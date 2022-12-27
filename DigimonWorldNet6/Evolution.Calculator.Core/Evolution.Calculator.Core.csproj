@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net6.0-windows</TargetFramework>
+        <Nullable>enable</Nullable>
+        <UseWPF>true</UseWPF>
+        <RootNamespace>DigimonWorld.Evolution.Calculator.Core</RootNamespace>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\Evolution.Calculator.API\Evolution.Calculator.API.csproj" />
+        <ProjectReference Include="..\Generics\Generics.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <Folder Include="EvolutionCriteria\Rookie" />
+        <Folder Include="EvolutionCriteria\Ultimate" />
+    </ItemGroup>
+
+</Project>
