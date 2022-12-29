@@ -4,17 +4,17 @@ using Generics.Enums;
 
 namespace DigimonWorld.Evolution.Calculator.Core.EvolutionCriteria.Champion;
 
-public class Centarumon : IEvolutionCriteria
+public class CentarumonEvolutionCriteria : IEvolutionCriteria
 {
     public EvolutionStage EvolutionStage => EvolutionStage.Champion;
 
     public DigimonType DigimonType => DigimonType.Centarumon;
 
-    public IMainCriteriaStats Stats => new MainCriteriaStats(brains: 100);
+    public MainCriteriaStats Stats => new(brains: 100);
 
-    public IMainCriteriaCareMistakes CareMistakes => new MainCriteriaCareMistakes(3, true);
+    public MainCriteriaCareMistakes CareMistakes => new(3, true);
 
-    public IMainCriteriaWeight Weight => new MainCriteriaWeight(40);
+    public MainCriteriaWeight Weight => new(40);
 
-    public IBonusCriteria BonusCriteria => new BonusCriteria(discipline: 60, techniqueCount: 28);
+    public BonusCriteria BonusCriteria => new(discipline: 60, techniqueCount: 28);
 }

@@ -1,8 +1,6 @@
-using DigimonWorld.Evolution.Calculator.Core.Interfaces.EvolutionCriteria;
-
 namespace DigimonWorld.Evolution.Calculator.Core.DataObjects.EvolutionCriteria;
 
-public class MainCriteriaCareMistakes : IMainCriteriaCareMistakes
+public class MainCriteriaCareMistakes
 {
     public MainCriteriaCareMistakes(int careMistakes, bool isCareMistakesCriteriaMaximum)
     {

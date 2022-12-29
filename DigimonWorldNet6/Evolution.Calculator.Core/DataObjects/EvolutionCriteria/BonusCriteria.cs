@@ -1,9 +1,8 @@
-using DigimonWorld.Evolution.Calculator.Core.Interfaces.EvolutionCriteria;
 using Generics.Enums;
 
 namespace DigimonWorld.Evolution.Calculator.Core.DataObjects.EvolutionCriteria;
 
-public class BonusCriteria : IBonusCriteria
+public class BonusCriteria
 {
     public BonusCriteria(int happiness = 0, int discipline = 0, int battles = 0, bool isBattlesCriteriaAMaximum = true,
         int techniqueCount = 0, DigimonType precursorDigimon = DigimonType.None)

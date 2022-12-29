@@ -1,8 +1,6 @@
-using DigimonWorld.Evolution.Calculator.Core.Interfaces.EvolutionCriteria;
-
 namespace DigimonWorld.Evolution.Calculator.Core.DataObjects.EvolutionCriteria;
 
-public class MainCriteriaWeight : IMainCriteriaWeight
+public class MainCriteriaWeight
 {
     private const int WEIGHT_MARGIN = 5;
 

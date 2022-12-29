@@ -6,8 +6,6 @@ public class Digimon
 {
     public DigimonType DigimonType { get; set; }
 
-    public EvolutionStage EvolutionStage { get; set; }
-
     public int HP { get; set; }
 
     public int MP { get; set; }

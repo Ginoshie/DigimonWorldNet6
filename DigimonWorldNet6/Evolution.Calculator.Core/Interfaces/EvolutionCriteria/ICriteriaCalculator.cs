@@ -2,7 +2,7 @@ using DigimonWorld.Evolution.Calculator.Core.DataObjects;
 
 namespace DigimonWorld.Evolution.Calculator.Core.Interfaces.EvolutionCriteria;
 
-public interface ICriteriaCalculator
+public interface ICriteriaCalculator<T>
 {
-    public bool CriteriaIsMet(Digimon digimon, IEvolutionCriteria evolutionCriteria);
+    public bool CriteriaIsMet(Digimon digimon, T evolutionCriteria);
 }

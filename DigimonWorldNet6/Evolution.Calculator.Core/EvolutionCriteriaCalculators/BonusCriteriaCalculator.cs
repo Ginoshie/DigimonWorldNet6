@@ -1,18 +1,12 @@
 using DigimonWorld.Evolution.Calculator.Core.DataObjects;
+using DigimonWorld.Evolution.Calculator.Core.DataObjects.EvolutionCriteria;
 using DigimonWorld.Evolution.Calculator.Core.Interfaces.EvolutionCriteria;
 
 namespace DigimonWorld.Evolution.Calculator.Core.EvolutionCriteriaCalculators;
 
-public class BonusCriteriaCalculator : ICriteriaCalculator
+public class BonusCriteriaCalculator : ICriteriaCalculator<BonusCriteria>
 {
-    public bool CriteriaIsMet(Digimon digimon, IEvolutionCriteria evolutionCriteria)
-    {
-        var bonusCriteria = evolutionCriteria.BonusCriteria;
-
-        return BattleCriteriaIsMet(digimon, bonusCriteria);
-    }
-
-    private bool BattleCriteriaIsMet(Digimon digimon, IBonusCriteria bonusCriteria)
+    public bool CriteriaIsMet(Digimon digimon, BonusCriteria bonusCriteria)
     {
         return (digimon.Battles <= bonusCriteria.Battles && bonusCriteria.IsBattlesCriteriaAMaximum) ||
                (digimon.Battles >= bonusCriteria.Battles && !bonusCriteria.IsBattlesCriteriaAMaximum);
