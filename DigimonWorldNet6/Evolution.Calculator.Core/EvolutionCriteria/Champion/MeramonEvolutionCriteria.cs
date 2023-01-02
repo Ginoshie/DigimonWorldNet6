@@ -4,7 +4,7 @@ using Generics.Enums;
 
 namespace DigimonWorld.Evolution.Calculator.Core.EvolutionCriteria.Champion;
 
-public class MeramonEvolutionCriteria : IEvolutionCriteria
+public sealed class MeramonEvolutionCriteria : IEvolutionCriteria
 {
     public EvolutionStage EvolutionStage => EvolutionStage.Champion;
 

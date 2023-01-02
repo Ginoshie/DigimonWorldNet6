@@ -2,7 +2,7 @@ using Generics.Enums;
 
 namespace DigimonWorld.Evolution.Calculator.Core.DataObjects;
 
-public class Digimon
+public sealed class Digimon
 {
     public DigimonType DigimonType { get; set; }
 

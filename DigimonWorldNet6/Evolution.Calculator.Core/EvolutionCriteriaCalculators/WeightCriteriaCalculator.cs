@@ -4,7 +4,7 @@ using DigimonWorld.Evolution.Calculator.Core.Interfaces.EvolutionCriteria;
 
 namespace DigimonWorld.Evolution.Calculator.Core.EvolutionCriteriaCalculators;
 
-public class WeightCriteriaCalculator : ICriteriaCalculator<MainCriteriaWeight>
+public sealed class WeightCriteriaCalculator : ICriteriaCalculator<MainCriteriaWeight>
 {
     public bool CriteriaIsMet(Digimon digimon, MainCriteriaWeight weightCriteria)
     {

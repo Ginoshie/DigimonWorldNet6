@@ -1,5 +1,5 @@
-using System;
 using System.Collections.Generic;
+using System.Linq;
 using DigimonWorld.Evolution.Calculator.Core.DataObjects;
 using DigimonWorld.Evolution.Calculator.Core.DataObjects.EvolutionCriteria;
 using DigimonWorld.Evolution.Calculator.Core.Interfaces.EvolutionCriteria;
@@ -7,7 +7,7 @@ using Generics.Enums;
 
 namespace DigimonWorld.Evolution.Calculator.Core;
 
-public class EvolutionCalculator : IEvolutionCalculator
+public sealed class EvolutionCalculator : IEvolutionCalculator
 {
     private readonly ICriteriaCalculator<MainCriteriaStats> _statsMainCriteriaCalculator;
     private readonly ICriteriaCalculator<MainCriteriaCareMistakes> _careMistakesMainCriteriaCalculator;
@@ -29,23 +29,28 @@ public class EvolutionCalculator : IEvolutionCalculator
 
     public DigimonType DetermineEvolutionResult(Digimon digimon)
     {
-        var evolutionCriteriaOfPossibleEvolutions = _allEvolutionMappings[digimon.DigimonType];
+        var evolutionCriteriaOfPossibleEvolutions = _allEvolutionMappings[digimon.DigimonType].ToArray();
+        var highestEvolutionScore = 0;
+        var evolutionResult = DigimonType.None;
 
         foreach (var evolutionCriteria in evolutionCriteriaOfPossibleEvolutions)
         {
-            var highestEvolutionScore = 0;
+            if (!EvolutionEnabled(digimon, evolutionCriteria)) continue;
 
-            if (EvolutionEnabled(digimon, evolutionCriteria))
-            {
-                var currentEvolutionScore = calculateEvolutionScore(digimon, evolutionCriteria.Stats);
+            var currentEvolutionScore = CalculateEvolutionScore(digimon, evolutionCriteria.Stats);
 
-                // TODO: Continue here.
-                if (currentEvolutionScore > highestEvolutionScore)
-                {
-                    highestEvolutionScore = currentEvolutionScore;
-                }
-            }
+            if (currentEvolutionScore <= highestEvolutionScore) continue;
+
+            highestEvolutionScore = currentEvolutionScore;
+            evolutionResult = evolutionCriteria.DigimonType;
         }
+
+        if (evolutionCriteriaOfPossibleEvolutions.FirstOrDefault()?.EvolutionStage == EvolutionStage.Champion && evolutionResult == DigimonType.None)
+        {
+            evolutionResult = DigimonType.Numemon;
+        }
+
+        return evolutionResult;
     }
 
     private bool EvolutionEnabled(Digimon digimon, IEvolutionCriteria evolutionCriteria)
@@ -60,7 +65,7 @@ public class EvolutionCalculator : IEvolutionCalculator
         return criteriaMetCount >= 3;
     }
 
-    private int calculateEvolutionScore(Digimon digimon, MainCriteriaStats statsCriteria)
+    private int CalculateEvolutionScore(Digimon digimon, MainCriteriaStats statsCriteria)
     {
         var evolutionStatsTotal = 0;
         var evolutionStatCountTotal = 0;
@@ -100,7 +105,7 @@ public class EvolutionCalculator : IEvolutionCalculator
             evolutionStatsTotal += digimon.Brains;
             evolutionStatCountTotal++;
         }
-        
+
         return evolutionStatsTotal / evolutionStatCountTotal;
     }
 }

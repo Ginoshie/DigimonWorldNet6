@@ -1,6 +1,6 @@
 namespace DigimonWorld.Evolution.Calculator.Core.DataObjects.EvolutionCriteria;
 
-public class MainCriteriaStats
+public sealed class MainCriteriaStats
 {
     public MainCriteriaStats(int hp = 0, int mp = 0, int off = 0, int def = 0, int speed = 0, int brains = 0)
     {

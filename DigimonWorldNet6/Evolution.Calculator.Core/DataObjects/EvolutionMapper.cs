@@ -5,7 +5,7 @@ using Generics.Enums;
 
 namespace DigimonWorld.Evolution.Calculator.Core.DataObjects;
 
-public class EvolutionMapper : IEvolutionMapper
+public sealed class EvolutionMapper : IEvolutionMapper
 {
     public Dictionary<DigimonType, IEnumerable<IEvolutionCriteria>> GetAllEvolutionMappings()
     {
