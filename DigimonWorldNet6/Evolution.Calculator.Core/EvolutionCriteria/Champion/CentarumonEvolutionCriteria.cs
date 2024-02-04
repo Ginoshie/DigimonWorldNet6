@@ -14,7 +14,7 @@ public sealed class CentarumonEvolutionCriteria : IEvolutionCriteria
 
     public MainCriteriaCareMistakes CareMistakes => new(3, true);
 
-    public MainCriteriaWeight Weight => new(40);
+    public MainCriteriaWeight Weight => new(30);
 
     public BonusCriteria BonusCriteria => new(discipline: 60, techniqueCount: 28);
 }

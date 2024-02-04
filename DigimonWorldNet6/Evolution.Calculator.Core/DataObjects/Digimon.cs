@@ -28,5 +28,5 @@ public sealed class Digimon
 
     public int Battles { get; set; }
 
-    public int TechniqueCount { get; }
+    public int TechniqueCount { get; set; }
 }

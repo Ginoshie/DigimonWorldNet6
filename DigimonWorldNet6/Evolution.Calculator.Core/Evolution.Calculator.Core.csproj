@@ -12,9 +12,4 @@
         <ProjectReference Include="..\Generics\Generics.csproj" />
     </ItemGroup>
 
-    <ItemGroup>
-        <Folder Include="EvolutionCriteria\Rookie" />
-        <Folder Include="EvolutionCriteria\Ultimate" />
-    </ItemGroup>
-
 </Project>

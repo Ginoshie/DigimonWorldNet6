@@ -10,7 +10,7 @@ public sealed class TyrannomonEvolutionCriteria : IEvolutionCriteria
 
     public DigimonType DigimonType => DigimonType.Tyrannomon;
 
-    public MainCriteriaStats Stats => new(1000, def: 100);
+    public MainCriteriaStats Stats => new(hp: 1000, def: 100);
 
     public MainCriteriaCareMistakes CareMistakes => new(5, true);
 

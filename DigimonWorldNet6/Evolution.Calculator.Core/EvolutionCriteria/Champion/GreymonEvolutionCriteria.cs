@@ -12,7 +12,7 @@ public sealed class GreymonEvolutionCriteria : IEvolutionCriteria
 
     public MainCriteriaStats Stats => new(off: 100, def: 100, speed: 100, brains: 100);
 
-    public MainCriteriaCareMistakes CareMistakes => new(0, true);
+    public MainCriteriaCareMistakes CareMistakes => new(1, true);
 
     public MainCriteriaWeight Weight => new(30);
 

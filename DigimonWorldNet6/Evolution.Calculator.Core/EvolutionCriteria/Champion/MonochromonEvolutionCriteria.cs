@@ -10,7 +10,7 @@ public sealed class MonochromonEvolutionCriteria : IEvolutionCriteria
 
     public DigimonType DigimonType => DigimonType.Monochromon;
 
-    public MainCriteriaStats Stats => new(1000, brains: 100);
+    public MainCriteriaStats Stats => new(hp: 1000, def: 100, brains: 100);
 
     public MainCriteriaCareMistakes CareMistakes => new(3, true);
 

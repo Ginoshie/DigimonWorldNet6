@@ -13,6 +13,9 @@ public enum DigimonType
     Monochromon,
     Numemon,
     Palmon,
+    Patamon,
+    Poyomon,
+    Tokomon,
     Tyrannomon,
     Unknown,
     None

@@ -16,5 +16,5 @@ public sealed class MeramonEvolutionCriteria : IEvolutionCriteria
 
     public MainCriteriaWeight Weight => new(20);
 
-    public BonusCriteria BonusCriteria => new(battles: 10, isBattlesCriteriaAMaximum: true, techniqueCount: 28);
+    public BonusCriteria BonusCriteria => new(battles: 10, isBattlesCriteriaAMaximum: false, techniqueCount: 28);
 }
