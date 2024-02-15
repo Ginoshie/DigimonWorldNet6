@@ -25,7 +25,7 @@ public sealed class DigimonBuilder
 
         return this;
     }
-    
+
     public DigimonBuilder WithHP(int hp)
     {
         _hp = hp;
@@ -98,24 +98,9 @@ public sealed class DigimonBuilder
         return this;
     }
 
-    
+
     public Digimon Build()
     {
-        return new Digimon
-        {
-            DigimonType = _digimonType,
-            HP = _hp,
-            MP = _mp,
-            Off = _off,
-            Def = _def,
-            Speed = _speed,
-            Brains = _brains,
-            CareMistakes = _careMistakes,
-            Weight = _weight,
-            Happiness = _happiness,
-            Discipline = _discipline,
-            Battles = _battles,
-            TechniqueCount = _techniqueCount
-        };
+        return new Digimon(_digimonType, _hp, _mp, _off, _def, _speed, _brains, _careMistakes, _weight, _happiness, _discipline, _battles, _techniqueCount);
     }
 }

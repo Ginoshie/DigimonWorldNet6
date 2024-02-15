@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using DigimonWorld.Evolution.Calculator.Core.EvolutionCriteria.Champion;
+using DigimonWorld.Evolution.Calculator.Core.EvolutionCriteria.Rookie;
 using DigimonWorld.Evolution.Calculator.Core.EvolutionCriteriaCalculation.ChampionAndUltimate;
 using DigimonWorld.Evolution.Calculator.Core.Interfaces.EvolutionCriteria;
 using Generics.Enums;
@@ -12,7 +12,6 @@ public sealed class RookieEvolutionMapper
 
     public RookieEvolutionMapper()
     {
-        
         _championAndUltimateEvolutionMappings[DigimonType.Tokomon] = TokomonEvolutions;
     }
 

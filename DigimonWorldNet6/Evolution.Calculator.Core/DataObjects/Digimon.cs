@@ -1,32 +1,56 @@
+using Generics;
 using Generics.Enums;
 
 namespace DigimonWorld.Evolution.Calculator.Core.DataObjects;
 
 public sealed class Digimon
 {
-    public DigimonType DigimonType { get; set; }
+    public Digimon(DigimonType digimonType, int hp, int mp, int off, int def, int speed, int brains, int careMistakes, int weight, int happiness, int discipline, int battles, int techniqueCount)
+    {
+        DigimonType = digimonType;
+        HP = hp;
+        MP = mp;
+        Off = off;
+        Def = def;
+        Speed = speed;
+        Brains = brains;
+        CareMistakes = careMistakes;
+        Weight = weight;
+        Happiness = happiness;
+        Discipline = discipline;
+        Battles = battles;
+        TechniqueCount = techniqueCount;
+        
+         var evolutionStageMapper = new EvolutionStageMapper();
 
-    public int HP { get; set; }
+         EvolutionStage = evolutionStageMapper[digimonType];
+    }
 
-    public int MP { get; set; }
+    public DigimonType DigimonType { get; }
 
-    public int Off { get; set; }
+    public EvolutionStage EvolutionStage { get; }
 
-    public int Def { get; set; }
+    public int HP { get; }
 
-    public int Speed { get; set; }
+    public int MP { get; }
 
-    public int Brains { get; set; }
+    public int Off { get; }
 
-    public int CareMistakes { get; set; }
+    public int Def { get; }
 
-    public int Weight { get; set; }
+    public int Speed { get; }
 
-    public int Happiness { get; set; }
+    public int Brains { get; }
 
-    public int Discipline { get; set; }
+    public int CareMistakes { get; }
 
-    public int Battles { get; set; }
+    public int Weight { get; }
 
-    public int TechniqueCount { get; set; }
+    public int Happiness { get; }
+
+    public int Discipline { get; }
+
+    public int Battles { get; }
+
+    public int TechniqueCount { get; }
 }

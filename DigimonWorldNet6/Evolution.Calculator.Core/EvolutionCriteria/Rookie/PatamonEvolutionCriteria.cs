@@ -2,15 +2,15 @@ using DigimonWorld.Evolution.Calculator.Core.DataObjects.EvolutionCriteria;
 using DigimonWorld.Evolution.Calculator.Core.Interfaces.EvolutionCriteria;
 using Generics.Enums;
 
-namespace DigimonWorld.Evolution.Calculator.Core.EvolutionCriteria.Champion;
+namespace DigimonWorld.Evolution.Calculator.Core.EvolutionCriteria.Rookie;
 
-public sealed class BiyomonEvolutionCriteria : IEvolutionCriteria
+public sealed class PatamonEvolutionCriteria : IEvolutionCriteria
 {
     public EvolutionStage EvolutionStage => EvolutionStage.Rookie;
 
-    public DigimonType DigimonType => DigimonType.Biyomon;
+    public DigimonType DigimonType => DigimonType.Patamon;
 
-    public MainCriteriaStats Stats => new(mp: 10, def: 1, speed: 1);
+    public MainCriteriaStats Stats => new(hp: 10, off: 1, brains: 1);
 
     public MainCriteriaCareMistakes CareMistakes => new(0, false);
 
