@@ -8,7 +8,7 @@ public sealed class BiyomonEvolutionCriteria : IEvolutionCriteria
 {
     public EvolutionStage EvolutionStage => EvolutionStage.Rookie;
 
-    public DigimonType DigimonType => DigimonType.Biyomon;
+    public EvolutionResult DigimonType => EvolutionResult.Biyomon;
 
     public MainCriteriaStats Stats => new(mp: 10, def: 1, speed: 1);
 
@@ -16,5 +16,5 @@ public sealed class BiyomonEvolutionCriteria : IEvolutionCriteria
 
     public MainCriteriaWeight Weight => new(15);
 
-    public BonusCriteria BonusCriteria => new(precursorDigimon: DigimonType.Tokomon);
+    public BonusCriteria BonusCriteria => new(precursorDigimon: EvolutionResult.Tokomon);
 }

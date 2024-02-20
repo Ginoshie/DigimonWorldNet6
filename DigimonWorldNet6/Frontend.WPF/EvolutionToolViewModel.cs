@@ -175,7 +175,7 @@ public sealed class EvolutionToolViewModel
         }
     }
     
-    public DigimonType EvolutionResult { get; private set; }
+    public EvolutionResult EvolutionResult { get; private set; }
 
     public event PropertyChangedEventHandler? PropertyChanged;
 

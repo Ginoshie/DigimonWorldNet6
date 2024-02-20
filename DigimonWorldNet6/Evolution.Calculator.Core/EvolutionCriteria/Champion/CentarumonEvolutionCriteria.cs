@@ -8,7 +8,7 @@ public sealed class CentarumonEvolutionCriteria : IEvolutionCriteria
 {
     public EvolutionStage EvolutionStage => EvolutionStage.Champion;
 
-    public DigimonType DigimonType => DigimonType.Centarumon;
+    public EvolutionResult DigimonType => EvolutionResult.Centarumon;
 
     public MainCriteriaStats Stats => new(brains: 100);
 

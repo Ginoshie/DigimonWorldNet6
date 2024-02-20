@@ -4,7 +4,7 @@ namespace DigimonWorld.Evolution.Calculator.Core.DataObjects.EvolutionCriteria;
 
 public sealed class BonusCriteria
 {
-    public BonusCriteria(int happiness = -1, int discipline = -1, int battles = -1, bool isBattlesCriteriaAMaximum = true, int techniqueCount = 0, DigimonType precursorDigimon = DigimonType.None)
+    public BonusCriteria(int happiness = -1, int discipline = -1, int battles = -1, bool isBattlesCriteriaAMaximum = true, int techniqueCount = 0, EvolutionResult precursorDigimon = EvolutionResult.None)
     {
         Happiness = happiness;
         Discipline = discipline;
@@ -24,5 +24,5 @@ public sealed class BonusCriteria
 
     public int TechniqueCount { get; }
 
-    public DigimonType PrecursorDigimon { get; }
+    public EvolutionResult PrecursorDigimon { get; }
 }

@@ -8,7 +8,7 @@ public sealed class TyrannomonEvolutionCriteria : IEvolutionCriteria
 {
     public EvolutionStage EvolutionStage => EvolutionStage.Champion;
 
-    public DigimonType DigimonType => DigimonType.Tyrannomon;
+    public EvolutionResult DigimonType => EvolutionResult.Tyrannomon;
 
     public MainCriteriaStats Stats => new(hp: 1000, def: 100);
 

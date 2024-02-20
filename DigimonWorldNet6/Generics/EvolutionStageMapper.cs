@@ -9,7 +9,8 @@ public sealed class EvolutionStageMapper
     public EvolutionStageMapper()
     {
         _evolutionStageMappings[DigimonType.Agumon] = EvolutionStage.Rookie;
-        
+        _evolutionStageMappings[DigimonType.Poyomon] = EvolutionStage.InTraining;
+        _evolutionStageMappings[DigimonType.Tokomon] = EvolutionStage.Rookie;
     }
     
     public EvolutionStage this[DigimonType evolutionResult]

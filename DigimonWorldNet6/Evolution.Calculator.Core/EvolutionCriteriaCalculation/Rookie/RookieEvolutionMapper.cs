@@ -8,16 +8,16 @@ namespace DigimonWorld.Evolution.Calculator.Core.EvolutionCriteriaCalculation.Ro
 
 public sealed class RookieEvolutionMapper
 {
-    private readonly Dictionary<DigimonType, IEnumerable<IEvolutionCriteria>> _championAndUltimateEvolutionMappings = new();
+    private readonly Dictionary<DigimonType, IEnumerable<IEvolutionCriteria>> _rookieEvolutionMappings = new();
 
     public RookieEvolutionMapper()
     {
-        _championAndUltimateEvolutionMappings[DigimonType.Tokomon] = TokomonEvolutions;
+        _rookieEvolutionMappings[DigimonType.Tokomon] = TokomonEvolutions;
     }
 
     public IEnumerable<IEvolutionCriteria> this[DigimonType digimonType] =>
-        _championAndUltimateEvolutionMappings[digimonType] ??
-        throw new KeyNotFoundException($"Evolution mapping for {digimonType} was not found in {nameof(ChampionAndUltimateEvolutionMapper)}");
+        _rookieEvolutionMappings[digimonType] ??
+        throw new KeyNotFoundException($"Evolution mapping for {digimonType} was not found in {nameof(RookieEvolutionMapper)}");
 
     private IEnumerable<IEvolutionCriteria> TokomonEvolutions { get; } = new IEvolutionCriteria[]
     {

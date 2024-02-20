@@ -9,9 +9,9 @@ namespace Evolution.Calculator.Tests;
 public sealed class InTrainingEvolutionMapper
 {
     [Test]
-    public void DetermineEvolutionResult_ShouldReturnExpectedDigimon([Values(DigimonType.Poyomon)] DigimonType evolutionResult, [Values(0, 9999)] int hp, [Values(0, 9999)] int mp,
+    public void DetermineEvolutionResult_ShouldReturnExpectedDigimon([Values(DigimonType.Poyomon)] DigimonType digimonType, [Values(0, 9999)] int hp, [Values(0, 9999)] int mp,
         [Values(0, 999)] int off, [Values(0, 999)] int def, [Values(0, 999)] int speed, [Values(0, 999)] int brains, [Values(0, 10)] int careMistakes, [Values(1, 15)] int weight,
-        [Values(0)] int happiness, [Values(0)] int discipline, [Values(0)] int battles, [Values(40)] int techniqueCount, [Values(DigimonType.Tokomon)] DigimonType digimonType)
+        [Values(0)] int happiness, [Values(0)] int discipline, [Values(0)] int battles, [Values(40)] int techniqueCount, [Values(EvolutionResult.Tokomon)] EvolutionResult evolutionResult)
     {
         // Arrange
         var sut = new SetupBuilder()

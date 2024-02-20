@@ -10,14 +10,14 @@ namespace Evolution.Calculator.Tests;
 public sealed class RookieEvolutionCalculatorTests
 {
     [Test]
-    [TestCase(DigimonType.Tokomon, 1000, 200, 20, 20, 20, 20, 50, 15, 80, 80, 0, 10, DigimonType.Patamon)]
-    [TestCase(DigimonType.Tokomon, 200, 200, 100, 20, 20, 20, 50, 15, 80, 80, 0, 10, DigimonType.Patamon)]
-    [TestCase(DigimonType.Tokomon, 200, 200, 20, 20, 20, 100, 50, 15, 80, 80, 0, 10, DigimonType.Patamon)]
-    [TestCase(DigimonType.Tokomon, 200, 1000, 20, 20, 20, 20, 50, 15, 80, 80, 0, 10, DigimonType.Biyomon)]
-    [TestCase(DigimonType.Tokomon, 200, 200, 20, 100, 20, 20, 50, 15, 80, 80, 0, 10, DigimonType.Biyomon)]
-    [TestCase(DigimonType.Tokomon, 200, 200, 20, 20, 100, 20, 50, 15, 80, 80, 0, 10, DigimonType.Biyomon)]
+    [TestCase(DigimonType.Tokomon, 1000, 200, 20, 20, 20, 20, 50, 15, 80, 80, 0, 10, EvolutionResult.Patamon)]
+    [TestCase(DigimonType.Tokomon, 200, 200, 100, 20, 20, 20, 50, 15, 80, 80, 0, 10, EvolutionResult.Patamon)]
+    [TestCase(DigimonType.Tokomon, 200, 200, 20, 20, 20, 100, 50, 15, 80, 80, 0, 10, EvolutionResult.Patamon)]
+    [TestCase(DigimonType.Tokomon, 200, 1000, 20, 20, 20, 20, 50, 15, 80, 80, 0, 10, EvolutionResult.Biyomon)]
+    [TestCase(DigimonType.Tokomon, 200, 200, 20, 100, 20, 20, 50, 15, 80, 80, 0, 10, EvolutionResult.Biyomon)]
+    [TestCase(DigimonType.Tokomon, 200, 200, 20, 20, 100, 20, 50, 15, 80, 80, 0, 10, EvolutionResult.Biyomon)]
     public void DetermineEvolutionResult_ShouldReturnExpectedDigimon(DigimonType digimonType, int hp, int mp, int off, int def, int speed, int brains, int careMistakes, int weight, int happiness,
-        int discipline, int battles, int techniqueCount, DigimonType evolutionResult)
+        int discipline, int battles, int techniqueCount, EvolutionResult evolutionResult)
     {
         // Arrange
         var sut = new SetupBuilder()

@@ -1,7 +1,8 @@
 namespace Generics.Enums;
 
-public enum DigimonType
+public enum EvolutionResult
 {
+    None,
     Agumon,
     Birdramon,
     Biyomon,

@@ -8,7 +8,7 @@ public sealed class MeramonEvolutionCriteria : IEvolutionCriteria
 {
     public EvolutionStage EvolutionStage => EvolutionStage.Champion;
 
-    public DigimonType DigimonType => DigimonType.Meramon;
+    public EvolutionResult DigimonType => EvolutionResult.Meramon;
 
     public MainCriteriaStats Stats => new(off: 100);
 

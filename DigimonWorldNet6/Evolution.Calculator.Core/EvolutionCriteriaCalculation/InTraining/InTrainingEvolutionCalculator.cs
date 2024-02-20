@@ -8,5 +8,5 @@ public sealed class InTrainingEvolutionCalculator : IEvolutionCalculator
 {
     private readonly InTrainingEvolutionMapper _inTrainingEvolutionMapper = new();
     
-    public DigimonType DetermineEvolutionResult(Digimon digimon) => _inTrainingEvolutionMapper[digimon.DigimonType];
+    public EvolutionResult DetermineEvolutionResult(Digimon digimon) => _inTrainingEvolutionMapper[digimon.DigimonType];
 }

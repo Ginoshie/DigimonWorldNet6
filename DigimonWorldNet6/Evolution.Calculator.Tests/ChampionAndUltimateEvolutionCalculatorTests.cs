@@ -10,12 +10,12 @@ namespace Evolution.Calculator.Tests;
 public sealed class ChampionAndUltimateEvolutionCalculatorTests
 {
     [Test]
-    [TestCase(DigimonType.Agumon, 1000, 1000, 250, 200, 500, 150, 3, 20, 80, 80, 0, 10, DigimonType.Birdramon)]
-    [TestCase(DigimonType.Agumon, 1500, 1000, 100, 100, 100, 150, 0, 20, 80, 80, 0, 10, DigimonType.Centarumon)]
-    [TestCase(DigimonType.Agumon, 1100, 1000, 100, 100, 150, 100, 0, 20, 80, 80, 0, 10, DigimonType.Tyrannomon)]
-    [TestCase(DigimonType.Agumon, 1000, 1000, 100, 100, 100, 100, 0, 20, 80, 80, 0, 10, DigimonType.Centarumon)]
+    [TestCase(DigimonType.Agumon, 1000, 1000, 250, 200, 500, 150, 3, 20, 80, 80, 0, 10, EvolutionResult.Birdramon)]
+    [TestCase(DigimonType.Agumon, 1500, 1000, 100, 100, 100, 150, 0, 20, 80, 80, 0, 10, EvolutionResult.Centarumon)]
+    [TestCase(DigimonType.Agumon, 1100, 1000, 100, 100, 150, 100, 0, 20, 80, 80, 0, 10, EvolutionResult.Tyrannomon)]
+    [TestCase(DigimonType.Agumon, 1000, 1000, 100, 100, 100, 100, 0, 20, 80, 80, 0, 10, EvolutionResult.Centarumon)]
     public void DetermineEvolutionResult_ShouldReturnExpectedDigimon(DigimonType digimonType, int hp, int mp, int off, int def, int speed, int brains, int careMistakes, int weight, int happiness,
-        int discipline, int battles, int techniqueCount, DigimonType evolutionResult)
+        int discipline, int battles, int techniqueCount, EvolutionResult evolutionResult)
     {
         // Arrange
         var championAndUltimateEvolutionCalculator = new SetupBuilder()

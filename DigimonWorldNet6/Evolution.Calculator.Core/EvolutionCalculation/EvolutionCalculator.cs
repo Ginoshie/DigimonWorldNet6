@@ -7,7 +7,7 @@ public sealed class EvolutionCalculator
 {
     private readonly EvolutionCalculationMapper _evolutionCalculationMapper = new();
     
-    public DigimonType CalculateEvolutionResult(Digimon digimon)
+    public EvolutionResult CalculateEvolutionResult(Digimon digimon)
     {
         var evolutionCalculator = _evolutionCalculationMapper[digimon.DigimonType];
         var evolutionResult = evolutionCalculator.DetermineEvolutionResult(digimon);

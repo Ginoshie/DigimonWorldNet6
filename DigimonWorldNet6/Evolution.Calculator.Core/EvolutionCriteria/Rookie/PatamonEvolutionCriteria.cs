@@ -8,7 +8,7 @@ public sealed class PatamonEvolutionCriteria : IEvolutionCriteria
 {
     public EvolutionStage EvolutionStage => EvolutionStage.Rookie;
 
-    public DigimonType DigimonType => DigimonType.Patamon;
+    public EvolutionResult DigimonType => EvolutionResult.Patamon;
 
     public MainCriteriaStats Stats => new(hp: 10, off: 1, brains: 1);
 
@@ -16,5 +16,5 @@ public sealed class PatamonEvolutionCriteria : IEvolutionCriteria
 
     public MainCriteriaWeight Weight => new(15);
 
-    public BonusCriteria BonusCriteria => new(precursorDigimon: DigimonType.Tokomon);
+    public BonusCriteria BonusCriteria => new(precursorDigimon: EvolutionResult.Tokomon);
 }

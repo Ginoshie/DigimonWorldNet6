@@ -16,14 +16,14 @@ public sealed class ChampionAndUltimateEvolutionCalculator : IEvolutionCalculato
     private readonly WeightCriteriaCalculator _weightMainCriteriaCalculator = new ();
     private readonly BonusCriteriaCalculator _bonusCriteriaCalculator = new ();
 
-    public DigimonType DetermineEvolutionResult(Digimon digimon)
+    public EvolutionResult DetermineEvolutionResult(Digimon digimon)
     {
         var evolutionCriteriaOfPossibleEvolutions = _championAndUltimateEvolutionMapper[digimon.DigimonType].ToList();
 
         GuardAgainstCorruptEvolutionCriteria(evolutionCriteriaOfPossibleEvolutions);
 
         var highestEvolutionScore = 0;
-        var evolutionResult = DigimonType.None;
+        var evolutionResult = EvolutionResult.None;
 
         foreach (var evolutionCriteria in evolutionCriteriaOfPossibleEvolutions)
         {
@@ -33,12 +33,12 @@ public sealed class ChampionAndUltimateEvolutionCalculator : IEvolutionCalculato
             if (currentEvolutionScore <= highestEvolutionScore) break;
 
             highestEvolutionScore = currentEvolutionScore;
-            evolutionResult = evolutionCriteria.DigimonType;
+            evolutionResult = (EvolutionResult)evolutionCriteria.DigimonType;
         }
 
-        if (evolutionCriteriaOfPossibleEvolutions.FirstOrDefault()?.EvolutionStage == EvolutionStage.Champion && evolutionResult == DigimonType.None)
+        if (evolutionCriteriaOfPossibleEvolutions.FirstOrDefault()?.EvolutionStage == EvolutionStage.Champion && evolutionResult == EvolutionResult.None)
         {
-            evolutionResult = DigimonType.Numemon;
+            evolutionResult = EvolutionResult.Numemon;
         }
 
         return evolutionResult;

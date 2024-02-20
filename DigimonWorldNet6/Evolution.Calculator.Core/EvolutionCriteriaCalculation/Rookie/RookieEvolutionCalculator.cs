@@ -12,14 +12,14 @@ public sealed class RookieEvolutionCalculator : IEvolutionCalculator
     private readonly RookieEvolutionMapper _rookieEvolutionMapper = new();
     private readonly RookieEvolutionScoreCalculator _rookieEvolutionScoreCalculator = new();
 
-    public DigimonType DetermineEvolutionResult(Digimon digimon)
+    public EvolutionResult DetermineEvolutionResult(Digimon digimon)
     {
         var evolutionCriteriaOfPossibleEvolutions = _rookieEvolutionMapper[digimon.DigimonType].ToList();
 
         GuardAgainstCorruptEvolutionCriteria(evolutionCriteriaOfPossibleEvolutions);
 
         var highestEvolutionScore = 0;
-        var evolutionResult = DigimonType.None;
+        var evolutionResult = EvolutionResult.None;
 
         foreach (var evolutionCriteria in evolutionCriteriaOfPossibleEvolutions)
         {
@@ -28,7 +28,7 @@ public sealed class RookieEvolutionCalculator : IEvolutionCalculator
             if (evolutionScore <= highestEvolutionScore) continue;
             
             highestEvolutionScore = evolutionScore;
-            evolutionResult = evolutionCriteria.DigimonType;
+            evolutionResult = (EvolutionResult)evolutionCriteria.DigimonType;
         }
 
         return evolutionResult;

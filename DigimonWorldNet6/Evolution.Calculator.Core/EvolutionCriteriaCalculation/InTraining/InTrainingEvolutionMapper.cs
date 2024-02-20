@@ -5,20 +5,20 @@ namespace DigimonWorld.Evolution.Calculator.Core.EvolutionCriteriaCalculation.In
 
 public sealed class InTrainingEvolutionMapper
 {
-    private readonly Dictionary<DigimonType, DigimonType> _freshAndInTrainingEvolutionMappings = new();
+    private readonly Dictionary<DigimonType, EvolutionResult> _freshAndInTrainingEvolutionMappings = new();
 
     public InTrainingEvolutionMapper()
     {
-        _freshAndInTrainingEvolutionMappings[DigimonType.Poyomon] = DigimonType.Tokomon;
+        _freshAndInTrainingEvolutionMappings[DigimonType.Poyomon] = EvolutionResult.Tokomon;
     }
 
-    public DigimonType this[DigimonType digimonType]
+    public EvolutionResult this[DigimonType digimonType]
     {
         get
         {
-            if (_freshAndInTrainingEvolutionMappings.TryGetValue(digimonType, out digimonType))
+            if (_freshAndInTrainingEvolutionMappings.TryGetValue(digimonType, out var evolutionResult))
             {
-                return digimonType;
+                return evolutionResult;
             }
             else
             {
