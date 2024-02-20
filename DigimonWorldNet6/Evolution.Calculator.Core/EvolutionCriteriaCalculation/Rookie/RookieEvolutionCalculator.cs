@@ -34,7 +34,7 @@ public sealed class RookieEvolutionCalculator : IEvolutionCalculator
         return evolutionResult;
     }
 
-    private static void GuardAgainstCorruptEvolutionCriteria(List<IEvolutionCriteria> evolutionCriteriaOfPossibleEvolutions)
+    private static void GuardAgainstCorruptEvolutionCriteria(IReadOnlyCollection<IEvolutionCriteria> evolutionCriteriaOfPossibleEvolutions)
     {
         var corruptEvolutionOptions =
             evolutionCriteriaOfPossibleEvolutions.Where(evolutionCriteria => evolutionCriteria.EvolutionStage != EvolutionStage.Rookie);

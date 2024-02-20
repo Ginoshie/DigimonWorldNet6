@@ -2,6 +2,7 @@ namespace Generics.Enums;
 
 public enum DigimonType
 {
+    None,
     Agumon,
     Birdramon,
     Biyomon,
@@ -16,7 +17,5 @@ public enum DigimonType
     Patamon,
     Poyomon,
     Tokomon,
-    Tyrannomon,
-    Unknown,
-    None
+    Tyrannomon
 }

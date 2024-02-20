@@ -1,11 +1,10 @@
 using DigimonWorld.Evolution.Calculator.Core.DataObjects;
 using DigimonWorld.Evolution.Calculator.Core.DataObjects.EvolutionCriteria;
-using DigimonWorld.Evolution.Calculator.Core.Interfaces.EvolutionCriteria;
 using Generics.Enums;
 
 namespace DigimonWorld.Evolution.Calculator.Core.EvolutionCriteriaCalculation.ChampionAndUltimate;
 
-public sealed class BonusCriteriaCalculator : ICriteriaCalculator<BonusCriteria>
+public sealed class BonusCriteriaCalculator
 {
     public bool CriteriaIsMet(Digimon digimon, BonusCriteria bonusCriteria)
     {
@@ -60,7 +59,7 @@ public sealed class BonusCriteriaCalculator : ICriteriaCalculator<BonusCriteria>
 
     private bool PrecursorDigimonCriteriaIsEnabled(BonusCriteria bonusCriteria)
     {
-        return bonusCriteria.PrecursorDigimon != DigimonType.None;
+        return bonusCriteria.PrecursorDigimon != null;
     }
 
     private bool PrecursorDigimonCriteriaIsMet(Digimon digimon, BonusCriteria bonusCriteria)

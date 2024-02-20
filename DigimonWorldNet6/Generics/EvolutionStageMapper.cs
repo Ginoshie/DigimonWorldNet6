@@ -12,17 +12,17 @@ public sealed class EvolutionStageMapper
         
     }
     
-    public EvolutionStage this[DigimonType digimonType]
+    public EvolutionStage this[DigimonType evolutionResult]
     {
         get
         {
-            if (_evolutionStageMappings.TryGetValue(digimonType, out var evolutionStage))
+            if (_evolutionStageMappings.TryGetValue(evolutionResult, out var evolutionStage))
             {
                 return evolutionStage;
             }
             else
             {
-                throw new KeyNotFoundException($"Evolution stage mapping for {digimonType} was not found in {nameof(EvolutionStageMapper)}");
+                throw new KeyNotFoundException($"Evolution stage mapping for {evolutionResult} was not found in {nameof(EvolutionStageMapper)}");
             }
         }
     }

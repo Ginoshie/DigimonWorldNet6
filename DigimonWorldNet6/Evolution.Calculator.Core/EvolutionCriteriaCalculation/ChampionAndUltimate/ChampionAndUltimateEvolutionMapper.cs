@@ -14,9 +14,9 @@ public sealed class ChampionAndUltimateEvolutionMapper
         _championAndUltimateEvolutionMappings[DigimonType.Agumon] = AgumonEvolutions;
     }
 
-    public IEnumerable<IEvolutionCriteria> this[DigimonType digimonType] =>
-        _championAndUltimateEvolutionMappings[digimonType] ??
-        throw new KeyNotFoundException($"Evolution mapping for {digimonType} was not found in {nameof(ChampionAndUltimateEvolutionMapper)}");
+    public IEnumerable<IEvolutionCriteria> this[DigimonType evolutionResult] =>
+        _championAndUltimateEvolutionMappings[evolutionResult] ??
+        throw new KeyNotFoundException($"Evolution mapping for {evolutionResult} was not found in {nameof(ChampionAndUltimateEvolutionMapper)}");
 
     private IEnumerable<IEvolutionCriteria> AgumonEvolutions { get; } = new IEvolutionCriteria[]
     {

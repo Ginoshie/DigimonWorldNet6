@@ -4,7 +4,7 @@ using DigimonWorld.Evolution.Calculator.Core.Interfaces.EvolutionCriteria;
 
 namespace DigimonWorld.Evolution.Calculator.Core.EvolutionCriteriaCalculation.ChampionAndUltimate;
 
-public sealed class StatsCriteriaCalculator : ICriteriaCalculator<MainCriteriaStats>
+public sealed class StatsCriteriaCalculator
 {
     public bool CriteriaIsMet(Digimon digimon, MainCriteriaStats statsCriteria)
     {

@@ -3,7 +3,276 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:wpf="clr-namespace:DigimonWorld.Frontend.WPF"
+        xmlns:enums="clr-namespace:Generics.Enums;assembly=Generics"
+        xmlns:combatStatValidation="clr-namespace:DigimonWorld.Frontend.WPF.Validation.CombatStats"
+        xmlns:nonCombatStatValidation="clr-namespace:DigimonWorld.Frontend.WPF.Validation.NonCombatStats"
         mc:Ignorable="d"
+        d:DataContext="{d:DesignInstance Type=wpf:EvolutionToolViewModel, IsDesignTimeCreatable=True}"
         Title="MainWindow" Height="450" Width="800">
-    <Grid />
+    <Window.Resources>
+        <ObjectDataProvider x:Key="DigimonTypes"
+                            MethodName="GetValues" ObjectType="{x:Type enums:DigimonType}">
+            <ObjectDataProvider.MethodParameters>
+                <x:Type TypeName="enums:DigimonType" />
+            </ObjectDataProvider.MethodParameters>
+        </ObjectDataProvider>
+
+        <Style x:Key="GroupBoxStyle" TargetType="{x:Type GroupBox}">
+            <Style.Setters>
+                <Setter Property="Margin" Value="3,0,3,1" />
+                <Setter Property="Padding" Value="0,0,0,0" />
+            </Style.Setters>
+        </Style>
+
+        <Style x:Key="ButtonStyle" TargetType="{x:Type Button}">
+            <Setter Property="Margin" Value="1" />
+            <Setter Property="Padding" Value="3" />
+        </Style>
+
+        <Style x:Key="LabelStyle" TargetType="{x:Type Label}">
+            <Style.Setters>
+                <Setter Property="Padding" Value="0,0,2,0" />
+                <Setter Property="HorizontalContentAlignment" Value="Center" />
+                <Setter Property="HorizontalAlignment" Value="Right" />
+                <Setter Property="VerticalAlignment" Value="Center" />
+            </Style.Setters>
+        </Style>
+
+        <Style x:Key="TextBoxStyle" TargetType="{x:Type TextBox}">
+            <Style.Setters>
+                <Setter Property="Margin" Value="1" />
+                <Setter Property="HorizontalContentAlignment" Value="Left" />
+                <Setter Property="VerticalContentAlignment" Value="Center" />
+                <Setter Property="HorizontalAlignment" Value="Stretch" />
+                <Setter Property="VerticalAlignment" Value="Stretch" />
+            </Style.Setters>
+        </Style>
+
+        <Style x:Key="ComboboxStyle" TargetType="{x:Type ComboBox}">
+            <Setter Property="Margin" Value="1" />
+            <Setter Property="VerticalContentAlignment" Value="Center" />
+            <Setter Property="HorizontalContentAlignment" Value="Left" />
+            <Style.Triggers>
+                <Trigger Property="Validation.HasError" Value="True">
+                    <Setter Property="ToolTip"
+                            Value="{Binding RelativeSource={x:Static RelativeSource.Self}, Path=(Validation.Errors)/ErrorContent}" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <GroupBox Header="Your digimon" Style="{StaticResource GroupBoxStyle}">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="25" />
+                    <RowDefinition Height="25" />
+                    <RowDefinition Height="25" />
+                    <RowDefinition Height="25" />
+                    <RowDefinition Height="25" />
+                    <RowDefinition Height="25" />
+                    <RowDefinition Height="25" />
+                    <RowDefinition Height="25" />
+                    <RowDefinition Height="25" />
+                    <RowDefinition Height="25" />
+                    <RowDefinition Height="25" />
+                    <RowDefinition Height="25" />
+                    <RowDefinition Height="25" />
+                    <RowDefinition Height="25" />
+                    <RowDefinition Height="25" />
+                    <RowDefinition Height="25" />
+                    <RowDefinition Height="25" />
+                </Grid.RowDefinitions>
+
+                <Label Grid.Column="0" Grid.Row="0"
+                       Content="Digimon:"
+                       Style="{StaticResource LabelStyle}" />
+                <ComboBox Name="Digimon" Grid.Column="1" Grid.Row="0" Grid.ColumnSpan="2"
+                          SelectedIndex="0"
+                          Style="{StaticResource ComboboxStyle}"
+                          ItemsSource="{Binding Source={StaticResource DigimonTypes}}">
+                </ComboBox>
+
+                <Label Grid.Column="0" Grid.Row="1" Content="HP:" Style="{StaticResource LabelStyle}" />
+                <TextBox Name="Hp" Grid.Column="1" Grid.Row="1" Style="{StaticResource TextBoxStyle}">
+                    <TextBox.Text>
+                        <Binding Path="HP" UpdateSourceTrigger="LostFocus">
+                            <Binding.ValidationRules>
+                                <combatStatValidation:HpStringValidationRule ValidationStep="CommittedValue" />
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox>
+
+                <Label Grid.Column="0" Grid.Row="2" Content="MP:" Style="{StaticResource LabelStyle}" />
+                <TextBox Name="Mp" Grid.Column="1" Grid.Row="2" Style="{StaticResource TextBoxStyle}">
+                    <TextBox.Text>
+                        <Binding Path="MP" UpdateSourceTrigger="LostFocus">
+                            <Binding.ValidationRules>
+                                <combatStatValidation:MpStringValidationRule ValidationStep="CommittedValue" />
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox>
+
+                <Label Grid.Column="0" Grid.Row="3" Content="Off:" Style="{StaticResource LabelStyle}" />
+                <TextBox Name="Off" Grid.Column="1" Grid.Row="3" Style="{StaticResource TextBoxStyle}">
+                    <TextBox.Text>
+                        <Binding Path="Off" UpdateSourceTrigger="LostFocus">
+                            <Binding.ValidationRules>
+                                <combatStatValidation:OffenseStringValidationRule ValidationStep="CommittedValue" />
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox>
+
+                <Label Grid.Column="0" Grid.Row="4" Content="Def:" Style="{StaticResource LabelStyle}" />
+                <TextBox Name="Def" Grid.Column="1" Grid.Row="4" Style="{StaticResource TextBoxStyle}">
+                    <TextBox.Text>
+                        <Binding Path="Def" UpdateSourceTrigger="LostFocus">
+                            <Binding.ValidationRules>
+                                <combatStatValidation:DefenseStringValidationRule ValidationStep="CommittedValue" />
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox>
+
+                <Label Grid.Column="0" Grid.Row="5" Content="Speed:" Style="{StaticResource LabelStyle}" />
+                <TextBox Name="Speed" Grid.Column="1" Grid.Row="5" Style="{StaticResource TextBoxStyle}">
+                    <TextBox.Text>
+                        <Binding Path="Speed" UpdateSourceTrigger="LostFocus">
+                            <Binding.ValidationRules>
+                                <combatStatValidation:SpeedStringValidationRule ValidationStep="CommittedValue" />
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox>
+
+                <Label Grid.Column="0" Grid.Row="6" Content="Brains:" Style="{StaticResource LabelStyle}" />
+                <TextBox Name="Brains" Grid.Column="1" Grid.Row="6" Style="{StaticResource TextBoxStyle}">
+                    <TextBox.Text>
+                        <Binding Path="Brains" UpdateSourceTrigger="LostFocus">
+                            <Binding.ValidationRules>
+                                <combatStatValidation:BrainsStringValidationRule ValidationStep="CommittedValue" />
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox>
+
+                <Label Grid.Column="0" Grid.Row="7" Content="Care Mistakes:" Style="{StaticResource LabelStyle}" />
+                <TextBox Name="CareMistakes" Grid.Column="1" Grid.Row="7" Style="{StaticResource TextBoxStyle}">
+                    <TextBox.Text>
+                        <Binding Path="CareMistakes" UpdateSourceTrigger="LostFocus">
+                            <Binding.ValidationRules>
+                                <nonCombatStatValidation:CareMistakesValidationRule ValidationStep="CommittedValue" />
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox>
+
+                <Label Grid.Column="0" Grid.Row="8" Content="Weight:" Style="{StaticResource LabelStyle}" />
+                <TextBox Name="Weight" Grid.Column="1" Grid.Row="8" Style="{StaticResource TextBoxStyle}">
+                    <TextBox.Text>
+                        <Binding Path="Weight" UpdateSourceTrigger="LostFocus">
+                            <Binding.ValidationRules>
+                                <nonCombatStatValidation:WeightValidationRule ValidationStep="CommittedValue" />
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox>
+
+                <Label Grid.Column="0" Grid.Row="9" Content="Happiness:" Style="{StaticResource LabelStyle}" />
+                <TextBox Name="Happiness" Grid.Column="1" Grid.Row="9" Style="{StaticResource TextBoxStyle}">
+                    <TextBox.Text>
+                        <Binding Path="Happiness" UpdateSourceTrigger="LostFocus">
+                            <Binding.ValidationRules>
+                                <nonCombatStatValidation:HappinessValidationRule ValidationStep="CommittedValue" />
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox>
+
+                <Label Grid.Column="0" Grid.Row="10" Content="Discipline:" Style="{StaticResource LabelStyle}" />
+                <TextBox Name="Discipline" Grid.Column="1" Grid.Row="10" Style="{StaticResource TextBoxStyle}">
+                    <TextBox.Text>
+                        <Binding Path="Discipline" UpdateSourceTrigger="LostFocus">
+                            <Binding.ValidationRules>
+                                <nonCombatStatValidation:DisciplineValidationRule ValidationStep="CommittedValue" />
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox>
+
+                <Label Grid.Column="0" Grid.Row="11" Content="Battles:" Style="{StaticResource LabelStyle}" />
+                <TextBox Name="Battles" Grid.Column="1" Grid.Row="11" Style="{StaticResource TextBoxStyle}">
+                    <TextBox.Text>
+                        <Binding Path="Discipline" UpdateSourceTrigger="LostFocus">
+                            <Binding.ValidationRules>
+                                <nonCombatStatValidation:BattlesValidationRule ValidationStep="CommittedValue" />
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox>
+
+                <Label Grid.Column="0" Grid.Row="12" Content="Techniques:" Style="{StaticResource LabelStyle}" />
+                <TextBox Name="Techniques" Grid.Column="1" Grid.Row="12" Style="{StaticResource TextBoxStyle}">
+                    <TextBox.Text>
+                        <Binding Path="Techniques" UpdateSourceTrigger="LostFocus">
+                            <Binding.ValidationRules>
+                                <nonCombatStatValidation:TechniquesValidationRule ValidationStep="CommittedValue" />
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox>
+
+                <Button Grid.Column="0" Grid.Row="16" Grid.ColumnSpan="3"
+                        Content="Calculate evolution"
+                        Command="{Binding SetEvolutionResult}">
+                    <Button.Style>
+                        <Style TargetType="{x:Type Button}" BasedOn="{StaticResource  ButtonStyle}">
+                            <Setter Property="IsEnabled" Value="false" />
+                            <Style.Triggers>
+                                <!-- Require the controls to be valid in order to press OK -->
+                                <MultiDataTrigger>
+                                    <MultiDataTrigger.Conditions>
+                                        <Condition Binding="{Binding ElementName=Digimon, Path=(Validation.HasError)}" Value="false" />
+                                        <Condition Binding="{Binding ElementName=Hp, Path=(Validation.HasError)}" Value="false" />
+                                        <Condition Binding="{Binding ElementName=Hp, Path=(Validation.HasError)}" Value="false" />
+                                        <Condition Binding="{Binding ElementName=Mp, Path=(Validation.HasError)}" Value="false" />
+                                        <Condition Binding="{Binding ElementName=Off, Path=(Validation.HasError)}" Value="false" />
+                                        <Condition Binding="{Binding ElementName=Def, Path=(Validation.HasError)}" Value="false" />
+                                        <Condition Binding="{Binding ElementName=Speed, Path=(Validation.HasError)}" Value="false" />
+                                        <Condition Binding="{Binding ElementName=Brains, Path=(Validation.HasError)}" Value="false" />
+                                        <Condition Binding="{Binding ElementName=CareMistakes, Path=(Validation.HasError)}" Value="false" />
+                                        <Condition Binding="{Binding ElementName=Weight, Path=(Validation.HasError)}" Value="false" />
+                                        <Condition Binding="{Binding ElementName=Happiness, Path=(Validation.HasError)}" Value="false" />
+                                        <Condition Binding="{Binding ElementName=Discipline, Path=(Validation.HasError)}" Value="false" />
+                                        <Condition Binding="{Binding ElementName=Battles, Path=(Validation.HasError)}" Value="false" />
+                                        <Condition Binding="{Binding ElementName=Techniques, Path=(Validation.HasError)}" Value="false" />
+                                    </MultiDataTrigger.Conditions>
+                                    <Setter Property="IsEnabled" Value="true" />
+                                </MultiDataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                </Button>
+
+            </Grid>
+        </GroupBox>
+    </Grid>
 </Window>

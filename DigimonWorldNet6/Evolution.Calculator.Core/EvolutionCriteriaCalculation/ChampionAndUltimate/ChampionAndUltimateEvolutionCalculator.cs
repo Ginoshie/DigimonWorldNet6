@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using DigimonWorld.Evolution.Calculator.Core.DataObjects;
-using DigimonWorld.Evolution.Calculator.Core.DataObjects.EvolutionCriteria;
 using DigimonWorld.Evolution.Calculator.Core.Interfaces.EvolutionCriteria;
 using Generics.Enums;
 
@@ -12,10 +11,10 @@ public sealed class ChampionAndUltimateEvolutionCalculator : IEvolutionCalculato
 {
     private readonly ChampionAndUltimateEvolutionMapper _championAndUltimateEvolutionMapper = new();
     private readonly ChampionAndUltimateEvolutionScoreCalculator _championAndUltimateEvolutionScoreCalculator = new();
-    private readonly ICriteriaCalculator<MainCriteriaStats> _statsMainCriteriaCalculator = new StatsCriteriaCalculator();
-    private readonly ICriteriaCalculator<MainCriteriaCareMistakes> _careMistakesMainCriteriaCalculator = new CareMistakeCriteriaCalculator();
-    private readonly ICriteriaCalculator<MainCriteriaWeight> _weightMainCriteriaCalculator = new WeightCriteriaCalculator();
-    private readonly ICriteriaCalculator<BonusCriteria> _bonusCriteriaCalculator = new BonusCriteriaCalculator();
+    private readonly StatsCriteriaCalculator _statsMainCriteriaCalculator = new ();
+    private readonly CareMistakeCriteriaCalculator _careMistakesMainCriteriaCalculator = new ();
+    private readonly WeightCriteriaCalculator _weightMainCriteriaCalculator = new ();
+    private readonly BonusCriteriaCalculator _bonusCriteriaCalculator = new ();
 
     public DigimonType DetermineEvolutionResult(Digimon digimon)
     {
