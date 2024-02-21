@@ -7,7 +7,7 @@ using Generics.Enums;
 
 namespace DigimonWorld.Frontend.WPF;
 
-public sealed class EvolutionToolViewModel
+public sealed class EvolutionToolViewModel : INotifyPropertyChanged
 {
     private int _hp;
     private int _mp;
@@ -21,9 +21,10 @@ public sealed class EvolutionToolViewModel
     private int _discipline;
     private int _battles;
     private int _techniques;
-
-    private readonly EvolutionCalculator _evolutionCalculator = new ();
     private DigimonType _digimonType;
+    private EvolutionResult _evolutionResult;
+
+    private readonly EvolutionCalculator _evolutionCalculator = new();
 
     public EvolutionToolViewModel()
     {
@@ -104,7 +105,7 @@ public sealed class EvolutionToolViewModel
         set
         {
             _brains = value;
-            
+
             OnPropertyChanged();
         }
     }
@@ -115,7 +116,7 @@ public sealed class EvolutionToolViewModel
         set
         {
             _careMistakes = value;
-            
+
             OnPropertyChanged();
         }
     }
@@ -126,7 +127,7 @@ public sealed class EvolutionToolViewModel
         set
         {
             _weight = value;
-            
+
             OnPropertyChanged();
         }
     }
@@ -137,7 +138,7 @@ public sealed class EvolutionToolViewModel
         set
         {
             _happiness = value;
-            
+
             OnPropertyChanged();
         }
     }
@@ -148,7 +149,7 @@ public sealed class EvolutionToolViewModel
         set
         {
             _discipline = value;
-            
+
             OnPropertyChanged();
         }
     }
@@ -159,7 +160,7 @@ public sealed class EvolutionToolViewModel
         set
         {
             _battles = value;
-            
+
             OnPropertyChanged();
         }
     }
@@ -170,12 +171,21 @@ public sealed class EvolutionToolViewModel
         set
         {
             _techniques = value;
-            
+
             OnPropertyChanged();
         }
     }
-    
-    public EvolutionResult EvolutionResult { get; private set; }
+
+    public EvolutionResult EvolutionResult
+    {
+        get => _evolutionResult;
+        private set
+        {
+            _evolutionResult = value;
+
+            OnPropertyChanged();
+        }
+    }
 
     public event PropertyChangedEventHandler? PropertyChanged;
 
