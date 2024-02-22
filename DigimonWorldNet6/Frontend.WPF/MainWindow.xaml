@@ -10,7 +10,7 @@
         xmlns:conversion="clr-namespace:DigimonWorld.Frontend.WPF.Conversion"
         mc:Ignorable="d"
         d:DataContext="{d:DesignInstance Type=wpf:EvolutionToolViewModel, IsDesignTimeCreatable=True}"
-        Title="MainWindow" Height="435" Width="800">
+        Title="MainWindow" Height="435" Width="1025">
     <Window.Resources>
         <conversion:EnumToImageConverter x:Key="EnumToImageConverter"/>
         
@@ -67,10 +67,10 @@
 
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="235" />
+            <ColumnDefinition Width="350" />
+            <ColumnDefinition Width="50" />
+            <ColumnDefinition Width="350" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
