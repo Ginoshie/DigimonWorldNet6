@@ -4,17 +4,17 @@ using Generics.Enums;
 
 namespace DigimonWorld.Evolution.Calculator.Core.EvolutionCriteria.Rookie;
 
-public sealed class BiyomonEvolutionCriteria : IEvolutionCriteria
+public sealed class GabumonEvolutionCriteria : IEvolutionCriteria
 {
     public EvolutionStage EvolutionStage => EvolutionStage.Rookie;
 
-    public EvolutionResult DigimonType => EvolutionResult.Biyomon;
+    public EvolutionResult DigimonType => EvolutionResult.Gabumon;
 
-    public MainCriteriaStats Stats => new(mp: 10, def: 1, speed: 1);
+    public MainCriteriaStats Stats => new(def: 10, speed: 10, brains: 1);
 
     public MainCriteriaCareMistakes CareMistakes => new();
 
     public MainCriteriaWeight Weight => new(15);
 
-    public BonusCriteria BonusCriteria => new(battles: -2, isBattlesCriteriaAMaximum: false, precursorDigimon: EvolutionResult.Tokomon);
+    public BonusCriteria BonusCriteria => new(battles: -2, isBattlesCriteriaAMaximum: false, precursorDigimon: EvolutionResult.Koromon);
 }

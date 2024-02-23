@@ -12,9 +12,9 @@ public sealed class PatamonEvolutionCriteria : IEvolutionCriteria
 
     public MainCriteriaStats Stats => new(hp: 10, off: 1, brains: 1);
 
-    public MainCriteriaCareMistakes CareMistakes => new(0, false);
+    public MainCriteriaCareMistakes CareMistakes => new();
 
     public MainCriteriaWeight Weight => new(15);
 
-    public BonusCriteria BonusCriteria => new(precursorDigimon: EvolutionResult.Tokomon);
+    public BonusCriteria BonusCriteria => new(battles: -2, isBattlesCriteriaAMaximum: false, precursorDigimon: EvolutionResult.Tokomon);
 }
