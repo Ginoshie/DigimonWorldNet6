@@ -3,7 +3,7 @@ using DigimonWorld.Evolution.Calculator.Core.EvolutionCriteria.Rookie;
 using DigimonWorld.Evolution.Calculator.Core.Interfaces.EvolutionCriteria;
 using Generics.Enums;
 
-namespace DigimonWorld.Evolution.Calculator.Core.EvolutionCriteriaCalculation.Rookie;
+namespace DigimonWorld.Evolution.Calculator.Core.EvolutionCriteriaCalculation.FromInTraining;
 
 public sealed class FromInTrainingEvolutionMapper
 {

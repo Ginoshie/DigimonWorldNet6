@@ -1,5 +1,4 @@
 using DigimonWorld.Evolution.Calculator.Core.EvolutionCriteriaCalculation.FromInTraining;
-using DigimonWorld.Evolution.Calculator.Core.EvolutionCriteriaCalculation.Rookie;
 using Evolution.Calculator.Tests.Builder;
 using Generics.Enums;
 using NUnit.Framework;
