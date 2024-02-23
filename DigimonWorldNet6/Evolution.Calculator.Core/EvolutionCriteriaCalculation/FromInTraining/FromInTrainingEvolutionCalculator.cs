@@ -2,19 +2,20 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using DigimonWorld.Evolution.Calculator.Core.DataObjects;
+using DigimonWorld.Evolution.Calculator.Core.EvolutionCriteriaCalculation.Rookie;
 using DigimonWorld.Evolution.Calculator.Core.Interfaces.EvolutionCriteria;
 using Generics.Enums;
 
-namespace DigimonWorld.Evolution.Calculator.Core.EvolutionCriteriaCalculation.Rookie;
+namespace DigimonWorld.Evolution.Calculator.Core.EvolutionCriteriaCalculation.FromInTraining;
 
-public sealed class RookieEvolutionCalculator : IEvolutionCalculator
+public sealed class FromInTrainingEvolutionCalculator : IEvolutionCalculator
 {
-    private readonly RookieEvolutionMapper _rookieEvolutionMapper = new();
-    private readonly RookieEvolutionScoreCalculator _rookieEvolutionScoreCalculator = new();
+    private readonly FromInTrainingEvolutionMapper _fromInTrainingEvolutionMapper = new();
+    private readonly FromInTrainingEvolutionScoreCalculator _fromInTrainingEvolutionScoreCalculator = new();
 
     public EvolutionResult DetermineEvolutionResult(Digimon digimon)
     {
-        var evolutionCriteriaOfPossibleEvolutions = _rookieEvolutionMapper[digimon.DigimonType].ToList();
+        var evolutionCriteriaOfPossibleEvolutions = _fromInTrainingEvolutionMapper[digimon.DigimonType].ToList();
 
         GuardAgainstCorruptEvolutionCriteria(evolutionCriteriaOfPossibleEvolutions);
 
@@ -23,7 +24,7 @@ public sealed class RookieEvolutionCalculator : IEvolutionCalculator
 
         foreach (var evolutionCriteria in evolutionCriteriaOfPossibleEvolutions)
         {
-            var evolutionScore = _rookieEvolutionScoreCalculator.CalculateEvolutionScore(digimon, evolutionCriteria.Stats);
+            var evolutionScore = _fromInTrainingEvolutionScoreCalculator.CalculateEvolutionScore(digimon, evolutionCriteria.Stats);
 
             if (evolutionScore <= highestEvolutionScore) continue;
             

@@ -1,13 +1,13 @@
 using System.Collections.Generic;
 using Generics.Enums;
 
-namespace DigimonWorld.Evolution.Calculator.Core.EvolutionCriteriaCalculation.InTraining;
+namespace DigimonWorld.Evolution.Calculator.Core.EvolutionCriteriaCalculation.FromFresh;
 
-public sealed class InTrainingEvolutionMapper
+public sealed class FromFreshEvolutionMapper
 {
     private readonly Dictionary<DigimonType, EvolutionResult> _freshAndInTrainingEvolutionMappings = new();
 
-    public InTrainingEvolutionMapper()
+    public FromFreshEvolutionMapper()
     {
         _freshAndInTrainingEvolutionMappings[DigimonType.Poyomon] = EvolutionResult.Tokomon;
     }
@@ -22,7 +22,7 @@ public sealed class InTrainingEvolutionMapper
             }
             else
             {
-                throw new KeyNotFoundException($"Evolution mapping for {digimonType} was not found in {nameof(InTrainingEvolutionMapper)}");
+                throw new KeyNotFoundException($"Evolution mapping for {digimonType} was not found in {nameof(FromFreshEvolutionMapper)}");
             }
         }
     }

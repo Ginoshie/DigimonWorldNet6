@@ -1,4 +1,4 @@
-using DigimonWorld.Evolution.Calculator.Core.EvolutionCriteriaCalculation.InTraining;
+using DigimonWorld.Evolution.Calculator.Core.EvolutionCriteriaCalculation.FromFresh;
 using Evolution.Calculator.Tests.Builder;
 using Generics.Enums;
 using NUnit.Framework;
@@ -6,7 +6,7 @@ using Shouldly;
 
 namespace Evolution.Calculator.Tests;
 
-public sealed class InTrainingEvolutionMapper
+public sealed class FromFreshEvolutionCalculatorMapperTests
 {
     [Test]
     public void DetermineEvolutionResult_ShouldReturnExpectedDigimon([Values(DigimonType.Poyomon)] DigimonType digimonType, [Values(0, 9999)] int hp, [Values(0, 9999)] int mp,
@@ -41,9 +41,9 @@ public sealed class InTrainingEvolutionMapper
 
     private sealed class SetupBuilder
     {
-        public InTrainingEvolutionCalculator Build()
+        public FromFreshEvolutionCalculator Build()
         {
-            var sut = new InTrainingEvolutionCalculator();
+            var sut = new FromFreshEvolutionCalculator();
 
             return sut;
         }

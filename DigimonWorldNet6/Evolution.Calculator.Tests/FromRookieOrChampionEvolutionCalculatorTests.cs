@@ -1,4 +1,4 @@
-using DigimonWorld.Evolution.Calculator.Core.EvolutionCriteriaCalculation.ChampionAndUltimate;
+using DigimonWorld.Evolution.Calculator.Core.EvolutionCriteriaCalculation.FromRookieOrChampion;
 using Evolution.Calculator.Tests.Builder;
 using Generics.Enums;
 using NUnit.Framework;
@@ -7,7 +7,7 @@ using Shouldly;
 namespace Evolution.Calculator.Tests;
 
 [TestFixture]
-public sealed class ChampionAndUltimateEvolutionCalculatorTests
+public sealed class FromRookieOrChampionEvolutionCalculatorTests
 {
     [Test]
     [TestCase(DigimonType.Agumon, 1000, 1000, 250, 200, 500, 150, 3, 20, 80, 80, 0, 10, EvolutionResult.Birdramon)]
@@ -45,9 +45,9 @@ public sealed class ChampionAndUltimateEvolutionCalculatorTests
 
     private sealed class SetupBuilder
     {
-        public ChampionAndUltimateEvolutionCalculator Build()
+        public FromRookieOrChampionEvolutionCalculator Build()
         {
-            var sut = new ChampionAndUltimateEvolutionCalculator();
+            var sut = new FromRookieOrChampionEvolutionCalculator();
 
             return sut;
         }

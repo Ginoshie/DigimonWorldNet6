@@ -5,12 +5,12 @@ using DigimonWorld.Evolution.Calculator.Core.DataObjects;
 using DigimonWorld.Evolution.Calculator.Core.Interfaces.EvolutionCriteria;
 using Generics.Enums;
 
-namespace DigimonWorld.Evolution.Calculator.Core.EvolutionCriteriaCalculation.ChampionAndUltimate;
+namespace DigimonWorld.Evolution.Calculator.Core.EvolutionCriteriaCalculation.FromRookieOrChampion;
 
-public sealed class ChampionAndUltimateEvolutionCalculator : IEvolutionCalculator
+public sealed class FromRookieOrChampionEvolutionCalculator : IEvolutionCalculator
 {
-    private readonly ChampionAndUltimateEvolutionMapper _championAndUltimateEvolutionMapper = new();
-    private readonly ChampionAndUltimateEvolutionScoreCalculator _championAndUltimateEvolutionScoreCalculator = new();
+    private readonly FromRookieOrChampionEvolutionMapper _fromRookieOrChampionEvolutionMapper = new();
+    private readonly FromRookieOrChampionEvolutionScoreCalculator _fromRookieOrChampionEvolutionScoreCalculator = new();
     private readonly StatsCriteriaCalculator _statsMainCriteriaCalculator = new ();
     private readonly CareMistakeCriteriaCalculator _careMistakesMainCriteriaCalculator = new ();
     private readonly WeightCriteriaCalculator _weightMainCriteriaCalculator = new ();
@@ -18,7 +18,7 @@ public sealed class ChampionAndUltimateEvolutionCalculator : IEvolutionCalculato
 
     public EvolutionResult DetermineEvolutionResult(Digimon digimon)
     {
-        var evolutionCriteriaOfPossibleEvolutions = _championAndUltimateEvolutionMapper[digimon.DigimonType].ToList();
+        var evolutionCriteriaOfPossibleEvolutions = _fromRookieOrChampionEvolutionMapper[digimon.DigimonType].ToList();
 
         GuardAgainstCorruptEvolutionCriteria(evolutionCriteriaOfPossibleEvolutions);
 
@@ -29,7 +29,7 @@ public sealed class ChampionAndUltimateEvolutionCalculator : IEvolutionCalculato
         {
             if (!EvolutionEnabled(digimon, evolutionCriteria)) continue;
 
-            var currentEvolutionScore = _championAndUltimateEvolutionScoreCalculator.CalculateEvolutionScore(digimon, evolutionCriteria.Stats);
+            var currentEvolutionScore = _fromRookieOrChampionEvolutionScoreCalculator.CalculateEvolutionScore(digimon, evolutionCriteria.Stats);
             if (currentEvolutionScore <= highestEvolutionScore) break;
 
             highestEvolutionScore = currentEvolutionScore;

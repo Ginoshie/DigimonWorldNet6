@@ -2,7 +2,7 @@ using DigimonWorld.Evolution.Calculator.Core.DataObjects;
 using DigimonWorld.Evolution.Calculator.Core.DataObjects.EvolutionCriteria;
 using Generics.Enums;
 
-namespace DigimonWorld.Evolution.Calculator.Core.EvolutionCriteriaCalculation.ChampionAndUltimate;
+namespace DigimonWorld.Evolution.Calculator.Core.EvolutionCriteriaCalculation.FromRookieOrChampion;
 
 public sealed class BonusCriteriaCalculator
 {

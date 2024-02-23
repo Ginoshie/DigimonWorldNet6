@@ -1,9 +1,9 @@
 using DigimonWorld.Evolution.Calculator.Core.DataObjects;
 using DigimonWorld.Evolution.Calculator.Core.DataObjects.EvolutionCriteria;
 
-namespace DigimonWorld.Evolution.Calculator.Core.EvolutionCriteriaCalculation.ChampionAndUltimate;
+namespace DigimonWorld.Evolution.Calculator.Core.EvolutionCriteriaCalculation.FromRookieOrChampion;
 
-public sealed class ChampionAndUltimateEvolutionScoreCalculator
+public sealed class FromRookieOrChampionEvolutionScoreCalculator
 {
     public int CalculateEvolutionScore(Digimon digimon, MainCriteriaStats statsCriteria)
     {

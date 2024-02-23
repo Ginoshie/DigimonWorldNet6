@@ -1,3 +1,4 @@
+using DigimonWorld.Evolution.Calculator.Core.EvolutionCriteriaCalculation.FromInTraining;
 using DigimonWorld.Evolution.Calculator.Core.EvolutionCriteriaCalculation.Rookie;
 using Evolution.Calculator.Tests.Builder;
 using Generics.Enums;
@@ -7,7 +8,7 @@ using Shouldly;
 namespace Evolution.Calculator.Tests;
 
 [TestFixture]
-public sealed class RookieEvolutionCalculatorTests
+public sealed class FromInTrainingEvolutionCalculatorTests
 {
     [Test]
     [TestCase(DigimonType.Tokomon, 1000, 200, 20, 20, 20, 20, 50, 15, 80, 80, 0, 10, EvolutionResult.Patamon)]
@@ -47,9 +48,9 @@ public sealed class RookieEvolutionCalculatorTests
 
     private sealed class SetupBuilder
     {
-        public RookieEvolutionCalculator Build()
+        public FromInTrainingEvolutionCalculator Build()
         {
-            var sut = new RookieEvolutionCalculator();
+            var sut = new FromInTrainingEvolutionCalculator();
 
             return sut;
         }
