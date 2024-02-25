@@ -1,3 +1,4 @@
+using System;
 using DigimonWorld.Evolution.Calculator.Core.DataObjects;
 using DigimonWorld.Evolution.Calculator.Core.Interfaces.EvolutionCriteria;
 using Generics.Enums;
@@ -8,5 +9,10 @@ public sealed class FromFreshEvolutionCalculator : IEvolutionCalculator
 {
     private readonly FromFreshEvolutionMapper _fromFreshEvolutionMapper = new();
     
-    public EvolutionResult DetermineEvolutionResult(Digimon digimon) => _fromFreshEvolutionMapper[digimon.DigimonType];
+    public EvolutionResult DetermineEvolutionResult(Digimon digimon)
+    {
+        if (digimon.EvolutionStage != EvolutionStage.Fresh) throw new ArgumentException($"{digimon.DigimonType} is not a {EvolutionStage.Fresh.ToString()} stage digimon.");
+        
+        return _fromFreshEvolutionMapper[digimon.DigimonType];
+    }
 }

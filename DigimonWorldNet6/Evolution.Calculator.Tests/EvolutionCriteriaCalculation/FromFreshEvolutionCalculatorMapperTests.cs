@@ -1,3 +1,4 @@
+using System;
 using DigimonWorld.Evolution.Calculator.Core.EvolutionCriteriaCalculation.FromFresh;
 using Evolution.Calculator.Tests.Builder;
 using Generics.Enums;
@@ -37,6 +38,39 @@ public sealed class FromFreshEvolutionCalculatorMapperTests
 
         // Assert
         result.ShouldBe(evolutionResult);
+    }
+    [Test]
+    [TestCase(DigimonType.Tsunomon, 100, 100, 10, 10, 10, 10, 0, 30, 100, 100, 100, 58)]
+    [TestCase(DigimonType.Palmon, 100, 100, 10, 10, 10, 10, 0, 30, 100, 100, 100, 58)]
+    [TestCase(DigimonType.Kuwagamon, 100, 100, 10, 10, 10, 10, 0, 30, 100, 100, 100, 58)]
+    [TestCase(DigimonType.Giromon, 100, 100, 10, 10, 10, 10, 0, 30, 100, 100, 100, 58)]
+    public void DetermineEvolutionResult_ShouldThrowException_WhenDigimonIsNotAFresh(DigimonType digimonType, int hp, int mp, int off, int def, int speed, int brains, int careMistakes, int weight, int happiness,
+        int discipline, int battles, int techniqueCount)
+    {
+        // Arrange
+        var sut = new SetupBuilder()
+            .Build();
+        var digimon = new DigimonBuilder()
+            .WithDigimonType(digimonType)
+            .WithHP(hp)
+            .WithMP(mp)
+            .WithOff(off)
+            .WithDef(def)
+            .WithSpeed(speed)
+            .WithBrains(brains)
+            .WithCareMistakes(careMistakes)
+            .WithWeight(weight)
+            .WithHappiness(happiness)
+            .WithDiscipline(discipline)
+            .WithBattles(battles)
+            .WithTechniqueCount(techniqueCount)
+            .Build();
+
+        // Act
+        Action determineEvolutionResultThrowingException = () => sut.DetermineEvolutionResult(digimon);
+
+        // Assert
+        determineEvolutionResultThrowingException.ShouldThrow<Exception>();
     }
 
     private sealed class SetupBuilder

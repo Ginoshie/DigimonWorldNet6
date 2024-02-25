@@ -14,6 +14,8 @@ public sealed class FromInTrainingEvolutionCalculator : IEvolutionCalculator
 
     public EvolutionResult DetermineEvolutionResult(Digimon digimon)
     {
+        if (digimon.EvolutionStage != EvolutionStage.InTraining) throw new ArgumentException($"{digimon.DigimonType} is not a {EvolutionStage.InTraining.ToString()} stage digimon.");
+        
         var evolutionCriteriaOfPossibleEvolutions = _fromInTrainingEvolutionMapper[digimon.DigimonType].ToList();
 
         GuardAgainstCorruptEvolutionCriteria(evolutionCriteriaOfPossibleEvolutions);
@@ -28,7 +30,7 @@ public sealed class FromInTrainingEvolutionCalculator : IEvolutionCalculator
             if (evolutionScore <= highestEvolutionScore) continue;
             
             highestEvolutionScore = evolutionScore;
-            evolutionResult = (EvolutionResult)evolutionCriteria.DigimonType;
+            evolutionResult = evolutionCriteria.DigimonType;
         }
 
         return evolutionResult;

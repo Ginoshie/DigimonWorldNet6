@@ -11,13 +11,16 @@ public sealed class FromRookieOrChampionEvolutionCalculator : IEvolutionCalculat
 {
     private readonly FromRookieOrChampionEvolutionMapper _fromRookieOrChampionEvolutionMapper = new();
     private readonly FromRookieOrChampionEvolutionScoreCalculator _fromRookieOrChampionEvolutionScoreCalculator = new();
-    private readonly StatsCriteriaCalculator _statsMainCriteriaCalculator = new ();
-    private readonly CareMistakeCriteriaCalculator _careMistakesMainCriteriaCalculator = new ();
-    private readonly WeightCriteriaCalculator _weightMainCriteriaCalculator = new ();
-    private readonly BonusCriteriaCalculator _bonusCriteriaCalculator = new ();
+    private readonly StatsCriteriaCalculator _statsMainCriteriaCalculator = new();
+    private readonly CareMistakeCriteriaCalculator _careMistakesMainCriteriaCalculator = new();
+    private readonly WeightCriteriaCalculator _weightMainCriteriaCalculator = new();
+    private readonly BonusCriteriaCalculator _bonusCriteriaCalculator = new();
 
     public EvolutionResult DetermineEvolutionResult(Digimon digimon)
     {
+        if (digimon.EvolutionStage is not (EvolutionStage.Rookie or EvolutionStage.Champion))
+            throw new ArgumentException($"{digimon.DigimonType} is not a {EvolutionStage.Rookie.ToString()} or {EvolutionStage.Champion.ToString()} stage digimon.");
+
         var evolutionCriteriaOfPossibleEvolutions = _fromRookieOrChampionEvolutionMapper[digimon.DigimonType].ToList();
 
         GuardAgainstCorruptEvolutionCriteria(evolutionCriteriaOfPossibleEvolutions);

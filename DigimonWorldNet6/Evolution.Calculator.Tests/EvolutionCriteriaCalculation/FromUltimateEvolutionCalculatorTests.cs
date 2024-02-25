@@ -1,5 +1,5 @@
 using System;
-using DigimonWorld.Evolution.Calculator.Core.EvolutionCriteriaCalculation.FromInTraining;
+using DigimonWorld.Evolution.Calculator.Core.EvolutionCriteriaCalculation.FromUltimate;
 using Evolution.Calculator.Tests.Builder;
 using Generics.Enums;
 using NUnit.Framework;
@@ -8,17 +8,17 @@ using Shouldly;
 namespace Evolution.Calculator.Tests.EvolutionCriteriaCalculation;
 
 [TestFixture]
-public sealed class FromInTrainingEvolutionCalculatorTests
+public sealed class FromUltimateEvolutionCalculatorTests
 {
     [Test]
-    [TestCase(DigimonType.Tokomon, 1000, 200, 20, 20, 20, 20, 50, 15, 80, 80, 0, 10, EvolutionResult.Patamon)]
-    [TestCase(DigimonType.Tokomon, 200, 200, 100, 20, 20, 20, 50, 15, 80, 80, 0, 10, EvolutionResult.Patamon)]
-    [TestCase(DigimonType.Tokomon, 200, 200, 20, 20, 20, 100, 50, 15, 80, 80, 0, 10, EvolutionResult.Patamon)]
-    [TestCase(DigimonType.Tokomon, 200, 1000, 20, 20, 20, 20, 50, 15, 80, 80, 0, 10, EvolutionResult.Biyomon)]
-    [TestCase(DigimonType.Tokomon, 200, 200, 20, 100, 20, 20, 50, 15, 80, 80, 0, 10, EvolutionResult.Biyomon)]
-    [TestCase(DigimonType.Tokomon, 200, 200, 20, 20, 100, 20, 50, 15, 80, 80, 0, 10, EvolutionResult.Biyomon)]
+    [TestCase(DigimonType.Andromon, 9999, 9999, 999, 999, 999, 999, 0, 30, 100, 100, 100, 58)]
+    [TestCase(DigimonType.Digitamamon, 9999, 9999, 999, 999, 999, 999, 0, 30, 100, 100, 100, 58)]
+    [TestCase(DigimonType.Etemon, 9999, 9999, 999, 999, 999, 999, 0, 30, 100, 100, 100, 58)]
+    [TestCase(DigimonType.Andromon, 100, 100, 10, 10, 10, 10, 0, 30, 100, 100, 100, 58)]
+    [TestCase(DigimonType.Digitamamon, 100, 100, 10, 10, 10, 10, 0, 30, 100, 100, 100, 58)]
+    [TestCase(DigimonType.Etemon, 100, 100, 10, 10, 10, 10, 0, 30, 100, 100, 100, 58)]
     public void DetermineEvolutionResult_ShouldReturnExpectedDigimon(DigimonType digimonType, int hp, int mp, int off, int def, int speed, int brains, int careMistakes, int weight, int happiness,
-        int discipline, int battles, int techniqueCount, EvolutionResult evolutionResult)
+        int discipline, int battles, int techniqueCount)
     {
         // Arrange
         var sut = new SetupBuilder()
@@ -43,15 +43,19 @@ public sealed class FromInTrainingEvolutionCalculatorTests
         var result = sut.DetermineEvolutionResult(digimon);
 
         // Assert
-        result.ShouldBe(evolutionResult);
+        result.ShouldBe(EvolutionResult.None);
     }
     
     [Test]
-    [TestCase(DigimonType.Yuramon, 1000, 200, 20, 20, 20, 20, 50, 15, 80, 80, 0, 10)]
-    [TestCase(DigimonType.Gabumon, 1000, 200, 20, 20, 20, 20, 50, 15, 80, 80, 0, 10)]
-    [TestCase(DigimonType.Garurumon, 1000, 200, 20, 20, 20, 20, 50, 15, 80, 80, 0, 10)]
-    [TestCase(DigimonType.Monzaemon, 1000, 200, 20, 20, 20, 20, 50, 15, 80, 80, 0, 10)]
-    public void DetermineEvolutionResult__ShouldThrowException_WhenDigimonIsNotAnInTraining(DigimonType digimonType, int hp, int mp, int off, int def, int speed, int brains, int careMistakes, int weight, int happiness,
+    [TestCase(DigimonType.Yuramon, 9999, 9999, 999, 999, 999, 999, 0, 30, 100, 100, 100, 58)]
+    [TestCase(DigimonType.Tsunomon, 9999, 9999, 999, 999, 999, 999, 0, 30, 100, 100, 100, 58)]
+    [TestCase(DigimonType.Agumon, 9999, 9999, 999, 999, 999, 999, 0, 30, 100, 100, 100, 58)]
+    [TestCase(DigimonType.Kabuterimon, 9999, 9999, 999, 999, 999, 999, 0, 30, 100, 100, 100, 58)]
+    [TestCase(DigimonType.Yuramon, 100, 100, 10, 10, 10, 10, 0, 30, 100, 100, 100, 58)]
+    [TestCase(DigimonType.Tsunomon, 100, 100, 10, 10, 10, 10, 0, 30, 100, 100, 100, 58)]
+    [TestCase(DigimonType.Agumon, 100, 100, 10, 10, 10, 10, 0, 30, 100, 100, 100, 58)]
+    [TestCase(DigimonType.Kabuterimon, 100, 100, 10, 10, 10, 10, 0, 30, 100, 100, 100, 58)]
+    public void DetermineEvolutionResult_ShouldThrowException_WhenDigimonIsNotAnUltimate(DigimonType digimonType, int hp, int mp, int off, int def, int speed, int brains, int careMistakes, int weight, int happiness,
         int discipline, int battles, int techniqueCount)
     {
         // Arrange
@@ -82,9 +86,9 @@ public sealed class FromInTrainingEvolutionCalculatorTests
 
     private sealed class SetupBuilder
     {
-        public FromInTrainingEvolutionCalculator Build()
+        public FromUltimateEvolutionCalculator Build()
         {
-            var sut = new FromInTrainingEvolutionCalculator();
+            var sut = new FromUltimateEvolutionCalculator();
 
             return sut;
         }
