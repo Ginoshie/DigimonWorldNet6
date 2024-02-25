@@ -5,18 +5,21 @@ namespace DigimonWorld.Evolution.Calculator.Core.EvolutionCriteriaCalculation.Fr
 
 public sealed class FromFreshEvolutionMapper
 {
-    private readonly Dictionary<DigimonType, EvolutionResult> _freshAndInTrainingEvolutionMappings = new();
+    private readonly Dictionary<DigimonType, EvolutionResult> _fromFreshEvolutionMappings = new();
 
     public FromFreshEvolutionMapper()
     {
-        _freshAndInTrainingEvolutionMappings[DigimonType.Poyomon] = EvolutionResult.Tokomon;
+        _fromFreshEvolutionMappings[DigimonType.Botamon] = EvolutionResult.Koromon;
+        _fromFreshEvolutionMappings[DigimonType.Poyomon] = EvolutionResult.Tokomon;
+        _fromFreshEvolutionMappings[DigimonType.Punimon] = EvolutionResult.Tsunomon;
+        _fromFreshEvolutionMappings[DigimonType.Yuramon] = EvolutionResult.Tanemon;
     }
 
     public EvolutionResult this[DigimonType digimonType]
     {
         get
         {
-            if (_freshAndInTrainingEvolutionMappings.TryGetValue(digimonType, out var evolutionResult))
+            if (_fromFreshEvolutionMappings.TryGetValue(digimonType, out var evolutionResult))
             {
                 return evolutionResult;
             }
