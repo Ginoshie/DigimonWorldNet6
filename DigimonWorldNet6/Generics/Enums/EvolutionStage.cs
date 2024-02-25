@@ -2,7 +2,7 @@ namespace Generics.Enums;
 
 public enum EvolutionStage
 {
-    Baby,
+    Fresh,
     InTraining,
     Rookie,
     Champion,
