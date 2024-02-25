@@ -5,7 +5,7 @@ using Generics.Enums;
 using NUnit.Framework;
 using Shouldly;
 
-namespace Evolution.Calculator.Tests.EvolutionCriteriaCalculation;
+namespace Evolution.Calculator.Tests.EvolutionCriteriaCalculation.FromFresh;
 
 public sealed class FromFreshEvolutionCalculatorMapperTests
 {
