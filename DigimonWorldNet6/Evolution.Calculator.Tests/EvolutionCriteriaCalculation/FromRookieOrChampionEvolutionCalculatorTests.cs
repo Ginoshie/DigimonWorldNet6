@@ -4,7 +4,7 @@ using Generics.Enums;
 using NUnit.Framework;
 using Shouldly;
 
-namespace Evolution.Calculator.Tests;
+namespace Evolution.Calculator.Tests.EvolutionCriteriaCalculation;
 
 [TestFixture]
 public sealed class FromRookieOrChampionEvolutionCalculatorTests
