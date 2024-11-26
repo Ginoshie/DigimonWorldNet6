@@ -10,7 +10,11 @@
         xmlns:conversion="clr-namespace:DigimonWorld.Frontend.WPF.Conversion"
         mc:Ignorable="d"
         d:DataContext="{d:DesignInstance Type=wpf:EvolutionToolViewModel, IsDesignTimeCreatable=True}"
-        Title="MainWindow" Height="435" Width="1025">
+        Title="Digimon World Tool" 
+        Icon="pack://application:,,,/Frontend.WPF;component/Images/Misc/Icon.jpg"
+        ResizeMode="NoResize"
+        Height="435" Width="1025">
+    
     <Window.Resources>
         <conversion:EnumToImageConverter x:Key="EnumToImageConverter"/>
         
@@ -278,9 +282,9 @@
             </Grid>
         </GroupBox>
 
-        <Image Grid.Column="1" Grid.Row="0" Width="200" Source="{Binding DigimonType, Converter={StaticResource EnumToImageConverter}}" />
-        <Image Grid.Column="2" Grid.Row="0" Height="100" Source="/Images/Arrow-Right.jpg" />
-        <Image Grid.Column="3" Grid.Row="0" Width="200" Source="{Binding  EvolutionResult, Mode=OneWay, Converter={StaticResource EnumToImageConverter}}" />
+        <Image Grid.Column="1" Grid.Row="0" Width="350" Source="{Binding DigimonType, Converter={StaticResource EnumToImageConverter}}" />
+        <Image Grid.Column="2" Grid.Row="0" Height="100" Source="/Images/Misc/Arrow-Right.jpg" />
+        <Image Grid.Column="3" Grid.Row="0" Width="350" Source="{Binding  EvolutionResult, Mode=OneWay, Converter={StaticResource EnumToImageConverter}}" />
 
     </Grid>
 </Window>

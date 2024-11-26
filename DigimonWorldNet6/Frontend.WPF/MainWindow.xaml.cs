@@ -1,14 +1,12 @@
-﻿using System.Windows;
+﻿namespace DigimonWorld.Frontend.WPF;
 
-namespace DigimonWorld.Frontend.WPF;
-
-public partial class MainWindow : Window
+public partial class MainWindow
 {
     public MainWindow()
     {
         InitializeComponent();
 
-        var dataContext = new EvolutionToolViewModel();
+        EvolutionToolViewModel dataContext = new();
             
         DataContext = dataContext;
     }

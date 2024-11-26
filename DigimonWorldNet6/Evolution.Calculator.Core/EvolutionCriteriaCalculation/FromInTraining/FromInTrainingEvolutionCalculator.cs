@@ -16,16 +16,16 @@ public sealed class FromInTrainingEvolutionCalculator : IEvolutionCalculator
     {
         if (digimon.EvolutionStage != EvolutionStage.InTraining) throw new ArgumentException($"{digimon.DigimonType} is not a {EvolutionStage.InTraining.ToString()} stage digimon.");
         
-        var evolutionCriteriaOfPossibleEvolutions = _fromInTrainingEvolutionMapper[digimon.DigimonType].ToList();
+        List<IEvolutionCriteria> evolutionCriteriaOfPossibleEvolutions = _fromInTrainingEvolutionMapper[digimon.DigimonType].ToList();
 
         GuardAgainstCorruptEvolutionCriteria(evolutionCriteriaOfPossibleEvolutions);
 
-        var highestEvolutionScore = 0;
-        var evolutionResult = EvolutionResult.None;
+        int highestEvolutionScore = 0;
+        EvolutionResult evolutionResult = EvolutionResult.None;
 
-        foreach (var evolutionCriteria in evolutionCriteriaOfPossibleEvolutions)
+        foreach (IEvolutionCriteria? evolutionCriteria in evolutionCriteriaOfPossibleEvolutions)
         {
-            var evolutionScore = _fromInTrainingEvolutionScoreCalculator.CalculateEvolutionScore(digimon, evolutionCriteria.Stats);
+            int evolutionScore = _fromInTrainingEvolutionScoreCalculator.CalculateEvolutionScore(digimon, evolutionCriteria.Stats);
 
             if (evolutionScore <= highestEvolutionScore) continue;
             
@@ -38,9 +38,9 @@ public sealed class FromInTrainingEvolutionCalculator : IEvolutionCalculator
 
     private static void GuardAgainstCorruptEvolutionCriteria(IReadOnlyCollection<IEvolutionCriteria> evolutionCriteriaOfPossibleEvolutions)
     {
-        var corruptEvolutionOptions =
+        IEnumerable<IEvolutionCriteria> corruptEvolutionOptions =
             evolutionCriteriaOfPossibleEvolutions.Where(evolutionCriteria => evolutionCriteria.EvolutionStage != EvolutionStage.Rookie);
-        var formattedCorruptEvolutionOptions = string.Join(", ", corruptEvolutionOptions);
+        string formattedCorruptEvolutionOptions = string.Join(", ", corruptEvolutionOptions);
         if (evolutionCriteriaOfPossibleEvolutions.Any(evolutionCriteria => evolutionCriteria.EvolutionStage != EvolutionStage.Rookie))
             throw new ArgumentException(
                 $"Evolution options are corrupt, all options should be {EvolutionStage.Rookie}; Corrupt evolution options: {formattedCorruptEvolutionOptions}");

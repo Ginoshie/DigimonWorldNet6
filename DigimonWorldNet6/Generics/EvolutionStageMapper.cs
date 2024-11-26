@@ -74,14 +74,12 @@ public sealed class EvolutionStageMapper
     {
         get
         {
-            if (_evolutionStageMappings.TryGetValue(evolutionResult, out var evolutionStage))
+            if (_evolutionStageMappings.TryGetValue(evolutionResult, out EvolutionStage evolutionStage))
             {
                 return evolutionStage;
             }
-            else
-            {
-                throw new KeyNotFoundException($"Evolution stage mapping for {evolutionResult} was not found in {nameof(EvolutionStageMapper)}");
-            }
+
+            throw new KeyNotFoundException($"Evolution stage mapping for {evolutionResult} was not found in {nameof(EvolutionStageMapper)}");
         }
     }
 }

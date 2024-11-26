@@ -1,4 +1,5 @@
 using DigimonWorld.Evolution.Calculator.Core.DataObjects;
+using DigimonWorld.Evolution.Calculator.Core.Interfaces.EvolutionCriteria;
 using Generics.Enums;
 
 namespace DigimonWorld.Evolution.Calculator.Core.EvolutionCalculation;
@@ -9,8 +10,8 @@ public sealed class EvolutionCalculator
     
     public EvolutionResult CalculateEvolutionResult(Digimon digimon)
     {
-        var evolutionCalculator = _evolutionCalculationMapper[digimon.DigimonType];
-        var evolutionResult = evolutionCalculator.DetermineEvolutionResult(digimon);
+        IEvolutionCalculator evolutionCalculator = _evolutionCalculationMapper[digimon.DigimonType];
+        EvolutionResult evolutionResult = evolutionCalculator.DetermineEvolutionResult(digimon);
 
         return evolutionResult;
     }

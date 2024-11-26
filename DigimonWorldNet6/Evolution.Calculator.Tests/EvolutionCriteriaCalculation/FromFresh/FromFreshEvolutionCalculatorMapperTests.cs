@@ -1,4 +1,5 @@
 using System;
+using DigimonWorld.Evolution.Calculator.Core.DataObjects;
 using DigimonWorld.Evolution.Calculator.Core.EvolutionCriteriaCalculation.FromFresh;
 using Evolution.Calculator.Tests.Builder;
 using Generics.Enums;
@@ -15,9 +16,9 @@ public sealed class FromFreshEvolutionCalculatorMapperTests
         [Values(0)] int happiness, [Values(0)] int discipline, [Values(0)] int battles, [Values(40)] int techniqueCount, [Values(EvolutionResult.Tokomon)] EvolutionResult evolutionResult)
     {
         // Arrange
-        var sut = new SetupBuilder()
+        FromFreshEvolutionCalculator sut = new SetupBuilder()
             .Build();
-        var digimon = new DigimonBuilder()
+        Digimon digimon = new DigimonBuilder()
             .WithDigimonType(digimonType)
             .WithHP(hp)
             .WithMP(mp)
@@ -34,7 +35,7 @@ public sealed class FromFreshEvolutionCalculatorMapperTests
             .Build();
 
         // Act
-        var result = sut.DetermineEvolutionResult(digimon);
+        EvolutionResult result = sut.DetermineEvolutionResult(digimon);
 
         // Assert
         result.ShouldBe(evolutionResult);
@@ -48,9 +49,9 @@ public sealed class FromFreshEvolutionCalculatorMapperTests
         int discipline, int battles, int techniqueCount)
     {
         // Arrange
-        var sut = new SetupBuilder()
+        FromFreshEvolutionCalculator sut = new SetupBuilder()
             .Build();
-        var digimon = new DigimonBuilder()
+        Digimon digimon = new DigimonBuilder()
             .WithDigimonType(digimonType)
             .WithHP(hp)
             .WithMP(mp)
@@ -77,7 +78,7 @@ public sealed class FromFreshEvolutionCalculatorMapperTests
     {
         public FromFreshEvolutionCalculator Build()
         {
-            var sut = new FromFreshEvolutionCalculator();
+            FromFreshEvolutionCalculator sut = new();
 
             return sut;
         }

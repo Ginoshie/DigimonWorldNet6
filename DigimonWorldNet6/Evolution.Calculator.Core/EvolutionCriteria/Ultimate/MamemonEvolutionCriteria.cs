@@ -12,7 +12,7 @@ public sealed class MamemonEvolutionCriteria : IEvolutionCriteria
 
     public MainCriteriaStats Stats => new(off: 400, def: 300, speed: 300, brains: 400);
 
-    public MainCriteriaCareMistakes CareMistakes => new(15, false);
+    public MainCriteriaCareMistakes CareMistakes => new(15);
 
     public MainCriteriaWeight Weight => new(5);
 

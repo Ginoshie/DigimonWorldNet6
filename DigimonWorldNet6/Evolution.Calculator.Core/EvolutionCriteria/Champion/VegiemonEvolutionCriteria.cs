@@ -12,7 +12,7 @@ public sealed class VegiemonEvolutionCriteria : IEvolutionCriteria
 
     public MainCriteriaStats Stats => new(mp: 1000);
 
-    public MainCriteriaCareMistakes CareMistakes => new(5, false);
+    public MainCriteriaCareMistakes CareMistakes => new(5);
 
     public MainCriteriaWeight Weight => new(10);
 

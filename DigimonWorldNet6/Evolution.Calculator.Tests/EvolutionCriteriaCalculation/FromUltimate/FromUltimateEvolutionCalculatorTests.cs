@@ -1,4 +1,5 @@
 using System;
+using DigimonWorld.Evolution.Calculator.Core.DataObjects;
 using DigimonWorld.Evolution.Calculator.Core.EvolutionCriteriaCalculation.FromUltimate;
 using Evolution.Calculator.Tests.Builder;
 using Generics.Enums;
@@ -21,9 +22,9 @@ public sealed class FromUltimateEvolutionCalculatorTests
         int discipline, int battles, int techniqueCount)
     {
         // Arrange
-        var sut = new SetupBuilder()
+        FromUltimateEvolutionCalculator sut = new SetupBuilder()
             .Build();
-        var digimon = new DigimonBuilder()
+        Digimon digimon = new DigimonBuilder()
             .WithDigimonType(digimonType)
             .WithHP(hp)
             .WithMP(mp)
@@ -40,7 +41,7 @@ public sealed class FromUltimateEvolutionCalculatorTests
             .Build();
 
         // Act
-        var result = sut.DetermineEvolutionResult(digimon);
+        EvolutionResult result = sut.DetermineEvolutionResult(digimon);
 
         // Assert
         result.ShouldBe(EvolutionResult.None);
@@ -59,9 +60,9 @@ public sealed class FromUltimateEvolutionCalculatorTests
         int discipline, int battles, int techniqueCount)
     {
         // Arrange
-        var sut = new SetupBuilder()
+        FromUltimateEvolutionCalculator sut = new SetupBuilder()
             .Build();
-        var digimon = new DigimonBuilder()
+        Digimon digimon = new DigimonBuilder()
             .WithDigimonType(digimonType)
             .WithHP(hp)
             .WithMP(mp)
@@ -88,7 +89,7 @@ public sealed class FromUltimateEvolutionCalculatorTests
     {
         public FromUltimateEvolutionCalculator Build()
         {
-            var sut = new FromUltimateEvolutionCalculator();
+            FromUltimateEvolutionCalculator sut = new();
 
             return sut;
         }

@@ -21,22 +21,22 @@ public sealed class FromRookieOrChampionEvolutionCalculator : IEvolutionCalculat
         if (digimon.EvolutionStage is not (EvolutionStage.Rookie or EvolutionStage.Champion))
             throw new ArgumentException($"{digimon.DigimonType} is not a {EvolutionStage.Rookie.ToString()} or {EvolutionStage.Champion.ToString()} stage digimon.");
 
-        var evolutionCriteriaOfPossibleEvolutions = _fromRookieOrChampionEvolutionMapper[digimon.DigimonType].ToList();
+        List<IEvolutionCriteria> evolutionCriteriaOfPossibleEvolutions = _fromRookieOrChampionEvolutionMapper[digimon.DigimonType].ToList();
 
         GuardAgainstCorruptEvolutionCriteria(evolutionCriteriaOfPossibleEvolutions);
 
-        var highestEvolutionScore = 0;
-        var evolutionResult = EvolutionResult.None;
+        int highestEvolutionScore = 0;
+        EvolutionResult evolutionResult = EvolutionResult.None;
 
-        foreach (var evolutionCriteria in evolutionCriteriaOfPossibleEvolutions)
+        foreach (IEvolutionCriteria evolutionCriteria in evolutionCriteriaOfPossibleEvolutions)
         {
             if (!EvolutionEnabled(digimon, evolutionCriteria)) continue;
 
-            var currentEvolutionScore = _fromRookieOrChampionEvolutionScoreCalculator.CalculateEvolutionScore(digimon, evolutionCriteria.Stats);
+            int currentEvolutionScore = _fromRookieOrChampionEvolutionScoreCalculator.CalculateEvolutionScore(digimon, evolutionCriteria.Stats);
             if (currentEvolutionScore <= highestEvolutionScore) break;
 
             highestEvolutionScore = currentEvolutionScore;
-            evolutionResult = (EvolutionResult)evolutionCriteria.DigimonType;
+            evolutionResult = evolutionCriteria.DigimonType;
         }
 
         if (evolutionCriteriaOfPossibleEvolutions.FirstOrDefault()?.EvolutionStage == EvolutionStage.Champion && evolutionResult == EvolutionResult.None)
@@ -53,9 +53,9 @@ public sealed class FromRookieOrChampionEvolutionCalculator : IEvolutionCalculat
               evolutionCriteriaOfPossibleEvolutions.All(evolutionCriteria => evolutionCriteria.EvolutionStage == EvolutionStage.Ultimate))
            )
         {
-            var corruptEvolutionOptions =
+            IEnumerable<IEvolutionCriteria> corruptEvolutionOptions =
                 evolutionCriteriaOfPossibleEvolutions.Where(evolutionCriteria => evolutionCriteria.EvolutionStage is not (EvolutionStage.Champion or EvolutionStage.Ultimate));
-            var formattedCorruptEvolutionOptions = string.Join(", ", corruptEvolutionOptions);
+            string formattedCorruptEvolutionOptions = string.Join(", ", corruptEvolutionOptions);
             throw new ArgumentException(
                 $"Evolution options are corrupt, all options should be either {EvolutionStage.Champion} or {EvolutionStage.Ultimate}; Corrupt evolution options: {formattedCorruptEvolutionOptions}");
         }
@@ -63,7 +63,7 @@ public sealed class FromRookieOrChampionEvolutionCalculator : IEvolutionCalculat
 
     private bool EvolutionEnabled(Digimon digimon, IEvolutionCriteria evolutionCriteria)
     {
-        var criteriaMetCount = 0;
+        int criteriaMetCount = 0;
 
         if (_statsMainCriteriaCalculator.CriteriaIsMet(digimon, evolutionCriteria.Stats)) criteriaMetCount++;
         if (_careMistakesMainCriteriaCalculator.CriteriaIsMet(digimon, evolutionCriteria.CareMistakes)) criteriaMetCount++;

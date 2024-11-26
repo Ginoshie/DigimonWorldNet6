@@ -12,7 +12,7 @@ public sealed class DrimogemonEvolutionCriteria : IEvolutionCriteria
 
     public MainCriteriaStats Stats => new(off: 100);
 
-    public MainCriteriaCareMistakes CareMistakes => new(3, false);
+    public MainCriteriaCareMistakes CareMistakes => new(3);
 
     public MainCriteriaWeight Weight => new(40);
 

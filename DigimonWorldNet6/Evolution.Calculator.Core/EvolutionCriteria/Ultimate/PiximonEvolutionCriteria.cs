@@ -12,7 +12,7 @@ public sealed class PiximonEvolutionCriteria : IEvolutionCriteria
 
     public MainCriteriaStats Stats => new(off: 300, def: 300, speed: 400, brains: 400);
 
-    public MainCriteriaCareMistakes CareMistakes => new(15, false);
+    public MainCriteriaCareMistakes CareMistakes => new(15);
 
     public MainCriteriaWeight Weight => new(5);
 

@@ -1,4 +1,5 @@
 using System;
+using DigimonWorld.Evolution.Calculator.Core.DataObjects;
 using DigimonWorld.Evolution.Calculator.Core.EvolutionCriteriaCalculation.FromInTraining;
 using Evolution.Calculator.Tests.Builder;
 using Generics.Enums;
@@ -21,9 +22,9 @@ public sealed class FromInTrainingEvolutionCalculatorTests
         int discipline, int battles, int techniqueCount, EvolutionResult evolutionResult)
     {
         // Arrange
-        var sut = new SetupBuilder()
+        FromInTrainingEvolutionCalculator sut = new SetupBuilder()
             .Build();
-        var digimon = new DigimonBuilder()
+        Digimon digimon = new DigimonBuilder()
             .WithDigimonType(digimonType)
             .WithHP(hp)
             .WithMP(mp)
@@ -40,7 +41,7 @@ public sealed class FromInTrainingEvolutionCalculatorTests
             .Build();
 
         // Act
-        var result = sut.DetermineEvolutionResult(digimon);
+        EvolutionResult result = sut.DetermineEvolutionResult(digimon);
 
         // Assert
         result.ShouldBe(evolutionResult);
@@ -55,9 +56,9 @@ public sealed class FromInTrainingEvolutionCalculatorTests
         int discipline, int battles, int techniqueCount)
     {
         // Arrange
-        var sut = new SetupBuilder()
+        FromInTrainingEvolutionCalculator sut = new SetupBuilder()
             .Build();
-        var digimon = new DigimonBuilder()
+        Digimon digimon = new DigimonBuilder()
             .WithDigimonType(digimonType)
             .WithHP(hp)
             .WithMP(mp)
@@ -84,7 +85,7 @@ public sealed class FromInTrainingEvolutionCalculatorTests
     {
         public FromInTrainingEvolutionCalculator Build()
         {
-            var sut = new FromInTrainingEvolutionCalculator();
+            FromInTrainingEvolutionCalculator sut = new();
 
             return sut;
         }

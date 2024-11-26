@@ -55,14 +55,12 @@ public sealed class FromRookieOrChampionEvolutionMapper
     {
         get
         {
-            if (_fromRookieOrChampionEvolutionMappings.TryGetValue(digimonType, out var evolutionResult))
+            if (_fromRookieOrChampionEvolutionMappings.TryGetValue(digimonType, out IEnumerable<IEvolutionCriteria>? evolutionResult))
             {
                 return evolutionResult;
             }
-            else
-            {
-                throw new KeyNotFoundException($"Evolution mapping for {digimonType} was not found in {nameof(FromRookieOrChampionEvolutionMapper)}");
-            }
+
+            throw new KeyNotFoundException($"Evolution mapping for {digimonType} was not found in {nameof(FromRookieOrChampionEvolutionMapper)}");
         }
     }
 

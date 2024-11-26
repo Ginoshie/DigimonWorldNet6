@@ -12,7 +12,7 @@ public sealed class OgremonEvolutionCriteria : IEvolutionCriteria
 
     public MainCriteriaStats Stats => new(hp: 1000, off: 100);
 
-    public MainCriteriaCareMistakes CareMistakes => new(5, false);
+    public MainCriteriaCareMistakes CareMistakes => new(5);
 
     public MainCriteriaWeight Weight => new(30);
 

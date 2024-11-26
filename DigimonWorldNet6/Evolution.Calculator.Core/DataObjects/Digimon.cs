@@ -21,7 +21,7 @@ public sealed class Digimon
         Battles = battles;
         TechniqueCount = techniqueCount;
         
-         var evolutionStageMapper = new EvolutionStageMapper();
+         EvolutionStageMapper evolutionStageMapper = new();
 
          EvolutionStage = evolutionStageMapper[digimonType];
     }

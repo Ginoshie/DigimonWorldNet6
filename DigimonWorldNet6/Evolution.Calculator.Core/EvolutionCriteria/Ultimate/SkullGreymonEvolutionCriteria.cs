@@ -12,7 +12,7 @@ public sealed class SkullGreymonEvolutionCriteria : IEvolutionCriteria
 
     public MainCriteriaStats Stats => new(hp: 4000, mp: 6000, off: 400, def: 400, speed: 200, brains: 500);
 
-    public MainCriteriaCareMistakes CareMistakes => new(10, false);
+    public MainCriteriaCareMistakes CareMistakes => new(10);
 
     public MainCriteriaWeight Weight => new(30);
 

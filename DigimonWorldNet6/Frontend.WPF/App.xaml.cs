@@ -5,7 +5,7 @@ using Microsoft.Extensions.Hosting;
 
 namespace DigimonWorld.Frontend.WPF;
 
-public partial class App : Application
+public partial class App
 {
     public static IHost? AppHost { get; private set; }
 
@@ -17,7 +17,7 @@ public partial class App : Application
             {
                 services.AddSingleton<MainWindow>();
                 
-                var evolutionCalculatorModule = new EvolutionCalculatorModule();
+                EvolutionCalculatorModule evolutionCalculatorModule = new();
                 evolutionCalculatorModule.RegisterServices(services);
             })
             .Build();
@@ -27,7 +27,7 @@ public partial class App : Application
     {
         await AppHost!.StartAsync();
 
-        var startupForm = AppHost.Services.GetRequiredService<MainWindow>();
+        MainWindow startupForm = AppHost.Services.GetRequiredService<MainWindow>();
         startupForm.Show();
         
         base.OnStartup(e);

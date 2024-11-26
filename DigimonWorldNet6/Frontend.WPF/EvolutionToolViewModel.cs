@@ -191,7 +191,7 @@ public sealed class EvolutionToolViewModel : INotifyPropertyChanged
 
     private void CalculateEvolutionResult()
     {
-        var currentDigimon = new Digimon(DigimonType, HP, MP, Off, Def, Speed, Brains, CareMistakes, Weight, Happiness, Discipline, Battles, _techniques);
+        Digimon currentDigimon = new(DigimonType, HP, MP, Off, Def, Speed, Brains, CareMistakes, Weight, Happiness, Discipline, Battles, _techniques);
         EvolutionResult = _evolutionCalculator.CalculateEvolutionResult(currentDigimon);
     }
 

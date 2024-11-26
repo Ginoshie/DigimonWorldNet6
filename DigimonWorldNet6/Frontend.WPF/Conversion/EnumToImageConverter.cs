@@ -12,14 +12,14 @@ public sealed class EnumToImageConverter : IValueConverter
     {
         ArgumentNullException.ThrowIfNull(value);
 
-        var stringValue = value.ToString();
+        string? stringValue = value.ToString();
 
         ArgumentException.ThrowIfNullOrWhiteSpace(stringValue);
 
         if (targetType != typeof(ImageSource))
             throw new ArgumentException($"Can only convert to {typeof(ImageSource)} but tried to convert to {targetType}", nameof(targetType));
 
-        return new BitmapImage(new Uri($"/Images/{stringValue}.jpg", UriKind.Relative));
+        return new BitmapImage(new Uri($"/Images/Digimon/{stringValue}.jpg", UriKind.Relative));
     }
 
     public object ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture)

@@ -12,7 +12,7 @@ public sealed class MeramonEvolutionCriteria : IEvolutionCriteria
 
     public MainCriteriaStats Stats => new(off: 100);
 
-    public MainCriteriaCareMistakes CareMistakes => new(5, false);
+    public MainCriteriaCareMistakes CareMistakes => new(5);
 
     public MainCriteriaWeight Weight => new(20);
 

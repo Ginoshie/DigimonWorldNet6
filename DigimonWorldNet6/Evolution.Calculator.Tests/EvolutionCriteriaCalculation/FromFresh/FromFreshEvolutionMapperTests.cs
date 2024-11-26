@@ -17,11 +17,11 @@ public class FromFreshEvolutionMapperTests
     public void FromFreshEvolutionMapperIndexer_ShouldReturnExpectedResult(DigimonType digimonType, EvolutionResult expectedEvolutionResult)
     {
         // Arrange
-        var sut = new SetupBuilder()
+        FromFreshEvolutionMapper sut = new SetupBuilder()
             .Build();
 
         // Act
-        var result = sut[digimonType];
+        EvolutionResult result = sut[digimonType];
 
         // Assert
         result.ShouldBe(expectedEvolutionResult);
@@ -31,7 +31,7 @@ public class FromFreshEvolutionMapperTests
     public void FromFreshEvolutionMapperIndexer_ShouldThrowException_WhenMappingDoesNotExist([Values(DigimonType.Tsunomon, DigimonType.Penguinmon, DigimonType.Bakemon, DigimonType.Vademon)] DigimonType digimonType)
     {
         // Arrange
-        var sut = new SetupBuilder()
+        FromFreshEvolutionMapper sut = new SetupBuilder()
             .Build();
 
         // Act
@@ -45,7 +45,7 @@ public class FromFreshEvolutionMapperTests
     {
         public FromFreshEvolutionMapper Build()
         {
-            var sut = new FromFreshEvolutionMapper();
+            FromFreshEvolutionMapper sut = new();
 
             return sut;
         }

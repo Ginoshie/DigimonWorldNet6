@@ -12,7 +12,7 @@ public sealed class GiromonEvolutionCriteria : IEvolutionCriteria
 
     public MainCriteriaStats Stats => new(off: 400, speed: 3200, brains: 400);
 
-    public MainCriteriaCareMistakes CareMistakes => new(15, false);
+    public MainCriteriaCareMistakes CareMistakes => new(15);
 
     public MainCriteriaWeight Weight => new(5);
 

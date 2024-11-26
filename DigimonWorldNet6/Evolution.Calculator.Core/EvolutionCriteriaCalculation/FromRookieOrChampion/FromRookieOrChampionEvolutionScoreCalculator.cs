@@ -7,8 +7,8 @@ public sealed class FromRookieOrChampionEvolutionScoreCalculator
 {
     public int CalculateEvolutionScore(Digimon digimon, MainCriteriaStats statsCriteria)
     {
-        var evolutionStatsTotal = 0;
-        var evolutionStatCountTotal = 0;
+        int evolutionStatsTotal = 0;
+        int evolutionStatCountTotal = 0;
 
         if (statsCriteria.HP > 0)
         {

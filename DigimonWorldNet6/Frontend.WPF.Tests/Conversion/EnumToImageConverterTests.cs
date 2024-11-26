@@ -14,11 +14,11 @@ public class EnumToImageConverterTests
     public void Convert_ShouldThrowArgumentNullException_WhenValueIsNull()
     {
         // Arrange
-        var setup = new SetupBuilder()
+        (EnumToImageConverter sut, ImageSource imageSource, Type targetType, CultureInfo cultureInfo, string digimonFileName, string digimonImageFilePath) setup = new SetupBuilder()
             .Build();
 
         // Act
-        var convertThrowingException = () => setup.sut.Convert(null, setup.targetType, null, setup.cultureInfo) as BitmapImage;
+        Func<BitmapImage?> convertThrowingException = () => setup.sut.Convert(null, setup.targetType, null, setup.cultureInfo) as BitmapImage;
 
         // Assert
         convertThrowingException.ShouldThrow<ArgumentNullException>();
@@ -28,11 +28,11 @@ public class EnumToImageConverterTests
     public void Convert_ShouldThrowArgumentException_WhenValueIsWhiteSpace([Values("", " ")] string value)
     {
         // Arrange
-        var setup = new SetupBuilder()
+        (EnumToImageConverter sut, ImageSource imageSource, Type targetType, CultureInfo cultureInfo, string digimonFileName, string digimonImageFilePath) setup = new SetupBuilder()
             .Build();
 
         // Act
-        var convertThrowingException = () => setup.sut.Convert(value, setup.targetType, null, setup.cultureInfo) as BitmapImage;
+        Func<BitmapImage?> convertThrowingException = () => setup.sut.Convert(value, setup.targetType, null, setup.cultureInfo) as BitmapImage;
 
         // Assert
         convertThrowingException.ShouldThrow<ArgumentException>();
@@ -47,11 +47,11 @@ public class EnumToImageConverterTests
     public void Convert_ShouldThrowArgumentException_WhenTargetTypeIsNotImageSource(Type targetType)
     {
         // Arrange
-        var setup = new SetupBuilder()
+        (EnumToImageConverter sut, ImageSource imageSource, Type targetType, CultureInfo cultureInfo, string digimonFileName, string digimonImageFilePath) setup = new SetupBuilder()
             .Build();
 
         // Act
-        var convertThrowingException = () => setup.sut.Convert(setup.digimonFileName, typeof(string), null, setup.cultureInfo) as BitmapImage;
+        Func<BitmapImage?> convertThrowingException = () => setup.sut.Convert(setup.digimonFileName, typeof(string), null, setup.cultureInfo) as BitmapImage;
 
         // Assert
         convertThrowingException.ShouldThrow<ArgumentException>();
@@ -61,11 +61,11 @@ public class EnumToImageConverterTests
     public void Convert_ShouldReturnCorrectBitMapImage()
     {
         // Arrange
-        var setup = new SetupBuilder()
+        (EnumToImageConverter sut, ImageSource imageSource, Type targetType, CultureInfo cultureInfo, string digimonFileName, string digimonImageFilePath) setup = new SetupBuilder()
             .Build();
 
         // Act
-        var result = setup.sut.Convert(setup.digimonFileName, setup.targetType, null, setup.cultureInfo) as BitmapImage;
+        BitmapImage? result = setup.sut.Convert(setup.digimonFileName, setup.targetType, null, setup.cultureInfo) as BitmapImage;
 
         // Assert
         result.ShouldNotBeNull();
@@ -76,11 +76,11 @@ public class EnumToImageConverterTests
     public void ConvertBack_IsNotImplemented()
     {
         // Arrange
-        var setup = new SetupBuilder()
+        (EnumToImageConverter sut, ImageSource imageSource, Type targetType, CultureInfo cultureInfo, string digimonFileName, string digimonImageFilePath) setup = new SetupBuilder()
             .Build();
 
         // Act
-        var convertBackThrowingNotSupportedException = () => setup.sut.ConvertBack(setup.digimonFileName, setup.targetType, null, setup.cultureInfo) as BitmapImage;
+        Func<BitmapImage?> convertBackThrowingNotSupportedException = () => setup.sut.ConvertBack(setup.digimonFileName, setup.targetType, null, setup.cultureInfo) as BitmapImage;
 
         // Assert
         convertBackThrowingNotSupportedException.ShouldThrow<NotSupportedException>();
@@ -88,18 +88,18 @@ public class EnumToImageConverterTests
 
     private sealed class SetupBuilder
     {
-        private const string DigimonFileName = "Agumon";
+        private const string DIGIMON_FILE_NAME = "Agumon";
 
         private readonly CultureInfo _cultureInfo = CultureInfo.CurrentCulture;
         private readonly BitmapImage _imageSource = new();
         private readonly Type _targetType = typeof(ImageSource);
-        private readonly string _digimonImageFilePath = string.Concat("/Images/", DigimonFileName, ".jpg");
+        private readonly string _digimonImageFilePath = string.Concat("/Images/", DIGIMON_FILE_NAME, ".jpg");
 
         public (EnumToImageConverter sut, ImageSource imageSource, Type targetType, CultureInfo cultureInfo, string digimonFileName, string digimonImageFilePath) Build()
         {
-            var sut = new EnumToImageConverter();
+            EnumToImageConverter sut = new();
 
-            return (sut, _imageSource, _targetType, _cultureInfo, DigimonFileName, _digimonImageFilePath);
+            return (sut, _imageSource, _targetType, _cultureInfo, DIGIMON_FILE_NAME, _digimonImageFilePath);
         }
     }
 }

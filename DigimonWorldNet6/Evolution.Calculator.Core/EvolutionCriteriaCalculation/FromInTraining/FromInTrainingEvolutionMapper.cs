@@ -21,14 +21,12 @@ public sealed class FromInTrainingEvolutionMapper
     {
         get
         {
-            if (_fromInTrainingEvolutionMappings.TryGetValue(digimonType, out var evolutionResult))
+            if (_fromInTrainingEvolutionMappings.TryGetValue(digimonType, out IEnumerable<IEvolutionCriteria>? evolutionResult))
             {
                 return evolutionResult;
             }
-            else
-            {
-                throw new KeyNotFoundException($"Evolution mapping for {digimonType} was not found in {nameof(FromInTrainingEvolutionMapper)}");
-            }
+
+            throw new KeyNotFoundException($"Evolution mapping for {digimonType} was not found in {nameof(FromInTrainingEvolutionMapper)}");
         }
     }
 

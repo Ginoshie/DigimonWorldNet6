@@ -12,7 +12,7 @@ public sealed class ShellmonEvolutionCriteria : IEvolutionCriteria
 
     public MainCriteriaStats Stats => new(hp: 1000, def: 100);
 
-    public MainCriteriaCareMistakes CareMistakes => new(5, false);
+    public MainCriteriaCareMistakes CareMistakes => new(5);
 
     public MainCriteriaWeight Weight => new(40);
 

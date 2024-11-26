@@ -11,11 +11,11 @@ public sealed class EvolutionStageMapperTests
     public void EvolutionStageMapper_ShouldNotThrowException_WhenValidIndexIsUsed([Values] DigimonType digimonType)
     {
         // Arrange
-        var sut = new SetupBuilder()
+        EvolutionStageMapper sut = new SetupBuilder()
             .Build();
 
         // Act
-        var applyValidIndex = () => sut[digimonType];
+        Func<EvolutionStage> applyValidIndex = () => sut[digimonType];
 
         // Assert
         applyValidIndex.ShouldNotThrow();
@@ -27,7 +27,7 @@ public sealed class EvolutionStageMapperTests
         // Arrange
         const DigimonType invalidDigimonTypeIndex = (DigimonType)999;
         
-        var sut = new SetupBuilder()
+        EvolutionStageMapper sut = new SetupBuilder()
             .Build();
 
         // Act
@@ -41,7 +41,7 @@ public sealed class EvolutionStageMapperTests
     {
         public EvolutionStageMapper Build()
         {
-            var sut = new EvolutionStageMapper();
+            EvolutionStageMapper sut = new();
 
             return sut;
         }

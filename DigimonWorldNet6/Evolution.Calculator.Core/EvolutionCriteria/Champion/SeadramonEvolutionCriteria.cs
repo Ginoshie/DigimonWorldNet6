@@ -12,7 +12,7 @@ public sealed class SeadramonEvolutionCriteria : IEvolutionCriteria
 
     public MainCriteriaStats Stats => new(hp: 1000, mp: 1000);
 
-    public MainCriteriaCareMistakes CareMistakes => new(3, false);
+    public MainCriteriaCareMistakes CareMistakes => new(3);
 
     public MainCriteriaWeight Weight => new(30);
 

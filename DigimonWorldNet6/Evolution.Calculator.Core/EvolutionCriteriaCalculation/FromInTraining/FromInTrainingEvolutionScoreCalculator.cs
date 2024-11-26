@@ -7,9 +7,9 @@ public sealed class FromInTrainingEvolutionScoreCalculator
 {
     public int CalculateEvolutionScore(Digimon digimon, MainCriteriaStats statsCriteria)
     {
-        var highestEvolutionStat = 0;
-        var hpScore = digimon.HP / 10;
-        var mpScore = digimon.MP / 10;
+        int highestEvolutionStat = 0;
+        int hpScore = digimon.HP / 10;
+        int mpScore = digimon.MP / 10;
 
         if (statsCriteria.HP > 0 && hpScore > highestEvolutionStat)
         {

@@ -1,5 +1,7 @@
 using System;
+using System.Collections.Generic;
 using DigimonWorld.Evolution.Calculator.Core.EvolutionCriteriaCalculation.FromInTraining;
+using DigimonWorld.Evolution.Calculator.Core.Interfaces.EvolutionCriteria;
 using Generics.Enums;
 using NUnit.Framework;
 using Shouldly;
@@ -13,11 +15,11 @@ public class FromInTrainingEvolutionMapperTests
     public void FromFreshEvolutionMapperIndexer_ShouldNotThrow_WhenMappingExists([Values(DigimonType.Koromon, DigimonType.Tokomon, DigimonType.Tsunomon, DigimonType.Tanemon)] DigimonType digimonType)
     {
         // Arrange
-        var sut = new SetupBuilder()
+        FromInTrainingEvolutionMapper sut = new SetupBuilder()
             .Build();
 
         // Act
-        var mappingNotThrowingException = () => sut[digimonType];
+        Func<IEnumerable<IEvolutionCriteria>> mappingNotThrowingException = () => sut[digimonType];
 
         // Assert
         mappingNotThrowingException.ShouldNotThrow();
@@ -29,7 +31,7 @@ public class FromInTrainingEvolutionMapperTests
         DigimonType digimonType)
     {
         // Arrange
-        var sut = new SetupBuilder()
+        FromInTrainingEvolutionMapper sut = new SetupBuilder()
             .Build();
 
         // Act
@@ -43,7 +45,7 @@ public class FromInTrainingEvolutionMapperTests
     {
         public FromInTrainingEvolutionMapper Build()
         {
-            var sut = new FromInTrainingEvolutionMapper();
+            FromInTrainingEvolutionMapper sut = new();
 
             return sut;
         }

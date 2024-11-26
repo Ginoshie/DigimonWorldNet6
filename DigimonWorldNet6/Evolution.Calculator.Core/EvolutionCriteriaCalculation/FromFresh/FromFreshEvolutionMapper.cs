@@ -19,14 +19,12 @@ public sealed class FromFreshEvolutionMapper
     {
         get
         {
-            if (_fromFreshEvolutionMappings.TryGetValue(digimonType, out var evolutionResult))
+            if (_fromFreshEvolutionMappings.TryGetValue(digimonType, out EvolutionResult evolutionResult))
             {
                 return evolutionResult;
             }
-            else
-            {
-                throw new KeyNotFoundException($"Evolution mapping for {digimonType} was not found in {nameof(FromFreshEvolutionMapper)}");
-            }
+
+            throw new KeyNotFoundException($"Evolution mapping for {digimonType} was not found in {nameof(FromFreshEvolutionMapper)}");
         }
     }
 }

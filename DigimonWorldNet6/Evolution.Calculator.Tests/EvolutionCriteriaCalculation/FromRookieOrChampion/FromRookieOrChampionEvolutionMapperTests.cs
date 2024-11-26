@@ -1,5 +1,7 @@
 using System;
+using System.Collections.Generic;
 using DigimonWorld.Evolution.Calculator.Core.EvolutionCriteriaCalculation.FromRookieOrChampion;
+using DigimonWorld.Evolution.Calculator.Core.Interfaces.EvolutionCriteria;
 using Generics.Enums;
 using NUnit.Framework;
 using Shouldly;
@@ -18,11 +20,11 @@ public class FromRookieOrChampionEvolutionMapperTests
         DigimonType digimonType)
     {
         // Arrange
-        var sut = new SetupBuilder()
+        FromRookieOrChampionEvolutionMapper sut = new SetupBuilder()
             .Build();
 
         // Act
-        var mappingNotThrowingException = () => sut[digimonType];
+        Func<IEnumerable<IEvolutionCriteria>> mappingNotThrowingException = () => sut[digimonType];
 
         // Assert
         mappingNotThrowingException.ShouldNotThrow();
@@ -32,7 +34,7 @@ public class FromRookieOrChampionEvolutionMapperTests
     public void FromFreshEvolutionMapperIndexer_ShouldThrowException_WhenMappingDoesNotExist([Values(DigimonType.Yuramon, DigimonType.Tsunomon, DigimonType.Vademon)] DigimonType digimonType)
     {
         // Arrange
-        var sut = new SetupBuilder()
+        FromRookieOrChampionEvolutionMapper sut = new SetupBuilder()
             .Build();
 
         // Act
@@ -46,7 +48,7 @@ public class FromRookieOrChampionEvolutionMapperTests
     {
         public FromRookieOrChampionEvolutionMapper Build()
         {
-            var sut = new FromRookieOrChampionEvolutionMapper();
+            FromRookieOrChampionEvolutionMapper sut = new();
 
             return sut;
         }

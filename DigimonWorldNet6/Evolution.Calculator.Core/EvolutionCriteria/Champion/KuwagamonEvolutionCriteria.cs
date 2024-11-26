@@ -12,7 +12,7 @@ public sealed class KuwagamonEvolutionCriteria : IEvolutionCriteria
 
     public MainCriteriaStats Stats => new(hp: 1000, mp: 1000, off: 100, speed: 100);
 
-    public MainCriteriaCareMistakes CareMistakes => new(5, false);
+    public MainCriteriaCareMistakes CareMistakes => new(5);
 
     public MainCriteriaWeight Weight => new(30);
 
