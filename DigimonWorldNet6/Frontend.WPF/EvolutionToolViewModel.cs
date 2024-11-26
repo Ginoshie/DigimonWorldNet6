@@ -22,7 +22,7 @@ public sealed class EvolutionToolViewModel : INotifyPropertyChanged
     private int _battles;
     private int _techniques;
     private DigimonType _digimonType;
-    private EvolutionResult _evolutionResult;
+    private EvolutionResult _evolutionResult = EvolutionResult.Unknown;
 
     private readonly EvolutionCalculator _evolutionCalculator = new();
 
@@ -40,7 +40,11 @@ public sealed class EvolutionToolViewModel : INotifyPropertyChanged
         {
             _digimonType = value;
 
+            _evolutionResult = EvolutionResult.Unknown;
+
             OnPropertyChanged();
+            
+            OnPropertyChanged(nameof(EvolutionResult));
         }
     }
 

@@ -2,6 +2,7 @@ namespace Generics.Enums;
 
 public enum EvolutionResult
 {
+    Unknown,
     None,
     Agumon,
     Airdramon,
