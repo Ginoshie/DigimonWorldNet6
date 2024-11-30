@@ -2,6 +2,80 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <Application.Resources>
+        <FontFamily x:Key="DW1Font">pack://application:,,,/Frontend.WPF;component/Fonts/DW1_US_Regular.ttf#DW1 US</FontFamily>
 
+        <!-- Global style for TextBlock -->
+        <Style TargetType="TextBlock">
+            <Setter Property="FontFamily" Value="{StaticResource DW1Font}" />
+            <Setter Property="FontWeight" Value="Bold" />
+            <Setter Property="Foreground" Value="#D6D6D8" />
+        </Style>
+
+        <!-- Optional: Set a global default font for Control -->
+        <Style TargetType="Control">
+            <Setter Property="FontFamily" Value="{StaticResource DW1Font}" />
+        </Style>
+
+        <Style TargetType="Window">
+            <Setter Property="Background" Value="#2E3841" />
+        </Style>
+
+        <Style TargetType="Grid">
+            <Setter Property="Background" Value="#2E3841" />
+        </Style>
+
+        <Style TargetType="TextBox">
+            <Setter Property="FontFamily" Value="{StaticResource DW1Font}" />
+            <Setter Property="Background" Value="#354A5B" />
+            <Setter Property="Foreground" Value="#D6D6D8" />
+            <Setter Property="BorderBrush" Value="#6987A3"></Setter>
+            <Setter Property="BorderThickness" Value="2"></Setter>
+        </Style>
+
+        <Style TargetType="ComboBox">
+            <!-- Main ComboBox styling -->
+            <Setter Property="Background" Value="#354A5B" />
+            <Setter Property="Foreground" Value="#D6D6D8" />
+            <Setter Property="BorderBrush" Value="#6987A3" />
+            <Setter Property="BorderThickness" Value="2" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ComboBox">
+                        <Grid>
+                            <!-- Border around the ComboBox -->
+                            <Border Background="{TemplateBinding Background}">
+                                <ToggleButton Name="ToggleButton"
+                                              Background="{TemplateBinding Background}"
+                                              BorderBrush="{TemplateBinding BorderBrush}"
+                                              BorderThickness="{TemplateBinding BorderThickness}"
+                                              IsChecked="{Binding IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}">
+                                    <ContentPresenter Content="{TemplateBinding SelectionBoxItem}"
+                                                      ContentTemplate="{TemplateBinding SelectionBoxItemTemplate}"
+                                                      VerticalAlignment="Center"
+                                                      Margin="4" />
+                                </ToggleButton>
+                            </Border>
+
+                            <!-- Popup for the dropdown list -->
+                            <Popup Name="Popup"
+                                   Placement="Bottom"
+                                   IsOpen="{TemplateBinding IsDropDownOpen}"
+                                   AllowsTransparency="True"
+                                   Focusable="False"
+                                   PopupAnimation="Slide">
+                                <Border Background="#354A5B"
+                                        BorderBrush="#6987A3"
+                                        BorderThickness="2"
+                                        CornerRadius="4">
+                                    <ScrollViewer>
+                                        <ItemsPresenter />
+                                    </ScrollViewer>
+                                </Border>
+                            </Popup>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
     </Application.Resources>
 </Application>

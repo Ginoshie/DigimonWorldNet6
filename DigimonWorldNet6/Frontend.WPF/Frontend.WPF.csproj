@@ -19,6 +19,8 @@
 
     <ItemGroup>
       <Resource Include="Images\**\*" />
+      <None Remove="Fonts\DW1_US_Regular.ttf" />
+      <Resource Include="Fonts\DW1_US_Regular.ttf" />
     </ItemGroup>
 
 </Project>
