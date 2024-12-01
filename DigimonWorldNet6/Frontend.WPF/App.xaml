@@ -4,14 +4,12 @@
     <Application.Resources>
         <FontFamily x:Key="DW1Font">pack://application:,,,/Frontend.WPF;component/Fonts/DW1_US_Regular.ttf#DW1 US</FontFamily>
 
-        <!-- Global style for TextBlock -->
         <Style TargetType="TextBlock">
             <Setter Property="FontFamily" Value="{StaticResource DW1Font}" />
             <Setter Property="FontWeight" Value="Bold" />
             <Setter Property="Foreground" Value="#D6D6D8" />
         </Style>
 
-        <!-- Optional: Set a global default font for Control -->
         <Style TargetType="Control">
             <Setter Property="FontFamily" Value="{StaticResource DW1Font}" />
         </Style>
@@ -24,36 +22,158 @@
             <Setter Property="Background" Value="#2E3841" />
         </Style>
 
-        <Style TargetType="TextBox">
-            <Setter Property="FontFamily" Value="{StaticResource DW1Font}" />
-            <Setter Property="Background" Value="#354A5B" />
-            <Setter Property="Foreground" Value="#D6D6D8" />
-            <Setter Property="BorderBrush" Value="#6987A3"></Setter>
-            <Setter Property="BorderThickness" Value="2"></Setter>
+        <Style x:Key="DefaultButtonStyle" TargetType="Button">
+            <Setter Property="HorizontalAlignment" Value="Center" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="Width" Value="Auto" />
+            <Setter Property="Margin" Value="3,10,3,10" />
+            <Setter Property="Foreground" Value="#B8B8B8" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Grid>
+                            <!-- Outer Border for Top and Left -->
+                            <Border BorderBrush="#B0B0B0" BorderThickness="2,2,0,0">
+                                <Border Background="#575C60">
+                                    <!-- Inner Border for Bottom and Right -->
+                                    <Border BorderBrush="#121212" BorderThickness="0,0,2,2">
+                                        <!-- Button Content -->
+                                        <ContentPresenter HorizontalAlignment="Center"
+                                                          VerticalAlignment="Center"
+                                                          Margin="15, 0 , 15, 0" />
+                                    </Border>
+                                </Border>
+                            </Border>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
         </Style>
 
-        <Style TargetType="ComboBox">
-            <!-- Main ComboBox styling -->
+        <Style x:Key="DefaultLabelStyle" TargetType="{x:Type Label}">
+            <Style.Setters>
+                <Setter Property="Padding" Value="0,0,2,0" />
+                <Setter Property="HorizontalContentAlignment" Value="Center" />
+                <Setter Property="HorizontalAlignment" Value="Right" />
+                <Setter Property="VerticalAlignment" Value="Center" />
+            </Style.Setters>
+        </Style>
+
+        <Style x:Key="DefaultSheenLabelStyle" TargetType="Label">
+            <!-- Main Background with linear gradient for horizontal reflection -->
+            <Setter Property="Background">
+                <Setter.Value>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                        <!-- Horizontal gradient -->
+                        <GradientStop Color="#F7D600" Offset="0.0" /> <!-- Gold starts at the very top -->
+                        <GradientStop Color="White" Offset="0.15" />  <!-- White sheen starts at 1/5th -->
+                        <GradientStop Color="#F7D600" Offset="0.3" /> <!-- Gold resumes -->
+                        <GradientStop Color="#DEB500" Offset="0.7" /> <!-- Darker gold -->
+                        <GradientStop Color="#AD7B00" Offset="1" />   <!-- Deep brown at the bottom -->
+                    </LinearGradientBrush>
+                </Setter.Value>
+            </Setter>
+
+            <!-- Text color -->
+            <Setter Property="Foreground" Value="Black" />
+
+            <!-- Border settings -->
+            <Setter Property="Margin" Value="10" />
+            <Setter Property="BorderBrush" Value="Black" />
+            <Setter Property="BorderThickness" Value="2" />
+
+            <!-- Rounded corners and vertical sheen effect -->
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Label">
+                        <Grid>
+                            <!-- Base Border with Main Horizontal Gradient -->
+                            <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="0,0,2,2" CornerRadius="2">
+                                <Border BorderBrush="#B0B0B0" BorderThickness="2,2,0,0" CornerRadius="2" Padding="10">
+                                </Border>
+                            </Border>
+
+                            <!-- Label Content -->
+                            <ContentPresenter HorizontalAlignment="Center"
+                                              VerticalAlignment="Center"
+                                              RecognizesAccessKey="True">
+                                <!-- Wrapping text content in a TextBlock -->
+                                <ContentPresenter.ContentTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding}"
+                                                   Foreground="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Foreground}"
+                                                   TextAlignment="Center" />
+                                    </DataTemplate>
+                                </ContentPresenter.ContentTemplate>
+                            </ContentPresenter>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="DefaultTextBoxStyle" TargetType="{x:Type TextBox}" BasedOn="{StaticResource {x:Type TextBox}}">
+            <Style.Setters>
+                <Setter Property="FontFamily" Value="{StaticResource DW1Font}" />
+                <Setter Property="Background" Value="#354A5B" />
+                <Setter Property="Foreground" Value="#D6D6D8" />
+                <Setter Property="BorderBrush" Value="#6987A3" />
+                <Setter Property="BorderThickness" Value="2" />
+                <Setter Property="Margin" Value="1" />
+                <Setter Property="HorizontalContentAlignment" Value="Left" />
+                <Setter Property="VerticalContentAlignment" Value="Center" />
+                <Setter Property="HorizontalAlignment" Value="Stretch" />
+                <Setter Property="VerticalAlignment" Value="Stretch" />
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="TextBox">
+                            <Grid>
+                                <!-- Outer Border for Bottom and Right -->
+                                <Border BorderBrush="#6789A5"
+                                        BorderThickness="0,0,2,2">
+                                    <!-- Inner Border for Top and Left -->
+                                    <Border BorderBrush="#060100"
+                                            BorderThickness="2,2,0,0">
+                                        <!-- Background and Content -->
+                                        <Border Background="{TemplateBinding Background}"
+                                                Padding="4">
+                                            <ScrollViewer x:Name="PART_ContentHost" />
+                                        </Border>
+                                    </Border>
+                                </Border>
+                            </Grid>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style.Setters>
+        </Style>
+
+        <Style x:Key="DefaultComboboxStyle" TargetType="ComboBox" BasedOn="{StaticResource {x:Type ComboBox}}">
             <Setter Property="Background" Value="#354A5B" />
             <Setter Property="Foreground" Value="#D6D6D8" />
-            <Setter Property="BorderBrush" Value="#6987A3" />
-            <Setter Property="BorderThickness" Value="2" />
+            <Setter Property="Margin" Value="1" />
+            <Setter Property="VerticalContentAlignment" Value="Center" />
+            <Setter Property="HorizontalContentAlignment" Value="Left" />
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="ComboBox">
                         <Grid>
-                            <!-- Border around the ComboBox -->
-                            <Border Background="{TemplateBinding Background}">
-                                <ToggleButton Name="ToggleButton"
-                                              Background="{TemplateBinding Background}"
-                                              BorderBrush="{TemplateBinding BorderBrush}"
-                                              BorderThickness="{TemplateBinding BorderThickness}"
-                                              IsChecked="{Binding IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}">
-                                    <ContentPresenter Content="{TemplateBinding SelectionBoxItem}"
-                                                      ContentTemplate="{TemplateBinding SelectionBoxItemTemplate}"
-                                                      VerticalAlignment="Center"
-                                                      Margin="4" />
-                                </ToggleButton>
+                            <!-- Outer Border for Bottom and Right -->
+                            <Border BorderBrush="#6789A5" BorderThickness="0,0,2,2">
+                                <!-- Inner Border for Top and Left -->
+                                <Border BorderBrush="#060100" BorderThickness="2,2,0,0">
+                                    <!-- Background and ComboBox Content -->
+                                    <ToggleButton Name="ToggleButton"
+                                                  Background="{TemplateBinding Background}"
+                                                  BorderBrush="Transparent"
+                                                  BorderThickness="0"
+                                                  IsChecked="{Binding IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}">
+                                        <ContentPresenter Content="{TemplateBinding SelectionBoxItem}"
+                                                          ContentTemplate="{TemplateBinding SelectionBoxItemTemplate}"
+                                                          VerticalAlignment="Center"
+                                                          Margin="4" />
+                                    </ToggleButton>
+                                </Border>
                             </Border>
 
                             <!-- Popup for the dropdown list -->
@@ -76,6 +196,13 @@
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
+            <Style.Triggers>
+                <Trigger Property="Validation.HasError" Value="True">
+                    <Setter Property="ToolTip"
+                            Value="{Binding RelativeSource={x:Static RelativeSource.Self}, Path=(Validation.Errors)/ErrorContent}" />
+                </Trigger>
+            </Style.Triggers>
         </Style>
+
     </Application.Resources>
 </Application>

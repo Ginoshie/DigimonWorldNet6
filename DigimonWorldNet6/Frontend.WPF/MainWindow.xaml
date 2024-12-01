@@ -25,104 +25,14 @@
             </ObjectDataProvider.MethodParameters>
         </ObjectDataProvider>
 
-        <Style x:Key="SheenLabelStyle" TargetType="Label">
-            <!-- Main Background with linear gradient for horizontal reflection -->
-            <Setter Property="Background">
-                <Setter.Value>
-                    <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
-                        <!-- Horizontal gradient -->
-                        <GradientStop Color="#F7D600" Offset="0.0" /> <!-- Gold starts at the very top -->
-                        <GradientStop Color="White" Offset="0.2" />  <!-- White sheen starts at 1/5th -->
-                        <GradientStop Color="#F7D600" Offset="0.4" /> <!-- Gold resumes -->
-                        <GradientStop Color="#DEB500" Offset="0.7" /> <!-- Darker gold -->
-                        <GradientStop Color="#AD7B00" Offset="1" />   <!-- Deep brown at the bottom -->
-                    </LinearGradientBrush>
-                </Setter.Value>
-            </Setter>
-
-            <!-- Text color -->
-            <Setter Property="Foreground" Value="Black" />
-
-            <!-- Border settings -->
-            <Setter Property="Margin" Value="10" />
-            <Setter Property="BorderBrush" Value="Black" />
-            <Setter Property="BorderThickness" Value="2" />
-
-            <!-- Rounded corners and vertical sheen effect -->
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="Label">
-                        <Grid>
-                            <!-- Base Border with Main Horizontal Gradient -->
-                            <Border Background="{TemplateBinding Background}"
-                                    BorderBrush="{TemplateBinding BorderBrush}"
-                                    BorderThickness="{TemplateBinding BorderThickness}"
-                                    CornerRadius="10" Padding="10">
-                            </Border>
-
-                            <!-- Label Content -->
-                            <ContentPresenter HorizontalAlignment="Center"
-                                              VerticalAlignment="Center"
-                                              RecognizesAccessKey="True">
-                                <!-- Wrapping text content in a TextBlock -->
-                                <ContentPresenter.ContentTemplate>
-                                    <DataTemplate>
-                                        <TextBlock Text="{Binding}"
-                                                   Foreground="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Foreground}"
-                                                   TextAlignment="Center" />
-                                    </DataTemplate>
-                                </ContentPresenter.ContentTemplate>
-                            </ContentPresenter>
-                        </Grid>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
-
-        <Style x:Key="ButtonStyle" TargetType="{x:Type Button}">
-            <Setter Property="Margin" Value="3,10,3,10" />
-            <Setter Property="Padding" Value="3" />
-        </Style>
-
-        <Style x:Key="LabelStyle" TargetType="{x:Type Label}">
-            <Style.Setters>
-                <Setter Property="Padding" Value="0,0,2,0" />
-                <Setter Property="HorizontalContentAlignment" Value="Center" />
-                <Setter Property="HorizontalAlignment" Value="Right" />
-                <Setter Property="VerticalAlignment" Value="Center" />
-            </Style.Setters>
-        </Style>
-
-        <Style x:Key="TextBoxStyle" TargetType="{x:Type TextBox}" BasedOn="{StaticResource {x:Type TextBox}}">
-            <Style.Setters>
-                <Setter Property="Margin" Value="1" />
-                <Setter Property="HorizontalContentAlignment" Value="Left" />
-                <Setter Property="VerticalContentAlignment" Value="Center" />
-                <Setter Property="HorizontalAlignment" Value="Stretch" />
-                <Setter Property="VerticalAlignment" Value="Stretch" />
-            </Style.Setters>
-        </Style>
-
-        <Style x:Key="ComboboxStyle" TargetType="{x:Type ComboBox}" BasedOn="{StaticResource {x:Type ComboBox}}">
-            <Setter Property="Margin" Value="1" />
-            <Setter Property="VerticalContentAlignment" Value="Center" />
-            <Setter Property="HorizontalContentAlignment" Value="Left" />
-            <Style.Triggers>
-                <Trigger Property="Validation.HasError" Value="True">
-                    <Setter Property="ToolTip"
-                            Value="{Binding RelativeSource={x:Static RelativeSource.Self}, Path=(Validation.Errors)/ErrorContent}" />
-                </Trigger>
-            </Style.Triggers>
-        </Style>
-
         <GridLength x:Key="RowHeight">30</GridLength>
 
     </Window.Resources>
 
-    <Border CornerRadius="5" BorderBrush="Black" BorderThickness="3" Padding="0" Background="Black">
-        <Border CornerRadius="5" BorderBrush="#4A9FC5" BorderThickness="3" Padding="0" Background="#4A9FC5">
-            <Border CornerRadius="5" BorderBrush="#90D9FA" BorderThickness="3" Padding="0" Background="#90D9FA">
-                <Border CornerRadius="5" BorderBrush="Black" BorderThickness="2" Padding="0" Background="GhostWhite">
+    <Border CornerRadius="5" BorderBrush="Black" BorderThickness="3" Padding="0">
+        <Border CornerRadius="5" BorderBrush="#4A9FC5" BorderThickness="3" Padding="0">
+            <Border CornerRadius="5" BorderBrush="#90D9FA" BorderThickness="3" Padding="0">
+                <Border CornerRadius="5" BorderBrush="Black" BorderThickness="2" Padding="0">
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*" />
@@ -138,7 +48,7 @@
                                 <RowDefinition Height="*" />
                                 <RowDefinition Height="*" />
                             </Grid.RowDefinitions>
-                            <Label Grid.Row="0" Grid.Column="0" Height="40" Width="150" Style="{StaticResource SheenLabelStyle}">
+                            <Label Grid.Row="0" Grid.Column="0" Height="40" Width="150" Style="{StaticResource DefaultSheenLabelStyle}">
                                 YOUR DIGIMON
                             </Label>
                             <GroupBox Grid.Column="0" Grid.Row="1" Header="Your digimon">
@@ -175,16 +85,16 @@
 
                                     <Label Grid.Column="0" Grid.Row="0"
                                            Content="Digimon:"
-                                           Style="{StaticResource LabelStyle}" />
+                                           Style="{StaticResource DefaultLabelStyle}" />
                                     <ComboBox Name="Digimon" Grid.Column="1" Grid.Row="0" Grid.ColumnSpan="2"
                                               SelectedIndex="0"
-                                              Style="{StaticResource ComboboxStyle}"
+                                              Style="{StaticResource DefaultComboboxStyle}"
                                               ItemsSource="{Binding Source={StaticResource DigimonTypes}}"
                                               SelectedItem="{Binding DigimonType}">
                                     </ComboBox>
 
-                                    <Label Grid.Column="0" Grid.Row="1" Content="HP:" Style="{StaticResource LabelStyle}" />
-                                    <TextBox Name="Hp" Grid.Column="1" Grid.Row="1" Style="{StaticResource TextBoxStyle}">
+                                    <Label Grid.Column="0" Grid.Row="1" Content="HP:" Style="{StaticResource DefaultLabelStyle}" />
+                                    <TextBox Name="Hp" Grid.Column="1" Grid.Row="1" Style="{StaticResource DefaultTextBoxStyle}">
                                         <TextBox.Text>
                                             <Binding Path="HP" UpdateSourceTrigger="LostFocus">
                                                 <Binding.ValidationRules>
@@ -194,8 +104,8 @@
                                         </TextBox.Text>
                                     </TextBox>
 
-                                    <Label Grid.Column="0" Grid.Row="2" Content="MP:" Style="{StaticResource LabelStyle}" />
-                                    <TextBox Name="Mp" Grid.Column="1" Grid.Row="2" Style="{StaticResource TextBoxStyle}">
+                                    <Label Grid.Column="0" Grid.Row="2" Content="MP:" Style="{StaticResource DefaultLabelStyle}" />
+                                    <TextBox Name="Mp" Grid.Column="1" Grid.Row="2" Style="{StaticResource DefaultTextBoxStyle}">
                                         <TextBox.Text>
                                             <Binding Path="MP" UpdateSourceTrigger="LostFocus">
                                                 <Binding.ValidationRules>
@@ -205,8 +115,8 @@
                                         </TextBox.Text>
                                     </TextBox>
 
-                                    <Label Grid.Column="0" Grid.Row="3" Content="Off:" Style="{StaticResource LabelStyle}" />
-                                    <TextBox Name="Off" Grid.Column="1" Grid.Row="3" Style="{StaticResource TextBoxStyle}">
+                                    <Label Grid.Column="0" Grid.Row="3" Content="Off:" Style="{StaticResource DefaultLabelStyle}" />
+                                    <TextBox Name="Off" Grid.Column="1" Grid.Row="3" Style="{StaticResource DefaultTextBoxStyle}">
                                         <TextBox.Text>
                                             <Binding Path="Off" UpdateSourceTrigger="LostFocus">
                                                 <Binding.ValidationRules>
@@ -216,8 +126,8 @@
                                         </TextBox.Text>
                                     </TextBox>
 
-                                    <Label Grid.Column="0" Grid.Row="4" Content="Def:" Style="{StaticResource LabelStyle}" />
-                                    <TextBox Name="Def" Grid.Column="1" Grid.Row="4" Style="{StaticResource TextBoxStyle}">
+                                    <Label Grid.Column="0" Grid.Row="4" Content="Def:" Style="{StaticResource DefaultLabelStyle}" />
+                                    <TextBox Name="Def" Grid.Column="1" Grid.Row="4" Style="{StaticResource DefaultTextBoxStyle}">
                                         <TextBox.Text>
                                             <Binding Path="Def" UpdateSourceTrigger="LostFocus">
                                                 <Binding.ValidationRules>
@@ -227,8 +137,8 @@
                                         </TextBox.Text>
                                     </TextBox>
 
-                                    <Label Grid.Column="0" Grid.Row="5" Content="Speed:" Style="{StaticResource LabelStyle}" />
-                                    <TextBox Name="Speed" Grid.Column="1" Grid.Row="5" Style="{StaticResource TextBoxStyle}">
+                                    <Label Grid.Column="0" Grid.Row="5" Content="Speed:" Style="{StaticResource DefaultLabelStyle}" />
+                                    <TextBox Name="Speed" Grid.Column="1" Grid.Row="5" Style="{StaticResource DefaultTextBoxStyle}">
                                         <TextBox.Text>
                                             <Binding Path="Speed" UpdateSourceTrigger="LostFocus">
                                                 <Binding.ValidationRules>
@@ -238,8 +148,8 @@
                                         </TextBox.Text>
                                     </TextBox>
 
-                                    <Label Grid.Column="0" Grid.Row="6" Content="Brains:" Style="{StaticResource LabelStyle}" />
-                                    <TextBox Name="Brains" Grid.Column="1" Grid.Row="6" Style="{StaticResource TextBoxStyle}">
+                                    <Label Grid.Column="0" Grid.Row="6" Content="Brains:" Style="{StaticResource DefaultLabelStyle}" />
+                                    <TextBox Name="Brains" Grid.Column="1" Grid.Row="6" Style="{StaticResource DefaultTextBoxStyle}">
                                         <TextBox.Text>
                                             <Binding Path="Brains" UpdateSourceTrigger="LostFocus">
                                                 <Binding.ValidationRules>
@@ -249,8 +159,8 @@
                                         </TextBox.Text>
                                     </TextBox>
 
-                                    <Label Grid.Column="0" Grid.Row="7" Content="Care Mistakes:" Style="{StaticResource LabelStyle}" />
-                                    <TextBox Name="CareMistakes" Grid.Column="1" Grid.Row="7" Style="{StaticResource TextBoxStyle}">
+                                    <Label Grid.Column="0" Grid.Row="7" Content="Care Mistakes:" Style="{StaticResource DefaultLabelStyle}" />
+                                    <TextBox Name="CareMistakes" Grid.Column="1" Grid.Row="7" Style="{StaticResource DefaultTextBoxStyle}">
                                         <TextBox.Text>
                                             <Binding Path="CareMistakes" UpdateSourceTrigger="LostFocus">
                                                 <Binding.ValidationRules>
@@ -260,8 +170,8 @@
                                         </TextBox.Text>
                                     </TextBox>
 
-                                    <Label Grid.Column="0" Grid.Row="8" Content="Weight:" Style="{StaticResource LabelStyle}" />
-                                    <TextBox Name="Weight" Grid.Column="1" Grid.Row="8" Style="{StaticResource TextBoxStyle}">
+                                    <Label Grid.Column="0" Grid.Row="8" Content="Weight:" Style="{StaticResource DefaultLabelStyle}" />
+                                    <TextBox Name="Weight" Grid.Column="1" Grid.Row="8" Style="{StaticResource DefaultTextBoxStyle}">
                                         <TextBox.Text>
                                             <Binding Path="Weight" UpdateSourceTrigger="LostFocus">
                                                 <Binding.ValidationRules>
@@ -271,8 +181,8 @@
                                         </TextBox.Text>
                                     </TextBox>
 
-                                    <Label Grid.Column="0" Grid.Row="9" Content="Happiness:" Style="{StaticResource LabelStyle}" />
-                                    <TextBox Name="Happiness" Grid.Column="1" Grid.Row="9" Style="{StaticResource TextBoxStyle}">
+                                    <Label Grid.Column="0" Grid.Row="9" Content="Happiness:" Style="{StaticResource DefaultLabelStyle}" />
+                                    <TextBox Name="Happiness" Grid.Column="1" Grid.Row="9" Style="{StaticResource DefaultTextBoxStyle}">
                                         <TextBox.Text>
                                             <Binding Path="Happiness" UpdateSourceTrigger="LostFocus">
                                                 <Binding.ValidationRules>
@@ -282,8 +192,8 @@
                                         </TextBox.Text>
                                     </TextBox>
 
-                                    <Label Grid.Column="0" Grid.Row="10" Content="Discipline:" Style="{StaticResource LabelStyle}" />
-                                    <TextBox Name="Discipline" Grid.Column="1" Grid.Row="10" Style="{StaticResource TextBoxStyle}">
+                                    <Label Grid.Column="0" Grid.Row="10" Content="Discipline:" Style="{StaticResource DefaultLabelStyle}" />
+                                    <TextBox Name="Discipline" Grid.Column="1" Grid.Row="10" Style="{StaticResource DefaultTextBoxStyle}">
                                         <TextBox.Text>
                                             <Binding Path="Discipline" UpdateSourceTrigger="LostFocus">
                                                 <Binding.ValidationRules>
@@ -293,8 +203,8 @@
                                         </TextBox.Text>
                                     </TextBox>
 
-                                    <Label Grid.Column="0" Grid.Row="11" Content="Battles:" Style="{StaticResource LabelStyle}" />
-                                    <TextBox Name="Battles" Grid.Column="1" Grid.Row="11" Style="{StaticResource TextBoxStyle}">
+                                    <Label Grid.Column="0" Grid.Row="11" Content="Battles:" Style="{StaticResource DefaultLabelStyle}" />
+                                    <TextBox Name="Battles" Grid.Column="1" Grid.Row="11" Style="{StaticResource DefaultTextBoxStyle}">
                                         <TextBox.Text>
                                             <Binding Path="Discipline" UpdateSourceTrigger="LostFocus">
                                                 <Binding.ValidationRules>
@@ -304,8 +214,8 @@
                                         </TextBox.Text>
                                     </TextBox>
 
-                                    <Label Grid.Column="0" Grid.Row="12" Content="Techniques:" Style="{StaticResource LabelStyle}" />
-                                    <TextBox Name="Techniques" Grid.Column="1" Grid.Row="12" Style="{StaticResource TextBoxStyle}">
+                                    <Label Grid.Column="0" Grid.Row="12" Content="Techniques:" Style="{StaticResource DefaultLabelStyle}" />
+                                    <TextBox Name="Techniques" Grid.Column="1" Grid.Row="12" Style="{StaticResource DefaultTextBoxStyle}">
                                         <TextBox.Text>
                                             <Binding Path="Techniques" UpdateSourceTrigger="LostFocus">
                                                 <Binding.ValidationRules>
@@ -317,22 +227,104 @@
                                 </Grid>
                             </GroupBox>
 
-                            <Button Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="3" Height="40"
+                            <Button Grid.Column="0" Grid.Row="2" Height="40"
                                     Content="Calculate evolution"
                                     Command="{Binding SetEvolutionResult}">
                                 <Button.Style>
-                                    <Style TargetType="{x:Type Button}" BasedOn="{StaticResource  ButtonStyle}">
+                                    <Style TargetType="{x:Type Button}" BasedOn="{StaticResource DefaultButtonStyle}">
+                                        <Setter Property="Template">
+                                            <Setter.Value>
+                                                <ControlTemplate TargetType="Button">
+                                                    <Grid>
+                                                        <!-- Outer Border for Top and Left -->
+                                                        <Border BorderBrush="#B0B0B0" BorderThickness="2,2,0,0" Background="#575C60">
+                                                            <!-- Inner Border for Bottom and Right -->
+                                                            <Border BorderBrush="#121212" BorderThickness="0,0,2,2">
+                                                                <!-- Horizontal Layout for Image and Text -->
+                                                                <StackPanel Orientation="Horizontal"
+                                                                            HorizontalAlignment="Center"
+                                                                            VerticalAlignment="Center"
+                                                                            Margin="15,0,15,0">
+                                                                    <!-- Animated Image -->
+                                                                    <Image x:Name="AnimatedImage"
+                                                                           Width="20"
+                                                                           Height="20"
+                                                                           HorizontalAlignment="Left"
+                                                                           VerticalAlignment="Center"
+                                                                           Margin="0,0,15,0"
+                                                                           Source="/Images/Emotions/Evolution/evo1.png" />
+
+                                                                    <!-- Button Text -->
+                                                                    <ContentPresenter VerticalAlignment="Center" />
+                                                                </StackPanel>
+                                                            </Border>
+                                                        </Border>
+                                                    </Grid>
+                                                    <ControlTemplate.Triggers>
+                                                        <!-- Animation Trigger on Mouse Hover -->
+                                                        <Trigger Property="IsMouseOver" Value="True">
+                                                            <Trigger.EnterActions>
+                                                                <!-- Name the storyboard so it can be referenced later -->
+                                                                <BeginStoryboard x:Name="HoverAnimationStoryboard">
+                                                                    <Storyboard RepeatBehavior="Forever">
+                                                                        <!-- Frame 1 -->
+                                                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="AnimatedImage"
+                                                                                                       Storyboard.TargetProperty="Source">
+                                                                            <DiscreteObjectKeyFrame KeyTime="0:0:0">
+                                                                                <DiscreteObjectKeyFrame.Value>
+                                                                                    <BitmapImage UriSource="/Images/Emotions/Evolution/evo1.png" />
+                                                                                </DiscreteObjectKeyFrame.Value>
+                                                                            </DiscreteObjectKeyFrame>
+                                                                            <!-- Frame 2 -->
+                                                                            <DiscreteObjectKeyFrame KeyTime="0:0:0.4">
+                                                                                <DiscreteObjectKeyFrame.Value>
+                                                                                    <BitmapImage UriSource="/Images/Emotions/Evolution/evo2.png" />
+                                                                                </DiscreteObjectKeyFrame.Value>
+                                                                            </DiscreteObjectKeyFrame>
+                                                                            <!-- Frame 3 -->
+                                                                            <DiscreteObjectKeyFrame KeyTime="0:0:0.8">
+                                                                                <DiscreteObjectKeyFrame.Value>
+                                                                                    <BitmapImage UriSource="/Images/Emotions/Evolution/evo3.png" />
+                                                                                </DiscreteObjectKeyFrame.Value>
+                                                                            </DiscreteObjectKeyFrame>
+                                                                            <!-- Frame 4 -->
+                                                                            <DiscreteObjectKeyFrame KeyTime="0:0:1.2">
+                                                                                <DiscreteObjectKeyFrame.Value>
+                                                                                    <BitmapImage UriSource="/Images/Emotions/Evolution/evo4.png" />
+                                                                                </DiscreteObjectKeyFrame.Value>
+                                                                            </DiscreteObjectKeyFrame>
+                                                                            <!-- Frame 4 -->
+                                                                            <DiscreteObjectKeyFrame KeyTime="0:0:1.6">
+                                                                                <DiscreteObjectKeyFrame.Value>
+                                                                                    <BitmapImage UriSource="/Images/Emotions/Evolution/evo4.png" />
+                                                                                </DiscreteObjectKeyFrame.Value>
+                                                                            </DiscreteObjectKeyFrame>
+                                                                            <!-- Show Final Frame -->
+                                                                            <DiscreteObjectKeyFrame KeyTime="0:0:2.0">
+                                                                                <DiscreteObjectKeyFrame.Value>
+                                                                                    <BitmapImage UriSource="/Images/Emotions/Evolution/evo4.png" />
+                                                                                </DiscreteObjectKeyFrame.Value>
+                                                                            </DiscreteObjectKeyFrame>
+                                                                        </ObjectAnimationUsingKeyFrames>
+                                                                    </Storyboard>
+                                                                </BeginStoryboard>
+                                                            </Trigger.EnterActions>
+                                                            <Trigger.ExitActions>
+                                                                <!-- Stop the named storyboard -->
+                                                                <StopStoryboard BeginStoryboardName="HoverAnimationStoryboard" />
+                                                            </Trigger.ExitActions>
+                                                        </Trigger>
+                                                    </ControlTemplate.Triggers>
+                                                </ControlTemplate>
+                                            </Setter.Value>
+                                        </Setter>
                                         <Setter Property="IsEnabled" Value="false" />
-                                        <Setter Property="HorizontalAlignment" Value="Center" />
-                                        <Setter Property="VerticalAlignment" Value="Center" />
                                         <Setter Property="Padding" Value="15, 0 , 15, 0" />
-                                        <Setter Property="Width" Value="Auto" />
                                         <Style.Triggers>
-                                            <!-- Require the controls to be valid in order to press OK -->
+                                            <!-- Enable button only when validation passes -->
                                             <MultiDataTrigger>
                                                 <MultiDataTrigger.Conditions>
                                                     <Condition Binding="{Binding ElementName=Digimon, Path=(Validation.HasError)}" Value="false" />
-                                                    <Condition Binding="{Binding ElementName=Hp, Path=(Validation.HasError)}" Value="false" />
                                                     <Condition Binding="{Binding ElementName=Hp, Path=(Validation.HasError)}" Value="false" />
                                                     <Condition Binding="{Binding ElementName=Mp, Path=(Validation.HasError)}" Value="false" />
                                                     <Condition Binding="{Binding ElementName=Off, Path=(Validation.HasError)}" Value="false" />
@@ -352,6 +344,7 @@
                                     </Style>
                                 </Button.Style>
                             </Button>
+
 
                         </Grid>
                         <Grid Column="1">
@@ -373,7 +366,7 @@
                                 <ColumnDefinition Width="50" />
                                 <ColumnDefinition Width="350" />
                             </Grid.ColumnDefinitions>
-                            
+
                             <Image Grid.Column="0" Grid.Row="0" Width="325" Source="{Binding DigimonType, Converter={StaticResource EnumToImageConverter}}" />
                             <Image Grid.Column="1" Grid.Row="0" Height="100" Source="/Images/Misc/Arrow-Right.png" />
                             <Image Grid.Column="2" Grid.Row="0" Width="325" Source="{Binding  EvolutionResult, Mode=OneWay, Converter={StaticResource EnumToImageConverter}}" />

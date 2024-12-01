@@ -23,4 +23,8 @@
       <Resource Include="Fonts\DW1_US_Regular.ttf" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="Images\Emotions\Evolution\" />
+    </ItemGroup>
+
 </Project>
