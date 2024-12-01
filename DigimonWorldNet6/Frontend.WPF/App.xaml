@@ -129,19 +129,28 @@
                         <ControlTemplate TargetType="TextBox">
                             <Grid>
                                 <!-- Outer Border for Bottom and Right -->
-                                <Border BorderBrush="#6789A5"
+                                <Border x:Name="OuterBorder"
+                                        BorderBrush="#6789A5"
                                         BorderThickness="0,0,2,2">
                                     <!-- Inner Border for Top and Left -->
                                     <Border BorderBrush="#060100"
                                             BorderThickness="2,2,0,0">
                                         <!-- Background and Content -->
-                                        <Border Background="{TemplateBinding Background}"
+                                        <Border x:Name="InnerBorder"
+                                                Background="{TemplateBinding Background}"
                                                 Padding="4">
                                             <ScrollViewer x:Name="PART_ContentHost" />
                                         </Border>
                                     </Border>
                                 </Border>
                             </Grid>
+                            <ControlTemplate.Triggers>
+                                <!-- Hover Trigger -->
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter TargetName="InnerBorder" Property="Background" Value="#567D91" />
+                                    <Setter TargetName="OuterBorder" Property="BorderBrush" Value="#456A7D" />
+                                </Trigger>
+                            </ControlTemplate.Triggers>
                         </ControlTemplate>
                     </Setter.Value>
                 </Setter>
