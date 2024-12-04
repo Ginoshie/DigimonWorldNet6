@@ -182,18 +182,61 @@
                                         <ToggleButton.Template>
                                             <ControlTemplate TargetType="ToggleButton">
                                                 <Border Name="ToggleButtonBorder"
-                                                        Background="{TemplateBinding Background}"
                                                         BorderBrush="{TemplateBinding BorderBrush}"
                                                         BorderThickness="{TemplateBinding BorderThickness}">
-                                                    <ContentPresenter Content="{TemplateBinding Content}"
-                                                                      ContentTemplate="{TemplateBinding ContentTemplate}"
-                                                                      VerticalAlignment="Center"
-                                                                      Margin="4" />
+                                                    <Grid Background="{TemplateBinding Background}">
+                                                        <!-- Content Area -->
+                                                        <ContentPresenter Content="{TemplateBinding Content}"
+                                                                          ContentTemplate="{TemplateBinding ContentTemplate}"
+                                                                          VerticalAlignment="Center"
+                                                                          Margin="4" />
+
+                                                        <!-- Arrow Icon on the Right -->
+                                                        <Path Data="M 0 0 L 6 6 L 12 0 Z"
+                                                              VerticalAlignment="Center"
+                                                              HorizontalAlignment="Right"
+                                                              Fill="#D6D6D8"
+                                                              Width="12" Height="6"
+                                                              Margin="0,0,10,0">
+                                                            <Path.RenderTransform>
+                                                                <RotateTransform Angle="0" CenterX="6" CenterY="3" />
+                                                            </Path.RenderTransform>
+                                                            <Path.Style>
+                                                                <Style TargetType="Path">
+                                                                    <Style.Triggers>
+                                                                        <!-- Bind to IsDropDownOpen from ComboBox -->
+                                                                        <DataTrigger Binding="{Binding IsDropDownOpen, RelativeSource={RelativeSource AncestorType=ComboBox}}" Value="True">
+                                                                            <DataTrigger.EnterActions>
+                                                                                <BeginStoryboard>
+                                                                                    <Storyboard>
+                                                                                        <DoubleAnimation Storyboard.TargetProperty="(Path.RenderTransform).(RotateTransform.Angle)"
+                                                                                                         To="90" Duration="0:0:0.2" />
+                                                                                    </Storyboard>
+                                                                                </BeginStoryboard>
+                                                                            </DataTrigger.EnterActions>
+                                                                            <DataTrigger.ExitActions>
+                                                                                <BeginStoryboard>
+                                                                                    <Storyboard>
+                                                                                        <DoubleAnimation Storyboard.TargetProperty="(Path.RenderTransform).(RotateTransform.Angle)"
+                                                                                                         To="0" Duration="0:0:0.2" />
+                                                                                    </Storyboard>
+                                                                                </BeginStoryboard>
+                                                                            </DataTrigger.ExitActions>
+                                                                        </DataTrigger>
+                                                                    </Style.Triggers>
+                                                                </Style>
+                                                            </Path.Style>
+                                                        </Path>
+                                                    </Grid>
                                                 </Border>
                                                 <ControlTemplate.Triggers>
                                                     <!-- MouseOver Trigger -->
                                                     <Trigger Property="IsMouseOver" Value="True">
                                                         <Setter TargetName="ToggleButtonBorder" Property="Background" Value="#567D91" />
+                                                    </Trigger>
+                                                    <!-- Disabled Trigger -->
+                                                    <Trigger Property="IsEnabled" Value="False">
+                                                        <Setter TargetName="ToggleButtonBorder" Property="Background" Value="#A0A0A0" />
                                                     </Trigger>
                                                 </ControlTemplate.Triggers>
                                             </ControlTemplate>
@@ -219,21 +262,9 @@
                                 </Border>
                             </Popup>
                         </Grid>
-                        <!-- ComboBox Hover Trigger -->
-                        <ControlTemplate.Triggers>
-                            <Trigger Property="IsMouseOver" Value="True">
-                                <Setter TargetName="OuterBorder" Property="Background" Value="#456A7D" />
-                            </Trigger>
-                        </ControlTemplate.Triggers>
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
-            <Style.Triggers>
-                <Trigger Property="Validation.HasError" Value="True">
-                    <Setter Property="ToolTip"
-                            Value="{Binding RelativeSource={x:Static RelativeSource.Self}, Path=(Validation.Errors)/ErrorContent}" />
-                </Trigger>
-            </Style.Triggers>
         </Style>
 
     </Application.Resources>
