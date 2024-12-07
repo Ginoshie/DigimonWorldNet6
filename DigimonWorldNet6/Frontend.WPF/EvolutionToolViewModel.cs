@@ -3,12 +3,16 @@ using System.Runtime.CompilerServices;
 using System.Windows.Input;
 using DigimonWorld.Evolution.Calculator.Core.DataObjects;
 using DigimonWorld.Evolution.Calculator.Core.EvolutionCalculation;
+using DigimonWorld.Frontend.WPF.Constants;
 using Generics.Enums;
 
 namespace DigimonWorld.Frontend.WPF;
 
 public sealed class EvolutionToolViewModel : INotifyPropertyChanged
 {
+
+    private string _jijimonText = JijimonNarratorText.EvolutionCalculatorIntro;
+
     private int _hp;
     private int _mp;
     private int _off;
@@ -32,18 +36,34 @@ public sealed class EvolutionToolViewModel : INotifyPropertyChanged
     }
 
     public ICommand SetEvolutionResult { get; }
+    
+    public string CalculateButtonText => UiText.CalculateButtonText;
+
+    public string JijimonText
+    {
+        get => _jijimonText;
+        set
+        {
+            if (_jijimonText == value) return;
+
+            _jijimonText = value;
+            OnPropertyChanged();
+        }
+    }
 
     public DigimonType DigimonType
     {
         get => _digimonType;
         set
         {
+            if (_digimonType == value) return;
+
             _digimonType = value;
 
             _evolutionResult = EvolutionResult.Unknown;
 
             OnPropertyChanged();
-            
+
             OnPropertyChanged(nameof(EvolutionResult));
         }
     }
@@ -53,6 +73,8 @@ public sealed class EvolutionToolViewModel : INotifyPropertyChanged
         get => _hp;
         set
         {
+            if (_hp == value) return;
+
             _hp = value;
 
             OnPropertyChanged();
@@ -64,6 +86,8 @@ public sealed class EvolutionToolViewModel : INotifyPropertyChanged
         get => _mp;
         set
         {
+            if (_mp == value) return;
+
             _mp = value;
 
             OnPropertyChanged();
@@ -75,6 +99,8 @@ public sealed class EvolutionToolViewModel : INotifyPropertyChanged
         get => _off;
         set
         {
+            if (_off == value) return;
+
             _off = value;
 
             OnPropertyChanged();
@@ -86,6 +112,8 @@ public sealed class EvolutionToolViewModel : INotifyPropertyChanged
         get => _def;
         set
         {
+            if (_def == value) return;
+
             _def = value;
 
             OnPropertyChanged();
@@ -97,6 +125,8 @@ public sealed class EvolutionToolViewModel : INotifyPropertyChanged
         get => _speed;
         set
         {
+            if (_speed == value) return;
+
             _speed = value;
 
             OnPropertyChanged();
@@ -108,6 +138,8 @@ public sealed class EvolutionToolViewModel : INotifyPropertyChanged
         get => _brains;
         set
         {
+            if (_brains == value) return;
+
             _brains = value;
 
             OnPropertyChanged();
@@ -119,6 +151,8 @@ public sealed class EvolutionToolViewModel : INotifyPropertyChanged
         get => _careMistakes;
         set
         {
+            if (_careMistakes == value) return;
+
             _careMistakes = value;
 
             OnPropertyChanged();
@@ -130,6 +164,8 @@ public sealed class EvolutionToolViewModel : INotifyPropertyChanged
         get => _weight;
         set
         {
+            if (_weight == value) return;
+
             _weight = value;
 
             OnPropertyChanged();
@@ -141,6 +177,8 @@ public sealed class EvolutionToolViewModel : INotifyPropertyChanged
         get => _happiness;
         set
         {
+            if (_happiness == value) return;
+
             _happiness = value;
 
             OnPropertyChanged();
@@ -152,6 +190,8 @@ public sealed class EvolutionToolViewModel : INotifyPropertyChanged
         get => _discipline;
         set
         {
+            if (_discipline == value) return;
+
             _discipline = value;
 
             OnPropertyChanged();
@@ -163,6 +203,8 @@ public sealed class EvolutionToolViewModel : INotifyPropertyChanged
         get => _battles;
         set
         {
+            if (_battles == value) return;
+
             _battles = value;
 
             OnPropertyChanged();
@@ -174,6 +216,8 @@ public sealed class EvolutionToolViewModel : INotifyPropertyChanged
         get => _techniques;
         set
         {
+            if (_techniques == value) return;
+
             _techniques = value;
 
             OnPropertyChanged();
@@ -185,6 +229,8 @@ public sealed class EvolutionToolViewModel : INotifyPropertyChanged
         get => _evolutionResult;
         private set
         {
+            if (_evolutionResult == value) return;
+
             _evolutionResult = value;
 
             OnPropertyChanged();
