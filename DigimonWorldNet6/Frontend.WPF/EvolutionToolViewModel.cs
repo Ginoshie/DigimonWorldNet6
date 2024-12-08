@@ -10,8 +10,7 @@ namespace DigimonWorld.Frontend.WPF;
 
 public sealed class EvolutionToolViewModel : INotifyPropertyChanged
 {
-
-    private string _jijimonText = JijimonNarratorText.EvolutionCalculatorIntro;
+    private string _jijimonText = JijimonNarratorText.EvolutionCalculatorIntroText;
 
     private int _hp;
     private int _mp;
@@ -27,6 +26,7 @@ public sealed class EvolutionToolViewModel : INotifyPropertyChanged
     private int _techniques;
     private DigimonType _digimonType;
     private EvolutionResult _evolutionResult = EvolutionResult.Unknown;
+    private bool _flipToRight;
 
     private readonly EvolutionCalculator _evolutionCalculator = new();
 
@@ -36,7 +36,7 @@ public sealed class EvolutionToolViewModel : INotifyPropertyChanged
     }
 
     public ICommand SetEvolutionResult { get; }
-    
+
     public string CalculateButtonText => UiText.CalculateButtonText;
 
     public string JijimonText
@@ -60,11 +60,11 @@ public sealed class EvolutionToolViewModel : INotifyPropertyChanged
 
             _digimonType = value;
 
-            _evolutionResult = EvolutionResult.Unknown;
+            EvolutionResult = EvolutionResult.Unknown;
+
+            FlipToRight = false;
 
             OnPropertyChanged();
-
-            OnPropertyChanged(nameof(EvolutionResult));
         }
     }
 
@@ -233,6 +233,19 @@ public sealed class EvolutionToolViewModel : INotifyPropertyChanged
 
             _evolutionResult = value;
 
+            JijimonText = JijimonNarratorText.EvolutionResultCalculated(value);
+
+            OnPropertyChanged();
+        }
+    }
+
+    public bool FlipToRight
+    {
+        get => _flipToRight;
+        set
+        {
+            if (_flipToRight == value) return;
+            _flipToRight = value;
             OnPropertyChanged();
         }
     }
@@ -243,6 +256,8 @@ public sealed class EvolutionToolViewModel : INotifyPropertyChanged
     {
         Digimon currentDigimon = new(DigimonType, HP, MP, Off, Def, Speed, Brains, CareMistakes, Weight, Happiness, Discipline, Battles, _techniques);
         EvolutionResult = _evolutionCalculator.CalculateEvolutionResult(currentDigimon);
+
+        FlipToRight = true;
     }
 
     private void OnPropertyChanged([CallerMemberName] string? propertyName = null)
