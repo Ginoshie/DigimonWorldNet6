@@ -7,15 +7,17 @@ namespace DigimonWorld.Frontend.WPF.Services;
 public static class SpeakingSimulator
 {
     private static CancellationTokenSource _typingCancellationTokenSource = new();
-    private static readonly char[] Separator = [' '];
+    private static bool _instantDisplayRequested;
+
+    private static readonly char[] Separator = { ' ' };
 
     public static async Task WriteAsSpeech(string fullText, Action<string> updateTextAction)
     {
         await _typingCancellationTokenSource.CancelAsync();
-        
+
         _typingCancellationTokenSource.Dispose();
         _typingCancellationTokenSource = new CancellationTokenSource();
-        
+
         CancellationToken cancellationToken = _typingCancellationTokenSource.Token;
 
         string currentText = string.Empty;
@@ -26,10 +28,16 @@ public static class SpeakingSimulator
 
             foreach (string word in words)
             {
+                // If instant display is requested, immediately update with the full text.
+                if (_instantDisplayRequested)
+                {
+                    updateTextAction(fullText);
+                    return;
+                }
+
                 cancellationToken.ThrowIfCancellationRequested();
 
                 currentText += word + " ";
-
                 updateTextAction(currentText);
 
                 string lastFiveChars = currentText.Length >= 6
@@ -48,7 +56,21 @@ public static class SpeakingSimulator
         }
         catch (OperationCanceledException)
         {
-            // Graceful cancellation
+            // Handle cancellation gracefully
+            if (_instantDisplayRequested)
+            {
+                updateTextAction(fullText);
+            }
         }
+        finally
+        {
+            _instantDisplayRequested = false; // Reset for next usage
+        }
+    }
+
+    public static void RequestInstantDisplay()
+    {
+        _instantDisplayRequested = true;
+        _typingCancellationTokenSource.Cancel();
     }
 }

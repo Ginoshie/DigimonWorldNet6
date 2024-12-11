@@ -37,9 +37,12 @@ public sealed class EvolutionToolViewModel : INotifyPropertyChanged
     public EvolutionToolViewModel()
     {
         SetEvolutionResult = new CommandHandler(CalculateEvolutionResult);
+        InstantDisplayCommand = new CommandHandler(InstantDisplay);
     }
 
     public ICommand SetEvolutionResult { get; }
+    
+    public ICommand InstantDisplayCommand { get; }
 
     public string CalculateButtonText => UiText.CalculateButtonText;
 
@@ -261,6 +264,11 @@ public sealed class EvolutionToolViewModel : INotifyPropertyChanged
         EvolutionResult = _evolutionCalculator.CalculateEvolutionResult(currentDigimon);
 
         FlipToRight = true;
+    }
+
+    private void InstantDisplay()
+    {
+        SpeakingSimulator.RequestInstantDisplay();
     }
 
     private void OnPropertyChanged([CallerMemberName] string? propertyName = null)

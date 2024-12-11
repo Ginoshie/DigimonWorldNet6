@@ -409,6 +409,9 @@
                                     <Border CornerRadius="5" BorderBrush="#4A9FC5" BorderThickness="3" Padding="0" Background="#4A9FC5">
                                         <Border CornerRadius="5" BorderBrush="#90D9FA" BorderThickness="3" Padding="0" Background="#2E3841">
                                             <Border CornerRadius="5" BorderBrush="Transparent" BorderThickness="0" Padding="0" Background="#77000000">
+                                                <Border.InputBindings>
+                                                    <MouseBinding Gesture="LeftClick" Command="{Binding InstantDisplayCommand}" />
+                                                </Border.InputBindings>
                                                 <StackPanel Margin="5">
                                                     <!-- First Line: Yellow Text -->
                                                     <TextBlock Text="Jijimon"
@@ -419,7 +422,6 @@
                                                                Margin="0,0, 0, 5"
                                                                Width="545"
                                                                TextWrapping="Wrap" />
-
                                                     <!-- Second Line: White Text -->
                                                     <TextBlock Text="{Binding JijimonText}"
                                                                Foreground="#B3B5B1"
