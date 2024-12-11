@@ -4,6 +4,7 @@ public enum EvolutionResult
 {
     Unknown,
     None,
+    NotApplicable,
     Agumon,
     Airdramon,
     Andromon,

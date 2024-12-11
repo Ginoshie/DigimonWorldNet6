@@ -3,6 +3,7 @@ using System.Globalization;
 using System.Windows.Data;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using Generics.Enums;
 
 namespace DigimonWorld.Frontend.WPF.Conversion;
 
@@ -18,6 +19,11 @@ public sealed class EnumToImageConverter : IValueConverter
 
         if (targetType != typeof(ImageSource))
             throw new ArgumentException($"Can only convert to {typeof(ImageSource)} but tried to convert to {targetType}", nameof(targetType));
+
+        if (stringValue == EvolutionResult.NotApplicable.ToString())
+        {
+            stringValue = EvolutionResult.None.ToString();
+        }
 
         return new BitmapImage(new Uri($"/Images/Digimon/{stringValue}.jpg", UriKind.Relative));
     }

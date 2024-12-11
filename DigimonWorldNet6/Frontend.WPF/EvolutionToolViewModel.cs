@@ -1,14 +1,12 @@
-using System;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Input;
 using DigimonWorld.Evolution.Calculator.Core.DataObjects;
 using DigimonWorld.Evolution.Calculator.Core.EvolutionCalculation;
 using DigimonWorld.Frontend.WPF.Constants;
 using DigimonWorld.Frontend.WPF.Services;
 using Generics.Enums;
+using Generics.Extensions;
 
 namespace DigimonWorld.Frontend.WPF;
 
@@ -261,7 +259,10 @@ public sealed class EvolutionToolViewModel : INotifyPropertyChanged
     private void CalculateEvolutionResult()
     {
         Digimon currentDigimon = new(DigimonType, HP, MP, Off, Def, Speed, Brains, CareMistakes, Weight, Happiness, Discipline, Battles, _techniques);
-        EvolutionResult = _evolutionCalculator.CalculateEvolutionResult(currentDigimon);
+
+        EvolutionResult = currentDigimon.DigimonType.EvolutionStage() == EvolutionStage.Ultimate 
+            ? EvolutionResult.NotApplicable 
+            : _evolutionCalculator.CalculateEvolutionResult(currentDigimon);
 
         FlipToRight = true;
     }

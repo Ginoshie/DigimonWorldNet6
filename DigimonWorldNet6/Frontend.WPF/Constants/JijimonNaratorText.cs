@@ -22,6 +22,10 @@ public static class JijimonNarratorText
                 return "Oh dear, your digimon is not going to evolve I'm afraid.\n" +
                        "\n" +
                        "Perhaps check an evolution guide or try increasing some stats or changing weight?";
+            case EvolutionResult.NotApplicable:
+                return "Your digimon is already at ultimate level which means it can't evolve to a higher stage anymore. \n" +
+                       "\n" +
+                       "*whispers* . . .  The world holds many a secret though. . .  *smiles*";
         }
 
         DigimonType evolutionDigimonType = evolutionResult.ToDigimonType();
