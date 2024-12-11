@@ -52,7 +52,7 @@ public static class JijimonNarratorText
 
         return evolutionDigimonType switch
         {
-            DigimonType.Penguinmon => "Evolution time? Hmm somethings fishy about this one. . .\n" +
+            DigimonType.Penguinmon => "Evolution time? Hmm somethings fishy about this one . . . \n" +
                                       "\n" +
                                       $"Ah! No wonder, it's a {evolutionDigimonType}.  *laughs*\n" +
                                       "\n" +
@@ -68,7 +68,7 @@ public static class JijimonNarratorText
                                    "\n" +
                                    "A long time ago a player enjoyed this little guys presence a lot." +
                                    "\n" +
-                                   "Great memories. . .  *smiles widely*",
+                                   "Great memories . . .  *smiles widely*",
             _ => $"Very nice, it's going to become {AOrAn(evolutionDigimonType)} {evolutionDigimonType}.\n" +
                  "\n" +
                  "They grow up so fast, don't they."
@@ -87,12 +87,12 @@ public static class JijimonNarratorText
         {
             DigimonType.Vegiemon => "Good job, it will evolve to the champion stage.\n" +
                                     "\n" +
-                                    $"A {evolutionDigimonType}, he got some major beef. . .\n" +
+                                    $"A {evolutionDigimonType}, he got some major beef . . . \n" +
                                     "\n" +
                                     $"{DigimonType.Tyrannomon} will be very happy.  *chuckles*",
-            DigimonType.Sukamon => "Hmm this is going to be special. . .\n" +
+            DigimonType.Sukamon => "Hmm this is going to be special . . . \n" +
                                    "\n" +
-                                   "In a. . .good. . .way ofcourse.\n" +
+                                   "In a . . . good . . . way ofcourse.\n" +
                                    "\n" +
                                    $"It'll become a {evolutionDigimonType}.\n" +
                                    "\n" +
@@ -102,19 +102,19 @@ public static class JijimonNarratorText
                                     $"Great! It's a {evolutionDigimonType}.\n" +
                                     "\n" +
                                     $"Have you got any rumors for us {evolutionDigimonType}?  *leans in eagerly*",
-            DigimonType.Ogremon => "Oh this is going to be a special one. . .\n" +
+            DigimonType.Ogremon => "Oh this is going to be a special one . . . \n" +
                                    "\n" +
-                                   "There he is, perhaps not looking like it but. . .\n" +
+                                   "There he is, perhaps not looking like it but . . . \n" +
                                    "\n" +
                                    $"{evolutionDigimonType} has a gentle soul, you'd be surprised.  *nods*",
             DigimonType.Meramon => "Watch closely, it's going to evolve\n" +
                                    "\n" +
                                    "*sudden rise in temperature*\n" +
                                    "\n" +
-                                   $"Oof. . .hot. . .This must be a. . .{evolutionDigimonType}!\n" +
+                                   $"Oof . . . hot . . . This must be a . . . {evolutionDigimonType}!\n" +
                                    "\n" +
                                    "*yelps* don't burn my house!",
-            DigimonType.Leomon => "It's evolving, with such fierce power. . .\n" +
+            DigimonType.Leomon => "It's evolving, with such fierce power . . . \n" +
                                   "\n" +
                                   $"No wonder I could sense it's power. It's a {evolutionDigimonType}\n" +
                                   $"*starts humming the {evolutionDigimonType} theme*",
@@ -138,14 +138,14 @@ public static class JijimonNarratorText
                                     "*sudden temperature drop*\n" +
                                     "\n" +
                                     $"*shivers* Brrr, so chilly with {evolutionDigimonType} in the room",
-            DigimonType.Drimogemon => "*strange noise* Giin giin. . .Giin giin. . .\n" +
+            DigimonType.Drimogemon => "*strange noise* Giin giin . . . Giin giin . . . \n" +
                                       "\n" +
-                                      "Whats this sound I hear. . .\n" +
+                                      "Whats this sound I hear . . . \n" +
                                       "\n" +
                                       $"Oh that explains it, {evolutionDigimonType}'s horn drill.",
             DigimonType.Devimon => "Lets see what cheeky bugger it'll become this time.\n" +
                                    "\n" +
-                                   "Speak of the devil. . .\n" +
+                                   "Speak of the devil . . . \n" +
                                    $"\n It's going to become a {evolutionDigimonType}.",
             DigimonType.Coelamon => "Is it a plain?\n" +
                                     "Is it a fish?\n" +
@@ -167,16 +167,16 @@ public static class JijimonNarratorText
                                    $"Haha, just kidding, it's going to become a {evolutionDigimonType}!\n" +
                                    "\n" +
                                    "He's a great narrator himself, go give it a try.  *chuckles*",
-            DigimonType.Numemon => "It is going to evolve. . .hmm. . .\n" +
+            DigimonType.Numemon => "It is going to evolve . . . hmm . . . \n" +
                                    "\n" +
-                                   $"Well. . .That is  *a* champion, congrats on your {evolutionDigimonType}\n" +
+                                   $"Well . . . That is  *a* champion, congrats on your {evolutionDigimonType}\n" +
                                    "\n" +
-                                   "*whispers*  . . .Perhaps be a bit more careful next time?  *chuckles*",
+                                   "*whispers* . . . Perhaps be a bit more careful next time?  *chuckles*",
             DigimonType.Tyrannomon => "Oh look it's going to evolve!\n" +
                                       "\n" +
-                                      $"Nice work, lets see. It's . . .{evolutionDigimonType}\n" +
+                                      $"Nice work, lets see. It's . . . {evolutionDigimonType}\n" +
                                       "\n" +
-                                      "*mumbles*  . . .better stock up on meat you must. . .",
+                                      "*mumbles* . . . better stock up on meat you must . . . ",
             _ => "Great work!\n" +
                  "\n" +
                  $"It will become a mighty {evolutionDigimonType}"
@@ -193,9 +193,9 @@ public static class JijimonNarratorText
 
         return evolutionDigimonType switch
         {
-            DigimonType.SkullGreymon => "Oh this is a dreaded aura. . .this must be. . .\n" +
+            DigimonType.SkullGreymon => "Oh this is a dreaded aura . . . this must be . . . \n" +
                                         "\n" +
-                                        $"Welcome. . .{evolutionDigimonType}\n" +
+                                        $"Welcome . . . {evolutionDigimonType}\n" +
                                         "\n" +
                                         "Please be good to him player, it deserves it.",
             DigimonType.Vademon => "Look at that, now this is something special.\n" +
@@ -205,7 +205,7 @@ public static class JijimonNarratorText
                                    "Thank you for taking great care of your digimon.  *smiles",
             DigimonType.Phoenixmon => "Great it is evolving, lets see what it will become.\n" +
                                       "\n" +
-                                      $"Oh. . .behold the grace and beauty of {evolutionDigimonType}.\n" +
+                                      $"Oh . . . behold the grace and beauty of {evolutionDigimonType}.\n" +
                                       "\n" +
                                       "*Jijimon smiles widely and wobbles back and forth in contained excitement*",
             DigimonType.Monzaemon => $"Wow! Your {DigimonType.Numemon} is evolving!?\n" +
@@ -213,7 +213,7 @@ public static class JijimonNarratorText
                                      "Amazing work player!\n" +
                                      "\n" +
                                      $"This can mean only one thing, it's a {evolutionDigimonType}",
-            DigimonType.MetalGreymon => "Such presence already and it hasn't fully evolved yet. . .\n" +
+            DigimonType.MetalGreymon => "Such presence already and it hasn't fully evolved yet . . . \n" +
                                         "\n" +
                                         $"Yes, I figured, it's a {evolutionDigimonType}\n" +
                                         "\n" +
@@ -223,12 +223,12 @@ public static class JijimonNarratorText
                                     $"Oh it's an {evolutionDigimonType}.\n" +
                                     "\n" +
                                     "Whats the officer problem?  *chuckles*",
-            DigimonType.Digitamamon => "Oh goody, it's evolving. . .\n" +
+            DigimonType.Digitamamon => "Oh goody, it's evolving . . . \n" +
                                        "\n" +
                                        "Great, it's a {evolutionDigimonType}.\n" +
                                        "\n" +
                                        "He broke his egg so now he can make us omelettes.  *chuckles*",
-            DigimonType.Etemon => "Ohh this is going to be a cheeky evolution. . .\n" +
+            DigimonType.Etemon => "Ohh this is going to be a cheeky evolution . . . \n" +
                                   "\n" +
                                   $"Oh yes, it's an {evolutionDigimonType}." +
                                   "\n" +
