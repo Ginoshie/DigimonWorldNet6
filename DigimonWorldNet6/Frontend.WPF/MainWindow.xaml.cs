@@ -6,7 +6,7 @@ public partial class MainWindow
     {
         InitializeComponent();
 
-        EvolutionToolViewModel dataContext = new();
+        EvolutionToolViewModel dataContext = new(this);
             
         DataContext = dataContext;
     }

@@ -1,5 +1,8 @@
+using System;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 using DigimonWorld.Evolution.Calculator.Core.DataObjects;
 using DigimonWorld.Evolution.Calculator.Core.EvolutionCalculation;
@@ -32,16 +35,28 @@ public sealed class EvolutionToolViewModel : INotifyPropertyChanged
 
     private readonly EvolutionCalculator _evolutionCalculator = new();
 
-    public EvolutionToolViewModel()
+    public EvolutionToolViewModel(Window window)
     {
         SetEvolutionResult = new CommandHandler(CalculateEvolutionResult);
+        
         InstantDisplayCommand = new CommandHandler(InstantDisplay);
+        
+        MinimizeCommand = new CommandHandler(() => window.WindowState = WindowState.Minimized);
+        
+        CloseCommand = new CommandHandler(window.Close);
+
+        DragCommand = new CommandHandler(() => DragWindow(window));
     }
 
     public ICommand SetEvolutionResult { get; }
     
     public ICommand InstantDisplayCommand { get; }
-
+    public ICommand MinimizeCommand { get; }
+    
+    public ICommand CloseCommand { get; }
+    
+    public ICommand DragCommand { get; }
+    
     public string CalculateButtonText => UiText.CalculateButtonText;
 
     public string JijimonText
@@ -270,6 +285,27 @@ public sealed class EvolutionToolViewModel : INotifyPropertyChanged
     private void InstantDisplay()
     {
         SpeakingSimulator.RequestInstantDisplay();
+    }
+
+    private void DragWindow(Window window)
+    {
+        if (Mouse.PrimaryDevice.LeftButton != MouseButtonState.Pressed) return;
+        
+        MouseEventArgs? mouseEventArgs = Mouse.PrimaryDevice.Target as MouseEventArgs;
+
+        if (mouseEventArgs?.OriginalSource is Button or TextBox)
+        {
+            return;
+        }
+
+        try
+        {
+            window.DragMove();
+        }
+        catch (InvalidOperationException)
+        {
+            // Ignore exceptions caused by improper DragMove calls
+        }
     }
 
     private void OnPropertyChanged([CallerMemberName] string? propertyName = null)
