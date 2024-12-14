@@ -14,10 +14,6 @@
             <Setter Property="FontFamily" Value="{StaticResource Dw1Font}" />
         </Style>
 
-        <Style TargetType="Window">
-            <Setter Property="Background" Value="#2E3841" />
-        </Style>
-
         <Style TargetType="Grid">
             <Setter Property="Background" Value="#2E3841" />
         </Style>
