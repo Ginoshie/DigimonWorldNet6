@@ -291,13 +291,6 @@ public sealed class EvolutionToolViewModel : INotifyPropertyChanged
     {
         if (Mouse.PrimaryDevice.LeftButton != MouseButtonState.Pressed) return;
         
-        MouseEventArgs? mouseEventArgs = Mouse.PrimaryDevice.Target as MouseEventArgs;
-
-        if (mouseEventArgs?.OriginalSource is Button or TextBox)
-        {
-            return;
-        }
-
         try
         {
             window.DragMove();
