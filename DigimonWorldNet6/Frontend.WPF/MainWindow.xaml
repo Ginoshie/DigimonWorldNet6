@@ -387,11 +387,11 @@
                                                     <Setter.Value>
                                                         <ControlTemplate TargetType="Button">
                                                             <Grid>
-                                                                <!-- Outer Border for Top and Left -->
-                                                                <Border BorderBrush="#B0B0B0" BorderThickness="2,2,0,0" Background="#575C60">
-                                                                    <!-- Inner Border for Bottom and Right -->
-                                                                    <Border BorderBrush="#121212" BorderThickness="0,0,2,2">
-                                                                        <!-- Horizontal Layout for Image and Text -->
+                                                                <!-- Outer Border -->
+                                                                <Border x:Name="OuterBorder" BorderBrush="#B0B0B0" BorderThickness="3,3,0,0" Background="#575C60">
+                                                                    <!-- Inner Border -->
+                                                                    <Border x:Name="InnerBorder" BorderBrush="#121212" BorderThickness="0,0,3,3">
+                                                                        <!-- Content -->
                                                                         <StackPanel Orientation="Horizontal"
                                                                                     HorizontalAlignment="Center"
                                                                                     VerticalAlignment="Center"
@@ -404,67 +404,47 @@
                                                                                    VerticalAlignment="Center"
                                                                                    Margin="0,0,5,0"
                                                                                    Source="/Images/Emotions/Evolution/evo1.png" />
-
                                                                             <!-- Button Text -->
                                                                             <ContentPresenter VerticalAlignment="Center" />
                                                                         </StackPanel>
                                                                     </Border>
                                                                 </Border>
                                                             </Grid>
+                                                            <!-- Event Triggers for Animations -->
                                                             <ControlTemplate.Triggers>
-                                                                <!-- Animation Trigger on Mouse Hover -->
-                                                                <Trigger Property="IsMouseOver" Value="True">
-                                                                    <Trigger.EnterActions>
-                                                                        <!-- Name the storyboard so it can be referenced later -->
-                                                                        <BeginStoryboard x:Name="HoverAnimationStoryboard">
-                                                                            <Storyboard RepeatBehavior="Forever">
-                                                                                <!-- Frame 1 -->
-                                                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="AnimatedImage"
-                                                                                                               Storyboard.TargetProperty="Source">
-                                                                                    <DiscreteObjectKeyFrame KeyTime="0:0:0">
-                                                                                        <DiscreteObjectKeyFrame.Value>
-                                                                                            <BitmapImage UriSource="/Images/Emotions/Evolution/evo1.png" />
-                                                                                        </DiscreteObjectKeyFrame.Value>
-                                                                                    </DiscreteObjectKeyFrame>
-                                                                                    <!-- Frame 2 -->
-                                                                                    <DiscreteObjectKeyFrame KeyTime="0:0:0.4">
-                                                                                        <DiscreteObjectKeyFrame.Value>
-                                                                                            <BitmapImage UriSource="/Images/Emotions/Evolution/evo2.png" />
-                                                                                        </DiscreteObjectKeyFrame.Value>
-                                                                                    </DiscreteObjectKeyFrame>
-                                                                                    <!-- Frame 3 -->
-                                                                                    <DiscreteObjectKeyFrame KeyTime="0:0:0.8">
-                                                                                        <DiscreteObjectKeyFrame.Value>
-                                                                                            <BitmapImage UriSource="/Images/Emotions/Evolution/evo3.png" />
-                                                                                        </DiscreteObjectKeyFrame.Value>
-                                                                                    </DiscreteObjectKeyFrame>
-                                                                                    <!-- Frame 4 -->
-                                                                                    <DiscreteObjectKeyFrame KeyTime="0:0:1.2">
-                                                                                        <DiscreteObjectKeyFrame.Value>
-                                                                                            <BitmapImage UriSource="/Images/Emotions/Evolution/evo4.png" />
-                                                                                        </DiscreteObjectKeyFrame.Value>
-                                                                                    </DiscreteObjectKeyFrame>
-                                                                                    <!-- Frame 4 -->
-                                                                                    <DiscreteObjectKeyFrame KeyTime="0:0:1.6">
-                                                                                        <DiscreteObjectKeyFrame.Value>
-                                                                                            <BitmapImage UriSource="/Images/Emotions/Evolution/evo4.png" />
-                                                                                        </DiscreteObjectKeyFrame.Value>
-                                                                                    </DiscreteObjectKeyFrame>
-                                                                                    <!-- Show Final Frame -->
-                                                                                    <DiscreteObjectKeyFrame KeyTime="0:0:2.0">
-                                                                                        <DiscreteObjectKeyFrame.Value>
-                                                                                            <BitmapImage UriSource="/Images/Emotions/Evolution/evo4.png" />
-                                                                                        </DiscreteObjectKeyFrame.Value>
-                                                                                    </DiscreteObjectKeyFrame>
-                                                                                </ObjectAnimationUsingKeyFrames>
-                                                                            </Storyboard>
-                                                                        </BeginStoryboard>
-                                                                    </Trigger.EnterActions>
-                                                                    <Trigger.ExitActions>
-                                                                        <!-- Stop the named storyboard -->
-                                                                        <StopStoryboard BeginStoryboardName="HoverAnimationStoryboard" />
-                                                                    </Trigger.ExitActions>
-                                                                </Trigger>
+                                                                <!-- Trigger for Click Animation -->
+                                                                <EventTrigger RoutedEvent="Button.PreviewMouseDown">
+                                                                    <BeginStoryboard>
+                                                                        <Storyboard>
+                                                                            <!-- Change Outer Border Color -->
+                                                                            <ColorAnimation Storyboard.TargetName="OuterBorder"
+                                                                                            Storyboard.TargetProperty="(Border.BorderBrush).(SolidColorBrush.Color)"
+                                                                                            To="#060100"
+                                                                                            Duration="0:0:0.05" />
+                                                                            <!-- Change Inner Border Color -->
+                                                                            <ColorAnimation Storyboard.TargetName="InnerBorder"
+                                                                                            Storyboard.TargetProperty="(Border.BorderBrush).(SolidColorBrush.Color)"
+                                                                                            To="#6789A5"
+                                                                                            Duration="0:0:0.05" />
+                                                                        </Storyboard>
+                                                                    </BeginStoryboard>
+                                                                </EventTrigger>
+                                                                <EventTrigger RoutedEvent="Button.PreviewMouseUp">
+                                                                    <BeginStoryboard>
+                                                                        <Storyboard>
+                                                                            <!-- Reset Outer Border Color -->
+                                                                            <ColorAnimation Storyboard.TargetName="OuterBorder"
+                                                                                            Storyboard.TargetProperty="(Border.BorderBrush).(SolidColorBrush.Color)"
+                                                                                            To="#B0B0B0"
+                                                                                            Duration="0:0:0.05" />
+                                                                            <!-- Reset Inner Border Color -->
+                                                                            <ColorAnimation Storyboard.TargetName="InnerBorder"
+                                                                                            Storyboard.TargetProperty="(Border.BorderBrush).(SolidColorBrush.Color)"
+                                                                                            To="#121212"
+                                                                                            Duration="0:0:0.05" />
+                                                                        </Storyboard>
+                                                                    </BeginStoryboard>
+                                                                </EventTrigger>
                                                             </ControlTemplate.Triggers>
                                                         </ControlTemplate>
                                                     </Setter.Value>
@@ -495,6 +475,7 @@
                                             </Style>
                                         </Button.Style>
                                     </Button>
+
 
                                 </Grid>
                                 <Grid Column="1">
