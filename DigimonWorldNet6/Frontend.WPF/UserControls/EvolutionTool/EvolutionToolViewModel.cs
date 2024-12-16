@@ -2,7 +2,6 @@ using System;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Input;
 using DigimonWorld.Evolution.Calculator.Core.DataObjects;
 using DigimonWorld.Evolution.Calculator.Core.EvolutionCalculation;
@@ -11,7 +10,7 @@ using DigimonWorld.Frontend.WPF.Services;
 using Generics.Enums;
 using Generics.Extensions;
 
-namespace DigimonWorld.Frontend.WPF;
+namespace DigimonWorld.Frontend.WPF.UserControls.EvolutionTool;
 
 public sealed class EvolutionToolViewModel : INotifyPropertyChanged
 {

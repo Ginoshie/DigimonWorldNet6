@@ -25,6 +25,7 @@
 
     <ItemGroup>
       <Folder Include="Images\Emotions\Evolution\" />
+      <Folder Include="UserControls\**\*" />
     </ItemGroup>
 
 </Project>

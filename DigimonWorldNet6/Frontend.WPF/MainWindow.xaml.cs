@@ -1,4 +1,6 @@
-﻿namespace DigimonWorld.Frontend.WPF;
+﻿using DigimonWorld.Frontend.WPF.UserControls.EvolutionTool;
+
+namespace DigimonWorld.Frontend.WPF;
 
 public partial class MainWindow
 {

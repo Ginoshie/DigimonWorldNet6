@@ -1,0 +1,416 @@
+<UserControl x:Class="DigimonWorld.Frontend.WPF.UserControls.EvolutionTool.EvolutionToolUserControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:combatStatValidation="clr-namespace:DigimonWorld.Frontend.WPF.Validation.CombatStats"
+             xmlns:nonCombatStatValidation="clr-namespace:DigimonWorld.Frontend.WPF.Validation.NonCombatStats"
+             HorizontalAlignment="Stretch"
+             VerticalAlignment="Stretch">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Grid Column="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="320" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Label Grid.Row="0" Grid.Column="0" Height="40" Width="150" Style="{StaticResource DefaultSheenLabelStyle}">
+                YOUR DIGIMON
+            </Label>
+            <GroupBox Grid.Column="0" Grid.Row="1" Header="Your digimon">
+                <GroupBox.Template>
+                    <ControlTemplate TargetType="GroupBox">
+                        <Grid>
+
+                            <!-- Content Area for the Textboxes and Labels -->
+                            <ContentPresenter ContentSource="Content" Margin="10" />
+                        </Grid>
+                    </ControlTemplate>
+                </GroupBox.Template>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="{StaticResource DefaultTextBoxGridRowHeight}" />
+                        <RowDefinition Height="{StaticResource DefaultTextBoxGridRowHeight}" />
+                        <RowDefinition Height="{StaticResource DefaultTextBoxGridRowHeight}" />
+                        <RowDefinition Height="{StaticResource DefaultTextBoxGridRowHeight}" />
+                        <RowDefinition Height="{StaticResource DefaultTextBoxGridRowHeight}" />
+                        <RowDefinition Height="{StaticResource DefaultTextBoxGridRowHeight}" />
+                        <RowDefinition Height="{StaticResource DefaultTextBoxGridRowHeight}" />
+                        <RowDefinition Height="{StaticResource DefaultTextBoxGridRowHeight}" />
+                        <RowDefinition Height="{StaticResource DefaultTextBoxGridRowHeight}" />
+                        <RowDefinition Height="{StaticResource DefaultTextBoxGridRowHeight}" />
+                        <RowDefinition Height="{StaticResource DefaultTextBoxGridRowHeight}" />
+                        <RowDefinition Height="{StaticResource DefaultTextBoxGridRowHeight}" />
+                        <RowDefinition Height="{StaticResource DefaultTextBoxGridRowHeight}" />
+                    </Grid.RowDefinitions>
+
+                    <Label Grid.Column="0" Grid.Row="0"
+                           Content="Digimon:"
+                           Style="{StaticResource DefaultLabelStyle}" />
+                    <ComboBox Name="Digimon" Grid.Column="1" Grid.Row="0" Grid.ColumnSpan="2"
+                              SelectedIndex="0"
+                              Style="{StaticResource DefaultComboboxStyle}"
+                              ItemsSource="{Binding Source={StaticResource DigimonTypes}}"
+                              SelectedItem="{Binding DigimonType}"
+                              IsTabStop="False">
+                    </ComboBox>
+
+                    <Label Grid.Column="0" Grid.Row="1" Content="HP:" Style="{StaticResource DefaultLabelStyle}" />
+                    <TextBox Name="Hp" Grid.Column="1" Grid.Row="1" Style="{StaticResource DefaultTextBoxStyle}">
+                        <TextBox.Text>
+                            <Binding Path="HP" UpdateSourceTrigger="LostFocus">
+                                <Binding.ValidationRules>
+                                    <combatStatValidation:HpStringValidationRule ValidationStep="CommittedValue" />
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
+
+                    <Label Grid.Column="0" Grid.Row="2" Content="MP:" Style="{StaticResource DefaultLabelStyle}" />
+                    <TextBox Name="Mp" Grid.Column="1" Grid.Row="2" Style="{StaticResource DefaultTextBoxStyle}">
+                        <TextBox.Text>
+                            <Binding Path="MP" UpdateSourceTrigger="LostFocus">
+                                <Binding.ValidationRules>
+                                    <combatStatValidation:MpStringValidationRule ValidationStep="CommittedValue" />
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
+
+                    <Label Grid.Column="0" Grid.Row="3" Content="Off:" Style="{StaticResource DefaultLabelStyle}" />
+                    <TextBox Name="Off" Grid.Column="1" Grid.Row="3" Style="{StaticResource DefaultTextBoxStyle}">
+                        <TextBox.Text>
+                            <Binding Path="Off" UpdateSourceTrigger="LostFocus">
+                                <Binding.ValidationRules>
+                                    <combatStatValidation:OffenseStringValidationRule ValidationStep="CommittedValue" />
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
+
+                    <Label Grid.Column="0" Grid.Row="4" Content="Def:" Style="{StaticResource DefaultLabelStyle}" />
+                    <TextBox Name="Def" Grid.Column="1" Grid.Row="4" Style="{StaticResource DefaultTextBoxStyle}">
+                        <TextBox.Text>
+                            <Binding Path="Def" UpdateSourceTrigger="LostFocus">
+                                <Binding.ValidationRules>
+                                    <combatStatValidation:DefenseStringValidationRule ValidationStep="CommittedValue" />
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
+
+                    <Label Grid.Column="0" Grid.Row="5" Content="Speed:" Style="{StaticResource DefaultLabelStyle}" />
+                    <TextBox Name="Speed" Grid.Column="1" Grid.Row="5" Style="{StaticResource DefaultTextBoxStyle}">
+                        <TextBox.Text>
+                            <Binding Path="Speed" UpdateSourceTrigger="LostFocus">
+                                <Binding.ValidationRules>
+                                    <combatStatValidation:SpeedStringValidationRule ValidationStep="CommittedValue" />
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
+
+                    <Label Grid.Column="0" Grid.Row="6" Content="Brains:" Style="{StaticResource DefaultLabelStyle}" />
+                    <TextBox Name="Brains" Grid.Column="1" Grid.Row="6" Style="{StaticResource DefaultTextBoxStyle}">
+                        <TextBox.Text>
+                            <Binding Path="Brains" UpdateSourceTrigger="LostFocus">
+                                <Binding.ValidationRules>
+                                    <combatStatValidation:BrainsStringValidationRule ValidationStep="CommittedValue" />
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
+
+                    <Label Grid.Column="0" Grid.Row="7" Content="Care Mistakes:" Style="{StaticResource DefaultLabelStyle}" />
+                    <TextBox Name="CareMistakes" Grid.Column="1" Grid.Row="7" Style="{StaticResource DefaultTextBoxStyle}">
+                        <TextBox.Text>
+                            <Binding Path="CareMistakes" UpdateSourceTrigger="LostFocus">
+                                <Binding.ValidationRules>
+                                    <nonCombatStatValidation:CareMistakesValidationRule ValidationStep="CommittedValue" />
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
+
+                    <Label Grid.Column="0" Grid.Row="8" Content="Weight:" Style="{StaticResource DefaultLabelStyle}" />
+                    <TextBox Name="Weight" Grid.Column="1" Grid.Row="8" Style="{StaticResource DefaultTextBoxStyle}">
+                        <TextBox.Text>
+                            <Binding Path="Weight" UpdateSourceTrigger="LostFocus">
+                                <Binding.ValidationRules>
+                                    <nonCombatStatValidation:WeightValidationRule ValidationStep="CommittedValue" />
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
+
+                    <Label Grid.Column="0" Grid.Row="9" Content="Happiness:" Style="{StaticResource DefaultLabelStyle}" />
+                    <TextBox Name="Happiness" Grid.Column="1" Grid.Row="9" Style="{StaticResource DefaultTextBoxStyle}">
+                        <TextBox.Text>
+                            <Binding Path="Happiness" UpdateSourceTrigger="LostFocus">
+                                <Binding.ValidationRules>
+                                    <nonCombatStatValidation:HappinessValidationRule ValidationStep="CommittedValue" />
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
+
+                    <Label Grid.Column="0" Grid.Row="10" Content="Discipline:" Style="{StaticResource DefaultLabelStyle}" />
+                    <TextBox Name="Discipline" Grid.Column="1" Grid.Row="10" Style="{StaticResource DefaultTextBoxStyle}">
+                        <TextBox.Text>
+                            <Binding Path="Discipline" UpdateSourceTrigger="LostFocus">
+                                <Binding.ValidationRules>
+                                    <nonCombatStatValidation:DisciplineValidationRule ValidationStep="CommittedValue" />
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
+
+                    <Label Grid.Column="0" Grid.Row="11" Content="Battles:" Style="{StaticResource DefaultLabelStyle}" />
+                    <TextBox Name="Battles" Grid.Column="1" Grid.Row="11" Style="{StaticResource DefaultTextBoxStyle}">
+                        <TextBox.Text>
+                            <Binding Path="Discipline" UpdateSourceTrigger="LostFocus">
+                                <Binding.ValidationRules>
+                                    <nonCombatStatValidation:BattlesValidationRule ValidationStep="CommittedValue" />
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
+
+                    <Label Grid.Column="0" Grid.Row="12" Content="Techniques:" Style="{StaticResource DefaultLabelStyle}" />
+                    <TextBox Name="Techniques" Grid.Column="1" Grid.Row="12" Style="{StaticResource DefaultTextBoxStyle}">
+                        <TextBox.Text>
+                            <Binding Path="Techniques" UpdateSourceTrigger="LostFocus">
+                                <Binding.ValidationRules>
+                                    <nonCombatStatValidation:TechniquesValidationRule ValidationStep="CommittedValue" />
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
+                </Grid>
+            </GroupBox>
+
+            <Button Grid.Column="0" Grid.Row="2" Height="40"
+                    Content="{Binding CalculateButtonText}"
+                    Command="{Binding SetEvolutionResult}">
+                <Button.Style>
+                    <Style TargetType="{x:Type Button}" BasedOn="{StaticResource DefaultButtonStyle}">
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="Button">
+                                    <Grid>
+                                        <!-- Outer Border -->
+                                        <Border x:Name="OuterBorder" BorderBrush="#B0B0B0" BorderThickness="3,3,0,0" Background="#575C60">
+                                            <!-- Inner Border -->
+                                            <Border x:Name="InnerBorder" BorderBrush="#121212" BorderThickness="0,0,3,3">
+                                                <!-- Content -->
+                                                <StackPanel Orientation="Horizontal"
+                                                            HorizontalAlignment="Center"
+                                                            VerticalAlignment="Center"
+                                                            Margin="15,0,15,0">
+                                                    <!-- Animated Image -->
+                                                    <Image x:Name="AnimatedImage"
+                                                           Width="20"
+                                                           Height="20"
+                                                           HorizontalAlignment="Left"
+                                                           VerticalAlignment="Center"
+                                                           Margin="0,0,5,0"
+                                                           Source="/Images/Emotions/Evolution/evo1.png" />
+                                                    <!-- Button Text -->
+                                                    <ContentPresenter VerticalAlignment="Center" />
+                                                </StackPanel>
+                                            </Border>
+                                        </Border>
+                                    </Grid>
+                                    <!-- Event Triggers for Animations -->
+                                    <ControlTemplate.Triggers>
+                                        <!-- Trigger for Click Animation -->
+                                        <EventTrigger RoutedEvent="Button.PreviewMouseDown">
+                                            <BeginStoryboard>
+                                                <Storyboard>
+                                                    <!-- Change Outer Border Color -->
+                                                    <ColorAnimation Storyboard.TargetName="OuterBorder"
+                                                                    Storyboard.TargetProperty="(Border.BorderBrush).(SolidColorBrush.Color)"
+                                                                    To="#060100"
+                                                                    Duration="0:0:0.05" />
+                                                    <!-- Change Inner Border Color -->
+                                                    <ColorAnimation Storyboard.TargetName="InnerBorder"
+                                                                    Storyboard.TargetProperty="(Border.BorderBrush).(SolidColorBrush.Color)"
+                                                                    To="#6789A5"
+                                                                    Duration="0:0:0.05" />
+                                                </Storyboard>
+                                            </BeginStoryboard>
+                                        </EventTrigger>
+                                        <EventTrigger RoutedEvent="Button.PreviewMouseUp">
+                                            <BeginStoryboard>
+                                                <Storyboard>
+                                                    <!-- Reset Outer Border Color -->
+                                                    <ColorAnimation Storyboard.TargetName="OuterBorder"
+                                                                    Storyboard.TargetProperty="(Border.BorderBrush).(SolidColorBrush.Color)"
+                                                                    To="#B0B0B0"
+                                                                    Duration="0:0:0.05" />
+                                                    <!-- Reset Inner Border Color -->
+                                                    <ColorAnimation Storyboard.TargetName="InnerBorder"
+                                                                    Storyboard.TargetProperty="(Border.BorderBrush).(SolidColorBrush.Color)"
+                                                                    To="#121212"
+                                                                    Duration="0:0:0.05" />
+                                                </Storyboard>
+                                            </BeginStoryboard>
+                                        </EventTrigger>
+                                    </ControlTemplate.Triggers>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                        <Setter Property="IsEnabled" Value="false" />
+                        <Setter Property="Padding" Value="15, 0 , 15, 0" />
+                        <Style.Triggers>
+                            <!-- Enable button only when validation passes -->
+                            <MultiDataTrigger>
+                                <MultiDataTrigger.Conditions>
+                                    <Condition Binding="{Binding ElementName=Digimon, Path=(Validation.HasError)}" Value="false" />
+                                    <Condition Binding="{Binding ElementName=Hp, Path=(Validation.HasError)}" Value="false" />
+                                    <Condition Binding="{Binding ElementName=Mp, Path=(Validation.HasError)}" Value="false" />
+                                    <Condition Binding="{Binding ElementName=Off, Path=(Validation.HasError)}" Value="false" />
+                                    <Condition Binding="{Binding ElementName=Def, Path=(Validation.HasError)}" Value="false" />
+                                    <Condition Binding="{Binding ElementName=Speed, Path=(Validation.HasError)}" Value="false" />
+                                    <Condition Binding="{Binding ElementName=Brains, Path=(Validation.HasError)}" Value="false" />
+                                    <Condition Binding="{Binding ElementName=CareMistakes, Path=(Validation.HasError)}" Value="false" />
+                                    <Condition Binding="{Binding ElementName=Weight, Path=(Validation.HasError)}" Value="false" />
+                                    <Condition Binding="{Binding ElementName=Happiness, Path=(Validation.HasError)}" Value="false" />
+                                    <Condition Binding="{Binding ElementName=Discipline, Path=(Validation.HasError)}" Value="false" />
+                                    <Condition Binding="{Binding ElementName=Battles, Path=(Validation.HasError)}" Value="false" />
+                                    <Condition Binding="{Binding ElementName=Techniques, Path=(Validation.HasError)}" Value="false" />
+                                </MultiDataTrigger.Conditions>
+                                <Setter Property="IsEnabled" Value="true" />
+                            </MultiDataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+            </Button>
+
+
+        </Grid>
+        <Grid Column="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2" />
+                <ColumnDefinition Width="3" />
+                <ColumnDefinition Width="2" />
+                <ColumnDefinition Width="2" />
+            </Grid.ColumnDefinitions>
+
+            <Rectangle Grid.Row="0" Grid.Column="0" VerticalAlignment="Stretch" Fill="Black" Width="2" />
+            <Rectangle Grid.Row="0" Grid.Column="1" VerticalAlignment="Stretch" Fill="#4A9FC5" Width="3" />
+            <Rectangle Grid.Row="0" Grid.Column="2" VerticalAlignment="Stretch" Fill="#90D9FA" Width="2" />
+            <Rectangle Grid.Row="0" Grid.Column="3" VerticalAlignment="Stretch" Fill="Black" Width="2" />
+        </Grid>
+        <Grid Column="2">
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="175" />
+                    <ColumnDefinition Width="600" />
+                </Grid.ColumnDefinitions>
+                <Image Grid.Column="0" Grid.Row="0" Height="175"
+                       Source="/Images/Digimon/jijimon-narrator-left.png"
+                       HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10,15,10,15">
+                    <Image.RenderTransform>
+                        <ScaleTransform x:Name="ImageScaleTransform" CenterX="0.5" CenterY="0.5" />
+                    </Image.RenderTransform>
+                    <Image.RenderTransformOrigin>0.5,0.5</Image.RenderTransformOrigin>
+                    <Image.Style>
+                        <Style TargetType="Image">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding FlipToRight}" Value="True">
+                                    <DataTrigger.EnterActions>
+                                        <BeginStoryboard>
+                                            <Storyboard>
+                                                <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleX)"
+                                                                 To="-1" Duration="0:0:0.5" />
+                                            </Storyboard>
+                                        </BeginStoryboard>
+                                    </DataTrigger.EnterActions>
+                                    <DataTrigger.ExitActions>
+                                        <BeginStoryboard>
+                                            <Storyboard>
+                                                <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleX)"
+                                                                 To="1" Duration="0:0:0.5" />
+                                            </Storyboard>
+                                        </BeginStoryboard>
+                                    </DataTrigger.ExitActions>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Image.Style>
+                </Image>
+
+                <Border Grid.Row="0" Grid.Column="1" CornerRadius="5" BorderBrush="Black" BorderThickness="3" Margin="0, 15,25, 10" Padding="0" Background="Black">
+                    <Border CornerRadius="5" BorderBrush="#4A9FC5" BorderThickness="3" Padding="0" Background="#4A9FC5">
+                        <Border CornerRadius="5" BorderBrush="#90D9FA" BorderThickness="3" Padding="0" Background="#2E3841">
+                            <Border CornerRadius="5" BorderBrush="Transparent" BorderThickness="0" Padding="0" Background="#77000000">
+                                <Border.InputBindings>
+                                    <MouseBinding Gesture="LeftClick" Command="{Binding InstantDisplayCommand}" />
+                                </Border.InputBindings>
+                                <StackPanel Margin="5">
+                                    <!-- First Line: Yellow Text -->
+                                    <TextBlock Text="Jijimon"
+                                               Foreground="#D4D604"
+                                               FontSize="15"
+                                               HorizontalAlignment="Left"
+                                               VerticalAlignment="Top"
+                                               Margin="0,0, 0, 5"
+                                               Width="545"
+                                               TextWrapping="Wrap" />
+                                    <!-- Second Line: White Text -->
+                                    <TextBlock Text="{Binding JijimonText}"
+                                               Foreground="#B3B5B1"
+                                               FontSize="14"
+                                               HorizontalAlignment="Left"
+                                               VerticalAlignment="Top"
+                                               Margin="0, 5"
+                                               Width="545"
+                                               TextWrapping="Wrap">
+                                    </TextBlock>
+                                </StackPanel>
+                            </Border>
+                        </Border>
+                    </Border>
+                </Border>
+            </Grid>
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="350" />
+                    <ColumnDefinition Width="50" />
+                    <ColumnDefinition Width="350" />
+                </Grid.ColumnDefinitions>
+                <Border Grid.Column="0" Grid.Row="0" BorderBrush="#060100" BorderThickness="3,3,0,0" Margin="15" HorizontalAlignment="Center" VerticalAlignment="Bottom">
+                    <Border BorderBrush="#6789A5" BorderThickness="0,0,3,3" Background="#354A5B">
+                        <Image Width="300" Height="300" Source="{Binding DigimonType, Converter={StaticResource EnumToImageConverter}}" Stretch="Uniform" />
+                    </Border>
+                </Border>
+
+                <Image Grid.Column="1" Grid.Row="0" Height="100" Source="/Images/Misc/Arrow-Right.png" HorizontalAlignment="Center" VerticalAlignment="Center" />
+
+                <Border Grid.Column="2" Grid.Row="0" BorderBrush="#060100" BorderThickness="3,3,0,0" Margin="15" HorizontalAlignment="Center" VerticalAlignment="Bottom">
+                    <Border BorderBrush="#6789A5" BorderThickness="0,0,3,3" Background="#354A5B">
+                        <Image Width="300" Height="300" Source="{Binding EvolutionResult, Mode=OneWay, Converter={StaticResource EnumToImageConverter}}" Stretch="Uniform" />
+                    </Border>
+                </Border>
+            </Grid>
+        </Grid>
+    </Grid>
+</UserControl>
