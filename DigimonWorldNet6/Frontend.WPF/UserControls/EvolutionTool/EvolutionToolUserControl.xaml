@@ -3,6 +3,11 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:combatStatValidation="clr-namespace:DigimonWorld.Frontend.WPF.Validation.CombatStats"
              xmlns:nonCombatStatValidation="clr-namespace:DigimonWorld.Frontend.WPF.Validation.NonCombatStats"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:evolutionTool="clr-namespace:DigimonWorld.Frontend.WPF.UserControls.EvolutionTool"
+             mc:Ignorable="d"
+             d:DataContext="{d:DesignInstance Type=evolutionTool:EvolutionToolViewModel, IsDesignTimeCreatable=True}"
              HorizontalAlignment="Stretch"
              VerticalAlignment="Stretch">
     <Grid>
@@ -329,7 +334,7 @@
                        Source="/Images/Digimon/jijimon-narrator-left.png"
                        HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10,15,10,15">
                     <Image.RenderTransform>
-                        <ScaleTransform x:Name="ImageScaleTransform" CenterX="0.5" CenterY="0.5" />
+                        <ScaleTransform CenterX="0.5" CenterY="0.5" />
                     </Image.RenderTransform>
                     <Image.RenderTransformOrigin>0.5,0.5</Image.RenderTransformOrigin>
                     <Image.Style>

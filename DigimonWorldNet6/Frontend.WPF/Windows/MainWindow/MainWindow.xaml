@@ -1,12 +1,13 @@
-﻿<Window x:Class="DigimonWorld.Frontend.WPF.MainWindow"
+﻿<Window x:Class="DigimonWorld.Frontend.WPF.Windows.MainWindow.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
         xmlns:evolutionTool="clr-namespace:DigimonWorld.Frontend.WPF.UserControls.EvolutionTool"
+        xmlns:local="clr-namespace:DigimonWorld.Frontend.WPF.Windows.MainWindow"
         mc:Ignorable="d"
-        d:DataContext="{d:DesignInstance Type=evolutionTool:EvolutionToolViewModel, IsDesignTimeCreatable=True}"
+        d:DataContext="{d:DesignInstance Type=local:MainWindowViewModel, IsDesignTimeCreatable=True}"
         Title="Digimon World Tool"
         Icon="pack://application:,,,/Frontend.WPF;component/Images/Misc/Icon.jpg"
         ResizeMode="NoResize"
@@ -90,7 +91,7 @@
                                         <Border CornerRadius="5" BorderBrush="#90D9FA" BorderThickness="3" Padding="0" Background="#90D9FA">
                                             <Border CornerRadius="5" BorderBrush="Black" BorderThickness="3" Padding="0" Background="#2E3841">
                                                 <Border x:Name="InnerBorder" CornerRadius="5" BorderBrush="Transparent" BorderThickness="0" Background="#80000000" Opacity="0.5">
-                                                    <TextBlock Text="---" HorizontalAlignment="Center" VerticalAlignment="Bottom" FontSize="18" FontWeight="Bold" Foreground="White" />
+                                                    <TextBlock Text="---" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" FontWeight="Bold" Foreground="White" />
                                                 </Border>
                                             </Border>
                                         </Border>

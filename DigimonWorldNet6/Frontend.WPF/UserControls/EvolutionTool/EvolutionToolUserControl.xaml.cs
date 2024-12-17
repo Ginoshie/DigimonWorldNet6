@@ -1,11 +1,11 @@
-using System.Windows.Controls;
-
 namespace DigimonWorld.Frontend.WPF.UserControls.EvolutionTool;
 
-public partial class EvolutionToolUserControl : UserControl
+public partial class EvolutionToolUserControl
 {
     public EvolutionToolUserControl()
     {
         InitializeComponent();
+        
+        DataContext = new EvolutionToolViewModel();
     }
 }
