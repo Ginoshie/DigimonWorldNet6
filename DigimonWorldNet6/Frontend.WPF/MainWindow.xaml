@@ -5,7 +5,6 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
         xmlns:evolutionTool="clr-namespace:DigimonWorld.Frontend.WPF.UserControls.EvolutionTool"
-        xmlns:headerBar="clr-namespace:DigimonWorld.Frontend.WPF.UserControls.HeaderBar"
         mc:Ignorable="d"
         d:DataContext="{d:DesignInstance Type=evolutionTool:EvolutionToolViewModel, IsDesignTimeCreatable=True}"
         Title="Digimon World Tool"
@@ -28,7 +27,141 @@
             <RowDefinition Height="35" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-            <headerBar:HeaderBarUserControl />
+
+        <Border Background="Transparent" Grid.Row="0" Height="50">
+            <Grid Background="Transparent">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="15" />
+                </Grid.ColumnDefinitions>
+
+                <!-- Drag screen label -->
+                <Grid Grid.Column="1" Width="60" Height="50" Background="Transparent" SnapsToDevicePixels="True" UseLayoutRounding="True">
+                    <!-- Border Layers -->
+                    <Border CornerRadius="5" BorderBrush="Black" BorderThickness="3" Background="Black">
+                        <Border CornerRadius="5" BorderBrush="#4A9FC5" BorderThickness="3" Background="#4A9FC5">
+                            <Border CornerRadius="5" BorderBrush="#90D9FA" BorderThickness="3" Background="#90D9FA">
+                                <Border CornerRadius="5" BorderBrush="Black" BorderThickness="3" Background="#2E3841">
+                                    <!-- Inner Layer with Opacity Change -->
+                                    <Border x:Name="InnerBorder" CornerRadius="5" BorderBrush="Transparent" BorderThickness="0" Background="#80000000" Opacity="0.5"
+                                            Padding="0, 0, 0, 3">
+                                        <!-- Drag Symbol -->
+                                        <TextBlock Text="✥" HorizontalAlignment="Center" VerticalAlignment="Bottom"
+                                                   FontSize="20" FontWeight="Bold" Foreground="White" />
+                                    </Border>
+                                </Border>
+                            </Border>
+                        </Border>
+                    </Border>
+
+                    <!-- Mouse Events Triggering Visual Change -->
+                    <Grid.Triggers>
+                        <!-- MouseOver Trigger -->
+                        <EventTrigger RoutedEvent="UIElement.MouseEnter">
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <DoubleAnimation Storyboard.TargetName="InnerBorder" Storyboard.TargetProperty="Opacity"
+                                                     To="1.0" Duration="0:0:0.2" />
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger>
+                        <!-- MouseLeave Trigger -->
+                        <EventTrigger RoutedEvent="UIElement.MouseLeave">
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <DoubleAnimation Storyboard.TargetName="InnerBorder" Storyboard.TargetProperty="Opacity"
+                                                     To="0.5" Duration="0:0:0.2" />
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger>
+                    </Grid.Triggers>
+                </Grid>
+
+                <Button Grid.Column="2" Width="60" Height="50" Background="Transparent" BorderBrush="Transparent" Command="{Binding MinimizeCommand}">
+                    <Button.Template>
+                        <ControlTemplate TargetType="Button">
+                            <Grid Background="Transparent" SnapsToDevicePixels="True" UseLayoutRounding="True">
+                                <!-- Border Layers -->
+                                <Border CornerRadius="5" BorderBrush="Black" BorderThickness="3" Padding="0" Background="Black">
+                                    <Border CornerRadius="5" BorderBrush="#4A9FC5" BorderThickness="3" Padding="0" Background="#4A9FC5">
+                                        <Border CornerRadius="5" BorderBrush="#90D9FA" BorderThickness="3" Padding="0" Background="#90D9FA">
+                                            <Border CornerRadius="5" BorderBrush="Black" BorderThickness="3" Padding="0" Background="#2E3841">
+                                                <Border x:Name="InnerBorder" CornerRadius="5" BorderBrush="Transparent" BorderThickness="0" Background="#80000000" Opacity="0.5">
+                                                    <TextBlock Text="---" HorizontalAlignment="Center" VerticalAlignment="Bottom" FontSize="18" FontWeight="Bold" Foreground="White" />
+                                                </Border>
+                                            </Border>
+                                        </Border>
+                                    </Border>
+                                </Border>
+                            </Grid>
+                            <!-- Event Triggers for Animation -->
+                            <ControlTemplate.Triggers>
+                                <EventTrigger RoutedEvent="MouseEnter">
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimation Storyboard.TargetName="InnerBorder" Storyboard.TargetProperty="Opacity"
+                                                             To="1.0" Duration="0:0:0.2" />
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </EventTrigger>
+                                <EventTrigger RoutedEvent="MouseLeave">
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimation Storyboard.TargetName="InnerBorder" Storyboard.TargetProperty="Opacity"
+                                                             To="0.5" Duration="0:0:0.2" />
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </EventTrigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+
+                <Button Grid.Column="3" Width="60" Height="50" Background="Transparent" BorderBrush="Transparent" Command="{Binding CloseCommand}">
+                    <Button.Template>
+                        <ControlTemplate TargetType="Button">
+                            <Grid Background="Transparent" SnapsToDevicePixels="True" UseLayoutRounding="True">
+                                <!-- Border Layers -->
+                                <Border CornerRadius="5" BorderBrush="Black" BorderThickness="3" Padding="0" Background="Black">
+                                    <Border CornerRadius="5" BorderBrush="#4A9FC5" BorderThickness="3" Padding="0" Background="#4A9FC5">
+                                        <Border CornerRadius="5" BorderBrush="#90D9FA" BorderThickness="3" Padding="0" Background="#90D9FA">
+                                            <Border CornerRadius="5" BorderBrush="Black" BorderThickness="3" Padding="0" Background="#2E3841">
+                                                <Border x:Name="InnerBorder" CornerRadius="5" BorderBrush="Transparent" BorderThickness="0" Background="#80000000" Opacity="0.5">
+                                                    <TextBlock Text="X" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16" FontWeight="Bold" Foreground="White" />
+                                                </Border>
+                                            </Border>
+                                        </Border>
+                                    </Border>
+                                </Border>
+                            </Grid>
+                            <!-- Event Triggers for Animation -->
+                            <ControlTemplate.Triggers>
+                                <EventTrigger RoutedEvent="MouseEnter">
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimation Storyboard.TargetName="InnerBorder" Storyboard.TargetProperty="Opacity"
+                                                             To="1.0" Duration="0:0:0.2" />
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </EventTrigger>
+                                <EventTrigger RoutedEvent="MouseLeave">
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimation Storyboard.TargetName="InnerBorder" Storyboard.TargetProperty="Opacity"
+                                                             To="0.5" Duration="0:0:0.2" />
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </EventTrigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+            </Grid>
+        </Border>
+
         <Border Grid.Row="1" Background="Transparent">
             <Border CornerRadius="5" BorderBrush="Black" BorderThickness="3" Padding="0" Background="Black">
                 <Border CornerRadius="5" BorderBrush="#4A9FC5" BorderThickness="3" Padding="0" Background="#4A9FC5">
