@@ -14,7 +14,8 @@
         SizeToContent="WidthAndHeight"
         WindowStyle="None"
         AllowsTransparency="True"
-        Background="Transparent">
+        Background="Transparent"
+        WindowStartupLocation="CenterScreen">
 
     <Window.Resources />
 
