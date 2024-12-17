@@ -7,6 +7,7 @@ namespace DigimonWorld.Frontend.WPF.Services;
 public static class SpeakingSimulator
 {
     private static CancellationTokenSource _typingCancellationTokenSource = new();
+    private static bool _speechIsActive;
     private static bool _instantDisplayRequested;
 
     private static readonly char[] Separator = { ' ' };
@@ -14,7 +15,9 @@ public static class SpeakingSimulator
     public static async Task WriteAsSpeech(string fullText, Action<string> updateTextAction)
     {
         await _typingCancellationTokenSource.CancelAsync();
-
+        
+        _speechIsActive = true;
+        
         _typingCancellationTokenSource.Dispose();
         _typingCancellationTokenSource = new CancellationTokenSource();
 
@@ -65,11 +68,14 @@ public static class SpeakingSimulator
         finally
         {
             _instantDisplayRequested = false; // Reset for next usage
+            _speechIsActive = false;
         }
     }
 
     public static void RequestInstantDisplay()
     {
+        if (!_speechIsActive) return;
+        
         _instantDisplayRequested = true;
         _typingCancellationTokenSource.Cancel();
     }
