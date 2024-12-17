@@ -1,0 +1,38 @@
+<UserControl x:Class="DigimonWorld.Frontend.WPF.UserControls.FlaggedEvolutionPicker.FlaggedEvolutionPickerUserControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:flaggedEvolutionPicker="clr-namespace:DigimonWorld.Frontend.WPF.UserControls.FlaggedEvolutionPicker"
+             mc:Ignorable="d"
+             d:DataContext="{d:DesignInstance Type=flaggedEvolutionPicker:FlaggedEvolutionPickerViewModel, IsDesignTimeCreatable=True}"
+             HorizontalAlignment="Right"
+             VerticalAlignment="Center">
+    
+    <UserControl.Resources>
+        <!-- Define the ClosedImage and OpenImage images -->
+        <BitmapImage x:Key="ClosedImage" UriSource="pack://application:,,,/Frontend.WPF;component/Images/ComponentLabels/label-left-no-focus.png" />
+        <BitmapImage x:Key="OpenImage" UriSource="pack://application:,,,/Frontend.WPF;component/Images/ComponentLabels/label-left-focus.png" />
+
+        <!-- Define a Style for the Image with DataTriggers -->
+        <Style x:Key="DynamicImageStyle" TargetType="Image">
+            <!-- Set the default image -->
+            <Setter Property="Source" Value="{StaticResource ClosedImage}" />
+            <Style.Triggers>
+                <!-- Change to OpenImage when ComponentIsOpen is True -->
+                <DataTrigger Binding="{Binding ComponentIsOpen}" Value="True">
+                    <Setter Property="Source" Value="{StaticResource OpenImage}" />
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+    </UserControl.Resources>
+
+    <!-- Your UserControl UI Elements -->
+    <Grid Background="Transparent" SnapsToDevicePixels="True" UseLayoutRounding="True">
+        <!-- Apply the Style to the Image -->
+        <Image Style="{StaticResource DynamicImageStyle}"
+               Width="100" Height="200"
+               HorizontalAlignment="Right" VerticalAlignment="Center" />
+    </Grid>
+    
+</UserControl>
