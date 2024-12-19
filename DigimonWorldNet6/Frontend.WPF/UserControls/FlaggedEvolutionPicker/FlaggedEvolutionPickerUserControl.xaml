@@ -5,34 +5,107 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:flaggedEvolutionPicker="clr-namespace:DigimonWorld.Frontend.WPF.UserControls.FlaggedEvolutionPicker"
              mc:Ignorable="d"
-             d:DataContext="{d:DesignInstance Type=flaggedEvolutionPicker:FlaggedEvolutionPickerViewModel, IsDesignTimeCreatable=True}"
-             HorizontalAlignment="Right"
-             VerticalAlignment="Center">
-    
-    <UserControl.Resources>
-        <!-- Define the ClosedImage and OpenImage images -->
-        <BitmapImage x:Key="ClosedImage" UriSource="pack://application:,,,/Frontend.WPF;component/Images/ComponentLabels/label-left-no-focus.png" />
-        <BitmapImage x:Key="OpenImage" UriSource="pack://application:,,,/Frontend.WPF;component/Images/ComponentLabels/label-left-focus.png" />
-
-        <!-- Define a Style for the Image with DataTriggers -->
-        <Style x:Key="DynamicImageStyle" TargetType="Image">
-            <!-- Set the default image -->
-            <Setter Property="Source" Value="{StaticResource ClosedImage}" />
-            <Style.Triggers>
-                <!-- Change to OpenImage when ComponentIsOpen is True -->
-                <DataTrigger Binding="{Binding ComponentIsOpen}" Value="True">
-                    <Setter Property="Source" Value="{StaticResource OpenImage}" />
-                </DataTrigger>
-            </Style.Triggers>
-        </Style>
-    </UserControl.Resources>
+             d:DataContext="{d:DesignInstance Type=flaggedEvolutionPicker:FlaggedEvolutionPickerViewModel, IsDesignTimeCreatable=True}">
 
     <!-- Your UserControl UI Elements -->
-    <Grid Background="Transparent" SnapsToDevicePixels="True" UseLayoutRounding="True">
-        <!-- Apply the Style to the Image -->
-        <Image Style="{StaticResource DynamicImageStyle}"
-               Width="100" Height="200"
-               HorizontalAlignment="Right" VerticalAlignment="Center" />
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="500" />
+        </Grid.RowDefinitions>
+
+        <!-- Background for each column -->
+        <Border Grid.Column="0" Background="#A45A73" />
+        <Border Grid.Column="1" Background="#6F2D5B" />
+        <Border Grid.Column="2" Background="#0E5082" />
+        <Border Grid.Column="3" Background="#008742" />
+        <Border Grid.Column="4" Background="#AF642D" />
+
+        <!-- Column 1 -->
+        <ItemsControl Grid.Column="0" ItemsSource="{Binding FreshStageIcons}">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel Orientation="Vertical" HorizontalAlignment="Center" />
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <Button Width="70" Height="70" Margin="10">
+                        <Image Source="{Binding}" Stretch="Uniform" />
+                    </Button>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+
+        <!-- Column 2 -->
+        <ItemsControl Grid.Column="1" ItemsSource="{Binding InTrainingStageIcons}">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel Orientation="Vertical" HorizontalAlignment="Center" />
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <Button Width="70" Height="70" Margin="10">
+                        <Image Source="{Binding}" Stretch="Uniform" />
+                    </Button>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+
+        <!-- Column 3 -->
+        <ItemsControl Grid.Column="2" ItemsSource="{Binding RookieStageIcons}">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel Orientation="Vertical" HorizontalAlignment="Center" />
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <Button Width="70" Height="70" Margin="10">
+                        <Image Source="{Binding}" Stretch="Uniform" />
+                    </Button>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+
+        <!-- Column 4 -->
+        <ItemsControl Grid.Column="3" ItemsSource="{Binding ChampionStageIcons}">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel Orientation="Vertical" HorizontalAlignment="Center" />
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <Button Width="70" Height="70" Margin="10">
+                        <Image Source="{Binding}" Stretch="Uniform" />
+                    </Button>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+
+        <!-- Column 5 -->
+        <ItemsControl Grid.Column="4" ItemsSource="{Binding UltimateStageIcons}">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel Orientation="Vertical" HorizontalAlignment="Center" />
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <Button Width="70" Height="70" Margin="10">
+                        <Image Source="{Binding}" Stretch="Uniform" />
+                    </Button>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+
     </Grid>
-    
 </UserControl>

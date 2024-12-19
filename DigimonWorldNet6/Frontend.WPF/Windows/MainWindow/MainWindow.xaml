@@ -18,6 +18,33 @@
         Background="Transparent"
         WindowStartupLocation="CenterScreen">
 
+    <Window.Resources>
+        <!-- Define the ClosedImage and OpenImage images -->
+        <BitmapImage x:Key="ClosedImage" UriSource="pack://application:,,,/Frontend.WPF;component/Images/ComponentLabels/label-left-no-focus.png" />
+        <BitmapImage x:Key="OpenImage" UriSource="pack://application:,,,/Frontend.WPF;component/Images/ComponentLabels/label-left-focus.png" />
+
+        <!-- Define a Style for the Image with DataTriggers -->
+        <Style x:Key="DynamicComponentLabelStyle" TargetType="Image">
+            <!-- Set the default image -->
+            <Setter Property="Source" Value="{StaticResource ClosedImage}" />
+            <Style.Triggers>
+                <!-- Change to OpenImage when ComponentIsOpen is True -->
+                <DataTrigger Binding="{Binding LeftPaneIsOpen}" Value="True">
+                    <Setter Property="Source" Value="{StaticResource OpenImage}" />
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+
+        <Storyboard x:Key="ToggleLeftPane">
+            <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.X)"
+                             From="1171" To="0" Duration="0:0:0.3" />
+        </Storyboard>
+        <Storyboard x:Key="ToggleLeftPaneClosing">
+            <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.X)"
+                             From="0" To="1171" Duration="0:0:0.3" />
+        </Storyboard>
+    </Window.Resources>
+
     <Grid Background="Transparent" SnapsToDevicePixels="True" UseLayoutRounding="True">
         <b:Interaction.Triggers>
             <b:EventTrigger EventName="MouseDown">
@@ -29,7 +56,7 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="60" />
+            <ColumnDefinition Width="*" />
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
 
@@ -168,8 +195,43 @@
             </Grid>
         </Border>
 
-        <!-- FlaggedEvolutionPickerUserControl in Row 1, Column 0 -->
-        <flaggedEvolutionPicker:FlaggedEvolutionPickerUserControl Grid.Row="1" Grid.Column="0" Margin="0,0,-1,0" VerticalAlignment="Center" />
+        <Grid Grid.Row="1" Grid.Column="0" Background="Transparent" SnapsToDevicePixels="True" UseLayoutRounding="True"
+              RenderTransformOrigin="0.5,0.5">
+            <Grid.RenderTransform>
+                <!-- Start fully closed (hidden to the left) -->
+                <TranslateTransform X="1171" />
+            </Grid.RenderTransform>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="60" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <!-- Image with Command Binding -->
+            <Image Grid.Column="0" Style="{StaticResource DynamicComponentLabelStyle}" HorizontalAlignment="Right" VerticalAlignment="Center">
+                <b:Interaction.Triggers>
+                    <b:EventTrigger EventName="MouseLeftButtonDown">
+                        <b:InvokeCommandAction Command="{Binding ToggleLeftPaneCommand}" />
+                    </b:EventTrigger>
+                </b:Interaction.Triggers>
+            </Image>
+
+            <!-- FlaggedEvolutionPickerUserControl -->
+            <flaggedEvolutionPicker:FlaggedEvolutionPickerUserControl Grid.Column="1" Margin="0,0,-1,0" VerticalAlignment="Center" />
+
+            <!-- DataTrigger to Play the Animation -->
+            <Grid.Style>
+                <Style TargetType="Grid">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding LeftPaneIsOpen}" Value="True">
+                            <DataTrigger.EnterActions>
+                                <BeginStoryboard Storyboard="{StaticResource ToggleLeftPane}" />
+                            </DataTrigger.EnterActions>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Grid.Style>
+        </Grid>
 
         <!-- Existing EvolutionToolUserControl in Row 1, Column 1 -->
         <Border Grid.Row="1" Grid.Column="1" Background="Transparent">
