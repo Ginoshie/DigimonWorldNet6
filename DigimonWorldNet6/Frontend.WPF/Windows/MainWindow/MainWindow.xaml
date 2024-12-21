@@ -35,13 +35,13 @@
             </Style.Triggers>
         </Style>
 
-        <Storyboard x:Key="ToggleLeftPane">
+        <Storyboard x:Key="OpenLeftPane">
             <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.X)"
-                             From="1171" To="0" Duration="0:0:0.3" />
+                             To="0" Duration="0:0:0.3" />
         </Storyboard>
-        <Storyboard x:Key="ToggleLeftPaneClosing">
+        <Storyboard x:Key="CloseLeftPane">
             <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.X)"
-                             From="0" To="1171" Duration="0:0:0.3" />
+                             To="1171" Duration="0:0:0.3" />
         </Storyboard>
     </Window.Resources>
 
@@ -225,8 +225,11 @@
                     <Style.Triggers>
                         <DataTrigger Binding="{Binding LeftPaneIsOpen}" Value="True">
                             <DataTrigger.EnterActions>
-                                <BeginStoryboard Storyboard="{StaticResource ToggleLeftPane}" />
+                                <BeginStoryboard Storyboard="{StaticResource OpenLeftPane}" />
                             </DataTrigger.EnterActions>
+                            <DataTrigger.ExitActions>
+                                <BeginStoryboard Storyboard="{StaticResource CloseLeftPane}" />
+                            </DataTrigger.ExitActions>
                         </DataTrigger>
                     </Style.Triggers>
                 </Style>
