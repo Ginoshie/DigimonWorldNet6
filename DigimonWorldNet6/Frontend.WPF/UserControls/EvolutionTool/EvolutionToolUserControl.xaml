@@ -239,6 +239,59 @@
                                     </Grid>
                                     <!-- Event Triggers for Animations -->
                                     <ControlTemplate.Triggers>
+                                        <!-- Animation Trigger on Mouse Hover -->
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Trigger.EnterActions>
+                                                <!-- Name the storyboard so it can be referenced later -->
+                                                <BeginStoryboard x:Name="HoverAnimationStoryboard">
+                                                    <Storyboard RepeatBehavior="Forever">
+                                                        <!-- Frame 1 -->
+                                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="AnimatedImage"
+                                                                                       Storyboard.TargetProperty="Source">
+                                                            <DiscreteObjectKeyFrame KeyTime="0:0:0">
+                                                                <DiscreteObjectKeyFrame.Value>
+                                                                    <BitmapImage UriSource="/Images/Emotions/Evolution/evo1.png" />
+                                                                </DiscreteObjectKeyFrame.Value>
+                                                            </DiscreteObjectKeyFrame>
+                                                            <!-- Frame 2 -->
+                                                            <DiscreteObjectKeyFrame KeyTime="0:0:0.4">
+                                                                <DiscreteObjectKeyFrame.Value>
+                                                                    <BitmapImage UriSource="/Images/Emotions/Evolution/evo2.png" />
+                                                                </DiscreteObjectKeyFrame.Value>
+                                                            </DiscreteObjectKeyFrame>
+                                                            <!-- Frame 3 -->
+                                                            <DiscreteObjectKeyFrame KeyTime="0:0:0.8">
+                                                                <DiscreteObjectKeyFrame.Value>
+                                                                    <BitmapImage UriSource="/Images/Emotions/Evolution/evo3.png" />
+                                                                </DiscreteObjectKeyFrame.Value>
+                                                            </DiscreteObjectKeyFrame>
+                                                            <!-- Frame 4 -->
+                                                            <DiscreteObjectKeyFrame KeyTime="0:0:1.2">
+                                                                <DiscreteObjectKeyFrame.Value>
+                                                                    <BitmapImage UriSource="/Images/Emotions/Evolution/evo4.png" />
+                                                                </DiscreteObjectKeyFrame.Value>
+                                                            </DiscreteObjectKeyFrame>
+                                                            <!-- Frame 4 -->
+                                                            <DiscreteObjectKeyFrame KeyTime="0:0:1.6">
+                                                                <DiscreteObjectKeyFrame.Value>
+                                                                    <BitmapImage UriSource="/Images/Emotions/Evolution/evo4.png" />
+                                                                </DiscreteObjectKeyFrame.Value>
+                                                            </DiscreteObjectKeyFrame>
+                                                            <!-- Show Final Frame -->
+                                                            <DiscreteObjectKeyFrame KeyTime="0:0:2.0">
+                                                                <DiscreteObjectKeyFrame.Value>
+                                                                    <BitmapImage UriSource="/Images/Emotions/Evolution/evo4.png" />
+                                                                </DiscreteObjectKeyFrame.Value>
+                                                            </DiscreteObjectKeyFrame>
+                                                        </ObjectAnimationUsingKeyFrames>
+                                                    </Storyboard>
+                                                </BeginStoryboard>
+                                            </Trigger.EnterActions>
+                                            <Trigger.ExitActions>
+                                                <!-- Stop the named storyboard -->
+                                                <StopStoryboard BeginStoryboardName="HoverAnimationStoryboard" />
+                                            </Trigger.ExitActions>
+                                        </Trigger>
                                         <!-- Trigger for Click Animation -->
                                         <EventTrigger RoutedEvent="Button.PreviewMouseDown">
                                             <BeginStoryboard>
