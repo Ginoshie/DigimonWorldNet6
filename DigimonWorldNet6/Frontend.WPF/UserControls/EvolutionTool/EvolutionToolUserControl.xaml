@@ -209,7 +209,8 @@
                     Content="{Binding CalculateButtonText}"
                     Command="{Binding SetEvolutionResult}">
                 <Button.Style>
-                    <Style TargetType="{x:Type Button}" BasedOn="{StaticResource DefaultButtonStyle}">
+                    <Style TargetType="{x:Type Button}">
+                        <Setter Property="HorizontalAlignment" Value="Center"/>
                         <Setter Property="Template">
                             <Setter.Value>
                                 <ControlTemplate TargetType="Button">

@@ -41,7 +41,7 @@
         </Storyboard>
         <Storyboard x:Key="CloseLeftPane">
             <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.X)"
-                             To="1171" Duration="0:0:0.3" />
+                             To="795" Duration="0:0:0.3" />
         </Storyboard>
     </Window.Resources>
 
@@ -199,7 +199,7 @@
               RenderTransformOrigin="0.5,0.5">
             <Grid.RenderTransform>
                 <!-- Start fully closed (hidden to the left) -->
-                <TranslateTransform X="1171" />
+                <TranslateTransform X="795" />
             </Grid.RenderTransform>
 
             <Grid.ColumnDefinitions>

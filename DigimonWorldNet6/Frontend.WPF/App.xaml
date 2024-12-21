@@ -31,34 +31,6 @@
             <Setter Property="Background" Value="#2E3841" />
         </Style>
 
-        <Style x:Key="DefaultButtonStyle" TargetType="Button">
-            <Setter Property="HorizontalAlignment" Value="Center" />
-            <Setter Property="VerticalAlignment" Value="Center" />
-            <Setter Property="Width" Value="Auto" />
-            <Setter Property="Margin" Value="3,10,3,10" />
-            <Setter Property="Foreground" Value="#B8B8B8" />
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="Button">
-                        <Grid>
-                            <!-- Outer Border for Top and Left -->
-                            <Border BorderBrush="#B0B0B0" BorderThickness="2,2,0,0">
-                                <Border Background="#575C60">
-                                    <!-- Inner Border for Bottom and Right -->
-                                    <Border BorderBrush="#121212" BorderThickness="0,0,2,2">
-                                        <!-- Button Content -->
-                                        <ContentPresenter HorizontalAlignment="Center"
-                                                          VerticalAlignment="Center"
-                                                          Margin="15, 0 , 15, 0" />
-                                    </Border>
-                                </Border>
-                            </Border>
-                        </Grid>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
-
         <Style x:Key="DefaultLabelStyle" TargetType="{x:Type Label}">
             <Style.Setters>
                 <Setter Property="Padding" Value="0,0,2,0" />

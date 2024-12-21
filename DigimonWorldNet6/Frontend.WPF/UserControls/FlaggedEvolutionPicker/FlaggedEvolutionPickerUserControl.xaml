@@ -4,8 +4,21 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:flaggedEvolutionPicker="clr-namespace:DigimonWorld.Frontend.WPF.UserControls.FlaggedEvolutionPicker"
+             xmlns:system="clr-namespace:System;assembly=System.Runtime"
              mc:Ignorable="d"
              d:DataContext="{d:DesignInstance Type=flaggedEvolutionPicker:FlaggedEvolutionPickerViewModel, IsDesignTimeCreatable=True}">
+
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../Styles/Buttons/StretchContentButtonStyle/StretchContentButtonStyleDictionary.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+
+            <system:Double x:Key="Width">50</system:Double>
+            <system:Double x:Key="Height">50</system:Double>
+            <Thickness x:Key="Margin">8</Thickness>
+        </ResourceDictionary>
+    </UserControl.Resources>
 
     <!-- Your UserControl UI Elements -->
     <Grid>
@@ -17,18 +30,23 @@
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="500" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="400" />
         </Grid.RowDefinitions>
 
         <!-- Background for each column -->
-        <Border Grid.Column="0" Background="#A45A73" />
-        <Border Grid.Column="1" Background="#6F2D5B" />
-        <Border Grid.Column="2" Background="#0E5082" />
-        <Border Grid.Column="3" Background="#008742" />
-        <Border Grid.Column="4" Background="#AF642D" />
+        <Border Grid.Row="0" Grid.RowSpan="2" Grid.Column="0" Background="#A45A73" />
+        <Border Grid.Row="0" Grid.RowSpan="2" Grid.Column="1" Background="#6F2D5B" />
+        <Border Grid.Row="0" Grid.RowSpan="2" Grid.Column="2" Background="#0E5082" />
+        <Border Grid.Row="0" Grid.RowSpan="2" Grid.Column="3" Background="#008742" />
+        <Border Grid.Row="0" Grid.RowSpan="2" Grid.Column="4" Background="#AF642D" />
 
+        <Label Grid.Row="0" Grid.Column="0" Height="40" Width="100" Style="{StaticResource DefaultSheenLabelStyle}">
+            FRESH
+        </Label>
+        
         <!-- Column 1 -->
-        <ItemsControl Grid.Column="0" ItemsSource="{Binding FreshStageIcons}">
+        <ItemsControl Grid.Row="1" Grid.Column="0" ItemsSource="{Binding FreshStageIcons}">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
                     <WrapPanel Orientation="Vertical" HorizontalAlignment="Center" />
@@ -36,15 +54,22 @@
             </ItemsControl.ItemsPanel>
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
-                    <Button Width="70" Height="70" Margin="10">
-                        <Image Source="{Binding}" Stretch="Uniform" />
+                    <Button Style="{StaticResource StretchContentButtonStyle}"
+                            Width="{StaticResource Width}"
+                            Height="{StaticResource Height}"
+                            Margin="{StaticResource Margin}">
+                        <Image Source="{Binding}" Stretch="Fill" />
                     </Button>
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
         </ItemsControl>
-
+        
+        <Label Grid.Row="0" Grid.Column="1" Height="40" Width="100" Style="{StaticResource DefaultSheenLabelStyle}">
+            IN-TRAINING
+        </Label>
+        
         <!-- Column 2 -->
-        <ItemsControl Grid.Column="1" ItemsSource="{Binding InTrainingStageIcons}">
+        <ItemsControl Grid.Row="1" Grid.Column="1" ItemsSource="{Binding InTrainingStageIcons}">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
                     <WrapPanel Orientation="Vertical" HorizontalAlignment="Center" />
@@ -52,15 +77,22 @@
             </ItemsControl.ItemsPanel>
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
-                    <Button Width="70" Height="70" Margin="10">
-                        <Image Source="{Binding}" Stretch="Uniform" />
+                    <Button Style="{StaticResource StretchContentButtonStyle}"
+                            Width="{StaticResource Width}"
+                            Height="{StaticResource Height}"
+                            Margin="{StaticResource Margin}">
+                        <Image Source="{Binding}" Stretch="Fill" />
                     </Button>
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
         </ItemsControl>
+        
+        <Label Grid.Row="0" Grid.Column="2" Height="40" Width="100" Style="{StaticResource DefaultSheenLabelStyle}">
+            ROOKIE
+        </Label>
 
         <!-- Column 3 -->
-        <ItemsControl Grid.Column="2" ItemsSource="{Binding RookieStageIcons}">
+        <ItemsControl Grid.Row="1" Grid.Column="2" ItemsSource="{Binding RookieStageIcons}">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
                     <WrapPanel Orientation="Vertical" HorizontalAlignment="Center" />
@@ -68,15 +100,22 @@
             </ItemsControl.ItemsPanel>
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
-                    <Button Width="70" Height="70" Margin="10">
-                        <Image Source="{Binding}" Stretch="Uniform" />
+                    <Button Style="{StaticResource StretchContentButtonStyle}"
+                            Width="{StaticResource Width}"
+                            Height="{StaticResource Height}"
+                            Margin="{StaticResource Margin}">
+                        <Image Source="{Binding}" Stretch="Fill" />
                     </Button>
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
         </ItemsControl>
+        
+        <Label Grid.Row="0" Grid.Column="3" Height="40" Width="100" Style="{StaticResource DefaultSheenLabelStyle}">
+            CHAMPION
+        </Label>
 
         <!-- Column 4 -->
-        <ItemsControl Grid.Column="3" ItemsSource="{Binding ChampionStageIcons}">
+        <ItemsControl Grid.Row="1" Grid.Column="3" ItemsSource="{Binding ChampionStageIcons}">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
                     <WrapPanel Orientation="Vertical" HorizontalAlignment="Center" />
@@ -84,15 +123,22 @@
             </ItemsControl.ItemsPanel>
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
-                    <Button Width="70" Height="70" Margin="10">
-                        <Image Source="{Binding}" Stretch="Uniform" />
+                    <Button Style="{StaticResource StretchContentButtonStyle}"
+                            Width="{StaticResource Width}"
+                            Height="{StaticResource Height}"
+                            Margin="{StaticResource Margin}">
+                        <Image Source="{Binding}" Stretch="Fill" />
                     </Button>
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
         </ItemsControl>
+        
+        <Label Grid.Row="0" Grid.Column="4" Height="40" Width="100" Style="{StaticResource DefaultSheenLabelStyle}">
+            ULTIMATE
+        </Label>
 
         <!-- Column 5 -->
-        <ItemsControl Grid.Column="4" ItemsSource="{Binding UltimateStageIcons}">
+        <ItemsControl Grid.Row="1" Grid.Column="4" ItemsSource="{Binding UltimateStageIcons}">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
                     <WrapPanel Orientation="Vertical" HorizontalAlignment="Center" />
@@ -100,8 +146,11 @@
             </ItemsControl.ItemsPanel>
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
-                    <Button Width="70" Height="70" Margin="10">
-                        <Image Source="{Binding}" Stretch="Uniform" />
+                    <Button Style="{StaticResource StretchContentButtonStyle}"
+                            Width="{StaticResource Width}"
+                            Height="{StaticResource Height}"
+                            Margin="{StaticResource Margin}">
+                        <Image Source="{Binding}" Stretch="Fill" />
                     </Button>
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
