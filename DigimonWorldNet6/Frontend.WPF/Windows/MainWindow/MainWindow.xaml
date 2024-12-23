@@ -19,18 +19,31 @@
         WindowStartupLocation="CenterScreen">
 
     <Window.Resources>
-        <!-- Define the ClosedImage and OpenImage images -->
-        <BitmapImage x:Key="ClosedImage" UriSource="pack://application:,,,/Frontend.WPF;component/Images/ComponentLabels/label-left-no-focus.png" />
-        <BitmapImage x:Key="OpenImage" UriSource="pack://application:,,,/Frontend.WPF;component/Images/ComponentLabels/label-left-focus.png" />
+        <!-- Images used for opening and closing the side panes -->
+        <BitmapImage x:Key="ClosedLeftPaneImage" UriSource="pack://application:,,,/Frontend.WPF;component/Images/ComponentLabels/label-left-no-focus.png" />
+        <BitmapImage x:Key="OpenLeftPaneImage" UriSource="pack://application:,,,/Frontend.WPF;component/Images/ComponentLabels/label-left-focus.png" />
+        <BitmapImage x:Key="ClosedBottomPaneImage" UriSource="pack://application:,,,/Frontend.WPF;component/Images/ComponentLabels/label-bottom-no-focus.png" />
+        <BitmapImage x:Key="OpenBottomPaneImage" UriSource="pack://application:,,,/Frontend.WPF;component/Images/ComponentLabels/label-bottom-focus.png" />
 
-        <!-- Define a Style for the Image with DataTriggers -->
-        <Style x:Key="DynamicComponentLabelStyle" TargetType="Image">
+        <!-- Styles for the pane labels used for opening and closing -->
+        <Style x:Key="LeftPaneLabelStyle" TargetType="Image">
             <!-- Set the default image -->
-            <Setter Property="Source" Value="{StaticResource ClosedImage}" />
+            <Setter Property="Source" Value="{StaticResource ClosedLeftPaneImage}" />
             <Style.Triggers>
                 <!-- Change to OpenImage when ComponentIsOpen is True -->
                 <DataTrigger Binding="{Binding LeftPaneIsOpen}" Value="True">
-                    <Setter Property="Source" Value="{StaticResource OpenImage}" />
+                    <Setter Property="Source" Value="{StaticResource OpenLeftPaneImage}" />
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style x:Key="BottomPaneLabelStyle" TargetType="Image">
+            <!-- Set the default image -->
+            <Setter Property="Source" Value="{StaticResource ClosedBottomPaneImage}" />
+            <Style.Triggers>
+                <!-- Change to OpenImage when ComponentIsOpen is True -->
+                <DataTrigger Binding="{Binding BottomPaneIsOpen}" Value="True">
+                    <Setter Property="Source" Value="{StaticResource OpenBottomPaneImage}" />
                 </DataTrigger>
             </Style.Triggers>
         </Style>
@@ -43,6 +56,15 @@
             <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.X)"
                              To="795" Duration="0:0:0.3" />
         </Storyboard>
+
+        <Storyboard x:Key="OpenBottomPane">
+            <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.Y)"
+                             To="-12" Duration="0:0:0.3" />
+        </Storyboard>
+        <Storyboard x:Key="CloseBottomPane">
+            <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.Y)"
+                             To="-475" Duration="0:0:0.3" />
+        </Storyboard>
     </Window.Resources>
 
     <Grid Background="Transparent" SnapsToDevicePixels="True" UseLayoutRounding="True">
@@ -53,7 +75,8 @@
         </b:Interaction.Triggers>
         <Grid.RowDefinitions>
             <RowDefinition Height="35" />
-            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
@@ -195,59 +218,74 @@
             </Grid>
         </Border>
 
-        <Grid Grid.Row="1" Grid.Column="0" Background="Transparent" SnapsToDevicePixels="True" UseLayoutRounding="True"
-              RenderTransformOrigin="0.5,0.5">
-            <Grid.RenderTransform>
-                <!-- Start fully closed (hidden to the left) -->
-                <TranslateTransform X="795" />
-            </Grid.RenderTransform>
-
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="60" />
-                <ColumnDefinition Width="*" />
-            </Grid.ColumnDefinitions>
-
-            <!-- Image with Command Binding -->
-            <Image Grid.Column="0" Style="{StaticResource DynamicComponentLabelStyle}" HorizontalAlignment="Right" VerticalAlignment="Center">
-                <b:Interaction.Triggers>
-                    <b:EventTrigger EventName="MouseLeftButtonDown">
-                        <b:InvokeCommandAction Command="{Binding ToggleLeftPaneCommand}" />
-                    </b:EventTrigger>
-                </b:Interaction.Triggers>
-            </Image>
-
-            <!-- FlaggedEvolutionPickerUserControl -->
-            <flaggedEvolutionPicker:FlaggedEvolutionPickerUserControl Grid.Column="1" Margin="0,0,-1,0" VerticalAlignment="Center" />
-
-            <!-- DataTrigger to Play the Animation -->
-            <Grid.Style>
-                <Style TargetType="Grid">
-                    <Style.Triggers>
-                        <DataTrigger Binding="{Binding LeftPaneIsOpen}" Value="True">
-                            <DataTrigger.EnterActions>
-                                <BeginStoryboard Storyboard="{StaticResource OpenLeftPane}" />
-                            </DataTrigger.EnterActions>
-                            <DataTrigger.ExitActions>
-                                <BeginStoryboard Storyboard="{StaticResource CloseLeftPane}" />
-                            </DataTrigger.ExitActions>
-                        </DataTrigger>
-                    </Style.Triggers>
-                </Style>
-            </Grid.Style>
-        </Grid>
-
-        <!-- Existing EvolutionToolUserControl in Row 1, Column 1 -->
-        <Border Grid.Row="1" Grid.Column="1" Background="Transparent">
+        <!-- EvolutionToolUserControl in Row 1, Column 1 -->
+        <Border Grid.Row="1" Grid.Column="1" Background="Transparent" Panel.ZIndex="1">
             <Border CornerRadius="5" BorderBrush="Black" BorderThickness="3" Padding="0" Background="Black">
                 <Border CornerRadius="5" BorderBrush="#4A9FC5" BorderThickness="3" Padding="0" Background="#4A9FC5">
                     <Border CornerRadius="5" BorderBrush="#90D9FA" BorderThickness="3" Padding="0" Background="#90D9FA">
-                        <Border CornerRadius="5" BorderBrush="Black" BorderThickness="2.5" Padding="0" Background="Black">
-                            <!-- Main Content -->
+                        <Border CornerRadius="5" BorderBrush="Black" BorderThickness="3" Padding="0" Background="Black">
                             <evolutionTool:EvolutionToolUserControl />
                         </Border>
                     </Border>
                 </Border>
             </Border>
         </Border>
+
+        <!-- Bottom Pane -->
+        <Grid Grid.Row="2" Grid.Column="1" Background="Transparent" SnapsToDevicePixels="True" UseLayoutRounding="True" RenderTransformOrigin="0.5,0.5" Panel.ZIndex="0">
+            <Grid.RenderTransform>
+                <!-- Start fully closed -->
+                <TranslateTransform Y="-475" />
+            </Grid.RenderTransform>
+        
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+        
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="60"></RowDefinition>
+            </Grid.RowDefinitions>
+        
+            <!-- FlaggedEvolutionPickerUserControl in Bottom Pane -->
+            <Border Grid.Row="0" Grid.Column="1" Background="Transparent" Panel.ZIndex="1">
+                <Border CornerRadius="5" BorderBrush="Black" BorderThickness="3" Padding="0" Background="Black">
+                    <Border CornerRadius="5" BorderBrush="#4A9FC5" BorderThickness="3" Padding="0" Background="#4A9FC5">
+                        <Border CornerRadius="5" BorderBrush="#90D9FA" BorderThickness="3" Padding="0" Background="#90D9FA">
+                            <Border CornerRadius="5" BorderBrush="Black" BorderThickness="3" Padding="10" Background="#2E3841">
+                                <flaggedEvolutionPicker:FlaggedEvolutionPickerUserControl VerticalAlignment="Center" />
+                            </Border>
+                        </Border>
+                    </Border>
+                </Border>
+            </Border>
+        
+            <!-- Image with Command Binding -->
+            <Image Grid.Row="1" Grid.Column="1" Style="{StaticResource BottomPaneLabelStyle}" HorizontalAlignment="Center" VerticalAlignment="Top">
+                <b:Interaction.Triggers>
+                    <b:EventTrigger EventName="MouseLeftButtonDown">
+                        <b:InvokeCommandAction Command="{Binding ToggleBottomPaneCommand}" />
+                    </b:EventTrigger>
+                </b:Interaction.Triggers>
+            </Image>
+        
+            <!-- DataTrigger to Play the Animation -->
+            <Grid.Style>
+                <Style TargetType="Grid">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding BottomPaneIsOpen}" Value="True">
+                            <DataTrigger.EnterActions>
+                                <BeginStoryboard Storyboard="{StaticResource OpenBottomPane}" />
+                            </DataTrigger.EnterActions>
+                            <DataTrigger.ExitActions>
+                                <BeginStoryboard Storyboard="{StaticResource CloseBottomPane}" />
+                            </DataTrigger.ExitActions>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Grid.Style>
+        </Grid>
     </Grid>
 </Window>

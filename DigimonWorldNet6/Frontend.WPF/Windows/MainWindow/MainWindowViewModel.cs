@@ -19,9 +19,23 @@ public class MainWindowViewModel : INotifyPropertyChanged
         DragCommand = new CommandHandler(() => DragWindow(window));
         
         ToggleLeftPaneCommand = new CommandHandler(ToggleLeftPane);
+        
+        ToggleBottomPaneCommand = new CommandHandler(ToggleBottomPane);
     }
 
     public bool LeftPaneIsOpen
+    {
+        get => _leftPaneIsOpen;
+        private set
+        {
+            if (_leftPaneIsOpen == value) return;
+
+            _leftPaneIsOpen = value;
+            OnPropertyChanged();
+        }
+    }
+
+    public bool BottomPaneIsOpen
     {
         get => _leftPaneIsOpen;
         private set
@@ -40,6 +54,8 @@ public class MainWindowViewModel : INotifyPropertyChanged
     public ICommand DragCommand { get; }
     
     public ICommand ToggleLeftPaneCommand { get; }
+    
+    public ICommand ToggleBottomPaneCommand { get; }
 
     private void DragWindow(Window window)
     {
@@ -58,6 +74,11 @@ public class MainWindowViewModel : INotifyPropertyChanged
     private void ToggleLeftPane()
     {
         LeftPaneIsOpen = !LeftPaneIsOpen;
+    }
+    
+    private void ToggleBottomPane()
+    {
+        BottomPaneIsOpen = !BottomPaneIsOpen;
     }
 
     public event PropertyChangedEventHandler? PropertyChanged;

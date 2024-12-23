@@ -7,9 +7,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:evolutionTool="clr-namespace:DigimonWorld.Frontend.WPF.UserControls.EvolutionTool"
              mc:Ignorable="d"
-             d:DataContext="{d:DesignInstance Type=evolutionTool:EvolutionToolViewModel, IsDesignTimeCreatable=True}"
-             HorizontalAlignment="Stretch"
-             VerticalAlignment="Stretch">
+             d:DataContext="{d:DesignInstance Type=evolutionTool:EvolutionToolViewModel, IsDesignTimeCreatable=True}">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
@@ -32,8 +30,6 @@
                 <GroupBox.Template>
                     <ControlTemplate TargetType="GroupBox">
                         <Grid>
-
-                            <!-- Content Area for the Textboxes and Labels -->
                             <ContentPresenter ContentSource="Content" Margin="10" />
                         </Grid>
                     </ControlTemplate>

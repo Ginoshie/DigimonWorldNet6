@@ -20,14 +20,13 @@
         </ResourceDictionary>
     </UserControl.Resources>
 
-    <!-- Your UserControl UI Elements -->
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="Auto" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
@@ -41,11 +40,15 @@
         <Border Grid.Row="0" Grid.RowSpan="2" Grid.Column="3" Background="#008742" />
         <Border Grid.Row="0" Grid.RowSpan="2" Grid.Column="4" Background="#AF642D" />
 
-        <Label Grid.Row="0" Grid.Column="0" Height="40" Width="100" Style="{StaticResource DefaultSheenLabelStyle}">
-            FRESH
-        </Label>
-        
-        <!-- Column 1 -->
+        <!-- Column 0 -->
+        <Border Grid.Row="0" Grid.RowSpan="2" Grid.Column="0" BorderBrush="#C7A2AA" BorderThickness="3,3,0,0">
+            <!-- Inner Border -->
+            <Border BorderBrush="#8B3D59" BorderThickness="0,0,3,3">
+            </Border>
+        </Border>
+
+        <TextBlock Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="Black" Margin="10">FRESH</TextBlock>
+
         <ItemsControl Grid.Row="1" Grid.Column="0" ItemsSource="{Binding FreshStageIcons}">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
@@ -63,12 +66,16 @@
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
         </ItemsControl>
+
+        <!-- Column 1 -->
+        <Border Grid.Row="0" Grid.RowSpan="2" Grid.Column="1" BorderBrush="#A27B9A" BorderThickness="3,3,0,0">
+            <!-- Inner Border -->
+            <Border BorderBrush="#491247" BorderThickness="0,0,3,3">
+            </Border>
+        </Border>
         
-        <Label Grid.Row="0" Grid.Column="1" Height="40" Width="100" Style="{StaticResource DefaultSheenLabelStyle}">
-            IN-TRAINING
-        </Label>
-        
-        <!-- Column 2 -->
+        <TextBlock Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="Black" Margin="10">IN-TRAINING</TextBlock>
+
         <ItemsControl Grid.Row="1" Grid.Column="1" ItemsSource="{Binding InTrainingStageIcons}">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
@@ -86,12 +93,16 @@
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
         </ItemsControl>
-        
-        <Label Grid.Row="0" Grid.Column="2" Height="40" Width="100" Style="{StaticResource DefaultSheenLabelStyle}">
-            ROOKIE
-        </Label>
 
-        <!-- Column 3 -->
+        <!-- Column 2 -->
+        <Border Grid.Row="0" Grid.RowSpan="2" Grid.Column="2" BorderBrush="#5483C2" BorderThickness="3,3,0,0">
+            <!-- Inner Border -->
+            <Border BorderBrush="#09365B" BorderThickness="0,0,3,3">
+            </Border>
+        </Border>
+        
+        <TextBlock Grid.Row="0" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="Black" Margin="10">ROOKIE</TextBlock>
+
         <ItemsControl Grid.Row="1" Grid.Column="2" ItemsSource="{Binding RookieStageIcons}">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
@@ -109,12 +120,16 @@
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
         </ItemsControl>
-        
-        <Label Grid.Row="0" Grid.Column="3" Height="40" Width="100" Style="{StaticResource DefaultSheenLabelStyle}">
-            CHAMPION
-        </Label>
 
-        <!-- Column 4 -->
+        <!-- Column 3 -->
+        <Border Grid.Row="0" Grid.RowSpan="2" Grid.Column="3" BorderBrush="#59B06E" BorderThickness="3,3,0,0">
+            <!-- Inner Border -->
+            <Border BorderBrush="#015B29" BorderThickness="0,0,3,3">
+            </Border>
+        </Border>
+        
+        <TextBlock Grid.Row="0" Grid.Column="3" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="Black" Margin="10">CHAMPION</TextBlock>
+
         <ItemsControl Grid.Row="1" Grid.Column="3" ItemsSource="{Binding ChampionStageIcons}">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
@@ -132,12 +147,16 @@
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
         </ItemsControl>
-        
-        <Label Grid.Row="0" Grid.Column="4" Height="40" Width="100" Style="{StaticResource DefaultSheenLabelStyle}">
-            ULTIMATE
-        </Label>
 
-        <!-- Column 5 -->
+        <!-- Column 4 -->
+        <Border Grid.Row="0" Grid.RowSpan="2" Grid.Column="4" BorderBrush="#D19667" BorderThickness="3,3,0,0">
+            <!-- Inner Border -->
+            <Border BorderBrush="#714321" BorderThickness="0,0,3,3">
+            </Border>
+        </Border>
+        
+        <TextBlock Grid.Row="0" Grid.Column="4" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="Black" Margin="10">ULTIMATE</TextBlock>
+
         <ItemsControl Grid.Row="1" Grid.Column="4" ItemsSource="{Binding UltimateStageIcons}">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
