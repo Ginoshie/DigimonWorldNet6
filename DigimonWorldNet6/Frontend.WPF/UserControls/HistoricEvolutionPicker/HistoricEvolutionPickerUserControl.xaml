@@ -1,4 +1,4 @@
-<UserControl x:Class="DigimonWorld.Frontend.WPF.UserControls.FlaggedEvolutionPicker.FlaggedEvolutionPickerUserControl"
+<UserControl x:Class="DigimonWorld.Frontend.WPF.UserControls.HistoricEvolutionPicker.HistoricEvolutionPickerUserControl"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -68,6 +68,11 @@
                             Margin="{StaticResource Margin}"
                             Command="{Binding DataContext.HistoricEvolutionClickedCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}"
                             CommandParameter="{Binding}">
+                        <Button.ToolTip>
+                            <ToolTip ToolTipService.BetweenShowDelay="500">
+                                <TextBlock Text="{Binding DigimonType}" />
+                            </ToolTip>
+                        </Button.ToolTip>
                         <Image Source="{Binding IconPath}" Stretch="Fill">
                             <Image.Style>
                                 <Style TargetType="Image">
@@ -114,6 +119,11 @@
                             Margin="{StaticResource Margin}"
                             Command="{Binding DataContext.HistoricEvolutionClickedCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}"
                             CommandParameter="{Binding}">
+                        <Button.ToolTip>
+                            <ToolTip ToolTipService.BetweenShowDelay="500">
+                                <TextBlock Text="{Binding DigimonType}" />
+                            </ToolTip>
+                        </Button.ToolTip>
                         <Image Source="{Binding IconPath}" Stretch="Fill">
                             <Image.Style>
                                 <Style TargetType="Image">
@@ -160,6 +170,11 @@
                             Margin="{StaticResource Margin}"
                             Command="{Binding DataContext.HistoricEvolutionClickedCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}"
                             CommandParameter="{Binding}">
+                        <Button.ToolTip>
+                            <ToolTip ToolTipService.BetweenShowDelay="500">
+                                <TextBlock Text="{Binding DigimonType}" />
+                            </ToolTip>
+                        </Button.ToolTip>
                         <Image Source="{Binding IconPath}" Stretch="Fill">
                             <Image.Style>
                                 <Style TargetType="Image">
@@ -206,6 +221,11 @@
                             Margin="{StaticResource Margin}"
                             Command="{Binding DataContext.HistoricEvolutionClickedCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}"
                             CommandParameter="{Binding}">
+                        <Button.ToolTip>
+                            <ToolTip ToolTipService.BetweenShowDelay="500">
+                                <TextBlock Text="{Binding DigimonType}" />
+                            </ToolTip>
+                        </Button.ToolTip>
                         <Image Source="{Binding IconPath}" Stretch="Fill">
                             <Image.Style>
                                 <Style TargetType="Image">
@@ -252,6 +272,11 @@
                             Margin="{StaticResource Margin}"
                             Command="{Binding DataContext.HistoricEvolutionClickedCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}"
                             CommandParameter="{Binding}">
+                        <Button.ToolTip>
+                            <ToolTip ToolTipService.BetweenShowDelay="500">
+                                <TextBlock Text="{Binding DigimonType}" />
+                            </ToolTip>
+                        </Button.ToolTip>
                         <Image Source="{Binding IconPath}" Stretch="Fill">
                             <Image.Style>
                                 <Style TargetType="Image">
