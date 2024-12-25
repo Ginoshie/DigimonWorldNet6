@@ -10,6 +10,7 @@ public enum DigimonType
     Betamon,
     Birdramon,
     Biyomon,
+    Kunemon,
     Botamon,
     Centarumon,
     Coelamon,

@@ -9,8 +9,11 @@ public static class JijimonNarratorText
 {
     public const string EvolutionCalculatorIntroText = "Well hello there! \n" +
                                                        "\n" +
-                                                       "If you wish to calculate an evolution result then choose the digimon and fill out the stats.\n" +
-                                                       $"Once you've done all that press the \"{UiText.CalculateButtonText}\" button to see the result.";
+                                                       "If you wish to calculate an evolution result then choose the digimon and fill out the stats in the section to the left of me.\n" +
+                                                       "\n" +
+                                                       "Once you've done that, open the 'Historic Evolutions' pane and select each evolution you've achieved in this save.\n" +
+                                                       "\n" +
+                                                       $"When done press the \"{UiText.CalculateButtonText}\" button to see the result.";
 
     public static string EvolutionResultCalculated(EvolutionResult evolutionResult)
     {

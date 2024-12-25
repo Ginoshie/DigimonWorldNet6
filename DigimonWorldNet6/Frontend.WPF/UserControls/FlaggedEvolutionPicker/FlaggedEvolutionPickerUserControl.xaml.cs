@@ -1,13 +1,9 @@
-using System.Windows.Controls;
-
 namespace DigimonWorld.Frontend.WPF.UserControls.FlaggedEvolutionPicker;
 
-public partial class FlaggedEvolutionPickerUserControl : UserControl
+public partial class FlaggedEvolutionPickerUserControl
 {
     public FlaggedEvolutionPickerUserControl()
     {
         InitializeComponent();
-        
-        DataContext = new FlaggedEvolutionPickerViewModel();
     }
 }
