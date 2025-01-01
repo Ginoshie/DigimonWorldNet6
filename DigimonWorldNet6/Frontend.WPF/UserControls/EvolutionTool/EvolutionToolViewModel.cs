@@ -1,8 +1,8 @@
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows.Input;
+using DigimonWorld.Evolution.Calculator.Core;
 using DigimonWorld.Evolution.Calculator.Core.DataObjects;
-using DigimonWorld.Evolution.Calculator.Core.EvolutionCalculation;
 using DigimonWorld.Frontend.WPF.Constants;
 using DigimonWorld.Frontend.WPF.Services;
 using Generics.Enums;
@@ -29,8 +29,6 @@ public sealed class EvolutionToolViewModel : INotifyPropertyChanged
     private DigimonType _digimonType;
     private EvolutionResult _evolutionResult = EvolutionResult.Unknown;
     private bool _flipToRight;
-
-    private readonly EvolutionCalculator _evolutionCalculator = new();
 
     public EvolutionToolViewModel()
     {
@@ -263,7 +261,7 @@ public sealed class EvolutionToolViewModel : INotifyPropertyChanged
 
         EvolutionResult = currentDigimon.DigimonType.EvolutionStage() == EvolutionStage.Ultimate 
             ? EvolutionResult.NotApplicable 
-            : _evolutionCalculator.CalculateEvolutionResult(currentDigimon);
+            : ServiceRelay.CalculateEvolutionResult(currentDigimon);
 
         FlipToRight = true;
     }

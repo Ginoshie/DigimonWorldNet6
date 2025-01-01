@@ -5,5 +5,7 @@ public partial class HistoricEvolutionPickerUserControl
     public HistoricEvolutionPickerUserControl()
     {
         InitializeComponent();
+        
+        DataContext = new HistoricEvolutionPickerViewModel();
     }
 }

@@ -120,7 +120,7 @@ public static class JijimonNarratorText
                                    "\n" +
                                    $"Oof . . . hot . . . This must be a . . . {evolutionDigimonType}!\n" +
                                    "\n" +
-                                   "*yelps* don't burn my house!",
+                                   "*yelps* Don't burn my house!",
             DigimonType.Leomon => "It's evolving, with such fierce power . . . \n" +
                                   "\n" +
                                   $"No wonder I could sense it's power. It's a {evolutionDigimonType}\n" +
@@ -134,7 +134,9 @@ public static class JijimonNarratorText
                                    "\n" +
                                    $"Look at that, a {evolutionDigimonType}.\n" +
                                    "\n" +
-                                   "Without the confused aggression, I might add. Nice.",
+                                   "Without the confused aggression, I might add.\n" +
+                                   "\n" +
+                                   "Nice.",
             DigimonType.Garurumon => "Very nice, another evolution.\n" +
                                      "\n" +
                                      $"Oh a {evolutionDigimonType}.\n" +
@@ -183,7 +185,7 @@ public static class JijimonNarratorText
                                       "\n" +
                                       $"Nice work, lets see. It's . . . {evolutionDigimonType}\n" +
                                       "\n" +
-                                      "*mumbles* . . . better stock up on meat you must . . . ",
+                                      "*mumbles* . . . Better stock up on meat you must . . . ",
             _ => "Great work!\n" +
                  "\n" +
                  $"It will become a mighty {evolutionDigimonType}"

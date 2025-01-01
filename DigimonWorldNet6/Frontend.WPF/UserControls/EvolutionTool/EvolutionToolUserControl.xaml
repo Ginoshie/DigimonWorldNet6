@@ -180,7 +180,7 @@
                     <Label Grid.Column="0" Grid.Row="11" Content="Battles:" Style="{StaticResource DefaultLabelStyle}" />
                     <TextBox Name="Battles" Grid.Column="1" Grid.Row="11" Style="{StaticResource DefaultTextBoxStyle}">
                         <TextBox.Text>
-                            <Binding Path="Discipline" UpdateSourceTrigger="LostFocus">
+                            <Binding Path="Battles" UpdateSourceTrigger="LostFocus">
                                 <Binding.ValidationRules>
                                     <nonCombatStatValidation:BattlesValidationRule ValidationStep="CommittedValue" />
                                 </Binding.ValidationRules>
