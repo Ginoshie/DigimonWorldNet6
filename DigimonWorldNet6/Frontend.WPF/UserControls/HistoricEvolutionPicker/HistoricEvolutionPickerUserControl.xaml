@@ -68,7 +68,7 @@
                             Command="{Binding DataContext.HistoricEvolutionClickedCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}"
                             CommandParameter="{Binding}">
                         <Button.ToolTip>
-                            <ToolTip ToolTipService.BetweenShowDelay="500">
+                            <ToolTip ToolTipService.BetweenShowDelay="500" Style="{StaticResource DefaultToolTipStyle}">
                                 <TextBlock Text="{Binding DigimonType}" />
                             </ToolTip>
                         </Button.ToolTip>
@@ -119,7 +119,7 @@
                             Command="{Binding DataContext.HistoricEvolutionClickedCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}"
                             CommandParameter="{Binding}">
                         <Button.ToolTip>
-                            <ToolTip ToolTipService.BetweenShowDelay="500">
+                            <ToolTip ToolTipService.BetweenShowDelay="500" Style="{StaticResource DefaultToolTipStyle}">
                                 <TextBlock Text="{Binding DigimonType}" />
                             </ToolTip>
                         </Button.ToolTip>
@@ -170,7 +170,7 @@
                             Command="{Binding DataContext.HistoricEvolutionClickedCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}"
                             CommandParameter="{Binding}">
                         <Button.ToolTip>
-                            <ToolTip ToolTipService.BetweenShowDelay="500">
+                            <ToolTip ToolTipService.BetweenShowDelay="500" Style="{StaticResource DefaultToolTipStyle}">
                                 <TextBlock Text="{Binding DigimonType}" />
                             </ToolTip>
                         </Button.ToolTip>
@@ -221,7 +221,7 @@
                             Command="{Binding DataContext.HistoricEvolutionClickedCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}"
                             CommandParameter="{Binding}">
                         <Button.ToolTip>
-                            <ToolTip ToolTipService.BetweenShowDelay="500">
+                            <ToolTip ToolTipService.BetweenShowDelay="500" Style="{StaticResource DefaultToolTipStyle}">
                                 <TextBlock Text="{Binding DigimonType}" />
                             </ToolTip>
                         </Button.ToolTip>
@@ -272,7 +272,7 @@
                             Command="{Binding DataContext.HistoricEvolutionClickedCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}"
                             CommandParameter="{Binding}">
                         <Button.ToolTip>
-                            <ToolTip ToolTipService.BetweenShowDelay="500">
+                            <ToolTip ToolTipService.BetweenShowDelay="500" Style="{StaticResource DefaultToolTipStyle}">
                                 <TextBlock Text="{Binding DigimonType}" />
                             </ToolTip>
                         </Button.ToolTip>

@@ -248,14 +248,14 @@
             </Setter>
         </Style>
         
-        <Style TargetType="ToolTip">
+        <Style x:Key="DefaultToolTipStyle" TargetType="ToolTip">
             <Setter Property="Background" Value="#354A5B" />
             <Setter Property="BorderBrush" Value="#4A9FC5" />
             <Setter Property="BorderThickness" Value="1" />
             <Setter Property="Padding" Value="5" />
             <Setter Property="Placement" Value="Right" />
             <Setter Property="Foreground" Value="#D6D6D8" />
-            <Setter Property="FontSize" Value="14" />
+            <Setter Property="FontSize" Value="12" />
         </Style>
 
     </Application.Resources>
