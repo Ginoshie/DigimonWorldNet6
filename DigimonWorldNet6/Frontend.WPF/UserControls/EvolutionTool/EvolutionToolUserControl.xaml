@@ -6,6 +6,8 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:evolutionTool="clr-namespace:DigimonWorld.Frontend.WPF.UserControls.EvolutionTool"
+             xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
+             xmlns:behaviors="clr-namespace:DigimonWorld.Frontend.WPF.Behaviors"
              mc:Ignorable="d"
              d:DataContext="{d:DesignInstance Type=evolutionTool:EvolutionToolViewModel, IsDesignTimeCreatable=True}">
     <Grid>
@@ -69,8 +71,11 @@
 
                     <Label Grid.Column="0" Grid.Row="1" Content="HP:" Style="{StaticResource DefaultLabelStyle}" />
                     <TextBox Name="Hp" Grid.Column="1" Grid.Row="1" Style="{StaticResource DefaultTextBoxStyle}">
+                        <b:Interaction.Behaviors>
+                            <behaviors:TextBoxBehavior />
+                        </b:Interaction.Behaviors>
                         <TextBox.Text>
-                            <Binding Path="HP" UpdateSourceTrigger="LostFocus">
+                            <Binding Path="HP" UpdateSourceTrigger="LostFocus" Mode="TwoWay">
                                 <Binding.ValidationRules>
                                     <combatStatValidation:HpStringValidationRule ValidationStep="CommittedValue" />
                                 </Binding.ValidationRules>
@@ -80,8 +85,11 @@
 
                     <Label Grid.Column="0" Grid.Row="2" Content="MP:" Style="{StaticResource DefaultLabelStyle}" />
                     <TextBox Name="Mp" Grid.Column="1" Grid.Row="2" Style="{StaticResource DefaultTextBoxStyle}">
+                        <b:Interaction.Behaviors>
+                            <behaviors:TextBoxBehavior />
+                        </b:Interaction.Behaviors>
                         <TextBox.Text>
-                            <Binding Path="MP" UpdateSourceTrigger="LostFocus">
+                            <Binding Path="MP" UpdateSourceTrigger="LostFocus" Mode="TwoWay">
                                 <Binding.ValidationRules>
                                     <combatStatValidation:MpStringValidationRule ValidationStep="CommittedValue" />
                                 </Binding.ValidationRules>
@@ -91,8 +99,11 @@
 
                     <Label Grid.Column="0" Grid.Row="3" Content="Off:" Style="{StaticResource DefaultLabelStyle}" />
                     <TextBox Name="Off" Grid.Column="1" Grid.Row="3" Style="{StaticResource DefaultTextBoxStyle}">
+                        <b:Interaction.Behaviors>
+                            <behaviors:TextBoxBehavior />
+                        </b:Interaction.Behaviors>
                         <TextBox.Text>
-                            <Binding Path="Off" UpdateSourceTrigger="LostFocus">
+                            <Binding Path="Off" UpdateSourceTrigger="LostFocus" Mode="TwoWay">
                                 <Binding.ValidationRules>
                                     <combatStatValidation:OffenseStringValidationRule ValidationStep="CommittedValue" />
                                 </Binding.ValidationRules>
@@ -102,8 +113,11 @@
 
                     <Label Grid.Column="0" Grid.Row="4" Content="Def:" Style="{StaticResource DefaultLabelStyle}" />
                     <TextBox Name="Def" Grid.Column="1" Grid.Row="4" Style="{StaticResource DefaultTextBoxStyle}">
+                        <b:Interaction.Behaviors>
+                            <behaviors:TextBoxBehavior />
+                        </b:Interaction.Behaviors>
                         <TextBox.Text>
-                            <Binding Path="Def" UpdateSourceTrigger="LostFocus">
+                            <Binding Path="Def" UpdateSourceTrigger="LostFocus" Mode="TwoWay">
                                 <Binding.ValidationRules>
                                     <combatStatValidation:DefenseStringValidationRule ValidationStep="CommittedValue" />
                                 </Binding.ValidationRules>
@@ -113,8 +127,11 @@
 
                     <Label Grid.Column="0" Grid.Row="5" Content="Speed:" Style="{StaticResource DefaultLabelStyle}" />
                     <TextBox Name="Speed" Grid.Column="1" Grid.Row="5" Style="{StaticResource DefaultTextBoxStyle}">
+                        <b:Interaction.Behaviors>
+                            <behaviors:TextBoxBehavior />
+                        </b:Interaction.Behaviors>
                         <TextBox.Text>
-                            <Binding Path="Speed" UpdateSourceTrigger="LostFocus">
+                            <Binding Path="Speed" UpdateSourceTrigger="LostFocus" Mode="TwoWay">
                                 <Binding.ValidationRules>
                                     <combatStatValidation:SpeedStringValidationRule ValidationStep="CommittedValue" />
                                 </Binding.ValidationRules>
@@ -124,8 +141,11 @@
 
                     <Label Grid.Column="0" Grid.Row="6" Content="Brains:" Style="{StaticResource DefaultLabelStyle}" />
                     <TextBox Name="Brains" Grid.Column="1" Grid.Row="6" Style="{StaticResource DefaultTextBoxStyle}">
+                        <b:Interaction.Behaviors>
+                            <behaviors:TextBoxBehavior />
+                        </b:Interaction.Behaviors>
                         <TextBox.Text>
-                            <Binding Path="Brains" UpdateSourceTrigger="LostFocus">
+                            <Binding Path="Brains" UpdateSourceTrigger="LostFocus" Mode="TwoWay">
                                 <Binding.ValidationRules>
                                     <combatStatValidation:BrainsStringValidationRule ValidationStep="CommittedValue" />
                                 </Binding.ValidationRules>
@@ -135,8 +155,11 @@
 
                     <Label Grid.Column="0" Grid.Row="7" Content="Care Mistakes:" Style="{StaticResource DefaultLabelStyle}" />
                     <TextBox Name="CareMistakes" Grid.Column="1" Grid.Row="7" Style="{StaticResource DefaultTextBoxStyle}">
+                        <b:Interaction.Behaviors>
+                            <behaviors:TextBoxBehavior />
+                        </b:Interaction.Behaviors>
                         <TextBox.Text>
-                            <Binding Path="CareMistakes" UpdateSourceTrigger="LostFocus">
+                            <Binding Path="CareMistakes" UpdateSourceTrigger="LostFocus" Mode="TwoWay">
                                 <Binding.ValidationRules>
                                     <nonCombatStatValidation:CareMistakesValidationRule ValidationStep="CommittedValue" />
                                 </Binding.ValidationRules>
@@ -146,8 +169,11 @@
 
                     <Label Grid.Column="0" Grid.Row="8" Content="Weight:" Style="{StaticResource DefaultLabelStyle}" />
                     <TextBox Name="Weight" Grid.Column="1" Grid.Row="8" Style="{StaticResource DefaultTextBoxStyle}">
+                        <b:Interaction.Behaviors>
+                            <behaviors:TextBoxBehavior />
+                        </b:Interaction.Behaviors>
                         <TextBox.Text>
-                            <Binding Path="Weight" UpdateSourceTrigger="LostFocus">
+                            <Binding Path="Weight" UpdateSourceTrigger="LostFocus" Mode="TwoWay">
                                 <Binding.ValidationRules>
                                     <nonCombatStatValidation:WeightValidationRule ValidationStep="CommittedValue" />
                                 </Binding.ValidationRules>
@@ -157,8 +183,11 @@
 
                     <Label Grid.Column="0" Grid.Row="9" Content="Happiness:" Style="{StaticResource DefaultLabelStyle}" />
                     <TextBox Name="Happiness" Grid.Column="1" Grid.Row="9" Style="{StaticResource DefaultTextBoxStyle}">
+                        <b:Interaction.Behaviors>
+                            <behaviors:TextBoxBehavior />
+                        </b:Interaction.Behaviors>
                         <TextBox.Text>
-                            <Binding Path="Happiness" UpdateSourceTrigger="LostFocus">
+                            <Binding Path="Happiness" UpdateSourceTrigger="LostFocus" Mode="TwoWay">
                                 <Binding.ValidationRules>
                                     <nonCombatStatValidation:HappinessValidationRule ValidationStep="CommittedValue" />
                                 </Binding.ValidationRules>
@@ -168,8 +197,11 @@
 
                     <Label Grid.Column="0" Grid.Row="10" Content="Discipline:" Style="{StaticResource DefaultLabelStyle}" />
                     <TextBox Name="Discipline" Grid.Column="1" Grid.Row="10" Style="{StaticResource DefaultTextBoxStyle}">
+                        <b:Interaction.Behaviors>
+                            <behaviors:TextBoxBehavior />
+                        </b:Interaction.Behaviors>
                         <TextBox.Text>
-                            <Binding Path="Discipline" UpdateSourceTrigger="LostFocus">
+                            <Binding Path="Discipline" UpdateSourceTrigger="LostFocus" Mode="TwoWay">
                                 <Binding.ValidationRules>
                                     <nonCombatStatValidation:DisciplineValidationRule ValidationStep="CommittedValue" />
                                 </Binding.ValidationRules>
@@ -179,8 +211,11 @@
 
                     <Label Grid.Column="0" Grid.Row="11" Content="Battles:" Style="{StaticResource DefaultLabelStyle}" />
                     <TextBox Name="Battles" Grid.Column="1" Grid.Row="11" Style="{StaticResource DefaultTextBoxStyle}">
+                        <b:Interaction.Behaviors>
+                            <behaviors:TextBoxBehavior />
+                        </b:Interaction.Behaviors>
                         <TextBox.Text>
-                            <Binding Path="Battles" UpdateSourceTrigger="LostFocus">
+                            <Binding Path="Battles" UpdateSourceTrigger="LostFocus" Mode="TwoWay">
                                 <Binding.ValidationRules>
                                     <nonCombatStatValidation:BattlesValidationRule ValidationStep="CommittedValue" />
                                 </Binding.ValidationRules>
@@ -190,8 +225,11 @@
 
                     <Label Grid.Column="0" Grid.Row="12" Content="Techniques:" Style="{StaticResource DefaultLabelStyle}" />
                     <TextBox Name="Techniques" Grid.Column="1" Grid.Row="12" Style="{StaticResource DefaultTextBoxStyle}">
+                        <b:Interaction.Behaviors>
+                            <behaviors:TextBoxBehavior />
+                        </b:Interaction.Behaviors>
                         <TextBox.Text>
-                            <Binding Path="Techniques" UpdateSourceTrigger="LostFocus">
+                            <Binding Path="Techniques" UpdateSourceTrigger="LostFocus" Mode="TwoWay">
                                 <Binding.ValidationRules>
                                     <nonCombatStatValidation:TechniquesValidationRule ValidationStep="CommittedValue" />
                                 </Binding.ValidationRules>
