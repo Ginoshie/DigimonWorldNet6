@@ -1,16 +1,15 @@
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
 using System.Windows.Input;
 using DigimonWorld.Evolution.Calculator.Core;
 using DigimonWorld.Evolution.Calculator.Core.DataObjects;
 using DigimonWorld.Frontend.WPF.Constants;
 using DigimonWorld.Frontend.WPF.Services;
+using DigimonWorld.Frontend.WPF.ViewModelComponents;
 using Generics.Enums;
 using Generics.Extensions;
 
 namespace DigimonWorld.Frontend.WPF.UserControls.EvolutionTool;
 
-public sealed class EvolutionToolViewModel : INotifyPropertyChanged
+public sealed class EvolutionToolViewModel : BaseViewModel
 {
     private string _jijimonText = JijimonNarratorText.EvolutionCalculatorIntroText;
 
@@ -252,8 +251,6 @@ public sealed class EvolutionToolViewModel : INotifyPropertyChanged
         }
     }
 
-    public event PropertyChangedEventHandler? PropertyChanged;
-
     private void CalculateEvolutionResult()
     {
         _evolutionResult = EvolutionResult.Unknown;
@@ -272,10 +269,5 @@ public sealed class EvolutionToolViewModel : INotifyPropertyChanged
     private void InstantDisplay()
     {
         SpeakingSimulator.RequestInstantDisplay();
-    }
-
-    private void OnPropertyChanged([CallerMemberName] string? propertyName = null)
-    {
-        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }
 }

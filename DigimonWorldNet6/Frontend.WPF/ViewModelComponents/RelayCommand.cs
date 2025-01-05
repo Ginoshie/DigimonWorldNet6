@@ -1,7 +1,7 @@
 using System;
 using System.Windows.Input;
 
-namespace DigimonWorld.Frontend.WPF;
+namespace DigimonWorld.Frontend.WPF.ViewModelComponents;
 
 public class RelayCommand : ICommand
 {

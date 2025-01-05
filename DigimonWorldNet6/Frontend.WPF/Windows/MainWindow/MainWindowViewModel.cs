@@ -1,12 +1,11 @@
 using System;
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Input;
+using DigimonWorld.Frontend.WPF.ViewModelComponents;
 
 namespace DigimonWorld.Frontend.WPF.Windows.MainWindow;
 
-public class MainWindowViewModel : INotifyPropertyChanged
+public class MainWindowViewModel : BaseViewModel
 {
     private bool _leftPaneIsOpen;
 
@@ -79,12 +78,5 @@ public class MainWindowViewModel : INotifyPropertyChanged
     private void ToggleBottomPane()
     {
         BottomPaneIsOpen = !BottomPaneIsOpen;
-    }
-
-    public event PropertyChangedEventHandler? PropertyChanged;
-
-    private void OnPropertyChanged([CallerMemberName] string? propertyName = null)
-    {
-        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }
 }

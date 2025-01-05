@@ -1,14 +1,13 @@
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
 using System.Windows.Input;
 using DigimonWorld.Evolution.Calculator.Core;
 using DigimonWorld.Frontend.WPF.Models;
+using DigimonWorld.Frontend.WPF.ViewModelComponents;
 using Generics.Enums;
 
 namespace DigimonWorld.Frontend.WPF.UserControls.HistoricEvolutionPicker;
 
-public class HistoricEvolutionPickerViewModel : INotifyPropertyChanged
+public class HistoricEvolutionPickerViewModel : BaseViewModel
 {
     public HistoricEvolutionPickerViewModel()
     {
@@ -29,12 +28,5 @@ public class HistoricEvolutionPickerViewModel : INotifyPropertyChanged
         }
         
         OnPropertyChanged(nameof(HistoricEvolutions));
-    }
-    
-    public event PropertyChangedEventHandler? PropertyChanged;
-
-    private void OnPropertyChanged([CallerMemberName] string? propertyName = null)
-    {
-        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }
 }
