@@ -62,7 +62,7 @@
                            Content="Digimon:"
                            Style="{StaticResource DefaultLabelStyle}">
                         <b:Interaction.Behaviors>
-                            <behaviors:DelayedTooltipBehavior 
+                            <behaviors:DelayedTooltipBehavior
                                 TooltipText="The digimon type of your digimon."
                                 TooltipStyle="{StaticResource DefaultToolTipStyle}" />
                         </b:Interaction.Behaviors>
@@ -74,7 +74,7 @@
                               SelectedItem="{Binding DigimonType}"
                               IsTabStop="False">
                         <b:Interaction.Behaviors>
-                            <behaviors:DelayedTooltipBehavior 
+                            <behaviors:DelayedTooltipBehavior
                                 TooltipText="The digimon type of your digimon."
                                 TooltipStyle="{StaticResource DefaultToolTipStyle}" />
                         </b:Interaction.Behaviors>
@@ -82,7 +82,7 @@
 
                     <Label Grid.Column="0" Grid.Row="1" Content="HP:" Style="{StaticResource DefaultLabelStyle}">
                         <b:Interaction.Behaviors>
-                            <behaviors:DelayedTooltipBehavior 
+                            <behaviors:DelayedTooltipBehavior
                                 TooltipText="The 'HP' stat value of your digimon."
                                 TooltipStyle="{StaticResource DefaultToolTipStyle}" />
                         </b:Interaction.Behaviors>
@@ -90,7 +90,7 @@
                     <TextBox Name="Hp" Grid.Column="1" Grid.Row="1" Style="{StaticResource DefaultTextBoxStyle}">
                         <b:Interaction.Behaviors>
                             <behaviors:TextBoxBehavior />
-                            <behaviors:DelayedTooltipBehavior 
+                            <behaviors:DelayedTooltipBehavior
                                 TooltipText="The 'HP' stat value of your digimon."
                                 TooltipStyle="{StaticResource DefaultToolTipStyle}" />
                         </b:Interaction.Behaviors>
@@ -105,7 +105,7 @@
 
                     <Label Grid.Column="0" Grid.Row="2" Content="MP:" Style="{StaticResource DefaultLabelStyle}">
                         <b:Interaction.Behaviors>
-                            <behaviors:DelayedTooltipBehavior 
+                            <behaviors:DelayedTooltipBehavior
                                 TooltipText="The 'MP' stat value of your digimon."
                                 TooltipStyle="{StaticResource DefaultToolTipStyle}" />
                         </b:Interaction.Behaviors>
@@ -113,7 +113,7 @@
                     <TextBox Name="Mp" Grid.Column="1" Grid.Row="2" Style="{StaticResource DefaultTextBoxStyle}">
                         <b:Interaction.Behaviors>
                             <behaviors:TextBoxBehavior />
-                            <behaviors:DelayedTooltipBehavior 
+                            <behaviors:DelayedTooltipBehavior
                                 TooltipText="The 'MP' stat value of your digimon."
                                 TooltipStyle="{StaticResource DefaultToolTipStyle}" />
                         </b:Interaction.Behaviors>
@@ -128,7 +128,7 @@
 
                     <Label Grid.Column="0" Grid.Row="3" Content="Off:" Style="{StaticResource DefaultLabelStyle}">
                         <b:Interaction.Behaviors>
-                            <behaviors:DelayedTooltipBehavior 
+                            <behaviors:DelayedTooltipBehavior
                                 TooltipText="The 'Off' stat value of your digimon."
                                 TooltipStyle="{StaticResource DefaultToolTipStyle}" />
                         </b:Interaction.Behaviors>
@@ -136,7 +136,7 @@
                     <TextBox Name="Off" Grid.Column="1" Grid.Row="3" Style="{StaticResource DefaultTextBoxStyle}">
                         <b:Interaction.Behaviors>
                             <behaviors:TextBoxBehavior />
-                            <behaviors:DelayedTooltipBehavior 
+                            <behaviors:DelayedTooltipBehavior
                                 TooltipText="The 'Off' stat value of your digimon."
                                 TooltipStyle="{StaticResource DefaultToolTipStyle}" />
                         </b:Interaction.Behaviors>
@@ -151,7 +151,7 @@
 
                     <Label Grid.Column="0" Grid.Row="4" Content="Def:" Style="{StaticResource DefaultLabelStyle}">
                         <b:Interaction.Behaviors>
-                            <behaviors:DelayedTooltipBehavior 
+                            <behaviors:DelayedTooltipBehavior
                                 TooltipText="The 'Def' stat value of your digimon."
                                 TooltipStyle="{StaticResource DefaultToolTipStyle}" />
                         </b:Interaction.Behaviors>
@@ -159,7 +159,7 @@
                     <TextBox Name="Def" Grid.Column="1" Grid.Row="4" Style="{StaticResource DefaultTextBoxStyle}">
                         <b:Interaction.Behaviors>
                             <behaviors:TextBoxBehavior />
-                            <behaviors:DelayedTooltipBehavior 
+                            <behaviors:DelayedTooltipBehavior
                                 TooltipText="The 'Def' stat value of your digimon."
                                 TooltipStyle="{StaticResource DefaultToolTipStyle}" />
                         </b:Interaction.Behaviors>
@@ -174,7 +174,7 @@
 
                     <Label Grid.Column="0" Grid.Row="5" Content="Speed:" Style="{StaticResource DefaultLabelStyle}">
                         <b:Interaction.Behaviors>
-                            <behaviors:DelayedTooltipBehavior 
+                            <behaviors:DelayedTooltipBehavior
                                 TooltipText="The 'Speed' stat value of your digimon."
                                 TooltipStyle="{StaticResource DefaultToolTipStyle}" />
                         </b:Interaction.Behaviors>
@@ -182,7 +182,7 @@
                     <TextBox Name="Speed" Grid.Column="1" Grid.Row="5" Style="{StaticResource DefaultTextBoxStyle}">
                         <b:Interaction.Behaviors>
                             <behaviors:TextBoxBehavior />
-                            <behaviors:DelayedTooltipBehavior 
+                            <behaviors:DelayedTooltipBehavior
                                 TooltipText="The 'Speed' stat value of your digimon."
                                 TooltipStyle="{StaticResource DefaultToolTipStyle}" />
                         </b:Interaction.Behaviors>
@@ -197,7 +197,7 @@
 
                     <Label Grid.Column="0" Grid.Row="6" Content="Brains:" Style="{StaticResource DefaultLabelStyle}">
                         <b:Interaction.Behaviors>
-                            <behaviors:DelayedTooltipBehavior 
+                            <behaviors:DelayedTooltipBehavior
                                 TooltipText="The 'Brains' stat value of your digimon."
                                 TooltipStyle="{StaticResource DefaultToolTipStyle}" />
                         </b:Interaction.Behaviors>
@@ -205,7 +205,7 @@
                     <TextBox Name="Brains" Grid.Column="1" Grid.Row="6" Style="{StaticResource DefaultTextBoxStyle}">
                         <b:Interaction.Behaviors>
                             <behaviors:TextBoxBehavior />
-                            <behaviors:DelayedTooltipBehavior 
+                            <behaviors:DelayedTooltipBehavior
                                 TooltipText="The 'Brains' stat value of your digimon."
                                 TooltipStyle="{StaticResource DefaultToolTipStyle}" />
                         </b:Interaction.Behaviors>
@@ -220,7 +220,7 @@
 
                     <Label Grid.Column="0" Grid.Row="7" Content="Care Mistakes:" Style="{StaticResource DefaultLabelStyle}">
                         <b:Interaction.Behaviors>
-                            <behaviors:DelayedTooltipBehavior 
+                            <behaviors:DelayedTooltipBehavior
                                 TooltipText="The care mistake count of your digimon.&#x0a;&#x0a;This number is reset upon evolution and death.&#x0a;&#x0a;Care mistakes are:&#x0a;- pooping on the ground&#x0a;- not feeding, while energy level is below threshold, until the hunger timer runs out while not sleeping&#x0a;- not sleeping until the sleeping timer runs out"
                                 TooltipStyle="{StaticResource DefaultToolTipStyle}" />
                         </b:Interaction.Behaviors>
@@ -228,7 +228,7 @@
                     <TextBox Name="CareMistakes" Grid.Column="1" Grid.Row="7" Style="{StaticResource DefaultTextBoxStyle}">
                         <b:Interaction.Behaviors>
                             <behaviors:TextBoxBehavior />
-                            <behaviors:DelayedTooltipBehavior 
+                            <behaviors:DelayedTooltipBehavior
                                 TooltipText="The care mistake count of your digimon.&#x0a;&#x0a;This number is reset upon evolution and death.&#x0a;&#x0a;Care mistakes are:&#x0a;- pooping on the ground&#x0a;- not feeding, while energy level is below threshold, until the hunger timer runs out while not sleeping&#x0a;- not sleeping until the sleeping timer runs out"
                                 TooltipStyle="{StaticResource DefaultToolTipStyle}" />
                         </b:Interaction.Behaviors>
@@ -243,7 +243,7 @@
 
                     <Label Grid.Column="0" Grid.Row="8" Content="Weight:" Style="{StaticResource DefaultLabelStyle}">
                         <b:Interaction.Behaviors>
-                            <behaviors:DelayedTooltipBehavior 
+                            <behaviors:DelayedTooltipBehavior
                                 TooltipText="The weight value of your digimon."
                                 TooltipStyle="{StaticResource DefaultToolTipStyle}" />
                         </b:Interaction.Behaviors>
@@ -251,7 +251,7 @@
                     <TextBox Name="Weight" Grid.Column="1" Grid.Row="8" Style="{StaticResource DefaultTextBoxStyle}">
                         <b:Interaction.Behaviors>
                             <behaviors:TextBoxBehavior />
-                            <behaviors:DelayedTooltipBehavior 
+                            <behaviors:DelayedTooltipBehavior
                                 TooltipText="The weight value of your digimon."
                                 TooltipStyle="{StaticResource DefaultToolTipStyle}" />
                         </b:Interaction.Behaviors>
@@ -266,7 +266,7 @@
 
                     <Label Grid.Column="0" Grid.Row="9" Content="Happiness:" Style="{StaticResource DefaultLabelStyle}">
                         <b:Interaction.Behaviors>
-                            <behaviors:DelayedTooltipBehavior 
+                            <behaviors:DelayedTooltipBehavior
                                 TooltipText="The happiness value of your digimon.&#x0a;&#x0a;A full blue bar with a red angry face icon is -100.&#x0a;A blue slither but mostly full pink bar with a yellow smiling face icon is 0.&#x0a;A full blue bar with yellow smiling face icon is 100"
                                 TooltipStyle="{StaticResource DefaultToolTipStyle}" />
                         </b:Interaction.Behaviors>
@@ -274,7 +274,7 @@
                     <TextBox Name="Happiness" Grid.Column="1" Grid.Row="9" Style="{StaticResource DefaultTextBoxStyle}">
                         <b:Interaction.Behaviors>
                             <behaviors:TextBoxBehavior />
-                            <behaviors:DelayedTooltipBehavior 
+                            <behaviors:DelayedTooltipBehavior
                                 TooltipText="The happiness value of your digimon.&#x0a;&#x0a;A full blue bar with a red angry face icon is -100.&#x0a;A blue slither but mostly full pink bar with a yellow smiling face icon is 0.&#x0a;A full blue bar with yellow smiling face icon is 100"
                                 TooltipStyle="{StaticResource DefaultToolTipStyle}" />
                         </b:Interaction.Behaviors>
@@ -289,7 +289,7 @@
 
                     <Label Grid.Column="0" Grid.Row="10" Content="Discipline:" Style="{StaticResource DefaultLabelStyle}">
                         <b:Interaction.Behaviors>
-                            <behaviors:DelayedTooltipBehavior 
+                            <behaviors:DelayedTooltipBehavior
                                 TooltipText="The discipline value of your digimon.&#x0a;&#x0a;A full blue bar with a blue face icon with sunglasses is 0.&#x0a;A blue slither but mostly full pink bar with a yellow face icon with glasses is 50.&#x0a;A full blue bar with yellow face icon with glasses icon is 100"
                                 TooltipStyle="{StaticResource DefaultToolTipStyle}" />
                         </b:Interaction.Behaviors>
@@ -297,7 +297,7 @@
                     <TextBox Name="Discipline" Grid.Column="1" Grid.Row="10" Style="{StaticResource DefaultTextBoxStyle}">
                         <b:Interaction.Behaviors>
                             <behaviors:TextBoxBehavior />
-                            <behaviors:DelayedTooltipBehavior 
+                            <behaviors:DelayedTooltipBehavior
                                 TooltipText="The discipline value of your digimon.&#x0a;&#x0a;A full blue bar with a blue face icon with sunglasses is 0.&#x0a;A blue slither but mostly full pink bar with a yellow face icon with glasses is 50.&#x0a;A full blue bar with yellow face icon with glasses icon is 100"
                                 TooltipStyle="{StaticResource DefaultToolTipStyle}" />
                         </b:Interaction.Behaviors>
@@ -312,7 +312,7 @@
 
                     <Label Grid.Column="0" Grid.Row="11" Content="Battles:" Style="{StaticResource DefaultLabelStyle}">
                         <b:Interaction.Behaviors>
-                            <behaviors:DelayedTooltipBehavior 
+                            <behaviors:DelayedTooltipBehavior
                                 TooltipText="The battle count of your digimon.&#x0a;&#x0a;This number is reset upon evolution and death."
                                 TooltipStyle="{StaticResource DefaultToolTipStyle}" />
                         </b:Interaction.Behaviors>
@@ -320,7 +320,7 @@
                     <TextBox Name="Battles" Grid.Column="1" Grid.Row="11" Style="{StaticResource DefaultTextBoxStyle}">
                         <b:Interaction.Behaviors>
                             <behaviors:TextBoxBehavior />
-                            <behaviors:DelayedTooltipBehavior 
+                            <behaviors:DelayedTooltipBehavior
                                 TooltipText="The battle count of your digimon.&#x0a;&#x0a;This number is reset upon evolution and death."
                                 TooltipStyle="{StaticResource DefaultToolTipStyle}" />
                         </b:Interaction.Behaviors>
@@ -335,7 +335,7 @@
 
                     <Label Grid.Column="0" Grid.Row="12" Content="Techniques:" Style="{StaticResource DefaultLabelStyle}">
                         <b:Interaction.Behaviors>
-                            <behaviors:DelayedTooltipBehavior 
+                            <behaviors:DelayedTooltipBehavior
                                 TooltipText="The number of total known techniques.&#x0a;&#x0a;You can find this in the 'Tech' of the Digimon window.&#x0a;&#x0a;Count all the available techniques, not just those that your digimon can use."
                                 TooltipStyle="{StaticResource DefaultToolTipStyle}" />
                         </b:Interaction.Behaviors>
@@ -343,7 +343,7 @@
                     <TextBox Name="Techniques" Grid.Column="1" Grid.Row="12" Style="{StaticResource DefaultTextBoxStyle}">
                         <b:Interaction.Behaviors>
                             <behaviors:TextBoxBehavior />
-                            <behaviors:DelayedTooltipBehavior 
+                            <behaviors:DelayedTooltipBehavior
                                 TooltipText="The number of total known techniques.&#x0a;&#x0a;You can find this in the 'Tech' of the Digimon window.&#x0a;&#x0a;Count all the available techniques, not just those that your digimon can use."
                                 TooltipStyle="{StaticResource DefaultToolTipStyle}" />
                         </b:Interaction.Behaviors>
@@ -363,7 +363,7 @@
                     Command="{Binding SetEvolutionResult}">
                 <Button.Style>
                     <Style TargetType="{x:Type Button}">
-                        <Setter Property="HorizontalAlignment" Value="Center"/>
+                        <Setter Property="HorizontalAlignment" Value="Center" />
                         <Setter Property="Template">
                             <Setter.Value>
                                 <ControlTemplate TargetType="Button">
@@ -371,7 +371,7 @@
                                         <!-- Outer Border -->
                                         <Border x:Name="OuterBorder" BorderBrush="#B0B0B0" BorderThickness="3,3,0,0" Background="#575C60">
                                             <!-- Inner Border -->
-                                            <Border x:Name="InnerBorder" BorderBrush="#121212" BorderThickness="0,0,3,3">
+                                            <Border x:Name="InnerBorder" BorderBrush="#060100" BorderThickness="0,0,3,3">
                                                 <!-- Content -->
                                                 <StackPanel Orientation="Horizontal"
                                                             HorizontalAlignment="Center"
@@ -446,39 +446,15 @@
                                                 <StopStoryboard BeginStoryboardName="HoverAnimationStoryboard" />
                                             </Trigger.ExitActions>
                                         </Trigger>
-                                        <!-- Trigger for Click Animation -->
-                                        <EventTrigger RoutedEvent="Button.PreviewMouseDown">
-                                            <BeginStoryboard>
-                                                <Storyboard>
-                                                    <!-- Change Outer Border Color -->
-                                                    <ColorAnimation Storyboard.TargetName="OuterBorder"
-                                                                    Storyboard.TargetProperty="(Border.BorderBrush).(SolidColorBrush.Color)"
-                                                                    To="#060100"
-                                                                    Duration="0:0:0.05" />
-                                                    <!-- Change Inner Border Color -->
-                                                    <ColorAnimation Storyboard.TargetName="InnerBorder"
-                                                                    Storyboard.TargetProperty="(Border.BorderBrush).(SolidColorBrush.Color)"
-                                                                    To="#6789A5"
-                                                                    Duration="0:0:0.05" />
-                                                </Storyboard>
-                                            </BeginStoryboard>
-                                        </EventTrigger>
-                                        <EventTrigger RoutedEvent="Button.PreviewMouseUp">
-                                            <BeginStoryboard>
-                                                <Storyboard>
-                                                    <!-- Reset Outer Border Color -->
-                                                    <ColorAnimation Storyboard.TargetName="OuterBorder"
-                                                                    Storyboard.TargetProperty="(Border.BorderBrush).(SolidColorBrush.Color)"
-                                                                    To="#B0B0B0"
-                                                                    Duration="0:0:0.05" />
-                                                    <!-- Reset Inner Border Color -->
-                                                    <ColorAnimation Storyboard.TargetName="InnerBorder"
-                                                                    Storyboard.TargetProperty="(Border.BorderBrush).(SolidColorBrush.Color)"
-                                                                    To="#121212"
-                                                                    Duration="0:0:0.05" />
-                                                </Storyboard>
-                                            </BeginStoryboard>
-                                        </EventTrigger>
+                                        <!-- While the button is pressed, change the border colors -->
+                                        <Trigger Property="IsPressed" Value="True">
+                                            <Setter TargetName="OuterBorder"
+                                                    Property="BorderBrush"
+                                                    Value="#060100" />
+                                            <Setter TargetName="InnerBorder"
+                                                    Property="BorderBrush"
+                                                    Value="#6789A5" />
+                                        </Trigger>
                                     </ControlTemplate.Triggers>
                                 </ControlTemplate>
                             </Setter.Value>

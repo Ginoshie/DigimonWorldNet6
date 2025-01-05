@@ -15,7 +15,7 @@
                                     Background="#575C60">
                                 <!-- Inner Border for Bottom and Right -->
                                 <Border x:Name="InnerBorder"
-                                        BorderBrush="#121212"
+                                        BorderBrush="#060100"
                                         BorderThickness="0,0,3,3">
                                     <!-- Button Content -->
                                     <ContentPresenter HorizontalAlignment="Stretch"
