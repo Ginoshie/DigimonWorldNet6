@@ -361,11 +361,6 @@
             <Button Grid.Column="0" Grid.Row="2" Height="40"
                     Content="{Binding CalculateButtonText}"
                     Command="{Binding SetEvolutionResult}">
-                <b:Interaction.Behaviors>
-                    <behaviors:DelayedTooltipBehavior 
-                        TooltipText="Press this button to see the evolution result of the data you provided."
-                        TooltipStyle="{StaticResource DefaultToolTipStyle}" />
-                </b:Interaction.Behaviors>
                 <Button.Style>
                     <Style TargetType="{x:Type Button}">
                         <Setter Property="HorizontalAlignment" Value="Center"/>
