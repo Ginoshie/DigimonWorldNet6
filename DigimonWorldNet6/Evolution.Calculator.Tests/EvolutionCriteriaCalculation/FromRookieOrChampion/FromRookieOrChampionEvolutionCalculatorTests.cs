@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using DigimonWorld.Evolution.Calculator.Core;
 using DigimonWorld.Evolution.Calculator.Core.DataObjects;
 using DigimonWorld.Evolution.Calculator.Core.EvolutionCriteriaCalculation.FromRookieOrChampion;
