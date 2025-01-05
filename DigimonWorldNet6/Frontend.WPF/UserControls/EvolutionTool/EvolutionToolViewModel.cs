@@ -33,14 +33,14 @@ public sealed class EvolutionToolViewModel : INotifyPropertyChanged
     public EvolutionToolViewModel()
     {
         SetEvolutionResult = new CommandHandler(CalculateEvolutionResult);
-        
+
         InstantDisplayCommand = new CommandHandler(InstantDisplay);
     }
 
     public ICommand SetEvolutionResult { get; }
-    
+
     public ICommand InstantDisplayCommand { get; }
-    
+
     public string CalculateButtonText => UiText.CalculateButtonText;
 
     public string JijimonText
@@ -236,9 +236,8 @@ public sealed class EvolutionToolViewModel : INotifyPropertyChanged
             if (_evolutionResult == value) return;
 
             _evolutionResult = value;
-            _ = SpeakingSimulator.WriteAsSpeech(JijimonNarratorText.EvolutionResultCalculated(value), textOutput => JijimonText = textOutput);
 
-            OnPropertyChanged();
+            _ = SpeakingSimulator.WriteEvolutionTextAsSpeech(JijimonNarratorText.EvolutionResultCalculated(value), textOutput => JijimonText = textOutput, () => OnPropertyChanged());
         }
     }
 
@@ -257,10 +256,14 @@ public sealed class EvolutionToolViewModel : INotifyPropertyChanged
 
     private void CalculateEvolutionResult()
     {
+        _evolutionResult = EvolutionResult.Unknown;
+
+        OnPropertyChanged(nameof(EvolutionResult));
+
         Digimon currentDigimon = new(DigimonType, HP, MP, Off, Def, Speed, Brains, CareMistakes, Weight, Happiness, Discipline, Battles, _techniques);
 
-        EvolutionResult = currentDigimon.DigimonType.EvolutionStage() == EvolutionStage.Ultimate 
-            ? EvolutionResult.NotApplicable 
+        EvolutionResult = currentDigimon.DigimonType.EvolutionStage() == EvolutionStage.Ultimate
+            ? EvolutionResult.NotApplicable
             : ServiceRelay.CalculateEvolutionResult(currentDigimon);
 
         FlipToRight = true;

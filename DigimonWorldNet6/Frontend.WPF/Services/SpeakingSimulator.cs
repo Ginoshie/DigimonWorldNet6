@@ -1,6 +1,8 @@
 using System;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using DigimonWorld.Frontend.WPF.Constants;
 
 namespace DigimonWorld.Frontend.WPF.Services;
 
@@ -10,14 +12,12 @@ public static class SpeakingSimulator
     private static bool _speechIsActive;
     private static bool _instantDisplayRequested;
 
-    private static readonly char[] Separator = { ' ' };
-
-    public static async Task WriteAsSpeech(string fullText, Action<string> updateTextAction)
+    public static async Task WriteEvolutionTextAsSpeech(string fullText, Action<string> updateTextAction, Action showEvolutionAction)
     {
         await _typingCancellationTokenSource.CancelAsync();
-        
+
         _speechIsActive = true;
-        
+
         _typingCancellationTokenSource.Dispose();
         _typingCancellationTokenSource = new CancellationTokenSource();
 
@@ -27,18 +27,25 @@ public static class SpeakingSimulator
 
         try
         {
-            string[] words = fullText.Split(Separator, StringSplitOptions.None);
+            string[] words = fullText.Split(JijimonNarratorText.SeparatorChar);
+
+            if (!words.Contains(JijimonNarratorText.ShowEvolutionResultKeyWord))
+            {
+                showEvolutionAction.Invoke();
+            }
 
             foreach (string word in words)
             {
-                // If instant display is requested, immediately update with the full text.
-                if (_instantDisplayRequested)
-                {
-                    updateTextAction(fullText);
-                    return;
-                }
-
                 cancellationToken.ThrowIfCancellationRequested();
+
+                if (word == JijimonNarratorText.ShowEvolutionResultKeyWord)
+                {
+                    showEvolutionAction.Invoke();
+
+                    await Task.Delay(500, cancellationToken);
+
+                    continue;
+                }
 
                 currentText += word + " ";
                 updateTextAction(currentText);
@@ -59,15 +66,16 @@ public static class SpeakingSimulator
         }
         catch (OperationCanceledException)
         {
-            // Handle cancellation gracefully
             if (_instantDisplayRequested)
             {
-                updateTextAction(fullText);
+                updateTextAction(fullText.Replace(JijimonNarratorText.ShowEvolutionResultKeyWord, ""));
+
+                showEvolutionAction.Invoke();
             }
         }
         finally
         {
-            _instantDisplayRequested = false; // Reset for next usage
+            _instantDisplayRequested = false;
             _speechIsActive = false;
         }
     }
@@ -75,7 +83,7 @@ public static class SpeakingSimulator
     public static void RequestInstantDisplay()
     {
         if (!_speechIsActive) return;
-        
+
         _instantDisplayRequested = true;
         _typingCancellationTokenSource.Cancel();
     }
