@@ -11,17 +11,15 @@ public class HistoricEvolutionPickerViewModel : BaseViewModel
 {
     public HistoricEvolutionPickerViewModel()
     {
-        HistoricEvolutionClickedCommand = new RelayCommand(UpdateHistoricEvolution);
+        HistoricEvolutionClickedCommand = new RelayCommand<DigimonIcon>(UpdateHistoricEvolution);
     }
     
     public ICommand HistoricEvolutionClickedCommand { get; }
     
-    public IList<DigimonType> HistoricEvolutions { get; } = Session.HistoricEvolutions;
-    
-    private void UpdateHistoricEvolution(object parameter)
+    public IList<DigimonType> HistoricEvolutions => Session.HistoricEvolutions;
+
+    private void UpdateHistoricEvolution(DigimonIcon digimonIcon)
     {
-        if (parameter is not DigimonIcon digimonIcon) return;
-        
         if (!HistoricEvolutions.Remove(digimonIcon.DigimonType))
         {
             HistoricEvolutions.Add(digimonIcon.DigimonType);
