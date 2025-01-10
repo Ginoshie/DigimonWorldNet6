@@ -13,7 +13,7 @@
     <UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="../Styles/Buttons/StretchContentButtonStyle/StretchContentButtonStyleDictionary.xaml" />
+                <ResourceDictionary Source="../Styles/Buttons/StretchContentButtonStyleDictionary.xaml" />
             </ResourceDictionary.MergedDictionaries>
 
             <conversion:DigimonTypeContainsMultiConverter x:Key="DigimonTypeMultiConverter" />

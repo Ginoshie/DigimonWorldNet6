@@ -571,8 +571,7 @@
                                                VerticalAlignment="Top"
                                                Margin="0, 5"
                                                Width="545"
-                                               TextWrapping="Wrap">
-                                    </TextBlock>
+                                               TextWrapping="Wrap" />
                                 </StackPanel>
                             </Border>
                         </Border>
