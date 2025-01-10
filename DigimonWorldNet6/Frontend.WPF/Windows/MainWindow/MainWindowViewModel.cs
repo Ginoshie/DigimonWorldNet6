@@ -1,6 +1,7 @@
 using System;
 using System.Windows;
 using System.Windows.Input;
+using DigimonWorld.Frontend.WPF.Services;
 using DigimonWorld.Frontend.WPF.ViewModelComponents;
 
 namespace DigimonWorld.Frontend.WPF.Windows.MainWindow;
@@ -8,18 +9,28 @@ namespace DigimonWorld.Frontend.WPF.Windows.MainWindow;
 public class MainWindowViewModel : BaseViewModel
 {
     private bool _leftPaneIsOpen;
+    private readonly Window _window;
 
     public MainWindowViewModel(Window window)
     {
-        MinimizeCommand = new CommandHandler(() => window.WindowState = WindowState.Minimized);
+        _window = window;
+        
+        MinimizeCommand = new CommandHandler(() => _window.WindowState = WindowState.Minimized);
 
-        CloseCommand = new CommandHandler(window.Close);
+        CloseCommand = new CommandHandler(CloseApplication);
 
         DragCommand = new CommandHandler(() => DragWindow(window));
         
         ToggleLeftPaneCommand = new CommandHandler(ToggleLeftPane);
         
         ToggleBottomPaneCommand = new CommandHandler(ToggleBottomPane);
+    }
+
+    private void CloseApplication()
+    {
+        Jukebox.Dispose();
+        
+        _window.Close();
     }
 
     public bool LeftPaneIsOpen
