@@ -9,6 +9,7 @@ namespace DigimonWorld.Frontend.WPF.Windows.MainWindow;
 public class MainWindowViewModel : BaseViewModel
 {
     private bool _leftPaneIsOpen;
+    private bool _bottomPaneIsOpen;
     private readonly Window _window;
 
     public MainWindowViewModel(Window window)
@@ -47,12 +48,12 @@ public class MainWindowViewModel : BaseViewModel
 
     public bool BottomPaneIsOpen
     {
-        get => _leftPaneIsOpen;
+        get => _bottomPaneIsOpen;
         private set
         {
-            if (_leftPaneIsOpen == value) return;
+            if (_bottomPaneIsOpen == value) return;
 
-            _leftPaneIsOpen = value;
+            _bottomPaneIsOpen = value;
             OnPropertyChanged();
         }
     }

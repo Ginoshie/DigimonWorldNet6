@@ -51,11 +51,11 @@
 
         <Storyboard x:Key="OpenLeftPane">
             <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.X)"
-                             To="0" Duration="0:0:0.3" />
+                             To="12" Duration="0:0:0.3" />
         </Storyboard>
         <Storyboard x:Key="CloseLeftPane">
             <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.X)"
-                             To="795" Duration="0:0:0.3" />
+                             To="272" Duration="0:0:0.3" />
         </Storyboard>
 
         <Storyboard x:Key="OpenBottomPane">
@@ -319,24 +319,25 @@
         </Grid>
         
         <!-- Left Pane -->
-        <Grid Grid.Row="2" Grid.Column="0" Background="Transparent" SnapsToDevicePixels="True" UseLayoutRounding="True" RenderTransformOrigin="0.5,0.5" Panel.ZIndex="0">
+        <Grid Grid.Row="1" Grid.Column="0" Background="Transparent" SnapsToDevicePixels="True" UseLayoutRounding="True" RenderTransformOrigin="0.5,0.5" Panel.ZIndex="0">
             <Grid.RenderTransform>
                 <!-- Start fully closed -->
-                <TranslateTransform Y="-475" />
+                <TranslateTransform X="272" />
             </Grid.RenderTransform>
 
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"></ColumnDefinition>
-                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                <ColumnDefinition Width="45"></ColumnDefinition>
                 <ColumnDefinition Width="*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
 
             <Grid.RowDefinitions>
-                <RowDefinition Height="500"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
             </Grid.RowDefinitions>
 
-            <!-- FlaggedEvolutionPickerUserControl in Bottom Pane -->
-            <Border Grid.Row="0" Grid.Column="1" Background="Transparent" Panel.ZIndex="1">
+            <!-- MusicPlayerUserControl in Left Pane -->
+            <Border Grid.Row="1" Grid.Column="1" Background="Transparent" Panel.ZIndex="1">
                 <Border CornerRadius="5" BorderBrush="Black" BorderThickness="3" Padding="0" Background="Black">
                     <Border CornerRadius="5" BorderBrush="#4A9FC5" BorderThickness="3" Padding="0" Background="#4A9FC5">
                         <Border CornerRadius="5" BorderBrush="#90D9FA" BorderThickness="3" Padding="0" Background="#90D9FA">
@@ -349,30 +350,30 @@
             </Border>
 
             <!-- Image with Command Binding -->
-            <Grid Grid.Row="0" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Center" Background="Transparent">
-                <Image Style="{StaticResource LeftPaneLabelStyle}" Margin="0,-2, 0, 0">
+            <Grid Grid.Row="1" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Center" Background="Transparent">
+                <Image Style="{StaticResource LeftPaneLabelStyle}" Margin="0,0, -2, 0">
                     <b:Interaction.Triggers>
                         <b:EventTrigger EventName="MouseLeftButtonDown">
-                            <b:InvokeCommandAction Command="{Binding ToggleBottomPaneCommand}" />
+                            <b:InvokeCommandAction Command="{Binding ToggleLeftPaneCommand}" />
                         </b:EventTrigger>
                     </b:Interaction.Triggers>
                 </Image>
 
                 <!-- Overlay Text -->
-                <TextBlock Text="JukeBox"
+                <TextBlock Text="J&#xD;&#xA;u&#xD;&#xA;k&#xD;&#xA;e&#xD;&#xA;b&#xD;&#xA;o&#xD;&#xA;x"
+                           TextWrapping="Wrap"
                            HorizontalAlignment="Center"
                            VerticalAlignment="Center"
                            FontWeight="Bold"
                            TextAlignment="Center">
-
                     <TextBlock.Style>
                         <Style TargetType="TextBlock">
                             <Setter Property="FontFamily" Value="{StaticResource Dw1Font}" />
                             <Setter Property="FontWeight" Value="Bold" />
                             <Setter Property="Foreground" Value="#D6D6D8" />
                             <Style.Triggers>
-                                <!-- Change color based on BottomPaneIsOpen -->
-                                <DataTrigger Binding="{Binding BottomPaneIsOpen}" Value="True">
+                                <!-- Change color based on LeftPaneIsOpen -->
+                                <DataTrigger Binding="{Binding LeftPaneIsOpen}" Value="True">
                                     <Setter Property="Foreground" Value="Black" /> <!-- Color when open -->
                                 </DataTrigger>
                             </Style.Triggers>
@@ -380,7 +381,7 @@
                     </TextBlock.Style>
                     <b:Interaction.Triggers>
                         <b:EventTrigger EventName="MouseLeftButtonDown">
-                            <b:InvokeCommandAction Command="{Binding ToggleBottomPaneCommand}" />
+                            <b:InvokeCommandAction Command="{Binding ToggleLeftPaneCommand}" />
                         </b:EventTrigger>
                     </b:Interaction.Triggers>
                 </TextBlock>
@@ -390,12 +391,12 @@
             <Grid.Style>
                 <Style TargetType="Grid">
                     <Style.Triggers>
-                        <DataTrigger Binding="{Binding BottomPaneIsOpen}" Value="True">
+                        <DataTrigger Binding="{Binding LeftPaneIsOpen}" Value="True">
                             <DataTrigger.EnterActions>
-                                <BeginStoryboard Storyboard="{StaticResource OpenBottomPane}" />
+                                <BeginStoryboard Storyboard="{StaticResource OpenLeftPane}" />
                             </DataTrigger.EnterActions>
                             <DataTrigger.ExitActions>
-                                <BeginStoryboard Storyboard="{StaticResource CloseBottomPane}" />
+                                <BeginStoryboard Storyboard="{StaticResource CloseLeftPane}" />
                             </DataTrigger.ExitActions>
                         </DataTrigger>
                     </Style.Triggers>

@@ -7,7 +7,7 @@
              xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
              xmlns:system="clr-namespace:System;assembly=System.Runtime"
              mc:Ignorable="d"
-             d:DataContext="{d:DesignInstance musicPlayer:MusicPlayerViewModel}">
+             d:DataContext="{d:DesignInstance Type=musicPlayer:MusicPlayerViewModel, IsDesignTimeCreatable=True}">
 
     <UserControl.Resources>
         <ResourceDictionary>
