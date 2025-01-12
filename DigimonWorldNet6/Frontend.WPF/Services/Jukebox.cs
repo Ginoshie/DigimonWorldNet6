@@ -13,13 +13,14 @@ namespace DigimonWorld.Frontend.WPF.Services;
 
 public static class Jukebox
 {
+    private static bool _hasPlayedMusic;
     private static readonly WasapiOut SoundOut;
     private static readonly CompositeDisposable CompositeDisposable;
 
     private static readonly BehaviorSubject<string> CurrentSongTitleSubject = new(string.Empty);
     private static readonly BehaviorSubject<double> CurrentPositionSubject = new(0);
     private static readonly BehaviorSubject<double> SongLengthSubject = new(0);
-    private static readonly BehaviorSubject<float> VolumeSubject = new(1);
+    private static readonly BehaviorSubject<float> VolumeSubject = new(50);
 
     private static readonly IObservable<long> IntervalObservable = Observable.Interval(TimeSpan.FromMilliseconds(100));
 
@@ -81,7 +82,7 @@ public static class Jukebox
         
         LoadCurrentTrack();
 
-        if (!_isPaused)
+        if (!_isPaused && _hasPlayedMusic)
         {
             SoundOut.Play();
         }
@@ -93,6 +94,7 @@ public static class Jukebox
         {
             case PlaybackState.Stopped:
                 PlayCurrentTrack();
+                _hasPlayedMusic = true;
                 _isPaused = false;
                 break;
             case PlaybackState.Paused:
@@ -116,7 +118,7 @@ public static class Jukebox
         
         LoadCurrentTrack();
 
-        if (!_isPaused)
+        if (!_isPaused && _hasPlayedMusic)
         {
             SoundOut.Play();
         }

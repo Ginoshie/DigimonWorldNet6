@@ -191,18 +191,8 @@
                 <!-- Slider control that takes up all available width -->
                 <Slider x:Name="VolumeSlider"
                         Minimum="0" Maximum="100" Value="{Binding Volume, Mode=TwoWay}"
-                        TickFrequency="0.1" IsSnapToTickEnabled="True"
+                        TickFrequency="0.1" IsSnapToTickEnabled="True" IsMoveToPointEnabled="True"
                         VerticalAlignment="Center" HorizontalAlignment="Stretch">
-                    <b:Interaction.Triggers>
-                        <!-- When the mouse is clicked down -->
-                        <b:EventTrigger EventName="PreviewMouseLeftButtonDown">
-                            <b:InvokeCommandAction Command="{Binding SetVolumeFromClickCommand}" CommandParameter="{Binding ElementName=VolumeSlider}" />
-                        </b:EventTrigger>
-                        <!-- While the mouse moves, update the volume -->
-                        <b:EventTrigger EventName="PreviewMouseMove">
-                            <b:InvokeCommandAction Command="{Binding SetVolumeFromMouseMoveCommand}" CommandParameter="{Binding ElementName=VolumeSlider}" />
-                        </b:EventTrigger>
-                    </b:Interaction.Triggers>
                 </Slider>
             </StackPanel>
 

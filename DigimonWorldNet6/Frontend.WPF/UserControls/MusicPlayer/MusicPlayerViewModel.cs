@@ -1,13 +1,15 @@
 using System;
-using System.Windows.Controls;
+using System.Reactive.Disposables;
 using System.Windows.Input;
 using DigimonWorld.Frontend.WPF.Services;
 using DigimonWorld.Frontend.WPF.ViewModelComponents;
 
 namespace DigimonWorld.Frontend.WPF.UserControls.MusicPlayer;
 
-public class MusicPlayerViewModel : BaseViewModel
+public class MusicPlayerViewModel : BaseViewModel, IDisposable
 {
+    private readonly CompositeDisposable _compositeDisposable = new();
+
     private string _currentSongTitle = string.Empty;
     private double _currentPosition;
     private TimeSpan _songLength;
@@ -29,14 +31,10 @@ public class MusicPlayerViewModel : BaseViewModel
 
         ToggleMuteEnabledCommand = new CommandHandler(ToggleMuteEnabled);
 
-        SetVolumeFromClickCommand = new RelayCommand<Slider>(SetVolumeFromSliderClick);
-
-        SetVolumeFromMouseMoveCommand = new RelayCommand<Slider>(SetVolumeFromMouseMove);
-
-        Jukebox.CurrentSongTitleObservable.Subscribe(currentSongTitle => CurrentSongTitle = currentSongTitle);
-        Jukebox.CurrentPositionObservable.Subscribe(currentPosition => CurrentPosition = currentPosition);
-        Jukebox.SongLengthObservable.Subscribe(songLength => SongLength = songLength);
-        Jukebox.VolumeObservable.Subscribe(volume => Volume = volume);
+        _compositeDisposable.Add(Jukebox.CurrentSongTitleObservable.Subscribe(currentSongTitle => CurrentSongTitle = currentSongTitle));
+        _compositeDisposable.Add(Jukebox.CurrentPositionObservable.Subscribe(currentPosition => CurrentPosition = currentPosition));
+        _compositeDisposable.Add(Jukebox.SongLengthObservable.Subscribe(songLength => SongLength = songLength));
+        _compositeDisposable.Add(Jukebox.VolumeObservable.Subscribe(volume => Volume = volume));
     }
 
     public ICommand ToggleShuffleCommand { get; }
@@ -50,10 +48,6 @@ public class MusicPlayerViewModel : BaseViewModel
     public ICommand ToggleRepeatSingleSongCommand { get; }
 
     public ICommand ToggleMuteEnabledCommand { get; }
-
-    public ICommand SetVolumeFromClickCommand { get; }
-
-    public ICommand SetVolumeFromMouseMoveCommand { get; }
 
     public string CurrentSongTitle
     {
@@ -231,28 +225,8 @@ public class MusicPlayerViewModel : BaseViewModel
         }
     }
 
-
-    private void SetVolumeFromSliderClick(Slider slider)
+    public void Dispose()
     {
-        double position = Mouse.GetPosition(slider).X;
-
-        float newVolume = (float)(position / slider.ActualWidth * 100);
-
-        Volume = newVolume;
-    }
-
-    private void SetVolumeFromMouseMove(Slider slider)
-    {
-        if (!Mouse.LeftButton.Equals(MouseButtonState.Pressed)) return;
-
-        double position = Mouse.GetPosition(slider).X;
-        float newVolume = (float)(position / slider.ActualWidth * 100);
-
-        Volume = newVolume switch
-        {
-            <= 0 => 0,
-            >= 100 => 100,
-            _ => newVolume
-        };
+        _compositeDisposable.Dispose();
     }
 }
