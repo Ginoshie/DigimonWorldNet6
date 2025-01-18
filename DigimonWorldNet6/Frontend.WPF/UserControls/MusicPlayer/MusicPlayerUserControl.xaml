@@ -12,6 +12,7 @@
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="../Styles/Buttons/DefaultButtonStyle.xaml" />
+                <ResourceDictionary Source="../Styles/ProgressBarStyle.xaml" />
             </ResourceDictionary.MergedDictionaries>
 
             <system:Double x:Key="ButtonDimension">40</system:Double>
@@ -109,6 +110,7 @@
                        Height="10" />
 
             <ProgressBar Grid.Column="1" Value="{Binding CurrentPosition}"
+                         Style="{StaticResource  CustomProgressBarStyle}"
                          Minimum="0"
                          Maximum="{Binding SongLength}"
                          VerticalAlignment="Center"
