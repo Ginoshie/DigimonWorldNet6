@@ -3,26 +3,11 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:system="clr-namespace:System;assembly=System.Runtime"
              xmlns:constants="clr-namespace:DigimonWorld.Frontend.WPF.Constants"
-             xmlns:conversion="clr-namespace:DigimonWorld.Frontend.WPF.Conversion"
              xmlns:historicEvolutionPicker="clr-namespace:DigimonWorld.Frontend.WPF.UserControls.HistoricEvolutionPicker"
+             xmlns:userControls="clr-namespace:DigimonWorld.Frontend.WPF.UserControls.HistoricEvolutionPicker.UserControls"
              mc:Ignorable="d"
              d:DataContext="{d:DesignInstance Type=historicEvolutionPicker:HistoricEvolutionPickerViewModel, IsDesignTimeCreatable=True}">
-
-    <UserControl.Resources>
-        <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="../../ResourceDictionaries/Styles/Buttons/StretchContentButtonStyle.xaml" />
-            </ResourceDictionary.MergedDictionaries>
-
-            <conversion:DigimonTypeContainsMultiConverter x:Key="DigimonTypeMultiConverter" />
-
-            <system:Double x:Key="Width">50</system:Double>
-            <system:Double x:Key="Height">50</system:Double>
-            <Thickness x:Key="Margin">8</Thickness>
-        </ResourceDictionary>
-    </UserControl.Resources>
 
     <Grid>
         <Grid.ColumnDefinitions>
@@ -37,267 +22,104 @@
             <RowDefinition Height="400" />
         </Grid.RowDefinitions>
 
-        <!-- Background for each column -->
         <Border Grid.Row="0" Grid.RowSpan="2" Grid.Column="0" Background="#A45A73" />
         <Border Grid.Row="0" Grid.RowSpan="2" Grid.Column="1" Background="#6F2D5B" />
         <Border Grid.Row="0" Grid.RowSpan="2" Grid.Column="2" Background="#0E5082" />
         <Border Grid.Row="0" Grid.RowSpan="2" Grid.Column="3" Background="#008742" />
         <Border Grid.Row="0" Grid.RowSpan="2" Grid.Column="4" Background="#AF642D" />
 
-        <!-- Column 0 -->
-        <Border Grid.Row="0" Grid.RowSpan="2" Grid.Column="0" BorderBrush="#C7A2AA" BorderThickness="3,3,0,0">
-            <!-- Inner Border -->
-            <Border BorderBrush="#8B3D59" BorderThickness="0,0,3,3">
+        <Border Grid.Row="0" Grid.RowSpan="2" Grid.Column="0"
+                BorderBrush="#C7A2AA"
+                BorderThickness="3,3,0,0">
+            <Border BorderBrush="#8B3D59"
+                    BorderThickness="0,0,3,3" />
+        </Border>
+
+        <TextBlock Grid.Row="0" Grid.Column="0"
+                   VerticalAlignment="Center"
+                   HorizontalAlignment="Center"
+                   Foreground="Black"
+                   Margin="10">
+            FRESH
+        </TextBlock>
+
+        <userControls:HistoricEvolutionButton Grid.Row="1" Grid.Column="0"
+                                              Tag="{x:Static constants:EvolutionIcons.FreshStageIcons}" />
+
+        <Border Grid.Row="0" Grid.RowSpan="2" Grid.Column="1"
+                BorderBrush="#A27B9A"
+                BorderThickness="3,3,0,0">
+            <Border BorderBrush="#491247"
+                    BorderThickness="0,0,3,3" />
+        </Border>
+
+        <TextBlock Grid.Row="0" Grid.Column="1"
+                   VerticalAlignment="Center"
+                   HorizontalAlignment="Center"
+                   Foreground="Black"
+                   Margin="10">
+            IN-TRAINING
+        </TextBlock>
+
+        <userControls:HistoricEvolutionButton Grid.Row="1" Grid.Column="1"
+                                              Tag="{x:Static constants:EvolutionIcons.InTrainingStageIcons}" />
+
+        <Border Grid.Row="0" Grid.RowSpan="2" Grid.Column="2"
+                BorderBrush="#5483C2"
+                BorderThickness="3,3,0,0">
+            <Border BorderBrush="#09365B"
+                    BorderThickness="0,0,3,3">
             </Border>
         </Border>
 
-        <TextBlock Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="Black" Margin="10">FRESH</TextBlock>
+        <TextBlock Grid.Row="0" Grid.Column="2"
+                   VerticalAlignment="Center"
+                   HorizontalAlignment="Center"
+                   Foreground="Black"
+                   Margin="10">
+            ROOKIE
+        </TextBlock>
 
-        <ItemsControl Grid.Row="1" Grid.Column="0" ItemsSource="{x:Static constants:EvolutionIcons.FreshStageIcons}">
-            <ItemsControl.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <WrapPanel Orientation="Vertical" HorizontalAlignment="Center" />
-                </ItemsPanelTemplate>
-            </ItemsControl.ItemsPanel>
-            <ItemsControl.ItemTemplate>
-                <DataTemplate>
-                    <Button Style="{StaticResource StretchContentButtonStyle}"
-                            Width="{StaticResource Width}"
-                            Height="{StaticResource Height}"
-                            Margin="{StaticResource Margin}"
-                            Command="{Binding DataContext.HistoricEvolutionClickedCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}"
-                            CommandParameter="{Binding}">
-                        <Button.ToolTip>
-                            <ToolTip ToolTipService.BetweenShowDelay="500" Style="{StaticResource DefaultToolTipStyle}">
-                                <TextBlock Text="{Binding DigimonType}" />
-                            </ToolTip>
-                        </Button.ToolTip>
-                        <Image Source="{Binding IconPath}" Stretch="Fill">
-                            <Image.Style>
-                                <Style TargetType="Image">
-                                    <Setter Property="Opacity" Value="0.5" />
-                                    <Style.Triggers>
-                                        <DataTrigger Value="True">
-                                            <DataTrigger.Binding>
-                                                <MultiBinding Converter="{StaticResource DigimonTypeMultiConverter}">
-                                                    <Binding Path="DataContext.HistoricEvolutions" RelativeSource="{RelativeSource AncestorType=ItemsControl}" />
-                                                    <Binding Path="." />
-                                                </MultiBinding>
-                                            </DataTrigger.Binding>
-                                            <Setter Property="Opacity" Value="1.0" />
-                                        </DataTrigger>
-                                    </Style.Triggers>
-                                </Style>
-                            </Image.Style>
-                        </Image>
-                    </Button>
-                </DataTemplate>
-            </ItemsControl.ItemTemplate>
-        </ItemsControl>
+        <userControls:HistoricEvolutionButton Grid.Row="1" Grid.Column="2"
+                                              Tag="{x:Static constants:EvolutionIcons.RookieStageIcons}" />
 
-        <!-- Column 1 -->
-        <Border Grid.Row="0" Grid.RowSpan="2" Grid.Column="1" BorderBrush="#A27B9A" BorderThickness="3,3,0,0">
-            <!-- Inner Border -->
-            <Border BorderBrush="#491247" BorderThickness="0,0,3,3">
+        <Border Grid.Row="0" Grid.RowSpan="2" Grid.Column="3"
+                BorderBrush="#59B06E"
+                BorderThickness="3,3,0,0">
+            <Border BorderBrush="#015B29"
+                    BorderThickness="0,0,3,3">
             </Border>
         </Border>
 
-        <TextBlock Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="Black" Margin="10">IN-TRAINING</TextBlock>
+        <TextBlock Grid.Row="0" Grid.Column="3"
+                   VerticalAlignment="Center"
+                   HorizontalAlignment="Center"
+                   Foreground="Black"
+                   Margin="10">
+            CHAMPION
+        </TextBlock>
 
-        <ItemsControl Grid.Row="1" Grid.Column="1" ItemsSource="{x:Static constants:EvolutionIcons.InTrainingStageIcons}">
-            <ItemsControl.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <WrapPanel Orientation="Vertical" HorizontalAlignment="Center" />
-                </ItemsPanelTemplate>
-            </ItemsControl.ItemsPanel>
-            <ItemsControl.ItemTemplate>
-                <DataTemplate>
-                    <Button Style="{StaticResource StretchContentButtonStyle}"
-                            Width="{StaticResource Width}"
-                            Height="{StaticResource Height}"
-                            Margin="{StaticResource Margin}"
-                            Command="{Binding DataContext.HistoricEvolutionClickedCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}"
-                            CommandParameter="{Binding}">
-                        <Button.ToolTip>
-                            <ToolTip ToolTipService.BetweenShowDelay="500" Style="{StaticResource DefaultToolTipStyle}">
-                                <TextBlock Text="{Binding DigimonType}" />
-                            </ToolTip>
-                        </Button.ToolTip>
-                        <Image Source="{Binding IconPath}" Stretch="Fill">
-                            <Image.Style>
-                                <Style TargetType="Image">
-                                    <Setter Property="Opacity" Value="0.5" />
-                                    <Style.Triggers>
-                                        <DataTrigger Value="True">
-                                            <DataTrigger.Binding>
-                                                <MultiBinding Converter="{StaticResource DigimonTypeMultiConverter}">
-                                                    <Binding Path="DataContext.HistoricEvolutions" RelativeSource="{RelativeSource AncestorType=ItemsControl}" />
-                                                    <Binding Path="." />
-                                                </MultiBinding>
-                                            </DataTrigger.Binding>
-                                            <Setter Property="Opacity" Value="1.0" />
-                                        </DataTrigger>
-                                    </Style.Triggers>
-                                </Style>
-                            </Image.Style>
-                        </Image>
-                    </Button>
-                </DataTemplate>
-            </ItemsControl.ItemTemplate>
-        </ItemsControl>
+        <userControls:HistoricEvolutionButton Grid.Row="1" Grid.Column="3"
+                                              Tag="{x:Static constants:EvolutionIcons.ChampionStageIcons}" />
 
-        <!-- Column 2 -->
-        <Border Grid.Row="0" Grid.RowSpan="2" Grid.Column="2" BorderBrush="#5483C2" BorderThickness="3,3,0,0">
-            <!-- Inner Border -->
-            <Border BorderBrush="#09365B" BorderThickness="0,0,3,3">
+        <Border Grid.Row="0" Grid.RowSpan="2" Grid.Column="4"
+                BorderBrush="#D19667"
+                BorderThickness="3,3,0,0">
+            <Border BorderBrush="#714321"
+                    BorderThickness="0,0,3,3">
             </Border>
         </Border>
 
-        <TextBlock Grid.Row="0" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="Black" Margin="10">ROOKIE</TextBlock>
+        <TextBlock Grid.Row="0" Grid.Column="4"
+                   VerticalAlignment="Center"
+                   HorizontalAlignment="Center"
+                   Foreground="Black"
+                   Margin="10">
+            ULTIMATE
+        </TextBlock>
 
-        <ItemsControl Grid.Row="1" Grid.Column="2" ItemsSource="{x:Static constants:EvolutionIcons.RookieStageIcons}">
-            <ItemsControl.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <WrapPanel Orientation="Vertical" HorizontalAlignment="Center" />
-                </ItemsPanelTemplate>
-            </ItemsControl.ItemsPanel>
-            <ItemsControl.ItemTemplate>
-                <DataTemplate>
-                    <Button Style="{StaticResource StretchContentButtonStyle}"
-                            Width="{StaticResource Width}"
-                            Height="{StaticResource Height}"
-                            Margin="{StaticResource Margin}"
-                            Command="{Binding DataContext.HistoricEvolutionClickedCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}"
-                            CommandParameter="{Binding}">
-                        <Button.ToolTip>
-                            <ToolTip ToolTipService.BetweenShowDelay="500" Style="{StaticResource DefaultToolTipStyle}">
-                                <TextBlock Text="{Binding DigimonType}" />
-                            </ToolTip>
-                        </Button.ToolTip>
-                        <Image Source="{Binding IconPath}" Stretch="Fill">
-                            <Image.Style>
-                                <Style TargetType="Image">
-                                    <Setter Property="Opacity" Value="0.5" />
-                                    <Style.Triggers>
-                                        <DataTrigger Value="True">
-                                            <DataTrigger.Binding>
-                                                <MultiBinding Converter="{StaticResource DigimonTypeMultiConverter}">
-                                                    <Binding Path="DataContext.HistoricEvolutions" RelativeSource="{RelativeSource AncestorType=ItemsControl}" />
-                                                    <Binding Path="." />
-                                                </MultiBinding>
-                                            </DataTrigger.Binding>
-                                            <Setter Property="Opacity" Value="1.0" />
-                                        </DataTrigger>
-                                    </Style.Triggers>
-                                </Style>
-                            </Image.Style>
-                        </Image>
-                    </Button>
-                </DataTemplate>
-            </ItemsControl.ItemTemplate>
-        </ItemsControl>
-
-        <!-- Column 3 -->
-        <Border Grid.Row="0" Grid.RowSpan="2" Grid.Column="3" BorderBrush="#59B06E" BorderThickness="3,3,0,0">
-            <!-- Inner Border -->
-            <Border BorderBrush="#015B29" BorderThickness="0,0,3,3">
-            </Border>
-        </Border>
-
-        <TextBlock Grid.Row="0" Grid.Column="3" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="Black" Margin="10">CHAMPION</TextBlock>
-
-        <ItemsControl Grid.Row="1" Grid.Column="3" ItemsSource="{x:Static constants:EvolutionIcons.ChampionStageIcons}">
-            <ItemsControl.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <WrapPanel Orientation="Vertical" HorizontalAlignment="Center" />
-                </ItemsPanelTemplate>
-            </ItemsControl.ItemsPanel>
-            <ItemsControl.ItemTemplate>
-                <DataTemplate>
-                    <Button Style="{StaticResource StretchContentButtonStyle}"
-                            Width="{StaticResource Width}"
-                            Height="{StaticResource Height}"
-                            Margin="{StaticResource Margin}"
-                            Command="{Binding DataContext.HistoricEvolutionClickedCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}"
-                            CommandParameter="{Binding}">
-                        <Button.ToolTip>
-                            <ToolTip ToolTipService.BetweenShowDelay="500" Style="{StaticResource DefaultToolTipStyle}">
-                                <TextBlock Text="{Binding DigimonType}" />
-                            </ToolTip>
-                        </Button.ToolTip>
-                        <Image Source="{Binding IconPath}" Stretch="Fill">
-                            <Image.Style>
-                                <Style TargetType="Image">
-                                    <Setter Property="Opacity" Value="0.5" />
-                                    <Style.Triggers>
-                                        <DataTrigger Value="True">
-                                            <DataTrigger.Binding>
-                                                <MultiBinding Converter="{StaticResource DigimonTypeMultiConverter}">
-                                                    <Binding Path="DataContext.HistoricEvolutions" RelativeSource="{RelativeSource AncestorType=ItemsControl}" />
-                                                    <Binding Path="." />
-                                                </MultiBinding>
-                                            </DataTrigger.Binding>
-                                            <Setter Property="Opacity" Value="1.0" />
-                                        </DataTrigger>
-                                    </Style.Triggers>
-                                </Style>
-                            </Image.Style>
-                        </Image>
-                    </Button>
-                </DataTemplate>
-            </ItemsControl.ItemTemplate>
-        </ItemsControl>
-
-        <!-- Column 4 -->
-        <Border Grid.Row="0" Grid.RowSpan="2" Grid.Column="4" BorderBrush="#D19667" BorderThickness="3,3,0,0">
-            <!-- Inner Border -->
-            <Border BorderBrush="#714321" BorderThickness="0,0,3,3">
-            </Border>
-        </Border>
-
-        <TextBlock Grid.Row="0" Grid.Column="4" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="Black" Margin="10">ULTIMATE</TextBlock>
-
-        <ItemsControl Grid.Row="1" Grid.Column="4" ItemsSource="{x:Static constants:EvolutionIcons.UltimateStageIcons}">
-            <ItemsControl.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <WrapPanel Orientation="Vertical" HorizontalAlignment="Center" />
-                </ItemsPanelTemplate>
-            </ItemsControl.ItemsPanel>
-            <ItemsControl.ItemTemplate>
-                <DataTemplate>
-                    <Button Style="{StaticResource StretchContentButtonStyle}"
-                            Width="{StaticResource Width}"
-                            Height="{StaticResource Height}"
-                            Margin="{StaticResource Margin}"
-                            Command="{Binding DataContext.HistoricEvolutionClickedCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}"
-                            CommandParameter="{Binding}">
-                        <Button.ToolTip>
-                            <ToolTip ToolTipService.BetweenShowDelay="500" Style="{StaticResource DefaultToolTipStyle}">
-                                <TextBlock Text="{Binding DigimonType}" />
-                            </ToolTip>
-                        </Button.ToolTip>
-                        <Image Source="{Binding IconPath}" Stretch="Fill">
-                            <Image.Style>
-                                <Style TargetType="Image">
-                                    <Setter Property="Opacity" Value="0.5" />
-                                    <Style.Triggers>
-                                        <DataTrigger Value="True">
-                                            <DataTrigger.Binding>
-                                                <MultiBinding Converter="{StaticResource DigimonTypeMultiConverter}">
-                                                    <Binding Path="DataContext.HistoricEvolutions" RelativeSource="{RelativeSource AncestorType=ItemsControl}" />
-                                                    <Binding Path="." />
-                                                </MultiBinding>
-                                            </DataTrigger.Binding>
-                                            <Setter Property="Opacity" Value="1.0" />
-                                        </DataTrigger>
-                                    </Style.Triggers>
-                                </Style>
-                            </Image.Style>
-                        </Image>
-                    </Button>
-                </DataTemplate>
-            </ItemsControl.ItemTemplate>
-        </ItemsControl>
+        <userControls:HistoricEvolutionButton Grid.Row="1" Grid.Column="4"
+                                              Tag="{x:Static constants:EvolutionIcons.UltimateStageIcons}" />
 
     </Grid>
 </UserControl>

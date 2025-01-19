@@ -8,8 +8,14 @@
              xmlns:evolutionTool="clr-namespace:DigimonWorld.Frontend.WPF.UserControls.EvolutionTool"
              xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
              xmlns:behaviors="clr-namespace:DigimonWorld.Frontend.WPF.Behaviors"
+             xmlns:userControls="clr-namespace:DigimonWorld.Frontend.WPF.UserControls.EvolutionTool.UserControls"
              mc:Ignorable="d"
              d:DataContext="{d:DesignInstance Type=evolutionTool:EvolutionToolViewModel, IsDesignTimeCreatable=True}">
+
+    <UserControl.Resources>
+        <ResourceDictionary Source="./Styles/CalculateEvolutionButtonStyle.xaml" />
+    </UserControl.Resources>
+
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
@@ -358,134 +364,10 @@
                 </Grid>
             </GroupBox>
 
-            <Button Grid.Column="0" Grid.Row="2" Height="40"
+            <Button Grid.Column="0" Grid.Row="2" Style="{StaticResource CalculateEvolutionButtonStyle}"
+                    Height="40"
                     Content="{Binding CalculateButtonText}"
-                    Command="{Binding SetEvolutionResult}">
-                <Button.Style>
-                    <Style TargetType="{x:Type Button}">
-                        <Setter Property="HorizontalAlignment" Value="Center" />
-                        <Setter Property="Template">
-                            <Setter.Value>
-                                <ControlTemplate TargetType="Button">
-                                    <Grid>
-                                        <!-- Outer Border -->
-                                        <Border x:Name="OuterBorder" BorderBrush="#B0B0B0" BorderThickness="3,3,0,0" Background="#575C60">
-                                            <!-- Inner Border -->
-                                            <Border x:Name="InnerBorder" BorderBrush="#060100" BorderThickness="0,0,3,3">
-                                                <!-- Content -->
-                                                <StackPanel Orientation="Horizontal"
-                                                            HorizontalAlignment="Center"
-                                                            VerticalAlignment="Center"
-                                                            Margin="15,0,15,0">
-                                                    <!-- Animated Image -->
-                                                    <Image x:Name="AnimatedImage"
-                                                           Width="20"
-                                                           Height="20"
-                                                           HorizontalAlignment="Left"
-                                                           VerticalAlignment="Center"
-                                                           Margin="0,0,5,0"
-                                                           Source="/Images/Emotions/Evolution/evo1.png" />
-                                                    <!-- Button Text -->
-                                                    <ContentPresenter VerticalAlignment="Center" />
-                                                </StackPanel>
-                                            </Border>
-                                        </Border>
-                                    </Grid>
-                                    <!-- Event Triggers for Animations -->
-                                    <ControlTemplate.Triggers>
-                                        <!-- Animation Trigger on Mouse Hover -->
-                                        <Trigger Property="IsMouseOver" Value="True">
-                                            <Trigger.EnterActions>
-                                                <!-- Name the storyboard so it can be referenced later -->
-                                                <BeginStoryboard x:Name="HoverAnimationStoryboard">
-                                                    <Storyboard RepeatBehavior="Forever">
-                                                        <!-- Frame 1 -->
-                                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="AnimatedImage"
-                                                                                       Storyboard.TargetProperty="Source">
-                                                            <DiscreteObjectKeyFrame KeyTime="0:0:0">
-                                                                <DiscreteObjectKeyFrame.Value>
-                                                                    <BitmapImage UriSource="/Images/Emotions/Evolution/evo1.png" />
-                                                                </DiscreteObjectKeyFrame.Value>
-                                                            </DiscreteObjectKeyFrame>
-                                                            <!-- Frame 2 -->
-                                                            <DiscreteObjectKeyFrame KeyTime="0:0:0.4">
-                                                                <DiscreteObjectKeyFrame.Value>
-                                                                    <BitmapImage UriSource="/Images/Emotions/Evolution/evo2.png" />
-                                                                </DiscreteObjectKeyFrame.Value>
-                                                            </DiscreteObjectKeyFrame>
-                                                            <!-- Frame 3 -->
-                                                            <DiscreteObjectKeyFrame KeyTime="0:0:0.8">
-                                                                <DiscreteObjectKeyFrame.Value>
-                                                                    <BitmapImage UriSource="/Images/Emotions/Evolution/evo3.png" />
-                                                                </DiscreteObjectKeyFrame.Value>
-                                                            </DiscreteObjectKeyFrame>
-                                                            <!-- Frame 4 -->
-                                                            <DiscreteObjectKeyFrame KeyTime="0:0:1.2">
-                                                                <DiscreteObjectKeyFrame.Value>
-                                                                    <BitmapImage UriSource="/Images/Emotions/Evolution/evo4.png" />
-                                                                </DiscreteObjectKeyFrame.Value>
-                                                            </DiscreteObjectKeyFrame>
-                                                            <!-- Frame 4 -->
-                                                            <DiscreteObjectKeyFrame KeyTime="0:0:1.6">
-                                                                <DiscreteObjectKeyFrame.Value>
-                                                                    <BitmapImage UriSource="/Images/Emotions/Evolution/evo4.png" />
-                                                                </DiscreteObjectKeyFrame.Value>
-                                                            </DiscreteObjectKeyFrame>
-                                                            <!-- Show Final Frame -->
-                                                            <DiscreteObjectKeyFrame KeyTime="0:0:2.0">
-                                                                <DiscreteObjectKeyFrame.Value>
-                                                                    <BitmapImage UriSource="/Images/Emotions/Evolution/evo4.png" />
-                                                                </DiscreteObjectKeyFrame.Value>
-                                                            </DiscreteObjectKeyFrame>
-                                                        </ObjectAnimationUsingKeyFrames>
-                                                    </Storyboard>
-                                                </BeginStoryboard>
-                                            </Trigger.EnterActions>
-                                            <Trigger.ExitActions>
-                                                <!-- Stop the named storyboard -->
-                                                <StopStoryboard BeginStoryboardName="HoverAnimationStoryboard" />
-                                            </Trigger.ExitActions>
-                                        </Trigger>
-                                        <!-- While the button is pressed, change the border colors -->
-                                        <Trigger Property="IsPressed" Value="True">
-                                            <Setter TargetName="OuterBorder"
-                                                    Property="BorderBrush"
-                                                    Value="#060100" />
-                                            <Setter TargetName="InnerBorder"
-                                                    Property="BorderBrush"
-                                                    Value="#6789A5" />
-                                        </Trigger>
-                                    </ControlTemplate.Triggers>
-                                </ControlTemplate>
-                            </Setter.Value>
-                        </Setter>
-                        <Setter Property="IsEnabled" Value="false" />
-                        <Setter Property="Padding" Value="15, 0 , 15, 0" />
-                        <Style.Triggers>
-                            <!-- Enable button only when validation passes -->
-                            <MultiDataTrigger>
-                                <MultiDataTrigger.Conditions>
-                                    <Condition Binding="{Binding ElementName=Digimon, Path=(Validation.HasError)}" Value="false" />
-                                    <Condition Binding="{Binding ElementName=Hp, Path=(Validation.HasError)}" Value="false" />
-                                    <Condition Binding="{Binding ElementName=Mp, Path=(Validation.HasError)}" Value="false" />
-                                    <Condition Binding="{Binding ElementName=Off, Path=(Validation.HasError)}" Value="false" />
-                                    <Condition Binding="{Binding ElementName=Def, Path=(Validation.HasError)}" Value="false" />
-                                    <Condition Binding="{Binding ElementName=Speed, Path=(Validation.HasError)}" Value="false" />
-                                    <Condition Binding="{Binding ElementName=Brains, Path=(Validation.HasError)}" Value="false" />
-                                    <Condition Binding="{Binding ElementName=CareMistakes, Path=(Validation.HasError)}" Value="false" />
-                                    <Condition Binding="{Binding ElementName=Weight, Path=(Validation.HasError)}" Value="false" />
-                                    <Condition Binding="{Binding ElementName=Happiness, Path=(Validation.HasError)}" Value="false" />
-                                    <Condition Binding="{Binding ElementName=Discipline, Path=(Validation.HasError)}" Value="false" />
-                                    <Condition Binding="{Binding ElementName=Battles, Path=(Validation.HasError)}" Value="false" />
-                                    <Condition Binding="{Binding ElementName=Techniques, Path=(Validation.HasError)}" Value="false" />
-                                </MultiDataTrigger.Conditions>
-                                <Setter Property="IsEnabled" Value="true" />
-                            </MultiDataTrigger>
-                        </Style.Triggers>
-                    </Style>
-                </Button.Style>
-            </Button>
-
+                    Command="{Binding SetEvolutionResult}" />
 
         </Grid>
         <Grid Column="1">
@@ -513,70 +395,11 @@
                     <ColumnDefinition Width="175" />
                     <ColumnDefinition Width="600" />
                 </Grid.ColumnDefinitions>
-                <Image Grid.Column="0" Grid.Row="0" Height="175"
-                       Source="/Images/Digimon/jijimon-narrator-left.png"
-                       HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10,15,10,15">
-                    <Image.RenderTransform>
-                        <ScaleTransform CenterX="0.5" CenterY="0.5" />
-                    </Image.RenderTransform>
-                    <Image.RenderTransformOrigin>0.5,0.5</Image.RenderTransformOrigin>
-                    <Image.Style>
-                        <Style TargetType="Image">
-                            <Style.Triggers>
-                                <DataTrigger Binding="{Binding FlipToRight}" Value="True">
-                                    <DataTrigger.EnterActions>
-                                        <BeginStoryboard>
-                                            <Storyboard>
-                                                <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleX)"
-                                                                 To="-1" Duration="0:0:0.5" />
-                                            </Storyboard>
-                                        </BeginStoryboard>
-                                    </DataTrigger.EnterActions>
-                                    <DataTrigger.ExitActions>
-                                        <BeginStoryboard>
-                                            <Storyboard>
-                                                <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleX)"
-                                                                 To="1" Duration="0:0:0.5" />
-                                            </Storyboard>
-                                        </BeginStoryboard>
-                                    </DataTrigger.ExitActions>
-                                </DataTrigger>
-                            </Style.Triggers>
-                        </Style>
-                    </Image.Style>
-                </Image>
 
-                <Border Grid.Row="0" Grid.Column="1" CornerRadius="5" BorderBrush="Black" BorderThickness="3" Margin="0, 15,25, 10" Padding="0" Background="Black">
-                    <Border CornerRadius="5" BorderBrush="#4A9FC5" BorderThickness="3" Padding="0" Background="#4A9FC5">
-                        <Border CornerRadius="5" BorderBrush="#90D9FA" BorderThickness="3" Padding="0" Background="#2E3841">
-                            <Border CornerRadius="5" BorderBrush="Transparent" BorderThickness="0" Padding="0" Background="#77000000">
-                                <Border.InputBindings>
-                                    <MouseBinding Gesture="LeftClick" Command="{Binding InstantDisplayCommand}" />
-                                </Border.InputBindings>
-                                <StackPanel Margin="5">
-                                    <!-- First Line: Yellow Text -->
-                                    <TextBlock Text="Jijimon"
-                                               Foreground="#D4D604"
-                                               FontSize="15"
-                                               HorizontalAlignment="Left"
-                                               VerticalAlignment="Top"
-                                               Margin="0,0, 0, 5"
-                                               Width="545"
-                                               TextWrapping="Wrap" />
-                                    <!-- Second Line: White Text -->
-                                    <TextBlock Text="{Binding JijimonText}"
-                                               Foreground="#B3B5B1"
-                                               FontSize="14"
-                                               HorizontalAlignment="Left"
-                                               VerticalAlignment="Top"
-                                               Margin="0, 5"
-                                               Width="545"
-                                               TextWrapping="Wrap" />
-                                </StackPanel>
-                            </Border>
-                        </Border>
-                    </Border>
-                </Border>
+                <userControls:JijimonNarrator Grid.Column="0" Grid.Row="0" />
+
+                <userControls:JijimonNaratorTextDisplay Grid.Row="0" Grid.Column="1" />
+
             </Grid>
             <Grid Grid.Row="1">
                 <Grid.ColumnDefinitions>

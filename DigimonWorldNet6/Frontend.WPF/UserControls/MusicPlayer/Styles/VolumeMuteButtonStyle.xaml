@@ -14,11 +14,9 @@
                         </Border>
                     </Grid>
                     <ControlTemplate.Triggers>
-                        <!-- Change Icon based on Volume -->
                         <DataTrigger Binding="{Binding Volume}" Value="0">
                             <Setter TargetName="Icon" Property="TextBlock.Text" Value="🔇" />
                         </DataTrigger>
-                        <!-- Trigger for IsPressed to change BorderBrush -->
                         <Trigger Property="IsPressed" Value="True">
                             <Setter TargetName="OuterBorder" Property="BorderBrush" Value="#060100" />
                             <Setter TargetName="InnerBorder" Property="BorderBrush" Value="#6789A5" />

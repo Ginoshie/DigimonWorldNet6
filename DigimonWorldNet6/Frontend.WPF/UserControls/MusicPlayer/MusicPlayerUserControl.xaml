@@ -15,7 +15,7 @@
                 <ResourceDictionary Source="../../ResourceDictionaries/Styles/ProgressBarStyle.xaml" />
                 <ResourceDictionary Source="../../ResourceDictionaries/ControlTemplates/DefaultHorizontalSliderTemplate.xaml" />
                 <ResourceDictionary Source="../../ResourceDictionaries/Styles/Buttons/DefaultToggleButtonStyle.xaml" />
-                <ResourceDictionary Source="../../ResourceDictionaries/Styles/Buttons/VolumeMuteButtonStyle.xaml" />
+                <ResourceDictionary Source="./Styles/VolumeMuteButtonStyle.xaml" />
             </ResourceDictionary.MergedDictionaries>
 
             <system:Double x:Key="ButtonDimension">40</system:Double>
