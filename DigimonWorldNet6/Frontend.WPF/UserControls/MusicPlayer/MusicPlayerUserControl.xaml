@@ -11,9 +11,9 @@
     <UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="../Styles/Buttons/DefaultButtonStyle.xaml" />
-                <ResourceDictionary Source="../Styles/ProgressBarStyle.xaml" />
-                <ResourceDictionary Source="../Styles/Sliders/DefaultHorizontalSlider.xaml" />
+                <ResourceDictionary Source="../../ResourceDictionaries/Styles/Buttons/DefaultButtonStyle.xaml" />
+                <ResourceDictionary Source="../../ResourceDictionaries/Styles/ProgressBarStyle.xaml" />
+                <ResourceDictionary Source="../../ResourceDictionaries/ControlTemplates/DefaultHorizontalSlider.xaml" />
             </ResourceDictionary.MergedDictionaries>
 
             <system:Double x:Key="ButtonDimension">40</system:Double>

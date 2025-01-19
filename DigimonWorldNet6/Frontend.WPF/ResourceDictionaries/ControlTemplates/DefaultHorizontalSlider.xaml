@@ -2,9 +2,9 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
         <ResourceDictionary.MergedDictionaries>
-            <ResourceDictionary Source="DefaultIncreaseRepeatButtonStyle.xaml"></ResourceDictionary>
-            <ResourceDictionary Source="DefaultDecreaseRepeatButtonStyle.xaml"></ResourceDictionary>
-            <ResourceDictionary Source="DefaultSliderThumbStyle.xaml"></ResourceDictionary>
+            <ResourceDictionary Source="../Styles/Sliders/DefaultIncreaseRepeatButtonStyle.xaml"></ResourceDictionary>
+            <ResourceDictionary Source="../Styles/Sliders/DefaultDecreaseRepeatButtonStyle.xaml"></ResourceDictionary>
+            <ResourceDictionary Source="../Styles/Sliders/DefaultSliderThumbStyle.xaml"></ResourceDictionary>
         </ResourceDictionary.MergedDictionaries>
     
     <ControlTemplate x:Key="DefaultHorizontalSlider"
