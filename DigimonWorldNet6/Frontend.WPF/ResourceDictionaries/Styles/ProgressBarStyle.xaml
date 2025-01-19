@@ -1,6 +1,6 @@
-<!-- ProgressBarStyle.xaml -->
 <ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
     <Style x:Key="CustomProgressBarStyle" TargetType="ProgressBar">
         <Setter Property="Template">
             <Setter.Value>
@@ -24,21 +24,18 @@
                                 </VisualState>
                             </VisualStateGroup>
                         </VisualStateManager.VisualStateGroups>
-
                         <Border x:Name="PART_Track" SnapsToDevicePixels="True" BorderBrush="#060100" BorderThickness="2,2,0,0">
-                            <Border SnapsToDevicePixels="True" BorderBrush="#6789A5" BorderThickness="0,0,2,2"/>
+                            <Border SnapsToDevicePixels="True" BorderBrush="#6789A5" BorderThickness="0,0,2,2" />
                         </Border>
-
-                        <Border x:Name="PART_Indicator" 
-                                HorizontalAlignment="Left" 
-                                Background="{TemplateBinding Foreground}" 
-                                SnapsToDevicePixels="True" 
+                        <Border x:Name="PART_Indicator"
+                                HorizontalAlignment="Left"
+                                Background="{TemplateBinding Foreground}"
+                                SnapsToDevicePixels="True"
                                 BorderBrush="#060100" BorderThickness="2,2,0,0">
-                            <Border SnapsToDevicePixels="True" 
-                                    BorderBrush="#6789A5" 
+                            <Border SnapsToDevicePixels="True"
+                                    BorderBrush="#6789A5"
                                     BorderThickness="0,0,2,2" />
                         </Border>
-                        
                     </Grid>
                 </ControlTemplate>
             </Setter.Value>
@@ -47,4 +44,5 @@
         <Setter Property="Foreground" Value="#6987A3">
         </Setter>
     </Style>
+
 </ResourceDictionary>

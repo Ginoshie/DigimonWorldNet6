@@ -13,7 +13,9 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="../../ResourceDictionaries/Styles/Buttons/DefaultButtonStyle.xaml" />
                 <ResourceDictionary Source="../../ResourceDictionaries/Styles/ProgressBarStyle.xaml" />
-                <ResourceDictionary Source="../../ResourceDictionaries/ControlTemplates/DefaultHorizontalSlider.xaml" />
+                <ResourceDictionary Source="../../ResourceDictionaries/ControlTemplates/DefaultHorizontalSliderTemplate.xaml" />
+                <ResourceDictionary Source="../../ResourceDictionaries/Styles/Buttons/DefaultToggleButtonStyle.xaml" />
+                <ResourceDictionary Source="../../ResourceDictionaries/Styles/Buttons/VolumeMuteButtonStyle.xaml" />
             </ResourceDictionary.MergedDictionaries>
 
             <system:Double x:Key="ButtonDimension">40</system:Double>
@@ -29,6 +31,8 @@
             <RowDefinition Height="auto" />
             <RowDefinition Height="auto" />
         </Grid.RowDefinitions>
+        
+        <!-- Song title-->
         <TextBlock Grid.Row="0"
                    Text="{Binding CurrentSongTitle}"
                    Foreground="#D6D6D8"
@@ -43,191 +47,138 @@
                 <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
 
+            <!-- Current position in song -->
             <TextBlock Grid.Column="0" Text="{Binding CurrentPositionString}"
                        Foreground="#B3B5B1"
+                       Height="10"
                        VerticalAlignment="Center"
                        HorizontalAlignment="Left"
-                       Margin="0,0,5,0"
-                       Height="10" />
+                       Margin="0,0,5,0" />
 
-            <ProgressBar Grid.Column="1" Value="{Binding CurrentPosition}"
-                         Style="{StaticResource  CustomProgressBarStyle}"
-                         Minimum="0"
-                         Maximum="{Binding SongLength}"
+            <!-- Song progress bar -->
+            <ProgressBar Grid.Column="1" Style="{StaticResource  CustomProgressBarStyle}"
+                         Value="{Binding CurrentPosition}"
+                         Height="10"
                          VerticalAlignment="Center"
                          HorizontalAlignment="Stretch"
                          Margin="0,0,0,0"
-                         Height="10" />
+                         Minimum="0"
+                         Maximum="{Binding SongLength}" />
 
+            <!-- Total song length -->
             <TextBlock Grid.Column="2" Text="{Binding SongLengthString}"
                        Foreground="#B3B5B1"
+                       Height="10"
                        VerticalAlignment="Center"
                        HorizontalAlignment="Right"
-                       Margin="5,0,0,0"
-                       Height="10" />
+                       Margin="5,0,0,0" />
         </Grid>
 
         <StackPanel Grid.Row="2" Orientation="Horizontal" Margin="0,10">
             <!-- Shuffle button -->
-            <Button Height="{StaticResource ButtonDimension}" Width="{StaticResource ButtonDimension}" FontSize="{StaticResource ButtonFontSize}" Content="🔀" Margin="0, 0, 1, 0"
-                    Command="{Binding ToggleShuffleCommand}">
-                <Button.Style>
-                    <Style TargetType="{x:Type Button}">
-                        <Setter Property="HorizontalAlignment" Value="Center" />
-                        <Setter Property="Opacity" Value="0.5" />
-                        <Setter Property="Template">
-                            <Setter.Value>
-                                <ControlTemplate TargetType="Button">
-                                    <Grid>
-                                        <!-- Outer Border -->
-                                        <Border x:Name="OuterBorder" BorderBrush="#B0B0B0" BorderThickness="3,3,0,0" Background="#575C60">
-                                            <!-- Inner Border for Bottom and Right -->
-                                            <Border x:Name="InnerBorder" BorderBrush="#060100" BorderThickness="0,0,3,3">
-                                                <!-- ContentPresenter to show the button content -->
-                                                <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center" />
-                                            </Border>
-                                        </Border>
-                                    </Grid>
-                                    <!-- ControlTemplate Triggers -->
-                                    <ControlTemplate.Triggers>
-                                        <!-- IsPressed Trigger to change border color when pressed -->
-                                        <Trigger Property="IsPressed" Value="True">
-                                            <Setter TargetName="OuterBorder" Property="BorderBrush" Value="#060100" />
-                                            <Setter TargetName="InnerBorder" Property="BorderBrush" Value="#6789A5" />
-                                        </Trigger>
-                                    </ControlTemplate.Triggers>
-                                </ControlTemplate>
-                            </Setter.Value>
-                        </Setter>
-                        <!-- Style-Level Triggers -->
-                        <Style.Triggers>
-                            <DataTrigger Binding="{Binding ShuffleEnabled}" Value="True">
-                                <Setter Property="Opacity" Value="1.0" />
-                            </DataTrigger>
-                        </Style.Triggers>
-                    </Style>
-                </Button.Style>
-            </Button>
+            <Button Style="{StaticResource DefaultToggleButtonStyle}"
+                    Content="🔀"
+                    Command="{Binding ToggleShuffleCommand}"
+                    Height="{StaticResource ButtonDimension}"
+                    Width="{StaticResource ButtonDimension}"
+                    FontSize="{StaticResource ButtonFontSize}"
+                    Margin="0, 0, 1, 0"
+                    Tag="{Binding ShuffleEnabled}" />
 
             <!-- Previous track button -->
-            <Button Height="{StaticResource ButtonDimension}" Width="{StaticResource ButtonDimension}" FontSize="{StaticResource ButtonFontSize}" Content="⏮️" Margin="15, 0, 0, 0"
-                    Command="{Binding PreviousSongCommand}" Style="{StaticResource DefaultButtonStyle}" />
+            <Button Style="{StaticResource DefaultButtonStyle}"
+                    Content="⏮️"
+                    Command="{Binding PreviousSongCommand}"
+                    Height="{StaticResource ButtonDimension}"
+                    Width="{StaticResource ButtonDimension}"
+                    FontSize="{StaticResource ButtonFontSize}"
+                    Margin="15, 0, 0, 0" />
 
             <!-- Play/Pause button -->
-            <Button Height="{StaticResource ButtonDimension}" Width="{StaticResource ButtonDimension}" FontSize="{StaticResource ButtonFontSize}" Content="⏯️" Margin="0, 0, 0, 0"
-                    Command="{Binding PlayPauseCommand}" Style="{StaticResource DefaultButtonStyle}" />
+            <Button Style="{StaticResource DefaultButtonStyle}"
+                    Content="⏯️"
+                    Command="{Binding PlayPauseCommand}"
+                    Height="{StaticResource ButtonDimension}"
+                    Width="{StaticResource ButtonDimension}"
+                    FontSize="{StaticResource ButtonFontSize}"
+                    Margin="0, 0, 0, 0" />
 
             <!-- Next track button -->
-            <Button Height="{StaticResource ButtonDimension}" Width="{StaticResource ButtonDimension}" FontSize="{StaticResource ButtonFontSize}" Content="⏭️" Margin="0, 0, 15, 0"
-                    Command="{Binding NextSongCommand}" Style="{StaticResource DefaultButtonStyle}" />
+            <Button Style="{StaticResource DefaultButtonStyle}"
+                    Content="⏭️"
+                    Command="{Binding NextSongCommand}"
+                    Height="{StaticResource ButtonDimension}"
+                    Width="{StaticResource ButtonDimension}"
+                    FontSize="{StaticResource ButtonFontSize}"
+                    Margin="0, 0, 15, 0" />
 
             <!-- Repeat button -->
-            <Button Height="{StaticResource ButtonDimension}" Width="{StaticResource ButtonDimension}" FontSize="{StaticResource ButtonFontSize}" Content="🔁" Margin="0, 0, 0, 0"
-                    Command="{Binding ToggleRepeatSingleSongCommand}">
-                <Button.Style>
-                    <Style TargetType="{x:Type Button}">
-                        <Setter Property="HorizontalAlignment" Value="Center" />
-                        <Setter Property="Opacity" Value="0.5" />
-                        <Setter Property="Template">
-                            <Setter.Value>
-                                <ControlTemplate TargetType="Button">
-                                    <Grid>
-                                        <!-- Outer Border -->
-                                        <Border x:Name="OuterBorder" BorderBrush="#B0B0B0" BorderThickness="3,3,0,0" Background="#575C60">
-                                            <!-- Inner Border for Bottom and Right -->
-                                            <Border x:Name="InnerBorder" BorderBrush="#060100" BorderThickness="0,0,3,3">
-                                                <!-- ContentPresenter to show the button content -->
-                                                <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center" />
-                                            </Border>
-                                        </Border>
-                                    </Grid>
-                                    <!-- ControlTemplate Triggers -->
-                                    <ControlTemplate.Triggers>
-                                        <!-- IsPressed Trigger to change border color when pressed -->
-                                        <Trigger Property="IsPressed" Value="True">
-                                            <Setter TargetName="OuterBorder" Property="BorderBrush" Value="#060100" />
-                                            <Setter TargetName="InnerBorder" Property="BorderBrush" Value="#6789A5" />
-                                        </Trigger>
-                                    </ControlTemplate.Triggers>
-                                </ControlTemplate>
-                            </Setter.Value>
-                        </Setter>
-                        <!-- Style-Level Triggers -->
-                        <Style.Triggers>
-                            <DataTrigger Binding="{Binding RepeatSingleSongEnabled}" Value="True">
-                                <Setter Property="Opacity" Value="1.0" />
-                            </DataTrigger>
-                        </Style.Triggers>
-                    </Style>
-                </Button.Style>
-            </Button>
+            <Button Style="{StaticResource DefaultToggleButtonStyle}"
+                    Content="🔁"
+                    Command="{Binding ToggleRepeatSingleSongCommand}"
+                    Height="{StaticResource ButtonDimension}"
+                    Width="{StaticResource ButtonDimension}"
+                    FontSize="{StaticResource ButtonFontSize}"
+                    Margin="0, 0, 0, 0"
+                    Tag="{Binding RepeatSingleSongEnabled}" />
+
         </StackPanel>
 
+        <!-- Volume section -->
         <Grid Grid.Row="3">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
-            <!-- Grid wrapping Slider and Volume Label -->
+            
+            <!-- Volume slider -->
             <StackPanel Grid.Column="0" Orientation="Vertical" HorizontalAlignment="Stretch" VerticalAlignment="Center">
-                <!-- This Grid will center the Volume label and value above the Slider -->
+                
+                <!-- Volume label -->
                 <Grid HorizontalAlignment="Center">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="Auto" />
                     </Grid.ColumnDefinitions>
 
-                    <!-- Volume Label -->
                     <TextBlock Grid.Column="0"
-                               Foreground="#B3B5B1" VerticalAlignment="Bottom" TextAlignment="Right" Margin="0,5">
+                               Foreground="#B3B5B1" 
+                               VerticalAlignment="Bottom" 
+                               TextAlignment="Right" 
+                               Margin="0,5">
                         Volume:&#160;
                     </TextBlock>
 
-                    <!-- Volume value with fixed width -->
-                    <TextBlock Grid.Column="1" Foreground="#B3B5B1" VerticalAlignment="Bottom" HorizontalAlignment="Center" Width="22" Margin="0,5">
+                    <TextBlock Grid.Column="1" 
+                               Foreground="#B3B5B1" 
+                               VerticalAlignment="Bottom" 
+                               HorizontalAlignment="Center" 
+                               Width="22" 
+                               Margin="0,5">
                         <Run Text="{Binding ElementName=VolumeSlider, Path=Value}" />
                     </TextBlock>
                 </Grid>
 
-                <!-- Slider control that takes up all available width -->
-                <Slider x:Name="VolumeSlider" Template="{StaticResource DefaultHorizontalSlider}" Focusable="False" SnapsToDevicePixels="True"
-                        Minimum="0" Maximum="100" Value="{Binding Volume, Mode=TwoWay}" TickFrequency="10" IsSnapToTickEnabled="False" 
-                        IsMoveToPointEnabled="True" VerticalAlignment="Center" HorizontalAlignment="Stretch" />
+                <!-- Volume slider -->
+                <Slider x:Name="VolumeSlider" 
+                        Template="{StaticResource DefaultHorizontalSliderTemplate}" 
+                        Focusable="False" SnapsToDevicePixels="True"
+                        Minimum="0" 
+                        Maximum="100" 
+                        Value="{Binding Volume, Mode=TwoWay}" 
+                        TickFrequency="10" IsSnapToTickEnabled="False"
+                        IsMoveToPointEnabled="True" 
+                        VerticalAlignment="Center" 
+                        HorizontalAlignment="Stretch" />
             </StackPanel>
 
-            <!-- Mute/Unmute button -->
-            <Button Grid.Column="1" Height="{StaticResource ButtonDimension}" Width="{StaticResource ButtonDimension}" Margin="15, 10, 0,10" Command="{Binding ToggleMuteEnabledCommand}">
-                <Button.Style>
-                    <Style TargetType="{x:Type Button}">
-                        <Setter Property="HorizontalAlignment" Value="Center" />
-                        <Setter Property="Template">
-                            <Setter.Value>
-                                <ControlTemplate TargetType="Button">
-                                    <Grid>
-                                        <Border x:Name="OuterBorder" BorderBrush="#B0B0B0" BorderThickness="3,3,0,0" Background="#575C60">
-                                            <Border x:Name="InnerBorder" BorderBrush="#060100" BorderThickness="0,0,3,3">
-                                                <TextBlock x:Name="Icon" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="{StaticResource ButtonFontSize}" Text="🔊" />
-                                            </Border>
-                                        </Border>
-                                    </Grid>
-                                    <ControlTemplate.Triggers>
-                                        <!-- Change Icon based on Volume -->
-                                        <DataTrigger Binding="{Binding Volume}" Value="0">
-                                            <Setter TargetName="Icon" Property="TextBlock.Text" Value="🔇" />
-                                        </DataTrigger>
-                                        <!-- Trigger for IsPressed to change BorderBrush -->
-                                        <Trigger Property="IsPressed" Value="True">
-                                            <Setter TargetName="OuterBorder" Property="BorderBrush" Value="#060100" />
-                                            <Setter TargetName="InnerBorder" Property="BorderBrush" Value="#6789A5" />
-                                        </Trigger>
-                                    </ControlTemplate.Triggers>
-                                </ControlTemplate>
-                            </Setter.Value>
-                        </Setter>
-                    </Style>
-                </Button.Style>
-            </Button>
-
+            <!-- Volume mute button -->
+            <Button Grid.Column="1" Style="{StaticResource VolumeMuteButtonStyle}"
+                    Command="{Binding ToggleMuteEnabledCommand}"
+                    FontSize="{StaticResource ButtonFontSize}"
+                    Height="{StaticResource ButtonDimension}" 
+                    Width="{StaticResource ButtonDimension}" 
+                    Margin="15, 10, 0,10" />
         </Grid>
     </Grid>
 </UserControl>

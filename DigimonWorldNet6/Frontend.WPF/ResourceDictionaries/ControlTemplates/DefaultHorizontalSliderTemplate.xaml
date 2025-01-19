@@ -7,7 +7,7 @@
             <ResourceDictionary Source="../Styles/Sliders/DefaultSliderThumbStyle.xaml"></ResourceDictionary>
         </ResourceDictionary.MergedDictionaries>
     
-    <ControlTemplate x:Key="DefaultHorizontalSlider"
+    <ControlTemplate x:Key="DefaultHorizontalSliderTemplate"
                      TargetType="{x:Type Slider}">
         <Grid>
             <Grid.RowDefinitions>

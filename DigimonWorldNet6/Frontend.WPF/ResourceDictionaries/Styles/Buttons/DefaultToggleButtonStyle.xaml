@@ -1,7 +1,9 @@
 <ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
-    <Style x:Key="DefaultButtonStyle" TargetType="Button">
+    <Style x:Key="DefaultToggleButtonStyle" TargetType="{x:Type Button}">
+        <Setter Property="HorizontalAlignment" Value="Center" />
+        <Setter Property="Opacity" Value="0.5" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
@@ -21,6 +23,11 @@
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
+        <Style.Triggers>
+            <DataTrigger Binding="{Binding Path=Tag, RelativeSource={RelativeSource Self}}" Value="True">
+                <Setter Property="Opacity" Value="1.0" />
+            </DataTrigger>
+        </Style.Triggers>
     </Style>
 
 </ResourceDictionary>
