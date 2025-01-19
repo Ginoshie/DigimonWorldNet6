@@ -13,70 +13,11 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="../Styles/Buttons/DefaultButtonStyle.xaml" />
                 <ResourceDictionary Source="../Styles/ProgressBarStyle.xaml" />
+                <ResourceDictionary Source="../Styles/Sliders/DefaultHorizontalSlider.xaml" />
             </ResourceDictionary.MergedDictionaries>
 
             <system:Double x:Key="ButtonDimension">40</system:Double>
             <system:Double x:Key="ButtonFontSize">25</system:Double>
-
-            <Style TargetType="Slider" x:Key="VolumeSliderStyle">
-                <Setter Property="Template">
-                    <Setter.Value>
-                        <ControlTemplate TargetType="Slider">
-                            <Grid>
-                                <!-- Background Track -->
-                                <Track x:Name="PART_Track" VerticalAlignment="Center" Height="auto">
-                                    <Track.DecreaseRepeatButton>
-                                        <RepeatButton>
-                                            <RepeatButton.Template>
-                                                <ControlTemplate TargetType="RepeatButton">
-                                                    <Border SnapsToDevicePixels="True" BorderBrush="#060100" BorderThickness="3,2,0,0" Height="7">
-                                                        <Border SnapsToDevicePixels="True" BorderBrush="#6789A5" BorderThickness="0,0,0,3" Background="#6987A3" Height="7" />
-                                                    </Border>
-                                                </ControlTemplate>
-                                            </RepeatButton.Template>
-                                        </RepeatButton>
-                                    </Track.DecreaseRepeatButton>
-
-                                    <Track.IncreaseRepeatButton>
-                                        <RepeatButton>
-                                            <RepeatButton.Command>ScrollBar.PageDownCommand</RepeatButton.Command>
-                                            <RepeatButton.Template>
-                                                <ControlTemplate TargetType="RepeatButton">
-                                                    <Border SnapsToDevicePixels="True" BorderBrush="#060100" BorderThickness="0,2,0,0" Height="7">
-                                                        <Border SnapsToDevicePixels="True" BorderBrush="#6789A5" BorderThickness="0,0,1,3" Background="#354A5B" Height="7" />
-                                                    </Border>
-                                                </ControlTemplate>
-                                            </RepeatButton.Template>
-                                        </RepeatButton>
-                                    </Track.IncreaseRepeatButton>
-
-                                    <Track.Thumb>
-                                        <Thumb Width="12" Height="18">
-                                            <Thumb.Template>
-                                                <ControlTemplate TargetType="Thumb">
-                                                    <Grid>
-                                                        <Border x:Name="OuterBorder" BorderBrush="#B0B0B0" BorderThickness="1,1,0,0" Background="#575C60">
-                                                            <Border x:Name="InnerBorder" BorderBrush="#060100" BorderThickness="0,0,2,2" />
-                                                        </Border>
-                                                    </Grid>
-                                                    <ControlTemplate.Triggers>
-                                                        <Trigger Property="IsMouseCaptured" Value="True">
-                                                            <Setter TargetName="OuterBorder" Property="BorderBrush" Value="#060100" />
-                                                            <Setter TargetName="OuterBorder" Property="BorderThickness" Value="2,2,0,0" />
-                                                            <Setter TargetName="InnerBorder" Property="BorderBrush" Value="#6789A5" />
-                                                            <Setter TargetName="InnerBorder" Property="BorderThickness" Value="0,0,1,1" />
-                                                        </Trigger>
-                                                    </ControlTemplate.Triggers>
-                                                </ControlTemplate>
-                                            </Thumb.Template>
-                                        </Thumb>
-                                    </Track.Thumb>
-                                </Track>
-                            </Grid>
-                        </ControlTemplate>
-                    </Setter.Value>
-                </Setter>
-            </Style>
 
         </ResourceDictionary>
     </UserControl.Resources>
@@ -249,9 +190,9 @@
                 </Grid>
 
                 <!-- Slider control that takes up all available width -->
-                <Slider x:Name="VolumeSlider" Style="{StaticResource VolumeSliderStyle}" Focusable="False" SnapsToDevicePixels="True"
-                        Minimum="0" Maximum="100" Value="{Binding Volume, Mode=TwoWay}" TickFrequency="0.1"
-                        IsSnapToTickEnabled="True" IsMoveToPointEnabled="True" VerticalAlignment="Center" HorizontalAlignment="Stretch" />
+                <Slider x:Name="VolumeSlider" Template="{StaticResource DefaultHorizontalSlider}" Focusable="False" SnapsToDevicePixels="True"
+                        Minimum="0" Maximum="100" Value="{Binding Volume, Mode=TwoWay}" TickFrequency="10" IsSnapToTickEnabled="False" 
+                        IsMoveToPointEnabled="True" VerticalAlignment="Center" HorizontalAlignment="Stretch" />
             </StackPanel>
 
             <!-- Mute/Unmute button -->
