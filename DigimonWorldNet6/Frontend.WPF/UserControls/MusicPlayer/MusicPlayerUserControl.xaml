@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:musicPlayer="clr-namespace:DigimonWorld.Frontend.WPF.UserControls.MusicPlayer"
              xmlns:system="clr-namespace:System;assembly=System.Runtime"
+             xmlns:userControls="clr-namespace:DigimonWorld.Frontend.WPF.UserControls.MusicPlayer.UserControls"
              mc:Ignorable="d"
              d:DataContext="{d:DesignInstance Type=musicPlayer:MusicPlayerViewModel, IsDesignTimeCreatable=True}">
 
@@ -30,17 +31,85 @@
             <RowDefinition Height="auto" />
             <RowDefinition Height="auto" />
             <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
         </Grid.RowDefinitions>
-        
+
+        <!-- Giromon narrator -->
+        <StackPanel Grid.Row="0" Orientation="Horizontal">
+            <userControls:GiromonNarrator />
+
+            <StackPanel Orientation="Vertical" Margin="10, 0 ,0 , 0">
+                <userControls:GiromonNaratorTextDisplay />
+
+                <!-- Volume section -->
+                <Grid Margin="20, 0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+
+                    <!-- Volume slider -->
+                    <StackPanel Grid.Column="0" Orientation="Vertical" HorizontalAlignment="Stretch" VerticalAlignment="Center" Width="150">
+
+                        <!-- Volume label -->
+                        <Grid HorizontalAlignment="Center">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+
+                            <TextBlock Grid.Column="0"
+                                       Foreground="#B3B5B1"
+                                       VerticalAlignment="Bottom"
+                                       TextAlignment="Right"
+                                       Margin="0,5">
+                                Volume:&#160;
+                            </TextBlock>
+
+                            <TextBlock Grid.Column="1"
+                                       Foreground="#B3B5B1"
+                                       VerticalAlignment="Bottom"
+                                       HorizontalAlignment="Center"
+                                       Width="22"
+                                       Margin="0,5">
+                                <Run Text="{Binding ElementName=VolumeSlider, Path=Value}" />
+                            </TextBlock>
+                        </Grid>
+
+                        <!-- Volume slider -->
+                        <Slider x:Name="VolumeSlider"
+                                Template="{StaticResource DefaultHorizontalSliderTemplate}"
+                                Focusable="False" SnapsToDevicePixels="True"
+                                Minimum="0"
+                                Maximum="100"
+                                Value="{Binding Volume, Mode=TwoWay}"
+                                TickFrequency="10" IsSnapToTickEnabled="False"
+                                IsMoveToPointEnabled="True"
+                                VerticalAlignment="Center"
+                                HorizontalAlignment="Stretch"
+                                Margin="0,0, 10, 0" />
+                    </StackPanel>
+
+                    <!-- Volume mute button -->
+                    <Button Grid.Column="1" Style="{StaticResource VolumeMuteButtonStyle}"
+                            Command="{Binding ToggleMuteEnabledCommand}"
+                            FontSize="{StaticResource ButtonFontSize}"
+                            Height="{StaticResource ButtonDimension}"
+                            Width="{StaticResource ButtonDimension}"
+                            Margin="0, 10, 0,10" />
+                </Grid>
+            </StackPanel>
+        </StackPanel>
+
         <!-- Song title-->
-        <TextBlock Grid.Row="0"
+        <TextBlock Grid.Row="1"
                    Text="{Binding CurrentSongTitle}"
                    Foreground="#D6D6D8"
                    FontSize="16"
-                   Margin="0, 10"
+                   Margin="0, 0, 0, 10"
                    TextWrapping="Wrap" />
 
-        <Grid Grid.Row="1" VerticalAlignment="Center">
+        <Grid Grid.Row="2" VerticalAlignment="Center">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="*" />
@@ -74,7 +143,7 @@
                        Margin="5,0,0,0" />
         </Grid>
 
-        <StackPanel Grid.Row="2" Orientation="Horizontal" Margin="0,10">
+        <StackPanel Grid.Row="3" Orientation="Horizontal" Margin="0,10, 0, 0" HorizontalAlignment="Center">
             <!-- Shuffle button -->
             <Button Style="{StaticResource DefaultToggleButtonStyle}"
                     Content="🔀"
@@ -82,7 +151,7 @@
                     Height="{StaticResource ButtonDimension}"
                     Width="{StaticResource ButtonDimension}"
                     FontSize="{StaticResource ButtonFontSize}"
-                    Margin="0, 0, 1, 0"
+                    Margin="0, 0, 15, 0"
                     Tag="{Binding ShuffleEnabled}" />
 
             <!-- Previous track button -->
@@ -92,7 +161,7 @@
                     Height="{StaticResource ButtonDimension}"
                     Width="{StaticResource ButtonDimension}"
                     FontSize="{StaticResource ButtonFontSize}"
-                    Margin="15, 0, 0, 0" />
+                    Margin="0, 0, 0, 0" />
 
             <!-- Play/Pause button -->
             <Button Style="{StaticResource DefaultButtonStyle}"
@@ -101,7 +170,7 @@
                     Height="{StaticResource ButtonDimension}"
                     Width="{StaticResource ButtonDimension}"
                     FontSize="{StaticResource ButtonFontSize}"
-                    Margin="0, 0, 0, 0" />
+                    Margin="5, 0, 0, 0" />
 
             <!-- Next track button -->
             <Button Style="{StaticResource DefaultButtonStyle}"
@@ -110,7 +179,7 @@
                     Height="{StaticResource ButtonDimension}"
                     Width="{StaticResource ButtonDimension}"
                     FontSize="{StaticResource ButtonFontSize}"
-                    Margin="0, 0, 15, 0" />
+                    Margin="5, 0, 0, 0" />
 
             <!-- Repeat button -->
             <Button Style="{StaticResource DefaultToggleButtonStyle}"
@@ -119,66 +188,9 @@
                     Height="{StaticResource ButtonDimension}"
                     Width="{StaticResource ButtonDimension}"
                     FontSize="{StaticResource ButtonFontSize}"
-                    Margin="0, 0, 0, 0"
+                    Margin="15, 0, 0, 0"
                     Tag="{Binding RepeatSingleSongEnabled}" />
 
         </StackPanel>
-
-        <!-- Volume section -->
-        <Grid Grid.Row="3">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="Auto" />
-            </Grid.ColumnDefinitions>
-            
-            <!-- Volume slider -->
-            <StackPanel Grid.Column="0" Orientation="Vertical" HorizontalAlignment="Stretch" VerticalAlignment="Center">
-                
-                <!-- Volume label -->
-                <Grid HorizontalAlignment="Center">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="Auto" />
-                    </Grid.ColumnDefinitions>
-
-                    <TextBlock Grid.Column="0"
-                               Foreground="#B3B5B1" 
-                               VerticalAlignment="Bottom" 
-                               TextAlignment="Right" 
-                               Margin="0,5">
-                        Volume:&#160;
-                    </TextBlock>
-
-                    <TextBlock Grid.Column="1" 
-                               Foreground="#B3B5B1" 
-                               VerticalAlignment="Bottom" 
-                               HorizontalAlignment="Center" 
-                               Width="22" 
-                               Margin="0,5">
-                        <Run Text="{Binding ElementName=VolumeSlider, Path=Value}" />
-                    </TextBlock>
-                </Grid>
-
-                <!-- Volume slider -->
-                <Slider x:Name="VolumeSlider" 
-                        Template="{StaticResource DefaultHorizontalSliderTemplate}" 
-                        Focusable="False" SnapsToDevicePixels="True"
-                        Minimum="0" 
-                        Maximum="100" 
-                        Value="{Binding Volume, Mode=TwoWay}" 
-                        TickFrequency="10" IsSnapToTickEnabled="False"
-                        IsMoveToPointEnabled="True" 
-                        VerticalAlignment="Center" 
-                        HorizontalAlignment="Stretch" />
-            </StackPanel>
-
-            <!-- Volume mute button -->
-            <Button Grid.Column="1" Style="{StaticResource VolumeMuteButtonStyle}"
-                    Command="{Binding ToggleMuteEnabledCommand}"
-                    FontSize="{StaticResource ButtonFontSize}"
-                    Height="{StaticResource ButtonDimension}" 
-                    Width="{StaticResource ButtonDimension}" 
-                    Margin="15, 10, 0,10" />
-        </Grid>
     </Grid>
 </UserControl>

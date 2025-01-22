@@ -1,3 +1,5 @@
+using System.Threading;
+using System.Threading.Tasks;
 using System.Windows.Input;
 using DigimonWorld.Evolution.Calculator.Core;
 using DigimonWorld.Evolution.Calculator.Core.DataObjects;
@@ -11,7 +13,9 @@ namespace DigimonWorld.Frontend.WPF.UserControls.EvolutionTool;
 
 public sealed class EvolutionToolViewModel : BaseViewModel
 {
-    private string _jijimonText = JijimonNarratorText.EvolutionCalculatorIntroText;
+    private readonly SpeakingSimulator _speakingSimulator;
+    
+    private string _jijimonText = string.Empty;
 
     private int _hp;
     private int _mp;
@@ -31,9 +35,16 @@ public sealed class EvolutionToolViewModel : BaseViewModel
 
     public EvolutionToolViewModel()
     {
+        _speakingSimulator = new SpeakingSimulator();
+        
         SetEvolutionResult = new CommandHandler(CalculateEvolutionResult);
 
         InstantDisplayCommand = new CommandHandler(InstantDisplay);
+
+        Task
+            .Delay(1500)
+            .WaitAsync(CancellationToken.None)
+            .ContinueWith(_ => _speakingSimulator.WriteTextAsSpeechAsync(JijimonNarratorText.IntroText, textOutput => JijimonText = textOutput));
     }
 
     public ICommand SetEvolutionResult { get; }
@@ -50,6 +61,7 @@ public sealed class EvolutionToolViewModel : BaseViewModel
             if (_jijimonText == value) return;
 
             _jijimonText = value;
+
             OnPropertyChanged();
         }
     }
@@ -236,7 +248,7 @@ public sealed class EvolutionToolViewModel : BaseViewModel
 
             _evolutionResult = value;
 
-            _ = SpeakingSimulator.WriteEvolutionTextAsSpeech(JijimonNarratorText.EvolutionResultCalculated(value), textOutput => JijimonText = textOutput, () => OnPropertyChanged());
+            _ = _speakingSimulator.WriteEvolutionTextAsSpeech(JijimonNarratorText.EvolutionResultCalculated(value), textOutput => JijimonText = textOutput, () => OnPropertyChanged());
         }
     }
 
@@ -268,6 +280,6 @@ public sealed class EvolutionToolViewModel : BaseViewModel
 
     private void InstantDisplay()
     {
-        SpeakingSimulator.RequestInstantDisplay();
+        _speakingSimulator.RequestInstantDisplay();
     }
 }

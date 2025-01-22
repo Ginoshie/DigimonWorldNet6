@@ -2,48 +2,76 @@ using System;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using DigimonWorld.Frontend.WPF.Constants;
 
 namespace DigimonWorld.Frontend.WPF.Services;
 
-public static class SpeakingSimulator
+public class SpeakingSimulator
 {
-    private static CancellationTokenSource _typingCancellationTokenSource = new();
-    private static bool _speechIsActive;
-    private static bool _instantDisplayRequested;
+    private CancellationTokenSource? _typingCancellationTokenSource;
+    private bool _instantDisplayRequested;
+    private readonly object _lock = new();
 
-    public static async Task WriteEvolutionTextAsSpeech(string fullText, Action<string> updateTextAction, Action showEvolutionAction)
+    public static string ShowEvolutionResultKeyWord => "ShowEvolutionResult";
+
+    public async Task WriteTextAsSpeechAsync(string fullText, Action<string> updateTextAction)
     {
-        await _typingCancellationTokenSource.CancelAsync();
+        CancelAndReset();
+        await StartNewSpeechTask(() => WriteEvolutionTextAsSpeechInternal(fullText, updateTextAction, null));
+    }
 
-        _speechIsActive = true;
+    public async Task WriteEvolutionTextAsSpeech(string fullText, Action<string> updateTextAction, Action? showEvolutionAction)
+    {
+        CancelAndReset();
+        await StartNewSpeechTask(() => WriteEvolutionTextAsSpeechInternal(fullText, updateTextAction, showEvolutionAction));
+    }
 
-        _typingCancellationTokenSource.Dispose();
-        _typingCancellationTokenSource = new CancellationTokenSource();
+    private void CancelAndReset()
+    {
+        lock (_lock)
+        {
+            if (_typingCancellationTokenSource != null)
+            {
+                _typingCancellationTokenSource.Cancel();
+                _typingCancellationTokenSource.Dispose();
+            }
+            _typingCancellationTokenSource = new CancellationTokenSource();
+        }
+    }
 
-        CancellationToken cancellationToken = _typingCancellationTokenSource.Token;
+    private async Task StartNewSpeechTask(Func<Task> speechTask)
+    {
+        try
+        {
+            await speechTask();
+        }
+        catch (OperationCanceledException)
+        {
+            // Task canceled: swallow the exception as it's expected behavior
+        }
+    }
 
+    private async Task WriteEvolutionTextAsSpeechInternal(string fullText, Action<string> updateTextAction, Action? showEvolutionAction)
+    {
+        CancellationToken cancellationToken = _typingCancellationTokenSource!.Token;
         string currentText = string.Empty;
 
         try
         {
-            string[] words = fullText.Split(JijimonNarratorText.SeparatorChar);
+            string[] words = fullText.Split(' ');
 
-            if (!words.Contains(JijimonNarratorText.ShowEvolutionResultKeyWord))
+            if (!words.Contains(ShowEvolutionResultKeyWord))
             {
-                showEvolutionAction.Invoke();
+                showEvolutionAction?.Invoke();
             }
 
             foreach (string word in words)
             {
                 cancellationToken.ThrowIfCancellationRequested();
 
-                if (word == JijimonNarratorText.ShowEvolutionResultKeyWord)
+                if (word == ShowEvolutionResultKeyWord)
                 {
-                    showEvolutionAction.Invoke();
-
+                    showEvolutionAction?.Invoke();
                     await Task.Delay(500, cancellationToken);
-
                     continue;
                 }
 
@@ -68,22 +96,20 @@ public static class SpeakingSimulator
         {
             if (_instantDisplayRequested)
             {
-                updateTextAction(fullText.Replace(JijimonNarratorText.ShowEvolutionResultKeyWord, ""));
-
-                showEvolutionAction.Invoke();
+                updateTextAction(fullText.Replace(ShowEvolutionResultKeyWord, ""));
+                showEvolutionAction?.Invoke();
             }
         }
         finally
         {
             _instantDisplayRequested = false;
-            _speechIsActive = false;
         }
     }
 
-    public static void RequestInstantDisplay()
+    public void RequestInstantDisplay()
     {
-        if (!_speechIsActive) return;
-
+        if (_typingCancellationTokenSource?.IsCancellationRequested != false) return;
+        
         _instantDisplayRequested = true;
         _typingCancellationTokenSource.Cancel();
     }

@@ -1,6 +1,9 @@
 using System;
 using System.Reactive.Disposables;
+using System.Threading;
+using System.Threading.Tasks;
 using System.Windows.Input;
+using DigimonWorld.Frontend.WPF.Constants;
 using DigimonWorld.Frontend.WPF.Services;
 using DigimonWorld.Frontend.WPF.ViewModelComponents;
 
@@ -8,7 +11,8 @@ namespace DigimonWorld.Frontend.WPF.UserControls.MusicPlayer;
 
 public class MusicPlayerViewModel : BaseViewModel, IDisposable
 {
-    private readonly CompositeDisposable _compositeDisposable = new();
+    private readonly SpeakingSimulator _speakingSimulator;
+    private readonly CompositeDisposable _compositeDisposable;
 
     private string _currentSongTitle = string.Empty;
     private double _currentPosition;
@@ -16,9 +20,12 @@ public class MusicPlayerViewModel : BaseViewModel, IDisposable
     private bool _shuffleEnabled;
     private bool _repeatSingleSongEnabled;
     private bool _muteEnabled;
+    private string _giromonText = string.Empty;
 
     public MusicPlayerViewModel()
     {
+        _speakingSimulator = new SpeakingSimulator();
+
         ToggleShuffleCommand = new CommandHandler(ToggleShuffle);
 
         PreviousSongCommand = new CommandHandler(PreviousSong);
@@ -31,10 +38,26 @@ public class MusicPlayerViewModel : BaseViewModel, IDisposable
 
         ToggleMuteEnabledCommand = new CommandHandler(ToggleMuteEnabled);
 
-        _compositeDisposable.Add(Jukebox.CurrentSongTitleObservable.Subscribe(currentSongTitle => CurrentSongTitle = currentSongTitle));
-        _compositeDisposable.Add(Jukebox.CurrentPositionObservable.Subscribe(currentPosition => CurrentPosition = currentPosition));
-        _compositeDisposable.Add(Jukebox.SongLengthObservable.Subscribe(songLength => SongLength = songLength));
-        _compositeDisposable.Add(Jukebox.VolumeObservable.Subscribe(volume => Volume = volume));
+        _compositeDisposable = new CompositeDisposable(
+            Jukebox.CurrentSongTitleObservable.Subscribe(currentSongTitle => CurrentSongTitle = currentSongTitle),
+            Jukebox.CurrentPositionObservable.Subscribe(currentPosition => CurrentPosition = currentPosition),
+            Jukebox.SongLengthObservable.Subscribe(songLength => SongLength = songLength),
+            Jukebox.VolumeObservable.Subscribe(volume => Volume = volume),
+            EventHub.OnLeftPaneOpened.Subscribe(async void (_) => await OnMusicPlayerOpened()),
+            EventHub.OnLeftPaneClosed.Subscribe(async void (_) => await OnMusicPlayerClosed()),
+            EventHub.OnLeomonsThemeStarted.Subscribe(async void (_) => await OnLeomonSongStarted()),
+            EventHub.OnShuffleDisabled.Subscribe(async void (_) => await OnShuffleDisabled()),
+            EventHub.OnShuffleEnabled.Subscribe(async void (_) => await OnShuffleEnabled()),
+            EventHub.OnPreviousSongStarted.Subscribe(async void (_) => await OnPreviousSongStarted()),
+            EventHub.OnCurrentSongStarted.Subscribe(async void (_) => await OnCurrentSongStarted()),
+            EventHub.OnPause.Subscribe(async void (_) => await OnPaused()),
+            EventHub.OnNextSongStarted.Subscribe(async void (_) => await OnNextSongStarted()),
+            EventHub.OnRepeatCurrentSongMode.Subscribe(async void (_) => await OnRepeatCurrentSongMode()),
+            EventHub.OnPlayAllSongsMode.Subscribe(async void (_) => await OnPlayAllSongsMode()),
+            EventHub.OnMute.Subscribe(async void (_) => await OnMute()),
+            EventHub.OnUnmute.Subscribe(async void (_) => await OnUnmute()));
+
+        InstantDisplayCommand = new CommandHandler(InstantDisplay);
     }
 
     public ICommand ToggleShuffleCommand { get; }
@@ -48,6 +71,8 @@ public class MusicPlayerViewModel : BaseViewModel, IDisposable
     public ICommand ToggleRepeatSingleSongCommand { get; }
 
     public ICommand ToggleMuteEnabledCommand { get; }
+
+    public ICommand InstantDisplayCommand { get; }
 
     public string CurrentSongTitle
     {
@@ -164,6 +189,19 @@ public class MusicPlayerViewModel : BaseViewModel, IDisposable
         }
     }
 
+    public string GiromonText
+    {
+        get => _giromonText;
+        set
+        {
+            if (_giromonText == value) return;
+
+            _giromonText = value;
+
+            OnPropertyChanged();
+        }
+    }
+
     private void ToggleShuffle()
     {
         ShuffleEnabled = !ShuffleEnabled;
@@ -229,4 +267,28 @@ public class MusicPlayerViewModel : BaseViewModel, IDisposable
     {
         _compositeDisposable.Dispose();
     }
+
+    private void InstantDisplay()
+    {
+        _speakingSimulator.RequestInstantDisplay();
+    }
+
+    private async Task OnMusicPlayerOpened() => await Task
+        .Delay(500)
+        .WaitAsync(CancellationToken.None)
+        .ContinueWith(_ => _speakingSimulator.WriteTextAsSpeechAsync(GiromonJukeboxNarratorText.IntroText, textOutput => GiromonText = textOutput));
+
+    private async Task OnMusicPlayerClosed() => await _speakingSimulator.WriteTextAsSpeechAsync(string.Empty, textOutput => GiromonText = textOutput);
+
+    private async Task OnLeomonSongStarted() => await _speakingSimulator.WriteTextAsSpeechAsync(GiromonJukeboxNarratorText.LeomonsTheme, textOutput => GiromonText = textOutput);
+    private async Task OnShuffleDisabled() => await _speakingSimulator.WriteTextAsSpeechAsync(GiromonJukeboxNarratorText.ShuffleDisabled, textOutput => GiromonText = textOutput);
+    private async Task OnShuffleEnabled() => await _speakingSimulator.WriteTextAsSpeechAsync(GiromonJukeboxNarratorText.ShuffleEnabled, textOutput => GiromonText = textOutput);
+    private async Task OnPreviousSongStarted() => await _speakingSimulator.WriteTextAsSpeechAsync(GiromonJukeboxNarratorText.PreviousSong, textOutput => GiromonText = textOutput);
+    private async Task OnCurrentSongStarted() => await _speakingSimulator.WriteTextAsSpeechAsync(GiromonJukeboxNarratorText.Play, textOutput => GiromonText = textOutput);
+    private async Task OnPaused() => await _speakingSimulator.WriteTextAsSpeechAsync(GiromonJukeboxNarratorText.Pause, textOutput => GiromonText = textOutput);
+    private async Task OnNextSongStarted() => await _speakingSimulator.WriteTextAsSpeechAsync(GiromonJukeboxNarratorText.NextSong, textOutput => GiromonText = textOutput);
+    private async Task OnRepeatCurrentSongMode() => await _speakingSimulator.WriteTextAsSpeechAsync(GiromonJukeboxNarratorText.RepeatCurrent, textOutput => GiromonText = textOutput);
+    private async Task OnPlayAllSongsMode() => await _speakingSimulator.WriteTextAsSpeechAsync(GiromonJukeboxNarratorText.PlayAllSongs, textOutput => GiromonText = textOutput);
+    private async Task OnMute() => await _speakingSimulator.WriteTextAsSpeechAsync(GiromonJukeboxNarratorText.Mute, textOutput => GiromonText = textOutput);
+    private async Task OnUnmute() => await _speakingSimulator.WriteTextAsSpeechAsync(GiromonJukeboxNarratorText.Unmute, textOutput => GiromonText = textOutput);
 }

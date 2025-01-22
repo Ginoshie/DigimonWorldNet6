@@ -1,36 +1,46 @@
-<UserControl x:Class="DigimonWorld.Frontend.WPF.UserControls.EvolutionTool.UserControls.JijimonNaratorTextDisplay"
+<UserControl x:Class="DigimonWorld.Frontend.WPF.UserControls.MusicPlayer.UserControls.GiromonNaratorTextDisplay"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:evolutionTool="clr-namespace:DigimonWorld.Frontend.WPF.UserControls.EvolutionTool"
+             xmlns:musicPlayer="clr-namespace:DigimonWorld.Frontend.WPF.UserControls.MusicPlayer"
+             xmlns:system="clr-namespace:System;assembly=System.Runtime"
              mc:Ignorable="d"
-             d:DataContext="{d:DesignInstance Type=evolutionTool:EvolutionToolViewModel, IsDesignTimeCreatable=True}">
+             d:DataContext="{d:DesignInstance Type=musicPlayer:MusicPlayerViewModel, IsDesignTimeCreatable=True}">
 
-    <Border CornerRadius="5" BorderBrush="Black" BorderThickness="3" Margin="0, 15,25, 10" Padding="0" Background="Black">
-        <Border CornerRadius="5" BorderBrush="#4A9FC5" BorderThickness="3" Padding="0" Background="#4A9FC5">
-            <Border CornerRadius="5" BorderBrush="#90D9FA" BorderThickness="3" Padding="0" Background="#2E3841">
-                <Border CornerRadius="5" BorderBrush="Transparent" BorderThickness="0" Padding="0" Background="#77000000">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            
+            <system:Double x:Key="Width">200</system:Double>
+
+        </ResourceDictionary>
+    </UserControl.Resources>
+    
+    <Border CornerRadius="5" BorderBrush="Black" BorderThickness="3" Background="Black">
+        <Border CornerRadius="5" BorderBrush="#4A9FC5" BorderThickness="3" Background="#4A9FC5">
+            <Border CornerRadius="5" BorderBrush="#90D9FA" BorderThickness="3" Background="#2E3841">
+                <Border CornerRadius="5" BorderBrush="Transparent" BorderThickness="0" Background="#77000000">
                     <Border.InputBindings>
                         <MouseBinding Gesture="LeftClick" Command="{Binding InstantDisplayCommand}" />
                     </Border.InputBindings>
                     <StackPanel Margin="5">
-                        <TextBlock Text="Jijimon"
+                        <TextBlock Text="Giromon"
                                    Foreground="#D4D604"
                                    FontSize="15"
                                    HorizontalAlignment="Left"
                                    VerticalAlignment="Top"
                                    Margin="0,0, 0, 5"
-                                   Width="545"
+                                   Width="{StaticResource Width}"
+                                   Height="16"
                                    TextWrapping="Wrap" />
-                        <TextBlock Text="{Binding JijimonText}"
+                        <TextBlock Text="{Binding GiromonText}"
                                    Foreground="#B3B5B1"
                                    FontSize="14"
                                    HorizontalAlignment="Left"
                                    VerticalAlignment="Top"
                                    Margin="0, 5"
-                                   Width="545"
-                                   Height="130"
+                                   Width="{StaticResource Width}"
+                                   Height="60"
                                    TextWrapping="Wrap" />
                     </StackPanel>
                 </Border>

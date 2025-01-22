@@ -15,22 +15,22 @@ public class MainWindowViewModel : BaseViewModel
     public MainWindowViewModel(Window window)
     {
         _window = window;
-        
+
         MinimizeCommand = new CommandHandler(() => _window.WindowState = WindowState.Minimized);
 
         CloseCommand = new CommandHandler(CloseApplication);
 
         DragCommand = new CommandHandler(() => DragWindow(window));
-        
+
         ToggleLeftPaneCommand = new CommandHandler(ToggleLeftPane);
-        
+
         ToggleBottomPaneCommand = new CommandHandler(ToggleBottomPane);
     }
 
     private void CloseApplication()
     {
         Jukebox.Dispose();
-        
+
         _window.Close();
     }
 
@@ -42,6 +42,16 @@ public class MainWindowViewModel : BaseViewModel
             if (_leftPaneIsOpen == value) return;
 
             _leftPaneIsOpen = value;
+
+            if (_leftPaneIsOpen)
+            {
+                EventHub.SignalLeftPaneOpened();
+            }
+            else
+            {
+                EventHub.SignalLeftPaneClosed();
+            }
+
             OnPropertyChanged();
         }
     }
@@ -54,6 +64,7 @@ public class MainWindowViewModel : BaseViewModel
             if (_bottomPaneIsOpen == value) return;
 
             _bottomPaneIsOpen = value;
+
             OnPropertyChanged();
         }
     }
@@ -63,9 +74,9 @@ public class MainWindowViewModel : BaseViewModel
     public ICommand CloseCommand { get; }
 
     public ICommand DragCommand { get; }
-    
+
     public ICommand ToggleLeftPaneCommand { get; }
-    
+
     public ICommand ToggleBottomPaneCommand { get; }
 
     private void DragWindow(Window window)
@@ -81,12 +92,12 @@ public class MainWindowViewModel : BaseViewModel
             // Ignore exceptions caused by improper DragMove calls
         }
     }
-    
+
     private void ToggleLeftPane()
     {
         LeftPaneIsOpen = !LeftPaneIsOpen;
     }
-    
+
     private void ToggleBottomPane()
     {
         BottomPaneIsOpen = !BottomPaneIsOpen;
