@@ -13,6 +13,7 @@
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="../../ResourceDictionaries/Styles/Buttons/DefaultButtonStyle.xaml" />
+                <ResourceDictionary Source="../../ResourceDictionaries/Styles/DefaultTooltipStyle.xaml" />
                 <ResourceDictionary Source="../../ResourceDictionaries/Styles/ProgressBarStyle.xaml" />
                 <ResourceDictionary Source="../../ResourceDictionaries/ControlTemplates/DefaultHorizontalSliderTemplate.xaml" />
                 <ResourceDictionary Source="../../ResourceDictionaries/Styles/Buttons/DefaultToggleButtonStyle.xaml" />
@@ -96,7 +97,11 @@
                             FontSize="{StaticResource ButtonFontSize}"
                             Height="{StaticResource ButtonDimension}"
                             Width="{StaticResource ButtonDimension}"
-                            Margin="0, 10, 0,10" />
+                            Margin="0, 10, 0,10">
+                        <Button.ToolTip>
+                            <ToolTip Style="{StaticResource DefaultToolTipStyle}" Content="{Binding MuteButtonText}" />
+                        </Button.ToolTip>
+                    </Button>
                 </Grid>
             </StackPanel>
         </StackPanel>
@@ -152,7 +157,11 @@
                     Width="{StaticResource ButtonDimension}"
                     FontSize="{StaticResource ButtonFontSize}"
                     Margin="0, 0, 15, 0"
-                    Tag="{Binding ShuffleEnabled}" />
+                    Tag="{Binding ShuffleEnabled}">
+                <Button.ToolTip>
+                    <ToolTip Style="{StaticResource DefaultToolTipStyle}" Content="{Binding ShuffleButtonText}" />
+                </Button.ToolTip>
+            </Button>
 
             <!-- Previous track button -->
             <Button Style="{StaticResource DefaultButtonStyle}"
@@ -161,7 +170,11 @@
                     Height="{StaticResource ButtonDimension}"
                     Width="{StaticResource ButtonDimension}"
                     FontSize="{StaticResource ButtonFontSize}"
-                    Margin="0, 0, 0, 0" />
+                    Margin="0, 0, 0, 0">
+                <Button.ToolTip>
+                    <ToolTip Style="{StaticResource DefaultToolTipStyle}" Content="{Binding PreviousSongButtonText}" />
+                </Button.ToolTip>
+            </Button>
 
             <!-- Play/Pause button -->
             <Button Style="{StaticResource DefaultButtonStyle}"
@@ -170,7 +183,11 @@
                     Height="{StaticResource ButtonDimension}"
                     Width="{StaticResource ButtonDimension}"
                     FontSize="{StaticResource ButtonFontSize}"
-                    Margin="5, 0, 0, 0" />
+                    Margin="5, 0, 0, 0">
+                <Button.ToolTip>
+                    <ToolTip Style="{StaticResource DefaultToolTipStyle}" Content="{Binding PlayPauseButtonText}" />
+                </Button.ToolTip>
+            </Button>
 
             <!-- Next track button -->
             <Button Style="{StaticResource DefaultButtonStyle}"
@@ -179,7 +196,11 @@
                     Height="{StaticResource ButtonDimension}"
                     Width="{StaticResource ButtonDimension}"
                     FontSize="{StaticResource ButtonFontSize}"
-                    Margin="5, 0, 0, 0" />
+                    Margin="5, 0, 0, 0">
+                <Button.ToolTip>
+                    <ToolTip Style="{StaticResource DefaultToolTipStyle}" Content="{Binding NextSongButtonText}" />
+                </Button.ToolTip>
+            </Button>
 
             <!-- Repeat button -->
             <Button Style="{StaticResource DefaultToggleButtonStyle}"
@@ -189,7 +210,11 @@
                     Width="{StaticResource ButtonDimension}"
                     FontSize="{StaticResource ButtonFontSize}"
                     Margin="15, 0, 0, 0"
-                    Tag="{Binding RepeatSingleSongEnabled}" />
+                    Tag="{Binding RepeatSingleSongEnabled}">
+                <Button.ToolTip>
+                    <ToolTip Style="{StaticResource DefaultToolTipStyle}" Content="{Binding RepeatSingleSongText}" />
+                </Button.ToolTip>
+            </Button>
 
         </StackPanel>
     </Grid>

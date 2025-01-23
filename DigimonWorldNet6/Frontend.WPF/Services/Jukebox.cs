@@ -13,8 +13,8 @@ namespace DigimonWorld.Frontend.WPF.Services;
 
 public static class Jukebox
 {
-    private static readonly string LeomonSongTitle = "19) Leomon";
-    
+    private const string LEOMON_SONG_TITLE = "19) Leomon";
+
     private static bool _hasPlayedMusic;
     private static readonly WasapiOut SoundOut;
     private static readonly CompositeDisposable CompositeDisposable;
@@ -31,12 +31,11 @@ public static class Jukebox
     private static IWaveSource? _currentWaveSource;
 
     private static readonly List<string> ActivePlaylist = [];
-    private static bool _isPaused;
     private static int _currentTrackIndex;
     private static bool _shuffleEnabled;
     private static bool _repeatCurrent;
     private static float _volumeBeforeMute;
-    private static string _currentSongTitle;
+    private static string? _currentSongTitle;
 
     public static readonly IObservable<string> CurrentSongTitleObservable = CurrentSongTitleSubject.AsObservable();
     public static readonly IObservable<double> CurrentPositionObservable = CurrentPositionSubject.AsObservable();
@@ -54,9 +53,11 @@ public static class Jukebox
         LoadCurrentTrack();
 
         SoundOut.Stopped += OnPlaybackStopped;
-        
+
         CurrentSongTitleObservable.Subscribe(OnLeomonsSongStarted);
     }
+
+    public static bool IsPaused { get; private set; } = true;
 
     public static float Volume
     {
@@ -88,17 +89,16 @@ public static class Jukebox
         int trackIndexIncrease = _shuffleEnabled ? new Random().Next(0, ActivePlaylist.Count) : 1;
 
         _currentTrackIndex = (_currentTrackIndex - trackIndexIncrease + ActivePlaylist.Count) % ActivePlaylist.Count;
-        
+
         LoadCurrentTrack();
 
-        if (!_isPaused && _hasPlayedMusic)
-        {
-            SoundOut.Play();
-            
-            if (_currentSongTitle == LeomonSongTitle) return;
-            
-            EventHub.SignalPreviousSongStarted();
-        }
+        if (IsPaused || !_hasPlayedMusic) return;
+
+        SoundOut.Play();
+
+        if (_currentSongTitle == LEOMON_SONG_TITLE) return;
+
+        EventHub.SignalPreviousSongStarted();
     }
 
     public static void PlayPause()
@@ -108,17 +108,17 @@ public static class Jukebox
             case PlaybackState.Stopped:
                 PlayCurrentTrack();
                 _hasPlayedMusic = true;
-                _isPaused = false;
+                IsPaused = false;
                 EventHub.SignalCurrentSongStarted();
                 break;
             case PlaybackState.Paused:
                 SoundOut.Resume();
-                _isPaused = false;
+                IsPaused = false;
                 EventHub.SignalCurrentSongStarted();
                 break;
             case PlaybackState.Playing:
                 SoundOut.Pause();
-                _isPaused = true;
+                IsPaused = true;
                 EventHub.SignalPause();
                 break;
             default:
@@ -131,53 +131,53 @@ public static class Jukebox
         int trackIndexIncrease = _shuffleEnabled ? new Random().Next(0, ActivePlaylist.Count) : 1;
 
         _currentTrackIndex = (_currentTrackIndex + trackIndexIncrease) % ActivePlaylist.Count;
-        
+
         LoadCurrentTrack();
 
-        if (_isPaused || !_hasPlayedMusic) return;
-        
+        if (IsPaused || !_hasPlayedMusic) return;
+
         SoundOut.Play();
 
-        if (_currentSongTitle == LeomonSongTitle) return;
-            
+        if (_currentSongTitle == LEOMON_SONG_TITLE) return;
+
         EventHub.SignalNextSongStarted();
     }
 
     public static void RepeatCurrentSong()
     {
         _repeatCurrent = true;
-        
+
         EventHub.SignalRepeatCurrentSongMode();
     }
 
     public static void PlayAllSongs()
     {
         _repeatCurrent = false;
-        
+
         EventHub.SignalPlayAllSongsMode();
     }
 
     public static void Mute()
     {
         if (SoundOut.Volume == 0) return;
-        
+
         _volumeBeforeMute = SoundOut.Volume;
 
         VolumeSubject.OnNext(0);
 
         SoundOut.Volume = 0;
-        
+
         EventHub.SignalMute();
     }
 
     public static void UnMute()
     {
-        if(_volumeBeforeMute == 0) return;
-        
+        if (_volumeBeforeMute == 0) return;
+
         VolumeSubject.OnNext(_volumeBeforeMute * 100);
 
         SoundOut.Volume = _volumeBeforeMute;
-        
+
         EventHub.SignalUnmute();
     }
 
@@ -272,7 +272,7 @@ public static class Jukebox
 
     private static void OnPlaybackStopped(object? sender, PlaybackStoppedEventArgs e)
     {
-        if (SoundOut.PlaybackState != PlaybackState.Stopped || _isPaused) return;
+        if (SoundOut.PlaybackState != PlaybackState.Stopped || IsPaused) return;
 
         if (!_repeatCurrent)
         {
@@ -286,7 +286,7 @@ public static class Jukebox
 
     private static void OnLeomonsSongStarted(string songTitle)
     {
-        if (songTitle == LeomonSongTitle)
+        if (songTitle == LEOMON_SONG_TITLE)
         {
             EventHub.SignalLeomonsThemeStarted();
         }

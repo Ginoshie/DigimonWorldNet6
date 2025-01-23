@@ -202,6 +202,18 @@ public class MusicPlayerViewModel : BaseViewModel, IDisposable
         }
     }
 
+    public string ShuffleButtonText => _shuffleEnabled ? "Shuffle mode ON.\n\nClick to turn OFF shuffle mode." : "Shuffle mode OFF.\n\nClick to turn ON shuffle mode.";
+
+    public string PreviousSongButtonText { get; } = "Skip to previous song";
+
+    public string PlayPauseButtonText => Jukebox.IsPaused ? "Music is paused.\n\nClick to start playing music." : "Music is playing.\n\nClick to pause music.";
+
+    public string NextSongButtonText { get; } = "Skip to next song.";
+
+    public string RepeatSingleSongText => _repeatSingleSongEnabled ? "Repeat single song mode ON.\n\nClick to turn ON play all songs mode." : "Play all songs mode ON.\n\nClick to turn ON repeat single song mode.";
+
+    public string MuteButtonText => _muteEnabled ? "Mute is ON.\n\nClick to turn OFF mute." : "Mute is OFF.\n\nClick to turn ON mute.";
+
     private void ToggleShuffle()
     {
         ShuffleEnabled = !ShuffleEnabled;
