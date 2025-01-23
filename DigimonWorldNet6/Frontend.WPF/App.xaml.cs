@@ -14,7 +14,7 @@ public partial class App
     {
         
         AppHost = Host.CreateDefaultBuilder()
-            .ConfigureServices((hostContext, services) =>
+            .ConfigureServices((_, services) =>
             {
                 services.AddSingleton<MainWindow>();
                 

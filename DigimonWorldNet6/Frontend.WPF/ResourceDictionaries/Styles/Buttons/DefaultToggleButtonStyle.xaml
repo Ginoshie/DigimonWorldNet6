@@ -14,6 +14,7 @@
                             </Border>
                         </Border>
                     </Grid>
+
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsPressed" Value="True">
                             <Setter TargetName="OuterBorder" Property="BorderBrush" Value="#060100" />
@@ -23,6 +24,7 @@
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
+
         <Style.Triggers>
             <DataTrigger Binding="{Binding Path=Tag, RelativeSource={RelativeSource Self}}" Value="True">
                 <Setter Property="Opacity" Value="1.0" />

@@ -11,11 +11,8 @@
             <Setter.Value>
                 <ControlTemplate TargetType="ComboBox">
                     <Grid>
-                        <!-- Outer Border for Bottom and Right -->
-                        <Border Name="OuterBorder" BorderBrush="#6789A5" BorderThickness="0,0,2,2">
-                            <!-- Inner Border for Top and Left -->
+                        <Border Name="OuterBorder" BorderBrush="#6789A5" BorderThickness="0,0,2,2" Background="{TemplateBinding Background}">
                             <Border BorderBrush="#060100" BorderThickness="2,2,0,0">
-                                <!-- Background and ComboBox Content -->
                                 <ToggleButton Name="ToggleButton"
                                               Background="{TemplateBinding Background}"
                                               BorderBrush="Transparent"
@@ -29,13 +26,11 @@
                                                     BorderBrush="{TemplateBinding BorderBrush}"
                                                     BorderThickness="{TemplateBinding BorderThickness}">
                                                 <Grid Background="{TemplateBinding Background}">
-                                                    <!-- Content Area -->
                                                     <ContentPresenter Content="{TemplateBinding Content}"
                                                                       ContentTemplate="{TemplateBinding ContentTemplate}"
                                                                       VerticalAlignment="Center"
                                                                       Margin="4" />
 
-                                                    <!-- Arrow Icon on the Right -->
                                                     <Path Data="M 0 0 L 6 6 L 12 0 Z"
                                                           VerticalAlignment="Center"
                                                           HorizontalAlignment="Right"
@@ -48,7 +43,6 @@
                                                         <Path.Style>
                                                             <Style TargetType="Path">
                                                                 <Style.Triggers>
-                                                                    <!-- Bind to IsDropDownOpen from ComboBox -->
                                                                     <DataTrigger Binding="{Binding IsDropDownOpen, RelativeSource={RelativeSource AncestorType=ComboBox}}" Value="True">
                                                                         <DataTrigger.EnterActions>
                                                                             <BeginStoryboard>
@@ -74,11 +68,9 @@
                                                 </Grid>
                                             </Border>
                                             <ControlTemplate.Triggers>
-                                                <!-- MouseOver Trigger -->
                                                 <Trigger Property="IsMouseOver" Value="True">
                                                     <Setter TargetName="ToggleButtonBorder" Property="Background" Value="#567D91" />
                                                 </Trigger>
-                                                <!-- Disabled Trigger -->
                                                 <Trigger Property="IsEnabled" Value="False">
                                                     <Setter TargetName="ToggleButtonBorder" Property="Background" Value="#A0A0A0" />
                                                 </Trigger>
@@ -89,7 +81,6 @@
                             </Border>
                         </Border>
 
-                        <!-- Popup for the dropdown list -->
                         <Popup Name="Popup"
                                Placement="Bottom"
                                IsOpen="{TemplateBinding IsDropDownOpen}"

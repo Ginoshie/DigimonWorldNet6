@@ -1,8 +1,6 @@
-using System.Windows.Controls;
-
 namespace DigimonWorld.Frontend.WPF.UserControls.MusicPlayer;
 
-public partial class MusicPlayerUserControl : UserControl
+public partial class MusicPlayerUserControl
 {
     public MusicPlayerUserControl()
     {
