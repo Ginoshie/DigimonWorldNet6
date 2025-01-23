@@ -274,7 +274,7 @@ public class MusicPlayerViewModel : BaseViewModel, IDisposable
     }
 
     private async Task OnMusicPlayerOpened() => await Task
-        .Delay(500)
+        .Delay(750)
         .WaitAsync(CancellationToken.None)
         .ContinueWith(_ => _speakingSimulator.WriteTextAsSpeechAsync(GiromonJukeboxNarratorText.IntroText, textOutput => GiromonText = textOutput));
 

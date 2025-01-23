@@ -2,10 +2,13 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:conversion="clr-namespace:DigimonWorld.Frontend.WPF.Conversion"
-             xmlns:enums="clr-namespace:Generics.Enums;assembly=Generics">
+             xmlns:enums="clr-namespace:Generics.Enums;assembly=Generics"
+             xmlns:system="clr-namespace:System;assembly=System.Runtime">
     <Application.Resources>
         <FontFamily x:Key="Dw1Font">pack://application:,,,/Frontend.WPF;component/Fonts/DW1_US_Regular.ttf#DW1 US</FontFamily>
 
+        <system:Int16 x:Key="DefaultTooltipDelay">750</system:Int16>
+        
         <conversion:EnumToImageConverter x:Key="EnumToImageConverter" />
 
         <ObjectDataProvider x:Key="DigimonTypes"

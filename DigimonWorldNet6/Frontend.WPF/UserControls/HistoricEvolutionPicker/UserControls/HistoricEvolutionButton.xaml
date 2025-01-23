@@ -32,14 +32,14 @@
         
         <ItemsControl.ItemTemplate>
             <DataTemplate>
-                <Button Style="{StaticResource StretchContentButtonStyle}"
+                <Button ToolTipService.InitialShowDelay="{StaticResource DefaultTooltipDelay}" Style="{StaticResource StretchContentButtonStyle}"
                         Width="{StaticResource Width}"
                         Height="{StaticResource Height}"
                         Margin="{StaticResource Margin}"
                         Command="{Binding DataContext.HistoricEvolutionClickedCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}"
                         CommandParameter="{Binding}">
                     <Button.ToolTip>
-                        <ToolTip ToolTipService.BetweenShowDelay="500" Style="{StaticResource DefaultToolTipStyle}">
+                        <ToolTip Style="{StaticResource DefaultToolTipStyle}">
                             <TextBlock Text="{Binding DigimonType}" />
                         </ToolTip>
                     </Button.ToolTip>

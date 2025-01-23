@@ -2,6 +2,7 @@ using System;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Threading;
+using DigimonWorld.Frontend.WPF.Constants;
 using Microsoft.Xaml.Behaviors;
 
 namespace DigimonWorld.Frontend.WPF.Behaviors
@@ -30,7 +31,7 @@ namespace DigimonWorld.Frontend.WPF.Behaviors
         protected override void OnAttached()
         {
             base.OnAttached();
-            _timer = new DispatcherTimer { Interval = TimeSpan.FromMilliseconds(500) };
+            _timer = new DispatcherTimer { Interval = TimeSpan.FromMilliseconds(DefaultValues.DefaultTooltipDelayInMs) };
             _timer.Tick += OnTimerTick;
 
             AssociatedObject.MouseEnter += OnMouseEnter;
