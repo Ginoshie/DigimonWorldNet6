@@ -13,7 +13,16 @@
              d:DataContext="{d:DesignInstance Type=evolutionTool:EvolutionToolViewModel, IsDesignTimeCreatable=True}">
 
     <UserControl.Resources>
-        <ResourceDictionary Source="./Styles/CalculateEvolutionButtonStyle.xaml" />
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="./Styles/CalculateEvolutionButtonStyle.xaml" />
+                <ResourceDictionary Source="../../ResourceDictionaries/Styles/DefaultTooltipStyle.xaml" />
+                <ResourceDictionary Source="../../ResourceDictionaries/Styles/DefaultSheenLabelStyle.xaml"  />
+                <ResourceDictionary Source="../../ResourceDictionaries/Styles/DefaultTextboxStyle.xaml"  />
+                <ResourceDictionary Source="../../ResourceDictionaries/Styles/DefaultLabelStyle.xaml"  />
+                <ResourceDictionary Source="../../ResourceDictionaries/Styles/DefaultComboboxStyle.xaml"  />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
     </UserControl.Resources>
 
     <Grid>

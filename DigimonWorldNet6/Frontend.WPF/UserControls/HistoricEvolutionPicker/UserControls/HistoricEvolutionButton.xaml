@@ -13,6 +13,7 @@
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="../../../ResourceDictionaries/Styles/Buttons/StretchContentButtonStyle.xaml" />
+                <ResourceDictionary Source="../../../ResourceDictionaries/Styles/DefaultTooltipStyle.xaml" />
             </ResourceDictionary.MergedDictionaries>
 
             <conversion:DigimonTypeContainsMultiConverter x:Key="DigimonTypeMultiConverter" />
