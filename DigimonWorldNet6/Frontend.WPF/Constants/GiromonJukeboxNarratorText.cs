@@ -22,10 +22,13 @@ public static class GiromonJukeboxNarratorText
                                           "\n" +
                                           "No more music, pause it!";
 
-    public static string NextSong { get; } = "Next song! Next song!";
+    public static string NextSong { get; } = "Next bomb . . . eh song! \n" +
+                                             "\n" +
+                                             "Song!";
 
-
-    public static string PreviousSong { get; } = "Previous song it is . . .";
+    public static string PreviousSong { get; } = "Previous song . . . \n" +
+                                                 "\n" +
+                                                 "A blast from the past!";
 
     public static string RepeatCurrent { get; } = "Repeat this song . . . \n" +
                                                   "\n" +
@@ -40,8 +43,8 @@ public static class GiromonJukeboxNarratorText
                                          "I . . . bomb you!";
 
     public static string Unmute { get; } = "Turn up the volume!\n" +
-                                         "\n" +
-                                         "Make it go * BOOOOOM! *";
+                                           "\n" +
+                                           "Make it go * BOOOOOM! *";
 
     public static string LeomonsTheme { get; } = "Stand up and pay respect for the greatest song in the world . . .";
 }

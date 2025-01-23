@@ -14,7 +14,7 @@ public static class JijimonNarratorText
                                     "\n" +
                                     "Once you've done that, open the 'Historic Evolutions' pane and select each evolution you've achieved in this save.\n" +
                                     "\n" +
-                                    $"When done press the \"{UiText.CalculateButtonText}\" button to see the result.";
+                                    $"When done, press the \"{UiText.CalculateButtonText}\" button to see the result.";
 
     public static string EvolutionResultCalculated(EvolutionResult evolutionResult)
     {
