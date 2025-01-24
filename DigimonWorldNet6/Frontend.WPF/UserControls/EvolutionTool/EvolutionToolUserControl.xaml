@@ -17,10 +17,10 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="./Styles/CalculateEvolutionButtonStyle.xaml" />
                 <ResourceDictionary Source="../../ResourceDictionaries/Styles/DefaultTooltipStyle.xaml" />
-                <ResourceDictionary Source="../../ResourceDictionaries/Styles/DefaultSheenLabelStyle.xaml"  />
                 <ResourceDictionary Source="../../ResourceDictionaries/Styles/DefaultTextboxStyle.xaml"  />
-                <ResourceDictionary Source="../../ResourceDictionaries/Styles/DefaultLabelStyle.xaml"  />
                 <ResourceDictionary Source="../../ResourceDictionaries/Styles/DefaultComboboxStyle.xaml"  />
+                <ResourceDictionary Source="../../ResourceDictionaries/Styles/Labels/DefaultSheenLabelStyle.xaml"  />
+                <ResourceDictionary Source="../../ResourceDictionaries/Styles/Labels/DefaultLabelStyle.xaml"  />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </UserControl.Resources>
@@ -374,7 +374,7 @@
             </GroupBox>
 
             <Button Grid.Column="0" Grid.Row="2" Style="{StaticResource CalculateEvolutionButtonStyle}"
-                    Height="40"
+                    Height="{StaticResource DefaultButtonHeight}"
                     Content="{Binding CalculateButtonText}"
                     Command="{Binding SetEvolutionResult}" />
 

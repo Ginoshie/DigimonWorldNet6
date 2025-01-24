@@ -4,6 +4,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:generalConfig="clr-namespace:DigimonWorld.Frontend.WPF.Windows.GeneralConfig"
+        xmlns:system="clr-namespace:System;assembly=System.Runtime"
         mc:Ignorable="d"
         d:DataContext="{d:DesignInstance Type=generalConfig:GeneralConfigWindowViewModel, IsDesignTimeCreatable=True}"
         Title="Configuration"
@@ -15,32 +16,73 @@
         WindowStartupLocation="Manual"
         Width="500"
         Height="500">
-    
+
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="../../ResourceDictionaries/Styles/Buttons/DefaultButtonStyle.xaml" />
+                <ResourceDictionary Source="../../ResourceDictionaries/Styles/Buttons/DefaultOptionPickerButtonStyle.xaml" />
+                <ResourceDictionary Source="../../ResourceDictionaries/Styles/Labels/DefaultSheenLabelStyle.xaml" />
+                <ResourceDictionary Source="../../ResourceDictionaries/Styles/Labels/DefaultLabelStyle.xaml" />
             </ResourceDictionary.MergedDictionaries>
+            
+            <system:Double x:Key="WindowButtonWidth">70</system:Double>
+            <system:Double x:Key="OptionButtonHeight">22</system:Double>
         </ResourceDictionary>
     </Window.Resources>
-    
+
     <Border Background="Transparent" Panel.ZIndex="1">
         <Border CornerRadius="5" BorderBrush="Black" BorderThickness="3" Background="Black">
             <Border CornerRadius="5" BorderBrush="#4A9FC5" BorderThickness="3" Background="#4A9FC5">
                 <Border CornerRadius="5" BorderBrush="#90D9FA" BorderThickness="3" Background="#90D9FA">
                     <Border CornerRadius="5" BorderBrush="Black" BorderThickness="3" Background="Black">
                         <Grid>
-                            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="60" />
+                            </Grid.RowDefinitions>
+                            <Grid Grid.Row="0">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="60"></RowDefinition>
+                                    <RowDefinition Height="Auto"></RowDefinition>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+                                <Label Grid.Row="0" Grid.Column="0" Height="40" Width="150" HorizontalAlignment="Center" Style="{StaticResource DefaultSheenLabelStyle}">
+                                    NARRATION
+                                </Label>
+                                <StackPanel Grid.Row="1" Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Center">
+                                    <Label Style="{StaticResource DefaultLabelStyle}" Content="Narrator mode:" Margin="10, 0, 5, 0"/>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Button Style="{StaticResource DefaultOptionPickerButtonStyle}"
+                                                Height="{StaticResource OptionButtonHeight}"
+                                                Width="60"
+                                                Content="Speech"
+                                                Command="{Binding SetNarratorModeSpeechCommand}"
+                                                Tag="{Binding IsNarratorModeSpeech}"/>
+                                        <Button Style="{StaticResource DefaultOptionPickerButtonStyle}"
+                                                Height="{StaticResource OptionButtonHeight}"
+                                                Width="60"
+                                                Content="Instant"
+                                                Command="{Binding SetNarratorModeInstantCommand}" 
+                                                Tag="{Binding IsNarratorModeInstant}"/>
+                                    </StackPanel>
+                                </StackPanel>
+
+                            </Grid>
+                            <StackPanel Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10">
                                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                                     <Button Style="{StaticResource DefaultButtonStyle}"
-                                            Height="40"
-                                            Width="75"
+                                            Height="{StaticResource DefaultButtonHeight}"
+                                            Width="{StaticResource WindowButtonWidth}"
                                             Margin="10, 0"
                                             Content="Save"
                                             Command="{Binding SaveCommand}" />
                                     <Button Style="{StaticResource DefaultButtonStyle}"
-                                            Height="40"
-                                            Width="75"
+                                            Height="{StaticResource DefaultButtonHeight}"
+                                            Width="{StaticResource WindowButtonWidth}"
                                             Content="Cancel"
                                             Command="{Binding CancelCommand}" />
                                 </StackPanel>

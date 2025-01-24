@@ -1,12 +1,11 @@
 using System;
 using System.Linq;
-using DigimonWorld.Frontend.WPF.Services;
 using Generics.Enums;
 using Generics.Extensions;
 
 namespace DigimonWorld.Frontend.WPF.Constants;
 
-public static class JijimonNarratorText
+public static class JijimonEvolutionCalculatorNarratorText
 {
     public const string IntroText = "Well hello there! \n" +
                                     "\n" +
@@ -15,6 +14,8 @@ public static class JijimonNarratorText
                                     "Once you've done that, open the 'Historic Evolutions' pane and select each evolution you've achieved in this save.\n" +
                                     "\n" +
                                     $"When done, press the \"{UiText.CalculateButtonText}\" button to see the result.";
+
+    public static string ShowEvolutionResultKeyWord => "ShowEvolutionResult";
 
     public static string EvolutionResultCalculated(EvolutionResult evolutionResult)
     {
@@ -93,101 +94,101 @@ public static class JijimonNarratorText
 
         return evolutionDigimonType switch
         {
-            DigimonType.Vegiemon => $"Good job, it will evolve to the champion stage.\n {SpeakingSimulator.ShowEvolutionResultKeyWord} " +
+            DigimonType.Vegiemon => $"Good job, it will evolve to the champion stage.\n {ShowEvolutionResultKeyWord} " +
                                     "\n" +
                                     $"A {evolutionDigimonType}, he got some major beef . . . \n" +
                                     "\n" +
                                     $"{DigimonType.Tyrannomon} will be very happy.  *chuckles*",
-            DigimonType.Sukamon => $"Hmm this is going to be special . . . \n {SpeakingSimulator.ShowEvolutionResultKeyWord} " +
+            DigimonType.Sukamon => $"Hmm this is going to be special . . . \n {ShowEvolutionResultKeyWord} " +
                                    "\n" +
                                    "In a . . . good . . . way ofcourse.\n" +
                                    "\n" +
                                    $"It'll become a {evolutionDigimonType}.\n" +
                                    "\n" +
                                    "It's time to clean up the city.",
-            DigimonType.Shellmon => $"Another exciting evolution!\n {SpeakingSimulator.ShowEvolutionResultKeyWord} " +
+            DigimonType.Shellmon => $"Another exciting evolution!\n {ShowEvolutionResultKeyWord} " +
                                     "\n" +
                                     $"Great! It's a {evolutionDigimonType}.\n" +
                                     "\n" +
                                     $"Have you got any rumors for us {evolutionDigimonType}?  *leans in eagerly*",
-            DigimonType.Ogremon => $"Oh this is going to be a special one . . . \n {SpeakingSimulator.ShowEvolutionResultKeyWord} " +
+            DigimonType.Ogremon => $"Oh this is going to be a special one . . . \n {ShowEvolutionResultKeyWord} " +
                                    "\n" +
                                    "There it is, perhaps not looking like it but . . . \n" +
                                    "\n" +
                                    $"{evolutionDigimonType} has a gentle soul, you'd be surprised.  *nods*",
-            DigimonType.Meramon => $"Watch closely, it's going to evolve\n {SpeakingSimulator.ShowEvolutionResultKeyWord} " +
+            DigimonType.Meramon => $"Watch closely, it's going to evolve\n {ShowEvolutionResultKeyWord} " +
                                    "\n" +
                                    "*sudden rise in temperature*\n" +
                                    "\n" +
                                    $"Oof . . . hot . . . This must be a . . . {evolutionDigimonType}!\n" +
                                    "\n" +
                                    "*yelps* Don't burn my house!",
-            DigimonType.Leomon => $"It's evolving, with such fierce power . . . \n {SpeakingSimulator.ShowEvolutionResultKeyWord} " +
+            DigimonType.Leomon => $"It's evolving, with such fierce power . . . \n {ShowEvolutionResultKeyWord} " +
                                   "\n" +
                                   $"No wonder I could sense it's power. It's a {evolutionDigimonType}\n" +
                                   $"*starts humming the {evolutionDigimonType} theme*",
-            DigimonType.Kokatorimon => $"It's evolving, let's wait for the result\n {SpeakingSimulator.ShowEvolutionResultKeyWord} " +
+            DigimonType.Kokatorimon => $"It's evolving, let's wait for the result\n {ShowEvolutionResultKeyWord} " +
                                        "\n" +
                                        $"Great, it's a {evolutionDigimonType}\n" +
                                        "\n" +
                                        "You two can race for the worm in the morning.  *smiles gently*",
-            DigimonType.Greymon => $"How nice, another evolution incoming.\n {SpeakingSimulator.ShowEvolutionResultKeyWord} " +
+            DigimonType.Greymon => $"How nice, another evolution incoming.\n {ShowEvolutionResultKeyWord} " +
                                    "\n" +
                                    $"Look at that, a {evolutionDigimonType}.\n" +
                                    "\n" +
                                    "Without the confused aggression, I might add.\n" +
                                    "\n" +
                                    "Nice.",
-            DigimonType.Garurumon => $"Very nice, another evolution.\n {SpeakingSimulator.ShowEvolutionResultKeyWord} " +
+            DigimonType.Garurumon => $"Very nice, another evolution.\n {ShowEvolutionResultKeyWord} " +
                                      "\n" +
                                      $"Oh a {evolutionDigimonType}.\n" +
                                      "\n" +
                                      "Welcome back pack leader, please no howling in the night",
             DigimonType.Frigimon => "Goodness, we've got another evolution coming up!\n" +
                                     "\n" +
-                                    $"*sudden temperature drop*\n {SpeakingSimulator.ShowEvolutionResultKeyWord} " +
+                                    $"*sudden temperature drop*\n {ShowEvolutionResultKeyWord} " +
                                     "\n" +
                                     $"*shivers* Brrr, so chilly with {evolutionDigimonType} in the room",
             DigimonType.Drimogemon => "*strange noise* Giin giin . . . Giin giin . . . \n" +
                                       "\n" +
-                                      $"Whats this sound I hear . . . \n {SpeakingSimulator.ShowEvolutionResultKeyWord} " +
+                                      $"Whats this sound I hear . . . \n {ShowEvolutionResultKeyWord} " +
                                       "\n" +
                                       $"Oh that explains it, {evolutionDigimonType}'s horn drill.",
-            DigimonType.Devimon => $"Lets see what cheeky bugger it'll become this time.\n {SpeakingSimulator.ShowEvolutionResultKeyWord} " +
+            DigimonType.Devimon => $"Lets see what cheeky bugger it'll become this time.\n {ShowEvolutionResultKeyWord} " +
                                    "\n" +
                                    "Speak of the devil . . . \n" +
                                    $"\n It's going to become a {evolutionDigimonType}.",
             DigimonType.Coelamon => "Is it a plain?\n" +
                                     "Is it a fish?\n" +
                                     "Is it a floater?\n" +
-                                    $"\n {SpeakingSimulator.ShowEvolutionResultKeyWord} " +
+                                    $"\n {ShowEvolutionResultKeyWord} " +
                                     $"No! It's a {evolutionDigimonType}",
-            DigimonType.Centarumon => $"Here we go, another evolution.\n {SpeakingSimulator.ShowEvolutionResultKeyWord} " +
+            DigimonType.Centarumon => $"Here we go, another evolution.\n {ShowEvolutionResultKeyWord} " +
                                       "\n" +
                                       $"Ohh! It's a {evolutionDigimonType}.\n" +
                                       "\n" +
                                       "No need for 'Is there a doctor in the room' I suppose.",
-            DigimonType.Birdramon => $"Great work it is going to evolve.\n {SpeakingSimulator.ShowEvolutionResultKeyWord} " +
+            DigimonType.Birdramon => $"Great work it is going to evolve.\n {ShowEvolutionResultKeyWord} " +
                                      "\n" +
                                      $"Oh, the greatest parent of all, a {evolutionDigimonType}.\n" +
                                      "\n" +
                                      "It'll take good care of you.",
-            DigimonType.Bakemon => $"Bakke bakke! Bakkee bakke bakkeee!\n {SpeakingSimulator.ShowEvolutionResultKeyWord} " +
+            DigimonType.Bakemon => $"Bakke bakke! Bakkee bakke bakkeee!\n {ShowEvolutionResultKeyWord} " +
                                    "\n" +
                                    $"Haha, just kidding, it's going to become a {evolutionDigimonType}!\n" +
                                    "\n" +
                                    "He's a great narrator himself, go give it a try.  *chuckles*",
-            DigimonType.Numemon => $"It is going to evolve . . . hmm . . . \n {SpeakingSimulator.ShowEvolutionResultKeyWord} " +
+            DigimonType.Numemon => $"It is going to evolve . . . hmm . . . \n {ShowEvolutionResultKeyWord} " +
                                    "\n" +
                                    $"Well . . . That is  *a* champion, congrats on your {evolutionDigimonType}\n" +
                                    "\n" +
                                    "*whispers* . . . Perhaps be a bit more careful next time?  *chuckles*",
-            DigimonType.Tyrannomon => $"Oh look it's going to evolve!\n {SpeakingSimulator.ShowEvolutionResultKeyWord} " +
+            DigimonType.Tyrannomon => $"Oh look it's going to evolve!\n {ShowEvolutionResultKeyWord} " +
                                       "\n" +
                                       $"Nice work, lets see. It's . . . {evolutionDigimonType}\n" +
                                       "\n" +
                                       "*mumbles* . . . Better stock up on meat you must . . . ",
-            _ => $"Great work!\n {SpeakingSimulator.ShowEvolutionResultKeyWord} " +
+            _ => $"Great work!\n {ShowEvolutionResultKeyWord} " +
                  "\n" +
                  $"It will become a mighty {evolutionDigimonType}"
         };
@@ -203,17 +204,17 @@ public static class JijimonNarratorText
 
         return evolutionDigimonType switch
         {
-            DigimonType.SkullGreymon => $"Oh this is a dreaded aura . . . this must be . . . \n {SpeakingSimulator.ShowEvolutionResultKeyWord} " +
+            DigimonType.SkullGreymon => $"Oh this is a dreaded aura . . . this must be . . . \n {ShowEvolutionResultKeyWord} " +
                                         "\n" +
                                         $"Welcome . . . {evolutionDigimonType}\n" +
                                         "\n" +
                                         "Please be good to it player, it deserves it.",
-            DigimonType.Vademon => $"Look at that, now this is something special. {SpeakingSimulator.ShowEvolutionResultKeyWord} \n" +
+            DigimonType.Vademon => $"Look at that, now this is something special. {ShowEvolutionResultKeyWord} \n" +
                                    "\n" +
                                    $"You gave your digimon long life and you are rewarded with a {evolutionDigimonType}." +
                                    "\n" +
                                    "Thank you for taking great care of your digimon.  *smiles",
-            DigimonType.Phoenixmon => $"Great it is evolving, lets see what it will become.\n {SpeakingSimulator.ShowEvolutionResultKeyWord} " +
+            DigimonType.Phoenixmon => $"Great it is evolving, lets see what it will become.\n {ShowEvolutionResultKeyWord} " +
                                       "\n" +
                                       $"Oh . . . behold the grace and beauty of {evolutionDigimonType}.\n" +
                                       "\n" +
@@ -223,19 +224,19 @@ public static class JijimonNarratorText
                                      "Amazing work player!\n" +
                                      "\n" +
                                      "This can mean only one thing . . . \n" +
-                                     $"\n {SpeakingSimulator.ShowEvolutionResultKeyWord} " +
+                                     $"\n {ShowEvolutionResultKeyWord} " +
                                      $"It's a {evolutionDigimonType}",
-            DigimonType.MetalGreymon => $"Such presence already and it hasn't fully evolved yet . . . \n {SpeakingSimulator.ShowEvolutionResultKeyWord} " +
+            DigimonType.MetalGreymon => $"Such presence already and it hasn't fully evolved yet . . . \n {ShowEvolutionResultKeyWord} " +
                                         "\n" +
                                         $"Yes, I figured, it's a {evolutionDigimonType}\n" +
                                         "\n" +
                                         "Nipple rockets in your honor player.",
-            DigimonType.Andromon => $"Exciting, we got an ultimate evolution\n {SpeakingSimulator.ShowEvolutionResultKeyWord} " +
+            DigimonType.Andromon => $"Exciting, we got an ultimate evolution\n {ShowEvolutionResultKeyWord} " +
                                     "\n" +
                                     $"Oh it's an {evolutionDigimonType}.\n" +
                                     "\n" +
                                     "Whats the officer problem?  *chuckles*",
-            DigimonType.Digitamamon => $"Oh goody, it's evolving . . . \n {SpeakingSimulator.ShowEvolutionResultKeyWord} " +
+            DigimonType.Digitamamon => $"Oh goody, it's evolving . . . \n {ShowEvolutionResultKeyWord} " +
                                        "\n" +
                                        $"Great, it's a {evolutionDigimonType}.\n" +
                                        "\n" +
@@ -247,14 +248,14 @@ public static class JijimonNarratorText
                                   "Not your average greengrocer but much better!",
             DigimonType.Giromon => "*intense industrial machinery noise*\n" +
                                    "\n" +
-                                   $"This can only be a . . . \n  {SpeakingSimulator.ShowEvolutionResultKeyWord} " +
+                                   $"This can only be a . . . \n  {ShowEvolutionResultKeyWord} " +
                                    "\n" +
                                    $"{evolutionDigimonType}!\n" +
                                    "\n" +
                                    "The trash metal lover of the city, or 'crash metal' for our NTSC friends.",
             _ => "Amazing, it's evolving to the ultimate stage.\n" +
                  "\n" +
-                 $"Lets see. The final form is . . . {SpeakingSimulator.ShowEvolutionResultKeyWord} \n" +
+                 $"Lets see. The final form is . . . {ShowEvolutionResultKeyWord} \n" +
                  "\n" +
                  $"{evolutionDigimonType}, congratulations!\n" +
                  "\n" +

@@ -1,17 +1,27 @@
 using System;
 using System.Linq;
+using System.Reactive.Disposables;
 using System.Threading;
 using System.Threading.Tasks;
+using DigimonWorld.Frontend.WPF.Constants;
 
 namespace DigimonWorld.Frontend.WPF.Services;
 
-public class SpeakingSimulator
+public class SpeakingSimulator : IDisposable
 {
+    private readonly object _lock = new();
+    private readonly CompositeDisposable _compositeDisposable;
+    
     private CancellationTokenSource? _typingCancellationTokenSource;
     private bool _instantDisplayRequested;
-    private readonly object _lock = new();
 
-    public static string ShowEvolutionResultKeyWord => "ShowEvolutionResult";
+    public SpeakingSimulator()
+    {
+        _compositeDisposable = new CompositeDisposable
+        (
+            GeneralConfiguration.NarratorMode.Subscribe(OnNarratorModeChanged)
+        );
+    }
 
     public async Task WriteTextAsSpeechAsync(string fullText, Action<string> updateTextAction)
     {
@@ -23,6 +33,22 @@ public class SpeakingSimulator
     {
         CancelAndReset();
         await StartNewSpeechTask(() => WriteEvolutionTextAsSpeechInternal(fullText, updateTextAction, showEvolutionAction));
+    }
+
+    public void RequestInstantDisplay()
+    {
+        if (_typingCancellationTokenSource?.IsCancellationRequested != false) return;
+        
+        _instantDisplayRequested = true;
+        _typingCancellationTokenSource.Cancel();
+    }
+
+    private void OnNarratorModeChanged(NarratorMode narratorMode)
+    {
+        if (narratorMode == NarratorMode.Instant)
+        {
+            RequestInstantDisplay();
+        }
     }
 
     private void CancelAndReset()
@@ -59,7 +85,7 @@ public class SpeakingSimulator
         {
             string[] words = fullText.Split(' ');
 
-            if (!words.Contains(ShowEvolutionResultKeyWord))
+            if (!words.Contains(JijimonEvolutionCalculatorNarratorText.ShowEvolutionResultKeyWord))
             {
                 showEvolutionAction?.Invoke();
             }
@@ -68,7 +94,7 @@ public class SpeakingSimulator
             {
                 cancellationToken.ThrowIfCancellationRequested();
 
-                if (word == ShowEvolutionResultKeyWord)
+                if (word == JijimonEvolutionCalculatorNarratorText.ShowEvolutionResultKeyWord)
                 {
                     showEvolutionAction?.Invoke();
                     await Task.Delay(500, cancellationToken);
@@ -96,7 +122,7 @@ public class SpeakingSimulator
         {
             if (_instantDisplayRequested)
             {
-                updateTextAction(fullText.Replace(ShowEvolutionResultKeyWord, ""));
+                updateTextAction(fullText.Replace(JijimonEvolutionCalculatorNarratorText.ShowEvolutionResultKeyWord, ""));
                 showEvolutionAction?.Invoke();
             }
         }
@@ -106,11 +132,9 @@ public class SpeakingSimulator
         }
     }
 
-    public void RequestInstantDisplay()
+    public void Dispose()
     {
-        if (_typingCancellationTokenSource?.IsCancellationRequested != false) return;
-        
-        _instantDisplayRequested = true;
-        _typingCancellationTokenSource.Cancel();
+        _typingCancellationTokenSource?.Dispose();
+        _compositeDisposable.Dispose();
     }
 }

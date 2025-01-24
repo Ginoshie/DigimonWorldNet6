@@ -8,6 +8,7 @@
         <FontFamily x:Key="Dw1Font">pack://application:,,,/Frontend.WPF;component/Fonts/DW1_US_Regular.ttf#DW1 US</FontFamily>
 
         <system:Int32 x:Key="DefaultTooltipDelay">750</system:Int32>
+        <system:Double x:Key="DefaultButtonHeight">40</system:Double>
 
         <conversion:EnumToImageConverter x:Key="EnumToImageConverter" />
 

@@ -12,7 +12,6 @@ public partial class GeneralConfigWindow
     }
 
     private void GeneralConfigWindow_Loaded(object? sender, EventArgs e)
-        // Find the target element in the MainWindow
     {
         UIElement? targetElement = Application.Current.MainWindow?.FindName("OuterBorderWindow") as UIElement;
 

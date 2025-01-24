@@ -1,3 +1,5 @@
+using System;
+using System.Reactive.Disposables;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -11,9 +13,10 @@ using Generics.Extensions;
 
 namespace DigimonWorld.Frontend.WPF.UserControls.EvolutionTool;
 
-public sealed class EvolutionToolViewModel : BaseViewModel
+public sealed class EvolutionToolViewModel : BaseViewModel, IDisposable
 {
     private readonly SpeakingSimulator _speakingSimulator;
+    private readonly CompositeDisposable _compositeDisposable;
     
     private string _jijimonText = string.Empty;
 
@@ -36,6 +39,10 @@ public sealed class EvolutionToolViewModel : BaseViewModel
     public EvolutionToolViewModel()
     {
         _speakingSimulator = new SpeakingSimulator();
+
+        _compositeDisposable = new CompositeDisposable(
+            _speakingSimulator
+        );
         
         SetEvolutionResult = new CommandHandler(CalculateEvolutionResult);
 
@@ -44,7 +51,7 @@ public sealed class EvolutionToolViewModel : BaseViewModel
         Task
             .Delay(1500)
             .WaitAsync(CancellationToken.None)
-            .ContinueWith(_ => _speakingSimulator.WriteTextAsSpeechAsync(JijimonNarratorText.IntroText, textOutput => JijimonText = textOutput));
+            .ContinueWith(_ => _speakingSimulator.WriteTextAsSpeechAsync(JijimonEvolutionCalculatorNarratorText.IntroText, textOutput => JijimonText = textOutput));
     }
 
     public ICommand SetEvolutionResult { get; }
@@ -248,7 +255,7 @@ public sealed class EvolutionToolViewModel : BaseViewModel
 
             _evolutionResult = value;
 
-            _ = _speakingSimulator.WriteEvolutionTextAsSpeech(JijimonNarratorText.EvolutionResultCalculated(value), textOutput => JijimonText = textOutput, () => OnPropertyChanged());
+            _ = _speakingSimulator.WriteEvolutionTextAsSpeech(JijimonEvolutionCalculatorNarratorText.EvolutionResultCalculated(value), textOutput => JijimonText = textOutput, () => OnPropertyChanged());
         }
     }
 
@@ -281,5 +288,11 @@ public sealed class EvolutionToolViewModel : BaseViewModel
     private void InstantDisplay()
     {
         _speakingSimulator.RequestInstantDisplay();
+    }
+
+    public void Dispose()
+    {
+        _speakingSimulator.Dispose();
+        _compositeDisposable.Dispose();
     }
 }

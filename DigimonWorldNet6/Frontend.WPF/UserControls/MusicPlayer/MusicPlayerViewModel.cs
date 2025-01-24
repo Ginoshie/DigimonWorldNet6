@@ -39,6 +39,7 @@ public class MusicPlayerViewModel : BaseViewModel, IDisposable
         ToggleMuteEnabledCommand = new CommandHandler(ToggleMuteEnabled);
 
         _compositeDisposable = new CompositeDisposable(
+            _speakingSimulator,
             Jukebox.CurrentSongTitleObservable.Subscribe(currentSongTitle => CurrentSongTitle = currentSongTitle),
             Jukebox.CurrentPositionObservable.Subscribe(currentPosition => CurrentPosition = currentPosition),
             Jukebox.SongLengthObservable.Subscribe(songLength => SongLength = songLength),
@@ -77,14 +78,7 @@ public class MusicPlayerViewModel : BaseViewModel, IDisposable
     public string CurrentSongTitle
     {
         get => _currentSongTitle;
-        set
-        {
-            if (value == _currentSongTitle) return;
-
-            _currentSongTitle = value;
-
-            OnPropertyChanged();
-        }
+        set => SetField(ref _currentSongTitle, value);
     }
 
     public double CurrentPosition
@@ -166,14 +160,7 @@ public class MusicPlayerViewModel : BaseViewModel, IDisposable
     public bool MuteEnabled
     {
         get => _muteEnabled;
-        set
-        {
-            if (value == _muteEnabled) return;
-
-            _muteEnabled = value;
-
-            OnPropertyChanged();
-        }
+        set => SetField(ref _muteEnabled, value);
     }
 
     public float Volume
@@ -192,14 +179,7 @@ public class MusicPlayerViewModel : BaseViewModel, IDisposable
     public string GiromonText
     {
         get => _giromonText;
-        set
-        {
-            if (_giromonText == value) return;
-
-            _giromonText = value;
-
-            OnPropertyChanged();
-        }
+        set => SetField(ref _giromonText, value);
     }
 
     public string ShuffleButtonText => _shuffleEnabled ? "Shuffle mode ON.\n\nClick to turn OFF shuffle mode." : "Shuffle mode OFF.\n\nClick to turn ON shuffle mode.";
@@ -275,11 +255,6 @@ public class MusicPlayerViewModel : BaseViewModel, IDisposable
         }
     }
 
-    public void Dispose()
-    {
-        _compositeDisposable.Dispose();
-    }
-
     private void InstantDisplay()
     {
         _speakingSimulator.RequestInstantDisplay();
@@ -303,4 +278,9 @@ public class MusicPlayerViewModel : BaseViewModel, IDisposable
     private async Task OnPlayAllSongsMode() => await _speakingSimulator.WriteTextAsSpeechAsync(GiromonJukeboxNarratorText.PlayAllSongs, textOutput => GiromonText = textOutput);
     private async Task OnMute() => await _speakingSimulator.WriteTextAsSpeechAsync(GiromonJukeboxNarratorText.Mute, textOutput => GiromonText = textOutput);
     private async Task OnUnmute() => await _speakingSimulator.WriteTextAsSpeechAsync(GiromonJukeboxNarratorText.Unmute, textOutput => GiromonText = textOutput);
+
+    public void Dispose()
+    {
+        _compositeDisposable.Dispose();
+    }
 }
