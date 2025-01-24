@@ -20,18 +20,14 @@
         WindowStartupLocation="CenterScreen">
 
     <Window.Resources>
-        <!-- Images used for opening and closing the side panes -->
         <BitmapImage x:Key="ClosedLeftPaneImage" UriSource="pack://application:,,,/Frontend.WPF;component/Images/ComponentLabels/label-left-no-focus.png" />
         <BitmapImage x:Key="OpenLeftPaneImage" UriSource="pack://application:,,,/Frontend.WPF;component/Images/ComponentLabels/label-left-focus.png" />
         <BitmapImage x:Key="ClosedBottomPaneImage" UriSource="pack://application:,,,/Frontend.WPF;component/Images/ComponentLabels/label-bottom-no-focus.png" />
         <BitmapImage x:Key="OpenBottomPaneImage" UriSource="pack://application:,,,/Frontend.WPF;component/Images/ComponentLabels/label-bottom-focus.png" />
 
-        <!-- Styles for the pane labels used for opening and closing -->
         <Style x:Key="LeftPaneLabelStyle" TargetType="Image">
-            <!-- Set the default image -->
             <Setter Property="Source" Value="{StaticResource ClosedLeftPaneImage}" />
             <Style.Triggers>
-                <!-- Change to OpenImage when ComponentIsOpen is True -->
                 <DataTrigger Binding="{Binding LeftPaneIsOpen}" Value="True">
                     <Setter Property="Source" Value="{StaticResource OpenLeftPaneImage}" />
                 </DataTrigger>
@@ -39,10 +35,8 @@
         </Style>
 
         <Style x:Key="BottomPaneLabelStyle" TargetType="Image">
-            <!-- Set the default image -->
             <Setter Property="Source" Value="{StaticResource ClosedBottomPaneImage}" />
             <Style.Triggers>
-                <!-- Change to OpenImage when ComponentIsOpen is True -->
                 <DataTrigger Binding="{Binding BottomPaneIsOpen}" Value="True">
                     <Setter Property="Source" Value="{StaticResource OpenBottomPaneImage}" />
                 </DataTrigger>
@@ -75,7 +69,7 @@
             </b:EventTrigger>
         </b:Interaction.Triggers>
         <Grid.RowDefinitions>
-            <RowDefinition Height="35" />
+            <RowDefinition Height="37" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
@@ -84,7 +78,6 @@
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
 
-        <!-- Header Section (Row 0) -->
         <Border Background="Transparent" Grid.Row="0" Grid.ColumnSpan="2" Height="50">
             <Grid Background="Transparent">
                 <Grid.ColumnDefinitions>
@@ -92,20 +85,17 @@
                     <ColumnDefinition Width="Auto" />
                     <ColumnDefinition Width="Auto" />
                     <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
                     <ColumnDefinition Width="15" />
                 </Grid.ColumnDefinitions>
 
-                <!-- Drag screen label -->
-                <Grid Grid.Column="1" Width="60" Height="50" Background="Transparent" SnapsToDevicePixels="True" UseLayoutRounding="True">
-                    <!-- Border Layers -->
+                <Grid Grid.Column="2" Width="60" Height="50" Background="Transparent" SnapsToDevicePixels="True" UseLayoutRounding="True">
                     <Border CornerRadius="5" BorderBrush="Black" BorderThickness="3" Background="Black">
                         <Border CornerRadius="5" BorderBrush="#4A9FC5" BorderThickness="3" Background="#4A9FC5">
                             <Border CornerRadius="5" BorderBrush="#90D9FA" BorderThickness="3" Background="#90D9FA">
                                 <Border CornerRadius="5" BorderBrush="Black" BorderThickness="3" Background="#2E3841">
-                                    <!-- Inner Layer with Opacity Change -->
                                     <Border x:Name="InnerBorder" CornerRadius="5" BorderBrush="Transparent" BorderThickness="0" Background="#80000000" Opacity="0.5"
                                             Padding="0, 0, 0, 3">
-                                        <!-- Drag Symbol -->
                                         <TextBlock Text="✥" HorizontalAlignment="Center" VerticalAlignment="Bottom"
                                                    FontSize="20" FontWeight="Bold" Foreground="White" />
                                     </Border>
@@ -114,9 +104,7 @@
                         </Border>
                     </Border>
 
-                    <!-- Mouse Events Triggering Visual Change -->
                     <Grid.Triggers>
-                        <!-- MouseOver Trigger -->
                         <EventTrigger RoutedEvent="UIElement.MouseEnter">
                             <BeginStoryboard>
                                 <Storyboard>
@@ -125,7 +113,6 @@
                                 </Storyboard>
                             </BeginStoryboard>
                         </EventTrigger>
-                        <!-- MouseLeave Trigger -->
                         <EventTrigger RoutedEvent="UIElement.MouseLeave">
                             <BeginStoryboard>
                                 <Storyboard>
@@ -137,11 +124,10 @@
                     </Grid.Triggers>
                 </Grid>
 
-                <Button Grid.Column="2" Width="60" Height="50" Background="Transparent" BorderBrush="Transparent" Command="{Binding MinimizeCommand}">
+                <Button Grid.Column="3" Width="60" Height="50" Background="Transparent" BorderBrush="Transparent" Command="{Binding MinimizeCommand}">
                     <Button.Template>
                         <ControlTemplate TargetType="Button">
                             <Grid Background="Transparent" SnapsToDevicePixels="True" UseLayoutRounding="True">
-                                <!-- Border Layers -->
                                 <Border CornerRadius="5" BorderBrush="Black" BorderThickness="3" Padding="0" Background="Black">
                                     <Border CornerRadius="5" BorderBrush="#4A9FC5" BorderThickness="3" Padding="0" Background="#4A9FC5">
                                         <Border CornerRadius="5" BorderBrush="#90D9FA" BorderThickness="3" Padding="0" Background="#90D9FA">
@@ -154,7 +140,6 @@
                                     </Border>
                                 </Border>
                             </Grid>
-                            <!-- Event Triggers for Animation -->
                             <ControlTemplate.Triggers>
                                 <EventTrigger RoutedEvent="MouseEnter">
                                     <BeginStoryboard>
@@ -177,11 +162,10 @@
                     </Button.Template>
                 </Button>
 
-                <Button Grid.Column="3" Width="60" Height="50" Background="Transparent" BorderBrush="Transparent" Command="{Binding CloseCommand}">
+                <Button Grid.Column="4" Width="60" Height="50" Background="Transparent" BorderBrush="Transparent" Command="{Binding CloseCommand}">
                     <Button.Template>
                         <ControlTemplate TargetType="Button">
                             <Grid Background="Transparent" SnapsToDevicePixels="True" UseLayoutRounding="True">
-                                <!-- Border Layers -->
                                 <Border CornerRadius="5" BorderBrush="Black" BorderThickness="3" Padding="0" Background="Black">
                                     <Border CornerRadius="5" BorderBrush="#4A9FC5" BorderThickness="3" Padding="0" Background="#4A9FC5">
                                         <Border CornerRadius="5" BorderBrush="#90D9FA" BorderThickness="3" Padding="0" Background="#90D9FA">
@@ -194,7 +178,6 @@
                                     </Border>
                                 </Border>
                             </Grid>
-                            <!-- Event Triggers for Animation -->
                             <ControlTemplate.Triggers>
                                 <EventTrigger RoutedEvent="MouseEnter">
                                     <BeginStoryboard>
@@ -219,12 +202,11 @@
             </Grid>
         </Border>
 
-        <!-- EvolutionToolUserControl in Row 1, Column 1 -->
         <Border Grid.Row="1" Grid.Column="1" Background="Transparent" Panel.ZIndex="1">
-            <Border CornerRadius="5" BorderBrush="Black" BorderThickness="3" Padding="0" Background="Black">
-                <Border CornerRadius="5" BorderBrush="#4A9FC5" BorderThickness="3" Padding="0" Background="#4A9FC5">
-                    <Border CornerRadius="5" BorderBrush="#90D9FA" BorderThickness="3" Padding="0" Background="#90D9FA">
-                        <Border CornerRadius="5" BorderBrush="Black" BorderThickness="3" Padding="0" Background="Black">
+            <Border CornerRadius="5" BorderBrush="Black" BorderThickness="3" Background="Black">
+                <Border CornerRadius="5" BorderBrush="#4A9FC5" BorderThickness="3" Background="#4A9FC5">
+                    <Border CornerRadius="5" BorderBrush="#90D9FA" BorderThickness="3" Background="#90D9FA">
+                        <Border CornerRadius="5" BorderBrush="Black" BorderThickness="3" Background="Black">
                             <evolutionTool:EvolutionToolUserControl />
                         </Border>
                     </Border>
@@ -232,10 +214,8 @@
             </Border>
         </Border>
 
-        <!-- Bottom Pane -->
         <Grid Grid.Row="2" Grid.Column="1" Background="Transparent" SnapsToDevicePixels="True" UseLayoutRounding="True" RenderTransformOrigin="0.5,0.5" Panel.ZIndex="0">
             <Grid.RenderTransform>
-                <!-- Start fully closed -->
                 <TranslateTransform Y="-475" />
             </Grid.RenderTransform>
 
@@ -250,7 +230,6 @@
                 <RowDefinition Height="45"></RowDefinition>
             </Grid.RowDefinitions>
 
-            <!-- FlaggedEvolutionPickerUserControl in Bottom Pane -->
             <Border Grid.Row="0" Grid.Column="1" Background="Transparent" Panel.ZIndex="1">
                 <Border CornerRadius="5" BorderBrush="Black" BorderThickness="3" Padding="0" Background="Black">
                     <Border CornerRadius="5" BorderBrush="#4A9FC5" BorderThickness="3" Padding="0" Background="#4A9FC5">
@@ -263,7 +242,6 @@
                 </Border>
             </Border>
 
-            <!-- Image with Command Binding -->
             <Grid Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Top" Background="Transparent">
                 <Image Style="{StaticResource BottomPaneLabelStyle}" Margin="0,-2, 0, 0">
                     <b:Interaction.Triggers>
@@ -273,7 +251,6 @@
                     </b:Interaction.Triggers>
                 </Image>
 
-                <!-- Overlay Text -->
                 <TextBlock Text="Historic Evolutions"
                            HorizontalAlignment="Center"
                            VerticalAlignment="Center"
@@ -286,9 +263,8 @@
                             <Setter Property="FontWeight" Value="Bold" />
                             <Setter Property="Foreground" Value="#D6D6D8" />
                             <Style.Triggers>
-                                <!-- Change color based on BottomPaneIsOpen -->
                                 <DataTrigger Binding="{Binding BottomPaneIsOpen}" Value="True">
-                                    <Setter Property="Foreground" Value="Black" /> <!-- Color when open -->
+                                    <Setter Property="Foreground" Value="Black" />
                                 </DataTrigger>
                             </Style.Triggers>
                         </Style>
@@ -301,7 +277,6 @@
                 </TextBlock>
             </Grid>
 
-            <!-- DataTrigger to Play the Animation -->
             <Grid.Style>
                 <Style TargetType="Grid">
                     <Style.Triggers>
@@ -318,10 +293,8 @@
             </Grid.Style>
         </Grid>
         
-        <!-- Left Pane -->
         <Grid Grid.Row="1" Grid.Column="0" Background="Transparent" SnapsToDevicePixels="True" UseLayoutRounding="True" RenderTransformOrigin="0.5,0.5" Panel.ZIndex="0">
             <Grid.RenderTransform>
-                <!-- Start fully closed -->
                 <TranslateTransform X="465" />
             </Grid.RenderTransform>
 
@@ -336,7 +309,6 @@
                 <RowDefinition Height="*"></RowDefinition>
             </Grid.RowDefinitions>
 
-            <!-- MusicPlayerUserControl in Left Pane -->
             <Border Grid.Row="1" Grid.Column="1" Background="Transparent" Panel.ZIndex="1">
                 <Border CornerRadius="5" BorderBrush="Black" BorderThickness="3" Padding="0" Background="Black">
                     <Border CornerRadius="5" BorderBrush="#4A9FC5" BorderThickness="3" Padding="0" Background="#4A9FC5">
@@ -349,7 +321,6 @@
                 </Border>
             </Border>
 
-            <!-- Image with Command Binding -->
             <Grid Grid.Row="1" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Center" Background="Transparent">
                 <Image Style="{StaticResource LeftPaneLabelStyle}" Margin="0,0, -2, 0">
                     <b:Interaction.Triggers>
@@ -359,7 +330,6 @@
                     </b:Interaction.Triggers>
                 </Image>
 
-                <!-- Overlay Text -->
                 <TextBlock Text="J&#xD;&#xA;u&#xD;&#xA;k&#xD;&#xA;e&#xD;&#xA;b&#xD;&#xA;o&#xD;&#xA;x"
                            TextWrapping="Wrap"
                            HorizontalAlignment="Center"
@@ -372,9 +342,8 @@
                             <Setter Property="FontWeight" Value="Bold" />
                             <Setter Property="Foreground" Value="#D6D6D8" />
                             <Style.Triggers>
-                                <!-- Change color based on LeftPaneIsOpen -->
                                 <DataTrigger Binding="{Binding LeftPaneIsOpen}" Value="True">
-                                    <Setter Property="Foreground" Value="Black" /> <!-- Color when open -->
+                                    <Setter Property="Foreground" Value="Black" />
                                 </DataTrigger>
                             </Style.Triggers>
                         </Style>
@@ -387,7 +356,6 @@
                 </TextBlock>
             </Grid>
 
-            <!-- DataTrigger to Play the Animation -->
             <Grid.Style>
                 <Style TargetType="Grid">
                     <Style.Triggers>
