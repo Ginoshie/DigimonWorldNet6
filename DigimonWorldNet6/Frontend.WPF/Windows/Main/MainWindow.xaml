@@ -1,15 +1,15 @@
-﻿<Window x:Class="DigimonWorld.Frontend.WPF.Windows.MainWindow.MainWindow"
+﻿<Window x:Class="DigimonWorld.Frontend.WPF.Windows.Main.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
         xmlns:evolutionTool="clr-namespace:DigimonWorld.Frontend.WPF.UserControls.EvolutionTool"
-        xmlns:local="clr-namespace:DigimonWorld.Frontend.WPF.Windows.MainWindow"
         xmlns:historicEvolutionPicker="clr-namespace:DigimonWorld.Frontend.WPF.UserControls.HistoricEvolutionPicker"
         xmlns:musicPlayer="clr-namespace:DigimonWorld.Frontend.WPF.UserControls.MusicPlayer"
+        xmlns:main="clr-namespace:DigimonWorld.Frontend.WPF.Windows.Main"
         mc:Ignorable="d"
-        d:DataContext="{d:DesignInstance Type=local:MainWindowViewModel, IsDesignTimeCreatable=True}"
+        d:DataContext="{d:DesignInstance Type=main:MainWindowViewModel, IsDesignTimeCreatable=True}"
         Title="Digimon World Tool"
         Icon="pack://application:,,,/Frontend.WPF;component/Images/Misc/Icon.jpg"
         ResizeMode="NoResize"
@@ -88,6 +88,44 @@
                     <ColumnDefinition Width="Auto" />
                     <ColumnDefinition Width="15" />
                 </Grid.ColumnDefinitions>
+
+                <Button Grid.Column="1" Width="60" Height="50" Background="Transparent" BorderBrush="Transparent" Command="{Binding OpenConfigurationMenuCommand}">
+                    <Button.Template>
+                        <ControlTemplate TargetType="Button">
+                            <Grid Background="Transparent" SnapsToDevicePixels="True" UseLayoutRounding="True">
+                                <Border CornerRadius="5" BorderBrush="Black" BorderThickness="3" Padding="0" Background="Black">
+                                    <Border CornerRadius="5" BorderBrush="#4A9FC5" BorderThickness="3" Padding="0" Background="#4A9FC5">
+                                        <Border CornerRadius="5" BorderBrush="#90D9FA" BorderThickness="3" Padding="0" Background="#90D9FA">
+                                            <Border CornerRadius="5" BorderBrush="Black" BorderThickness="3" Padding="0" Background="#2E3841">
+                                                <Border x:Name="InnerBorder" CornerRadius="5" BorderBrush="Transparent" BorderThickness="0" Background="#80000000" Opacity="0.5">
+                                                    <TextBlock Text="⚙" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" FontWeight="Bold" Foreground="White" />
+                                                </Border>
+                                            </Border>
+                                        </Border>
+                                    </Border>
+                                </Border>
+                            </Grid>
+                            <ControlTemplate.Triggers>
+                                <EventTrigger RoutedEvent="MouseEnter">
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimation Storyboard.TargetName="InnerBorder" Storyboard.TargetProperty="Opacity"
+                                                             To="1.0" Duration="0:0:0.2" />
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </EventTrigger>
+                                <EventTrigger RoutedEvent="MouseLeave">
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimation Storyboard.TargetName="InnerBorder" Storyboard.TargetProperty="Opacity"
+                                                             To="0.5" Duration="0:0:0.2" />
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </EventTrigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
 
                 <Grid Grid.Column="2" Width="60" Height="50" Background="Transparent" SnapsToDevicePixels="True" UseLayoutRounding="True">
                     <Border CornerRadius="5" BorderBrush="Black" BorderThickness="3" Background="Black">
@@ -202,7 +240,7 @@
             </Grid>
         </Border>
 
-        <Border Grid.Row="1" Grid.Column="1" Background="Transparent" Panel.ZIndex="1">
+        <Border x:Name="OuterBorderWindow" Grid.Row="1" Grid.Column="1" Background="Transparent" Panel.ZIndex="1">
             <Border CornerRadius="5" BorderBrush="Black" BorderThickness="3" Background="Black">
                 <Border CornerRadius="5" BorderBrush="#4A9FC5" BorderThickness="3" Background="#4A9FC5">
                     <Border CornerRadius="5" BorderBrush="#90D9FA" BorderThickness="3" Background="#90D9FA">

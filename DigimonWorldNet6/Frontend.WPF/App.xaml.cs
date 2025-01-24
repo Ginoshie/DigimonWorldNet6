@@ -1,6 +1,6 @@
 ﻿using System.Windows;
 using DigimonWorld.Evolution.Calculator.Core.Modules;
-using DigimonWorld.Frontend.WPF.Windows.MainWindow;
+using DigimonWorld.Frontend.WPF.Windows.Main;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 

@@ -3,8 +3,9 @@ using System.Windows;
 using System.Windows.Input;
 using DigimonWorld.Frontend.WPF.Services;
 using DigimonWorld.Frontend.WPF.ViewModelComponents;
+using DigimonWorld.Frontend.WPF.Windows.GeneralConfig;
 
-namespace DigimonWorld.Frontend.WPF.Windows.MainWindow;
+namespace DigimonWorld.Frontend.WPF.Windows.Main;
 
 public class MainWindowViewModel : BaseViewModel
 {
@@ -25,6 +26,8 @@ public class MainWindowViewModel : BaseViewModel
         ToggleLeftPaneCommand = new CommandHandler(ToggleLeftPane);
 
         ToggleBottomPaneCommand = new CommandHandler(ToggleBottomPane);
+        
+        OpenConfigurationMenuCommand = new CommandHandler(OpenConfigurationMenu);
     }
 
     private void CloseApplication()
@@ -79,6 +82,8 @@ public class MainWindowViewModel : BaseViewModel
 
     public ICommand ToggleBottomPaneCommand { get; }
 
+    public ICommand OpenConfigurationMenuCommand { get; }
+
     private void DragWindow(Window window)
     {
         if (Mouse.PrimaryDevice.LeftButton != MouseButtonState.Pressed) return;
@@ -101,5 +106,19 @@ public class MainWindowViewModel : BaseViewModel
     private void ToggleBottomPane()
     {
         BottomPaneIsOpen = !BottomPaneIsOpen;
+    }
+
+    private void OpenConfigurationMenu()
+    {
+        GeneralConfigWindow configWindow = new()
+        {
+            Owner = Application.Current.MainWindow
+        };
+
+        GeneralConfigWindowViewModel configViewModel = new(configWindow);
+
+        configWindow.DataContext = configViewModel;
+
+        configWindow.ShowDialog();
     }
 }
