@@ -422,7 +422,41 @@
                     </Border>
                 </Border>
 
-                <Image Grid.Column="1" Grid.Row="0" Height="85" Source="/Images/Misc/Arrow-Right.png" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                <Grid Grid.Column="1" Grid.Row="0">
+                    <Path Grid.Column="0" Grid.Row="0" 
+                          Data="M 0 0 L 0 90 L 30 45 Z"
+                          VerticalAlignment="Center"
+                          HorizontalAlignment="Right"
+                          Fill="#575C60"
+                          Width="30" Height="90" />
+                    
+                    <Path Grid.Column="0" Grid.Row="0" 
+                          Data="M 0 90 L 0 0 L 30 45 Z"
+                          VerticalAlignment="Center"
+                          HorizontalAlignment="Right"
+                          Fill="#575C60"
+                          Stroke="#B0B0B0"
+                          StrokeThickness="2"
+                          Width="30" Height="90" />
+                    
+                    <Path Grid.Column="0" Grid.Row="0"
+                          Data="M 0 90 L 0 0"
+                          VerticalAlignment="Center"
+                          HorizontalAlignment="Right"
+                          Stroke="#B0B0B0"
+                          StrokeThickness="2"
+                          Width="30" Height="90" />
+                    
+                    <Path Grid.Column="0" Grid.Row="0"
+                          Data="M 31 45 L 1 91"
+                          VerticalAlignment="Center"
+                          HorizontalAlignment="Right"
+                          Stroke="#060100"
+                          StrokeThickness="3"
+                          Width="31" Height="91" />
+                </Grid>
+
+                <!-- <Image Grid.Column="1" Grid.Row="0" Height="85" Source="/Images/Misc/Arrow-Right.png" HorizontalAlignment="Center" VerticalAlignment="Center" /> -->
 
                 <Border Grid.Column="2" Grid.Row="0" BorderBrush="#060100" BorderThickness="3,3,0,0" Margin="15" HorizontalAlignment="Center" VerticalAlignment="Bottom">
                     <Border BorderBrush="#6789A5" BorderThickness="0,0,3,3" Background="#354A5B">
