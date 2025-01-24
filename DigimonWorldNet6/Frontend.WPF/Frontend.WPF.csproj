@@ -8,6 +8,10 @@
         <RootNamespace>DigimonWorld.Frontend.WPF</RootNamespace>
     </PropertyGroup>
 
+    <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+        <DebugType>none</DebugType>
+    </PropertyGroup>
+
     <ItemGroup>
         <ProjectReference Include="..\Evolution.Calculator.Core\Evolution.Calculator.Core.csproj"/>
     </ItemGroup>
@@ -37,6 +41,24 @@
         <None Include="Music\**\*.wav">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </None>
+    </ItemGroup>
+
+    <ItemGroup>
+      <Page Update="ResourceDictionaries\Styles\Labels\DefaultLabelStyle.xaml">
+        <Generator>MSBuild:Compile</Generator>
+        <XamlRuntime>Wpf</XamlRuntime>
+        <SubType>Designer</SubType>
+      </Page>
+      <Page Update="ResourceDictionaries\Styles\Labels\DefaultSheenLabelStyle.xaml">
+        <Generator>MSBuild:Compile</Generator>
+        <XamlRuntime>Wpf</XamlRuntime>
+        <SubType>Designer</SubType>
+      </Page>
+      <Page Update="ResourceDictionaries\Styles\Buttons\DefaultOptionPickerButtonStyle.xaml">
+        <Generator>MSBuild:Compile</Generator>
+        <XamlRuntime>Wpf</XamlRuntime>
+        <SubType>Designer</SubType>
+      </Page>
     </ItemGroup>
 
 </Project>
