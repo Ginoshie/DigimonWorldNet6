@@ -11,9 +11,10 @@ public class SpeakingSimulator : IDisposable
 {
     private readonly object _lock = new();
     private readonly CompositeDisposable _compositeDisposable;
-    
+
     private CancellationTokenSource? _typingCancellationTokenSource;
     private bool _instantDisplayRequested;
+    private NarratorMode _narratorMode;
 
     public SpeakingSimulator()
     {
@@ -26,19 +27,19 @@ public class SpeakingSimulator : IDisposable
     public async Task WriteTextAsSpeechAsync(string fullText, Action<string> updateTextAction)
     {
         CancelAndReset();
-        await StartNewSpeechTask(() => WriteEvolutionTextAsSpeechInternal(fullText, updateTextAction, null));
+        await StartNewSpeechTask(() => WriteTextAsSpeech(fullText, updateTextAction, null));
     }
 
     public async Task WriteEvolutionTextAsSpeech(string fullText, Action<string> updateTextAction, Action? showEvolutionAction)
     {
         CancelAndReset();
-        await StartNewSpeechTask(() => WriteEvolutionTextAsSpeechInternal(fullText, updateTextAction, showEvolutionAction));
+        await StartNewSpeechTask(() => WriteTextAsSpeech(fullText, updateTextAction, showEvolutionAction));
     }
 
     public void RequestInstantDisplay()
     {
         if (_typingCancellationTokenSource?.IsCancellationRequested != false) return;
-        
+
         _instantDisplayRequested = true;
         _typingCancellationTokenSource.Cancel();
     }
@@ -49,6 +50,8 @@ public class SpeakingSimulator : IDisposable
         {
             RequestInstantDisplay();
         }
+
+        _narratorMode = narratorMode;
     }
 
     private void CancelAndReset()
@@ -60,6 +63,7 @@ public class SpeakingSimulator : IDisposable
                 _typingCancellationTokenSource.Cancel();
                 _typingCancellationTokenSource.Dispose();
             }
+
             _typingCancellationTokenSource = new CancellationTokenSource();
         }
     }
@@ -76,7 +80,7 @@ public class SpeakingSimulator : IDisposable
         }
     }
 
-    private async Task WriteEvolutionTextAsSpeechInternal(string fullText, Action<string> updateTextAction, Action? showEvolutionAction)
+    private async Task WriteTextAsSpeech(string fullText, Action<string> updateTextAction, Action? showEvolutionAction)
     {
         CancellationToken cancellationToken = _typingCancellationTokenSource!.Token;
         string currentText = string.Empty;
@@ -84,6 +88,14 @@ public class SpeakingSimulator : IDisposable
         try
         {
             string[] words = fullText.Split(' ');
+
+            if (_narratorMode == NarratorMode.Instant)
+            {
+                updateTextAction(fullText.Replace(JijimonEvolutionCalculatorNarratorText.ShowEvolutionResultKeyWord, ""));
+                showEvolutionAction?.Invoke();
+
+                return;
+            }
 
             if (!words.Contains(JijimonEvolutionCalculatorNarratorText.ShowEvolutionResultKeyWord))
             {
