@@ -3,6 +3,7 @@ using System.Windows;
 using System.Windows.Input;
 using DigimonWorld.Frontend.WPF.Services;
 using DigimonWorld.Frontend.WPF.ViewModelComponents;
+using DigimonWorld.Frontend.WPF.Windows.About;
 using DigimonWorld.Frontend.WPF.Windows.GeneralConfig;
 
 namespace DigimonWorld.Frontend.WPF.Windows.Main;
@@ -27,7 +28,9 @@ public class MainWindowViewModel : BaseViewModel
 
         ToggleBottomPaneCommand = new CommandHandler(ToggleBottomPane);
         
-        OpenConfigurationMenuCommand = new CommandHandler(OpenConfigurationMenu);
+        OpenConfigurationWindowCommand = new CommandHandler(OpenConfigurationWindow);
+        
+        OpenAboutWindowCommand = new CommandHandler(OpenAboutWindow);
     }
 
     private void CloseApplication()
@@ -82,7 +85,9 @@ public class MainWindowViewModel : BaseViewModel
 
     public ICommand ToggleBottomPaneCommand { get; }
 
-    public ICommand OpenConfigurationMenuCommand { get; }
+    public ICommand OpenConfigurationWindowCommand { get; }
+
+    public ICommand OpenAboutWindowCommand { get; }
 
     private void DragWindow(Window window)
     {
@@ -108,7 +113,7 @@ public class MainWindowViewModel : BaseViewModel
         BottomPaneIsOpen = !BottomPaneIsOpen;
     }
 
-    private void OpenConfigurationMenu()
+    private void OpenConfigurationWindow()
     {
         GeneralConfigWindow configWindow = new()
         {
@@ -120,5 +125,19 @@ public class MainWindowViewModel : BaseViewModel
         configWindow.DataContext = configViewModel;
 
         configWindow.ShowDialog();
+    }
+
+    private void OpenAboutWindow()
+    {
+        AboutWindow aboutWindow = new()
+        {
+            Owner = Application.Current.MainWindow
+        };
+
+        AboutWindowViewModel aboutWindowViewModel = new(aboutWindow);
+
+        aboutWindow.DataContext = aboutWindowViewModel;
+
+        aboutWindow.ShowDialog();
     }
 }

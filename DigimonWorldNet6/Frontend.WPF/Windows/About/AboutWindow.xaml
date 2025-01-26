@@ -1,0 +1,141 @@
+<windows:BaseDialogWindow x:Class="DigimonWorld.Frontend.WPF.Windows.About.AboutWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:system="clr-namespace:System;assembly=System.Runtime"
+        xmlns:about="clr-namespace:DigimonWorld.Frontend.WPF.Windows.About"
+        xmlns:windows="clr-namespace:DigimonWorld.Frontend.WPF.Windows"
+        mc:Ignorable="d"
+        d:DataContext="{d:DesignInstance Type=about:AboutWindowViewModel, IsDesignTimeCreatable=True}"
+        Title="Configuration"
+        ResizeMode="NoResize"
+        SizeToContent="WidthAndHeight"
+        WindowStyle="None"
+        AllowsTransparency="True"
+        Background="Transparent"
+        WindowStartupLocation="Manual">
+
+    <windows:BaseDialogWindow.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../../ResourceDictionaries/Styles/Buttons/DefaultButtonStyle.xaml" />
+                <ResourceDictionary Source="../../ResourceDictionaries/Styles/Buttons/DefaultSmallButtonStyle.xaml" />
+                <ResourceDictionary Source="../../ResourceDictionaries/Styles/Buttons/DefaultOptionPickerButtonStyle.xaml" />
+                <ResourceDictionary Source="../../ResourceDictionaries/Styles/Labels/DefaultSheenLabelStyle.xaml" />
+                <ResourceDictionary Source="../../ResourceDictionaries/Styles/Labels/DefaultLabelStyle.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+
+            <system:Double x:Key="WindowButtonWidth">70</system:Double>
+            <system:Double x:Key="DefaultButtonTextHeightSpacing">22</system:Double>
+
+        </ResourceDictionary>
+    </windows:BaseDialogWindow.Resources>
+
+    <Border Background="Transparent" Panel.ZIndex="1">
+        <Border CornerRadius="5" BorderBrush="Black" BorderThickness="3" Background="Black">
+            <Border CornerRadius="5" BorderBrush="#4A9FC5" BorderThickness="3" Background="#4A9FC5">
+                <Border CornerRadius="5" BorderBrush="#90D9FA" BorderThickness="3" Background="#90D9FA">
+                    <Border CornerRadius="5" BorderBrush="Black" BorderThickness="3" Background="Black">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="*" />
+                            </Grid.RowDefinitions>
+
+                            <Grid Grid.Row="0" Grid.Column="0" Margin="10, 0">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="*" />
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Style="{StaticResource DefaultSheenLabelStyle}"
+                                       Height="40"
+                                       Width="150"
+                                       HorizontalAlignment="Center"
+                                       Content="ABOUT 🛈" />
+                                <StackPanel Grid.Row="1" Grid.Column="0">
+                                    <Label Style="{StaticResource DefaultLabelStyle}" Content="Title:" Margin="10, 0, 5, 0" />
+                                    <Label Style="{StaticResource DefaultLabelStyle}" Content="Created by:" Margin="10, 0, 5, 0" />
+                                    <Label Style="{StaticResource DefaultLabelStyle}" Content="Contact:" Margin="10, 0, 5, 0" />
+                                    <Label Style="{StaticResource DefaultLabelStyle}" Content="Youtube:" Margin="10, 0, 5, 0" />
+                                </StackPanel>
+                                <StackPanel Grid.Row="1" Grid.Column="1">
+                                    <Label HorizontalAlignment="Left" Style="{StaticResource DefaultLabelStyle}" Content="Ginoshie" />
+                                    <Label HorizontalAlignment="Left" Style="{StaticResource DefaultLabelStyle}" Content="Digimon World Demistifier" />
+                                    <Label Style="{StaticResource DefaultLabelStyle}" HorizontalAlignment="Left" Content="{Binding ContactEmailAddress}" />
+                                    <Label Style="{StaticResource DefaultLabelStyle}" HorizontalAlignment="Left" Content="{Binding YoutubeAddress}" />
+                                </StackPanel>
+
+                                <StackPanel Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2"
+                                            Orientation="Horizontal"
+                                            HorizontalAlignment="Center"
+                                            Margin="0,5,0,0">
+                                    <Button Style="{StaticResource DefaultSmallButtonStyle}"
+                                            Content="Copy e-mail"
+                                            Height="{StaticResource DefaultButtonTextHeightSpacing}"
+                                            Width="85"
+                                            Command="{Binding CopyContactEmailCommand}" />
+                                    <Button Style="{StaticResource DefaultSmallButtonStyle}"
+                                            Content="Go to youtube"
+                                            Height="{StaticResource DefaultButtonTextHeightSpacing}"
+                                            Width="110"
+                                            Margin="5, 0, 0, 0" 
+                                            Command="{Binding OpenYoutubeWebsiteCommand}"/>
+                                </StackPanel>
+                            </Grid>
+
+                            <Grid Grid.Row="1" Grid.Column="0" Margin="10, 0">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="*" />
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"
+                                       Height="40"
+                                       Width="150"
+                                       HorizontalAlignment="Center"
+                                       Margin="10, 20, 10, 10"
+                                       Style="{StaticResource DefaultSheenLabelStyle}"
+                                       Content="CREDITS ©" />
+                                <StackPanel Grid.Row="1" Grid.Column="0">
+                                    <Label Style="{StaticResource DefaultLabelStyle}" Content="Support and love:" Margin="10, 0, 5, 0" />
+                                    <Label Style="{StaticResource DefaultLabelStyle}" Content="Girimon witty text:" Margin="10, 0, 5, 0" />
+                                    <Label Style="{StaticResource DefaultLabelStyle}" Content="Evolution criteria:" Margin="10, 0, 5, 0" />
+                                    <Label Style="{StaticResource DefaultLabelStyle}" Content="Evolution sprites:" Margin="10, 0, 5, 0" />
+                                    <Label Style="{StaticResource DefaultLabelStyle}" Content="Digimon sprites:" Margin="10, 0, 5, 0" />
+                                    <Label Style="{StaticResource DefaultLabelStyle}" Content="Digimon images:" Margin="10, 0, 5, 0" />
+                                </StackPanel>
+                                <StackPanel Grid.Row="1" Grid.Column="1">
+                                    <Label HorizontalAlignment="Left" Style="{StaticResource DefaultLabelStyle}" Content="Flaminamigo" />
+                                    <Label HorizontalAlignment="Left" Style="{StaticResource DefaultLabelStyle}" Content="Flaminamigo" />
+                                    <Label HorizontalAlignment="Left" Style="{StaticResource DefaultLabelStyle}" Content="Harceru" />
+                                    <Label HorizontalAlignment="Left" Style="{StaticResource DefaultLabelStyle}" Content="Rommstar (evolution sprites)" />
+                                    <Label HorizontalAlignment="Left" Style="{StaticResource DefaultLabelStyle}" Content="www.digimon.fandom.com" />
+                                    <Label HorizontalAlignment="Left" Style="{StaticResource DefaultLabelStyle}" Content="www.grindosaur.com" />
+                                </StackPanel>
+                            </Grid>
+
+                            <Button Grid.Row="2" Grid.Column="0" Style="{StaticResource DefaultButtonStyle}"
+                                    HorizontalAlignment="Center"
+                                    Height="{StaticResource DefaultButtonHeight}"
+                                    Width="{StaticResource WindowButtonWidth}"
+                                    Margin="0, 15, 0, 10"
+                                    Content="Close"
+                                    Command="{Binding CloseWindowCommand}" />
+                        </Grid>
+                    </Border>
+                </Border>
+            </Border>
+        </Border>
+    </Border>
+
+</windows:BaseDialogWindow>

@@ -9,6 +9,7 @@
 
         <system:Int32 x:Key="DefaultTooltipDelay">750</system:Int32>
         <system:Double x:Key="DefaultButtonHeight">40</system:Double>
+        <system:Double x:Key="DefaultTextHeightSpacing">16</system:Double>
 
         <conversion:EnumToImageConverter x:Key="EnumToImageConverter" />
 
