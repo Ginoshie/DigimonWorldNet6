@@ -6,11 +6,11 @@ using DigimonWorld.Frontend.WPF.ViewModelComponents;
 
 namespace DigimonWorld.Frontend.WPF.Windows.About;
 
-public class AboutWindowViewModel : BaseViewModel
+public class AboutAndCreditsWindowViewModel : BaseViewModel
 {
     private readonly Window _window;
 
-    public AboutWindowViewModel(Window window)
+    public AboutAndCreditsWindowViewModel(Window window)
     {
         _window = window;
         CopyContactEmailCommand = new CommandHandler(CopyText);

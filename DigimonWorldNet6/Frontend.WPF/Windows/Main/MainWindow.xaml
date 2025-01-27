@@ -20,46 +20,52 @@
         WindowStartupLocation="CenterScreen">
 
     <Window.Resources>
-        <BitmapImage x:Key="ClosedLeftPaneImage" UriSource="pack://application:,,,/Frontend.WPF;component/Images/ComponentLabels/label-left-no-focus.png" />
-        <BitmapImage x:Key="OpenLeftPaneImage" UriSource="pack://application:,,,/Frontend.WPF;component/Images/ComponentLabels/label-left-focus.png" />
-        <BitmapImage x:Key="ClosedBottomPaneImage" UriSource="pack://application:,,,/Frontend.WPF;component/Images/ComponentLabels/label-bottom-no-focus.png" />
-        <BitmapImage x:Key="OpenBottomPaneImage" UriSource="pack://application:,,,/Frontend.WPF;component/Images/ComponentLabels/label-bottom-focus.png" />
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../../ResourceDictionaries/Styles/DefaultTooltipStyle.xaml" />
+            </ResourceDictionary.MergedDictionaries>
 
-        <Style x:Key="LeftPaneLabelStyle" TargetType="Image">
-            <Setter Property="Source" Value="{StaticResource ClosedLeftPaneImage}" />
-            <Style.Triggers>
-                <DataTrigger Binding="{Binding LeftPaneIsOpen}" Value="True">
-                    <Setter Property="Source" Value="{StaticResource OpenLeftPaneImage}" />
-                </DataTrigger>
-            </Style.Triggers>
-        </Style>
+            <BitmapImage x:Key="ClosedLeftPaneImage" UriSource="pack://application:,,,/Frontend.WPF;component/Images/ComponentLabels/label-left-no-focus.png" />
+            <BitmapImage x:Key="OpenLeftPaneImage" UriSource="pack://application:,,,/Frontend.WPF;component/Images/ComponentLabels/label-left-focus.png" />
+            <BitmapImage x:Key="ClosedBottomPaneImage" UriSource="pack://application:,,,/Frontend.WPF;component/Images/ComponentLabels/label-bottom-no-focus.png" />
+            <BitmapImage x:Key="OpenBottomPaneImage" UriSource="pack://application:,,,/Frontend.WPF;component/Images/ComponentLabels/label-bottom-focus.png" />
 
-        <Style x:Key="BottomPaneLabelStyle" TargetType="Image">
-            <Setter Property="Source" Value="{StaticResource ClosedBottomPaneImage}" />
-            <Style.Triggers>
-                <DataTrigger Binding="{Binding BottomPaneIsOpen}" Value="True">
-                    <Setter Property="Source" Value="{StaticResource OpenBottomPaneImage}" />
-                </DataTrigger>
-            </Style.Triggers>
-        </Style>
+            <Style x:Key="LeftPaneLabelStyle" TargetType="Image">
+                <Setter Property="Source" Value="{StaticResource ClosedLeftPaneImage}" />
+                <Style.Triggers>
+                    <DataTrigger Binding="{Binding LeftPaneIsOpen}" Value="True">
+                        <Setter Property="Source" Value="{StaticResource OpenLeftPaneImage}" />
+                    </DataTrigger>
+                </Style.Triggers>
+            </Style>
 
-        <Storyboard x:Key="OpenLeftPane">
-            <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.X)"
-                             To="12" Duration="0:0:0.3" />
-        </Storyboard>
-        <Storyboard x:Key="CloseLeftPane">
-            <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.X)"
-                             To="465" Duration="0:0:0.3" />
-        </Storyboard>
+            <Style x:Key="BottomPaneLabelStyle" TargetType="Image">
+                <Setter Property="Source" Value="{StaticResource ClosedBottomPaneImage}" />
+                <Style.Triggers>
+                    <DataTrigger Binding="{Binding BottomPaneIsOpen}" Value="True">
+                        <Setter Property="Source" Value="{StaticResource OpenBottomPaneImage}" />
+                    </DataTrigger>
+                </Style.Triggers>
+            </Style>
 
-        <Storyboard x:Key="OpenBottomPane">
-            <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.Y)"
-                             To="-12" Duration="0:0:0.3" />
-        </Storyboard>
-        <Storyboard x:Key="CloseBottomPane">
-            <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.Y)"
-                             To="-475" Duration="0:0:0.3" />
-        </Storyboard>
+            <Storyboard x:Key="OpenLeftPane">
+                <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.X)"
+                                 To="12" Duration="0:0:0.3" />
+            </Storyboard>
+            <Storyboard x:Key="CloseLeftPane">
+                <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.X)"
+                                 To="465" Duration="0:0:0.3" />
+            </Storyboard>
+
+            <Storyboard x:Key="OpenBottomPane">
+                <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.Y)"
+                                 To="-12" Duration="0:0:0.3" />
+            </Storyboard>
+            <Storyboard x:Key="CloseBottomPane">
+                <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.Y)"
+                                 To="-475" Duration="0:0:0.3" />
+            </Storyboard>
+        </ResourceDictionary>
     </Window.Resources>
 
     <Grid Background="Transparent" SnapsToDevicePixels="True" UseLayoutRounding="True">
@@ -92,6 +98,9 @@
                 </Grid.ColumnDefinitions>
 
                 <Button Grid.Column="1" Width="60" Height="50" Background="Transparent" BorderBrush="Transparent" Command="{Binding OpenConfigurationWindowCommand}">
+                    <Button.ToolTip>
+                        <ToolTip Style="{StaticResource DefaultToolTipStyle}" Content="Open the configuration window" />
+                    </Button.ToolTip>
                     <Button.Template>
                         <ControlTemplate TargetType="Button">
                             <Grid Background="Transparent" SnapsToDevicePixels="True" UseLayoutRounding="True">
@@ -129,7 +138,10 @@
                     </Button.Template>
                 </Button>
 
-                <Button Grid.Column="2" Width="60" Height="50" Background="Transparent" BorderBrush="Transparent" Command="{Binding OpenAboutWindowCommand}">
+                <Button Grid.Column="2" Width="60" Height="50" Background="Transparent" BorderBrush="Transparent" Command="{Binding OpenAboutAndCreditsWindowCommand}">
+                    <Button.ToolTip>
+                        <ToolTip Style="{StaticResource DefaultToolTipStyle}" Content="Open the about and credits window" />
+                    </Button.ToolTip>
                     <Button.Template>
                         <ControlTemplate TargetType="Button">
                             <Grid Background="Transparent" SnapsToDevicePixels="True" UseLayoutRounding="True">
@@ -168,7 +180,13 @@
                 </Button>
 
                 <Grid Grid.Column="4" Width="60" Height="50" Background="Transparent" SnapsToDevicePixels="True" UseLayoutRounding="True">
-                    <Border CornerRadius="5" BorderBrush="Black" BorderThickness="3" Background="Black">
+                    <Border CornerRadius="5" BorderBrush="Black" BorderThickness="3" Background="Black"
+                            ToolTipService.InitialShowDelay="750">
+                        <Border.ToolTip>
+                            <ToolTip Style="{StaticResource DefaultToolTipStyle}">
+                                <TextBlock Text="Click and hold to drag the application window" />
+                            </ToolTip>
+                        </Border.ToolTip>
                         <Border CornerRadius="5" BorderBrush="#4A9FC5" BorderThickness="3" Background="#4A9FC5">
                             <Border CornerRadius="5" BorderBrush="#90D9FA" BorderThickness="3" Background="#90D9FA">
                                 <Border CornerRadius="5" BorderBrush="Black" BorderThickness="3" Background="#2E3841">
@@ -202,6 +220,9 @@
                 </Grid>
 
                 <Button Grid.Column="5" Width="60" Height="50" Background="Transparent" BorderBrush="Transparent" Command="{Binding MinimizeCommand}">
+                    <Button.ToolTip>
+                        <ToolTip Style="{StaticResource DefaultToolTipStyle}" Content="Minimize the application" />
+                    </Button.ToolTip>
                     <Button.Template>
                         <ControlTemplate TargetType="Button">
                             <Grid Background="Transparent" SnapsToDevicePixels="True" UseLayoutRounding="True">
@@ -240,6 +261,9 @@
                 </Button>
 
                 <Button Grid.Column="6" Width="60" Height="50" Background="Transparent" BorderBrush="Transparent" Command="{Binding CloseCommand}">
+                    <Button.ToolTip>
+                        <ToolTip Style="{StaticResource DefaultToolTipStyle}" Content="Close the application" />
+                    </Button.ToolTip>
                     <Button.Template>
                         <ControlTemplate TargetType="Button">
                             <Grid Background="Transparent" SnapsToDevicePixels="True" UseLayoutRounding="True">
@@ -312,7 +336,7 @@
                     <Border CornerRadius="5" BorderBrush="#4A9FC5" BorderThickness="3" Padding="0" Background="#4A9FC5">
                         <Border CornerRadius="5" BorderBrush="#90D9FA" BorderThickness="3" Padding="0" Background="#90D9FA">
                             <Border CornerRadius="5" BorderBrush="Black" BorderThickness="3" Padding="10" Background="#2E3841">
-                                <historicEvolutionPicker:HistoricEvolutionPickerUserControl VerticalAlignment="Center"/>
+                                <historicEvolutionPicker:HistoricEvolutionPickerUserControl VerticalAlignment="Center" />
                             </Border>
                         </Border>
                     </Border>
@@ -369,7 +393,7 @@
                 </Style>
             </Grid.Style>
         </Grid>
-        
+
         <Grid Grid.Row="1" Grid.Column="0" Background="Transparent" SnapsToDevicePixels="True" UseLayoutRounding="True" RenderTransformOrigin="0.5,0.5" Panel.ZIndex="0">
             <Grid.RenderTransform>
                 <TranslateTransform X="465" />
@@ -391,7 +415,7 @@
                     <Border CornerRadius="5" BorderBrush="#4A9FC5" BorderThickness="3" Padding="0" Background="#4A9FC5">
                         <Border CornerRadius="5" BorderBrush="#90D9FA" BorderThickness="3" Padding="0" Background="#90D9FA">
                             <Border CornerRadius="5" BorderBrush="Black" BorderThickness="3" Padding="10" Background="#2E3841">
-                                <musicPlayer:MusicPlayerUserControl VerticalAlignment="Center"/>
+                                <musicPlayer:MusicPlayerUserControl VerticalAlignment="Center" />
                             </Border>
                         </Border>
                     </Border>

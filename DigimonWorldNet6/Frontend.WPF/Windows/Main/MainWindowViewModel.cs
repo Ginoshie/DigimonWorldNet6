@@ -30,7 +30,7 @@ public class MainWindowViewModel : BaseViewModel
         
         OpenConfigurationWindowCommand = new CommandHandler(OpenConfigurationWindow);
         
-        OpenAboutWindowCommand = new CommandHandler(OpenAboutWindow);
+        OpenAboutAndCreditsWindowCommand = new CommandHandler(OpenAboutAndCreditsWindow);
     }
 
     private void CloseApplication()
@@ -87,7 +87,7 @@ public class MainWindowViewModel : BaseViewModel
 
     public ICommand OpenConfigurationWindowCommand { get; }
 
-    public ICommand OpenAboutWindowCommand { get; }
+    public ICommand OpenAboutAndCreditsWindowCommand { get; }
 
     private void DragWindow(Window window)
     {
@@ -127,17 +127,17 @@ public class MainWindowViewModel : BaseViewModel
         configWindow.ShowDialog();
     }
 
-    private void OpenAboutWindow()
+    private void OpenAboutAndCreditsWindow()
     {
-        AboutWindow aboutWindow = new()
+        AboutAndCreditsWindow aboutAndCreditsWindow = new()
         {
             Owner = Application.Current.MainWindow
         };
 
-        AboutWindowViewModel aboutWindowViewModel = new(aboutWindow);
+        AboutAndCreditsWindowViewModel aboutAndCreditsWindowViewModel = new(aboutAndCreditsWindow);
 
-        aboutWindow.DataContext = aboutWindowViewModel;
+        aboutAndCreditsWindow.DataContext = aboutAndCreditsWindowViewModel;
 
-        aboutWindow.ShowDialog();
+        aboutAndCreditsWindow.ShowDialog();
     }
 }

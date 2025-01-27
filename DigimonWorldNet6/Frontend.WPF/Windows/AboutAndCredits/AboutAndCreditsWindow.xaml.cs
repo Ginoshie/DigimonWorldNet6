@@ -2,9 +2,9 @@ using System.Windows;
 
 namespace DigimonWorld.Frontend.WPF.Windows.About;
 
-public partial class AboutWindow
+public partial class AboutAndCreditsWindow
 {
-    public AboutWindow()
+    public AboutAndCreditsWindow()
     {
         InitializeComponent();
     }

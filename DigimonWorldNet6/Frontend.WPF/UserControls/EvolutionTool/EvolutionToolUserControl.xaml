@@ -376,7 +376,11 @@
             <Button Grid.Column="0" Grid.Row="2" Style="{StaticResource CalculateEvolutionButtonStyle}"
                     Height="{StaticResource DefaultButtonHeight}"
                     Content="{Binding CalculateButtonText}"
-                    Command="{Binding SetEvolutionResult}" />
+                    Command="{Binding SetEvolutionResult}" >
+                <Button.ToolTip>
+                    <ToolTip Style="{StaticResource DefaultToolTipStyle}" Content="Calculate the evolution result" />
+                </Button.ToolTip>
+            </Button>
 
         </Grid>
         <Grid Column="1">
