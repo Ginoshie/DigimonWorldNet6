@@ -33,31 +33,31 @@ public static class EventHub
     
     private static readonly Subject<Unit> UnmuteSubject = new();
     
-    public static IObservable<Unit> OnLeftPaneOpened { get; } = LeftPaneOpenedSubject.AsObservable();
+    public static IObservable<Unit> LeftPaneOpened { get; } = LeftPaneOpenedSubject.AsObservable();
     
-    public static IObservable<Unit> OnLeftPaneClosed { get; } =  LeftPaneClosedSubject.AsObservable();
+    public static IObservable<Unit> LeftPaneClosed { get; } =  LeftPaneClosedSubject.AsObservable();
     
-    public static IObservable<Unit> OnLeomonsThemeStarted { get; } = LeomonsThemeStartedSubject.AsObservable();
+    public static IObservable<Unit> LeomonsThemeStarted { get; } = LeomonsThemeStartedSubject.AsObservable();
     
-    public static IObservable<Unit> OnShuffleEnabled { get; } = ShuffleEnabledSubject.AsObservable();
+    public static IObservable<Unit> ShuffleEnabled { get; } = ShuffleEnabledSubject.AsObservable();
     
-    public static IObservable<Unit> OnShuffleDisabled { get; } = ShuffleDisabledSubject.AsObservable();
+    public static IObservable<Unit> ShuffleDisabled { get; } = ShuffleDisabledSubject.AsObservable();
     
-    public static IObservable<Unit> OnPreviousSongStarted { get; } = PreviousSongStartedSubject.AsObservable();
+    public static IObservable<Unit> PreviousSongStarted { get; } = PreviousSongStartedSubject.AsObservable();
     
-    public static IObservable<Unit> OnCurrentSongStarted { get; } = CurrentSongStartedSubject.AsObservable();
+    public static IObservable<Unit> CurrentSongStarted { get; } = CurrentSongStartedSubject.AsObservable();
     
-    public static IObservable<Unit> OnNextSongStarted { get; } = NextSongStartedSubject.AsObservable();
+    public static IObservable<Unit> NextSongStarted { get; } = NextSongStartedSubject.AsObservable();
     
-    public static IObservable<Unit> OnPause { get; } = PauseSubject.AsObservable();
+    public static IObservable<Unit> MusicPaused { get; } = PauseSubject.AsObservable();
     
-    public static IObservable<Unit> OnRepeatCurrentSongMode { get; } = RepeatCurrentSongSubject.AsObservable();
+    public static IObservable<Unit> RepeatCurrentSongModeEnabled { get; } = RepeatCurrentSongSubject.AsObservable();
     
-    public static IObservable<Unit> OnPlayAllSongsMode { get; } = PlayAllSongsSubject.AsObservable();
+    public static IObservable<Unit> PlayAllSongsModeEnabled { get; } = PlayAllSongsSubject.AsObservable();
     
-    public static IObservable<Unit> OnMute { get; } = MuteSubject.AsObservable();
+    public static IObservable<Unit> MuteMusic { get; } = MuteSubject.AsObservable();
     
-    public static IObservable<Unit> OnUnmute { get; } = UnmuteSubject.AsObservable();
+    public static IObservable<Unit> UnmuteMusic { get; } = UnmuteSubject.AsObservable();
     
     public static void SignalLeftPaneOpened() => LeftPaneOpenedSubject.OnNext(Unit.Default);
     

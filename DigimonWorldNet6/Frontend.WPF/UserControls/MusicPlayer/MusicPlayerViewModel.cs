@@ -44,19 +44,19 @@ public class MusicPlayerViewModel : BaseViewModel, IDisposable
             Jukebox.CurrentPositionObservable.Subscribe(currentPosition => CurrentPosition = currentPosition),
             Jukebox.SongLengthObservable.Subscribe(songLength => SongLength = songLength),
             Jukebox.VolumeObservable.Subscribe(volume => Volume = volume),
-            EventHub.OnLeftPaneOpened.Subscribe(async void (_) => await OnMusicPlayerOpened()),
-            EventHub.OnLeftPaneClosed.Subscribe(async void (_) => await OnMusicPlayerClosed()),
-            EventHub.OnLeomonsThemeStarted.Subscribe(async void (_) => await OnLeomonSongStarted()),
-            EventHub.OnShuffleDisabled.Subscribe(async void (_) => await OnShuffleDisabled()),
-            EventHub.OnShuffleEnabled.Subscribe(async void (_) => await OnShuffleEnabled()),
-            EventHub.OnPreviousSongStarted.Subscribe(async void (_) => await OnPreviousSongStarted()),
-            EventHub.OnCurrentSongStarted.Subscribe(async void (_) => await OnCurrentSongStarted()),
-            EventHub.OnPause.Subscribe(async void (_) => await OnPaused()),
-            EventHub.OnNextSongStarted.Subscribe(async void (_) => await OnNextSongStarted()),
-            EventHub.OnRepeatCurrentSongMode.Subscribe(async void (_) => await OnRepeatCurrentSongMode()),
-            EventHub.OnPlayAllSongsMode.Subscribe(async void (_) => await OnPlayAllSongsMode()),
-            EventHub.OnMute.Subscribe(async void (_) => await OnMute()),
-            EventHub.OnUnmute.Subscribe(async void (_) => await OnUnmute()));
+            EventHub.LeftPaneOpened.Subscribe(async void (_) => await OnMusicPlayerOpened()),
+            EventHub.LeftPaneClosed.Subscribe(async void (_) => await OnMusicPlayerClosed()),
+            EventHub.LeomonsThemeStarted.Subscribe(async void (_) => await OnLeomonSongStarted()),
+            EventHub.ShuffleDisabled.Subscribe(async void (_) => await OnShuffleDisabled()),
+            EventHub.ShuffleEnabled.Subscribe(async void (_) => await OnShuffleEnabled()),
+            EventHub.PreviousSongStarted.Subscribe(async void (_) => await OnPreviousSongStarted()),
+            EventHub.CurrentSongStarted.Subscribe(async void (_) => await OnCurrentSongStarted()),
+            EventHub.MusicPaused.Subscribe(async void (_) => await OnPaused()),
+            EventHub.NextSongStarted.Subscribe(async void (_) => await OnNextSongStarted()),
+            EventHub.RepeatCurrentSongModeEnabled.Subscribe(async void (_) => await OnRepeatCurrentSongMode()),
+            EventHub.PlayAllSongsModeEnabled.Subscribe(async void (_) => await OnPlayAllSongsMode()),
+            EventHub.MuteMusic.Subscribe(async void (_) => await OnMute()),
+            EventHub.UnmuteMusic.Subscribe(async void (_) => await OnUnmute()));
 
         InstantDisplayCommand = new CommandHandler(InstantDisplay);
     }

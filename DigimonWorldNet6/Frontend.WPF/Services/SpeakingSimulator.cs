@@ -3,6 +3,7 @@ using System.Linq;
 using System.Reactive.Disposables;
 using System.Threading;
 using System.Threading.Tasks;
+using DigimonWorld.Frontend.WPF.Configuration;
 using DigimonWorld.Frontend.WPF.Constants;
 
 namespace DigimonWorld.Frontend.WPF.Services;
@@ -14,13 +15,13 @@ public class SpeakingSimulator : IDisposable
 
     private CancellationTokenSource? _typingCancellationTokenSource;
     private bool _instantDisplayRequested;
-    private NarratorMode _narratorMode;
+    private SpeakingSimulatorConfig _speakingSimulatorConfig = null!;
 
     public SpeakingSimulator()
     {
         _compositeDisposable = new CompositeDisposable
         (
-            GeneralConfiguration.NarratorMode.Subscribe(OnNarratorModeChanged)
+            GeneralConfiguration.CurrentSpeakingSimulatorConfig.Subscribe(OnConfigChanged)
         );
     }
 
@@ -44,14 +45,14 @@ public class SpeakingSimulator : IDisposable
         _typingCancellationTokenSource.Cancel();
     }
 
-    private void OnNarratorModeChanged(NarratorMode narratorMode)
+    private void OnConfigChanged(SpeakingSimulatorConfig speakingSimulatorConfig)
     {
-        if (narratorMode == NarratorMode.Instant)
+        if (speakingSimulatorConfig.NarratorMode == NarratorMode.Instant)
         {
             RequestInstantDisplay();
         }
 
-        _narratorMode = narratorMode;
+        _speakingSimulatorConfig = speakingSimulatorConfig;
     }
 
     private void CancelAndReset()
@@ -89,7 +90,7 @@ public class SpeakingSimulator : IDisposable
         {
             string[] words = fullText.Split(' ');
 
-            if (_narratorMode == NarratorMode.Instant)
+            if (_speakingSimulatorConfig.NarratorMode == NarratorMode.Instant)
             {
                 updateTextAction(fullText.Replace(JijimonEvolutionCalculatorNarratorText.ShowEvolutionResultKeyWord, ""));
                 showEvolutionAction?.Invoke();

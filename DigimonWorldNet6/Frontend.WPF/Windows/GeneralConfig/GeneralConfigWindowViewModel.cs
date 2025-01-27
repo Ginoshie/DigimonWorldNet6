@@ -1,6 +1,7 @@
 using System;
 using System.Reactive.Disposables;
 using System.Windows.Input;
+using DigimonWorld.Frontend.WPF.Configuration;
 using DigimonWorld.Frontend.WPF.Constants;
 using DigimonWorld.Frontend.WPF.Services;
 using DigimonWorld.Frontend.WPF.ViewModelComponents;
@@ -11,6 +12,7 @@ public class GeneralConfigWindowViewModel : BaseViewModel, IDisposable
 {
     private readonly CompositeDisposable _compositeDisposable;
     private readonly GeneralConfigWindow _window;
+
     private bool _isNarratorModeInstant;
     private bool _isNarratorModeSpeech;
 
@@ -27,7 +29,7 @@ public class GeneralConfigWindowViewModel : BaseViewModel, IDisposable
         SetNarratorModeInstantCommand = new CommandHandler(SetNarratorModeInstant);
 
         _compositeDisposable = new CompositeDisposable(
-            GeneralConfiguration.NarratorMode.Subscribe(OnNarratorModeChanged)
+            GeneralConfiguration.CurrentSpeakingSimulatorConfig.Subscribe(OnSpeakingSimulatorConfigChanged)
         );
     }
 
@@ -53,28 +55,38 @@ public class GeneralConfigWindowViewModel : BaseViewModel, IDisposable
 
     private void Save()
     {
+        GeneralConfiguration.SaveConfiguration();
+
         _window.Close();
     }
 
     private void Cancel()
     {
+        GeneralConfiguration.ResetConfiguration();
+
         _window.Close();
     }
 
     private void SetNarratorModeSpeech()
     {
         GeneralConfiguration.SetNarratorMode(NarratorMode.Speech);
+
+        IsNarratorModeSpeech = true;
+        IsNarratorModeInstant = false;
     }
 
     private void SetNarratorModeInstant()
     {
         GeneralConfiguration.SetNarratorMode(NarratorMode.Instant);
+
+        IsNarratorModeSpeech = false;
+        IsNarratorModeInstant = true;
     }
 
-    private void OnNarratorModeChanged(NarratorMode mode)
+    private void OnSpeakingSimulatorConfigChanged(SpeakingSimulatorConfig speakingSimulatorConfig)
     {
-        IsNarratorModeSpeech = mode == NarratorMode.Speech;
-        IsNarratorModeInstant = mode == NarratorMode.Instant;
+        IsNarratorModeSpeech = speakingSimulatorConfig.NarratorMode == NarratorMode.Speech;
+        IsNarratorModeInstant = speakingSimulatorConfig.NarratorMode == NarratorMode.Instant;
     }
 
     public void Dispose()
