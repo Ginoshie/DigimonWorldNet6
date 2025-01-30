@@ -23,6 +23,7 @@
                 <ResourceDictionary Source="../../ResourceDictionaries/Styles/Buttons/DefaultOptionPickerButtonStyle.xaml" />
                 <ResourceDictionary Source="../../ResourceDictionaries/Styles/Labels/DefaultSheenLabelStyle.xaml" />
                 <ResourceDictionary Source="../../ResourceDictionaries/Styles/Labels/DefaultLabelStyle.xaml" />
+                <ResourceDictionary Source="../../ResourceDictionaries/Styles/DefaultTooltipStyle.xaml" />
             </ResourceDictionary.MergedDictionaries>
 
             <system:Double x:Key="WindowButtonWidth">70</system:Double>
@@ -30,6 +31,10 @@
             <system:Double x:Key="OptionButtonHeight">22</system:Double>
         </ResourceDictionary>
     </windows:BaseDialogWindow.Resources>
+
+    <Window.InputBindings>
+        <KeyBinding Key="Escape" Command="{Binding CancelCommand}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}" />
+    </Window.InputBindings>
 
     <Border Background="Transparent" Panel.ZIndex="1">
         <Border CornerRadius="5" BorderBrush="Black" BorderThickness="3" Background="Black">
@@ -130,12 +135,20 @@
                                         Width="{StaticResource WindowButtonWidth}"
                                         Margin="0, 0, 10, 0"
                                         Content="Save"
-                                        Command="{Binding SaveCommand}" />
+                                        Command="{Binding SaveCommand}">
+                                    <Button.ToolTip>
+                                        <ToolTip Style="{StaticResource DefaultToolTipStyle}" Content="Save and apply the current configuration." />
+                                    </Button.ToolTip>
+                                </Button>
                                 <Button Style="{StaticResource DefaultButtonStyle}"
                                         Height="{StaticResource DefaultButtonHeight}"
                                         Width="{StaticResource WindowButtonWidth}"
                                         Content="Cancel"
-                                        Command="{Binding CancelCommand}" />
+                                        Command="{Binding CancelCommand}">
+                                    <Button.ToolTip>
+                                        <ToolTip Style="{StaticResource DefaultToolTipStyle}" Content="Exit this window without applying or saving&#x0a;the configuration changes. (hotkey: ESC)" />
+                                    </Button.ToolTip>
+                                </Button>
                             </StackPanel>
                         </Grid>
                     </Border>

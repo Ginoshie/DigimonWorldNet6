@@ -3,7 +3,7 @@ using System.Windows;
 using System.Windows.Input;
 using DigimonWorld.Frontend.WPF.Services;
 using DigimonWorld.Frontend.WPF.ViewModelComponents;
-using DigimonWorld.Frontend.WPF.Windows.About;
+using DigimonWorld.Frontend.WPF.Windows.AboutAndCredits;
 using DigimonWorld.Frontend.WPF.Windows.GeneralConfig;
 
 namespace DigimonWorld.Frontend.WPF.Windows.Main;

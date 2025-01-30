@@ -1,6 +1,4 @@
-using System.Windows;
-
-namespace DigimonWorld.Frontend.WPF.Windows.About;
+namespace DigimonWorld.Frontend.WPF.Windows.AboutAndCredits;
 
 public partial class AboutAndCreditsWindow
 {
