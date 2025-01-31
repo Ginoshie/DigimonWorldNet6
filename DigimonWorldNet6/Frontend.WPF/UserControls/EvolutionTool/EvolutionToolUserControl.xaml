@@ -25,7 +25,7 @@
         </ResourceDictionary>
     </UserControl.Resources>
 
-    <Grid>
+    <Grid KeyboardNavigation.TabNavigation="Cycle">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
             <ColumnDefinition Width="*" />
@@ -40,7 +40,7 @@
                 <RowDefinition Height="*" />
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
-            <Label Grid.Row="0" Grid.Column="0" Height="40" Width="150" Style="{StaticResource DefaultSheenLabelStyle}">
+            <Label Grid.Row="0" Grid.Column="0" Height="40" Width="150" Style="{StaticResource DefaultSheenLabelStyle}" IsTabStop="False">
                 YOUR DIGIMON
             </Label>
             <GroupBox Grid.Column="0" Grid.Row="1" Header="Your digimon">
@@ -86,8 +86,7 @@
                               SelectedIndex="0"
                               Style="{StaticResource DefaultComboboxStyle}"
                               ItemsSource="{Binding Source={StaticResource DigimonTypes}}"
-                              SelectedItem="{Binding DigimonType}"
-                              IsTabStop="False">
+                              SelectedItem="{Binding DigimonType}">
                         <b:Interaction.Behaviors>
                             <behaviors:DelayedTooltipBehavior
                                 TooltipText="The digimon type of your digimon."
@@ -396,7 +395,7 @@
             <Rectangle Grid.Row="0" Grid.Column="2" VerticalAlignment="Stretch" Fill="#90D9FA" Width="2" />
             <Rectangle Grid.Row="0" Grid.Column="3" VerticalAlignment="Stretch" Fill="Black" Width="2" />
         </Grid>
-        <Grid Column="2">
+        <Grid Column="2" KeyboardNavigation.TabNavigation="None">
 
             <Grid.RowDefinitions>
                 <RowDefinition Height="*" />

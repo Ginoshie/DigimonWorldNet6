@@ -97,7 +97,7 @@
                     <ColumnDefinition Width="15" />
                 </Grid.ColumnDefinitions>
 
-                <Button Grid.Column="1" Width="60" Height="50" Background="Transparent" BorderBrush="Transparent" Command="{Binding OpenConfigurationWindowCommand}">
+                <Button Grid.Column="1" Width="60" Height="50" Background="Transparent" BorderBrush="Transparent" Command="{Binding OpenConfigurationWindowCommand}" IsTabStop="False">
                     <Button.ToolTip>
                         <ToolTip Style="{StaticResource DefaultToolTipStyle}" Content="Open the configuration window" />
                     </Button.ToolTip>
@@ -138,7 +138,7 @@
                     </Button.Template>
                 </Button>
 
-                <Button Grid.Column="2" Width="60" Height="50" Background="Transparent" BorderBrush="Transparent" Command="{Binding OpenAboutAndCreditsWindowCommand}">
+                <Button Grid.Column="2" Width="60" Height="50" Background="Transparent" BorderBrush="Transparent" Command="{Binding OpenAboutAndCreditsWindowCommand}" IsTabStop="False">
                     <Button.ToolTip>
                         <ToolTip Style="{StaticResource DefaultToolTipStyle}" Content="Open the about and credits window" />
                     </Button.ToolTip>
@@ -219,7 +219,7 @@
                     </Grid.Triggers>
                 </Grid>
 
-                <Button Grid.Column="5" Width="60" Height="50" Background="Transparent" BorderBrush="Transparent" Command="{Binding MinimizeCommand}">
+                <Button Grid.Column="5" Width="60" Height="50" Background="Transparent" BorderBrush="Transparent" Command="{Binding MinimizeCommand}" IsTabStop="False">
                     <Button.ToolTip>
                         <ToolTip Style="{StaticResource DefaultToolTipStyle}" Content="Minimize the application" />
                     </Button.ToolTip>
@@ -260,7 +260,7 @@
                     </Button.Template>
                 </Button>
 
-                <Button Grid.Column="6" Width="60" Height="50" Background="Transparent" BorderBrush="Transparent" Command="{Binding CloseCommand}">
+                <Button Grid.Column="6" Width="60" Height="50" Background="Transparent" BorderBrush="Transparent" Command="{Binding CloseCommand}" IsTabStop="False">
                     <Button.ToolTip>
                         <ToolTip Style="{StaticResource DefaultToolTipStyle}" Content="Close the application" />
                     </Button.ToolTip>
