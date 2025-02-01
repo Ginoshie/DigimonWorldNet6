@@ -1,0 +1,78 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <Style x:Key="DefaultFocusStyle" TargetType="Control">
+        <Setter Property="Control.Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Control">
+                    <Grid Background="Transparent">
+                        <Border Margin="-5" BorderThickness="2" CornerRadius="2" Background="Transparent">
+                            <Border.BorderBrush>
+                                <SolidColorBrush x:Name="outerBrush" Color="#AD7B00" />
+                            </Border.BorderBrush>
+                        </Border>
+                        <Border Margin="-4" BorderThickness="2" CornerRadius="2" Background="Transparent">
+                            <Border.BorderBrush>
+                                <SolidColorBrush x:Name="secondBrush" Color="#E8C31B" />
+                            </Border.BorderBrush>
+                        </Border>
+                        <Border Margin="-3" BorderThickness="2" CornerRadius="2" Background="Transparent">
+                            <Border.BorderBrush>
+                                <SolidColorBrush x:Name="thirdBrush" Color="#F7D600" />
+                            </Border.BorderBrush>
+                        </Border>
+                        <Border Margin="-2" BorderThickness="2" CornerRadius="2" Background="Transparent">
+                            <Border.BorderBrush>
+                                <SolidColorBrush x:Name="innerBrush" Color="#DEB500" />
+                            </Border.BorderBrush>
+                        </Border>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+                            <BeginStoryboard>
+                                <Storyboard RepeatBehavior="Forever">
+                                    <ColorAnimationUsingKeyFrames Storyboard.TargetName="outerBrush" Storyboard.TargetProperty="Color" Duration="0:0:1.2" RepeatBehavior="Forever">
+                                        <DiscreteColorKeyFrame KeyTime="0:0:0" Value="#AD7B00" />
+                                        <DiscreteColorKeyFrame KeyTime="0:0:0.3" Value="#DEB500" />
+                                        <DiscreteColorKeyFrame KeyTime="0:0:0.6" Value="#F7D600" />
+                                        <DiscreteColorKeyFrame KeyTime="0:0:0.9" Value="#E8C31B" />
+                                        <DiscreteColorKeyFrame KeyTime="0:0:1.2" Value="#E8C31B" />
+                                    </ColorAnimationUsingKeyFrames>
+                                    <ColorAnimationUsingKeyFrames Storyboard.TargetName="secondBrush" Storyboard.TargetProperty="Color" Duration="0:0:1.2" RepeatBehavior="Forever">
+                                        <DiscreteColorKeyFrame KeyTime="0:0:0" Value="#E8C31B" />
+                                        <DiscreteColorKeyFrame KeyTime="0:0:0.3" Value="#AD7B00" />
+                                        <DiscreteColorKeyFrame KeyTime="0:0:0.6" Value="#DEB500" />
+                                        <DiscreteColorKeyFrame KeyTime="0:0:0.9" Value="#F7D600" />
+                                        <DiscreteColorKeyFrame KeyTime="0:0:1.2" Value="#F7D600" />
+                                    </ColorAnimationUsingKeyFrames>
+                                    <ColorAnimationUsingKeyFrames Storyboard.TargetName="thirdBrush" Storyboard.TargetProperty="Color" Duration="0:0:1.2" RepeatBehavior="Forever">
+                                        <DiscreteColorKeyFrame KeyTime="0:0:0" Value="#F7D600" />
+                                        <DiscreteColorKeyFrame KeyTime="0:0:0.3" Value="#E8C31B" />
+                                        <DiscreteColorKeyFrame KeyTime="0:0:0.6" Value="#AD7B00" />
+                                        <DiscreteColorKeyFrame KeyTime="0:0:0.9" Value="#DEB500" />
+                                        <DiscreteColorKeyFrame KeyTime="0:0:1.2" Value="#DEB500" />
+                                    </ColorAnimationUsingKeyFrames>
+                                    <ColorAnimationUsingKeyFrames Storyboard.TargetName="innerBrush" Storyboard.TargetProperty="Color" Duration="0:0:1.2" RepeatBehavior="Forever">
+                                        <DiscreteColorKeyFrame KeyTime="0:0:0" Value="#DEB500" />
+                                        <DiscreteColorKeyFrame KeyTime="0:0:0.3" Value="#F7D600" />
+                                        <DiscreteColorKeyFrame KeyTime="0:0:0.6" Value="#E8C31B" />
+                                        <DiscreteColorKeyFrame KeyTime="0:0:0.9" Value="#AD7B00" />
+                                        <DiscreteColorKeyFrame KeyTime="0:0:1.2" Value="#AD7B00" />
+                                    </ColorAnimationUsingKeyFrames>
+                                    <ColorAnimationUsingKeyFrames Storyboard.TargetName="innerBrush" Storyboard.TargetProperty="Color" Duration="0:0:1.2" RepeatBehavior="Forever">
+                                        <DiscreteColorKeyFrame KeyTime="0:0:0" Value="#DEB500" />
+                                        <DiscreteColorKeyFrame KeyTime="0:0:0.3" Value="#F7D600" />
+                                        <DiscreteColorKeyFrame KeyTime="0:0:0.6" Value="#E8C31B" />
+                                        <DiscreteColorKeyFrame KeyTime="0:0:0.9" Value="#AD7B00" />
+                                        <DiscreteColorKeyFrame KeyTime="0:0:1.2" Value="#AD7B00" />
+                                    </ColorAnimationUsingKeyFrames>
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+</ResourceDictionary>

@@ -19,6 +19,7 @@
                 <ResourceDictionary Source="../../ResourceDictionaries/Styles/DefaultTooltipStyle.xaml" />
                 <ResourceDictionary Source="../../ResourceDictionaries/Styles/DefaultTextboxStyle.xaml"  />
                 <ResourceDictionary Source="../../ResourceDictionaries/Styles/DefaultComboboxStyle.xaml"  />
+                <ResourceDictionary Source="../../ResourceDictionaries/Styles/DefaultFocusStyle.xaml"  />
                 <ResourceDictionary Source="../../ResourceDictionaries/Styles/Labels/DefaultSheenLabelStyle.xaml"  />
                 <ResourceDictionary Source="../../ResourceDictionaries/Styles/Labels/DefaultLabelStyle.xaml"  />
             </ResourceDictionary.MergedDictionaries>
@@ -82,9 +83,8 @@
                                 TooltipStyle="{StaticResource DefaultToolTipStyle}" />
                         </b:Interaction.Behaviors>
                     </Label>
-                    <ComboBox Name="Digimon" Grid.Column="1" Grid.Row="0" Grid.ColumnSpan="2"
+                    <ComboBox Name="Digimon" Grid.Column="1" Grid.Row="0" Grid.ColumnSpan="2" FocusVisualStyle="{StaticResource DefaultFocusStyle}" Style="{StaticResource DefaultComboboxStyle}"
                               SelectedIndex="0"
-                              Style="{StaticResource DefaultComboboxStyle}"
                               ItemsSource="{Binding Source={StaticResource DigimonTypes}}"
                               SelectedItem="{Binding DigimonType}">
                         <b:Interaction.Behaviors>
@@ -101,7 +101,7 @@
                                 TooltipStyle="{StaticResource DefaultToolTipStyle}" />
                         </b:Interaction.Behaviors>
                     </Label>
-                    <TextBox Name="Hp" Grid.Column="1" Grid.Row="1" Style="{StaticResource DefaultTextBoxStyle}">
+                    <TextBox Name="Hp" Grid.Column="1" Grid.Row="1" FocusVisualStyle="{StaticResource DefaultFocusStyle}" Style="{StaticResource DefaultTextBoxStyle}">
                         <b:Interaction.Behaviors>
                             <behaviors:TextBoxBehavior />
                             <behaviors:DelayedTooltipBehavior
@@ -124,7 +124,7 @@
                                 TooltipStyle="{StaticResource DefaultToolTipStyle}" />
                         </b:Interaction.Behaviors>
                     </Label>
-                    <TextBox Name="Mp" Grid.Column="1" Grid.Row="2" Style="{StaticResource DefaultTextBoxStyle}">
+                    <TextBox Name="Mp" Grid.Column="1" Grid.Row="2" FocusVisualStyle="{StaticResource DefaultFocusStyle}" Style="{StaticResource DefaultTextBoxStyle}">
                         <b:Interaction.Behaviors>
                             <behaviors:TextBoxBehavior />
                             <behaviors:DelayedTooltipBehavior
@@ -147,7 +147,7 @@
                                 TooltipStyle="{StaticResource DefaultToolTipStyle}" />
                         </b:Interaction.Behaviors>
                     </Label>
-                    <TextBox Name="Off" Grid.Column="1" Grid.Row="3" Style="{StaticResource DefaultTextBoxStyle}">
+                    <TextBox Name="Off" Grid.Column="1" Grid.Row="3" FocusVisualStyle="{StaticResource DefaultFocusStyle}" Style="{StaticResource DefaultTextBoxStyle}">
                         <b:Interaction.Behaviors>
                             <behaviors:TextBoxBehavior />
                             <behaviors:DelayedTooltipBehavior
@@ -170,7 +170,7 @@
                                 TooltipStyle="{StaticResource DefaultToolTipStyle}" />
                         </b:Interaction.Behaviors>
                     </Label>
-                    <TextBox Name="Def" Grid.Column="1" Grid.Row="4" Style="{StaticResource DefaultTextBoxStyle}">
+                    <TextBox Name="Def" Grid.Column="1" Grid.Row="4" FocusVisualStyle="{StaticResource DefaultFocusStyle}" Style="{StaticResource DefaultTextBoxStyle}">
                         <b:Interaction.Behaviors>
                             <behaviors:TextBoxBehavior />
                             <behaviors:DelayedTooltipBehavior
@@ -193,7 +193,7 @@
                                 TooltipStyle="{StaticResource DefaultToolTipStyle}" />
                         </b:Interaction.Behaviors>
                     </Label>
-                    <TextBox Name="Speed" Grid.Column="1" Grid.Row="5" Style="{StaticResource DefaultTextBoxStyle}">
+                    <TextBox Name="Speed" Grid.Column="1" Grid.Row="5" FocusVisualStyle="{StaticResource DefaultFocusStyle}" Style="{StaticResource DefaultTextBoxStyle}">
                         <b:Interaction.Behaviors>
                             <behaviors:TextBoxBehavior />
                             <behaviors:DelayedTooltipBehavior
@@ -216,7 +216,7 @@
                                 TooltipStyle="{StaticResource DefaultToolTipStyle}" />
                         </b:Interaction.Behaviors>
                     </Label>
-                    <TextBox Name="Brains" Grid.Column="1" Grid.Row="6" Style="{StaticResource DefaultTextBoxStyle}">
+                    <TextBox Name="Brains" Grid.Column="1" Grid.Row="6" FocusVisualStyle="{StaticResource DefaultFocusStyle}" Style="{StaticResource DefaultTextBoxStyle}">
                         <b:Interaction.Behaviors>
                             <behaviors:TextBoxBehavior />
                             <behaviors:DelayedTooltipBehavior
@@ -239,7 +239,7 @@
                                 TooltipStyle="{StaticResource DefaultToolTipStyle}" />
                         </b:Interaction.Behaviors>
                     </Label>
-                    <TextBox Name="CareMistakes" Grid.Column="1" Grid.Row="7" Style="{StaticResource DefaultTextBoxStyle}">
+                    <TextBox Name="CareMistakes" Grid.Column="1" Grid.Row="7" FocusVisualStyle="{StaticResource DefaultFocusStyle}" Style="{StaticResource DefaultTextBoxStyle}">
                         <b:Interaction.Behaviors>
                             <behaviors:TextBoxBehavior />
                             <behaviors:DelayedTooltipBehavior
@@ -262,7 +262,7 @@
                                 TooltipStyle="{StaticResource DefaultToolTipStyle}" />
                         </b:Interaction.Behaviors>
                     </Label>
-                    <TextBox Name="Weight" Grid.Column="1" Grid.Row="8" Style="{StaticResource DefaultTextBoxStyle}">
+                    <TextBox Name="Weight" Grid.Column="1" Grid.Row="8" FocusVisualStyle="{StaticResource DefaultFocusStyle}" Style="{StaticResource DefaultTextBoxStyle}">
                         <b:Interaction.Behaviors>
                             <behaviors:TextBoxBehavior />
                             <behaviors:DelayedTooltipBehavior
@@ -285,7 +285,7 @@
                                 TooltipStyle="{StaticResource DefaultToolTipStyle}" />
                         </b:Interaction.Behaviors>
                     </Label>
-                    <TextBox Name="Happiness" Grid.Column="1" Grid.Row="9" Style="{StaticResource DefaultTextBoxStyle}">
+                    <TextBox Name="Happiness" Grid.Column="1" Grid.Row="9" FocusVisualStyle="{StaticResource DefaultFocusStyle}" Style="{StaticResource DefaultTextBoxStyle}">
                         <b:Interaction.Behaviors>
                             <behaviors:TextBoxBehavior />
                             <behaviors:DelayedTooltipBehavior
@@ -308,7 +308,7 @@
                                 TooltipStyle="{StaticResource DefaultToolTipStyle}" />
                         </b:Interaction.Behaviors>
                     </Label>
-                    <TextBox Name="Discipline" Grid.Column="1" Grid.Row="10" Style="{StaticResource DefaultTextBoxStyle}">
+                    <TextBox Name="Discipline" Grid.Column="1" Grid.Row="10" FocusVisualStyle="{StaticResource DefaultFocusStyle}" Style="{StaticResource DefaultTextBoxStyle}">
                         <b:Interaction.Behaviors>
                             <behaviors:TextBoxBehavior />
                             <behaviors:DelayedTooltipBehavior
@@ -331,7 +331,7 @@
                                 TooltipStyle="{StaticResource DefaultToolTipStyle}" />
                         </b:Interaction.Behaviors>
                     </Label>
-                    <TextBox Name="Battles" Grid.Column="1" Grid.Row="11" Style="{StaticResource DefaultTextBoxStyle}">
+                    <TextBox Name="Battles" Grid.Column="1" Grid.Row="11" FocusVisualStyle="{StaticResource DefaultFocusStyle}" Style="{StaticResource DefaultTextBoxStyle}">
                         <b:Interaction.Behaviors>
                             <behaviors:TextBoxBehavior />
                             <behaviors:DelayedTooltipBehavior
@@ -354,7 +354,7 @@
                                 TooltipStyle="{StaticResource DefaultToolTipStyle}" />
                         </b:Interaction.Behaviors>
                     </Label>
-                    <TextBox Name="Techniques" Grid.Column="1" Grid.Row="12" Style="{StaticResource DefaultTextBoxStyle}">
+                    <TextBox Name="Techniques" Grid.Column="1" Grid.Row="12" FocusVisualStyle="{StaticResource DefaultFocusStyle}" Style="{StaticResource DefaultTextBoxStyle}">
                         <b:Interaction.Behaviors>
                             <behaviors:TextBoxBehavior />
                             <behaviors:DelayedTooltipBehavior
@@ -372,7 +372,7 @@
                 </Grid>
             </GroupBox>
 
-            <Button Grid.Column="0" Grid.Row="2" Style="{StaticResource CalculateEvolutionButtonStyle}"
+            <Button Grid.Column="0" Grid.Row="2" FocusVisualStyle="{StaticResource DefaultFocusStyle}" Style="{StaticResource CalculateEvolutionButtonStyle}"
                     Height="{StaticResource DefaultButtonHeight}"
                     Content="{Binding CalculateButtonText}"
                     Command="{Binding SetEvolutionResult}" >
