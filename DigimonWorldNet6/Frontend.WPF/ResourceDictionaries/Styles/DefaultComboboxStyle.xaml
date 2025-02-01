@@ -12,7 +12,7 @@
                 <ControlTemplate TargetType="ComboBox">
                     <Grid>
                         <Border Name="OuterBorder" BorderBrush="#6789A5" BorderThickness="0,0,2,2" Background="{TemplateBinding Background}">
-                            <Border BorderBrush="#060100" BorderThickness="2,2,0,0">
+                            <Border BorderBrush="#060100" BorderThickness="3,3,0,0">
                                 <ToggleButton Name="ToggleButton"
                                               Background="{TemplateBinding Background}"
                                               BorderBrush="Transparent"
@@ -86,12 +86,13 @@
                                IsOpen="{TemplateBinding IsDropDownOpen}"
                                AllowsTransparency="True"
                                Focusable="False"
-                               PopupAnimation="Slide">
+                               PopupAnimation="Slide"
+                               StaysOpen="False">
                             <Border Background="#354A5B"
                                     BorderBrush="#6987A3"
                                     BorderThickness="2"
-                                    CornerRadius="4">
-                                <ScrollViewer>
+                                    CornerRadius="0, 0, 2, 2">
+                                <ScrollViewer VerticalScrollBarVisibility="Auto" MaxHeight="503" HorizontalScrollBarVisibility="Auto">
                                     <ItemsPresenter />
                                 </ScrollViewer>
                             </Border>

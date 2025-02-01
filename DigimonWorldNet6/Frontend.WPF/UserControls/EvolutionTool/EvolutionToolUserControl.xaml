@@ -83,10 +83,11 @@
                                 TooltipStyle="{StaticResource DefaultToolTipStyle}" />
                         </b:Interaction.Behaviors>
                     </Label>
-                    <ComboBox Name="Digimon" Grid.Column="1" Grid.Row="0" Grid.ColumnSpan="2" FocusVisualStyle="{StaticResource DefaultFocusStyle}" Style="{StaticResource DefaultComboboxStyle}"
+                    <ComboBox Name="Digimon" Grid.Column="1" Grid.Row="0" Grid.ColumnSpan="2" HorizontalAlignment="Left" FocusVisualStyle="{StaticResource DefaultFocusStyle}" Style="{StaticResource DefaultComboboxStyle}"
                               SelectedIndex="0"
                               ItemsSource="{Binding Source={StaticResource DigimonTypes}}"
-                              SelectedItem="{Binding DigimonType}">
+                              SelectedItem="{Binding DigimonType}"
+                              Width="178">
                         <b:Interaction.Behaviors>
                             <behaviors:DelayedTooltipBehavior
                                 TooltipText="The digimon type of your digimon."
