@@ -13,7 +13,7 @@
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="../../ResourceDictionaries/Styles/Buttons/DefaultButtonStyle.xaml" />
-                <ResourceDictionary Source="../../ResourceDictionaries/Styles/DefaultTooltipStyle.xaml" />
+                <ResourceDictionary Source="../../ResourceDictionaries/Styles/ToolTips/DefaultTooltipRightStyle.xaml" />
                 <ResourceDictionary Source="../../ResourceDictionaries/Styles/ProgressBarStyle.xaml" />
                 <ResourceDictionary Source="../../ResourceDictionaries/ControlTemplates/DefaultHorizontalSliderTemplate.xaml" />
                 <ResourceDictionary Source="../../ResourceDictionaries/Styles/Buttons/DefaultToggleButtonStyle.xaml" />
@@ -99,7 +99,7 @@
                             Width="{StaticResource ButtonDimension}"
                             Margin="0, 10, 0,10">
                         <Button.ToolTip>
-                            <ToolTip Style="{StaticResource DefaultToolTipStyle}" Content="{Binding MuteButtonText}" />
+                            <ToolTip Style="{StaticResource DefaultToolTipRightStyle}" Content="{Binding MuteButtonText}" />
                         </Button.ToolTip>
                     </Button>
                 </Grid>
@@ -159,7 +159,7 @@
                     Margin="0, 0, 15, 0"
                     Tag="{Binding ShuffleEnabled}">
                 <Button.ToolTip>
-                    <ToolTip Style="{StaticResource DefaultToolTipStyle}" Content="{Binding ShuffleButtonText}" />
+                    <ToolTip Style="{StaticResource DefaultToolTipRightStyle}" Content="{Binding ShuffleButtonText}" />
                 </Button.ToolTip>
             </Button>
 
@@ -172,7 +172,7 @@
                     FontSize="{StaticResource ButtonFontSize}"
                     Margin="0, 0, 0, 0">
                 <Button.ToolTip>
-                    <ToolTip Style="{StaticResource DefaultToolTipStyle}" Content="{Binding PreviousSongButtonText}" />
+                    <ToolTip Style="{StaticResource DefaultToolTipRightStyle}" Content="{Binding PreviousSongButtonText}" />
                 </Button.ToolTip>
             </Button>
 
@@ -185,7 +185,7 @@
                     FontSize="{StaticResource ButtonFontSize}"
                     Margin="5, 0, 0, 0">
                 <Button.ToolTip>
-                    <ToolTip Style="{StaticResource DefaultToolTipStyle}" Content="{Binding PlayPauseButtonText}" />
+                    <ToolTip Style="{StaticResource DefaultToolTipRightStyle}" Content="{Binding PlayPauseButtonText}" />
                 </Button.ToolTip>
             </Button>
 
@@ -198,7 +198,7 @@
                     FontSize="{StaticResource ButtonFontSize}"
                     Margin="5, 0, 0, 0">
                 <Button.ToolTip>
-                    <ToolTip Style="{StaticResource DefaultToolTipStyle}" Content="{Binding NextSongButtonText}" />
+                    <ToolTip Style="{StaticResource DefaultToolTipRightStyle}" Content="{Binding NextSongButtonText}" />
                 </Button.ToolTip>
             </Button>
 
@@ -212,7 +212,7 @@
                     Margin="15, 0, 0, 0"
                     Tag="{Binding RepeatSingleSongEnabled}">
                 <Button.ToolTip>
-                    <ToolTip Style="{StaticResource DefaultToolTipStyle}" Content="{Binding RepeatSingleSongText}" />
+                    <ToolTip Style="{StaticResource DefaultToolTipRightStyle}" Content="{Binding RepeatSingleSongText}" />
                 </Button.ToolTip>
             </Button>
 

@@ -22,7 +22,7 @@
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="../../ResourceDictionaries/Styles/DefaultTooltipStyle.xaml" />
+                <ResourceDictionary Source="../../ResourceDictionaries/Styles/ToolTips/DefaultTooltipRightStyle.xaml" />
             </ResourceDictionary.MergedDictionaries>
 
             <BitmapImage x:Key="ClosedLeftPaneImage" UriSource="pack://application:,,,/Frontend.WPF;component/Images/ComponentLabels/label-left-no-focus.png" />
@@ -99,7 +99,7 @@
 
                 <Button Grid.Column="1" Width="60" Height="50" Background="Transparent" BorderBrush="Transparent" Command="{Binding OpenConfigurationWindowCommand}" IsTabStop="False">
                     <Button.ToolTip>
-                        <ToolTip Style="{StaticResource DefaultToolTipStyle}" Content="Open the configuration window" />
+                        <ToolTip Style="{StaticResource DefaultToolTipRightStyle}" Content="Open the configuration window" />
                     </Button.ToolTip>
                     <Button.Template>
                         <ControlTemplate TargetType="Button">
@@ -140,7 +140,7 @@
 
                 <Button Grid.Column="2" Width="60" Height="50" Background="Transparent" BorderBrush="Transparent" Command="{Binding OpenAboutAndCreditsWindowCommand}" IsTabStop="False">
                     <Button.ToolTip>
-                        <ToolTip Style="{StaticResource DefaultToolTipStyle}" Content="Open the about and credits window" />
+                        <ToolTip Style="{StaticResource DefaultToolTipRightStyle}" Content="Open the about and credits window" />
                     </Button.ToolTip>
                     <Button.Template>
                         <ControlTemplate TargetType="Button">
@@ -183,7 +183,7 @@
                     <Border CornerRadius="5" BorderBrush="Black" BorderThickness="3" Background="Black"
                             ToolTipService.InitialShowDelay="750">
                         <Border.ToolTip>
-                            <ToolTip Style="{StaticResource DefaultToolTipStyle}">
+                            <ToolTip Style="{StaticResource DefaultToolTipRightStyle}">
                                 <TextBlock Text="Click and hold to drag the application window" />
                             </ToolTip>
                         </Border.ToolTip>
@@ -221,7 +221,7 @@
 
                 <Button Grid.Column="5" Width="60" Height="50" Background="Transparent" BorderBrush="Transparent" Command="{Binding MinimizeCommand}" IsTabStop="False">
                     <Button.ToolTip>
-                        <ToolTip Style="{StaticResource DefaultToolTipStyle}" Content="Minimize the application" />
+                        <ToolTip Style="{StaticResource DefaultToolTipRightStyle}" Content="Minimize the application" />
                     </Button.ToolTip>
                     <Button.Template>
                         <ControlTemplate TargetType="Button">
@@ -262,7 +262,7 @@
 
                 <Button Grid.Column="6" Width="60" Height="50" Background="Transparent" BorderBrush="Transparent" Command="{Binding CloseCommand}" IsTabStop="False">
                     <Button.ToolTip>
-                        <ToolTip Style="{StaticResource DefaultToolTipStyle}" Content="Close the application" />
+                        <ToolTip Style="{StaticResource DefaultToolTipRightStyle}" Content="Close the application" />
                     </Button.ToolTip>
                     <Button.Template>
                         <ControlTemplate TargetType="Button">

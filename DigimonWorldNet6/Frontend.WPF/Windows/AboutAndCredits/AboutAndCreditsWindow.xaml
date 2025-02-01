@@ -24,7 +24,7 @@
                 <ResourceDictionary Source="../../ResourceDictionaries/Styles/Buttons/DefaultOptionPickerButtonStyle.xaml" />
                 <ResourceDictionary Source="../../ResourceDictionaries/Styles/Labels/DefaultSheenLabelStyle.xaml" />
                 <ResourceDictionary Source="../../ResourceDictionaries/Styles/Labels/DefaultLabelStyle.xaml" />
-                <ResourceDictionary Source="../../ResourceDictionaries/Styles/DefaultTooltipStyle.xaml" />
+                <ResourceDictionary Source="../../ResourceDictionaries/Styles/ToolTips/DefaultTooltipRightStyle.xaml" />
             </ResourceDictionary.MergedDictionaries>
 
             <system:Double x:Key="WindowButtonWidth">70</system:Double>
@@ -123,7 +123,7 @@
                                     Content="Close"
                                     Command="{Binding CloseWindowCommand}">
                                 <Button.ToolTip>
-                                    <ToolTip Style="{StaticResource DefaultToolTipStyle}" Content="Exit this window. (hotkey: ESC)" />
+                                    <ToolTip Style="{StaticResource DefaultToolTipRightStyle}" Content="Exit this window. (hotkey: ESC)" />
                                 </Button.ToolTip>
                             </Button>
                         </Grid>

@@ -44,22 +44,4 @@
         </None>
     </ItemGroup>
 
-    <ItemGroup>
-      <Page Update="ResourceDictionaries\Styles\Labels\DefaultLabelStyle.xaml">
-        <Generator>MSBuild:Compile</Generator>
-        <XamlRuntime>Wpf</XamlRuntime>
-        <SubType>Designer</SubType>
-      </Page>
-      <Page Update="ResourceDictionaries\Styles\Labels\DefaultSheenLabelStyle.xaml">
-        <Generator>MSBuild:Compile</Generator>
-        <XamlRuntime>Wpf</XamlRuntime>
-        <SubType>Designer</SubType>
-      </Page>
-      <Page Update="ResourceDictionaries\Styles\Buttons\DefaultOptionPickerButtonStyle.xaml">
-        <Generator>MSBuild:Compile</Generator>
-        <XamlRuntime>Wpf</XamlRuntime>
-        <SubType>Designer</SubType>
-      </Page>
-    </ItemGroup>
-
 </Project>
