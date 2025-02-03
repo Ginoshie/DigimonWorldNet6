@@ -99,7 +99,7 @@
                             Width="{StaticResource ButtonDimension}"
                             Margin="0, 10, 0,10">
                         <Button.ToolTip>
-                            <ToolTip Style="{StaticResource DefaultToolTipRightStyle}" Content="{Binding MuteButtonText}" />
+                            <ToolTip Style="{StaticResource DefaultToolTipRightStyle}" Content="Mute/Unmute the jukebox." />
                         </Button.ToolTip>
                     </Button>
                 </Grid>
@@ -159,7 +159,7 @@
                     Margin="0, 0, 15, 0"
                     Tag="{Binding ShuffleEnabled}">
                 <Button.ToolTip>
-                    <ToolTip Style="{StaticResource DefaultToolTipRightStyle}" Content="{Binding ShuffleButtonText}" />
+                    <ToolTip Style="{StaticResource DefaultToolTipRightStyle}" Content="Shuffle the playlist&#xD;&#xA;- ON: Play songs in a random order\&#xD;&#xA;- OFF: Play songs in consecutive order" />
                 </Button.ToolTip>
             </Button>
 
@@ -172,7 +172,7 @@
                     FontSize="{StaticResource ButtonFontSize}"
                     Margin="0, 0, 0, 0">
                 <Button.ToolTip>
-                    <ToolTip Style="{StaticResource DefaultToolTipRightStyle}" Content="{Binding PreviousSongButtonText}" />
+                    <ToolTip Style="{StaticResource DefaultToolTipRightStyle}" Content="Skip to the previous song" />
                 </Button.ToolTip>
             </Button>
 
@@ -185,7 +185,7 @@
                     FontSize="{StaticResource ButtonFontSize}"
                     Margin="5, 0, 0, 0">
                 <Button.ToolTip>
-                    <ToolTip Style="{StaticResource DefaultToolTipRightStyle}" Content="{Binding PlayPauseButtonText}" />
+                    <ToolTip Style="{StaticResource DefaultToolTipRightStyle}" Content="Play/Pause the song" />
                 </Button.ToolTip>
             </Button>
 
@@ -198,7 +198,7 @@
                     FontSize="{StaticResource ButtonFontSize}"
                     Margin="5, 0, 0, 0">
                 <Button.ToolTip>
-                    <ToolTip Style="{StaticResource DefaultToolTipRightStyle}" Content="{Binding NextSongButtonText}" />
+                    <ToolTip Style="{StaticResource DefaultToolTipRightStyle}" Content="Skip to the next song." />
                 </Button.ToolTip>
             </Button>
 
@@ -212,7 +212,7 @@
                     Margin="15, 0, 0, 0"
                     Tag="{Binding RepeatSingleSongEnabled}">
                 <Button.ToolTip>
-                    <ToolTip Style="{StaticResource DefaultToolTipRightStyle}" Content="{Binding RepeatSingleSongText}" />
+                    <ToolTip Style="{StaticResource DefaultToolTipRightStyle}" Content="Repeat all songs or repeat the current song.&#xD;&#xA;- ON: Repeat the current song&#xD;&#xA;- OFF: Repeat all songs" />
                 </Button.ToolTip>
             </Button>
 

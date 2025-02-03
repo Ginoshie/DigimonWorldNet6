@@ -182,18 +182,6 @@ public class MusicPlayerViewModel : BaseViewModel, IDisposable
         set => SetField(ref _giromonText, value);
     }
 
-    public string ShuffleButtonText => _shuffleEnabled ? "Shuffle mode ON.\n\nClick to turn OFF shuffle mode." : "Shuffle mode OFF.\n\nClick to turn ON shuffle mode.";
-
-    public string PreviousSongButtonText { get; } = "Skip to previous song";
-
-    public string PlayPauseButtonText => Jukebox.IsPaused ? "Music is paused.\n\nClick to start playing music." : "Music is playing.\n\nClick to pause music.";
-
-    public string NextSongButtonText { get; } = "Skip to next song.";
-
-    public string RepeatSingleSongText => _repeatSingleSongEnabled ? "Repeat single song mode ON.\n\nClick to turn ON play all songs mode." : "Play all songs mode ON.\n\nClick to turn ON repeat single song mode.";
-
-    public string MuteButtonText => _muteEnabled ? "Mute is ON.\n\nClick to turn OFF mute." : "Mute is OFF.\n\nClick to turn ON mute.";
-
     private void ToggleShuffle()
     {
         ShuffleEnabled = !ShuffleEnabled;
@@ -208,20 +196,11 @@ public class MusicPlayerViewModel : BaseViewModel, IDisposable
         }
     }
 
-    private void PreviousSong()
-    {
-        Jukebox.PreviousSong();
-    }
+    private void PreviousSong() => Jukebox.PreviousSong();
 
-    private void PlayPause()
-    {
-        Jukebox.PlayPause();
-    }
+    private void PlayPause() => Jukebox.PlayPause();
 
-    private void NextSong()
-    {
-        Jukebox.NextSong();
-    }
+    private void NextSong() => Jukebox.NextSong();
 
     private void ToggleRepeatSingleSongEnabled()
     {
@@ -255,10 +234,7 @@ public class MusicPlayerViewModel : BaseViewModel, IDisposable
         }
     }
 
-    private void InstantDisplay()
-    {
-        _speakingSimulator.RequestInstantDisplay();
-    }
+    private void InstantDisplay() => _speakingSimulator.RequestInstantDisplay();
 
     private async Task OnMusicPlayerOpened() => await Task
         .Delay(750)
