@@ -1,11 +1,11 @@
-using System;
+﻿using System;
 using System.Globalization;
 using System.Windows.Controls;
 using System.Windows.Data;
 
-namespace DigimonWorld.Frontend.WPF.Validation.NonCombatStats;
+namespace DigimonWorld.Frontend.WPF.Validation.Bases;
 
-public sealed class BattlesValidationRule : ValidationRule
+public class ZeroToNineNineNineValidationRule : ValidationRule
 {
     public override ValidationResult Validate(object? value, CultureInfo cultureInfo)
     {
@@ -28,8 +28,8 @@ public sealed class BattlesValidationRule : ValidationRule
         if(stringValue == string.Empty)
             return ValidationResult.ValidResult;
 
-        if (!int.TryParse(stringValue, out int intValue) || sourceValue.ToString()!.Length == 0 || intValue < 0)
-            return new ValidationResult(false, "This textbox has to be empty or contain a positive number.");
+        if (!int.TryParse(stringValue, out int intValue) || sourceValue.ToString()!.Length == 0 || intValue < 0 || intValue > 999)
+            return new ValidationResult(false, "\"This textbox has to contain a whole and positive number between 0 to 999.");
 
         return ValidationResult.ValidResult;
     }

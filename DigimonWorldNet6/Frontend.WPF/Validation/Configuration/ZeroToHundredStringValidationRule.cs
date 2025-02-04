@@ -1,11 +1,11 @@
-﻿using System;
+using System;
 using System.Globalization;
 using System.Windows.Controls;
 using System.Windows.Data;
 
-namespace DigimonWorld.Frontend.WPF.Validation.Bases;
+namespace DigimonWorld.Frontend.WPF.Validation.Configuration;
 
-public class ZeroToNineNineNineStringValidationRule : ValidationRule
+public class ZeroToHundredStringValidationRule : ValidationRule
 {
     public override ValidationResult Validate(object? value, CultureInfo cultureInfo)
     {
@@ -25,8 +25,8 @@ public class ZeroToNineNineNineStringValidationRule : ValidationRule
 
         string? stringValue = sourceValue.ToString();
 
-        if (!int.TryParse(stringValue, out int intValue) || sourceValue.ToString()!.Length == 0 || intValue < 0 || intValue > 999)
-            return new ValidationResult(false, "This textbox has to be empty or contain a positive number up to 999.");
+        if (!int.TryParse(stringValue, out int intValue) || sourceValue.ToString()!.Length == 0 || intValue < 0 || intValue > 100)
+            return new ValidationResult(false, "This textbox has to be contain a whole and positive number between 0 to 100.");
 
         return ValidationResult.ValidResult;
     }

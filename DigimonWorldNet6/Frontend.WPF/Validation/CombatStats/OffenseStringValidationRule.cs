@@ -4,4 +4,4 @@ using DigimonWorld.Frontend.WPF.Validation.Bases;
 
 namespace DigimonWorld.Frontend.WPF.Validation.CombatStats;
 
-public sealed class OffenseStringValidationRule : ZeroToNineNineNineStringValidationRule;
+public sealed class OffenseStringValidationRule : ZeroToNineNineNineValidationRule;

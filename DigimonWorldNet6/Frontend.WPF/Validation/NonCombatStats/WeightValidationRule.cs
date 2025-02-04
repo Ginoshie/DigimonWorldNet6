@@ -25,6 +25,9 @@ public sealed class WeightValidationRule : ValidationRule
 
         string? stringValue = sourceValue.ToString();
 
+        if(stringValue == string.Empty)
+            return ValidationResult.ValidResult;
+
         if (!int.TryParse(stringValue, out int intValue) || sourceValue.ToString()!.Length == 0 || intValue < 0 || intValue > 99)
             return new ValidationResult(false, "This textbox has to be empty or contain a positive number up to 99.");
 

@@ -11,56 +11,59 @@ namespace DigimonWorld.Frontend.WPF.Services;
 public static class GeneralConfigurationManager
 {
     private static readonly string GeneralConfigFilePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "GeneralConfiguration.json");
+    private static readonly JsonSerializerOptions JsonSerializerOptions = new() { WriteIndented = true };
 
     private static readonly BehaviorSubject<SpeakingSimulatorConfig> CurrentSpeakingSimulatorConfigSubject;
-    private static readonly BehaviorSubject<JukeboxConfig> CurrentJukeboxConfigSubject;
-
-    private static GeneralConfig _generalConfig = null!;
 
     static GeneralConfigurationManager()
     {
         LoadConfiguration();
 
-        CurrentSpeakingSimulatorConfigSubject = new BehaviorSubject<SpeakingSimulatorConfig>(_generalConfig.SpeakingSimulatorConfig);
+        CurrentSpeakingSimulatorConfigSubject = new BehaviorSubject<SpeakingSimulatorConfig>(GeneralConfig!.SpeakingSimulatorConfig);
         CurrentSpeakingSimulatorConfig = CurrentSpeakingSimulatorConfigSubject.AsObservable();
-
-        CurrentJukeboxConfigSubject = new BehaviorSubject<JukeboxConfig>(_generalConfig.JukeboxConfig);
-        CurrentJukeboxConfig = CurrentJukeboxConfigSubject.AsObservable();
     }
 
     public static IObservable<SpeakingSimulatorConfig> CurrentSpeakingSimulatorConfig { get; }
-    
-    public static IObservable<JukeboxConfig> CurrentJukeboxConfig { get; }
+
+    public static GeneralConfig GeneralConfig { get; private set; }
+
+    public static JukeboxConfig JukeboxConfig => GeneralConfig.JukeboxConfig;
 
     public static void SetNarratorMode(NarratorMode mode)
     {
-        _generalConfig.SpeakingSimulatorConfig.NarratorMode = mode;
+        GeneralConfig.SpeakingSimulatorConfig.NarratorMode = mode;
     }
 
-    public static void SetMuteIsOn(bool muteIsOn)
+    public static void SetVolume(int volume)
     {
-        _generalConfig.JukeboxConfig.MuteIsOn = muteIsOn;
+        // if (volume is < 0 or > 100) throw new ArgumentOutOfRangeException(nameof(volume), volume, "Volume must be between 0 and 100.");
+
+        GeneralConfig.JukeboxConfig.Volume = volume;
     }
 
-    public static void SetRepeatModeIsSingle(bool repeatModeIsSingle)
+    public static void SetMuteIsOn(MuteMode muteMode)
     {
-        _generalConfig.JukeboxConfig.RepeatModeIsSingle = repeatModeIsSingle;
+        GeneralConfig.JukeboxConfig.MuteMode = muteMode;
     }
 
-    public static void SetShuffleModeIsOn(bool shuffleModeIsOn)
+    public static void SetRepeatModeIsSingle(RepeatMode repeatMode)
     {
-        _generalConfig.JukeboxConfig.ShuffleModeIsOn = shuffleModeIsOn;
+        GeneralConfig.JukeboxConfig.RepeatMode = repeatMode;
+    }
+
+    public static void SetShuffleModeIsOn(ShuffleMode shuffleMode)
+    {
+        GeneralConfig.JukeboxConfig.ShuffleMode = shuffleMode;
     }
 
     public static void SaveConfiguration()
     {
         try
         {
-            string json = JsonSerializer.Serialize(_generalConfig, new JsonSerializerOptions { WriteIndented = true });
+            string json = JsonSerializer.Serialize(GeneralConfig, JsonSerializerOptions);
             File.WriteAllText(GeneralConfigFilePath, json);
 
-            CurrentSpeakingSimulatorConfigSubject.OnNext(_generalConfig.SpeakingSimulatorConfig);
-            CurrentJukeboxConfigSubject.OnNext(_generalConfig.JukeboxConfig);
+            CurrentSpeakingSimulatorConfigSubject.OnNext(GeneralConfig.SpeakingSimulatorConfig);
         }
         catch (Exception ex)
         {
@@ -71,15 +74,15 @@ public static class GeneralConfigurationManager
     public static void ResetConfiguration()
     {
         LoadConfiguration();
-        
-        CurrentSpeakingSimulatorConfigSubject.OnNext(_generalConfig.SpeakingSimulatorConfig);
+
+        CurrentSpeakingSimulatorConfigSubject.OnNext(GeneralConfig.SpeakingSimulatorConfig);
     }
 
     private static void LoadConfiguration()
     {
         if (!File.Exists(GeneralConfigFilePath))
         {
-            _generalConfig = new GeneralConfig();
+            GeneralConfig = new GeneralConfig();
 
             return;
         }
@@ -87,13 +90,13 @@ public static class GeneralConfigurationManager
         try
         {
             string json = File.ReadAllText(GeneralConfigFilePath);
-            _generalConfig = JsonSerializer.Deserialize<GeneralConfig>(json) ?? new GeneralConfig();
+            GeneralConfig = JsonSerializer.Deserialize<GeneralConfig>(json) ?? new GeneralConfig();
         }
         catch (Exception ex)
         {
             Console.WriteLine($"Error loading configuration: {ex.Message}");
-            
-            _generalConfig = new GeneralConfig();
+
+            GeneralConfig = new GeneralConfig();
         }
     }
 }

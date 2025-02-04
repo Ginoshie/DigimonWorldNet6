@@ -25,6 +25,9 @@ public sealed class DisciplineValidationRule : ValidationRule
 
         string? stringValue = sourceValue.ToString();
 
+        if(stringValue == string.Empty)
+            return ValidationResult.ValidResult;
+
         if (!int.TryParse(stringValue, out int intValue) || sourceValue.ToString()!.Length == 0 || intValue < -100 || intValue > 100)
             return new ValidationResult(false, "This textbox has to be empty or contain a number between -100 and 100.");
 

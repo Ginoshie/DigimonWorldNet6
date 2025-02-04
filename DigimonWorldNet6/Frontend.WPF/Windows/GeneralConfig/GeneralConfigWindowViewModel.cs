@@ -1,5 +1,3 @@
-using System;
-using System.Reactive.Disposables;
 using System.Windows.Input;
 using DigimonWorld.Frontend.WPF.Configuration;
 using DigimonWorld.Frontend.WPF.Constants;
@@ -8,13 +6,13 @@ using DigimonWorld.Frontend.WPF.ViewModelComponents;
 
 namespace DigimonWorld.Frontend.WPF.Windows.GeneralConfig;
 
-public class GeneralConfigWindowViewModel : BaseViewModel, IDisposable
+public class GeneralConfigWindowViewModel : BaseViewModel
 {
-    private readonly CompositeDisposable _compositeDisposable;
     private readonly GeneralConfigWindow _window;
 
     private bool _narratorModeIsInstant;
     private bool _narratorModeIsSpeech;
+    private int _volume;
     private bool _muteIsOn;
     private bool _muteIsOff;
     private bool _repeatModeIsSingle;
@@ -46,10 +44,7 @@ public class GeneralConfigWindowViewModel : BaseViewModel, IDisposable
 
         SetShuffleModeOffCommand = new CommandHandler(SetShuffleModeOff);
 
-        _compositeDisposable = new CompositeDisposable(
-            GeneralConfigurationManager.CurrentSpeakingSimulatorConfig.Subscribe(OnSpeakingSimulatorConfigChanged),
-            GeneralConfigurationManager.CurrentJukeboxConfig.Subscribe(OnJukeboxConfigChanged)
-        );
+        ApplyConfig(GeneralConfigurationManager.GeneralConfig);
     }
 
     public bool IsNarratorModeInstant
@@ -62,6 +57,17 @@ public class GeneralConfigWindowViewModel : BaseViewModel, IDisposable
     {
         get => _narratorModeIsSpeech;
         private set => SetField(ref _narratorModeIsSpeech, value);
+    }
+
+    public int Volume
+    {
+        get => _volume;
+        set
+        {
+            SetField(ref _volume, value);
+            
+            GeneralConfigurationManager.SetVolume(_volume);
+        }
     }
 
     public bool MuteIsOn
@@ -152,7 +158,7 @@ public class GeneralConfigWindowViewModel : BaseViewModel, IDisposable
 
     private void SetMuteOn()
     {
-        GeneralConfigurationManager.SetMuteIsOn(true);
+        GeneralConfigurationManager.SetMuteIsOn(MuteMode.Mute);
 
         MuteIsOn = true;
         MuteIsOff = false;
@@ -160,7 +166,7 @@ public class GeneralConfigWindowViewModel : BaseViewModel, IDisposable
 
     private void SetMuteOff()
     {
-        GeneralConfigurationManager.SetMuteIsOn(false);
+        GeneralConfigurationManager.SetMuteIsOn(MuteMode.Unmuted);
 
         MuteIsOn = false;
         MuteIsOff = true;
@@ -168,7 +174,7 @@ public class GeneralConfigWindowViewModel : BaseViewModel, IDisposable
 
     private void SetRepeatModeSingle()
     {
-        GeneralConfigurationManager.SetRepeatModeIsSingle(true);
+        GeneralConfigurationManager.SetRepeatModeIsSingle(RepeatMode.Single);
 
         RepeatModeIsSingle = true;
         RepeatModeIsAll = false;
@@ -176,7 +182,7 @@ public class GeneralConfigWindowViewModel : BaseViewModel, IDisposable
 
     private void SetRepeatModeAll()
     {
-        GeneralConfigurationManager.SetRepeatModeIsSingle(false);
+        GeneralConfigurationManager.SetRepeatModeIsSingle(RepeatMode.All);
 
         RepeatModeIsSingle = false;
         RepeatModeIsAll = true;
@@ -184,7 +190,7 @@ public class GeneralConfigWindowViewModel : BaseViewModel, IDisposable
 
     private void SetShuffleModeOn()
     {
-        GeneralConfigurationManager.SetShuffleModeIsOn(true);
+        GeneralConfigurationManager.SetShuffleModeIsOn(ShuffleMode.Shuffle);
 
         ShuffleModeIsOn = true;
         ShuffleModeIsOff = false;
@@ -192,32 +198,30 @@ public class GeneralConfigWindowViewModel : BaseViewModel, IDisposable
 
     private void SetShuffleModeOff()
     {
-        GeneralConfigurationManager.SetShuffleModeIsOn(false);
+        GeneralConfigurationManager.SetShuffleModeIsOn(ShuffleMode.Chronological);
 
         ShuffleModeIsOn = false;
         ShuffleModeIsOff = true;
     }
 
-    private void OnSpeakingSimulatorConfigChanged(SpeakingSimulatorConfig speakingSimulatorConfig)
+    private void ApplyConfig(Configuration.GeneralConfig generalConfig)
     {
+        JukeboxConfig jukeboxConfig = generalConfig.JukeboxConfig;
+        
+        Volume = jukeboxConfig.Volume;
+        
+        MuteIsOn = jukeboxConfig.MuteMode == MuteMode.Mute;
+        MuteIsOff = jukeboxConfig.MuteMode == MuteMode.Unmuted;
+
+        RepeatModeIsSingle = jukeboxConfig.RepeatMode == RepeatMode.Single;
+        RepeatModeIsAll = jukeboxConfig.RepeatMode == RepeatMode.All;
+
+        ShuffleModeIsOn = jukeboxConfig.ShuffleMode == ShuffleMode.Shuffle;
+        ShuffleModeIsOff = jukeboxConfig.ShuffleMode == ShuffleMode.Chronological;
+        
+        SpeakingSimulatorConfig speakingSimulatorConfig = generalConfig.SpeakingSimulatorConfig;
+        
         IsNarratorModeSpeech = speakingSimulatorConfig.NarratorMode == NarratorMode.Speech;
         IsNarratorModeInstant = speakingSimulatorConfig.NarratorMode == NarratorMode.Instant;
-    }
-
-    private void OnJukeboxConfigChanged(JukeboxConfig jukeboxConfig)
-    {
-        MuteIsOn = jukeboxConfig.MuteIsOn;
-        MuteIsOff = !jukeboxConfig.MuteIsOn;
-
-        RepeatModeIsSingle = jukeboxConfig.RepeatModeIsSingle;
-        RepeatModeIsAll = !jukeboxConfig.RepeatModeIsSingle;
-
-        ShuffleModeIsOn = jukeboxConfig.ShuffleModeIsOn;
-        ShuffleModeIsOff = !jukeboxConfig.ShuffleModeIsOn;
-    }
-
-    public void Dispose()
-    {
-        _compositeDisposable.Dispose();
     }
 }

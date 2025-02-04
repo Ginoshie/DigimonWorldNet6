@@ -111,7 +111,7 @@
                             <behaviors:TextBoxBehavior />
                         </b:Interaction.Behaviors>
                         <TextBox.Text>
-                            <Binding Path="HP" UpdateSourceTrigger="LostFocus" Mode="TwoWay">
+                            <Binding Path="HP" UpdateSourceTrigger="PropertyChanged" Mode="TwoWay">
                                 <Binding.ValidationRules>
                                     <combatStatValidation:HpStringValidationRule ValidationStep="CommittedValue" />
                                 </Binding.ValidationRules>
@@ -136,7 +136,7 @@
                             <behaviors:TextBoxBehavior />
                         </b:Interaction.Behaviors>
                         <TextBox.Text>
-                            <Binding Path="MP" UpdateSourceTrigger="LostFocus" Mode="TwoWay">
+                            <Binding Path="MP" UpdateSourceTrigger="PropertyChanged" Mode="TwoWay">
                                 <Binding.ValidationRules>
                                     <combatStatValidation:MpStringValidationRule ValidationStep="CommittedValue" />
                                 </Binding.ValidationRules>
@@ -161,9 +161,9 @@
                             <behaviors:TextBoxBehavior />
                         </b:Interaction.Behaviors>
                         <TextBox.Text>
-                            <Binding Path="Off" UpdateSourceTrigger="LostFocus" Mode="TwoWay">
+                            <Binding Path="Off" UpdateSourceTrigger="PropertyChanged" Mode="TwoWay">
                                 <Binding.ValidationRules>
-                                    <combatStatValidation:OffenseStringValidationRule ValidationStep="CommittedValue" />
+                                    <combatStatValidation:DefenseStringValidationRule ValidationStep="CommittedValue" />
                                 </Binding.ValidationRules>
                             </Binding>
                         </TextBox.Text>
@@ -186,9 +186,9 @@
                             <behaviors:TextBoxBehavior />
                         </b:Interaction.Behaviors>
                         <TextBox.Text>
-                            <Binding Path="Def" UpdateSourceTrigger="LostFocus" Mode="TwoWay">
+                            <Binding Path="Def" UpdateSourceTrigger="PropertyChanged" Mode="TwoWay">
                                 <Binding.ValidationRules>
-                                    <combatStatValidation:DefenseStringValidationRule ValidationStep="CommittedValue" />
+                                    <combatStatValidation:BrainsStringValidationRule ValidationStep="CommittedValue" />
                                 </Binding.ValidationRules>
                             </Binding>
                         </TextBox.Text>
@@ -211,7 +211,7 @@
                             <behaviors:TextBoxBehavior />
                         </b:Interaction.Behaviors>
                         <TextBox.Text>
-                            <Binding Path="Speed" UpdateSourceTrigger="LostFocus" Mode="TwoWay">
+                            <Binding Path="Speed" UpdateSourceTrigger="PropertyChanged" Mode="TwoWay">
                                 <Binding.ValidationRules>
                                     <combatStatValidation:SpeedStringValidationRule ValidationStep="CommittedValue" />
                                 </Binding.ValidationRules>
@@ -236,9 +236,9 @@
                             <behaviors:TextBoxBehavior />
                         </b:Interaction.Behaviors>
                         <TextBox.Text>
-                            <Binding Path="Brains" UpdateSourceTrigger="LostFocus" Mode="TwoWay">
+                            <Binding Path="Brains" UpdateSourceTrigger="PropertyChanged" Mode="TwoWay">
                                 <Binding.ValidationRules>
-                                    <combatStatValidation:BrainsStringValidationRule ValidationStep="CommittedValue" />
+                                    <combatStatValidation:OffenseStringValidationRule ValidationStep="CommittedValue" />
                                 </Binding.ValidationRules>
                             </Binding>
                         </TextBox.Text>
@@ -263,7 +263,7 @@
                             <behaviors:TextBoxBehavior />
                         </b:Interaction.Behaviors>
                         <TextBox.Text>
-                            <Binding Path="CareMistakes" UpdateSourceTrigger="LostFocus" Mode="TwoWay">
+                            <Binding Path="CareMistakes" UpdateSourceTrigger="PropertyChanged" Mode="TwoWay">
                                 <Binding.ValidationRules>
                                     <nonCombatStatValidation:CareMistakesValidationRule ValidationStep="CommittedValue" />
                                 </Binding.ValidationRules>
@@ -288,7 +288,7 @@
                             <behaviors:TextBoxBehavior />
                         </b:Interaction.Behaviors>
                         <TextBox.Text>
-                            <Binding Path="Weight" UpdateSourceTrigger="LostFocus" Mode="TwoWay">
+                            <Binding Path="Weight" UpdateSourceTrigger="PropertyChanged" Mode="TwoWay">
                                 <Binding.ValidationRules>
                                     <nonCombatStatValidation:WeightValidationRule ValidationStep="CommittedValue" />
                                 </Binding.ValidationRules>
@@ -315,7 +315,7 @@
                             <behaviors:TextBoxBehavior />
                         </b:Interaction.Behaviors>
                         <TextBox.Text>
-                            <Binding Path="Happiness" UpdateSourceTrigger="LostFocus" Mode="TwoWay">
+                            <Binding Path="Happiness" UpdateSourceTrigger="PropertyChanged" Mode="TwoWay">
                                 <Binding.ValidationRules>
                                     <nonCombatStatValidation:HappinessValidationRule ValidationStep="CommittedValue" />
                                 </Binding.ValidationRules>
@@ -342,7 +342,7 @@
                             <behaviors:TextBoxBehavior />
                         </b:Interaction.Behaviors>
                         <TextBox.Text>
-                            <Binding Path="Discipline" UpdateSourceTrigger="LostFocus" Mode="TwoWay">
+                            <Binding Path="Discipline" UpdateSourceTrigger="PropertyChanged" Mode="TwoWay">
                                 <Binding.ValidationRules>
                                     <nonCombatStatValidation:DisciplineValidationRule ValidationStep="CommittedValue" />
                                 </Binding.ValidationRules>
@@ -367,7 +367,7 @@
                             <behaviors:TextBoxBehavior />
                         </b:Interaction.Behaviors>
                         <TextBox.Text>
-                            <Binding Path="Battles" UpdateSourceTrigger="LostFocus" Mode="TwoWay">
+                            <Binding Path="Battles" UpdateSourceTrigger="PropertyChanged" Mode="TwoWay">
                                 <Binding.ValidationRules>
                                     <nonCombatStatValidation:BattlesValidationRule ValidationStep="CommittedValue" />
                                 </Binding.ValidationRules>
@@ -394,7 +394,7 @@
                             <behaviors:TextBoxBehavior />
                         </b:Interaction.Behaviors>
                         <TextBox.Text>
-                            <Binding Path="Techniques" UpdateSourceTrigger="LostFocus" Mode="TwoWay">
+                            <Binding Path="Techniques" UpdateSourceTrigger="PropertyChanged" Mode="TwoWay">
                                 <Binding.ValidationRules>
                                     <nonCombatStatValidation:TechniquesValidationRule ValidationStep="CommittedValue" />
                                 </Binding.ValidationRules>
@@ -490,8 +490,6 @@
                           StrokeThickness="3"
                           Width="31" Height="91" />
                 </Grid>
-
-                <!-- <Image Grid.Column="1" Grid.Row="0" Height="85" Source="/Images/Misc/Arrow-Right.png" HorizontalAlignment="Center" VerticalAlignment="Center" /> -->
 
                 <Border Grid.Column="2" Grid.Row="0" BorderBrush="#060100" BorderThickness="3,3,0,0" Margin="15" HorizontalAlignment="Center" VerticalAlignment="Bottom">
                     <Border BorderBrush="#6789A5" BorderThickness="0,0,3,3" Background="#354A5B">

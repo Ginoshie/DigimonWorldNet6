@@ -6,6 +6,7 @@
                           xmlns:generalConfig="clr-namespace:DigimonWorld.Frontend.WPF.Windows.GeneralConfig"
                           xmlns:system="clr-namespace:System;assembly=System.Runtime"
                           xmlns:windows="clr-namespace:DigimonWorld.Frontend.WPF.Windows"
+                          xmlns:validation="clr-namespace:DigimonWorld.Frontend.WPF.Validation.Configuration"
                           mc:Ignorable="d"
                           d:DataContext="{d:DesignInstance Type=generalConfig:GeneralConfigWindowViewModel, IsDesignTimeCreatable=True}"
                           Title="Configuration"
@@ -24,11 +25,13 @@
                 <ResourceDictionary Source="../../ResourceDictionaries/Styles/Labels/DefaultSheenLabelStyle.xaml" />
                 <ResourceDictionary Source="../../ResourceDictionaries/Styles/Labels/DefaultLabelStyle.xaml" />
                 <ResourceDictionary Source="../../ResourceDictionaries/Styles/ToolTips/DefaultTooltipRightStyle.xaml" />
+                <ResourceDictionary Source="../../ResourceDictionaries/Styles/DefaultTextboxStyle.xaml" />
+                <ResourceDictionary Source="./Styles/SaveButtonStyle.xaml" />
             </ResourceDictionary.MergedDictionaries>
 
             <system:Double x:Key="WindowButtonWidth">70</system:Double>
-            <system:Double x:Key="OptionButtonWidth">75</system:Double>
-            <system:Double x:Key="OptionButtonHeight">22</system:Double>
+            <system:Double x:Key="OptionWidth">75</system:Double>
+            <system:Double x:Key="OptionHeight">24</system:Double>
         </ResourceDictionary>
     </windows:BaseDialogWindow.Resources>
 
@@ -51,6 +54,7 @@
                                 <RowDefinition Height="*" />
                                 <RowDefinition Height="*" />
                                 <RowDefinition Height="*" />
+                                <RowDefinition Height="*" />
                             </Grid.RowDefinitions>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*" />
@@ -58,8 +62,8 @@
                             </Grid.ColumnDefinitions>
                             <StackPanel Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Orientation="Vertical">
                                 <Label Height="40" Width="230" HorizontalAlignment="Center" Style="{StaticResource DefaultSheenLabelStyle}" Margin="0,10,0, 0" Content="GENERAL CONFIGURATION" />
-                                <Label HorizontalAlignment="Center" MaxWidth="260">
-                                    <TextBlock Text="These settings reflect current behavior on and are applied on when the app starts." TextWrapping="Wrap" />
+                                <Label HorizontalAlignment="Center" MaxWidth="230">
+                                    <TextBlock Text="Settings are applied at app startup." TextWrapping="Wrap" />
                                 </Label>
                             </StackPanel>
                             <Label Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Height="40" Width="150" HorizontalAlignment="Center" Style="{StaticResource DefaultSheenLabelStyle}"
@@ -67,14 +71,14 @@
                             <Label Grid.Row="2" Grid.Column="0" Style="{StaticResource DefaultLabelStyle}" Content="Narrator mode:" Margin="0, 0, 5, 0" />
                             <StackPanel Grid.Row="2" Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center">
                                 <Button Style="{StaticResource DefaultOptionPickerButtonStyle}"
-                                        Height="{StaticResource OptionButtonHeight}"
-                                        Width="{StaticResource OptionButtonWidth}"
+                                        Height="{StaticResource OptionHeight}"
+                                        Width="{StaticResource OptionWidth}"
                                         Content="Speech"
                                         Command="{Binding SetNarratorModeSpeechCommand}"
                                         Tag="{Binding IsNarratorModeSpeech}" />
                                 <Button Style="{StaticResource DefaultOptionPickerButtonStyle}"
-                                        Height="{StaticResource OptionButtonHeight}"
-                                        Width="{StaticResource OptionButtonWidth}"
+                                        Height="{StaticResource OptionHeight}"
+                                        Width="{StaticResource OptionWidth}"
                                         Content="Instant"
                                         Command="{Binding SetNarratorModeInstantCommand}"
                                         Tag="{Binding IsNarratorModeInstant}" />
@@ -83,54 +87,67 @@
                             <Label Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" Height="40" Width="150" HorizontalAlignment="Center" Style="{StaticResource DefaultSheenLabelStyle}"
                                    Content="JUKEBOX"
                                    Margin="0, 20, 0, 10" />
-                            <Label Grid.Row="4" Grid.Column="0" Style="{StaticResource DefaultLabelStyle}" Content="Mute:" Margin="0, 0, 5, 0" />
-                            <Label Grid.Row="5" Grid.Column="0" Style="{StaticResource DefaultLabelStyle}" Content="Shuffle mode:" Margin="0, 0, 5, 0" />
-                            <Label Grid.Row="6" Grid.Column="0" Style="{StaticResource DefaultLabelStyle}" Content="Repeat mode:" Margin="0, 0, 5, 0" />
-                            <StackPanel Grid.Row="4" Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center">
+                            <Label Grid.Row="4" Grid.Column="0" Style="{StaticResource DefaultLabelStyle}" Content="Volume:" Margin="0, 0, 5, 0" />
+                            <Label Grid.Row="5" Grid.Column="0" Style="{StaticResource DefaultLabelStyle}" Content="Mute:" Margin="0, 0, 5, 0" />
+                            <Label Grid.Row="6" Grid.Column="0" Style="{StaticResource DefaultLabelStyle}" Content="Shuffle mode:" Margin="0, 0, 5, 0" />
+                            <Label Grid.Row="7" Grid.Column="0" Style="{StaticResource DefaultLabelStyle}" Content="Repeat mode:" Margin="0, 0, 5, 0" />
+                            <TextBox Name="Volume" Grid.Row="4" Grid.Column="1" Style="{StaticResource DefaultTextBoxStyle}"
+                                     HorizontalAlignment="Left"
+                                     Height="{StaticResource OptionHeight}"
+                                     Width="{StaticResource OptionWidth}">
+                                <TextBox.Text>
+                                    <Binding Path="Volume" UpdateSourceTrigger="PropertyChanged" Mode="TwoWay">
+                                        <Binding.ValidationRules>
+                                            <validation:ZeroToHundredStringValidationRule ValidationStep="CommittedValue" />
+                                        </Binding.ValidationRules>
+                                    </Binding>
+                                </TextBox.Text>
+                            </TextBox>
+                            <StackPanel Grid.Row="5" Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center">
                                 <Button Style="{StaticResource DefaultOptionPickerButtonStyle}"
-                                        Height="{StaticResource OptionButtonHeight}"
-                                        Width="{StaticResource OptionButtonWidth}"
+                                        Height="{StaticResource OptionHeight}"
+                                        Width="{StaticResource OptionWidth}"
                                         Content="ON"
                                         Command="{Binding SetMuteOnCommand}"
                                         Tag="{Binding MuteIsOn}" />
                                 <Button Style="{StaticResource DefaultOptionPickerButtonStyle}"
-                                        Height="{StaticResource OptionButtonHeight}"
-                                        Width="{StaticResource OptionButtonWidth}"
+                                        Height="{StaticResource OptionHeight}"
+                                        Width="{StaticResource OptionWidth}"
                                         Content="OFF"
                                         Command="{Binding SetMuteOffCommand}"
                                         Tag="{Binding MuteIsOff}" />
                             </StackPanel>
-                            <StackPanel Grid.Row="5" Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center">
+                            <StackPanel Grid.Row="6" Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center">
                                 <Button Style="{StaticResource DefaultOptionPickerButtonStyle}"
-                                        Height="{StaticResource OptionButtonHeight}"
-                                        Width="{StaticResource OptionButtonWidth}"
+                                        Height="{StaticResource OptionHeight}"
+                                        Width="{StaticResource OptionWidth}"
                                         Content="ON"
                                         Command="{Binding SetShuffleModeOnCommand}"
                                         Tag="{Binding ShuffleModeIsOn}" />
                                 <Button Style="{StaticResource DefaultOptionPickerButtonStyle}"
-                                        Height="{StaticResource OptionButtonHeight}"
-                                        Width="{StaticResource OptionButtonWidth}"
+                                        Height="{StaticResource OptionHeight}"
+                                        Width="{StaticResource OptionWidth}"
                                         Content="OFF"
                                         Command="{Binding SetShuffleModeOffCommand}"
                                         Tag="{Binding ShuffleModeIsOff}" />
                             </StackPanel>
-                            <StackPanel Grid.Row="6" Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center">
+                            <StackPanel Grid.Row="7" Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center">
                                 <Button Style="{StaticResource DefaultOptionPickerButtonStyle}"
-                                        Height="{StaticResource OptionButtonHeight}"
-                                        Width="{StaticResource OptionButtonWidth}"
+                                        Height="{StaticResource OptionHeight}"
+                                        Width="{StaticResource OptionWidth}"
                                         Content="Single"
                                         Command="{Binding SetRepeatModeSingleCommand}"
                                         Tag="{Binding RepeatModeIsSingle}" />
                                 <Button Style="{StaticResource DefaultOptionPickerButtonStyle}"
-                                        Height="{StaticResource OptionButtonHeight}"
-                                        Width="{StaticResource OptionButtonWidth}"
+                                        Height="{StaticResource OptionHeight}"
+                                        Width="{StaticResource OptionWidth}"
                                         Content="All"
                                         Command="{Binding SetRepeatModeAllCommand}"
                                         Tag="{Binding RepeatModeIsAll}" />
                             </StackPanel>
 
-                            <StackPanel Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Horizontal" Margin="0, 20, 0, 10">
-                                <Button Style="{StaticResource DefaultButtonStyle}"
+                            <StackPanel Grid.Row="8" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Horizontal" Margin="0, 20, 0, 10">
+                                <Button Style="{StaticResource SaveButtonStyle}"
                                         Height="{StaticResource DefaultButtonHeight}"
                                         Width="{StaticResource WindowButtonWidth}"
                                         Margin="0, 0, 10, 0"

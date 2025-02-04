@@ -78,6 +78,7 @@
             </Setter.Value>
         </Setter>
         <Setter Property="IsEnabled" Value="false" />
+        <Setter Property="Opacity" Value="0.5" />
         <Setter Property="Padding" Value="15, 0 , 15, 0" />
         <Style.Triggers>
             <MultiDataTrigger>
@@ -97,6 +98,7 @@
                     <Condition Binding="{Binding ElementName=Techniques, Path=(Validation.HasError)}" Value="false" />
                 </MultiDataTrigger.Conditions>
                 <Setter Property="IsEnabled" Value="true" />
+                <Setter Property="Opacity" Value="1.0" />
             </MultiDataTrigger>
         </Style.Triggers>
     </Style>

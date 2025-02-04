@@ -17,21 +17,21 @@ public sealed class EvolutionToolViewModel : BaseViewModel, IDisposable
 {
     private readonly SpeakingSimulator _speakingSimulator;
     private readonly CompositeDisposable _compositeDisposable;
-    
+
     private string _jijimonText = string.Empty;
 
-    private int _hp;
-    private int _mp;
-    private int _off;
-    private int _def;
-    private int _speed;
-    private int _brains;
-    private int _careMistakes;
-    private int _weight;
-    private int _happiness;
-    private int _discipline;
-    private int _battles;
-    private int _techniques;
+    private string _hp = "0";
+    private string _mp = "0";
+    private string _off = "0";
+    private string _def = "0";
+    private string _speed = "0";
+    private string _brains = "0";
+    private string _careMistakes = "0";
+    private string _weight = "0";
+    private string _happiness = "0";
+    private string _discipline = "0";
+    private string _battles = "0";
+    private string _techniques = "0";
     private DigimonType _digimonType;
     private EvolutionResult _evolutionResult = EvolutionResult.Unknown;
     private bool _flipToRight;
@@ -43,7 +43,7 @@ public sealed class EvolutionToolViewModel : BaseViewModel, IDisposable
         _compositeDisposable = new CompositeDisposable(
             _speakingSimulator
         );
-        
+
         SetEvolutionResult = new CommandHandler(CalculateEvolutionResult);
 
         InstantDisplayCommand = new CommandHandler(InstantDisplay);
@@ -90,7 +90,7 @@ public sealed class EvolutionToolViewModel : BaseViewModel, IDisposable
         }
     }
 
-    public int HP
+    public string HP
     {
         get => _hp;
         set
@@ -103,7 +103,7 @@ public sealed class EvolutionToolViewModel : BaseViewModel, IDisposable
         }
     }
 
-    public int MP
+    public string MP
     {
         get => _mp;
         set
@@ -116,7 +116,7 @@ public sealed class EvolutionToolViewModel : BaseViewModel, IDisposable
         }
     }
 
-    public int Off
+    public string Off
     {
         get => _off;
         set
@@ -129,7 +129,7 @@ public sealed class EvolutionToolViewModel : BaseViewModel, IDisposable
         }
     }
 
-    public int Def
+    public string Def
     {
         get => _def;
         set
@@ -142,7 +142,7 @@ public sealed class EvolutionToolViewModel : BaseViewModel, IDisposable
         }
     }
 
-    public int Speed
+    public string Speed
     {
         get => _speed;
         set
@@ -155,7 +155,7 @@ public sealed class EvolutionToolViewModel : BaseViewModel, IDisposable
         }
     }
 
-    public int Brains
+    public string Brains
     {
         get => _brains;
         set
@@ -168,7 +168,7 @@ public sealed class EvolutionToolViewModel : BaseViewModel, IDisposable
         }
     }
 
-    public int CareMistakes
+    public string CareMistakes
     {
         get => _careMistakes;
         set
@@ -181,7 +181,7 @@ public sealed class EvolutionToolViewModel : BaseViewModel, IDisposable
         }
     }
 
-    public int Weight
+    public string Weight
     {
         get => _weight;
         set
@@ -194,7 +194,7 @@ public sealed class EvolutionToolViewModel : BaseViewModel, IDisposable
         }
     }
 
-    public int Happiness
+    public string Happiness
     {
         get => _happiness;
         set
@@ -207,7 +207,7 @@ public sealed class EvolutionToolViewModel : BaseViewModel, IDisposable
         }
     }
 
-    public int Discipline
+    public string Discipline
     {
         get => _discipline;
         set
@@ -220,7 +220,7 @@ public sealed class EvolutionToolViewModel : BaseViewModel, IDisposable
         }
     }
 
-    public int Battles
+    public string Battles
     {
         get => _battles;
         set
@@ -233,7 +233,7 @@ public sealed class EvolutionToolViewModel : BaseViewModel, IDisposable
         }
     }
 
-    public int Techniques
+    public string Techniques
     {
         get => _techniques;
         set
@@ -276,7 +276,8 @@ public sealed class EvolutionToolViewModel : BaseViewModel, IDisposable
 
         OnPropertyChanged(nameof(EvolutionResult));
 
-        Digimon currentDigimon = new(DigimonType, HP, MP, Off, Def, Speed, Brains, CareMistakes, Weight, Happiness, Discipline, Battles, _techniques);
+        Digimon currentDigimon = new(DigimonType, int.Parse(HP), int.Parse(MP), int.Parse(Off), int.Parse(Def), int.Parse(Speed), int.Parse(Brains), int.Parse(CareMistakes), int.Parse(Weight), int.Parse(Happiness), int.Parse(Discipline),
+            int.Parse(Battles), int.Parse(Techniques));
 
         EvolutionResult = currentDigimon.DigimonType.EvolutionStage() == EvolutionStage.Ultimate
             ? EvolutionResult.NotApplicable

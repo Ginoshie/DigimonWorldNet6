@@ -25,8 +25,11 @@ public class ZeroToNineNineNineNineStringValidationRule : ValidationRule
 
         string? stringValue = sourceValue.ToString();
 
+        if(stringValue == string.Empty)
+            return ValidationResult.ValidResult;
+        
         if (!int.TryParse(stringValue, out int intValue) || sourceValue.ToString()!.Length == 0 || intValue < 0 || intValue > 9999)
-            return new ValidationResult(false, "This textbox has to be empty or contain a positive number up to 9999.");
+            return new ValidationResult(false, "This textbox has to contain a whole and positive number between 0 to 9999.");
 
         return ValidationResult.ValidResult;
     }
