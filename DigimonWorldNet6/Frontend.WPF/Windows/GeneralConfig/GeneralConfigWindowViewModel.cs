@@ -19,6 +19,8 @@ public class GeneralConfigWindowViewModel : BaseViewModel
     private bool _repeatModeIsAll;
     private bool _shuffleModeIsOn;
     private bool _shuffleModeIsOff;
+    private bool _pauseOnCloseWindow;
+    private bool _doNothingOnCloseWindow;
 
     public GeneralConfigWindowViewModel(GeneralConfigWindow window)
     {
@@ -36,13 +38,17 @@ public class GeneralConfigWindowViewModel : BaseViewModel
 
         SetMuteOffCommand = new CommandHandler(SetMuteOff);
 
+        SetShuffleModeOnCommand = new CommandHandler(SetShuffleModeOn);
+
+        SetShuffleModeOffCommand = new CommandHandler(SetShuffleModeOff);
+
         SetRepeatModeSingleCommand = new CommandHandler(SetRepeatModeSingle);
 
         SetRepeatModeAllCommand = new CommandHandler(SetRepeatModeAll);
 
-        SetShuffleModeOnCommand = new CommandHandler(SetShuffleModeOn);
+        SetPauseOnCloseCommand = new CommandHandler(SetPauseOnClose);
 
-        SetShuffleModeOffCommand = new CommandHandler(SetShuffleModeOff);
+        SetDoNothingOnCloseCommand = new CommandHandler(SetDoNothingOnClose);
 
         ApplyConfig(GeneralConfigurationManager.GeneralConfig);
     }
@@ -82,6 +88,18 @@ public class GeneralConfigWindowViewModel : BaseViewModel
         private set => SetField(ref _muteIsOff, value);
     }
 
+    public bool ShuffleModeIsOn
+    {
+        get => _shuffleModeIsOn;
+        private set => SetField(ref _shuffleModeIsOn, value);
+    }
+
+    public bool ShuffleModeIsOff
+    {
+        get => _shuffleModeIsOff;
+        private set => SetField(ref _shuffleModeIsOff, value);
+    }
+
     public bool RepeatModeIsSingle
     {
         get => _repeatModeIsSingle;
@@ -94,16 +112,16 @@ public class GeneralConfigWindowViewModel : BaseViewModel
         private set => SetField(ref _repeatModeIsAll, value);
     }
 
-    public bool ShuffleModeIsOn
+    public bool PauseOnCloseWindow
     {
-        get => _shuffleModeIsOn;
-        private set => SetField(ref _shuffleModeIsOn, value);
+        get => _pauseOnCloseWindow;
+        private set => SetField(ref _pauseOnCloseWindow, value);
     }
 
-    public bool ShuffleModeIsOff
+    public bool DoNothingOnCloseWindow
     {
-        get => _shuffleModeIsOff;
-        private set => SetField(ref _shuffleModeIsOff, value);
+        get => _doNothingOnCloseWindow;
+        private set => SetField(ref _doNothingOnCloseWindow, value);
     }
 
     public ICommand SaveCommand { get; private set; }
@@ -118,13 +136,17 @@ public class GeneralConfigWindowViewModel : BaseViewModel
 
     public ICommand SetMuteOffCommand { get; private set; }
 
+    public ICommand SetShuffleModeOnCommand { get; private set; }
+
+    public ICommand SetShuffleModeOffCommand { get; private set; }
+
     public ICommand SetRepeatModeSingleCommand { get; private set; }
 
     public ICommand SetRepeatModeAllCommand { get; private set; }
 
-    public ICommand SetShuffleModeOnCommand { get; private set; }
+    public ICommand SetPauseOnCloseCommand { get; private set; }
 
-    public ICommand SetShuffleModeOffCommand { get; private set; }
+    public ICommand SetDoNothingOnCloseCommand { get; private set; }
 
     private void Save()
     {
@@ -188,6 +210,22 @@ public class GeneralConfigWindowViewModel : BaseViewModel
         RepeatModeIsAll = true;
     }
 
+    private void SetPauseOnClose()
+    {
+        GeneralConfigurationManager.SetOnCloseAction(MusicPlayerOnCloseAction.Pause);
+
+        PauseOnCloseWindow = true;
+        DoNothingOnCloseWindow = false;
+    }
+
+    private void SetDoNothingOnClose()
+    {
+        GeneralConfigurationManager.SetOnCloseAction(MusicPlayerOnCloseAction.Nothing);
+
+        PauseOnCloseWindow = false;
+        DoNothingOnCloseWindow = true;
+    }
+
     private void SetShuffleModeOn()
     {
         GeneralConfigurationManager.SetShuffleModeIsOn(ShuffleMode.Shuffle);
@@ -206,18 +244,21 @@ public class GeneralConfigWindowViewModel : BaseViewModel
 
     private void ApplyConfig(Configuration.GeneralConfig generalConfig)
     {
-        JukeboxConfig jukeboxConfig = generalConfig.JukeboxConfig;
+        MusicPlayerConfig musicPlayerConfig = generalConfig.MusicPlayerConfig;
         
-        Volume = jukeboxConfig.Volume;
+        Volume = musicPlayerConfig.Volume;
         
-        MuteIsOn = jukeboxConfig.MuteMode == MuteMode.Mute;
-        MuteIsOff = jukeboxConfig.MuteMode == MuteMode.Unmuted;
+        MuteIsOn = musicPlayerConfig.MuteMode == MuteMode.Mute;
+        MuteIsOff = musicPlayerConfig.MuteMode == MuteMode.Unmuted;
 
-        RepeatModeIsSingle = jukeboxConfig.RepeatMode == RepeatMode.Single;
-        RepeatModeIsAll = jukeboxConfig.RepeatMode == RepeatMode.All;
+        ShuffleModeIsOn = musicPlayerConfig.ShuffleMode == ShuffleMode.Shuffle;
+        ShuffleModeIsOff = musicPlayerConfig.ShuffleMode == ShuffleMode.Chronological;
 
-        ShuffleModeIsOn = jukeboxConfig.ShuffleMode == ShuffleMode.Shuffle;
-        ShuffleModeIsOff = jukeboxConfig.ShuffleMode == ShuffleMode.Chronological;
+        RepeatModeIsSingle = musicPlayerConfig.RepeatMode == RepeatMode.Single;
+        RepeatModeIsAll = musicPlayerConfig.RepeatMode == RepeatMode.All;
+        
+        PauseOnCloseWindow = musicPlayerConfig.OnCloseAction == MusicPlayerOnCloseAction.Pause;
+        _doNothingOnCloseWindow = musicPlayerConfig.OnCloseAction == MusicPlayerOnCloseAction.Nothing;
         
         SpeakingSimulatorConfig speakingSimulatorConfig = generalConfig.SpeakingSimulatorConfig;
         

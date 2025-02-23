@@ -1,65 +1,36 @@
 using System;
+using System.Reactive.Disposables;
 using System.Windows;
 using System.Windows.Input;
 using DigimonWorld.Frontend.WPF.Services;
 using DigimonWorld.Frontend.WPF.ViewModelComponents;
 using DigimonWorld.Frontend.WPF.Windows.AboutAndCredits;
+using DigimonWorld.Frontend.WPF.Windows.BaseClasses;
 using DigimonWorld.Frontend.WPF.Windows.GeneralConfig;
+using DigimonWorld.Frontend.WPF.Windows.MusicPlayer;
 
 namespace DigimonWorld.Frontend.WPF.Windows.Main;
 
-public class MainWindowViewModel : BaseViewModel
+public class MainWindowViewModel : BaseWindowViewModel, IDisposable
 {
-    private bool _leftPaneIsOpen;
+    private readonly CompositeDisposable _compositeDisposable;
+    
     private bool _bottomPaneIsOpen;
-    private readonly Window _window;
+    private bool _musicPlayerIsOpen;
 
-    public MainWindowViewModel(Window window)
+    public MainWindowViewModel(Window window) : base(window)
     {
-        _window = window;
-
-        MinimizeCommand = new CommandHandler(() => _window.WindowState = WindowState.Minimized);
-
-        CloseCommand = new CommandHandler(CloseApplication);
-
-        DragCommand = new CommandHandler(() => DragWindow(window));
-
-        ToggleLeftPaneCommand = new CommandHandler(ToggleLeftPane);
-
         ToggleBottomPaneCommand = new CommandHandler(ToggleBottomPane);
         
         OpenConfigurationWindowCommand = new CommandHandler(OpenConfigurationWindow);
         
         OpenAboutAndCreditsWindowCommand = new CommandHandler(OpenAboutAndCreditsWindow);
-    }
 
-    private void CloseApplication()
-    {
-        Jukebox.Dispose();
+        OpenMusicPlayerWindowCommand = new CommandHandler(OpenMusicPlayerWindow);
 
-        _window.Close();
-    }
-
-    public bool LeftPaneIsOpen
-    {
-        get => _leftPaneIsOpen;
-        private set
-        {
-            if (_leftPaneIsOpen == value) return;
-
-            _leftPaneIsOpen = value;
-
-            if (_leftPaneIsOpen)
-            {
-                EventHub.SignalLeftPaneOpened();
-            }
-            else
-            {
-                EventHub.SignalLeftPaneClosed();
-            }
-
-            OnPropertyChanged();
-        }
+        _compositeDisposable = new CompositeDisposable(
+            EventHub.MusicPlayerClosedObservable.Subscribe(_ => _musicPlayerIsOpen = false)
+        );
     }
 
     public bool BottomPaneIsOpen
@@ -75,37 +46,19 @@ public class MainWindowViewModel : BaseViewModel
         }
     }
 
-    public ICommand MinimizeCommand { get; }
-
-    public ICommand CloseCommand { get; }
-
-    public ICommand DragCommand { get; }
-
-    public ICommand ToggleLeftPaneCommand { get; }
-
     public ICommand ToggleBottomPaneCommand { get; }
 
     public ICommand OpenConfigurationWindowCommand { get; }
 
     public ICommand OpenAboutAndCreditsWindowCommand { get; }
 
-    private void DragWindow(Window window)
-    {
-        if (Mouse.PrimaryDevice.LeftButton != MouseButtonState.Pressed) return;
+    public CommandHandler OpenMusicPlayerWindowCommand { get; }
 
-        try
-        {
-            window.DragMove();
-        }
-        catch (InvalidOperationException)
-        {
-            // Ignore exceptions caused by improper DragMove calls
-        }
-    }
-
-    private void ToggleLeftPane()
+    protected override void CloseApplication()
     {
-        LeftPaneIsOpen = !LeftPaneIsOpen;
+        Services.MusicPlayer.Dispose();
+
+        Window.Close();
     }
 
     private void ToggleBottomPane()
@@ -139,5 +92,30 @@ public class MainWindowViewModel : BaseViewModel
         aboutAndCreditsWindow.DataContext = aboutAndCreditsWindowViewModel;
 
         aboutAndCreditsWindow.ShowDialog();
+    }
+
+    private void OpenMusicPlayerWindow()
+    {
+        if (_musicPlayerIsOpen) return;
+        
+        MusicPlayerWindow musicPlayerWindow = new()
+        {
+            Owner = Application.Current.MainWindow
+        };
+
+        MusicPlayerViewModel musicPlayerViewModel = new(musicPlayerWindow);
+
+        musicPlayerWindow.DataContext = musicPlayerViewModel;
+
+        musicPlayerWindow.Show();
+        
+        EventHub.SignalMusicPlayerOpened();
+
+        _musicPlayerIsOpen = true;
+    }
+
+    public void Dispose()
+    {
+        _compositeDisposable.Dispose();
     }
 }

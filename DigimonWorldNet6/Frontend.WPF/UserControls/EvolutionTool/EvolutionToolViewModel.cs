@@ -48,8 +48,10 @@ public sealed class EvolutionToolViewModel : BaseViewModel, IDisposable
 
         InstantDisplayCommand = new CommandHandler(InstantDisplay);
 
+        int initialDelay = GeneralConfigurationManager.SpeakingSimulatorConfig.NarratorMode == NarratorMode.Instant ? 0 : 1500;
+        
         Task
-            .Delay(1500)
+            .Delay(initialDelay)
             .WaitAsync(CancellationToken.None)
             .ContinueWith(_ => _speakingSimulator.WriteTextAsSpeechAsync(JijimonEvolutionCalculatorNarratorText.IntroText, textOutput => JijimonText = textOutput));
     }

@@ -2,7 +2,7 @@ using DigimonWorld.Frontend.WPF.Constants;
 
 namespace DigimonWorld.Frontend.WPF.Configuration;
 
-public class JukeboxConfig
+public class MusicPlayerConfig
 {
     public int Volume { get; set; } = 50;
 
@@ -11,4 +11,6 @@ public class JukeboxConfig
     public RepeatMode RepeatMode { get; set; } = RepeatMode.Single;
 
     public ShuffleMode ShuffleMode { get; set; } = ShuffleMode.Chronological;
+    
+    public MusicPlayerOnCloseAction OnCloseAction { get; set; }
 }

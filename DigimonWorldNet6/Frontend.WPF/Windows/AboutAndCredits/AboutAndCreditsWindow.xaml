@@ -1,11 +1,11 @@
-<windows:BaseDialogWindow x:Class="DigimonWorld.Frontend.WPF.Windows.AboutAndCredits.AboutAndCreditsWindow"
+<baseClasses:BaseDialogWindow x:Class="DigimonWorld.Frontend.WPF.Windows.AboutAndCredits.AboutAndCreditsWindow"
                           xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                           xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                           xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                           xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
                           xmlns:system="clr-namespace:System;assembly=System.Runtime"
-                          xmlns:windows="clr-namespace:DigimonWorld.Frontend.WPF.Windows"
                           xmlns:aboutAndCredits="clr-namespace:DigimonWorld.Frontend.WPF.Windows.AboutAndCredits"
+                          xmlns:baseClasses="clr-namespace:DigimonWorld.Frontend.WPF.Windows.BaseClasses"
                           mc:Ignorable="d"
                           d:DataContext="{d:DesignInstance Type=aboutAndCredits:AboutAndCreditsWindowViewModel, IsDesignTimeCreatable=True}"
                           Title="Configuration"
@@ -16,7 +16,7 @@
                           Background="Transparent"
                           WindowStartupLocation="Manual">
 
-    <windows:BaseDialogWindow.Resources>
+    <baseClasses:BaseDialogWindow.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="../../ResourceDictionaries/Styles/Buttons/DefaultButtonStyle.xaml" />
@@ -31,7 +31,7 @@
             <system:Double x:Key="DefaultButtonTextHeightSpacing">22</system:Double>
 
         </ResourceDictionary>
-    </windows:BaseDialogWindow.Resources>
+    </baseClasses:BaseDialogWindow.Resources>
 
     <Window.InputBindings>
         <KeyBinding Key="Escape" Command="{Binding CloseWindowCommand}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}" />
@@ -133,4 +133,4 @@
         </Border>
     </Border>
 
-</windows:BaseDialogWindow>
+</baseClasses:BaseDialogWindow>

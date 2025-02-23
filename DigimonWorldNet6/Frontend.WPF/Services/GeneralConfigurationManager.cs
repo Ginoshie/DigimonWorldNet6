@@ -27,34 +27,20 @@ public static class GeneralConfigurationManager
 
     public static GeneralConfig GeneralConfig { get; private set; }
 
-    public static JukeboxConfig JukeboxConfig => GeneralConfig.JukeboxConfig;
+    public static MusicPlayerConfig MusicPlayerConfig => GeneralConfig.MusicPlayerConfig;
 
-    public static void SetNarratorMode(NarratorMode mode)
-    {
-        GeneralConfig.SpeakingSimulatorConfig.NarratorMode = mode;
-    }
+    public static SpeakingSimulatorConfig SpeakingSimulatorConfig => GeneralConfig.SpeakingSimulatorConfig;
 
-    public static void SetVolume(int volume)
-    {
-        // if (volume is < 0 or > 100) throw new ArgumentOutOfRangeException(nameof(volume), volume, "Volume must be between 0 and 100.");
+    public static void SetNarratorMode(NarratorMode mode) => GeneralConfig.SpeakingSimulatorConfig.NarratorMode = mode;
 
-        GeneralConfig.JukeboxConfig.Volume = volume;
-    }
+    public static void SetVolume(int volume) => GeneralConfig.MusicPlayerConfig.Volume = volume;
 
-    public static void SetMuteIsOn(MuteMode muteMode)
-    {
-        GeneralConfig.JukeboxConfig.MuteMode = muteMode;
-    }
+    public static void SetMuteIsOn(MuteMode muteMode) => GeneralConfig.MusicPlayerConfig.MuteMode = muteMode;
 
-    public static void SetRepeatModeIsSingle(RepeatMode repeatMode)
-    {
-        GeneralConfig.JukeboxConfig.RepeatMode = repeatMode;
-    }
+    public static void SetShuffleModeIsOn(ShuffleMode shuffleMode) => GeneralConfig.MusicPlayerConfig.ShuffleMode = shuffleMode;
 
-    public static void SetShuffleModeIsOn(ShuffleMode shuffleMode)
-    {
-        GeneralConfig.JukeboxConfig.ShuffleMode = shuffleMode;
-    }
+    public static void SetRepeatModeIsSingle(RepeatMode repeatMode) => GeneralConfig.MusicPlayerConfig.RepeatMode = repeatMode;
+    public static void SetOnCloseAction(MusicPlayerOnCloseAction onCloseAction) => GeneralConfig.MusicPlayerConfig.OnCloseAction = onCloseAction;
 
     public static void SaveConfiguration()
     {

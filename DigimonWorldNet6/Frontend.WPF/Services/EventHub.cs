@@ -8,9 +8,9 @@ namespace DigimonWorld.Frontend.WPF.Services;
 
 public static class EventHub
 {
-    private static readonly Subject<Unit> LeftPaneOpenedSubject = new();
+    private static readonly Subject<Unit> MusicPlayerOpenedSubject = new();
     
-    private static readonly Subject<Unit> LeftPaneClosedSubject = new();
+    private static readonly Subject<Unit> MusicPlayerClosedSubject = new();
     
     private static readonly Subject<Unit> LeomonsThemeStartedSubject = new();
     
@@ -26,27 +26,17 @@ public static class EventHub
     
     private static readonly BehaviorSubject<MuteMode> MuteModeSubject = new(MuteMode.Unmuted);
     
-    public static IObservable<Unit> LeftPaneOpenedObservable { get; } = LeftPaneOpenedSubject.AsObservable();
+    public static IObservable<Unit> MusicPlayerOpenedObservable { get; } = MusicPlayerOpenedSubject.AsObservable();
     
-    public static IObservable<Unit> LeftPaneClosedObservable { get; } =  LeftPaneClosedSubject.AsObservable();
+    public static IObservable<Unit> MusicPlayerClosedObservable { get; } =  MusicPlayerClosedSubject.AsObservable();
     
     public static IObservable<Unit> LeomonsThemeStartedObservable { get; } = LeomonsThemeStartedSubject.AsObservable();
     
-    public static IObservable<ShuffleMode> ShuffleModeObservable { get; } = ShuffleModeSubject.AsObservable();
-    
-    public static IObservable<Unit> PreviousSongStartedObservable { get; } = PreviousSongStartedSubject.AsObservable();
-    
-    public static IObservable<Unit> NextSongStartedObservable { get; } = NextSongStartedSubject.AsObservable();
-    
     public static IObservable<PlayMode> PlayModeObservable { get; } = PlayModeSubject.AsObservable();
     
-    public static IObservable<RepeatMode> RepeatModeObservable { get; } = RepeatModeSubject.AsObservable();
+    public static void SignalMusicPlayerOpened() => MusicPlayerOpenedSubject.OnNext(Unit.Default);
     
-    public static IObservable<MuteMode> MuteModeObservable { get; } = MuteModeSubject.AsObservable();
-    
-    public static void SignalLeftPaneOpened() => LeftPaneOpenedSubject.OnNext(Unit.Default);
-    
-    public static void SignalLeftPaneClosed() => LeftPaneClosedSubject.OnNext(Unit.Default);
+    public static void SignalMusicPlayerClosed() => MusicPlayerClosedSubject.OnNext(Unit.Default);
     
     public static void SignalLeomonsThemeStarted() => LeomonsThemeStartedSubject.OnNext(Unit.Default);
     
@@ -56,7 +46,7 @@ public static class EventHub
     
     public static void SignalNextSongStarted() => NextSongStartedSubject.OnNext(Unit.Default);
     
-    public static void SignalPlayMode(PlayMode playMode) => PlayModeSubject.OnNext(playMode);
+    public static void SignalPlayModeChanged(PlayMode playMode) => PlayModeSubject.OnNext(playMode);
     
     public static void SignalRepeatMode(RepeatMode repeatMode) => RepeatModeSubject.OnNext(repeatMode);
     

@@ -1,4 +1,4 @@
-namespace DigimonWorld.Frontend.WPF.UserControls.MusicPlayer.UserControls;
+namespace DigimonWorld.Frontend.WPF.Windows.MusicPlayer.UserControls;
 
 public partial class GiromonNarrator
 {

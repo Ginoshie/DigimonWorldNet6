@@ -3,9 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:evolutionTool="clr-namespace:DigimonWorld.Frontend.WPF.UserControls.EvolutionTool"
-             mc:Ignorable="d"
-             d:DataContext="{d:DesignInstance Type=evolutionTool:EvolutionToolViewModel, IsDesignTimeCreatable=True}">
+             mc:Ignorable="d">
 
     <Border CornerRadius="5" BorderBrush="Black" BorderThickness="3" Margin="0, 15,25, 10" Padding="0" Background="Black">
         <Border CornerRadius="5" BorderBrush="#4A9FC5" BorderThickness="3" Padding="0" Background="#4A9FC5">

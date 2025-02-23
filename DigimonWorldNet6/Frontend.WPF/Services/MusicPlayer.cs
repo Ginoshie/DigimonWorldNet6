@@ -13,7 +13,7 @@ using DigimonWorld.Frontend.WPF.Constants;
 
 namespace DigimonWorld.Frontend.WPF.Services;
 
-public static class Jukebox
+public static class MusicPlayer
 {
     private const string LEOMON_SONG_TITLE = "19) Leomon";
 
@@ -23,15 +23,17 @@ public static class Jukebox
     private static readonly BehaviorSubject<string> CurrentSongTitleSubject = new(string.Empty);
     private static readonly BehaviorSubject<double> CurrentPositionSubject = new(0);
     private static readonly BehaviorSubject<double> SongLengthSubject = new(0);
-    private static readonly BehaviorSubject<float> VolumeSubject = new(0);
 
     private static readonly IObservable<long> IntervalObservable = Observable.Interval(TimeSpan.FromMilliseconds(100));
+
+    private static readonly List<string> ActivePlaylist = [];
 
     private static IDisposable? _currentPositionSubscription;
 
     private static IWaveSource? _currentWaveSource;
 
-    private static readonly List<string> ActivePlaylist = [];
+    private static MusicPlayerConfig _musicPlayerConfig = null!;
+
     private static int _currentTrackIndex;
     private static ShuffleMode _shuffleMode;
     private static RepeatMode _repeatMode;
@@ -41,13 +43,17 @@ public static class Jukebox
     public static readonly IObservable<string> CurrentSongTitleObservable = CurrentSongTitleSubject.AsObservable();
     public static readonly IObservable<double> CurrentPositionObservable = CurrentPositionSubject.AsObservable();
     public static readonly IObservable<double> SongLengthObservable = SongLengthSubject.AsObservable();
-    public static readonly IObservable<float> VolumeObservable = VolumeSubject.AsObservable();
 
-    static Jukebox()
+    static MusicPlayer()
     {
         SoundOut = new WasapiOut();
 
-        CompositeDisposable = new CompositeDisposable(SoundOut, CurrentSongTitleSubject, CurrentPositionSubject, SongLengthSubject);
+        CompositeDisposable = new CompositeDisposable(SoundOut,
+            CurrentSongTitleSubject,
+            CurrentPositionSubject,
+            SongLengthSubject,
+            EventHub.MusicPlayerClosedObservable.Subscribe(_ => OnMusicPlayerClosed())
+        );
 
         LoadMusicResources();
 
@@ -57,7 +63,21 @@ public static class Jukebox
 
         CurrentSongTitleObservable.Subscribe(OnLeomonsSongStarted);
 
-        ApplyStartUpConfig(GeneralConfigurationManager.JukeboxConfig);
+        ApplyStartUpConfig(GeneralConfigurationManager.MusicPlayerConfig);
+    }
+
+    private static void OnMusicPlayerClosed()
+    {
+        switch (_musicPlayerConfig.OnCloseAction)
+        {
+            case MusicPlayerOnCloseAction.Pause:
+                Pause();
+                break;
+            case MusicPlayerOnCloseAction.Nothing:
+                break;
+            default:
+                throw new ArgumentOutOfRangeException();
+        }
     }
 
     public static PlayMode PlayMode { get; private set; } = PlayMode.Stopped;
@@ -102,22 +122,19 @@ public static class Jukebox
         switch (SoundOut.PlaybackState)
         {
             case PlaybackState.Stopped:
-                PlayCurrentTrack();
-                PlayMode = PlayMode.Playing;
+                StartPlaying();
                 break;
             case PlaybackState.Paused:
-                SoundOut.Resume();
-                PlayMode = PlayMode.Playing;
+                Unpause();
                 break;
             case PlaybackState.Playing:
-                SoundOut.Pause();
-                PlayMode = PlayMode.Paused;
+                Pause();
                 break;
             default:
                 throw new ArgumentOutOfRangeException();
         }
 
-        EventHub.SignalPlayMode(PlayMode);
+        EventHub.SignalPlayModeChanged(PlayMode);
     }
 
     public static void NextSong()
@@ -150,8 +167,6 @@ public static class Jukebox
 
         _volumeBeforeMute = SoundOut.Volume;
 
-        VolumeSubject.OnNext(0);
-
         SoundOut.Volume = 0;
 
         EventHub.SignalMuteMode(MuteMode.Mute);
@@ -160,8 +175,6 @@ public static class Jukebox
     public static void UnMute()
     {
         if (_volumeBeforeMute == 0) return;
-
-        VolumeSubject.OnNext(_volumeBeforeMute * 100);
 
         SoundOut.Volume = _volumeBeforeMute;
 
@@ -257,6 +270,27 @@ public static class Jukebox
         CompositeDisposable.Add(_currentPositionSubscription);
     }
 
+    private static void StartPlaying()
+    {
+        PlayCurrentTrack();
+
+        PlayMode = PlayMode.Playing;
+    }
+
+    private static void Unpause()
+    {
+        SoundOut.Resume();
+
+        PlayMode = PlayMode.Playing;
+    }
+
+    private static void Pause()
+    {
+        SoundOut.Pause();
+
+        PlayMode = PlayMode.Paused;
+    }
+
     private static void OnPlaybackStopped(object? sender, PlaybackStoppedEventArgs e)
     {
         if (SoundOut.PlaybackState != PlaybackState.Stopped || PlayMode == PlayMode.Paused) return;
@@ -279,16 +313,18 @@ public static class Jukebox
         }
     }
 
-    private static void ApplyStartUpConfig(JukeboxConfig jukeboxConfig)
+    private static void ApplyStartUpConfig(MusicPlayerConfig musicPlayerConfig)
     {
-        SetShuffleMode(jukeboxConfig.ShuffleMode);
+        _musicPlayerConfig = musicPlayerConfig;
 
-        SetRepeatMode(jukeboxConfig.RepeatMode);
+        SetShuffleMode(musicPlayerConfig.ShuffleMode);
 
-        Volume = jukeboxConfig.Volume / 100f;
+        SetRepeatMode(musicPlayerConfig.RepeatMode);
+
+        Volume = musicPlayerConfig.Volume / 100f;
         _volumeBeforeMute = Volume;
 
-        if (jukeboxConfig.MuteMode == MuteMode.Mute)
+        if (musicPlayerConfig.MuteMode == MuteMode.Mute)
         {
             Mute();
         }

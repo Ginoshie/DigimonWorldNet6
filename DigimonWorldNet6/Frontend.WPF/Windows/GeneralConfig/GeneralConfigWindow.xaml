@@ -1,12 +1,12 @@
-<windows:BaseDialogWindow x:Class="DigimonWorld.Frontend.WPF.Windows.GeneralConfig.GeneralConfigWindow"
+<baseClasses:BaseDialogWindow x:Class="DigimonWorld.Frontend.WPF.Windows.GeneralConfig.GeneralConfigWindow"
                           xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                           xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                           xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                           xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
                           xmlns:generalConfig="clr-namespace:DigimonWorld.Frontend.WPF.Windows.GeneralConfig"
                           xmlns:system="clr-namespace:System;assembly=System.Runtime"
-                          xmlns:windows="clr-namespace:DigimonWorld.Frontend.WPF.Windows"
                           xmlns:validation="clr-namespace:DigimonWorld.Frontend.WPF.Validation.Configuration"
+                          xmlns:baseClasses="clr-namespace:DigimonWorld.Frontend.WPF.Windows.BaseClasses"
                           mc:Ignorable="d"
                           d:DataContext="{d:DesignInstance Type=generalConfig:GeneralConfigWindowViewModel, IsDesignTimeCreatable=True}"
                           Title="Configuration"
@@ -17,7 +17,7 @@
                           Background="Transparent"
                           WindowStartupLocation="Manual">
 
-    <windows:BaseDialogWindow.Resources>
+    <baseClasses:BaseDialogWindow.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="../../ResourceDictionaries/Styles/Buttons/DefaultButtonStyle.xaml" />
@@ -33,7 +33,7 @@
             <system:Double x:Key="OptionWidth">75</system:Double>
             <system:Double x:Key="OptionHeight">24</system:Double>
         </ResourceDictionary>
-    </windows:BaseDialogWindow.Resources>
+    </baseClasses:BaseDialogWindow.Resources>
 
     <Window.InputBindings>
         <KeyBinding Key="Escape" Command="{Binding CancelCommand}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}" />
@@ -46,6 +46,7 @@
                     <Border CornerRadius="5" BorderBrush="Black" BorderThickness="3" Background="#2E3841">
                         <Grid Margin="10, 0">
                             <Grid.RowDefinitions>
+                                <RowDefinition Height="*" />
                                 <RowDefinition Height="*" />
                                 <RowDefinition Height="*" />
                                 <RowDefinition Height="*" />
@@ -85,12 +86,13 @@
                             </StackPanel>
 
                             <Label Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" Height="40" Width="150" HorizontalAlignment="Center" Style="{StaticResource DefaultSheenLabelStyle}"
-                                   Content="JUKEBOX"
+                                   Content="MUSIC PLAYER"
                                    Margin="0, 20, 0, 10" />
                             <Label Grid.Row="4" Grid.Column="0" Style="{StaticResource DefaultLabelStyle}" Content="Volume:" Margin="0, 0, 5, 0" />
                             <Label Grid.Row="5" Grid.Column="0" Style="{StaticResource DefaultLabelStyle}" Content="Mute:" Margin="0, 0, 5, 0" />
                             <Label Grid.Row="6" Grid.Column="0" Style="{StaticResource DefaultLabelStyle}" Content="Shuffle mode:" Margin="0, 0, 5, 0" />
                             <Label Grid.Row="7" Grid.Column="0" Style="{StaticResource DefaultLabelStyle}" Content="Repeat mode:" Margin="0, 0, 5, 0" />
+                            <Label Grid.Row="8" Grid.Column="0" Style="{StaticResource DefaultLabelStyle}" Content="When closing:" Margin="0, 0, 5, 0" />
                             <TextBox Name="Volume" Grid.Row="4" Grid.Column="1" Style="{StaticResource DefaultTextBoxStyle}"
                                      HorizontalAlignment="Left"
                                      Height="{StaticResource OptionHeight}"
@@ -145,8 +147,22 @@
                                         Command="{Binding SetRepeatModeAllCommand}"
                                         Tag="{Binding RepeatModeIsAll}" />
                             </StackPanel>
+                            <StackPanel Grid.Row="8" Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center">
+                                <Button Style="{StaticResource DefaultOptionPickerButtonStyle}"
+                                        Height="{StaticResource OptionHeight}"
+                                        Width="{StaticResource OptionWidth}"
+                                        Content="Pause"
+                                        Command="{Binding SetPauseOnCloseCommand}"
+                                        Tag="{Binding PauseOnCloseWindow}" />
+                                <Button Style="{StaticResource DefaultOptionPickerButtonStyle}"
+                                        Height="{StaticResource OptionHeight}"
+                                        Width="{StaticResource OptionWidth}"
+                                        Content="Nothing"
+                                        Command="{Binding SetDoNothingOnCloseCommand}"
+                                        Tag="{Binding DoNothingOnCloseWindow}" />
+                            </StackPanel>
 
-                            <StackPanel Grid.Row="8" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Horizontal" Margin="0, 20, 0, 10">
+                            <StackPanel Grid.Row="9" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Horizontal" Margin="0, 20, 0, 10">
                                 <Button Style="{StaticResource SaveButtonStyle}"
                                         Height="{StaticResource DefaultButtonHeight}"
                                         Width="{StaticResource WindowButtonWidth}"
@@ -173,4 +189,4 @@
             </Border>
         </Border>
     </Border>
-</windows:BaseDialogWindow>
+</baseClasses:BaseDialogWindow>

@@ -1,6 +1,6 @@
 namespace DigimonWorld.Frontend.WPF.Constants;
 
-public static class GiromonJukeboxNarratorText
+public static class GiromonMusicPlayerNarratorText
 {
     public static string IntroText { get; } = "Hello there . . . \n" +
                                               "\n" +

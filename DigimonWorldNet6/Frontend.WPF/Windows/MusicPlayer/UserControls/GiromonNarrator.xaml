@@ -1,11 +1,11 @@
-<UserControl x:Class="DigimonWorld.Frontend.WPF.UserControls.MusicPlayer.UserControls.GiromonNarrator"
+<UserControl x:Class="DigimonWorld.Frontend.WPF.Windows.MusicPlayer.UserControls.GiromonNarrator"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:musicPlayer="clr-namespace:DigimonWorld.Frontend.WPF.UserControls.MusicPlayer"
+             xmlns:musicPlayer1="clr-namespace:DigimonWorld.Frontend.WPF.Windows.MusicPlayer"
              mc:Ignorable="d"
-             d:DataContext="{d:DesignInstance Type=musicPlayer:MusicPlayerViewModel, IsDesignTimeCreatable=True}">
+             d:DataContext="{d:DesignInstance Type=musicPlayer1:MusicPlayerViewModel, IsDesignTimeCreatable=True}">
 
     <Image Height="135"
            Source="/Images/Digimon/Giromon.png"
