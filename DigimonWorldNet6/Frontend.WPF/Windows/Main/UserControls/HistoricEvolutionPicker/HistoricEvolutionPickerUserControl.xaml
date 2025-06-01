@@ -1,13 +1,13 @@
-<UserControl x:Class="DigimonWorld.Frontend.WPF.UserControls.HistoricEvolutionPicker.HistoricEvolutionPickerUserControl"
+<UserControl x:Class="DigimonWorld.Frontend.WPF.Windows.Main.UserControls.HistoricEvolutionPicker.HistoricEvolutionPickerUserControl"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:constants="clr-namespace:DigimonWorld.Frontend.WPF.Constants"
-             xmlns:historicEvolutionPicker="clr-namespace:DigimonWorld.Frontend.WPF.UserControls.HistoricEvolutionPicker"
-             xmlns:userControls="clr-namespace:DigimonWorld.Frontend.WPF.UserControls.HistoricEvolutionPicker.UserControls"
+             xmlns:historicEvolutionPicker1="clr-namespace:DigimonWorld.Frontend.WPF.Windows.Main.UserControls.HistoricEvolutionPicker"
+             xmlns:userControls="clr-namespace:DigimonWorld.Frontend.WPF.Windows.Main.UserControls.HistoricEvolutionPicker.UserControls"
              mc:Ignorable="d"
-             d:DataContext="{d:DesignInstance Type=historicEvolutionPicker:HistoricEvolutionPickerViewModel, IsDesignTimeCreatable=True}">
+             d:DataContext="{d:DesignInstance Type=historicEvolutionPicker1:HistoricEvolutionPickerViewModel, IsDesignTimeCreatable=True}">
 
     <Grid KeyboardNavigation.TabNavigation="None">
         <Grid.ColumnDefinitions>

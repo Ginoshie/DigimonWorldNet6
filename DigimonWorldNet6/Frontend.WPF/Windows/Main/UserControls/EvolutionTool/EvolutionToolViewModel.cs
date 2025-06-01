@@ -11,7 +11,7 @@ using DigimonWorld.Frontend.WPF.ViewModelComponents;
 using Generics.Enums;
 using Generics.Extensions;
 
-namespace DigimonWorld.Frontend.WPF.UserControls.EvolutionTool;
+namespace DigimonWorld.Frontend.WPF.Windows.Main.UserControls.EvolutionTool;
 
 public sealed class EvolutionToolViewModel : BaseViewModel, IDisposable
 {
@@ -48,7 +48,7 @@ public sealed class EvolutionToolViewModel : BaseViewModel, IDisposable
 
         InstantDisplayCommand = new CommandHandler(InstantDisplay);
 
-        int initialDelay = GeneralConfigurationManager.SpeakingSimulatorConfig.NarratorMode == NarratorMode.Instant ? 0 : 1500;
+        int initialDelay = UserConfigurationManager.SpeakingSimulatorConfig.NarratorMode == NarratorMode.Instant ? 0 : 1500;
         
         Task
             .Delay(initialDelay)

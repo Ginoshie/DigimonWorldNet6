@@ -1,6 +1,6 @@
 namespace DigimonWorld.Frontend.WPF.Configuration;
 
-public class GeneralConfig
+public class UserConfiguration
 {
     public SpeakingSimulatorConfig SpeakingSimulatorConfig { get; set; } = new();
 

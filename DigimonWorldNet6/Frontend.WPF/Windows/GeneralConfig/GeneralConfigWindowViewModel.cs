@@ -1,14 +1,20 @@
+using System.Windows.Controls;
 using System.Windows.Input;
 using DigimonWorld.Frontend.WPF.Configuration;
 using DigimonWorld.Frontend.WPF.Constants;
 using DigimonWorld.Frontend.WPF.Services;
 using DigimonWorld.Frontend.WPF.ViewModelComponents;
+using DigimonWorld.Frontend.WPF.Windows.GeneralConfig.UserControls;
 
 namespace DigimonWorld.Frontend.WPF.Windows.GeneralConfig;
 
 public class GeneralConfigWindowViewModel : BaseViewModel
 {
     private readonly GeneralConfigWindow _window;
+    private readonly HomeConfigurationSection _homeConfigurationSection = new();
+    private readonly GeneralConfigurationSection _generalConfigurationSection = new();
+    private readonly MusicPlayerConfigurationSection _musicPlayerConfigurationSection = new();
+    private readonly NarrationConfigurationSection _narrationConfigurationSection = new();
 
     private bool _narratorModeIsInstant;
     private bool _narratorModeIsSpeech;
@@ -22,13 +28,23 @@ public class GeneralConfigWindowViewModel : BaseViewModel
     private bool _pauseOnCloseWindow;
     private bool _doNothingOnCloseWindow;
 
+    private UserControl _currentSelectedSettingCategoryUserControl;
+
     public GeneralConfigWindowViewModel(GeneralConfigWindow window)
     {
         _window = window;
 
         SaveCommand = new CommandHandler(Save);
 
-        CancelCommand = new CommandHandler(Cancel);
+        CloseCommand = new CommandHandler(Close);
+
+        ShowHomeConfigurationSectionCommand = new CommandHandler(ShowHomeConfigurationSection);
+
+        ShowGeneralConfigurationSectionCommand = new CommandHandler(ShowGeneralConfigurationSection);
+
+        ShowMusicPlayerConfigurationSectionCommand = new CommandHandler(ShowMusicPlayerConfigurationSection);
+
+        ShowNarrationConfigurationSectionCommand = new CommandHandler(ShowNarrationConfigurationSection);
 
         SetNarratorModeSpeechCommand = new CommandHandler(SetNarratorModeSpeech);
 
@@ -50,8 +66,18 @@ public class GeneralConfigWindowViewModel : BaseViewModel
 
         SetDoNothingOnCloseCommand = new CommandHandler(SetDoNothingOnClose);
 
-        ApplyConfig(GeneralConfigurationManager.GeneralConfig);
+        _currentSelectedSettingCategoryUserControl = new HomeConfigurationSection();
+
+        LoadConfig(UserConfigurationManager.UserConfiguration);
     }
+
+    public bool HomeConfigurationSectionIsSelected => CurrentSelectedSettingCategoryUserControl.GetType() == typeof(HomeConfigurationSection);
+
+    public bool GeneralConfigurationSectionIsSelected => CurrentSelectedSettingCategoryUserControl.GetType() == typeof(GeneralConfigurationSection);
+
+    public bool MusicPlayerConfigurationSectionIsSelected => CurrentSelectedSettingCategoryUserControl.GetType() == typeof(MusicPlayerConfigurationSection);
+
+    public bool NarrationConfigurationSectionIsSelected => CurrentSelectedSettingCategoryUserControl.GetType() == typeof(NarrationConfigurationSection);
 
     public bool IsNarratorModeInstant
     {
@@ -71,8 +97,8 @@ public class GeneralConfigWindowViewModel : BaseViewModel
         set
         {
             SetField(ref _volume, value);
-            
-            GeneralConfigurationManager.SetVolume(_volume);
+
+            UserConfigurationManager.SetVolume(_volume);
         }
     }
 
@@ -124,9 +150,33 @@ public class GeneralConfigWindowViewModel : BaseViewModel
         private set => SetField(ref _doNothingOnCloseWindow, value);
     }
 
+    public UserControl CurrentSelectedSettingCategoryUserControl
+    {
+        get => _currentSelectedSettingCategoryUserControl;
+        private set
+        {
+            LoadConfig(UserConfigurationManager.UserConfiguration);
+
+            SetField(ref _currentSelectedSettingCategoryUserControl, value);
+
+            OnPropertyChanged(nameof(HomeConfigurationSectionIsSelected));
+            OnPropertyChanged(nameof(GeneralConfigurationSectionIsSelected));
+            OnPropertyChanged(nameof(MusicPlayerConfigurationSectionIsSelected));
+            OnPropertyChanged(nameof(NarrationConfigurationSectionIsSelected));
+        }
+    }
+
     public ICommand SaveCommand { get; private set; }
 
-    public ICommand CancelCommand { get; private set; }
+    public ICommand CloseCommand { get; private set; }
+
+    public ICommand ShowHomeConfigurationSectionCommand { get; private set; }
+
+    public ICommand ShowGeneralConfigurationSectionCommand { get; private set; }
+
+    public ICommand ShowMusicPlayerConfigurationSectionCommand { get; private set; }
+
+    public ICommand ShowNarrationConfigurationSectionCommand { get; private set; }
 
     public ICommand SetNarratorModeSpeechCommand { get; private set; }
 
@@ -148,106 +198,84 @@ public class GeneralConfigWindowViewModel : BaseViewModel
 
     public ICommand SetDoNothingOnCloseCommand { get; private set; }
 
-    private void Save()
-    {
-        GeneralConfigurationManager.SaveConfiguration();
+    private void Save() => SaveConfiguration();
 
-        _window.Close();
-    }
+    private void Close() => _window.Close();
 
-    private void Cancel()
-    {
-        GeneralConfigurationManager.ResetConfiguration();
+    private void ShowHomeConfigurationSection() => CurrentSelectedSettingCategoryUserControl = _homeConfigurationSection;
 
-        _window.Close();
-    }
+    private void ShowGeneralConfigurationSection() => CurrentSelectedSettingCategoryUserControl = _generalConfigurationSection;
+
+    private void ShowMusicPlayerConfigurationSection() => CurrentSelectedSettingCategoryUserControl = _musicPlayerConfigurationSection;
+
+    private void ShowNarrationConfigurationSection() => CurrentSelectedSettingCategoryUserControl = _narrationConfigurationSection;
 
     private void SetNarratorModeSpeech()
     {
-        GeneralConfigurationManager.SetNarratorMode(NarratorMode.Speech);
-
         IsNarratorModeSpeech = true;
         IsNarratorModeInstant = false;
     }
 
     private void SetNarratorModeInstant()
     {
-        GeneralConfigurationManager.SetNarratorMode(NarratorMode.Instant);
-
         IsNarratorModeSpeech = false;
         IsNarratorModeInstant = true;
     }
 
     private void SetMuteOn()
     {
-        GeneralConfigurationManager.SetMuteIsOn(MuteMode.Mute);
-
         MuteIsOn = true;
         MuteIsOff = false;
     }
 
     private void SetMuteOff()
     {
-        GeneralConfigurationManager.SetMuteIsOn(MuteMode.Unmuted);
-
         MuteIsOn = false;
         MuteIsOff = true;
     }
 
-    private void SetRepeatModeSingle()
-    {
-        GeneralConfigurationManager.SetRepeatModeIsSingle(RepeatMode.Single);
-
-        RepeatModeIsSingle = true;
-        RepeatModeIsAll = false;
-    }
-
-    private void SetRepeatModeAll()
-    {
-        GeneralConfigurationManager.SetRepeatModeIsSingle(RepeatMode.All);
-
-        RepeatModeIsSingle = false;
-        RepeatModeIsAll = true;
-    }
-
-    private void SetPauseOnClose()
-    {
-        GeneralConfigurationManager.SetOnCloseAction(MusicPlayerOnCloseAction.Pause);
-
-        PauseOnCloseWindow = true;
-        DoNothingOnCloseWindow = false;
-    }
-
-    private void SetDoNothingOnClose()
-    {
-        GeneralConfigurationManager.SetOnCloseAction(MusicPlayerOnCloseAction.Nothing);
-
-        PauseOnCloseWindow = false;
-        DoNothingOnCloseWindow = true;
-    }
-
     private void SetShuffleModeOn()
     {
-        GeneralConfigurationManager.SetShuffleModeIsOn(ShuffleMode.Shuffle);
-
         ShuffleModeIsOn = true;
         ShuffleModeIsOff = false;
     }
 
     private void SetShuffleModeOff()
     {
-        GeneralConfigurationManager.SetShuffleModeIsOn(ShuffleMode.Chronological);
-
         ShuffleModeIsOn = false;
         ShuffleModeIsOff = true;
     }
 
-    private void ApplyConfig(Configuration.GeneralConfig generalConfig)
+    private void SetRepeatModeSingle()
     {
-        MusicPlayerConfig musicPlayerConfig = generalConfig.MusicPlayerConfig;
-        
+        RepeatModeIsSingle = true;
+        RepeatModeIsAll = false;
+    }
+
+    private void SetRepeatModeAll()
+    {
+        RepeatModeIsSingle = false;
+        RepeatModeIsAll = true;
+    }
+
+    private void SetPauseOnClose()
+    {
+        PauseOnCloseWindow = true;
+        DoNothingOnCloseWindow = false;
+    }
+
+    private void SetDoNothingOnClose()
+    {
+        PauseOnCloseWindow = false;
+        DoNothingOnCloseWindow = true;
+    }
+
+    private void LoadConfig(UserConfiguration userConfiguration)
+    {
+        MusicPlayerConfig musicPlayerConfig = userConfiguration.MusicPlayerConfig;
+
         Volume = musicPlayerConfig.Volume;
-        
+
         MuteIsOn = musicPlayerConfig.MuteMode == MuteMode.Mute;
         MuteIsOff = musicPlayerConfig.MuteMode == MuteMode.Unmuted;
 
@@ -256,13 +284,24 @@ public class GeneralConfigWindowViewModel : BaseViewModel
 
         RepeatModeIsSingle = musicPlayerConfig.RepeatMode == RepeatMode.Single;
         RepeatModeIsAll = musicPlayerConfig.RepeatMode == RepeatMode.All;
-        
+
         PauseOnCloseWindow = musicPlayerConfig.OnCloseAction == MusicPlayerOnCloseAction.Pause;
         _doNothingOnCloseWindow = musicPlayerConfig.OnCloseAction == MusicPlayerOnCloseAction.Nothing;
-        
-        SpeakingSimulatorConfig speakingSimulatorConfig = generalConfig.SpeakingSimulatorConfig;
-        
+
+        SpeakingSimulatorConfig speakingSimulatorConfig = userConfiguration.SpeakingSimulatorConfig;
+
         IsNarratorModeSpeech = speakingSimulatorConfig.NarratorMode == NarratorMode.Speech;
         IsNarratorModeInstant = speakingSimulatorConfig.NarratorMode == NarratorMode.Instant;
+    }
+
+    private void SaveConfiguration()
+    {
+        UserConfigurationManager.SetNarratorMode(IsNarratorModeSpeech ? NarratorMode.Speech : NarratorMode.Instant);
+        UserConfigurationManager.SetMuteIsOn(MuteIsOn ? MuteMode.Mute : MuteMode.Unmuted);
+        UserConfigurationManager.SetShuffleModeIsOn(ShuffleModeIsOn ? ShuffleMode.Shuffle : ShuffleMode.Chronological);
+        UserConfigurationManager.SetRepeatModeIsSingle(RepeatModeIsSingle ? RepeatMode.Single : RepeatMode.All);
+        UserConfigurationManager.SetOnCloseAction(PauseOnCloseWindow ? MusicPlayerOnCloseAction.Pause : MusicPlayerOnCloseAction.Nothing);
+
+        UserConfigurationManager.SaveConfiguration();
     }
 }

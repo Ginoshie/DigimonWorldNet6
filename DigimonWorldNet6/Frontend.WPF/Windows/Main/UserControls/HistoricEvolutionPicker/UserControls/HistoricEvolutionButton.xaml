@@ -1,19 +1,19 @@
-<UserControl x:Class="DigimonWorld.Frontend.WPF.UserControls.HistoricEvolutionPicker.UserControls.HistoricEvolutionButton"
+<UserControl x:Class="DigimonWorld.Frontend.WPF.Windows.Main.UserControls.HistoricEvolutionPicker.UserControls.HistoricEvolutionButton"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:historicEvolutionPicker="clr-namespace:DigimonWorld.Frontend.WPF.UserControls.HistoricEvolutionPicker"
              xmlns:system="clr-namespace:System;assembly=System.Runtime"
              xmlns:conversion="clr-namespace:DigimonWorld.Frontend.WPF.Conversion"
+             xmlns:historicEvolutionPicker1="clr-namespace:DigimonWorld.Frontend.WPF.Windows.Main.UserControls.HistoricEvolutionPicker"
              mc:Ignorable="d"
-             d:DataContext="{d:DesignInstance Type=historicEvolutionPicker:HistoricEvolutionPickerViewModel, IsDesignTimeCreatable=True}">
+             d:DataContext="{d:DesignInstance Type=historicEvolutionPicker1:HistoricEvolutionPickerViewModel, IsDesignTimeCreatable=True}">
 
     <UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="../../../ResourceDictionaries/Styles/Buttons/StretchContentButtonStyle.xaml" />
-                <ResourceDictionary Source="../../../ResourceDictionaries/Styles/ToolTips/DefaultTooltipRightStyle.xaml" />
+                <ResourceDictionary Source="../../../../../ResourceDictionaries/Styles/Buttons/StretchContentButtonStyle.xaml" />
+                <ResourceDictionary Source="../../../../../ResourceDictionaries/Styles/ToolTips/DefaultTooltipRightStyle.xaml" />
             </ResourceDictionary.MergedDictionaries>
 
             <conversion:DigimonTypeContainsMultiConverter x:Key="DigimonTypeMultiConverter" />

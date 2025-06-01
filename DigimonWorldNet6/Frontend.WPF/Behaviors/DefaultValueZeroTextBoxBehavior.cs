@@ -4,7 +4,7 @@ using Microsoft.Xaml.Behaviors;
 
 namespace DigimonWorld.Frontend.WPF.Behaviors
 {
-    public class TextBoxBehavior : Behavior<TextBox>
+    public class DefaultValueZeroTextBoxBehavior : Behavior<TextBox>
     {
         protected override void OnAttached()
         {

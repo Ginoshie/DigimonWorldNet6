@@ -1,6 +1,6 @@
 using System;
 
-namespace DigimonWorld.Frontend.WPF.UserControls.EvolutionTool;
+namespace DigimonWorld.Frontend.WPF.Windows.Main.UserControls.EvolutionTool;
 
 public partial class EvolutionToolUserControl : IDisposable
 {

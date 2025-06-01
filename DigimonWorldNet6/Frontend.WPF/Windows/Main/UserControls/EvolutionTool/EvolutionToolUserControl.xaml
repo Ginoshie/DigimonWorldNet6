@@ -1,28 +1,28 @@
-<UserControl x:Class="DigimonWorld.Frontend.WPF.UserControls.EvolutionTool.EvolutionToolUserControl"
+<UserControl x:Class="DigimonWorld.Frontend.WPF.Windows.Main.UserControls.EvolutionTool.EvolutionToolUserControl"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:combatStatValidation="clr-namespace:DigimonWorld.Frontend.WPF.Validation.CombatStats"
              xmlns:nonCombatStatValidation="clr-namespace:DigimonWorld.Frontend.WPF.Validation.NonCombatStats"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:evolutionTool="clr-namespace:DigimonWorld.Frontend.WPF.UserControls.EvolutionTool"
              xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
              xmlns:behaviors="clr-namespace:DigimonWorld.Frontend.WPF.Behaviors"
-             xmlns:userControls="clr-namespace:DigimonWorld.Frontend.WPF.UserControls.EvolutionTool.UserControls"
+             xmlns:userControls1="clr-namespace:DigimonWorld.Frontend.WPF.Windows.Main.UserControls.EvolutionTool.UserControls"
+             xmlns:evolutionTool1="clr-namespace:DigimonWorld.Frontend.WPF.Windows.Main.UserControls.EvolutionTool"
              mc:Ignorable="d"
-             d:DataContext="{d:DesignInstance Type=evolutionTool:EvolutionToolViewModel, IsDesignTimeCreatable=True}">
+             d:DataContext="{d:DesignInstance Type=evolutionTool1:EvolutionToolViewModel, IsDesignTimeCreatable=True}">
 
     <UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="./Styles/CalculateEvolutionButtonStyle.xaml" />
-                <ResourceDictionary Source="../../ResourceDictionaries/Styles/DefaultTextboxStyle.xaml" />
-                <ResourceDictionary Source="../../ResourceDictionaries/Styles/DefaultComboboxStyle.xaml" />
-                <ResourceDictionary Source="../../ResourceDictionaries/Styles/DefaultFocusStyle.xaml" />
-                <ResourceDictionary Source="../../ResourceDictionaries/Styles/Labels/DefaultSheenLabelStyle.xaml" />
-                <ResourceDictionary Source="../../ResourceDictionaries/Styles/Labels/DefaultLabelStyle.xaml" />
-                <ResourceDictionary Source="../../ResourceDictionaries/Styles/ToolTips/DefaultTooltipRightStyle.xaml" />
-                <ResourceDictionary Source="../../ResourceDictionaries/Styles/ToolTips/DefaultTooltipLeftStyle.xaml" />
+                <ResourceDictionary Source="../../../../ResourceDictionaries/Styles/DefaultTextboxStyle.xaml" />
+                <ResourceDictionary Source="../../../../ResourceDictionaries/Styles/DefaultComboboxStyle.xaml" />
+                <ResourceDictionary Source="../../../../ResourceDictionaries/Styles/DefaultFocusStyle.xaml" />
+                <ResourceDictionary Source="../../../../ResourceDictionaries/Styles/Labels/DefaultSheenLabelStyle.xaml" />
+                <ResourceDictionary Source="../../../../ResourceDictionaries/Styles/Labels/DefaultLabelStyle.xaml" />
+                <ResourceDictionary Source="../../../../ResourceDictionaries/Styles/ToolTips/DefaultTooltipRightStyle.xaml" />
+                <ResourceDictionary Source="../../../../ResourceDictionaries/Styles/ToolTips/DefaultTooltipLeftStyle.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </UserControl.Resources>
@@ -108,7 +108,7 @@
                             </ToolTip>
                         </TextBox.ToolTip>
                         <b:Interaction.Behaviors>
-                            <behaviors:TextBoxBehavior />
+                            <behaviors:DefaultValueZeroTextBoxBehavior />
                         </b:Interaction.Behaviors>
                         <TextBox.Text>
                             <Binding Path="HP" UpdateSourceTrigger="PropertyChanged" Mode="TwoWay">
@@ -133,7 +133,7 @@
                             </ToolTip>
                         </TextBox.ToolTip>
                         <b:Interaction.Behaviors>
-                            <behaviors:TextBoxBehavior />
+                            <behaviors:DefaultValueZeroTextBoxBehavior />
                         </b:Interaction.Behaviors>
                         <TextBox.Text>
                             <Binding Path="MP" UpdateSourceTrigger="PropertyChanged" Mode="TwoWay">
@@ -158,7 +158,7 @@
                             </ToolTip>
                         </TextBox.ToolTip>
                         <b:Interaction.Behaviors>
-                            <behaviors:TextBoxBehavior />
+                            <behaviors:DefaultValueZeroTextBoxBehavior />
                         </b:Interaction.Behaviors>
                         <TextBox.Text>
                             <Binding Path="Off" UpdateSourceTrigger="PropertyChanged" Mode="TwoWay">
@@ -183,7 +183,7 @@
                             </ToolTip>
                         </TextBox.ToolTip>
                         <b:Interaction.Behaviors>
-                            <behaviors:TextBoxBehavior />
+                            <behaviors:DefaultValueZeroTextBoxBehavior />
                         </b:Interaction.Behaviors>
                         <TextBox.Text>
                             <Binding Path="Def" UpdateSourceTrigger="PropertyChanged" Mode="TwoWay">
@@ -208,7 +208,7 @@
                             </ToolTip>
                         </TextBox.ToolTip>
                         <b:Interaction.Behaviors>
-                            <behaviors:TextBoxBehavior />
+                            <behaviors:DefaultValueZeroTextBoxBehavior />
                         </b:Interaction.Behaviors>
                         <TextBox.Text>
                             <Binding Path="Speed" UpdateSourceTrigger="PropertyChanged" Mode="TwoWay">
@@ -233,7 +233,7 @@
                             </ToolTip>
                         </TextBox.ToolTip>
                         <b:Interaction.Behaviors>
-                            <behaviors:TextBoxBehavior />
+                            <behaviors:DefaultValueZeroTextBoxBehavior />
                         </b:Interaction.Behaviors>
                         <TextBox.Text>
                             <Binding Path="Brains" UpdateSourceTrigger="PropertyChanged" Mode="TwoWay">
@@ -260,7 +260,7 @@
                             </ToolTip>
                         </TextBox.ToolTip>
                         <b:Interaction.Behaviors>
-                            <behaviors:TextBoxBehavior />
+                            <behaviors:DefaultValueZeroTextBoxBehavior />
                         </b:Interaction.Behaviors>
                         <TextBox.Text>
                             <Binding Path="CareMistakes" UpdateSourceTrigger="PropertyChanged" Mode="TwoWay">
@@ -285,7 +285,7 @@
                             </ToolTip>
                         </TextBox.ToolTip>
                         <b:Interaction.Behaviors>
-                            <behaviors:TextBoxBehavior />
+                            <behaviors:DefaultValueZeroTextBoxBehavior />
                         </b:Interaction.Behaviors>
                         <TextBox.Text>
                             <Binding Path="Weight" UpdateSourceTrigger="PropertyChanged" Mode="TwoWay">
@@ -312,7 +312,7 @@
                             </ToolTip>
                         </TextBox.ToolTip>
                         <b:Interaction.Behaviors>
-                            <behaviors:TextBoxBehavior />
+                            <behaviors:DefaultValueZeroTextBoxBehavior />
                         </b:Interaction.Behaviors>
                         <TextBox.Text>
                             <Binding Path="Happiness" UpdateSourceTrigger="PropertyChanged" Mode="TwoWay">
@@ -339,7 +339,7 @@
                             </ToolTip>
                         </TextBox.ToolTip>
                         <b:Interaction.Behaviors>
-                            <behaviors:TextBoxBehavior />
+                            <behaviors:DefaultValueZeroTextBoxBehavior />
                         </b:Interaction.Behaviors>
                         <TextBox.Text>
                             <Binding Path="Discipline" UpdateSourceTrigger="PropertyChanged" Mode="TwoWay">
@@ -364,7 +364,7 @@
                             </ToolTip>
                         </TextBox.ToolTip>
                         <b:Interaction.Behaviors>
-                            <behaviors:TextBoxBehavior />
+                            <behaviors:DefaultValueZeroTextBoxBehavior />
                         </b:Interaction.Behaviors>
                         <TextBox.Text>
                             <Binding Path="Battles" UpdateSourceTrigger="PropertyChanged" Mode="TwoWay">
@@ -391,7 +391,7 @@
                             </ToolTip>
                         </TextBox.ToolTip>
                         <b:Interaction.Behaviors>
-                            <behaviors:TextBoxBehavior />
+                            <behaviors:DefaultValueZeroTextBoxBehavior />
                         </b:Interaction.Behaviors>
                         <TextBox.Text>
                             <Binding Path="Techniques" UpdateSourceTrigger="PropertyChanged" Mode="TwoWay">
@@ -440,9 +440,9 @@
                     <ColumnDefinition Width="600" />
                 </Grid.ColumnDefinitions>
 
-                <userControls:JijimonNarrator Grid.Column="0" Grid.Row="0" />
+                <userControls1:JijimonNarrator Grid.Column="0" Grid.Row="0" />
 
-                <userControls:JijimonNaratorTextDisplay Grid.Row="0" Grid.Column="1" />
+                <userControls1:JijimonNaratorTextDisplay Grid.Row="0" Grid.Column="1" />
 
             </Grid>
             <Grid Grid.Row="1">

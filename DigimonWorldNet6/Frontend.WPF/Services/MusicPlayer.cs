@@ -35,14 +35,13 @@ public static class MusicPlayer
     private static MusicPlayerConfig _musicPlayerConfig = null!;
 
     private static int _currentTrackIndex;
-    private static ShuffleMode _shuffleMode;
-    private static RepeatMode _repeatMode;
     private static float _volumeBeforeMute;
     private static string? _currentSongTitle;
 
     public static readonly IObservable<string> CurrentSongTitleObservable = CurrentSongTitleSubject.AsObservable();
     public static readonly IObservable<double> CurrentPositionObservable = CurrentPositionSubject.AsObservable();
     public static readonly IObservable<double> SongLengthObservable = SongLengthSubject.AsObservable();
+    private static PlayMode _playMode = PlayMode.Stopped;
 
     static MusicPlayer()
     {
@@ -59,28 +58,18 @@ public static class MusicPlayer
 
         LoadCurrentTrack();
 
+        LoadConfig(UserConfigurationManager.CurrentMusicPlayerConfig.FirstAsync().Wait());
+        
         SoundOut.Stopped += OnPlaybackStopped;
 
         CurrentSongTitleObservable.Subscribe(OnLeomonsSongStarted);
-
-        ApplyStartUpConfig(GeneralConfigurationManager.MusicPlayerConfig);
     }
 
-    private static void OnMusicPlayerClosed()
+    public static PlayMode PlayMode
     {
-        switch (_musicPlayerConfig.OnCloseAction)
-        {
-            case MusicPlayerOnCloseAction.Pause:
-                Pause();
-                break;
-            case MusicPlayerOnCloseAction.Nothing:
-                break;
-            default:
-                throw new ArgumentOutOfRangeException();
-        }
+        get => _playMode;
+        private set => _playMode = value;
     }
-
-    public static PlayMode PlayMode { get; private set; } = PlayMode.Stopped;
 
     public static float Volume
     {
@@ -90,19 +79,27 @@ public static class MusicPlayer
             if (Math.Abs(SoundOut.Volume - value) < 0.001) return;
 
             SoundOut.Volume = value;
+            
+            EventHub.SignalVolumeChanged(value);
+
+            EventHub.SignalMuteMode(value == 0 ? MuteMode.Mute : MuteMode.Unmuted);
         }
     }
 
+    public static ShuffleMode ShuffleMode { get; private set; }
+
+    public static RepeatMode RepeatMode { get; private set; }
+
     public static void SetShuffleMode(ShuffleMode shuffleMode)
     {
-        _shuffleMode = shuffleMode;
+        ShuffleMode = shuffleMode;
 
         EventHub.SignalShuffleMode(shuffleMode);
     }
 
     public static void PreviousSong()
     {
-        int trackIndexIncrease = _shuffleMode == ShuffleMode.Shuffle ? new Random().Next(0, ActivePlaylist.Count) : 1;
+        int trackIndexIncrease = ShuffleMode == ShuffleMode.Shuffle ? new Random().Next(0, ActivePlaylist.Count) : 1;
 
         _currentTrackIndex = (_currentTrackIndex - trackIndexIncrease + ActivePlaylist.Count) % ActivePlaylist.Count;
 
@@ -139,7 +136,7 @@ public static class MusicPlayer
 
     public static void NextSong()
     {
-        int trackIndexIncrease = _shuffleMode == ShuffleMode.Shuffle ? new Random().Next(0, ActivePlaylist.Count) : 1;
+        int trackIndexIncrease = ShuffleMode == ShuffleMode.Shuffle ? new Random().Next(0, ActivePlaylist.Count) : 1;
 
         _currentTrackIndex = (_currentTrackIndex + trackIndexIncrease) % ActivePlaylist.Count;
 
@@ -156,29 +153,39 @@ public static class MusicPlayer
 
     public static void SetRepeatMode(RepeatMode repeatMode)
     {
-        _repeatMode = repeatMode;
+        RepeatMode = repeatMode;
 
-        EventHub.SignalRepeatMode(_repeatMode);
+        EventHub.SignalRepeatMode(RepeatMode);
     }
 
     public static void Mute()
     {
-        if (SoundOut.Volume == 0) return;
+        if (Volume == 0) return;
 
         _volumeBeforeMute = SoundOut.Volume;
 
-        SoundOut.Volume = 0;
-
-        EventHub.SignalMuteMode(MuteMode.Mute);
+        Volume = 0;
     }
 
     public static void UnMute()
     {
         if (_volumeBeforeMute == 0) return;
 
-        SoundOut.Volume = _volumeBeforeMute;
+        Volume = _volumeBeforeMute;
+    }
 
-        EventHub.SignalMuteMode(MuteMode.Unmuted);
+    private static void OnMusicPlayerClosed()
+    {
+        switch (_musicPlayerConfig.OnCloseAction)
+        {
+            case MusicPlayerOnCloseAction.Pause:
+                Pause();
+                break;
+            case MusicPlayerOnCloseAction.Nothing:
+                break;
+            default:
+                throw new ArgumentOutOfRangeException();
+        }
     }
 
     private static void LoadMusicResources()
@@ -249,7 +256,7 @@ public static class MusicPlayer
 
         SoundOut.Initialize(_currentWaveSource);
 
-        SoundOut.Volume = currentVolume;
+        Volume = currentVolume;
 
         _currentPositionSubscription = IntervalObservable.Subscribe(_ => CurrentPositionSubject.OnNext(_currentWaveSource.GetPosition().TotalSeconds));
 
@@ -257,6 +264,28 @@ public static class MusicPlayer
 
         _currentSongTitle = Path.GetFileNameWithoutExtension(filePath);
         CurrentSongTitleSubject.OnNext(_currentSongTitle);
+    }
+
+    private static void LoadConfig(MusicPlayerConfig musicPlayerConfig)
+    {
+        _musicPlayerConfig = musicPlayerConfig;
+
+        SetShuffleMode(musicPlayerConfig.ShuffleMode);
+
+        SetRepeatMode(musicPlayerConfig.RepeatMode);
+
+        Volume = musicPlayerConfig.Volume / 100f;
+        
+        _volumeBeforeMute = Volume;
+
+        if (musicPlayerConfig.MuteMode == MuteMode.Mute)
+        {
+            Mute();
+        }
+        else
+        {
+            UnMute();
+        }
     }
 
     private static void PlayCurrentTrack()
@@ -295,9 +324,9 @@ public static class MusicPlayer
     {
         if (SoundOut.PlaybackState != PlaybackState.Stopped || PlayMode == PlayMode.Paused) return;
 
-        if (_repeatMode == RepeatMode.All)
+        if (RepeatMode == RepeatMode.All)
         {
-            int trackIndexIncrease = _shuffleMode == ShuffleMode.Shuffle ? new Random().Next(0, ActivePlaylist.Count) : 1;
+            int trackIndexIncrease = ShuffleMode == ShuffleMode.Shuffle ? new Random().Next(0, ActivePlaylist.Count) : 1;
 
             _currentTrackIndex = (_currentTrackIndex + trackIndexIncrease) % ActivePlaylist.Count;
         }
@@ -310,27 +339,6 @@ public static class MusicPlayer
         if (songTitle == LEOMON_SONG_TITLE)
         {
             EventHub.SignalLeomonsThemeStarted();
-        }
-    }
-
-    private static void ApplyStartUpConfig(MusicPlayerConfig musicPlayerConfig)
-    {
-        _musicPlayerConfig = musicPlayerConfig;
-
-        SetShuffleMode(musicPlayerConfig.ShuffleMode);
-
-        SetRepeatMode(musicPlayerConfig.RepeatMode);
-
-        Volume = musicPlayerConfig.Volume / 100f;
-        _volumeBeforeMute = Volume;
-
-        if (musicPlayerConfig.MuteMode == MuteMode.Mute)
-        {
-            Mute();
-        }
-        else
-        {
-            UnMute();
         }
     }
 

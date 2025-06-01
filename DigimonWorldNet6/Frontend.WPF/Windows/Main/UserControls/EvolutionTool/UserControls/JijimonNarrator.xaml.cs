@@ -1,4 +1,4 @@
-namespace DigimonWorld.Frontend.WPF.UserControls.EvolutionTool.UserControls;
+namespace DigimonWorld.Frontend.WPF.Windows.Main.UserControls.EvolutionTool.UserControls;
 
 public partial class JijimonNarrator
 {

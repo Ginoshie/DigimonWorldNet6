@@ -5,7 +5,7 @@ using DigimonWorld.Frontend.WPF.Models;
 using DigimonWorld.Frontend.WPF.ViewModelComponents;
 using Generics.Enums;
 
-namespace DigimonWorld.Frontend.WPF.UserControls.HistoricEvolutionPicker;
+namespace DigimonWorld.Frontend.WPF.Windows.Main.UserControls.HistoricEvolutionPicker;
 
 public class HistoricEvolutionPickerViewModel : BaseViewModel
 {

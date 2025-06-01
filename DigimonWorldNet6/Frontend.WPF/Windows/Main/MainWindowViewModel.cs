@@ -106,6 +106,12 @@ public class MainWindowViewModel : BaseWindowViewModel, IDisposable
         MusicPlayerViewModel musicPlayerViewModel = new(musicPlayerWindow);
 
         musicPlayerWindow.DataContext = musicPlayerViewModel;
+        
+        musicPlayerWindow.Closed += (_, _) =>
+        {
+            musicPlayerViewModel.Dispose();
+            _musicPlayerIsOpen = false;
+        };
 
         musicPlayerWindow.Show();
         

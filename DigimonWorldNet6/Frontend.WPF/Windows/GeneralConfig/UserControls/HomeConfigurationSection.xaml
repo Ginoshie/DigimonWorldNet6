@@ -1,0 +1,23 @@
+<UserControl x:Class="DigimonWorld.Frontend.WPF.Windows.GeneralConfig.UserControls.HomeConfigurationSection"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:generalConfig="clr-namespace:DigimonWorld.Frontend.WPF.Windows.GeneralConfig"
+             mc:Ignorable="d"
+             Height="175"
+             Width="260"
+             d:DataContext="{d:DesignInstance Type=generalConfig:GeneralConfigWindowViewModel, IsDesignTimeCreatable=True}">
+    <Grid>
+        <TextBlock TextAlignment="Left"
+                   TextWrapping="Wrap">
+            This is the configuration menu.<LineBreak />
+            <LineBreak />
+            Here you can change the configuration of the application using settings of your preference. <LineBreak />
+            <LineBreak />
+            Click one of the category buttons on the left to open up the configuration section for that category.<LineBreak />
+            <LineBreak />
+            Saving the settings of that category will make it so the settings persist after closing down the application.
+        </TextBlock>
+    </Grid>
+</UserControl>

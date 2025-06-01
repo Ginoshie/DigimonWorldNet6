@@ -1,5 +1,6 @@
 using System;
 using System.Reactive.Disposables;
+using System.Reactive.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
@@ -19,9 +20,10 @@ public class MusicPlayerViewModel : BaseWindowViewModel, IDisposable
     private string _currentSongTitle = string.Empty;
     private double _currentPosition;
     private TimeSpan _songLength;
-    private bool _shuffleEnabled;
-    private bool _repeatSingleSongEnabled;
-    private bool _muteEnabled;
+    private bool _shuffleEnabled = Services.MusicPlayer.ShuffleMode == ShuffleMode.Shuffle;
+    private bool _repeatSingleSongEnabled = Services.MusicPlayer.RepeatMode == RepeatMode.Single;
+    private bool _muteEnabled = Services.MusicPlayer.Volume > 0;
+    private int _volume = (int)(Services.MusicPlayer.Volume * 100f);
     private string _giromonText = string.Empty;
 
     public MusicPlayerViewModel(Window window) : base(window)
@@ -40,18 +42,42 @@ public class MusicPlayerViewModel : BaseWindowViewModel, IDisposable
 
         ToggleMuteEnabledCommand = new CommandHandler(ToggleMuteEnabled);
 
+        InstantDisplayCommand = new CommandHandler(InstantDisplay);
+
         _compositeDisposable = new CompositeDisposable(
             _speakingSimulator,
             Services.MusicPlayer.CurrentSongTitleObservable.Subscribe(currentSongTitle => CurrentSongTitle = currentSongTitle),
             Services.MusicPlayer.CurrentPositionObservable.Subscribe(currentPosition => CurrentPosition = currentPosition),
             Services.MusicPlayer.SongLengthObservable.Subscribe(songLength => SongLength = songLength),
-            EventHub.MusicPlayerOpenedObservable.Subscribe(async void (_) => await OnMusicPlayerOpened()),
-            EventHub.MusicPlayerClosedObservable.Subscribe(async void (_) => await OnMusicPlayerClosed()),
-            EventHub.LeomonsThemeStartedObservable.Subscribe(async void (_) => await OnLeomonSongStarted()), 
-            EventHub.PlayModeObservable.Subscribe(async void (playMode) => await OnPlayModeChanged(playMode))
+            EventHub.MusicPlayerOpenedObservable
+                .SelectMany(_ => Observable.FromAsync(OnMusicPlayerOpened))
+                .Subscribe(),
+            EventHub.MusicPlayerClosedObservable
+                .SelectMany(_ => Observable.FromAsync(OnMusicPlayerClosed))
+                .Subscribe(),
+            EventHub.LeomonsThemeStartedObservable
+                .SelectMany(_ => Observable.FromAsync(OnLeomonSongStarted))
+                .Subscribe(),
+            EventHub.ShuffleModeChangedObservable
+                .SelectMany(mode => Observable.FromAsync(() => OnShuffleModeChanged(mode)))
+                .Subscribe(),
+            EventHub.PreviousSongStartedObservable
+                .SelectMany(Observable.FromAsync(OnPreviousSongStarted))
+                .Subscribe(),
+            EventHub.PlayModeChangedObservable
+                .SelectMany(mode => Observable.FromAsync(() => OnPlayModeChanged(mode)))
+                .Subscribe(),
+            EventHub.NextSongStartedObservable
+                .SelectMany(Observable.FromAsync(OnNextSongStarted))
+                .Subscribe(),
+            EventHub.RepeatModeChangedObservable
+                .SelectMany(mode => Observable.FromAsync(() => OnRepeatModeChanged(mode)))
+                .Subscribe(),
+            EventHub.MuteModeChangedObservable
+                .SelectMany(mode => Observable.FromAsync(() => OnMuteModeChanged(mode)))
+                .Subscribe(),
+            EventHub.VolumeChangedObservable.Subscribe(OnVolumeChanged)
         );
-
-        InstantDisplayCommand = new CommandHandler(InstantDisplay);
     }
 
     public ICommand ToggleShuffleCommand { get; }
@@ -109,7 +135,7 @@ public class MusicPlayerViewModel : BaseWindowViewModel, IDisposable
     public bool ShuffleEnabled
     {
         get => _shuffleEnabled;
-        set
+        private set
         {
             if (value == _shuffleEnabled) return;
 
@@ -124,7 +150,7 @@ public class MusicPlayerViewModel : BaseWindowViewModel, IDisposable
     public bool RepeatSingleSongEnabled
     {
         get => _repeatSingleSongEnabled;
-        set
+        private set
         {
             if (value == _repeatSingleSongEnabled) return;
 
@@ -144,7 +170,7 @@ public class MusicPlayerViewModel : BaseWindowViewModel, IDisposable
 
     public float Volume
     {
-        get => (float)Math.Round(Services.MusicPlayer.Volume * 100);
+        get => _volume;
         set
         {
             if (Math.Abs(Services.MusicPlayer.Volume - value) < 0.001) return;
@@ -170,61 +196,31 @@ public class MusicPlayerViewModel : BaseWindowViewModel, IDisposable
 
     private void ToggleShuffle()
     {
-        ShuffleEnabled = !ShuffleEnabled;
-
-        ShuffleMode shuffleMode = ShuffleEnabled ? ShuffleMode.Shuffle : ShuffleMode.Chronological;
-
-        Services.MusicPlayer.SetShuffleMode(shuffleMode);
-
-        _ = OnShuffleModeChanged(shuffleMode);
+        ShuffleMode toggledShuffleMode = !ShuffleEnabled ? ShuffleMode.Shuffle : ShuffleMode.Chronological;
+        Services.MusicPlayer.SetShuffleMode(toggledShuffleMode);
     }
 
-    private void PreviousSong()
-    {
-        Services.MusicPlayer.PreviousSong();
-
-        _ = OnPreviousSongStarted();
-    }
+    private void PreviousSong() => Services.MusicPlayer.PreviousSong();
 
     private void PlayPause() => Services.MusicPlayer.PlayPause();
 
-    private void NextSong()
-    {
-        Services.MusicPlayer.NextSong();
-
-        _ = OnNextSongStarted();
-    }
+    private void NextSong() => Services.MusicPlayer.NextSong();
 
     private void ToggleRepeatSingleSongEnabled()
     {
-        RepeatSingleSongEnabled = !RepeatSingleSongEnabled;
-
-        RepeatMode repeatMode = RepeatSingleSongEnabled ? RepeatMode.Single : RepeatMode.All;
-        
-        Services.MusicPlayer.SetRepeatMode(repeatMode);
-
-        _ = OnRepeatModeChanged(repeatMode);
+        RepeatMode toggledRepeatMode = !RepeatSingleSongEnabled ? RepeatMode.Single : RepeatMode.All;
+        Services.MusicPlayer.SetRepeatMode(toggledRepeatMode);
     }
 
     private void ToggleMuteEnabled()
     {
         if (Volume == 0)
         {
-            if (!MuteEnabled) return;
-
-            MuteEnabled = false;
-
             Services.MusicPlayer.UnMute();
-
-            _ = OnMuteModeChanged(MuteMode.Unmuted);
         }
         else
         {
             Services.MusicPlayer.Mute();
-
-            MuteEnabled = true;
-
-            _ = OnMuteModeChanged(MuteMode.Mute);
         }
     }
 
@@ -232,7 +228,7 @@ public class MusicPlayerViewModel : BaseWindowViewModel, IDisposable
 
     private async Task OnMusicPlayerOpened()
     {
-        int initialDelay = GeneralConfigurationManager.SpeakingSimulatorConfig.NarratorMode == NarratorMode.Instant ? 0 : 750;
+        int initialDelay = UserConfigurationManager.SpeakingSimulatorConfig.NarratorMode == NarratorMode.Instant ? 0 : 750;
 
         await Task
             .Delay(initialDelay)
@@ -300,6 +296,8 @@ public class MusicPlayerViewModel : BaseWindowViewModel, IDisposable
 
     private async Task OnMuteModeChanged(MuteMode muteMode)
     {
+        if (MuteEnabled && muteMode == MuteMode.Mute || !MuteEnabled && muteMode == MuteMode.Unmuted) return;
+
         switch (muteMode)
         {
             case MuteMode.Mute:
@@ -313,6 +311,13 @@ public class MusicPlayerViewModel : BaseWindowViewModel, IDisposable
             default:
                 throw new ArgumentOutOfRangeException(nameof(muteMode), muteMode, null);
         }
+    }
+
+    private void OnVolumeChanged(float newVolume)
+    {
+        _volume = (int)(newVolume * 100f);
+
+        OnPropertyChanged(nameof(Volume));
     }
 
     public void Dispose()

@@ -21,7 +21,7 @@ public class SpeakingSimulator : IDisposable
     {
         _compositeDisposable = new CompositeDisposable
         (
-            GeneralConfigurationManager.CurrentSpeakingSimulatorConfig.Subscribe(OnConfigChanged)
+            UserConfigurationManager.CurrentSpeakingSimulatorConfig.Subscribe(OnConfigChanged)
         );
     }
 

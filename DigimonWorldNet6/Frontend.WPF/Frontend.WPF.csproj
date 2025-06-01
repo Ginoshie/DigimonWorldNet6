@@ -31,11 +31,6 @@
     </ItemGroup>
 
     <ItemGroup>
-        <Folder Include="Images\Emotions\Evolution\"/>
-        <Folder Include="UserControls\**\*"/>
-    </ItemGroup>
-
-    <ItemGroup>
         <None Include="Music\**\*.mp3">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </None>

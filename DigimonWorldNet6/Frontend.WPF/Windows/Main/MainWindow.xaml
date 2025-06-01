@@ -4,10 +4,9 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
-        xmlns:evolutionTool="clr-namespace:DigimonWorld.Frontend.WPF.UserControls.EvolutionTool"
-        xmlns:historicEvolutionPicker="clr-namespace:DigimonWorld.Frontend.WPF.UserControls.HistoricEvolutionPicker"
         xmlns:main="clr-namespace:DigimonWorld.Frontend.WPF.Windows.Main"
-        xmlns:musicPlayer1="clr-namespace:DigimonWorld.Frontend.WPF.Windows.MusicPlayer"
+        xmlns:historicEvolutionPicker1="clr-namespace:DigimonWorld.Frontend.WPF.Windows.Main.UserControls.HistoricEvolutionPicker"
+        xmlns:evolutionTool="clr-namespace:DigimonWorld.Frontend.WPF.Windows.Main.UserControls.EvolutionTool"
         mc:Ignorable="d"
         d:DataContext="{d:DesignInstance Type=main:MainWindowViewModel, IsDesignTimeCreatable=True}"
         Title="Digimon World Tool"
@@ -358,7 +357,7 @@
                     <Border CornerRadius="5" BorderBrush="#4A9FC5" BorderThickness="3" Padding="0" Background="#4A9FC5">
                         <Border CornerRadius="5" BorderBrush="#90D9FA" BorderThickness="3" Padding="0" Background="#90D9FA">
                             <Border CornerRadius="5" BorderBrush="Black" BorderThickness="3" Padding="10" Background="#2E3841">
-                                <historicEvolutionPicker:HistoricEvolutionPickerUserControl VerticalAlignment="Center" />
+                                <historicEvolutionPicker1:HistoricEvolutionPickerUserControl VerticalAlignment="Center" />
                             </Border>
                         </Border>
                     </Border>
