@@ -5,36 +5,43 @@
              xmlns:enums="clr-namespace:Generics.Enums;assembly=Generics"
              xmlns:system="clr-namespace:System;assembly=System.Runtime">
     <Application.Resources>
-        <FontFamily x:Key="Dw1Font">pack://application:,,,/Frontend.WPF;component/Fonts/DW1_US_Regular.ttf#DW1 US</FontFamily>
 
-        <system:Int32 x:Key="DefaultTooltipDelay">750</system:Int32>
-        <system:Double x:Key="DefaultButtonHeight">40</system:Double>
-        <system:Double x:Key="DefaultTextHeightSpacing">16</system:Double>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/Frontend.WPF;component/Windows/GeneralConfig/ResourceDictionary/ConfigurationSectionDimensions.xaml" />
+            </ResourceDictionary.MergedDictionaries>
 
-        <conversion:EnumToImageConverter x:Key="EnumToImageConverter" />
+            <FontFamily x:Key="Dw1Font">pack://application:,,,/Frontend.WPF;component/Fonts/DW1_US_Regular.ttf#DW1 US</FontFamily>
 
-        <ObjectDataProvider x:Key="DigimonTypes"
-                            MethodName="GetValues" ObjectType="{x:Type enums:DigimonType}">
-            <ObjectDataProvider.MethodParameters>
-                <x:Type TypeName="enums:DigimonType" />
-            </ObjectDataProvider.MethodParameters>
-        </ObjectDataProvider>
+            <system:Int32 x:Key="DefaultTooltipDelay">750</system:Int32>
+            <system:Double x:Key="DefaultButtonHeight">40</system:Double>
+            <system:Double x:Key="DefaultTextHeightSpacing">16</system:Double>
 
-        <GridLength x:Key="DefaultTextBoxGridRowHeight">30</GridLength>
+            <conversion:EnumToImageConverter x:Key="EnumToImageConverter" />
 
-        <Style TargetType="TextBlock">
-            <Setter Property="FontFamily" Value="{StaticResource Dw1Font}" />
-            <Setter Property="FontWeight" Value="Bold" />
-            <Setter Property="Foreground" Value="#D6D6D8" />
-        </Style>
+            <ObjectDataProvider x:Key="DigimonTypes"
+                                MethodName="GetValues" ObjectType="{x:Type enums:DigimonType}">
+                <ObjectDataProvider.MethodParameters>
+                    <x:Type TypeName="enums:DigimonType" />
+                </ObjectDataProvider.MethodParameters>
+            </ObjectDataProvider>
 
-        <Style TargetType="Control">
-            <Setter Property="FontFamily" Value="{StaticResource Dw1Font}" />
-        </Style>
+            <GridLength x:Key="DefaultTextBoxGridRowHeight">30</GridLength>
 
-        <Style TargetType="Grid">
-            <Setter Property="Background" Value="#2E3841" />
-        </Style>
+            <Style TargetType="TextBlock">
+                <Setter Property="FontFamily" Value="{StaticResource Dw1Font}" />
+                <Setter Property="FontWeight" Value="Bold" />
+                <Setter Property="Foreground" Value="#D6D6D8" />
+            </Style>
 
+            <Style TargetType="Control">
+                <Setter Property="FontFamily" Value="{StaticResource Dw1Font}" />
+            </Style>
+
+            <Style TargetType="Grid">
+                <Setter Property="Background" Value="#2E3841" />
+            </Style>
+
+        </ResourceDictionary>
     </Application.Resources>
 </Application>

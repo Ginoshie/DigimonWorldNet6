@@ -7,8 +7,8 @@
              xmlns:system="clr-namespace:System;assembly=System.Runtime"
              xmlns:configuration="clr-namespace:DigimonWorld.Frontend.WPF.Validation.Configuration"
              mc:Ignorable="d"
-             Height="180"
-             Width="260"
+             Height="{StaticResource ConfigurationSectionHeight}"
+             Width="{StaticResource ConfigurationSectionWidth}"
              d:DataContext="{d:DesignInstance Type=generalConfig:GeneralConfigWindowViewModel, IsDesignTimeCreatable=True}">
 
     <UserControl.Resources>
@@ -116,7 +116,7 @@
                     Command="{Binding SetDoNothingOnCloseCommand}"
                     Tag="{Binding DoNothingOnCloseWindow}" />
         </StackPanel>
-        
+
         <Button Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2" Style="{StaticResource SaveButtonStyle}"
                 Height="{StaticResource DefaultButtonHeight}"
                 Width="{StaticResource WindowButtonWidth}"

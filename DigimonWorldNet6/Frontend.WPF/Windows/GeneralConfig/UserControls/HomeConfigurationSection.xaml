@@ -5,9 +5,10 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:generalConfig="clr-namespace:DigimonWorld.Frontend.WPF.Windows.GeneralConfig"
              mc:Ignorable="d"
-             Height="175"
-             Width="260"
+             Height="{StaticResource ConfigurationSectionHeight}"
+             Width="{StaticResource ConfigurationSectionWidth}"
              d:DataContext="{d:DesignInstance Type=generalConfig:GeneralConfigWindowViewModel, IsDesignTimeCreatable=True}">
+
     <Grid>
         <TextBlock TextAlignment="Left"
                    TextWrapping="Wrap">

@@ -12,7 +12,6 @@ public class GeneralConfigWindowViewModel : BaseViewModel
 {
     private readonly GeneralConfigWindow _window;
     private readonly HomeConfigurationSection _homeConfigurationSection = new();
-    private readonly GeneralConfigurationSection _generalConfigurationSection = new();
     private readonly MusicPlayerConfigurationSection _musicPlayerConfigurationSection = new();
     private readonly NarrationConfigurationSection _narrationConfigurationSection = new();
 
@@ -39,8 +38,6 @@ public class GeneralConfigWindowViewModel : BaseViewModel
         CloseCommand = new CommandHandler(Close);
 
         ShowHomeConfigurationSectionCommand = new CommandHandler(ShowHomeConfigurationSection);
-
-        ShowGeneralConfigurationSectionCommand = new CommandHandler(ShowGeneralConfigurationSection);
 
         ShowMusicPlayerConfigurationSectionCommand = new CommandHandler(ShowMusicPlayerConfigurationSection);
 
@@ -72,8 +69,6 @@ public class GeneralConfigWindowViewModel : BaseViewModel
     }
 
     public bool HomeConfigurationSectionIsSelected => CurrentSelectedSettingCategoryUserControl.GetType() == typeof(HomeConfigurationSection);
-
-    public bool GeneralConfigurationSectionIsSelected => CurrentSelectedSettingCategoryUserControl.GetType() == typeof(GeneralConfigurationSection);
 
     public bool MusicPlayerConfigurationSectionIsSelected => CurrentSelectedSettingCategoryUserControl.GetType() == typeof(MusicPlayerConfigurationSection);
 
@@ -160,7 +155,6 @@ public class GeneralConfigWindowViewModel : BaseViewModel
             SetField(ref _currentSelectedSettingCategoryUserControl, value);
 
             OnPropertyChanged(nameof(HomeConfigurationSectionIsSelected));
-            OnPropertyChanged(nameof(GeneralConfigurationSectionIsSelected));
             OnPropertyChanged(nameof(MusicPlayerConfigurationSectionIsSelected));
             OnPropertyChanged(nameof(NarrationConfigurationSectionIsSelected));
         }
@@ -171,8 +165,6 @@ public class GeneralConfigWindowViewModel : BaseViewModel
     public ICommand CloseCommand { get; private set; }
 
     public ICommand ShowHomeConfigurationSectionCommand { get; private set; }
-
-    public ICommand ShowGeneralConfigurationSectionCommand { get; private set; }
 
     public ICommand ShowMusicPlayerConfigurationSectionCommand { get; private set; }
 
@@ -203,8 +195,6 @@ public class GeneralConfigWindowViewModel : BaseViewModel
     private void Close() => _window.Close();
 
     private void ShowHomeConfigurationSection() => CurrentSelectedSettingCategoryUserControl = _homeConfigurationSection;
-
-    private void ShowGeneralConfigurationSection() => CurrentSelectedSettingCategoryUserControl = _generalConfigurationSection;
 
     private void ShowMusicPlayerConfigurationSection() => CurrentSelectedSettingCategoryUserControl = _musicPlayerConfigurationSection;
 

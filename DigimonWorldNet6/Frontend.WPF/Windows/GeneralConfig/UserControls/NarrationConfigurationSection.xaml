@@ -6,8 +6,8 @@
              xmlns:system="clr-namespace:System;assembly=System.Runtime"
              xmlns:generalConfig="clr-namespace:DigimonWorld.Frontend.WPF.Windows.GeneralConfig"
              mc:Ignorable="d"
-             Height="180"
-             Width="260"
+             Height="{StaticResource ConfigurationSectionHeight}"
+             Width="{StaticResource ConfigurationSectionWidth}"
              d:DataContext="{d:DesignInstance Type=generalConfig:GeneralConfigWindowViewModel, IsDesignTimeCreatable=True}">
 
     <UserControl.Resources>
