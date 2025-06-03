@@ -6,6 +6,7 @@
              xmlns:system="clr-namespace:System;assembly=System.Runtime"
              xmlns:conversion="clr-namespace:DigimonWorld.Frontend.WPF.Conversion"
              xmlns:historicEvolutionPicker1="clr-namespace:DigimonWorld.Frontend.WPF.Windows.Main.UserControls.HistoricEvolutionPicker"
+             xmlns:models="clr-namespace:DigimonWorld.Frontend.WPF.Models"
              mc:Ignorable="d"
              d:DataContext="{d:DesignInstance Type=historicEvolutionPicker1:HistoricEvolutionPickerViewModel, IsDesignTimeCreatable=True}">
 
@@ -41,10 +42,10 @@
                         CommandParameter="{Binding}">
                     <Button.ToolTip>
                         <ToolTip Style="{StaticResource DefaultToolTipRightStyle}">
-                            <TextBlock Text="{Binding DigimonType}" />
+                            <TextBlock Text="{Binding (models:DigimonIcon.DigimonType)}" />
                         </ToolTip>
                     </Button.ToolTip>
-                    <Image Source="{Binding IconPath}" Stretch="Fill">
+                    <Image Source="{Binding (models:DigimonIcon.IconPath)}" Stretch="Fill">
                         <Image.Style>
                             <Style TargetType="Image">
                                 <Setter Property="Opacity" Value="0.5" />

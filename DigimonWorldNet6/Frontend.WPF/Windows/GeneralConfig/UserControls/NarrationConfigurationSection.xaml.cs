@@ -1,8 +1,6 @@
-using System.Windows.Controls;
-
 namespace DigimonWorld.Frontend.WPF.Windows.GeneralConfig.UserControls;
 
-public partial class NarrationConfigurationSection : UserControl
+public partial class NarrationConfigurationSection
 {
     public NarrationConfigurationSection()
     {
