@@ -1,0 +1,15 @@
+<UserControl x:Class="DigimonWorld.Frontend.WPF.Windows.Main.UserControls.Navigation.NavigationUserControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:userControls="clr-namespace:DigimonWorld.Frontend.WPF.Windows.Main.UserControls.Navigation.UserControls"
+             mc:Ignorable="d">
+
+    <Grid Background="Transparent">
+        <StackPanel Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center">
+            <userControls:EvolutionCalculatorNavigationButton />
+            <userControls:DigiWikiNavigationButton />
+        </StackPanel>
+    </Grid>
+</UserControl>

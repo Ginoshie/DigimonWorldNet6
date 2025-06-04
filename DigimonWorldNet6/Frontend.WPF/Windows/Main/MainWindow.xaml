@@ -5,8 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
         xmlns:main="clr-namespace:DigimonWorld.Frontend.WPF.Windows.Main"
-        xmlns:historicEvolutionPicker1="clr-namespace:DigimonWorld.Frontend.WPF.Windows.Main.UserControls.HistoricEvolutionPicker"
+        xmlns:historicEvolutionPicker="clr-namespace:DigimonWorld.Frontend.WPF.Windows.Main.UserControls.HistoricEvolutionPicker"
         xmlns:evolutionTool="clr-namespace:DigimonWorld.Frontend.WPF.Windows.Main.UserControls.EvolutionTool"
+        xmlns:navigation="clr-namespace:DigimonWorld.Frontend.WPF.Windows.Main.UserControls.Navigation"
+        xmlns:system="clr-namespace:System;assembly=System.Runtime"
         mc:Ignorable="d"
         d:DataContext="{d:DesignInstance Type=main:MainWindowViewModel, IsDesignTimeCreatable=True}"
         Title="Digimon World Tool"
@@ -24,8 +26,25 @@
                 <ResourceDictionary Source="../../ResourceDictionaries/Styles/ToolTips/DefaultTooltipRightStyle.xaml" />
             </ResourceDictionary.MergedDictionaries>
 
+            <GridLength x:Key="PanelLabelThickness">45</GridLength>
+            <GridLength x:Key="BottomPanelHeight">475</GridLength>
+            <system:Double x:Key="BottomPanelYOffset">-475</system:Double>
+            <GridLength x:Key="LeftPanelWidth">120</GridLength>
+            <system:Double x:Key="LeftPanelYOffset">120</system:Double>
+            
+            <BitmapImage x:Key="ClosedLeftPaneImage" UriSource="pack://application:,,,/Frontend.WPF;component/Images/ComponentLabels/label-left-no-focus.png" />
+            <BitmapImage x:Key="OpenLeftPaneImage" UriSource="pack://application:,,,/Frontend.WPF;component/Images/ComponentLabels/label-left-focus.png" />
             <BitmapImage x:Key="ClosedBottomPaneImage" UriSource="pack://application:,,,/Frontend.WPF;component/Images/ComponentLabels/label-bottom-no-focus.png" />
             <BitmapImage x:Key="OpenBottomPaneImage" UriSource="pack://application:,,,/Frontend.WPF;component/Images/ComponentLabels/label-bottom-focus.png" />
+
+            <Style x:Key="LeftPaneLabelStyle" TargetType="Image">
+                <Setter Property="Source" Value="{StaticResource ClosedLeftPaneImage}" />
+                <Style.Triggers>
+                    <DataTrigger Binding="{Binding LeftPaneIsOpen}" Value="True">
+                        <Setter Property="Source" Value="{StaticResource OpenLeftPaneImage}" />
+                    </DataTrigger>
+                </Style.Triggers>
+            </Style>
 
             <Style x:Key="BottomPaneLabelStyle" TargetType="Image">
                 <Setter Property="Source" Value="{StaticResource ClosedBottomPaneImage}" />
@@ -36,13 +55,22 @@
                 </Style.Triggers>
             </Style>
 
+            <Storyboard x:Key="OpenLeftPane">
+                <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.X)"
+                                 To="10" Duration="0:0:0.3" />
+            </Storyboard>
+            <Storyboard x:Key="CloseLeftPane">
+                <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.X)"
+                                 To="{StaticResource LeftPanelYOffset}" Duration="0:0:0.3" />
+            </Storyboard>
+
             <Storyboard x:Key="OpenBottomPane">
                 <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.Y)"
                                  To="-12" Duration="0:0:0.3" />
             </Storyboard>
             <Storyboard x:Key="CloseBottomPane">
                 <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.Y)"
-                                 To="-475" Duration="0:0:0.3" />
+                                 To="{StaticResource BottomPanelYOffset}" Duration="0:0:0.3" />
             </Storyboard>
         </ResourceDictionary>
     </Window.Resources>
@@ -61,9 +89,10 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
             <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
 
-        <Border Background="Transparent" Grid.Row="0" Grid.ColumnSpan="2" Height="50">
+        <Border Grid.Column="1" Grid.Row="0" Background="Transparent" Grid.ColumnSpan="2" Height="50">
             <Grid Background="Transparent">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="15" />
@@ -84,9 +113,9 @@
                     <Button.Template>
                         <ControlTemplate TargetType="Button">
                             <Grid Background="Transparent" SnapsToDevicePixels="True" UseLayoutRounding="True">
-                                <Border CornerRadius="5" BorderBrush="Black" BorderThickness="3" Padding="0" Background="Black">
-                                    <Border CornerRadius="5" BorderBrush="#4A9FC5" BorderThickness="3" Padding="0" Background="#4A9FC5">
-                                        <Border CornerRadius="5" BorderBrush="#90D9FA" BorderThickness="3" Padding="0" Background="#90D9FA">
+                                <Border CornerRadius="8" BorderBrush="Black" BorderThickness="3" Padding="0">
+                                    <Border CornerRadius="8" BorderBrush="#4A9FC5" BorderThickness="3" Padding="0">
+                                        <Border CornerRadius="5" BorderBrush="#90D9FA" BorderThickness="3" Padding="0">
                                             <Border CornerRadius="5" BorderBrush="Black" BorderThickness="3" Padding="0" Background="#2E3841">
                                                 <Border x:Name="InnerBorder" CornerRadius="5" BorderBrush="Transparent" BorderThickness="0" Background="#80000000" Opacity="0.5">
                                                     <TextBlock Text="⚙" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" FontWeight="Bold" Foreground="White" />
@@ -125,9 +154,9 @@
                     <Button.Template>
                         <ControlTemplate TargetType="Button">
                             <Grid Background="Transparent" SnapsToDevicePixels="True" UseLayoutRounding="True">
-                                <Border CornerRadius="5" BorderBrush="Black" BorderThickness="3" Padding="0" Background="Black">
-                                    <Border CornerRadius="5" BorderBrush="#4A9FC5" BorderThickness="3" Padding="0" Background="#4A9FC5">
-                                        <Border CornerRadius="5" BorderBrush="#90D9FA" BorderThickness="3" Padding="0" Background="#90D9FA">
+                                <Border CornerRadius="8" BorderBrush="Black" BorderThickness="3" Padding="0">
+                                    <Border CornerRadius="8" BorderBrush="#4A9FC5" BorderThickness="3" Padding="0">
+                                        <Border CornerRadius="5" BorderBrush="#90D9FA" BorderThickness="3" Padding="0">
                                             <Border CornerRadius="5" BorderBrush="Black" BorderThickness="3" Padding="0" Background="#2E3841">
                                                 <Border x:Name="InnerBorder" CornerRadius="5" BorderBrush="Transparent" BorderThickness="0" Background="#80000000" Opacity="0.5">
                                                     <TextBlock Text="ℹ" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" FontWeight="Bold" Foreground="White" />
@@ -166,9 +195,9 @@
                     <Button.Template>
                         <ControlTemplate TargetType="Button">
                             <Grid Background="Transparent" SnapsToDevicePixels="True" UseLayoutRounding="True">
-                                <Border CornerRadius="5" BorderBrush="Black" BorderThickness="3" Padding="0" Background="Black">
-                                    <Border CornerRadius="5" BorderBrush="#4A9FC5" BorderThickness="3" Padding="0" Background="#4A9FC5">
-                                        <Border CornerRadius="5" BorderBrush="#90D9FA" BorderThickness="3" Padding="0" Background="#90D9FA">
+                                <Border CornerRadius="8" BorderBrush="Black" BorderThickness="3" Padding="0">
+                                    <Border CornerRadius="8" BorderBrush="#4A9FC5" BorderThickness="3" Padding="0">
+                                        <Border CornerRadius="5" BorderBrush="#90D9FA" BorderThickness="3" Padding="0">
                                             <Border CornerRadius="5" BorderBrush="Black" BorderThickness="3" Padding="0" Background="#2E3841">
                                                 <Border x:Name="InnerBorder" CornerRadius="5" BorderBrush="Transparent" BorderThickness="0" Background="#80000000" Opacity="0.5">
                                                     <TextBlock Text="📻" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" FontWeight="Bold" Foreground="White" />
@@ -201,14 +230,13 @@
                 </Button>
 
                 <Grid Grid.Column="5" Width="60" Height="50" Background="Transparent" SnapsToDevicePixels="True" UseLayoutRounding="True">
-                    <Border CornerRadius="5" BorderBrush="Black" BorderThickness="3" Background="Black"
-                            ToolTipService.InitialShowDelay="750">
+                    <Border CornerRadius="8" BorderBrush="Black" BorderThickness="3" ToolTipService.InitialShowDelay="750">
                         <Border.ToolTip>
                             <ToolTip Style="{StaticResource DefaultToolTipRightStyle}">
                                 <TextBlock Text="Click and hold to drag the application window" />
                             </ToolTip>
                         </Border.ToolTip>
-                        <Border CornerRadius="5" BorderBrush="#4A9FC5" BorderThickness="3" Background="#4A9FC5">
+                        <Border CornerRadius="8" BorderBrush="#4A9FC5" BorderThickness="3" Background="#4A9FC5">
                             <Border CornerRadius="5" BorderBrush="#90D9FA" BorderThickness="3" Background="#90D9FA">
                                 <Border CornerRadius="5" BorderBrush="Black" BorderThickness="3" Background="#2E3841">
                                     <Border x:Name="InnerBorder" CornerRadius="5" BorderBrush="Transparent" BorderThickness="0" Background="#80000000" Opacity="0.5"
@@ -247,9 +275,9 @@
                     <Button.Template>
                         <ControlTemplate TargetType="Button">
                             <Grid Background="Transparent" SnapsToDevicePixels="True" UseLayoutRounding="True">
-                                <Border CornerRadius="5" BorderBrush="Black" BorderThickness="3" Padding="0" Background="Black">
-                                    <Border CornerRadius="5" BorderBrush="#4A9FC5" BorderThickness="3" Padding="0" Background="#4A9FC5">
-                                        <Border CornerRadius="5" BorderBrush="#90D9FA" BorderThickness="3" Padding="0" Background="#90D9FA">
+                                <Border CornerRadius="8" BorderBrush="Black" BorderThickness="3" Padding="0">
+                                    <Border CornerRadius="8" BorderBrush="#4A9FC5" BorderThickness="3" Padding="0">
+                                        <Border CornerRadius="5" BorderBrush="#90D9FA" BorderThickness="3" Padding="0">
                                             <Border CornerRadius="5" BorderBrush="Black" BorderThickness="3" Padding="0" Background="#2E3841">
                                                 <Border x:Name="InnerBorder" CornerRadius="5" BorderBrush="Transparent" BorderThickness="0" Background="#80000000" Opacity="0.5">
                                                     <TextBlock Text="---" HorizontalAlignment="Center" VerticalAlignment="Bottom" FontSize="18" FontWeight="Bold" Foreground="White" />
@@ -288,9 +316,9 @@
                     <Button.Template>
                         <ControlTemplate TargetType="Button">
                             <Grid Background="Transparent" SnapsToDevicePixels="True" UseLayoutRounding="True">
-                                <Border CornerRadius="5" BorderBrush="Black" BorderThickness="3" Padding="0" Background="Black">
-                                    <Border CornerRadius="5" BorderBrush="#4A9FC5" BorderThickness="3" Padding="0" Background="#4A9FC5">
-                                        <Border CornerRadius="5" BorderBrush="#90D9FA" BorderThickness="3" Padding="0" Background="#90D9FA">
+                                <Border CornerRadius="8" BorderBrush="Black" BorderThickness="3" Padding="0">
+                                    <Border CornerRadius="8" BorderBrush="#4A9FC5" BorderThickness="3" Padding="0">
+                                        <Border CornerRadius="5" BorderBrush="#90D9FA" BorderThickness="3" Padding="0">
                                             <Border CornerRadius="5" BorderBrush="Black" BorderThickness="3" Padding="0" Background="#2E3841">
                                                 <Border x:Name="InnerBorder" CornerRadius="5" BorderBrush="Transparent" BorderThickness="0" Background="#80000000" Opacity="0.5">
                                                     <TextBlock Text="X" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16" FontWeight="Bold" Foreground="White" />
@@ -325,10 +353,10 @@
         </Border>
 
         <Border x:Name="OuterBorderWindow" Grid.Row="1" Grid.Column="1" Background="Transparent" Panel.ZIndex="1">
-            <Border CornerRadius="5" BorderBrush="Black" BorderThickness="3" Background="Black">
-                <Border CornerRadius="5" BorderBrush="#4A9FC5" BorderThickness="3" Background="#4A9FC5">
-                    <Border CornerRadius="5" BorderBrush="#90D9FA" BorderThickness="3" Background="#90D9FA">
-                        <Border CornerRadius="5" BorderBrush="Black" BorderThickness="3" Background="#2E3841">
+            <Border CornerRadius="8" BorderBrush="Black" BorderThickness="3">
+                <Border CornerRadius="8" BorderBrush="#4A9FC5" BorderThickness="3">
+                    <Border CornerRadius="5" BorderBrush="#90D9FA" BorderThickness="3">
+                        <Border CornerRadius="5" BorderBrush="Black" BorderThickness="3">
                             <evolutionTool:EvolutionToolUserControl x:Name="EvolutionToolUserControl" />
                         </Border>
                     </Border>
@@ -336,9 +364,86 @@
             </Border>
         </Border>
 
+        <Grid Grid.Row="1" Grid.Column="0" Background="Transparent" VerticalAlignment="Center" SnapsToDevicePixels="True" UseLayoutRounding="True" Panel.ZIndex="0">
+            <Grid.RenderTransform>
+                <TranslateTransform X="{StaticResource LeftPanelYOffset}" />
+            </Grid.RenderTransform>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="{StaticResource PanelLabelThickness}"></ColumnDefinition>
+                <ColumnDefinition Width="{StaticResource LeftPanelWidth}"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="400"></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <Border Grid.Row="0" Grid.Column="1" Background="Transparent" Panel.ZIndex="1">
+                <Border CornerRadius="8" BorderBrush="Black" BorderThickness="3" Padding="0">
+                    <Border CornerRadius="8" BorderBrush="#4A9FC5" BorderThickness="3" Margin="0" Padding="0">
+                        <Border CornerRadius="5" BorderBrush="#90D9FA" BorderThickness="3" Padding="0">
+                            <Border CornerRadius="5" BorderBrush="Black" BorderThickness="3" Padding="0" Background="#80202020">
+                                <navigation:NavigationUserControl HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </Border>
+                        </Border>
+                    </Border>
+                </Border>
+            </Border>
+
+            <Grid Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" Background="Transparent">
+                <Image Style="{StaticResource LeftPaneLabelStyle}" Margin="0,0, -2, 0">
+                    <b:Interaction.Triggers>
+                        <b:EventTrigger EventName="MouseLeftButtonDown">
+                            <b:InvokeCommandAction Command="{Binding ToggleLeftPaneCommand}" />
+                        </b:EventTrigger>
+                    </b:Interaction.Triggers>
+                </Image>
+
+                <TextBlock Text="N&#x0a;a&#x0a;v&#x0a;i&#x0a;g&#x0a;a&#x0a;t&#x0a;i&#x0a;o&#x0a;n"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center"
+                           FontWeight="Bold"
+                           TextAlignment="Center">
+
+                    <TextBlock.Style>
+                        <Style TargetType="TextBlock">
+                            <Setter Property="FontFamily" Value="{StaticResource Dw1Font}" />
+                            <Setter Property="FontWeight" Value="Bold" />
+                            <Setter Property="Foreground" Value="#D6D6D8" />
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding LeftPaneIsOpen}" Value="True">
+                                    <Setter Property="Foreground" Value="Black" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </TextBlock.Style>
+                    <b:Interaction.Triggers>
+                        <b:EventTrigger EventName="MouseLeftButtonDown">
+                            <b:InvokeCommandAction Command="{Binding ToggleLeftPaneCommand}" />
+                        </b:EventTrigger>
+                    </b:Interaction.Triggers>
+                </TextBlock>
+            </Grid>
+
+            <Grid.Style>
+                <Style TargetType="Grid">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding LeftPaneIsOpen}" Value="True">
+                            <DataTrigger.EnterActions>
+                                <BeginStoryboard Storyboard="{StaticResource OpenLeftPane}" />
+                            </DataTrigger.EnterActions>
+                            <DataTrigger.ExitActions>
+                                <BeginStoryboard Storyboard="{StaticResource CloseLeftPane}" />
+                            </DataTrigger.ExitActions>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Grid.Style>
+        </Grid>
+
         <Grid Grid.Row="2" Grid.Column="1" Background="Transparent" SnapsToDevicePixels="True" UseLayoutRounding="True" RenderTransformOrigin="0.5,0.5" Panel.ZIndex="0">
             <Grid.RenderTransform>
-                <TranslateTransform Y="-475" />
+                <TranslateTransform Y="{StaticResource BottomPanelYOffset}" />
             </Grid.RenderTransform>
 
             <Grid.ColumnDefinitions>
@@ -348,16 +453,16 @@
             </Grid.ColumnDefinitions>
 
             <Grid.RowDefinitions>
-                <RowDefinition Height="*"></RowDefinition>
-                <RowDefinition Height="45"></RowDefinition>
+                <RowDefinition Height="{StaticResource BottomPanelHeight}"></RowDefinition>
+                <RowDefinition Height="{StaticResource PanelLabelThickness}"></RowDefinition>
             </Grid.RowDefinitions>
 
             <Border Grid.Row="0" Grid.Column="1" Background="Transparent" Panel.ZIndex="1">
-                <Border CornerRadius="5" BorderBrush="Black" BorderThickness="3" Padding="0" Background="Black">
-                    <Border CornerRadius="5" BorderBrush="#4A9FC5" BorderThickness="3" Padding="0" Background="#4A9FC5">
-                        <Border CornerRadius="5" BorderBrush="#90D9FA" BorderThickness="3" Padding="0" Background="#90D9FA">
+                <Border CornerRadius="8" BorderBrush="Black" BorderThickness="3" Padding="0">
+                    <Border CornerRadius="8" BorderBrush="#4A9FC5" BorderThickness="3" Padding="0">
+                        <Border CornerRadius="5" BorderBrush="#90D9FA" BorderThickness="3" Padding="0">
                             <Border CornerRadius="5" BorderBrush="Black" BorderThickness="3" Padding="10" Background="#2E3841">
-                                <historicEvolutionPicker1:HistoricEvolutionPickerUserControl VerticalAlignment="Center" />
+                                <historicEvolutionPicker:HistoricEvolutionPickerUserControl VerticalAlignment="Center" />
                             </Border>
                         </Border>
                     </Border>

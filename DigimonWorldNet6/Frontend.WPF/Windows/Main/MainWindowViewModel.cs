@@ -16,11 +16,14 @@ public class MainWindowViewModel : BaseWindowViewModel, IDisposable
     private readonly CompositeDisposable _compositeDisposable;
     
     private bool _bottomPaneIsOpen;
+    private bool _leftPaneIsOpen;
     private bool _musicPlayerIsOpen;
 
     public MainWindowViewModel(Window window) : base(window)
     {
         ToggleBottomPaneCommand = new CommandHandler(ToggleBottomPane);
+        
+        ToggleLeftPaneCommand = new CommandHandler(ToggleLeftPane);
         
         OpenConfigurationWindowCommand = new CommandHandler(OpenConfigurationWindow);
         
@@ -31,6 +34,19 @@ public class MainWindowViewModel : BaseWindowViewModel, IDisposable
         _compositeDisposable = new CompositeDisposable(
             EventHub.MusicPlayerClosedObservable.Subscribe(_ => _musicPlayerIsOpen = false)
         );
+    }
+
+    public bool LeftPaneIsOpen
+    {
+        get => _leftPaneIsOpen;
+        private set
+        {
+            if (_leftPaneIsOpen == value) return;
+
+            _leftPaneIsOpen = value;
+
+            OnPropertyChanged();
+        }
     }
 
     public bool BottomPaneIsOpen
@@ -46,6 +62,7 @@ public class MainWindowViewModel : BaseWindowViewModel, IDisposable
         }
     }
 
+    public ICommand ToggleLeftPaneCommand { get; }
     public ICommand ToggleBottomPaneCommand { get; }
 
     public ICommand OpenConfigurationWindowCommand { get; }
@@ -59,6 +76,11 @@ public class MainWindowViewModel : BaseWindowViewModel, IDisposable
         Services.MusicPlayer.Dispose();
 
         Window.Close();
+    }
+
+    private void ToggleLeftPane()
+    {
+        LeftPaneIsOpen = !LeftPaneIsOpen;
     }
 
     private void ToggleBottomPane()
