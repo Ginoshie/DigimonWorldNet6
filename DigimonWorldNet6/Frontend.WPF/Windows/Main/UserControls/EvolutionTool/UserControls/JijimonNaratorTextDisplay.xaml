@@ -3,14 +3,15 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:evolutionTool="clr-namespace:DigimonWorld.Frontend.WPF.Windows.Main.UserControls.EvolutionTool"
              mc:Ignorable="d">
 
-    <Border CornerRadius="5" BorderBrush="Black" BorderThickness="3" Margin="0, 15,25, 10" Padding="0" Background="Black">
-        <Border CornerRadius="5" BorderBrush="#4A9FC5" BorderThickness="3" Padding="0" Background="#4A9FC5">
+    <Border CornerRadius="8" BorderBrush="Black" BorderThickness="3" Margin="0, 15,25, 10" Padding="0" Background="Black">
+        <Border CornerRadius="8" BorderBrush="#4A9FC5" BorderThickness="3" Padding="0" Background="#4A9FC5">
             <Border CornerRadius="5" BorderBrush="#90D9FA" BorderThickness="3" Padding="0" Background="#2E3841">
                 <Border CornerRadius="5" BorderBrush="Transparent" BorderThickness="0" Padding="0" Background="#77000000">
                     <Border.InputBindings>
-                        <MouseBinding Gesture="LeftClick" Command="{Binding InstantDisplayCommand}" />
+                        <MouseBinding Gesture="LeftClick" Command="{Binding (evolutionTool:EvolutionToolViewModel.InstantDisplayCommand)}" />
                     </Border.InputBindings>
                     <StackPanel Margin="5">
                         <TextBlock Text="Jijimon"
