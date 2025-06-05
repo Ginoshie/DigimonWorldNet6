@@ -19,9 +19,9 @@ public partial class MainWindow
 
     private void MainWindow_Closed(object? sender, EventArgs e)
     {
-        if (EvolutionToolUserControl is { } uc)
+        if (CurrentSelectedMainWindowContent is IDisposable disposableContent)
         {
-            uc.Dispose();
+            disposableContent.Dispose();
         }
 
         _viewModel.Dispose();

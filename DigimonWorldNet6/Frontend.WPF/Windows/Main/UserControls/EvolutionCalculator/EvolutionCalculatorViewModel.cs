@@ -11,9 +11,9 @@ using DigimonWorld.Frontend.WPF.ViewModelComponents;
 using Generics.Enums;
 using Generics.Extensions;
 
-namespace DigimonWorld.Frontend.WPF.Windows.Main.UserControls.EvolutionTool;
+namespace DigimonWorld.Frontend.WPF.Windows.Main.UserControls.EvolutionCalculator;
 
-public sealed class EvolutionToolViewModel : BaseViewModel, IDisposable
+public sealed class EvolutionCalculatorViewModel : BaseViewModel, IDisposable
 {
     private readonly SpeakingSimulator _speakingSimulator;
     private readonly CompositeDisposable _compositeDisposable;
@@ -36,7 +36,7 @@ public sealed class EvolutionToolViewModel : BaseViewModel, IDisposable
     private EvolutionResult _evolutionResult = EvolutionResult.Unknown;
     private bool _flipToRight;
 
-    public EvolutionToolViewModel()
+    public EvolutionCalculatorViewModel()
     {
         _speakingSimulator = new SpeakingSimulator();
 
@@ -49,7 +49,7 @@ public sealed class EvolutionToolViewModel : BaseViewModel, IDisposable
         InstantDisplayCommand = new CommandHandler(InstantDisplay);
 
         int initialDelay = UserConfigurationManager.SpeakingSimulatorConfig.NarratorMode == NarratorMode.Instant ? 0 : 1500;
-        
+
         Task
             .Delay(initialDelay)
             .WaitAsync(CancellationToken.None)

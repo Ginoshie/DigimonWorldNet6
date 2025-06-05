@@ -4,8 +4,8 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              mc:Ignorable="d">
-    
-    <Button Background="Transparent" BorderThickness="0" Focusable="False">
+
+    <Button Background="Transparent" BorderThickness="0" Focusable="False" Command="{Binding DataContext.ShowEvolutionCalculatorCommand, RelativeSource={RelativeSource AncestorType=Window}}">
         <Button.Template>
             <ControlTemplate TargetType="Button">
                 <Grid Background="Transparent" Margin="7">

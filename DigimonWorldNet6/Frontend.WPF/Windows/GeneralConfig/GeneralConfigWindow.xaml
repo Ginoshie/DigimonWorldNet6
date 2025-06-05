@@ -38,8 +38,8 @@
 
     <Border Background="Transparent" Panel.ZIndex="1" KeyboardNavigation.TabNavigation="None">
         <Border CornerRadius="8" BorderBrush="Black" BorderThickness="3">
-            <Border CornerRadius="8" BorderBrush="#4A9FC5" BorderThickness="3" >
-                <Border CornerRadius="5" BorderBrush="#90D9FA" BorderThickness="3" >
+            <Border CornerRadius="8" BorderBrush="#4A9FC5" BorderThickness="3">
+                <Border CornerRadius="5" BorderBrush="#90D9FA" BorderThickness="3">
                     <Border CornerRadius="5" BorderBrush="Black" BorderThickness="3" Background="#2E3841">
                         <Grid>
                             <Grid.RowDefinitions>
@@ -116,11 +116,7 @@
                                     <Rectangle Grid.Row="0" Grid.Column="3" VerticalAlignment="Stretch" Fill="Black" Width="2" />
                                 </Grid>
 
-                                <StackPanel Grid.Row="0" Grid.Column="2">
-                                    <ContentControl Content="{Binding CurrentSelectedSettingCategoryUserControl}"
-                                                    Margin="10"
-                                                    Height="180" />
-                                </StackPanel>
+                                <ContentControl Grid.Row="0" Grid.Column="2" Content="{Binding CurrentSelectedSettingCategoryUserControl}" Margin="10" Height="180" />
                             </Grid>
 
                             <Grid Grid.Row="1" Column="0">
@@ -151,17 +147,17 @@
                                 <Rectangle Grid.Row="3" Grid.Column="0" VerticalAlignment="Stretch" Fill="Black" Height="2" />
                             </Grid>
 
-                                <Button Grid.Row="4" Grid.Column="0" Style="{StaticResource DefaultButtonStyle}"
-                                        Height="{StaticResource DefaultButtonHeight}"
-                                        Width="{StaticResource WindowButtonWidth}"
-                                        Margin="0, 10, 0, 10"
-                                        Content="Close"
-                                        Command="{Binding CloseCommand}">
-                                    <Button.ToolTip>
-                                        <ToolTip Style="{StaticResource DefaultToolTipRightStyle}"
-                                                 Content="Exit this window. (hotkey: ESC)" />
-                                    </Button.ToolTip>
-                                </Button>
+                            <Button Grid.Row="4" Grid.Column="0" Style="{StaticResource DefaultButtonStyle}"
+                                    Height="{StaticResource DefaultButtonHeight}"
+                                    Width="{StaticResource WindowButtonWidth}"
+                                    Margin="0, 10, 0, 10"
+                                    Content="Close"
+                                    Command="{Binding CloseCommand}">
+                                <Button.ToolTip>
+                                    <ToolTip Style="{StaticResource DefaultToolTipRightStyle}"
+                                             Content="Exit this window. (hotkey: ESC)" />
+                                </Button.ToolTip>
+                            </Button>
                         </Grid>
                     </Border>
                 </Border>
