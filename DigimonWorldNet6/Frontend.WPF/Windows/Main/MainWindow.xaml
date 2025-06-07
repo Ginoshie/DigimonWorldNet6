@@ -354,10 +354,10 @@
         <Border x:Name="OuterBorderWindow" Grid.Row="1" Grid.Column="1" Background="Transparent" Panel.ZIndex="1">
             <Border CornerRadius="8" BorderBrush="Black" BorderThickness="3">
                 <Border CornerRadius="8" BorderBrush="#4A9FC5" BorderThickness="3">
-                            <ContentControl Content="{Binding CurrentSelectedMainWindowContent}" x:Name="CurrentSelectedMainWindowContent"/>
-                        </Border>
-                    </Border>
+                    <ContentControl Content="{Binding CurrentSelectedMainWindowContent}" x:Name="CurrentSelectedMainWindowContent" />
                 </Border>
+            </Border>
+        </Border>
 
         <Grid Grid.Row="1" Grid.Column="0" Background="Transparent" VerticalAlignment="Center" SnapsToDevicePixels="True" UseLayoutRounding="True" Panel.ZIndex="0">
             <Grid.RenderTransform>
