@@ -29,7 +29,7 @@
                             <SolidColorBrush x:Name="innerBrush" Color="Transparent" />
                         </Border.BorderBrush>
                     </Border>
-                    <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5">
                         <Image x:Name="AnimatedImage" Source="/Images/Menu/Gauge Menu 1.png" Width="{StaticResource ButtonWidth}" Stretch="UniformToFill" />
                         <TextBlock Width="{StaticResource TextBlockWidth}" TextAlignment="Center" TextWrapping="Wrap">Evolution Calculator</TextBlock>
                     </StackPanel>
