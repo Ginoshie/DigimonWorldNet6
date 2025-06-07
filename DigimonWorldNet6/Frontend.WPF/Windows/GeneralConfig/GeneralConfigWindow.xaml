@@ -37,129 +37,89 @@
     </Window.InputBindings>
 
     <Border Background="Transparent" Panel.ZIndex="1" KeyboardNavigation.TabNavigation="None">
-        <Border CornerRadius="8" BorderBrush="Black" BorderThickness="3">
-            <Border CornerRadius="8" BorderBrush="#4A9FC5" BorderThickness="3">
-                <Border CornerRadius="5" BorderBrush="#90D9FA" BorderThickness="3">
-                    <Border CornerRadius="5" BorderBrush="Black" BorderThickness="3" Background="#2E3841">
-                        <Grid>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="*" />
-                                <RowDefinition Height="*" />
-                                <RowDefinition Height="*" />
-                                <RowDefinition Height="*" />
-                                <RowDefinition Height="*" />
-                            </Grid.RowDefinitions>
-                            <Label Grid.Row="0" Grid.Column="0" Height="40" Width="150" HorizontalAlignment="Center" Style="{StaticResource DefaultSheenLabelStyle}"
-                                   Content="CONFIGURATION" />
+        <Border CornerRadius="8" BorderBrush="Black" BorderThickness="3" SnapsToDevicePixels="True" UseLayoutRounding="True">
+            <Border CornerRadius="8" BorderBrush="#4A9FC5" BorderThickness="3" SnapsToDevicePixels="True" UseLayoutRounding="True">
+                <Border CornerRadius="5" BorderBrush="#90D9FA" BorderThickness="3" SnapsToDevicePixels="True" UseLayoutRounding="True">
+                    <Grid Background="#90D9FA" SnapsToDevicePixels="True" UseLayoutRounding="True">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
 
-                            <Grid Grid.Row="1" Column="0">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="2" />
-                                    <RowDefinition Height="3" />
-                                    <RowDefinition Height="2" />
-                                    <RowDefinition Height="2" />
-                                </Grid.RowDefinitions>
+                        <Border Grid.Row="0" Grid.Column="0" CornerRadius="5" BorderBrush="#90D9FA" BorderThickness="1.5">
+                            <Border CornerRadius="3" BorderBrush="Black" BorderThickness="3" Background="#2E3841">
+                                <Label Height="40" Width="150" HorizontalAlignment="Center" Style="{StaticResource DefaultSheenLabelStyle}"
+                                       Content="CONFIGURATION" />
+                            </Border>
+                        </Border>
 
-                                <Rectangle Grid.Row="0" Grid.Column="0" VerticalAlignment="Stretch" Fill="Black" Height="2" />
-                                <Rectangle Grid.Row="1" Grid.Column="0" VerticalAlignment="Stretch" Fill="#4A9FC5" Height="3" />
-                                <Rectangle Grid.Row="2" Grid.Column="0" VerticalAlignment="Stretch" Fill="#90D9FA" Height="2" />
-                                <Rectangle Grid.Row="3" Grid.Column="0" VerticalAlignment="Stretch" Fill="Black" Height="2" />
-                            </Grid>
-                            <Grid Grid.Row="2">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*" />
-                                    <ColumnDefinition Width="*" />
-                                    <ColumnDefinition Width="280" />
-                                </Grid.ColumnDefinitions>
-                                <StackPanel Grid.Column="0" Orientation="Vertical" VerticalAlignment="Center">
-                                    <Button Style="{StaticResource DefaultOptionPickerButtonStyle}"
-                                            Height="40"
-                                            Width="150"
-                                            HorizontalAlignment="Center"
-                                            Content="HOME"
-                                            Command="{Binding ShowHomeConfigurationSectionCommand}"
-                                            Tag="{Binding HomeConfigurationSectionIsSelected}" />
-                                    <!-- <Button Style="{StaticResource DefaultOptionPickerButtonStyle}" -->
-                                    <!--         Height="40" -->
-                                    <!--         Width="150" -->
-                                    <!--         HorizontalAlignment="Center" -->
-                                    <!--         Content="GENERAL" -->
-                                    <!--         Command="{Binding ShowGeneralConfigurationSectionCommand}" -->
-                                    <!--         Tag="{Binding GeneralConfigurationSectionIsSelected}" /> -->
-                                    <Button Style="{StaticResource DefaultOptionPickerButtonStyle}"
-                                            Height="40"
-                                            Width="150"
-                                            HorizontalAlignment="Center"
-                                            Content="MUSIC PLAYER"
-                                            Command="{Binding ShowMusicPlayerConfigurationSectionCommand}"
-                                            Tag="{Binding MusicPlayerConfigurationSectionIsSelected}" />
-                                    <Button Style="{StaticResource DefaultOptionPickerButtonStyle}"
-                                            Height="40"
-                                            Width="150"
-                                            HorizontalAlignment="Center"
-                                            Content="NARRATION"
-                                            Command="{Binding ShowNarrationConfigurationSectionCommand}"
-                                            Tag="{Binding NarrationConfigurationSectionIsSelected}" />
-                                </StackPanel>
+                        <Grid Grid.Row="2"  Background="#90D9FA">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="280" />
+                            </Grid.ColumnDefinitions>
 
-                                <Grid Grid.Column="1">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="2" />
-                                        <ColumnDefinition Width="3" />
-                                        <ColumnDefinition Width="2" />
-                                        <ColumnDefinition Width="2" />
-                                    </Grid.ColumnDefinitions>
-
-                                    <Rectangle Grid.Row="0" Grid.Column="0" VerticalAlignment="Stretch" Fill="Black" Width="2" />
-                                    <Rectangle Grid.Row="0" Grid.Column="1" VerticalAlignment="Stretch" Fill="#4A9FC5" Width="3" />
-                                    <Rectangle Grid.Row="0" Grid.Column="2" VerticalAlignment="Stretch" Fill="#90D9FA" Width="2" />
-                                    <Rectangle Grid.Row="0" Grid.Column="3" VerticalAlignment="Stretch" Fill="Black" Width="2" />
-                                </Grid>
-
-                                <ContentControl Grid.Row="0" Grid.Column="2" Content="{Binding CurrentSelectedSettingCategoryUserControl}" Margin="10" Height="180" />
-                            </Grid>
-
-                            <Grid Grid.Row="1" Column="0">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="2" />
-                                    <RowDefinition Height="3" />
-                                    <RowDefinition Height="2" />
-                                    <RowDefinition Height="2" />
-                                </Grid.RowDefinitions>
-
-                                <Rectangle Grid.Row="0" Grid.Column="0" VerticalAlignment="Stretch" Fill="Black" Height="2" />
-                                <Rectangle Grid.Row="1" Grid.Column="0" VerticalAlignment="Stretch" Fill="#4A9FC5" Height="3" />
-                                <Rectangle Grid.Row="2" Grid.Column="0" VerticalAlignment="Stretch" Fill="#90D9FA" Height="2" />
-                                <Rectangle Grid.Row="3" Grid.Column="0" VerticalAlignment="Stretch" Fill="Black" Height="2" />
-                            </Grid>
-
-                            <Grid Grid.Row="3">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="2" />
-                                    <RowDefinition Height="3" />
-                                    <RowDefinition Height="2" />
-                                    <RowDefinition Height="2" />
-                                </Grid.RowDefinitions>
-
-                                <Rectangle Grid.Row="0" Grid.Column="0" VerticalAlignment="Stretch" Fill="Black" Height="2" />
-                                <Rectangle Grid.Row="1" Grid.Column="0" VerticalAlignment="Stretch" Fill="#4A9FC5" Height="3" />
-                                <Rectangle Grid.Row="2" Grid.Column="0" VerticalAlignment="Stretch" Fill="#90D9FA" Height="2" />
-                                <Rectangle Grid.Row="3" Grid.Column="0" VerticalAlignment="Stretch" Fill="Black" Height="2" />
-                            </Grid>
-
-                            <Button Grid.Row="4" Grid.Column="0" Style="{StaticResource DefaultButtonStyle}"
-                                    Height="{StaticResource DefaultButtonHeight}"
-                                    Width="{StaticResource WindowButtonWidth}"
-                                    Margin="0, 10, 0, 10"
-                                    Content="Close"
-                                    Command="{Binding CloseCommand}">
-                                <Button.ToolTip>
-                                    <ToolTip Style="{StaticResource DefaultToolTipRightStyle}"
-                                             Content="Exit this window. (hotkey: ESC)" />
-                                </Button.ToolTip>
-                            </Button>
+                            <Border Grid.Column="0" CornerRadius="5" BorderBrush="#90D9FA" BorderThickness="1.5">
+                                <Border CornerRadius="3" BorderBrush="Black" BorderThickness="3" Background="#2E3841">
+                                    <StackPanel  Orientation="Vertical" VerticalAlignment="Center">
+                                        <Button Style="{StaticResource DefaultOptionPickerButtonStyle}"
+                                                Height="40"
+                                                Width="150"
+                                                HorizontalAlignment="Center"
+                                                Content="HOME"
+                                                Command="{Binding ShowHomeConfigurationSectionCommand}"
+                                                Tag="{Binding HomeConfigurationSectionIsSelected}" />
+                                        <!-- <Button Style="{StaticResource DefaultOptionPickerButtonStyle}" -->
+                                        <!--         Height="40" -->
+                                        <!--         Width="150" -->
+                                        <!--         HorizontalAlignment="Center" -->
+                                        <!--         Content="GENERAL" -->
+                                        <!--         Command="{Binding ShowGeneralConfigurationSectionCommand}" -->
+                                        <!--         Tag="{Binding GeneralConfigurationSectionIsSelected}" /> -->
+                                        <Button Style="{StaticResource DefaultOptionPickerButtonStyle}"
+                                                Height="40"
+                                                Width="150"
+                                                HorizontalAlignment="Center"
+                                                Content="MUSIC PLAYER"
+                                                Command="{Binding ShowMusicPlayerConfigurationSectionCommand}"
+                                                Tag="{Binding MusicPlayerConfigurationSectionIsSelected}" />
+                                        <Button Style="{StaticResource DefaultOptionPickerButtonStyle}"
+                                                Height="40"
+                                                Width="150"
+                                                HorizontalAlignment="Center"
+                                                Content="NARRATION"
+                                                Command="{Binding ShowNarrationConfigurationSectionCommand}"
+                                                Tag="{Binding NarrationConfigurationSectionIsSelected}" />
+                                    </StackPanel>
+                                </Border>
+                            </Border>
+                            <Border Grid.Row="0" Grid.Column="2" CornerRadius="5" BorderBrush="#90D9FA" BorderThickness="1.5">
+                                <Border CornerRadius="3" BorderBrush="Black" BorderThickness="3" Background="#2E3841">
+                                    <ContentControl Content="{Binding CurrentSelectedSettingCategoryUserControl}" Margin="10" Height="180" />
+                                </Border>
+                            </Border>
                         </Grid>
-                    </Border>
+
+                        <Border Grid.Row="4" Grid.Column="0" CornerRadius="5" BorderBrush="#90D9FA" BorderThickness="1.5">
+                            <Border CornerRadius="3" BorderBrush="Black" BorderThickness="3" Background="#2E3841">
+                                <Button Style="{StaticResource DefaultButtonStyle}"
+                                        Height="{StaticResource DefaultButtonHeight}"
+                                        Width="{StaticResource WindowButtonWidth}"
+                                        Margin="0, 10, 0, 10"
+                                        Content="Close"
+                                        Command="{Binding CloseCommand}">
+                                    <Button.ToolTip>
+                                        <ToolTip Style="{StaticResource DefaultToolTipRightStyle}"
+                                                 Content="Exit this window. (hotkey: ESC)" />
+                                    </Button.ToolTip>
+                                </Button>
+                            </Border>
+                        </Border>
+                    </Grid>
                 </Border>
             </Border>
         </Border>

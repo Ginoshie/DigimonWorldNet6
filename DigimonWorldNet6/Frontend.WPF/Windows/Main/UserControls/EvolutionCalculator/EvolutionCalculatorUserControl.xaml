@@ -27,476 +27,472 @@
         </ResourceDictionary>
     </UserControl.Resources>
 
-    <Grid KeyboardNavigation.TabNavigation="Cycle">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="*" />
-        </Grid.ColumnDefinitions>
-        <Grid Column="0">
+    <Border CornerRadius="5" BorderBrush="#90D9FA" BorderThickness="0" Background="#90D9FA">
+        <Grid KeyboardNavigation.TabNavigation="Cycle" Background="Transparent">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="320" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="*" />
-                <RowDefinition Height="*" />
-                <RowDefinition Height="*" />
-            </Grid.RowDefinitions>
-            <Label Grid.Row="0" Grid.Column="0" Height="40" Width="150" Style="{StaticResource DefaultSheenLabelStyle}" IsTabStop="False">
-                YOUR DIGIMON
-            </Label>
-            <GroupBox Grid.Column="0" Grid.Row="1" Header="Your digimon">
-                <GroupBox.Template>
-                    <ControlTemplate TargetType="GroupBox">
-                        <Grid>
-                            <ContentPresenter ContentSource="Content" Margin="10" />
+            <Border Grid.Column="0" CornerRadius="5" BorderBrush="#90D9FA" BorderThickness="3, 3, 1.5, 3" Background="#90D9FA">
+                <Border CornerRadius="3" BorderBrush="Black" BorderThickness="3">
+                    <Grid Column="0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="300" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+                        <Label Grid.Row="0" Grid.Column="0" Height="40" Width="150" Style="{StaticResource DefaultSheenLabelStyle}" IsTabStop="False">
+                            YOUR DIGIMON
+                        </Label>
+                        <GroupBox Grid.Column="0" Grid.Row="1" Header="Your digimon">
+                            <GroupBox.Template>
+                                <ControlTemplate TargetType="GroupBox">
+                                    <Grid>
+                                        <ContentPresenter ContentSource="Content" Margin="10" />
+                                    </Grid>
+                                </ControlTemplate>
+                            </GroupBox.Template>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="{StaticResource DefaultTextBoxGridRowHeight}" />
+                                    <RowDefinition Height="{StaticResource DefaultTextBoxGridRowHeight}" />
+                                    <RowDefinition Height="{StaticResource DefaultTextBoxGridRowHeight}" />
+                                    <RowDefinition Height="{StaticResource DefaultTextBoxGridRowHeight}" />
+                                    <RowDefinition Height="{StaticResource DefaultTextBoxGridRowHeight}" />
+                                    <RowDefinition Height="{StaticResource DefaultTextBoxGridRowHeight}" />
+                                    <RowDefinition Height="{StaticResource DefaultTextBoxGridRowHeight}" />
+                                    <RowDefinition Height="{StaticResource DefaultTextBoxGridRowHeight}" />
+                                    <RowDefinition Height="{StaticResource DefaultTextBoxGridRowHeight}" />
+                                    <RowDefinition Height="{StaticResource DefaultTextBoxGridRowHeight}" />
+                                    <RowDefinition Height="{StaticResource DefaultTextBoxGridRowHeight}" />
+                                    <RowDefinition Height="{StaticResource DefaultTextBoxGridRowHeight}" />
+                                    <RowDefinition Height="{StaticResource DefaultTextBoxGridRowHeight}" />
+                                </Grid.RowDefinitions>
+
+                                <Label Grid.Column="0" Grid.Row="0" Style="{StaticResource DefaultLabelStyle}"
+                                       Content="Digimon:">
+                                    <Label.ToolTip>
+                                        <ToolTip Style="{StaticResource DefaultToolTipLeftStyle}">
+                                            <TextBlock Text="The digimon type of your digimon." />
+                                        </ToolTip>
+                                    </Label.ToolTip>
+                                </Label>
+                                <ComboBox Name="Digimon" Grid.Column="1" Grid.Row="0" Grid.ColumnSpan="2" HorizontalAlignment="Left" FocusVisualStyle="{StaticResource DefaultFocusStyle}"
+                                          Style="{StaticResource DefaultComboboxStyle}"
+                                          SelectedIndex="0"
+                                          ItemsSource="{Binding Source={StaticResource DigimonTypes}}"
+                                          SelectedItem="{Binding DigimonType}"
+                                          Width="178">
+                                    <ComboBox.ToolTip>
+                                        <ToolTip Content="The digimon type of your digimon." Style="{StaticResource DefaultToolTipRightStyle}" />
+                                    </ComboBox.ToolTip>
+                                </ComboBox>
+
+                                <Label Grid.Column="0" Grid.Row="1" Content="HP:" Style="{StaticResource DefaultLabelStyle}">
+                                    <Label.ToolTip>
+                                        <ToolTip Style="{StaticResource DefaultToolTipLeftStyle}">
+                                            <TextBlock Text="The 'HP' stat value of your digimon." />
+                                        </ToolTip>
+                                    </Label.ToolTip>
+                                </Label>
+                                <TextBox Name="Hp" Grid.Column="1" Grid.Row="1" FocusVisualStyle="{StaticResource DefaultFocusStyle}" Style="{StaticResource DefaultTextBoxStyle}">
+                                    <TextBox.ToolTip>
+                                        <ToolTip Style="{StaticResource DefaultToolTipRightStyle}">
+                                            <TextBlock Text="The 'HP' stat value of your digimon." />
+                                        </ToolTip>
+                                    </TextBox.ToolTip>
+                                    <b:Interaction.Behaviors>
+                                        <behaviors:DefaultValueZeroTextBoxBehavior />
+                                    </b:Interaction.Behaviors>
+                                    <TextBox.Text>
+                                        <Binding Path="HP" UpdateSourceTrigger="PropertyChanged" Mode="TwoWay">
+                                            <Binding.ValidationRules>
+                                                <combatStatValidation:HpStringValidationRule ValidationStep="CommittedValue" />
+                                            </Binding.ValidationRules>
+                                        </Binding>
+                                    </TextBox.Text>
+                                </TextBox>
+
+                                <Label Grid.Column="0" Grid.Row="2" Content="MP:" Style="{StaticResource DefaultLabelStyle}">
+                                    <Label.ToolTip>
+                                        <ToolTip Style="{StaticResource DefaultToolTipLeftStyle}">
+                                            <TextBlock Text="The 'MP' stat value of your digimon." />
+                                        </ToolTip>
+                                    </Label.ToolTip>
+                                </Label>
+                                <TextBox Name="Mp" Grid.Column="1" Grid.Row="2" FocusVisualStyle="{StaticResource DefaultFocusStyle}" Style="{StaticResource DefaultTextBoxStyle}">
+                                    <TextBox.ToolTip>
+                                        <ToolTip Style="{StaticResource DefaultToolTipRightStyle}">
+                                            <TextBlock Text="The 'MP' stat value of your digimon." />
+                                        </ToolTip>
+                                    </TextBox.ToolTip>
+                                    <b:Interaction.Behaviors>
+                                        <behaviors:DefaultValueZeroTextBoxBehavior />
+                                    </b:Interaction.Behaviors>
+                                    <TextBox.Text>
+                                        <Binding Path="MP" UpdateSourceTrigger="PropertyChanged" Mode="TwoWay">
+                                            <Binding.ValidationRules>
+                                                <combatStatValidation:MpStringValidationRule ValidationStep="CommittedValue" />
+                                            </Binding.ValidationRules>
+                                        </Binding>
+                                    </TextBox.Text>
+                                </TextBox>
+
+                                <Label Grid.Column="0" Grid.Row="3" Content="Off:" Style="{StaticResource DefaultLabelStyle}">
+                                    <Label.ToolTip>
+                                        <ToolTip Style="{StaticResource DefaultToolTipLeftStyle}">
+                                            <TextBlock Text="The 'Off' stat value of your digimon." />
+                                        </ToolTip>
+                                    </Label.ToolTip>
+                                </Label>
+                                <TextBox Name="Off" Grid.Column="1" Grid.Row="3" FocusVisualStyle="{StaticResource DefaultFocusStyle}" Style="{StaticResource DefaultTextBoxStyle}">
+                                    <TextBox.ToolTip>
+                                        <ToolTip Style="{StaticResource DefaultToolTipRightStyle}">
+                                            <TextBlock Text="The 'Off' stat value of your digimon." />
+                                        </ToolTip>
+                                    </TextBox.ToolTip>
+                                    <b:Interaction.Behaviors>
+                                        <behaviors:DefaultValueZeroTextBoxBehavior />
+                                    </b:Interaction.Behaviors>
+                                    <TextBox.Text>
+                                        <Binding Path="Off" UpdateSourceTrigger="PropertyChanged" Mode="TwoWay">
+                                            <Binding.ValidationRules>
+                                                <combatStatValidation:DefenseStringValidationRule ValidationStep="CommittedValue" />
+                                            </Binding.ValidationRules>
+                                        </Binding>
+                                    </TextBox.Text>
+                                </TextBox>
+
+                                <Label Grid.Column="0" Grid.Row="4" Content="Def:" Style="{StaticResource DefaultLabelStyle}">
+                                    <Label.ToolTip>
+                                        <ToolTip Style="{StaticResource DefaultToolTipLeftStyle}">
+                                            <TextBlock Text="The 'Def' stat value of your digimon." />
+                                        </ToolTip>
+                                    </Label.ToolTip>
+                                </Label>
+                                <TextBox Name="Def" Grid.Column="1" Grid.Row="4" FocusVisualStyle="{StaticResource DefaultFocusStyle}" Style="{StaticResource DefaultTextBoxStyle}">
+                                    <TextBox.ToolTip>
+                                        <ToolTip Style="{StaticResource DefaultToolTipRightStyle}">
+                                            <TextBlock Text="The 'Def' stat value of your digimon." />
+                                        </ToolTip>
+                                    </TextBox.ToolTip>
+                                    <b:Interaction.Behaviors>
+                                        <behaviors:DefaultValueZeroTextBoxBehavior />
+                                    </b:Interaction.Behaviors>
+                                    <TextBox.Text>
+                                        <Binding Path="Def" UpdateSourceTrigger="PropertyChanged" Mode="TwoWay">
+                                            <Binding.ValidationRules>
+                                                <combatStatValidation:BrainsStringValidationRule ValidationStep="CommittedValue" />
+                                            </Binding.ValidationRules>
+                                        </Binding>
+                                    </TextBox.Text>
+                                </TextBox>
+
+                                <Label Grid.Column="0" Grid.Row="5" Content="Speed:" Style="{StaticResource DefaultLabelStyle}">
+                                    <Label.ToolTip>
+                                        <ToolTip Style="{StaticResource DefaultToolTipLeftStyle}">
+                                            <TextBlock Text="The 'Speed' stat value of your digimon." />
+                                        </ToolTip>
+                                    </Label.ToolTip>
+                                </Label>
+                                <TextBox Name="Speed" Grid.Column="1" Grid.Row="5" FocusVisualStyle="{StaticResource DefaultFocusStyle}" Style="{StaticResource DefaultTextBoxStyle}">
+                                    <TextBox.ToolTip>
+                                        <ToolTip Style="{StaticResource DefaultToolTipRightStyle}">
+                                            <TextBlock Text="The 'Speed' stat value of your digimon." />
+                                        </ToolTip>
+                                    </TextBox.ToolTip>
+                                    <b:Interaction.Behaviors>
+                                        <behaviors:DefaultValueZeroTextBoxBehavior />
+                                    </b:Interaction.Behaviors>
+                                    <TextBox.Text>
+                                        <Binding Path="Speed" UpdateSourceTrigger="PropertyChanged" Mode="TwoWay">
+                                            <Binding.ValidationRules>
+                                                <combatStatValidation:SpeedStringValidationRule ValidationStep="CommittedValue" />
+                                            </Binding.ValidationRules>
+                                        </Binding>
+                                    </TextBox.Text>
+                                </TextBox>
+
+                                <Label Grid.Column="0" Grid.Row="6" Content="Brains:" Style="{StaticResource DefaultLabelStyle}">
+                                    <Label.ToolTip>
+                                        <ToolTip Style="{StaticResource DefaultToolTipLeftStyle}">
+                                            <TextBlock Text="The 'Brains' stat value of your digimon." />
+                                        </ToolTip>
+                                    </Label.ToolTip>
+                                </Label>
+                                <TextBox Name="Brains" Grid.Column="1" Grid.Row="6" FocusVisualStyle="{StaticResource DefaultFocusStyle}" Style="{StaticResource DefaultTextBoxStyle}">
+                                    <TextBox.ToolTip>
+                                        <ToolTip Style="{StaticResource DefaultToolTipRightStyle}">
+                                            <TextBlock Text="The 'Brains' stat value of your digimon." />
+                                        </ToolTip>
+                                    </TextBox.ToolTip>
+                                    <b:Interaction.Behaviors>
+                                        <behaviors:DefaultValueZeroTextBoxBehavior />
+                                    </b:Interaction.Behaviors>
+                                    <TextBox.Text>
+                                        <Binding Path="Brains" UpdateSourceTrigger="PropertyChanged" Mode="TwoWay">
+                                            <Binding.ValidationRules>
+                                                <combatStatValidation:OffenseStringValidationRule ValidationStep="CommittedValue" />
+                                            </Binding.ValidationRules>
+                                        </Binding>
+                                    </TextBox.Text>
+                                </TextBox>
+
+                                <Label Grid.Column="0" Grid.Row="7" Content="Care Mistakes:" Style="{StaticResource DefaultLabelStyle}">
+                                    <Label.ToolTip>
+                                        <ToolTip Style="{StaticResource DefaultToolTipLeftStyle}">
+                                            <TextBlock
+                                                Text="The care mistake count of your digimon.&#x0a;&#x0a;This number is reset upon evolution and death.&#x0a;&#x0a;Care mistakes are:&#x0a;- pooping on the ground&#x0a;- not feeding, while energy level is below threshold, until the hunger timer runs out while not sleeping&#x0a;- not sleeping until the sleeping timer runs out" />
+                                        </ToolTip>
+                                    </Label.ToolTip>
+                                </Label>
+                                <TextBox Name="CareMistakes" Grid.Column="1" Grid.Row="7" FocusVisualStyle="{StaticResource DefaultFocusStyle}" Style="{StaticResource DefaultTextBoxStyle}">
+                                    <TextBox.ToolTip>
+                                        <ToolTip Style="{StaticResource DefaultToolTipRightStyle}">
+                                            <TextBlock
+                                                Text="The care mistake count of your digimon.&#x0a;&#x0a;This number is reset upon evolution and death.&#x0a;&#x0a;Care mistakes are:&#x0a;- pooping on the ground&#x0a;- not feeding, while energy level is below threshold, until the hunger timer runs out while not sleeping&#x0a;- not sleeping until the sleeping timer runs out" />
+                                        </ToolTip>
+                                    </TextBox.ToolTip>
+                                    <b:Interaction.Behaviors>
+                                        <behaviors:DefaultValueZeroTextBoxBehavior />
+                                    </b:Interaction.Behaviors>
+                                    <TextBox.Text>
+                                        <Binding Path="CareMistakes" UpdateSourceTrigger="PropertyChanged" Mode="TwoWay">
+                                            <Binding.ValidationRules>
+                                                <nonCombatStatValidation:CareMistakesValidationRule ValidationStep="CommittedValue" />
+                                            </Binding.ValidationRules>
+                                        </Binding>
+                                    </TextBox.Text>
+                                </TextBox>
+
+                                <Label Grid.Column="0" Grid.Row="8" Content="Weight:" Style="{StaticResource DefaultLabelStyle}">
+                                    <Label.ToolTip>
+                                        <ToolTip Style="{StaticResource DefaultToolTipLeftStyle}">
+                                            <TextBlock Text="The weight value of your digimon." />
+                                        </ToolTip>
+                                    </Label.ToolTip>
+                                </Label>
+                                <TextBox Name="Weight" Grid.Column="1" Grid.Row="8" FocusVisualStyle="{StaticResource DefaultFocusStyle}" Style="{StaticResource DefaultTextBoxStyle}">
+                                    <TextBox.ToolTip>
+                                        <ToolTip Style="{StaticResource DefaultToolTipRightStyle}">
+                                            <TextBlock Text="The weight value of your digimon." />
+                                        </ToolTip>
+                                    </TextBox.ToolTip>
+                                    <b:Interaction.Behaviors>
+                                        <behaviors:DefaultValueZeroTextBoxBehavior />
+                                    </b:Interaction.Behaviors>
+                                    <TextBox.Text>
+                                        <Binding Path="Weight" UpdateSourceTrigger="PropertyChanged" Mode="TwoWay">
+                                            <Binding.ValidationRules>
+                                                <nonCombatStatValidation:WeightValidationRule ValidationStep="CommittedValue" />
+                                            </Binding.ValidationRules>
+                                        </Binding>
+                                    </TextBox.Text>
+                                </TextBox>
+
+                                <Label Grid.Column="0" Grid.Row="9" Content="Happiness:" Style="{StaticResource DefaultLabelStyle}">
+                                    <Label.ToolTip>
+                                        <ToolTip Style="{StaticResource DefaultToolTipLeftStyle}">
+                                            <TextBlock
+                                                Text="The happiness value of your digimon.&#x0a;&#x0a;A full blue bar with a red angry face icon is -100.&#x0a;A blue slither but mostly full pink bar with a yellow smiling face icon is 0.&#x0a;A full blue bar with yellow smiling face icon is 100." />
+                                        </ToolTip>
+                                    </Label.ToolTip>
+                                </Label>
+                                <TextBox Name="Happiness" Grid.Column="1" Grid.Row="9" FocusVisualStyle="{StaticResource DefaultFocusStyle}" Style="{StaticResource DefaultTextBoxStyle}">
+                                    <TextBox.ToolTip>
+                                        <ToolTip Style="{StaticResource DefaultToolTipRightStyle}">
+                                            <TextBlock
+                                                Text="The happiness value of your digimon.&#x0a;&#x0a;A full blue bar with a red angry face icon is -100.&#x0a;A blue slither but mostly full pink bar with a yellow smiling face icon is 0.&#x0a;A full blue bar with yellow smiling face icon is 100." />
+                                        </ToolTip>
+                                    </TextBox.ToolTip>
+                                    <b:Interaction.Behaviors>
+                                        <behaviors:DefaultValueZeroTextBoxBehavior />
+                                    </b:Interaction.Behaviors>
+                                    <TextBox.Text>
+                                        <Binding Path="Happiness" UpdateSourceTrigger="PropertyChanged" Mode="TwoWay">
+                                            <Binding.ValidationRules>
+                                                <nonCombatStatValidation:HappinessValidationRule ValidationStep="CommittedValue" />
+                                            </Binding.ValidationRules>
+                                        </Binding>
+                                    </TextBox.Text>
+                                </TextBox>
+
+                                <Label Grid.Column="0" Grid.Row="10" Content="Discipline:" Style="{StaticResource DefaultLabelStyle}">
+                                    <Label.ToolTip>
+                                        <ToolTip Style="{StaticResource DefaultToolTipLeftStyle}">
+                                            <TextBlock
+                                                Text="The discipline value of your digimon.&#x0a;&#x0a;A full blue bar with a blue face icon with sunglasses is 0.&#x0a;A blue slither but mostly full pink bar with a yellow face icon with glasses is 50.&#x0a;A full blue bar with yellow face icon with glasses icon is 100." />
+                                        </ToolTip>
+                                    </Label.ToolTip>
+                                </Label>
+                                <TextBox Name="Discipline" Grid.Column="1" Grid.Row="10" FocusVisualStyle="{StaticResource DefaultFocusStyle}" Style="{StaticResource DefaultTextBoxStyle}">
+                                    <TextBox.ToolTip>
+                                        <ToolTip Style="{StaticResource DefaultToolTipRightStyle}">
+                                            <TextBlock
+                                                Text="The discipline value of your digimon.&#x0a;&#x0a;A full blue bar with a blue face icon with sunglasses is 0.&#x0a;A blue slither but mostly full pink bar with a yellow face icon with glasses is 50.&#x0a;A full blue bar with yellow face icon with glasses icon is 100." />
+                                        </ToolTip>
+                                    </TextBox.ToolTip>
+                                    <b:Interaction.Behaviors>
+                                        <behaviors:DefaultValueZeroTextBoxBehavior />
+                                    </b:Interaction.Behaviors>
+                                    <TextBox.Text>
+                                        <Binding Path="Discipline" UpdateSourceTrigger="PropertyChanged" Mode="TwoWay">
+                                            <Binding.ValidationRules>
+                                                <nonCombatStatValidation:DisciplineValidationRule ValidationStep="CommittedValue" />
+                                            </Binding.ValidationRules>
+                                        </Binding>
+                                    </TextBox.Text>
+                                </TextBox>
+
+                                <Label Grid.Column="0" Grid.Row="11" Content="Battles:" Style="{StaticResource DefaultLabelStyle}">
+                                    <Label.ToolTip>
+                                        <ToolTip Style="{StaticResource DefaultToolTipLeftStyle}">
+                                            <TextBlock Text="The battle count of your digimon.&#x0a;&#x0a;This number is reset upon evolution and death." />
+                                        </ToolTip>
+                                    </Label.ToolTip>
+                                </Label>
+                                <TextBox Name="Battles" Grid.Column="1" Grid.Row="11" FocusVisualStyle="{StaticResource DefaultFocusStyle}" Style="{StaticResource DefaultTextBoxStyle}">
+                                    <TextBox.ToolTip>
+                                        <ToolTip Style="{StaticResource DefaultToolTipRightStyle}">
+                                            <TextBlock Text="The battle count of your digimon.&#x0a;&#x0a;This number is reset upon evolution and death." />
+                                        </ToolTip>
+                                    </TextBox.ToolTip>
+                                    <b:Interaction.Behaviors>
+                                        <behaviors:DefaultValueZeroTextBoxBehavior />
+                                    </b:Interaction.Behaviors>
+                                    <TextBox.Text>
+                                        <Binding Path="Battles" UpdateSourceTrigger="PropertyChanged" Mode="TwoWay">
+                                            <Binding.ValidationRules>
+                                                <nonCombatStatValidation:BattlesValidationRule ValidationStep="CommittedValue" />
+                                            </Binding.ValidationRules>
+                                        </Binding>
+                                    </TextBox.Text>
+                                </TextBox>
+
+                                <Label Grid.Column="0" Grid.Row="12" Content="Techniques:" Style="{StaticResource DefaultLabelStyle}">
+                                    <Label.ToolTip>
+                                        <ToolTip Style="{StaticResource DefaultToolTipLeftStyle}">
+                                            <TextBlock
+                                                Text="The number of total known techniques.&#x0a;&#x0a;You can find this in the 'Tech' of the Digimon window.&#x0a;&#x0a;Count all the available techniques, not just those that your digimon can use." />
+                                        </ToolTip>
+                                    </Label.ToolTip>
+                                </Label>
+                                <TextBox Name="Techniques" Grid.Column="1" Grid.Row="12" FocusVisualStyle="{StaticResource DefaultFocusStyle}" Style="{StaticResource DefaultTextBoxStyle}">
+                                    <TextBox.ToolTip>
+                                        <ToolTip Style="{StaticResource DefaultToolTipRightStyle}">
+                                            <TextBlock
+                                                Text="The number of total known techniques.&#x0a;&#x0a;You can find this in the 'Tech' of the Digimon window.&#x0a;&#x0a;Count all the available techniques, not just those that your digimon can use." />
+                                        </ToolTip>
+                                    </TextBox.ToolTip>
+                                    <b:Interaction.Behaviors>
+                                        <behaviors:DefaultValueZeroTextBoxBehavior />
+                                    </b:Interaction.Behaviors>
+                                    <TextBox.Text>
+                                        <Binding Path="Techniques" UpdateSourceTrigger="PropertyChanged" Mode="TwoWay">
+                                            <Binding.ValidationRules>
+                                                <nonCombatStatValidation:TechniquesValidationRule ValidationStep="CommittedValue" />
+                                            </Binding.ValidationRules>
+                                        </Binding>
+                                    </TextBox.Text>
+                                </TextBox>
+                            </Grid>
+                        </GroupBox>
+
+                        <Button Grid.Column="0" Grid.Row="2" FocusVisualStyle="{StaticResource DefaultFocusStyle}" Style="{StaticResource CalculateEvolutionButtonStyle}"
+                                Height="{StaticResource DefaultButtonHeight}"
+                                Content="{Binding CalculateButtonText}"
+                                Command="{Binding SetEvolutionResult}">
+                            <Button.ToolTip>
+                                <ToolTip Style="{StaticResource DefaultToolTipRightStyle}" Content="Calculate the evolution result" />
+                            </Button.ToolTip>
+                        </Button>
+
+                    </Grid>
+                </Border>
+            </Border>
+            <Border Grid.Column="1" CornerRadius="5" BorderBrush="#90D9FA" BorderThickness="1.5, 3, 3, 3" Background="#90D9FA">
+                <Border CornerRadius="3" BorderBrush="Black" BorderThickness="3">
+                    <Grid Column="1" KeyboardNavigation.TabNavigation="None">
+
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+
+                        <Grid Grid.Row="0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="175" />
+                                <ColumnDefinition Width="600" />
+                            </Grid.ColumnDefinitions>
+
+                            <userControls1:JijimonNarrator Grid.Column="0" Grid.Row="0" />
+
+                            <userControls1:JijimonNaratorTextDisplay Grid.Row="0" Grid.Column="1" />
+
                         </Grid>
-                    </ControlTemplate>
-                </GroupBox.Template>
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="*" />
-                    </Grid.ColumnDefinitions>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="{StaticResource DefaultTextBoxGridRowHeight}" />
-                        <RowDefinition Height="{StaticResource DefaultTextBoxGridRowHeight}" />
-                        <RowDefinition Height="{StaticResource DefaultTextBoxGridRowHeight}" />
-                        <RowDefinition Height="{StaticResource DefaultTextBoxGridRowHeight}" />
-                        <RowDefinition Height="{StaticResource DefaultTextBoxGridRowHeight}" />
-                        <RowDefinition Height="{StaticResource DefaultTextBoxGridRowHeight}" />
-                        <RowDefinition Height="{StaticResource DefaultTextBoxGridRowHeight}" />
-                        <RowDefinition Height="{StaticResource DefaultTextBoxGridRowHeight}" />
-                        <RowDefinition Height="{StaticResource DefaultTextBoxGridRowHeight}" />
-                        <RowDefinition Height="{StaticResource DefaultTextBoxGridRowHeight}" />
-                        <RowDefinition Height="{StaticResource DefaultTextBoxGridRowHeight}" />
-                        <RowDefinition Height="{StaticResource DefaultTextBoxGridRowHeight}" />
-                        <RowDefinition Height="{StaticResource DefaultTextBoxGridRowHeight}" />
-                    </Grid.RowDefinitions>
+                        <Grid Grid.Row="1">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Border Grid.Column="0" Grid.Row="0" BorderBrush="#060100" BorderThickness="3,3,0,0" Margin="15" HorizontalAlignment="Center" VerticalAlignment="Bottom">
+                                <Border BorderBrush="#6789A5" BorderThickness="0,0,3,3" Background="#354A5B">
+                                    <Image Width="300" Height="300" Source="{Binding DigimonType, Converter={StaticResource EnumToImageConverter}}" Stretch="Uniform" />
+                                </Border>
+                            </Border>
 
-                    <Label Grid.Column="0" Grid.Row="0" Style="{StaticResource DefaultLabelStyle}"
-                           Content="Digimon:">
-                        <Label.ToolTip>
-                            <ToolTip Style="{StaticResource DefaultToolTipLeftStyle}">
-                                <TextBlock Text="The digimon type of your digimon." />
-                            </ToolTip>
-                        </Label.ToolTip>
-                    </Label>
-                    <ComboBox Name="Digimon" Grid.Column="1" Grid.Row="0" Grid.ColumnSpan="2" HorizontalAlignment="Left" FocusVisualStyle="{StaticResource DefaultFocusStyle}"
-                              Style="{StaticResource DefaultComboboxStyle}"
-                              SelectedIndex="0"
-                              ItemsSource="{Binding Source={StaticResource DigimonTypes}}"
-                              SelectedItem="{Binding DigimonType}"
-                              Width="178">
-                        <ComboBox.ToolTip>
-                            <ToolTip Content="The digimon type of your digimon." Style="{StaticResource DefaultToolTipRightStyle}" />
-                        </ComboBox.ToolTip>
-                    </ComboBox>
+                            <Grid Grid.Column="1" Grid.Row="0">
+                                <Path Grid.Column="0" Grid.Row="0"
+                                      Data="M 0 0 L 0 90 L 30 45 Z"
+                                      VerticalAlignment="Center"
+                                      HorizontalAlignment="Right"
+                                      Fill="#575C60"
+                                      Width="30" Height="90" />
 
-                    <Label Grid.Column="0" Grid.Row="1" Content="HP:" Style="{StaticResource DefaultLabelStyle}">
-                        <Label.ToolTip>
-                            <ToolTip Style="{StaticResource DefaultToolTipLeftStyle}">
-                                <TextBlock Text="The 'HP' stat value of your digimon." />
-                            </ToolTip>
-                        </Label.ToolTip>
-                    </Label>
-                    <TextBox Name="Hp" Grid.Column="1" Grid.Row="1" FocusVisualStyle="{StaticResource DefaultFocusStyle}" Style="{StaticResource DefaultTextBoxStyle}">
-                        <TextBox.ToolTip>
-                            <ToolTip Style="{StaticResource DefaultToolTipRightStyle}">
-                                <TextBlock Text="The 'HP' stat value of your digimon." />
-                            </ToolTip>
-                        </TextBox.ToolTip>
-                        <b:Interaction.Behaviors>
-                            <behaviors:DefaultValueZeroTextBoxBehavior />
-                        </b:Interaction.Behaviors>
-                        <TextBox.Text>
-                            <Binding Path="HP" UpdateSourceTrigger="PropertyChanged" Mode="TwoWay">
-                                <Binding.ValidationRules>
-                                    <combatStatValidation:HpStringValidationRule ValidationStep="CommittedValue" />
-                                </Binding.ValidationRules>
-                            </Binding>
-                        </TextBox.Text>
-                    </TextBox>
+                                <Path Grid.Column="0" Grid.Row="0"
+                                      Data="M 0 90 L 0 0 L 30 45 Z"
+                                      VerticalAlignment="Center"
+                                      HorizontalAlignment="Right"
+                                      Fill="#575C60"
+                                      Stroke="#B0B0B0"
+                                      StrokeThickness="2"
+                                      Width="30" Height="90" />
 
-                    <Label Grid.Column="0" Grid.Row="2" Content="MP:" Style="{StaticResource DefaultLabelStyle}">
-                        <Label.ToolTip>
-                            <ToolTip Style="{StaticResource DefaultToolTipLeftStyle}">
-                                <TextBlock Text="The 'MP' stat value of your digimon." />
-                            </ToolTip>
-                        </Label.ToolTip>
-                    </Label>
-                    <TextBox Name="Mp" Grid.Column="1" Grid.Row="2" FocusVisualStyle="{StaticResource DefaultFocusStyle}" Style="{StaticResource DefaultTextBoxStyle}">
-                        <TextBox.ToolTip>
-                            <ToolTip Style="{StaticResource DefaultToolTipRightStyle}">
-                                <TextBlock Text="The 'MP' stat value of your digimon." />
-                            </ToolTip>
-                        </TextBox.ToolTip>
-                        <b:Interaction.Behaviors>
-                            <behaviors:DefaultValueZeroTextBoxBehavior />
-                        </b:Interaction.Behaviors>
-                        <TextBox.Text>
-                            <Binding Path="MP" UpdateSourceTrigger="PropertyChanged" Mode="TwoWay">
-                                <Binding.ValidationRules>
-                                    <combatStatValidation:MpStringValidationRule ValidationStep="CommittedValue" />
-                                </Binding.ValidationRules>
-                            </Binding>
-                        </TextBox.Text>
-                    </TextBox>
+                                <Path Grid.Column="0" Grid.Row="0"
+                                      Data="M 0 90 L 0 0"
+                                      VerticalAlignment="Center"
+                                      HorizontalAlignment="Right"
+                                      Stroke="#B0B0B0"
+                                      StrokeThickness="2"
+                                      Width="30" Height="90" />
 
-                    <Label Grid.Column="0" Grid.Row="3" Content="Off:" Style="{StaticResource DefaultLabelStyle}">
-                        <Label.ToolTip>
-                            <ToolTip Style="{StaticResource DefaultToolTipLeftStyle}">
-                                <TextBlock Text="The 'Off' stat value of your digimon." />
-                            </ToolTip>
-                        </Label.ToolTip>
-                    </Label>
-                    <TextBox Name="Off" Grid.Column="1" Grid.Row="3" FocusVisualStyle="{StaticResource DefaultFocusStyle}" Style="{StaticResource DefaultTextBoxStyle}">
-                        <TextBox.ToolTip>
-                            <ToolTip Style="{StaticResource DefaultToolTipRightStyle}">
-                                <TextBlock Text="The 'Off' stat value of your digimon." />
-                            </ToolTip>
-                        </TextBox.ToolTip>
-                        <b:Interaction.Behaviors>
-                            <behaviors:DefaultValueZeroTextBoxBehavior />
-                        </b:Interaction.Behaviors>
-                        <TextBox.Text>
-                            <Binding Path="Off" UpdateSourceTrigger="PropertyChanged" Mode="TwoWay">
-                                <Binding.ValidationRules>
-                                    <combatStatValidation:DefenseStringValidationRule ValidationStep="CommittedValue" />
-                                </Binding.ValidationRules>
-                            </Binding>
-                        </TextBox.Text>
-                    </TextBox>
+                                <Path Grid.Column="0" Grid.Row="0"
+                                      Data="M 31 45 L 1 91"
+                                      VerticalAlignment="Center"
+                                      HorizontalAlignment="Right"
+                                      Stroke="#060100"
+                                      StrokeThickness="3"
+                                      Width="31" Height="91" />
+                            </Grid>
 
-                    <Label Grid.Column="0" Grid.Row="4" Content="Def:" Style="{StaticResource DefaultLabelStyle}">
-                        <Label.ToolTip>
-                            <ToolTip Style="{StaticResource DefaultToolTipLeftStyle}">
-                                <TextBlock Text="The 'Def' stat value of your digimon." />
-                            </ToolTip>
-                        </Label.ToolTip>
-                    </Label>
-                    <TextBox Name="Def" Grid.Column="1" Grid.Row="4" FocusVisualStyle="{StaticResource DefaultFocusStyle}" Style="{StaticResource DefaultTextBoxStyle}">
-                        <TextBox.ToolTip>
-                            <ToolTip Style="{StaticResource DefaultToolTipRightStyle}">
-                                <TextBlock Text="The 'Def' stat value of your digimon." />
-                            </ToolTip>
-                        </TextBox.ToolTip>
-                        <b:Interaction.Behaviors>
-                            <behaviors:DefaultValueZeroTextBoxBehavior />
-                        </b:Interaction.Behaviors>
-                        <TextBox.Text>
-                            <Binding Path="Def" UpdateSourceTrigger="PropertyChanged" Mode="TwoWay">
-                                <Binding.ValidationRules>
-                                    <combatStatValidation:BrainsStringValidationRule ValidationStep="CommittedValue" />
-                                </Binding.ValidationRules>
-                            </Binding>
-                        </TextBox.Text>
-                    </TextBox>
-
-                    <Label Grid.Column="0" Grid.Row="5" Content="Speed:" Style="{StaticResource DefaultLabelStyle}">
-                        <Label.ToolTip>
-                            <ToolTip Style="{StaticResource DefaultToolTipLeftStyle}">
-                                <TextBlock Text="The 'Speed' stat value of your digimon." />
-                            </ToolTip>
-                        </Label.ToolTip>
-                    </Label>
-                    <TextBox Name="Speed" Grid.Column="1" Grid.Row="5" FocusVisualStyle="{StaticResource DefaultFocusStyle}" Style="{StaticResource DefaultTextBoxStyle}">
-                        <TextBox.ToolTip>
-                            <ToolTip Style="{StaticResource DefaultToolTipRightStyle}">
-                                <TextBlock Text="The 'Speed' stat value of your digimon." />
-                            </ToolTip>
-                        </TextBox.ToolTip>
-                        <b:Interaction.Behaviors>
-                            <behaviors:DefaultValueZeroTextBoxBehavior />
-                        </b:Interaction.Behaviors>
-                        <TextBox.Text>
-                            <Binding Path="Speed" UpdateSourceTrigger="PropertyChanged" Mode="TwoWay">
-                                <Binding.ValidationRules>
-                                    <combatStatValidation:SpeedStringValidationRule ValidationStep="CommittedValue" />
-                                </Binding.ValidationRules>
-                            </Binding>
-                        </TextBox.Text>
-                    </TextBox>
-
-                    <Label Grid.Column="0" Grid.Row="6" Content="Brains:" Style="{StaticResource DefaultLabelStyle}">
-                        <Label.ToolTip>
-                            <ToolTip Style="{StaticResource DefaultToolTipLeftStyle}">
-                                <TextBlock Text="The 'Brains' stat value of your digimon." />
-                            </ToolTip>
-                        </Label.ToolTip>
-                    </Label>
-                    <TextBox Name="Brains" Grid.Column="1" Grid.Row="6" FocusVisualStyle="{StaticResource DefaultFocusStyle}" Style="{StaticResource DefaultTextBoxStyle}">
-                        <TextBox.ToolTip>
-                            <ToolTip Style="{StaticResource DefaultToolTipRightStyle}">
-                                <TextBlock Text="The 'Brains' stat value of your digimon." />
-                            </ToolTip>
-                        </TextBox.ToolTip>
-                        <b:Interaction.Behaviors>
-                            <behaviors:DefaultValueZeroTextBoxBehavior />
-                        </b:Interaction.Behaviors>
-                        <TextBox.Text>
-                            <Binding Path="Brains" UpdateSourceTrigger="PropertyChanged" Mode="TwoWay">
-                                <Binding.ValidationRules>
-                                    <combatStatValidation:OffenseStringValidationRule ValidationStep="CommittedValue" />
-                                </Binding.ValidationRules>
-                            </Binding>
-                        </TextBox.Text>
-                    </TextBox>
-
-                    <Label Grid.Column="0" Grid.Row="7" Content="Care Mistakes:" Style="{StaticResource DefaultLabelStyle}">
-                        <Label.ToolTip>
-                            <ToolTip Style="{StaticResource DefaultToolTipLeftStyle}">
-                                <TextBlock
-                                    Text="The care mistake count of your digimon.&#x0a;&#x0a;This number is reset upon evolution and death.&#x0a;&#x0a;Care mistakes are:&#x0a;- pooping on the ground&#x0a;- not feeding, while energy level is below threshold, until the hunger timer runs out while not sleeping&#x0a;- not sleeping until the sleeping timer runs out" />
-                            </ToolTip>
-                        </Label.ToolTip>
-                    </Label>
-                    <TextBox Name="CareMistakes" Grid.Column="1" Grid.Row="7" FocusVisualStyle="{StaticResource DefaultFocusStyle}" Style="{StaticResource DefaultTextBoxStyle}">
-                        <TextBox.ToolTip>
-                            <ToolTip Style="{StaticResource DefaultToolTipRightStyle}">
-                                <TextBlock
-                                    Text="The care mistake count of your digimon.&#x0a;&#x0a;This number is reset upon evolution and death.&#x0a;&#x0a;Care mistakes are:&#x0a;- pooping on the ground&#x0a;- not feeding, while energy level is below threshold, until the hunger timer runs out while not sleeping&#x0a;- not sleeping until the sleeping timer runs out" />
-                            </ToolTip>
-                        </TextBox.ToolTip>
-                        <b:Interaction.Behaviors>
-                            <behaviors:DefaultValueZeroTextBoxBehavior />
-                        </b:Interaction.Behaviors>
-                        <TextBox.Text>
-                            <Binding Path="CareMistakes" UpdateSourceTrigger="PropertyChanged" Mode="TwoWay">
-                                <Binding.ValidationRules>
-                                    <nonCombatStatValidation:CareMistakesValidationRule ValidationStep="CommittedValue" />
-                                </Binding.ValidationRules>
-                            </Binding>
-                        </TextBox.Text>
-                    </TextBox>
-
-                    <Label Grid.Column="0" Grid.Row="8" Content="Weight:" Style="{StaticResource DefaultLabelStyle}">
-                        <Label.ToolTip>
-                            <ToolTip Style="{StaticResource DefaultToolTipLeftStyle}">
-                                <TextBlock Text="The weight value of your digimon." />
-                            </ToolTip>
-                        </Label.ToolTip>
-                    </Label>
-                    <TextBox Name="Weight" Grid.Column="1" Grid.Row="8" FocusVisualStyle="{StaticResource DefaultFocusStyle}" Style="{StaticResource DefaultTextBoxStyle}">
-                        <TextBox.ToolTip>
-                            <ToolTip Style="{StaticResource DefaultToolTipRightStyle}">
-                                <TextBlock Text="The weight value of your digimon." />
-                            </ToolTip>
-                        </TextBox.ToolTip>
-                        <b:Interaction.Behaviors>
-                            <behaviors:DefaultValueZeroTextBoxBehavior />
-                        </b:Interaction.Behaviors>
-                        <TextBox.Text>
-                            <Binding Path="Weight" UpdateSourceTrigger="PropertyChanged" Mode="TwoWay">
-                                <Binding.ValidationRules>
-                                    <nonCombatStatValidation:WeightValidationRule ValidationStep="CommittedValue" />
-                                </Binding.ValidationRules>
-                            </Binding>
-                        </TextBox.Text>
-                    </TextBox>
-
-                    <Label Grid.Column="0" Grid.Row="9" Content="Happiness:" Style="{StaticResource DefaultLabelStyle}">
-                        <Label.ToolTip>
-                            <ToolTip Style="{StaticResource DefaultToolTipLeftStyle}">
-                                <TextBlock
-                                    Text="The happiness value of your digimon.&#x0a;&#x0a;A full blue bar with a red angry face icon is -100.&#x0a;A blue slither but mostly full pink bar with a yellow smiling face icon is 0.&#x0a;A full blue bar with yellow smiling face icon is 100." />
-                            </ToolTip>
-                        </Label.ToolTip>
-                    </Label>
-                    <TextBox Name="Happiness" Grid.Column="1" Grid.Row="9" FocusVisualStyle="{StaticResource DefaultFocusStyle}" Style="{StaticResource DefaultTextBoxStyle}">
-                        <TextBox.ToolTip>
-                            <ToolTip Style="{StaticResource DefaultToolTipRightStyle}">
-                                <TextBlock
-                                    Text="The happiness value of your digimon.&#x0a;&#x0a;A full blue bar with a red angry face icon is -100.&#x0a;A blue slither but mostly full pink bar with a yellow smiling face icon is 0.&#x0a;A full blue bar with yellow smiling face icon is 100." />
-                            </ToolTip>
-                        </TextBox.ToolTip>
-                        <b:Interaction.Behaviors>
-                            <behaviors:DefaultValueZeroTextBoxBehavior />
-                        </b:Interaction.Behaviors>
-                        <TextBox.Text>
-                            <Binding Path="Happiness" UpdateSourceTrigger="PropertyChanged" Mode="TwoWay">
-                                <Binding.ValidationRules>
-                                    <nonCombatStatValidation:HappinessValidationRule ValidationStep="CommittedValue" />
-                                </Binding.ValidationRules>
-                            </Binding>
-                        </TextBox.Text>
-                    </TextBox>
-
-                    <Label Grid.Column="0" Grid.Row="10" Content="Discipline:" Style="{StaticResource DefaultLabelStyle}">
-                        <Label.ToolTip>
-                            <ToolTip Style="{StaticResource DefaultToolTipLeftStyle}">
-                                <TextBlock
-                                    Text="The discipline value of your digimon.&#x0a;&#x0a;A full blue bar with a blue face icon with sunglasses is 0.&#x0a;A blue slither but mostly full pink bar with a yellow face icon with glasses is 50.&#x0a;A full blue bar with yellow face icon with glasses icon is 100." />
-                            </ToolTip>
-                        </Label.ToolTip>
-                    </Label>
-                    <TextBox Name="Discipline" Grid.Column="1" Grid.Row="10" FocusVisualStyle="{StaticResource DefaultFocusStyle}" Style="{StaticResource DefaultTextBoxStyle}">
-                        <TextBox.ToolTip>
-                            <ToolTip Style="{StaticResource DefaultToolTipRightStyle}">
-                                <TextBlock
-                                    Text="The discipline value of your digimon.&#x0a;&#x0a;A full blue bar with a blue face icon with sunglasses is 0.&#x0a;A blue slither but mostly full pink bar with a yellow face icon with glasses is 50.&#x0a;A full blue bar with yellow face icon with glasses icon is 100." />
-                            </ToolTip>
-                        </TextBox.ToolTip>
-                        <b:Interaction.Behaviors>
-                            <behaviors:DefaultValueZeroTextBoxBehavior />
-                        </b:Interaction.Behaviors>
-                        <TextBox.Text>
-                            <Binding Path="Discipline" UpdateSourceTrigger="PropertyChanged" Mode="TwoWay">
-                                <Binding.ValidationRules>
-                                    <nonCombatStatValidation:DisciplineValidationRule ValidationStep="CommittedValue" />
-                                </Binding.ValidationRules>
-                            </Binding>
-                        </TextBox.Text>
-                    </TextBox>
-
-                    <Label Grid.Column="0" Grid.Row="11" Content="Battles:" Style="{StaticResource DefaultLabelStyle}">
-                        <Label.ToolTip>
-                            <ToolTip Style="{StaticResource DefaultToolTipLeftStyle}">
-                                <TextBlock Text="The battle count of your digimon.&#x0a;&#x0a;This number is reset upon evolution and death." />
-                            </ToolTip>
-                        </Label.ToolTip>
-                    </Label>
-                    <TextBox Name="Battles" Grid.Column="1" Grid.Row="11" FocusVisualStyle="{StaticResource DefaultFocusStyle}" Style="{StaticResource DefaultTextBoxStyle}">
-                        <TextBox.ToolTip>
-                            <ToolTip Style="{StaticResource DefaultToolTipRightStyle}">
-                                <TextBlock Text="The battle count of your digimon.&#x0a;&#x0a;This number is reset upon evolution and death." />
-                            </ToolTip>
-                        </TextBox.ToolTip>
-                        <b:Interaction.Behaviors>
-                            <behaviors:DefaultValueZeroTextBoxBehavior />
-                        </b:Interaction.Behaviors>
-                        <TextBox.Text>
-                            <Binding Path="Battles" UpdateSourceTrigger="PropertyChanged" Mode="TwoWay">
-                                <Binding.ValidationRules>
-                                    <nonCombatStatValidation:BattlesValidationRule ValidationStep="CommittedValue" />
-                                </Binding.ValidationRules>
-                            </Binding>
-                        </TextBox.Text>
-                    </TextBox>
-
-                    <Label Grid.Column="0" Grid.Row="12" Content="Techniques:" Style="{StaticResource DefaultLabelStyle}">
-                        <Label.ToolTip>
-                            <ToolTip Style="{StaticResource DefaultToolTipLeftStyle}">
-                                <TextBlock
-                                    Text="The number of total known techniques.&#x0a;&#x0a;You can find this in the 'Tech' of the Digimon window.&#x0a;&#x0a;Count all the available techniques, not just those that your digimon can use." />
-                            </ToolTip>
-                        </Label.ToolTip>
-                    </Label>
-                    <TextBox Name="Techniques" Grid.Column="1" Grid.Row="12" FocusVisualStyle="{StaticResource DefaultFocusStyle}" Style="{StaticResource DefaultTextBoxStyle}">
-                        <TextBox.ToolTip>
-                            <ToolTip Style="{StaticResource DefaultToolTipRightStyle}">
-                                <TextBlock
-                                    Text="The number of total known techniques.&#x0a;&#x0a;You can find this in the 'Tech' of the Digimon window.&#x0a;&#x0a;Count all the available techniques, not just those that your digimon can use." />
-                            </ToolTip>
-                        </TextBox.ToolTip>
-                        <b:Interaction.Behaviors>
-                            <behaviors:DefaultValueZeroTextBoxBehavior />
-                        </b:Interaction.Behaviors>
-                        <TextBox.Text>
-                            <Binding Path="Techniques" UpdateSourceTrigger="PropertyChanged" Mode="TwoWay">
-                                <Binding.ValidationRules>
-                                    <nonCombatStatValidation:TechniquesValidationRule ValidationStep="CommittedValue" />
-                                </Binding.ValidationRules>
-                            </Binding>
-                        </TextBox.Text>
-                    </TextBox>
-                </Grid>
-            </GroupBox>
-
-            <Button Grid.Column="0" Grid.Row="2" FocusVisualStyle="{StaticResource DefaultFocusStyle}" Style="{StaticResource CalculateEvolutionButtonStyle}"
-                    Height="{StaticResource DefaultButtonHeight}"
-                    Content="{Binding CalculateButtonText}"
-                    Command="{Binding SetEvolutionResult}">
-                <Button.ToolTip>
-                    <ToolTip Style="{StaticResource DefaultToolTipRightStyle}" Content="Calculate the evolution result" />
-                </Button.ToolTip>
-            </Button>
-
-        </Grid>
-        <Grid Column="1">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="2" />
-                <ColumnDefinition Width="3" />
-                <ColumnDefinition Width="2" />
-                <ColumnDefinition Width="2" />
-            </Grid.ColumnDefinitions>
-
-            <Rectangle Grid.Row="0" Grid.Column="0" VerticalAlignment="Stretch" Fill="Black" Width="2" />
-            <Rectangle Grid.Row="0" Grid.Column="1" VerticalAlignment="Stretch" Fill="#4A9FC5" Width="3" />
-            <Rectangle Grid.Row="0" Grid.Column="2" VerticalAlignment="Stretch" Fill="#90D9FA" Width="2" />
-            <Rectangle Grid.Row="0" Grid.Column="3" VerticalAlignment="Stretch" Fill="Black" Width="2" />
-        </Grid>
-        <Grid Column="2" KeyboardNavigation.TabNavigation="None">
-
-            <Grid.RowDefinitions>
-                <RowDefinition Height="*" />
-                <RowDefinition Height="*" />
-            </Grid.RowDefinitions>
-
-            <Grid Grid.Row="0">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="175" />
-                    <ColumnDefinition Width="600" />
-                </Grid.ColumnDefinitions>
-
-                <userControls1:JijimonNarrator Grid.Column="0" Grid.Row="0" />
-
-                <userControls1:JijimonNaratorTextDisplay Grid.Row="0" Grid.Column="1" />
-
-            </Grid>
-            <Grid Grid.Row="1">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="Auto" />
-                    <ColumnDefinition Width="*" />
-                </Grid.ColumnDefinitions>
-                <Border Grid.Column="0" Grid.Row="0" BorderBrush="#060100" BorderThickness="3,3,0,0" Margin="15" HorizontalAlignment="Center" VerticalAlignment="Bottom">
-                    <Border BorderBrush="#6789A5" BorderThickness="0,0,3,3" Background="#354A5B">
-                        <Image Width="300" Height="300" Source="{Binding DigimonType, Converter={StaticResource EnumToImageConverter}}" Stretch="Uniform" />
-                    </Border>
+                            <Border Grid.Column="2" Grid.Row="0" BorderBrush="#060100" BorderThickness="3,3,0,0" Margin="15" HorizontalAlignment="Center" VerticalAlignment="Bottom">
+                                <Border BorderBrush="#6789A5" BorderThickness="0,0,3,3" Background="#354A5B">
+                                    <Image Width="300" Height="300" Source="{Binding EvolutionResult, Mode=OneWay, Converter={StaticResource EnumToImageConverter}}" Stretch="Uniform" />
+                                </Border>
+                            </Border>
+                        </Grid>
+                    </Grid>
                 </Border>
-
-                <Grid Grid.Column="1" Grid.Row="0">
-                    <Path Grid.Column="0" Grid.Row="0"
-                          Data="M 0 0 L 0 90 L 30 45 Z"
-                          VerticalAlignment="Center"
-                          HorizontalAlignment="Right"
-                          Fill="#575C60"
-                          Width="30" Height="90" />
-
-                    <Path Grid.Column="0" Grid.Row="0"
-                          Data="M 0 90 L 0 0 L 30 45 Z"
-                          VerticalAlignment="Center"
-                          HorizontalAlignment="Right"
-                          Fill="#575C60"
-                          Stroke="#B0B0B0"
-                          StrokeThickness="2"
-                          Width="30" Height="90" />
-
-                    <Path Grid.Column="0" Grid.Row="0"
-                          Data="M 0 90 L 0 0"
-                          VerticalAlignment="Center"
-                          HorizontalAlignment="Right"
-                          Stroke="#B0B0B0"
-                          StrokeThickness="2"
-                          Width="30" Height="90" />
-
-                    <Path Grid.Column="0" Grid.Row="0"
-                          Data="M 31 45 L 1 91"
-                          VerticalAlignment="Center"
-                          HorizontalAlignment="Right"
-                          Stroke="#060100"
-                          StrokeThickness="3"
-                          Width="31" Height="91" />
-                </Grid>
-
-                <Border Grid.Column="2" Grid.Row="0" BorderBrush="#060100" BorderThickness="3,3,0,0" Margin="15" HorizontalAlignment="Center" VerticalAlignment="Bottom">
-                    <Border BorderBrush="#6789A5" BorderThickness="0,0,3,3" Background="#354A5B">
-                        <Image Width="300" Height="300" Source="{Binding EvolutionResult, Mode=OneWay, Converter={StaticResource EnumToImageConverter}}" Stretch="Uniform" />
-                    </Border>
-                </Border>
-            </Grid>
+            </Border>
         </Grid>
-    </Grid>
+    </Border>
 </UserControl>

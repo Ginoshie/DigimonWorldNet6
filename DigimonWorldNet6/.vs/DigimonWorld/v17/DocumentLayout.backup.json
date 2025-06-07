@@ -1,0 +1,79 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\git\\DigimonWorldNet6\\DigimonWorldNet6\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{78DB6FD7-7CBD-4B7C-BB5A-36558EE68D9A}|Frontend.WPF\\Frontend.WPF.csproj|c:\\git\\digimonworldnet6\\digimonworldnet6\\frontend.wpf\\conversion\\enumtoimageconverter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{78DB6FD7-7CBD-4B7C-BB5A-36558EE68D9A}|Frontend.WPF\\Frontend.WPF.csproj|solutionrelative:frontend.wpf\\conversion\\enumtoimageconverter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{78DB6FD7-7CBD-4B7C-BB5A-36558EE68D9A}|Frontend.WPF\\Frontend.WPF.csproj|c:\\git\\digimonworldnet6\\digimonworldnet6\\frontend.wpf\\app.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{78DB6FD7-7CBD-4B7C-BB5A-36558EE68D9A}|Frontend.WPF\\Frontend.WPF.csproj|solutionrelative:frontend.wpf\\app.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\git\\DigimonWorldNet6\\DigimonWorldNet6\\Frontend.WPF\\MainWindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Frontend.WPF\\MainWindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 3,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:129:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:128:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{d78612c7-9962-4b83-95d9-268046dad23a}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "EnumToImageConverter.cs",
+              "DocumentMoniker": "C:\\git\\DigimonWorldNet6\\DigimonWorldNet6\\Frontend.WPF\\Conversion\\EnumToImageConverter.cs",
+              "RelativeDocumentMoniker": "Frontend.WPF\\Conversion\\EnumToImageConverter.cs",
+              "ToolTip": "C:\\git\\DigimonWorldNet6\\DigimonWorldNet6\\Frontend.WPF\\Conversion\\EnumToImageConverter.cs",
+              "RelativeToolTip": "Frontend.WPF\\Conversion\\EnumToImageConverter.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAEAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-05T19:18:25.369Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "App.xaml",
+              "DocumentMoniker": "C:\\git\\DigimonWorldNet6\\DigimonWorldNet6\\Frontend.WPF\\App.xaml",
+              "RelativeDocumentMoniker": "Frontend.WPF\\App.xaml",
+              "ToolTip": "C:\\git\\DigimonWorldNet6\\DigimonWorldNet6\\Frontend.WPF\\App.xaml",
+              "RelativeToolTip": "Frontend.WPF\\App.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2024-12-04T18:44:21.372Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "MainWindow.xaml",
+              "DocumentMoniker": "C:\\git\\DigimonWorldNet6\\DigimonWorldNet6\\Frontend.WPF\\MainWindow.xaml",
+              "RelativeDocumentMoniker": "Frontend.WPF\\MainWindow.xaml",
+              "ToolTip": "C:\\git\\DigimonWorldNet6\\DigimonWorldNet6\\Frontend.WPF\\MainWindow.xaml",
+              "RelativeToolTip": "Frontend.WPF\\MainWindow.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-03-28T08:02:15.269Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

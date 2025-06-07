@@ -3,8 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             Height="555"
-             Width="1104"
+             Height="565"
+             Width="1093"
              mc:Ignorable="d">
     <Grid>
 
