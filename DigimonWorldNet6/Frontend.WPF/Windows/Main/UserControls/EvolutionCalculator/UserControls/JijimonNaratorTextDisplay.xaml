@@ -7,15 +7,15 @@
              mc:Ignorable="d" d:DataContext="{d:DesignInstance }">
 
     <Border CornerRadius="8" BorderBrush="Black" BorderThickness="3" Margin="0, 15,25, 10" Padding="0" Background="Black">
+        <i:Interaction.Triggers>
+            <i:EventTrigger EventName="MouseLeftButtonDown">
+                <i:InvokeCommandAction Command="{Binding InstantDisplayCommand}" />
+            </i:EventTrigger>
+        </i:Interaction.Triggers>
         <Border CornerRadius="8" BorderBrush="#4A9FC5" BorderThickness="3" Padding="0" Background="#4A9FC5">
             <Border CornerRadius="5" BorderBrush="#90D9FA" BorderThickness="3" Padding="0" Background="#2E3841">
                 <Border CornerRadius="5" BorderBrush="Transparent" BorderThickness="0" Padding="0" Background="#77000000">
                     <StackPanel Margin="5">
-                        <i:Interaction.Triggers>
-                            <i:EventTrigger EventName="MouseLeftButtonDown">
-                                <i:InvokeCommandAction Command="{Binding InstantDisplayCommand}" />
-                            </i:EventTrigger>
-                        </i:Interaction.Triggers>
                         <TextBlock Text="Jijimon"
                                    Foreground="#D4D604"
                                    FontSize="15"
