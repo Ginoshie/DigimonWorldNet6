@@ -5,5 +5,7 @@ public partial class DigiWikiUserControl
     public DigiWikiUserControl()
     {
         InitializeComponent();
+
+        DataContext = new DigiWikiViewModel();
     }
 }
