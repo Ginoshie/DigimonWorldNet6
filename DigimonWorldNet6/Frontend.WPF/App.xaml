@@ -22,6 +22,8 @@
 
             <system:Double x:Key="ButtonWidth">50</system:Double>
             <system:Double x:Key="TextBlockWidth">80</system:Double>
+            
+            <SolidColorBrush x:Key="DefaultBackGroundColor" Color="#2E3841"/>
 
             <conversion:EnumToImageConverter x:Key="EnumToImageConverter" />
 
@@ -45,7 +47,7 @@
             </Style>
 
             <Style TargetType="Grid">
-                <Setter Property="Background" Value="#2E3841" />
+                <Setter Property="Background" Value="{StaticResource DefaultBackGroundColor}" />
             </Style>
 
         </ResourceDictionary>
