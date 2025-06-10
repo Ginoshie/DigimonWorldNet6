@@ -50,8 +50,7 @@ public sealed class EvolutionCalculatorViewModel : BaseViewModel, IDisposable
 
         int initialDelay = UserConfigurationManager.SpeakingSimulatorConfig.NarratorMode == NarratorMode.Instant ? 0 : 1500;
 
-        Task
-            .Delay(initialDelay)
+        Task.Delay(initialDelay)
             .WaitAsync(CancellationToken.None)
             .ContinueWith(_ => _speakingSimulator.WriteTextAsSpeechAsync(JijimonEvolutionCalculatorNarratorText.IntroText, textOutput => JijimonText = textOutput));
     }
@@ -65,14 +64,7 @@ public sealed class EvolutionCalculatorViewModel : BaseViewModel, IDisposable
     public string JijimonText
     {
         get => _jijimonText;
-        set
-        {
-            if (_jijimonText == value) return;
-
-            _jijimonText = value;
-
-            OnPropertyChanged();
-        }
+        set => SetField(ref _jijimonText, value);
     }
 
     public DigimonType DigimonType
@@ -95,163 +87,79 @@ public sealed class EvolutionCalculatorViewModel : BaseViewModel, IDisposable
     public string HP
     {
         get => _hp;
-        set
-        {
-            if (_hp == value) return;
-
-            _hp = value;
-
-            OnPropertyChanged();
-        }
+        set => SetField(ref _hp, value);
     }
 
     public string MP
     {
         get => _mp;
-        set
-        {
-            if (_mp == value) return;
-
-            _mp = value;
-
-            OnPropertyChanged();
-        }
+        set => SetField(ref _mp, value);
     }
 
     public string Off
     {
         get => _off;
-        set
-        {
-            if (_off == value) return;
-
-            _off = value;
-
-            OnPropertyChanged();
-        }
+        set => SetField(ref _off, value);
     }
 
     public string Def
     {
         get => _def;
-        set
-        {
-            if (_def == value) return;
-
-            _def = value;
-
-            OnPropertyChanged();
-        }
+        set => SetField(ref _def, value);
     }
 
     public string Speed
     {
         get => _speed;
-        set
-        {
-            if (_speed == value) return;
-
-            _speed = value;
-
-            OnPropertyChanged();
-        }
+        set => SetField(ref _speed, value);
     }
 
     public string Brains
     {
         get => _brains;
-        set
-        {
-            if (_brains == value) return;
-
-            _brains = value;
-
-            OnPropertyChanged();
-        }
+        set => SetField(ref _brains, value);
     }
 
     public string CareMistakes
     {
         get => _careMistakes;
-        set
-        {
-            if (_careMistakes == value) return;
-
-            _careMistakes = value;
-
-            OnPropertyChanged();
-        }
+        set => SetField(ref _careMistakes, value);
     }
 
     public string Weight
     {
         get => _weight;
-        set
-        {
-            if (_weight == value) return;
-
-            _weight = value;
-
-            OnPropertyChanged();
-        }
+        set => SetField(ref _weight, value);
     }
 
     public string Happiness
     {
         get => _happiness;
-        set
-        {
-            if (_happiness == value) return;
-
-            _happiness = value;
-
-            OnPropertyChanged();
-        }
+        set => SetField(ref _happiness, value);
     }
 
     public string Discipline
     {
         get => _discipline;
-        set
-        {
-            if (_discipline == value) return;
-
-            _discipline = value;
-
-            OnPropertyChanged();
-        }
+        set => SetField(ref _discipline, value);
     }
 
     public string Battles
     {
         get => _battles;
-        set
-        {
-            if (_battles == value) return;
-
-            _battles = value;
-
-            OnPropertyChanged();
-        }
+        set => SetField(ref _battles, value);
     }
 
     public string Techniques
     {
         get => _techniques;
-        set
-        {
-            if (_techniques == value) return;
-
-            _techniques = value;
-
-            OnPropertyChanged();
-        }
+        set => SetField(ref _techniques, value);
     }
 
     public EvolutionResult EvolutionResult
     {
         get => _evolutionResult;
-        private set
+        set
         {
             if (_evolutionResult == value) return;
 
@@ -288,10 +196,7 @@ public sealed class EvolutionCalculatorViewModel : BaseViewModel, IDisposable
         FlipToRight = true;
     }
 
-    private void InstantDisplay()
-    {
-        _speakingSimulator.RequestInstantDisplay();
-    }
+    private void InstantDisplay() => _speakingSimulator.RequestInstantDisplay();
 
     public void Dispose()
     {
