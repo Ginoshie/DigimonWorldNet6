@@ -11,7 +11,8 @@
 
     <Grid>
         <TextBlock TextAlignment="Left"
-                   TextWrapping="Wrap">
+                   TextWrapping="Wrap"
+                   Margin="0, 0, 6,0">
             This is the configuration menu.<LineBreak />
             <LineBreak />
             Click one of the category buttons on the left to open up the configuration section for that category.<LineBreak />
