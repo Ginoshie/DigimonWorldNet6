@@ -10,7 +10,7 @@ namespace DigimonWorld.Frontend.WPF.Services;
 
 public class SpeakingSimulator : IDisposable
 {
-    private readonly object _lock = new();
+    private readonly Lock _lock = new();
     private readonly CompositeDisposable _compositeDisposable;
 
     private CancellationTokenSource? _typingCancellationTokenSource;
