@@ -14,9 +14,9 @@
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"></RowDefinition>
-            <RowDefinition Height="300"></RowDefinition>
+            <RowDefinition Height="250"></RowDefinition>
         </Grid.RowDefinitions>
-        <Image Grid.Row="0" Grid.Column="0" Height="175" Source="/Images/Digimon/Shellmon-right.png" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10,15,10,15" />
+        <Image Grid.Row="0" Grid.Column="0" Source="/Images/Digimon/Shellmon-right.png" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10,15,10,15" />
 
         <Border Grid.Row="0" Grid.Column="1" CornerRadius="8" BorderBrush="Black" BorderThickness="3" Margin="0, 15,15, 10" Padding="0" Background="Black">
             <b:Interaction.Triggers>

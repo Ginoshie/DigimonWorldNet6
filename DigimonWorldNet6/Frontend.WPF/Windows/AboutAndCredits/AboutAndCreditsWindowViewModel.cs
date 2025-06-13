@@ -22,7 +22,7 @@ public class AboutAndCreditsWindowViewModel : BaseViewModel
 
     public string ContactEmailAddress { get; set; } = UiText.ContactEmailAddress;
 
-    public string YoutubeAddress { get; set; } = UiText.YoutubeAddress;
+    public string YoutubeAddress { get; set; } = Url.YoutubeAddress;
 
     public ICommand CopyContactEmailCommand { get; }
 
@@ -35,7 +35,7 @@ public class AboutAndCreditsWindowViewModel : BaseViewModel
     private void OpenYoutubeWebsite() =>
         Process.Start(new ProcessStartInfo
         {
-            FileName = UiText.YoutubeAddress,
+            FileName = Url.YoutubeAddress,
             UseShellExecute = true
         });
 
