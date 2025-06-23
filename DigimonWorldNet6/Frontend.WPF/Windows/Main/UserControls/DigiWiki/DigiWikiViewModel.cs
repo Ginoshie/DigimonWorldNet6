@@ -45,7 +45,7 @@ public class DigiWikiViewModel : BaseViewModel
     {
         OpenFoodTopicCommand = new CommandHandler(OpenFoodTopic);
 
-        _currentSelectedDigiWikiContent = new HomeTopic(SpeakShellmonTextLongDelayAction, InstantDisplay);
+        _currentSelectedDigiWikiContent = new Home(SpeakShellmonTextLongDelayAction, InstantDisplay);
     }
 
     public ICommand OpenFoodTopicCommand { get; }

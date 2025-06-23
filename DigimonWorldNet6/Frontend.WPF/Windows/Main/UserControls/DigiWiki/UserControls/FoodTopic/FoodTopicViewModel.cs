@@ -8,12 +8,18 @@ namespace DigimonWorld.Frontend.WPF.Windows.Main.UserControls.DigiWiki.UserContr
 
 public class FoodTopicViewModel : TopicViewModelBase
 {
-    public FoodTopicViewModel(Action<string, Action<string>> speakShellmonTextShortDelayAction, Action<string, Action<string>> speakShellmonTextNoDelayAction, Action instantDisplay) : base(instantDisplay)
+    public FoodTopicViewModel(
+        Action<string, Action<string>> speakShellmonTextShortDelayAction,
+        Action<string, Action<string>> speakShellmonTextNoDelayAction,
+        Action instantDisplay) :
+        base(
+            instantDisplay,
+            speakShellmonTextNoDelayAction,
+            ShellmonDigiWikiNarratorText.FoodWikiShellFacts,
+            ShellmonDigiWikiNarratorText.FoodWikiText)
     {
         speakShellmonTextShortDelayAction(ShellmonDigiWikiNarratorText.FoodWikiText, SpeakShellmonTextAction);
 
-        SpeakFoodWikiCommand = new CommandHandler(() => speakShellmonTextNoDelayAction(ShellmonDigiWikiNarratorText.FoodWikiText, SpeakShellmonTextAction));
-        SpeakShellFactCommand = new CommandHandler(() => speakShellmonTextNoDelayAction(ShellmonDigiWikiNarratorText.FoodWikiShellFacts, SpeakShellmonTextAction));
         SpeakHungerConditionScreenCommand = new CommandHandler(() => speakShellmonTextNoDelayAction(ShellmonDigiWikiNarratorText.FoodWikiHungerConditionScreen, SpeakShellmonTextAction));
         SpeakHungerConditionOverworldCommand = new CommandHandler(() => speakShellmonTextNoDelayAction(ShellmonDigiWikiNarratorText.FoodWikiHungerConditionOverworld, SpeakShellmonTextAction));
         OpenGuideFoodChapterCommand = new CommandHandler(() => Process.Start(new ProcessStartInfo { FileName = Url.GuidFoodChapter, UseShellExecute = true }));
@@ -21,8 +27,6 @@ public class FoodTopicViewModel : TopicViewModelBase
         OpenDataSheetCommand = new CommandHandler(() => Process.Start(new ProcessStartInfo { FileName = Url.DataSheet, UseShellExecute = true }));
     }
 
-    public ICommand SpeakFoodWikiCommand { get; }
-    public ICommand SpeakShellFactCommand { get; }
     public ICommand SpeakHungerConditionScreenCommand { get; }
     public ICommand SpeakHungerConditionOverworldCommand { get; }
     public ICommand OpenGuideFoodChapterCommand { get; }

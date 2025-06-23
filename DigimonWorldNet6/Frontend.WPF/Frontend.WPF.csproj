@@ -28,9 +28,7 @@
     <ItemGroup>
         <Resource Include="Images\**\*"/>
         <Resource Include="Fonts\DW1_US_Regular.ttf"/>
-        <Resource Include="Windows\Main\UserControls\DigiWiki\UserControls\FoodTopic\Media\hunger-condition-overworld.jpg"/>
-        <Resource Include="Windows\Main\UserControls\DigiWiki\UserControls\FoodTopic\Media\hunger-condition-screen.jpg"/>
-        <Resource Include="Windows\Main\UserControls\DigiWiki\UserControls\FoodTopic\Media\sleep-condition-overworld.jpg"/>
+        <Resource Include="Windows\Main\UserControls\DigiWiki\UserControls\**\*.jpg"/>
     </ItemGroup>
 
     <ItemGroup>

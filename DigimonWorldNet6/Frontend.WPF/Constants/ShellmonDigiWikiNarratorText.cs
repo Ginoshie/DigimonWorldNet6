@@ -8,7 +8,9 @@ public static class ShellmonDigiWikiNarratorText
                                     "\n" +
                                     "Click on any of the buttons to open the page of that topic.\n" +
                                     "\n" +
-                                    "If you want even more information, click the 'View in guid' button to open the online guide.\n" +
+                                    "If you want even more information, after opening a topic, click any of the buttons in the \"More info\" to open the related online guide. If you want me to repeat the wiki text, just press the button in top right corner of this text section.\n" +
+                                    "\n" +
+                                    "Or try your luck clicking on some of the items on the page, who knows when and what I'll tell you. \n" +
                                     "\n" +
                                     "Happy browsing!";
 
