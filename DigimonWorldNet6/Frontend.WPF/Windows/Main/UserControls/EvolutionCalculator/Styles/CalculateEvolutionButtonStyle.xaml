@@ -19,7 +19,7 @@
                                            HorizontalAlignment="Left"
                                            VerticalAlignment="Center"
                                            Margin="0,0,5,0"
-                                           Source="/Images/Emotions/Evolution/evo1.png" />
+                                           Source="/Images/Icons/Emotions/Evolution/evo1.png" />
                                     <ContentPresenter VerticalAlignment="Center" />
                                 </StackPanel>
                             </Border>
@@ -34,27 +34,27 @@
                                                                        Storyboard.TargetProperty="Source">
                                             <DiscreteObjectKeyFrame KeyTime="0:0:0">
                                                 <DiscreteObjectKeyFrame.Value>
-                                                    <BitmapImage UriSource="/Images/Emotions/Evolution/evo1.png" />
+                                                    <BitmapImage UriSource="/Images/Icons/Emotions/Evolution/evo1.png" />
                                                 </DiscreteObjectKeyFrame.Value>
                                             </DiscreteObjectKeyFrame>
                                             <DiscreteObjectKeyFrame KeyTime="0:0:0.4">
                                                 <DiscreteObjectKeyFrame.Value>
-                                                    <BitmapImage UriSource="/Images/Emotions/Evolution/evo2.png" />
+                                                    <BitmapImage UriSource="/Images/Icons/Emotions/Evolution/evo2.png" />
                                                 </DiscreteObjectKeyFrame.Value>
                                             </DiscreteObjectKeyFrame>
                                             <DiscreteObjectKeyFrame KeyTime="0:0:0.8">
                                                 <DiscreteObjectKeyFrame.Value>
-                                                    <BitmapImage UriSource="/Images/Emotions/Evolution/evo3.png" />
+                                                    <BitmapImage UriSource="/Images/Icons/Emotions/Evolution/evo3.png" />
                                                 </DiscreteObjectKeyFrame.Value>
                                             </DiscreteObjectKeyFrame>
                                             <DiscreteObjectKeyFrame KeyTime="0:0:1.2">
                                                 <DiscreteObjectKeyFrame.Value>
-                                                    <BitmapImage UriSource="/Images/Emotions/Evolution/evo4.png" />
+                                                    <BitmapImage UriSource="/Images/Icons/Emotions/Evolution/evo4.png" />
                                                 </DiscreteObjectKeyFrame.Value>
                                             </DiscreteObjectKeyFrame>
                                             <DiscreteObjectKeyFrame KeyTime="0:0:1.6">
                                                 <DiscreteObjectKeyFrame.Value>
-                                                    <BitmapImage UriSource="/Images/Emotions/Evolution/evo4.png" />
+                                                    <BitmapImage UriSource="/Images/Icons/Emotions/Evolution/evo4.png" />
                                                 </DiscreteObjectKeyFrame.Value>
                                             </DiscreteObjectKeyFrame>
                                         </ObjectAnimationUsingKeyFrames>

@@ -15,14 +15,14 @@ public class FoodTopicViewModel : TopicViewModelBase
         base(
             instantDisplay,
             speakShellmonTextNoDelayAction,
-            ShellmonDigiWikiNarratorText.FoodWikiShellFacts,
-            ShellmonDigiWikiNarratorText.FoodWikiText)
+            ShellmonDigiWikiNarratorText.FoodWiki.ShellFacts,
+            ShellmonDigiWikiNarratorText.FoodWiki.WikiText)
     {
-        speakShellmonTextShortDelayAction(ShellmonDigiWikiNarratorText.FoodWikiText, SpeakShellmonTextAction);
+        speakShellmonTextShortDelayAction(ShellmonDigiWikiNarratorText.FoodWiki.WikiText, SpeakShellmonTextAction);
 
-        SpeakHungerConditionScreenCommand = new CommandHandler(() => speakShellmonTextNoDelayAction(ShellmonDigiWikiNarratorText.FoodWikiHungerConditionScreen, SpeakShellmonTextAction));
-        SpeakHungerConditionOverworldCommand = new CommandHandler(() => speakShellmonTextNoDelayAction(ShellmonDigiWikiNarratorText.FoodWikiHungerConditionOverworld, SpeakShellmonTextAction));
-        OpenGuideFoodChapterCommand = new CommandHandler(() => Process.Start(new ProcessStartInfo { FileName = Url.GuidFoodChapter, UseShellExecute = true }));
+        SpeakHungerConditionScreenCommand = new CommandHandler(() => speakShellmonTextNoDelayAction(ShellmonDigiWikiNarratorText.FoodWiki.HungerConditionScreen, SpeakShellmonTextAction));
+        SpeakHungerConditionOverworldCommand = new CommandHandler(() => speakShellmonTextNoDelayAction(ShellmonDigiWikiNarratorText.FoodWiki.HungerConditionOverworld, SpeakShellmonTextAction));
+        OpenGuideFoodChapterCommand = new CommandHandler(() => Process.Start(new ProcessStartInfo { FileName = Url.GuideFoodChapter, UseShellExecute = true }));
         OpenGuideHungryChapterCommand = new CommandHandler(() => Process.Start(new ProcessStartInfo { FileName = Url.GuideHungryChapter, UseShellExecute = true }));
         OpenDataSheetCommand = new CommandHandler(() => Process.Start(new ProcessStartInfo { FileName = Url.DataSheet, UseShellExecute = true }));
     }
