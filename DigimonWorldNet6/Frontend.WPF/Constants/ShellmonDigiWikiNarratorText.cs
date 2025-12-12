@@ -76,10 +76,10 @@ public static class ShellmonDigiWikiNarratorText
                                        "You'll hardly recognize after feeding one.";
 
         public const string PricklyPear = "Ouch! Thats a spikey one. It's the Pricklypear\n" +
-                                               "\n" +
-                                               "It's hard to digest and as a result your digimon will lose 5 weight!\n" +
-                                               "\n" +
-                                               "It does get you nice and toned though.";
+                                          "\n" +
+                                          "It's hard to digest and as a result your digimon will lose 5 weight!\n" +
+                                          "\n" +
+                                          "It does get you nice and toned though.";
 
         public const string Steak = "Ohhh thats bloody. . . Perhaps Myotismons favorite, a Steak.\n" +
                                     "\n" +
