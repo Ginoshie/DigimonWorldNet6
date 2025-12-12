@@ -54,7 +54,7 @@ public static class ShellmonDigiWikiNarratorText
                                        "\n" +
                                        "The following events influence the weight of your digimon:\n" +
                                        "\n" +
-                                       "- Feeding: Depending on the food it causes a reduction or increase.\n" +
+                                       "- Feeding: Depending on the food it either reduces or increases weight.\n" +
                                        "- Sleeping: Reduction of 1/10th of the default weight.\n" +
                                        "- Pooping: Reduction 1/4th of the poop size + a random value between 0 and 3.\n" +
                                        "- 0 Energy: Reduction every 10 minutes while having 0 energy your digimon will lose 1 weight.";
@@ -64,5 +64,63 @@ public static class ShellmonDigiWikiNarratorText
                                          "\n" +
                                          "Shell Fact Two\n" +
                                          "Time passed through training will not induce the weight reduction from 0 energy.";
+
+        public const string WeightProfileScreen = "You can view the weight of your digimon in the PROFILE section of the Status tab of the Digimon menu.\n" +
+                                                  "\n" +
+                                                  "To get to this screen, open the main menu by pressing triangle. Then open the Digimon menu. It opens up at the Status tab, at the top you'll find the PROFILE section.";
+
+        public const string BigBerry = "This is called the Big Berry.\n" +
+                                       "\n" +
+                                       "This chunker of a berry fills your digimon right up and makes it put on a whopping 10 weight!\n" +
+                                       "\n" +
+                                       "You'll hardly recognize after feeding one.";
+
+        public const string PricklyPear = "Ouch! Thats a spikey one. It's the Pricklypear\n" +
+                                               "\n" +
+                                               "It's hard to digest and as a result your digimon will lose 5 weight!\n" +
+                                               "\n" +
+                                               "It does get you nice and toned though.";
+
+        public const string Steak = "Ohhh thats bloody. . . Perhaps Myotismons favorite, a Steak.\n" +
+                                    "\n" +
+                                    "This risky piece of meat fills you up but wont increase your weight.\n" +
+                                    "\n" +
+                                    "Might make you sick though!";
+
+        public const string ChainMelon = "Aaahh so ripe. . . I like ripe melons. . . This beauty is a Chain Melon\n" +
+                                         "\n" +
+                                         "This wonderous fruit does many things. Among them is increasing weight by 3.\n" +
+                                         "\n" +
+                                         "It'll also make you much less tired, much happier and increase lifespan. Some bad ones make you sick though.";
+
+        public const string MoldyMeat = "Pwaaaah. . . whats that smell. . . Oh I see, Moldy Meat.\n" +
+                                        "\n" +
+                                        "This yukkie piece of \"meat\" increases weight by 2 but it's a sure fire way to get sick.\n" +
+                                        "\n" +
+                                        "\n Hard to believe anyone likes it, let alone loves it. But yet some do. . . ";
+
+        public const string Digicatfish = "Great catch! The Digicatfish, very filling and a solid way to increase weight.\n" +
+                                          "\n" +
+                                          "This hefty fish will increase your weight by 5.\n" +
+                                          "\n" +
+                                          "You can also use them to easily catch digiseabass, they also love them!";
+
+        public const string Digiseabass = "This is a rather peculiar fish, the Digiseabass.\n" +
+                                          "\n" +
+                                          "Consuming this big boy will result in a weight gain of 4 while also increasing your lifespan by a little.\n" +
+                                          "\n" +
+                                          "Invigorating!";
+
+        public const string BlackTrout = "Ah, the Black Trout. This is an odd one out.\n" +
+                                         "\n" +
+                                         "It's remarkable nutrional value will increase your stats but. . . lower your weight by 2!\n" +
+                                         "\n" +
+                                         "It remains a mystery to me still. . . ";
+
+        public const string GoldAcorn = "So shiny. . . It's very precious, this little Golden Acorn.\n" +
+                                        "\n" +
+                                        "Feed it or sell  it. It's up to you. Feeding it will increase weight by 4.\n" +
+                                        "\n" +
+                                        "Selling it though. . . will increase your bits by 8000 bits.";
     }
 }

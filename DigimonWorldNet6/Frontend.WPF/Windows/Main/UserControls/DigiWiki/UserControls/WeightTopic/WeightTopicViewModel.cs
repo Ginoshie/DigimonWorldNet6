@@ -21,9 +21,32 @@ public class WeightTopicViewModel : TopicViewModelBase
         speakShellmonTextShortDelayAction(ShellmonDigiWikiNarratorText.WeightWiki.WikiText, SpeakShellmonTextAction);
 
         OpenGuideFoodChapterCommand = new CommandHandler(() => Process.Start(new ProcessStartInfo { FileName = Url.GuideWeightChapter, UseShellExecute = true }));
-        OpenDataSheetCommand = new CommandHandler(() => Process.Start(new ProcessStartInfo { FileName = Url.DataSheet, UseShellExecute = true }));
+        OpenDigimonRaiseDataSheetCommand = new CommandHandler(() => Process.Start(new ProcessStartInfo { FileName = Url.DigimonRaiseDataSheet, UseShellExecute = true }));
+        OpenFoodDataSheetCommand = new CommandHandler(() => Process.Start(new ProcessStartInfo { FileName = Url.FoodDataSheet, UseShellExecute = true }));
+        
+        SpeakWeightProfileScreenCommand = new CommandHandler(() => speakShellmonTextNoDelayAction(ShellmonDigiWikiNarratorText.WeightWiki.WeightProfileScreen, SpeakShellmonTextAction));
+        SpeakBigBerryCommand = new CommandHandler(() => speakShellmonTextNoDelayAction(ShellmonDigiWikiNarratorText.WeightWiki.BigBerry, SpeakShellmonTextAction));
+        SpeakPricklyPearCommand = new CommandHandler(() => speakShellmonTextNoDelayAction(ShellmonDigiWikiNarratorText.WeightWiki.PricklyPear, SpeakShellmonTextAction));
+        SpeakSteakCommand = new CommandHandler(() => speakShellmonTextNoDelayAction(ShellmonDigiWikiNarratorText.WeightWiki.Steak, SpeakShellmonTextAction));
+        SpeakChainMelonCommand = new CommandHandler(() => speakShellmonTextNoDelayAction(ShellmonDigiWikiNarratorText.WeightWiki.ChainMelon, SpeakShellmonTextAction));
+        SpeakMoldyMeatCommand = new CommandHandler(() => speakShellmonTextNoDelayAction(ShellmonDigiWikiNarratorText.WeightWiki.MoldyMeat, SpeakShellmonTextAction));
+        SpeakDigicatfishCommand = new CommandHandler(() => speakShellmonTextNoDelayAction(ShellmonDigiWikiNarratorText.WeightWiki.Digicatfish, SpeakShellmonTextAction));
+        SpeakDigiseabassCommand = new CommandHandler(() => speakShellmonTextNoDelayAction(ShellmonDigiWikiNarratorText.WeightWiki.Digiseabass, SpeakShellmonTextAction));
+        SpeakBlackTroutCommand = new CommandHandler(() => speakShellmonTextNoDelayAction(ShellmonDigiWikiNarratorText.WeightWiki.BlackTrout, SpeakShellmonTextAction));
+        SpeakGoldAcornCommand = new CommandHandler(() => speakShellmonTextNoDelayAction(ShellmonDigiWikiNarratorText.WeightWiki.GoldAcorn, SpeakShellmonTextAction));
     }
 
     public ICommand OpenGuideFoodChapterCommand { get; }
-    public ICommand OpenDataSheetCommand { get; }
+    public ICommand OpenDigimonRaiseDataSheetCommand { get; }
+    public ICommand OpenFoodDataSheetCommand { get; }
+    public ICommand SpeakWeightProfileScreenCommand { get; }
+    public ICommand SpeakBigBerryCommand { get; }
+    public ICommand SpeakPricklyPearCommand { get; }
+    public ICommand SpeakSteakCommand { get; }
+    public ICommand SpeakChainMelonCommand { get; }
+    public ICommand SpeakMoldyMeatCommand { get; }
+    public ICommand SpeakDigicatfishCommand { get; }
+    public ICommand SpeakDigiseabassCommand { get; }
+    public ICommand SpeakBlackTroutCommand { get; }
+    public ICommand SpeakGoldAcornCommand { get; }
 }
