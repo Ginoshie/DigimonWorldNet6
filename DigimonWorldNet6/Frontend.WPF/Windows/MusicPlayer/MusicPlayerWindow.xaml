@@ -10,6 +10,8 @@
                         xmlns:baseClasses="clr-namespace:DigimonWorld.Frontend.WPF.Windows.BaseClasses"
                         mc:Ignorable="d"
                         d:DataContext="{d:DesignInstance Type=musicPlayer1:MusicPlayerViewModel, IsDesignTimeCreatable=True}"
+                        Title="Giromons Jukebox"
+                        Icon="pack://application:,,,/Frontend.WPF;component/Images/Misc/jukebox.png"
                         ResizeMode="NoResize"
                         SizeToContent="WidthAndHeight"
                         WindowStyle="None"
