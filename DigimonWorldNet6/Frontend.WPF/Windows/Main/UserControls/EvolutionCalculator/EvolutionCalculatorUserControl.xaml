@@ -47,7 +47,7 @@
                         <Label Grid.Row="0" Grid.Column="0" Height="40" Width="150" Style="{StaticResource DefaultSheenLabelStyle}" IsTabStop="False">
                             YOUR DIGIMON
                         </Label>
-                        <GroupBox Grid.Column="0" Grid.Row="1" Header="Your digimon">
+                        <GroupBox Grid.Column="0" Grid.Row="1" Header="Your Digimon">
                             <GroupBox.Template>
                                 <ControlTemplate TargetType="GroupBox">
                                     <Grid>
@@ -81,7 +81,7 @@
                                        Content="Digimon:">
                                     <Label.ToolTip>
                                         <ToolTip Style="{StaticResource DefaultToolTipLeftStyle}">
-                                            <TextBlock Text="The digimon type of your digimon." />
+                                            <TextBlock Text="The digimon type of your Digimon." />
                                         </ToolTip>
                                     </Label.ToolTip>
                                 </Label>
@@ -92,21 +92,21 @@
                                           SelectedItem="{Binding DigimonType}"
                                           Width="178">
                                     <ComboBox.ToolTip>
-                                        <ToolTip Content="The digimon type of your digimon." Style="{StaticResource DefaultToolTipRightStyle}" />
+                                        <ToolTip Content="The digimon type of your Digimon." Style="{StaticResource DefaultToolTipRightStyle}" />
                                     </ComboBox.ToolTip>
                                 </ComboBox>
 
                                 <Label Grid.Column="0" Grid.Row="1" Content="HP:" Style="{StaticResource DefaultLabelStyle}">
                                     <Label.ToolTip>
                                         <ToolTip Style="{StaticResource DefaultToolTipLeftStyle}">
-                                            <TextBlock Text="The 'HP' stat value of your digimon." />
+                                            <TextBlock Text="The 'HP' stat value of your Digimon." />
                                         </ToolTip>
                                     </Label.ToolTip>
                                 </Label>
                                 <TextBox Name="Hp" Grid.Column="1" Grid.Row="1" FocusVisualStyle="{StaticResource DefaultFocusStyle}" Style="{StaticResource DefaultTextBoxStyle}">
                                     <TextBox.ToolTip>
                                         <ToolTip Style="{StaticResource DefaultToolTipRightStyle}">
-                                            <TextBlock Text="The 'HP' stat value of your digimon." />
+                                            <TextBlock Text="The 'HP' stat value of your Digimon." />
                                         </ToolTip>
                                     </TextBox.ToolTip>
                                     <b:Interaction.Behaviors>
@@ -124,14 +124,14 @@
                                 <Label Grid.Column="0" Grid.Row="2" Content="MP:" Style="{StaticResource DefaultLabelStyle}">
                                     <Label.ToolTip>
                                         <ToolTip Style="{StaticResource DefaultToolTipLeftStyle}">
-                                            <TextBlock Text="The 'MP' stat value of your digimon." />
+                                            <TextBlock Text="The 'MP' stat value of your Digimon." />
                                         </ToolTip>
                                     </Label.ToolTip>
                                 </Label>
                                 <TextBox Name="Mp" Grid.Column="1" Grid.Row="2" FocusVisualStyle="{StaticResource DefaultFocusStyle}" Style="{StaticResource DefaultTextBoxStyle}">
                                     <TextBox.ToolTip>
                                         <ToolTip Style="{StaticResource DefaultToolTipRightStyle}">
-                                            <TextBlock Text="The 'MP' stat value of your digimon." />
+                                            <TextBlock Text="The 'MP' stat value of your Digimon." />
                                         </ToolTip>
                                     </TextBox.ToolTip>
                                     <b:Interaction.Behaviors>
@@ -149,14 +149,14 @@
                                 <Label Grid.Column="0" Grid.Row="3" Content="Off:" Style="{StaticResource DefaultLabelStyle}">
                                     <Label.ToolTip>
                                         <ToolTip Style="{StaticResource DefaultToolTipLeftStyle}">
-                                            <TextBlock Text="The 'Off' stat value of your digimon." />
+                                            <TextBlock Text="The 'Off' stat value of your Digimon." />
                                         </ToolTip>
                                     </Label.ToolTip>
                                 </Label>
                                 <TextBox Name="Off" Grid.Column="1" Grid.Row="3" FocusVisualStyle="{StaticResource DefaultFocusStyle}" Style="{StaticResource DefaultTextBoxStyle}">
                                     <TextBox.ToolTip>
                                         <ToolTip Style="{StaticResource DefaultToolTipRightStyle}">
-                                            <TextBlock Text="The 'Off' stat value of your digimon." />
+                                            <TextBlock Text="The 'Off' stat value of your Digimon." />
                                         </ToolTip>
                                     </TextBox.ToolTip>
                                     <b:Interaction.Behaviors>
@@ -174,14 +174,14 @@
                                 <Label Grid.Column="0" Grid.Row="4" Content="Def:" Style="{StaticResource DefaultLabelStyle}">
                                     <Label.ToolTip>
                                         <ToolTip Style="{StaticResource DefaultToolTipLeftStyle}">
-                                            <TextBlock Text="The 'Def' stat value of your digimon." />
+                                            <TextBlock Text="The 'Def' stat value of your Digimon." />
                                         </ToolTip>
                                     </Label.ToolTip>
                                 </Label>
                                 <TextBox Name="Def" Grid.Column="1" Grid.Row="4" FocusVisualStyle="{StaticResource DefaultFocusStyle}" Style="{StaticResource DefaultTextBoxStyle}">
                                     <TextBox.ToolTip>
                                         <ToolTip Style="{StaticResource DefaultToolTipRightStyle}">
-                                            <TextBlock Text="The 'Def' stat value of your digimon." />
+                                            <TextBlock Text="The 'Def' stat value of your Digimon." />
                                         </ToolTip>
                                     </TextBox.ToolTip>
                                     <b:Interaction.Behaviors>
@@ -199,14 +199,14 @@
                                 <Label Grid.Column="0" Grid.Row="5" Content="Speed:" Style="{StaticResource DefaultLabelStyle}">
                                     <Label.ToolTip>
                                         <ToolTip Style="{StaticResource DefaultToolTipLeftStyle}">
-                                            <TextBlock Text="The 'Speed' stat value of your digimon." />
+                                            <TextBlock Text="The 'Speed' stat value of your Digimon." />
                                         </ToolTip>
                                     </Label.ToolTip>
                                 </Label>
                                 <TextBox Name="Speed" Grid.Column="1" Grid.Row="5" FocusVisualStyle="{StaticResource DefaultFocusStyle}" Style="{StaticResource DefaultTextBoxStyle}">
                                     <TextBox.ToolTip>
                                         <ToolTip Style="{StaticResource DefaultToolTipRightStyle}">
-                                            <TextBlock Text="The 'Speed' stat value of your digimon." />
+                                            <TextBlock Text="The 'Speed' stat value of your Digimon." />
                                         </ToolTip>
                                     </TextBox.ToolTip>
                                     <b:Interaction.Behaviors>
@@ -224,14 +224,14 @@
                                 <Label Grid.Column="0" Grid.Row="6" Content="Brains:" Style="{StaticResource DefaultLabelStyle}">
                                     <Label.ToolTip>
                                         <ToolTip Style="{StaticResource DefaultToolTipLeftStyle}">
-                                            <TextBlock Text="The 'Brains' stat value of your digimon." />
+                                            <TextBlock Text="The 'Brains' stat value of your Digimon." />
                                         </ToolTip>
                                     </Label.ToolTip>
                                 </Label>
                                 <TextBox Name="Brains" Grid.Column="1" Grid.Row="6" FocusVisualStyle="{StaticResource DefaultFocusStyle}" Style="{StaticResource DefaultTextBoxStyle}">
                                     <TextBox.ToolTip>
                                         <ToolTip Style="{StaticResource DefaultToolTipRightStyle}">
-                                            <TextBlock Text="The 'Brains' stat value of your digimon." />
+                                            <TextBlock Text="The 'Brains' stat value of your Digimon." />
                                         </ToolTip>
                                     </TextBox.ToolTip>
                                     <b:Interaction.Behaviors>
@@ -250,7 +250,7 @@
                                     <Label.ToolTip>
                                         <ToolTip Style="{StaticResource DefaultToolTipLeftStyle}">
                                             <TextBlock
-                                                Text="The care mistake count of your digimon.&#x0a;&#x0a;This number is reset upon evolution and death.&#x0a;&#x0a;Care mistakes are:&#x0a;- pooping on the ground&#x0a;- not feeding, while energy level is below threshold, until the hunger timer runs out while not sleeping&#x0a;- not sleeping until the sleeping timer runs out" />
+                                                Text="The care mistake count of your Digimon.&#x0a;&#x0a;This number is reset upon evolution and death.&#x0a;&#x0a;Care mistakes are:&#x0a;- pooping on the ground&#x0a;- not feeding, while energy level is below threshold, until the hunger timer runs out while not sleeping&#x0a;- not sleeping until the sleeping timer runs out" />
                                         </ToolTip>
                                     </Label.ToolTip>
                                 </Label>
@@ -258,7 +258,7 @@
                                     <TextBox.ToolTip>
                                         <ToolTip Style="{StaticResource DefaultToolTipRightStyle}">
                                             <TextBlock
-                                                Text="The care mistake count of your digimon.&#x0a;&#x0a;This number is reset upon evolution and death.&#x0a;&#x0a;Care mistakes are:&#x0a;- pooping on the ground&#x0a;- not feeding, while energy level is below threshold, until the hunger timer runs out while not sleeping&#x0a;- not sleeping until the sleeping timer runs out" />
+                                                Text="The care mistake count of your Digimon.&#x0a;&#x0a;This number is reset upon evolution and death.&#x0a;&#x0a;Care mistakes are:&#x0a;- pooping on the ground&#x0a;- not feeding, while energy level is below threshold, until the hunger timer runs out while not sleeping&#x0a;- not sleeping until the sleeping timer runs out" />
                                         </ToolTip>
                                     </TextBox.ToolTip>
                                     <b:Interaction.Behaviors>
@@ -276,14 +276,14 @@
                                 <Label Grid.Column="0" Grid.Row="8" Content="Weight:" Style="{StaticResource DefaultLabelStyle}">
                                     <Label.ToolTip>
                                         <ToolTip Style="{StaticResource DefaultToolTipLeftStyle}">
-                                            <TextBlock Text="The weight value of your digimon." />
+                                            <TextBlock Text="The weight value of your Digimon." />
                                         </ToolTip>
                                     </Label.ToolTip>
                                 </Label>
                                 <TextBox Name="Weight" Grid.Column="1" Grid.Row="8" FocusVisualStyle="{StaticResource DefaultFocusStyle}" Style="{StaticResource DefaultTextBoxStyle}">
                                     <TextBox.ToolTip>
                                         <ToolTip Style="{StaticResource DefaultToolTipRightStyle}">
-                                            <TextBlock Text="The weight value of your digimon." />
+                                            <TextBlock Text="The weight value of your Digimon." />
                                         </ToolTip>
                                     </TextBox.ToolTip>
                                     <b:Interaction.Behaviors>
@@ -302,7 +302,7 @@
                                     <Label.ToolTip>
                                         <ToolTip Style="{StaticResource DefaultToolTipLeftStyle}">
                                             <TextBlock
-                                                Text="The happiness value of your digimon.&#x0a;&#x0a;A full blue bar with a red angry face icon is -100.&#x0a;A blue slither but mostly full pink bar with a yellow smiling face icon is 0.&#x0a;A full blue bar with yellow smiling face icon is 100." />
+                                                Text="The happiness value of your Digimon.&#x0a;&#x0a;A full blue bar with a red angry face icon is -100.&#x0a;A blue slither but mostly full pink bar with a yellow smiling face icon is 0.&#x0a;A full blue bar with yellow smiling face icon is 100." />
                                         </ToolTip>
                                     </Label.ToolTip>
                                 </Label>
@@ -310,7 +310,7 @@
                                     <TextBox.ToolTip>
                                         <ToolTip Style="{StaticResource DefaultToolTipRightStyle}">
                                             <TextBlock
-                                                Text="The happiness value of your digimon.&#x0a;&#x0a;A full blue bar with a red angry face icon is -100.&#x0a;A blue slither but mostly full pink bar with a yellow smiling face icon is 0.&#x0a;A full blue bar with yellow smiling face icon is 100." />
+                                                Text="The happiness value of your Digimon.&#x0a;&#x0a;A full blue bar with a red angry face icon is -100.&#x0a;A blue slither but mostly full pink bar with a yellow smiling face icon is 0.&#x0a;A full blue bar with yellow smiling face icon is 100." />
                                         </ToolTip>
                                     </TextBox.ToolTip>
                                     <b:Interaction.Behaviors>
@@ -329,7 +329,7 @@
                                     <Label.ToolTip>
                                         <ToolTip Style="{StaticResource DefaultToolTipLeftStyle}">
                                             <TextBlock
-                                                Text="The discipline value of your digimon.&#x0a;&#x0a;A full blue bar with a blue face icon with sunglasses is 0.&#x0a;A blue slither but mostly full pink bar with a yellow face icon with glasses is 50.&#x0a;A full blue bar with yellow face icon with glasses icon is 100." />
+                                                Text="The discipline value of your Digimon.&#x0a;&#x0a;A full blue bar with a blue face icon with sunglasses is 0.&#x0a;A blue slither but mostly full pink bar with a yellow face icon with glasses is 50.&#x0a;A full blue bar with yellow face icon with glasses icon is 100." />
                                         </ToolTip>
                                     </Label.ToolTip>
                                 </Label>
@@ -337,7 +337,7 @@
                                     <TextBox.ToolTip>
                                         <ToolTip Style="{StaticResource DefaultToolTipRightStyle}">
                                             <TextBlock
-                                                Text="The discipline value of your digimon.&#x0a;&#x0a;A full blue bar with a blue face icon with sunglasses is 0.&#x0a;A blue slither but mostly full pink bar with a yellow face icon with glasses is 50.&#x0a;A full blue bar with yellow face icon with glasses icon is 100." />
+                                                Text="The discipline value of your Digimon.&#x0a;&#x0a;A full blue bar with a blue face icon with sunglasses is 0.&#x0a;A blue slither but mostly full pink bar with a yellow face icon with glasses is 50.&#x0a;A full blue bar with yellow face icon with glasses icon is 100." />
                                         </ToolTip>
                                     </TextBox.ToolTip>
                                     <b:Interaction.Behaviors>
@@ -355,14 +355,14 @@
                                 <Label Grid.Column="0" Grid.Row="11" Content="Battles:" Style="{StaticResource DefaultLabelStyle}">
                                     <Label.ToolTip>
                                         <ToolTip Style="{StaticResource DefaultToolTipLeftStyle}">
-                                            <TextBlock Text="The battle count of your digimon.&#x0a;&#x0a;This number is reset upon evolution and death." />
+                                            <TextBlock Text="The battle count of your Digimon.&#x0a;&#x0a;This number is reset upon evolution and death." />
                                         </ToolTip>
                                     </Label.ToolTip>
                                 </Label>
                                 <TextBox Name="Battles" Grid.Column="1" Grid.Row="11" FocusVisualStyle="{StaticResource DefaultFocusStyle}" Style="{StaticResource DefaultTextBoxStyle}">
                                     <TextBox.ToolTip>
                                         <ToolTip Style="{StaticResource DefaultToolTipRightStyle}">
-                                            <TextBlock Text="The battle count of your digimon.&#x0a;&#x0a;This number is reset upon evolution and death." />
+                                            <TextBlock Text="The battle count of your Digimon.&#x0a;&#x0a;This number is reset upon evolution and death." />
                                         </ToolTip>
                                     </TextBox.ToolTip>
                                     <b:Interaction.Behaviors>
@@ -381,7 +381,7 @@
                                     <Label.ToolTip>
                                         <ToolTip Style="{StaticResource DefaultToolTipLeftStyle}">
                                             <TextBlock
-                                                Text="The number of total known techniques.&#x0a;&#x0a;You can find this in the 'Tech' of the Digimon window.&#x0a;&#x0a;Count all the available techniques, not just those that your digimon can use." />
+                                                Text="The number of total known techniques.&#x0a;&#x0a;You can find this in the 'Tech' of the Digimon window.&#x0a;&#x0a;Count all the available techniques, not just those that your Digimon can use." />
                                         </ToolTip>
                                     </Label.ToolTip>
                                 </Label>
@@ -389,7 +389,7 @@
                                     <TextBox.ToolTip>
                                         <ToolTip Style="{StaticResource DefaultToolTipRightStyle}">
                                             <TextBlock
-                                                Text="The number of total known techniques.&#x0a;&#x0a;You can find this in the 'Tech' of the Digimon window.&#x0a;&#x0a;Count all the available techniques, not just those that your digimon can use." />
+                                                Text="The number of total known techniques.&#x0a;&#x0a;You can find this in the 'Tech' of the Digimon window.&#x0a;&#x0a;Count all the available techniques, not just those that your Digimon can use." />
                                         </ToolTip>
                                     </TextBox.ToolTip>
                                     <b:Interaction.Behaviors>

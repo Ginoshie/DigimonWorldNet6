@@ -9,7 +9,7 @@ public static class JijimonEvolutionCalculatorNarratorText
 {
     public const string IntroText = "Well hello there! \n" +
                                     "\n" +
-                                    "If you wish to calculate an evolution result then choose the digimon and fill out the stats in the section to the left of me.\n" +
+                                    "If you wish to calculate an evolution result then choose the Digimon and fill out the stats in the section to the left of me.\n" +
                                     "\n" +
                                     "Once you've done that, open the 'Historic Evolutions' pane and select each evolution you've achieved in this save.\n" +
                                     "\n" +
@@ -22,13 +22,13 @@ public static class JijimonEvolutionCalculatorNarratorText
         switch (evolutionResult)
         {
             case EvolutionResult.Unknown:
-                return "If you wish to perform calculation for a different digimon then choose the digimon and fill out the stats.\n";
+                return "If you wish to perform calculation for a different Digimon then choose the Digimon and fill out the stats.\n";
             case EvolutionResult.None:
-                return "Oh dear, your digimon is not going to evolve I'm afraid.\n" +
+                return "Oh dear, your Digimon is not going to evolve I'm afraid.\n" +
                        "\n" +
                        "Perhaps check an evolution guide or try increasing some stats or changing weight?";
             case EvolutionResult.NotApplicable:
-                return "Your digimon is already at ultimate level which means it can't evolve to a higher stage anymore. \n" +
+                return "Your Digimon is already at ultimate level which means it can't evolve to a higher stage anymore. \n" +
                        "\n" +
                        "*whispers* . . .  The world holds many a secret though. . .  *smiles*";
         }
@@ -38,7 +38,7 @@ public static class JijimonEvolutionCalculatorNarratorText
 
         return evolutionResultEvolutionStage switch
         {
-            EvolutionStage.Fresh => throw new ArgumentOutOfRangeException(nameof(evolutionDigimonType), evolutionDigimonType, $"{evolutionDigimonType} is not a valid evolution target because fresh digimon hatch from eggs."),
+            EvolutionStage.Fresh => throw new ArgumentOutOfRangeException(nameof(evolutionDigimonType), evolutionDigimonType, $"{evolutionDigimonType} is not a valid evolution target because fresh Digimon hatch from eggs."),
             EvolutionStage.InTraining => "Oh look at that!\n" +
                                          "\n" +
                                          $"It will become {AOrAn(evolutionDigimonType)} {evolutionDigimonType}.\n" +
@@ -211,9 +211,9 @@ public static class JijimonEvolutionCalculatorNarratorText
                                         "Please be good to it player, it deserves it.",
             DigimonType.Vademon => $"Look at that, now this is something special. {ShowEvolutionResultKeyWord} \n" +
                                    "\n" +
-                                   $"You gave your digimon long life and you are rewarded with a {evolutionDigimonType}." +
+                                   $"You gave your Digimon long life and you are rewarded with a {evolutionDigimonType}." +
                                    "\n" +
-                                   "Thank you for taking great care of your digimon.  *smiles",
+                                   "Thank you for taking great care of your Digimon.  *smiles",
             DigimonType.Phoenixmon => $"Great it is evolving, lets see what it will become.\n {ShowEvolutionResultKeyWord} " +
                                       "\n" +
                                       $"Oh . . . behold the grace and beauty of {evolutionDigimonType}.\n" +
@@ -259,15 +259,15 @@ public static class JijimonEvolutionCalculatorNarratorText
                  "\n" +
                  $"{evolutionDigimonType}, congratulations!\n" +
                  "\n" +
-                 "You make an old digimon proud.  *smiles*"
+                 "You make an old Digimon proud.  *smiles*"
         };
     }
 
-    private static string AOrAn(DigimonType digimonType)
+    private static string AOrAn(DigimonType DigimonType)
     {
         char[] vowelSoundingVowels = ['a', 'e', 'i', 'o'];
-        string digimonTypeString = digimonType.ToString();
-        char firstLetter = digimonTypeString[0];
+        string DigimonTypeString = DigimonType.ToString();
+        char firstLetter = DigimonTypeString[0];
 
         return vowelSoundingVowels.Contains(firstLetter) ? "an" : "a";
     }

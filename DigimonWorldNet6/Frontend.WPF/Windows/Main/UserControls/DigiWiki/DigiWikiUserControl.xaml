@@ -44,6 +44,7 @@
                         <WrapPanel Grid.Row="1" HorizontalAlignment="Center">
                             <navigationButtons:FoodTopicNavigationButton Command="{Binding OpenFoodTopicCommand}" />
                             <navigationButtons:WeightTopicNavigationButton Command="{Binding OpenWeightTopicCommand}" />
+                            <navigationButtons:PoopTopicNavigationButton Command="{Binding OpenPoopTopicCommand}" />
                         </WrapPanel>
                     </Grid>
                 </Border>

@@ -40,12 +40,4 @@
         </None>
     </ItemGroup>
 
-    <ItemGroup>
-      <Page Update="Windows\Main\UserControls\DigiWiki\UserControls\WeightTopic\Styles\HiddenButtonStyle.xaml">
-        <Generator>MSBuild:Compile</Generator>
-        <XamlRuntime>Wpf</XamlRuntime>
-        <SubType>Designer</SubType>
-      </Page>
-    </ItemGroup>
-
 </Project>

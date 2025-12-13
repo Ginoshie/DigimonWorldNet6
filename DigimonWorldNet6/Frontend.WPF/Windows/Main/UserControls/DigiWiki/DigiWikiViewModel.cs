@@ -8,6 +8,7 @@ using DigimonWorld.Frontend.WPF.Services;
 using DigimonWorld.Frontend.WPF.ViewModelComponents;
 using DigimonWorld.Frontend.WPF.Windows.Main.UserControls.DigiWiki.UserControls.FoodTopic;
 using DigimonWorld.Frontend.WPF.Windows.Main.UserControls.DigiWiki.UserControls.HomeTopic;
+using DigimonWorld.Frontend.WPF.Windows.Main.UserControls.DigiWiki.UserControls.PoopTopic;
 using DigimonWorld.Frontend.WPF.Windows.Main.UserControls.DigiWiki.UserControls.WeightTopic;
 
 namespace DigimonWorld.Frontend.WPF.Windows.Main.UserControls.DigiWiki;
@@ -48,11 +49,14 @@ public class DigiWikiViewModel : BaseViewModel
 
         OpenWeightTopicCommand = new CommandHandler(OpenWeightTopic);
 
+        OpenPoopTopicCommand = new CommandHandler(OpenPoopTopic);
+
         _currentSelectedDigiWikiContent = new Home(SpeakShellmonTextLongDelayAction, InstantDisplay);
     }
 
     public ICommand OpenFoodTopicCommand { get; }
     public ICommand OpenWeightTopicCommand { get; }
+    public ICommand OpenPoopTopicCommand { get; }
 
     public UserControl CurrentSelectedDigiWikiContent
     {
@@ -62,6 +66,7 @@ public class DigiWikiViewModel : BaseViewModel
 
     private void OpenFoodTopic() => CurrentSelectedDigiWikiContent = new FoodTopicUserControl(SpeakShellmonTextShortDelayAction, SpeakShellmonTextNoDelayAction, InstantDisplay);
     private void OpenWeightTopic() => CurrentSelectedDigiWikiContent = new WeightTopicUserControl(SpeakShellmonTextShortDelayAction, SpeakShellmonTextNoDelayAction, InstantDisplay);
+    private void OpenPoopTopic() => CurrentSelectedDigiWikiContent = new PoopTopicUserControl(SpeakShellmonTextShortDelayAction, SpeakShellmonTextNoDelayAction, InstantDisplay);
 
     private void InstantDisplay()
     {
