@@ -37,15 +37,15 @@ public static class ShellmonDigiWikiNarratorText
                                          "Shell Fact Three\n" +
                                          "Training increases energy consumption by 1.";
 
-        public const string HungerConditionScreen = "When hungry, your Digimon will have a status modifier in the CONDITION section of the Status tab of the Digimon menu.\n" +
-                                                    "\n" +
-                                                    "To get to this screen, open the main menu by pressing triangle. Then open the Digimon menu. It opens up at the Status tab, in the bottom left corner you'll find the CONDITION section.";
+        public const string HungerScreen = "When hungry, your Digimon will have a status modifier in the CONDITION section of the Status tab of the Digimon menu.\n" +
+                                           "\n" +
+                                           "To get to this screen, open the main menu by pressing triangle. Then open the Digimon menu. It opens up at the Status tab, in the bottom left corner you'll find the CONDITION section.";
 
-        public const string HungerConditionOverworld = "When hungry, your Digimon will have an emotion bubble with a meat icon above its head. As long as this emotion bubble is visible it is hungry.\n" +
-                                                       "\n" +
-                                                       "It will make a uncomfortable movements and growl.\n" +
-                                                       "\n" +
-                                                       "Doesn't it make you want to feed it?";
+        public const string HungerOverworld = "When hungry, your Digimon will have an emotion bubble with a meat icon above its head. As long as this emotion bubble is visible it is hungry.\n" +
+                                              "\n" +
+                                              "It will make a uncomfortable movements and growl.\n" +
+                                              "\n" +
+                                              "Doesn't it make you want to feed it?";
     }
 
     public static class WeightWiki
@@ -65,9 +65,9 @@ public static class ShellmonDigiWikiNarratorText
                                          "Shell Fact Two\n" +
                                          "Time passed through training will not induce the weight reduction from 0 energy.";
 
-        public const string WeightProfileScreen = "You can view the weight of your Digimon in the PROFILE section of the Status tab of the Digimon menu.\n" +
-                                                  "\n" +
-                                                  "To get to this screen, open the main menu by pressing triangle. Then open the Digimon menu. It opens up at the Status tab, at the top you'll find the PROFILE section.";
+        public const string WeightScreen = "You can view the weight of your Digimon in the PROFILE section of the Status tab of the Digimon menu.\n" +
+                                           "\n" +
+                                           "To get to this screen, open the main menu by pressing triangle. Then open the Digimon menu. It opens up at the Status tab, at the top you'll find the PROFILE section.";
 
         public const string BigBerry = "This is called the Big Berry.\n" +
                                        "\n" +
@@ -150,32 +150,33 @@ public static class ShellmonDigiWikiNarratorText
                                          "Shell Fact Four\n" +
                                          "If the size of a poop goes above a certain value the game renders it upside down. Use the cheat sheet for Cheat Engine to change the size of poops on the screen.";
 
-        public const string PoopingConditionScreen = "When your Digimon has to poop it will have a status modifier in the CONDITION section of the Status tab of the Digimon menu.\n" +
-                                                     "\n" +
-                                                     "To get to this screen, open the main menu by pressing triangle. Then open the Digimon menu. It opens up at the Status tab, in the bottom left corner you'll find the CONDITION section.\n" +
-                                                     "\n" +
-                                                     "On this screen you'll also find the virus bar labelled as Vir.";
+        public const string PoopingScreen = "When your Digimon has to poop it will have a status modifier in the CONDITION section of the Status tab of the Digimon menu.\n" +
+                                            "\n" +
+                                            "To get to this screen, open the main menu by pressing triangle. Then open the Digimon menu. It opens up at the Status tab, in the bottom left corner you'll find the CONDITION section.\n" +
+                                            "\n" +
+                                            "On this screen you'll also find the virus bar labelled as Vir.";
 
-        public const string PoopingConditionOverworld = "When your Digimon has to poop it will have an emotion bubble with a turd icon above its head.\n" +
-                                                        "\n" +
-                                                        "It will stomp its feet and possible even grab its butt.\n" +
-                                                        "\n" +
-                                                        "Please get it to a toilet will you.";
+        public const string PoopingOverworld = "When your Digimon has to poop it will have an emotion bubble with a turd icon above its head.\n" +
+                                               "\n" +
+                                               "It will stomp its feet and possible even grab its butt.\n" +
+                                               "\n" +
+                                               "Please get it to a toilet will you.";
     }
 
     public static class AgeWiki
     {
-        public const string WikiText = "Every digimon starts out with 360 hours of lifespan. During its lifetime it will reduce each hours naturally but it may also be increased or decreased by certain events.\n" +
-                                       "\n" +
-                                       "The following events increase lifespan:\n" +
-                                       "- Ultimate evoltion (non-item): 96h\n" +
-                                       "- Eating a chainmelon: 20h\n" +
-                                       "- Eating a digiseabas: 3h\n" +
-                                       "\n" +
-                                       "The following events reduce lifspan:\n" +
-                                       "- Each passing hour: 1h\n" +
-                                       "- Every 4th hour: 0-4h, based on happiness\n" +
-                                       "- Feeding a DV chip: 24h";
+        public const string WikiText =
+            "Every digimon starts out with 360 hours of lifespan. During its lifetime it will reduce each hours naturally but it may also be increased or decreased by certain events. When lifespan decreases to 0 it passes away and becomes an egg.\n" +
+            "\n" +
+            "The following events increase lifespan:\n" +
+            "- Ultimate evoltion (non-item): 96h\n" +
+            "- Eating a chainmelon: 20h\n" +
+            "- Eating a digiseabas: 3h\n" +
+            "\n" +
+            "The following events reduce lifspan:\n" +
+            "- Each passing hour: 1h\n" +
+            "- Every 4th hour: 0-4h, based on happiness\n" +
+            "- Feeding a DV chip: 24h";
 
         public const string ShellFacts = "Whether you're a brother or whether you're a mother\n" +
                                          "You're stayin' alive. . .  stayin' alive. . . \n" +
@@ -203,5 +204,39 @@ public static class ShellmonDigiWikiNarratorText
                                                   "- -100 to -97\n" +
                                                   "\n" +
                                                   "Perhaps you already noticed but. . . the visual of the happiness bar sometimes overlaps two ranges. So you can't reliably use it.";
+    }
+
+    public static class TirednessWiki
+    {
+        public const string WikiText = "Digimon, though being digital, get tired from activities. Once they get too tired they'll become exhausted.\n" +
+                                       "\n" +
+                                       "The tiredness value can be anywhere between 0 and 100. From 80 and up your digimon will get the exhausted condition.\n" +
+                                       "While exhausted the following applies to your digimon:\n" +
+                                       "- Lose 2 happiness every 5 minutes\n" +
+                                       "- Lose 4 happiness and 3 discipline when training at 100 tiredness\n" +
+                                       "- Higher chance of injury after battle\n" +
+                                       "- Get sleepy faster\n" +
+                                       "- May get hungry faster\n" +
+                                       "- Increased chance of getting sick when staying up too long\n" +
+                                       "\n" +
+                                       "Mechanics that reduce or increase tiredness are only listed in the guide due to their sheer number. Click the in the MORE INFO section to open the Tiredness chapter of the guide for more info.";
+
+
+        public const string ShellFacts = "Shell Fact One\n" +
+                                         "A Happymushrm reduces tiredness, quite the funny mushroom I suppose.\n" +
+                                         "\n" +
+                                         "Shell Fact Two\n" +
+                                         "If your digimon likes the area its in it will reduce tiredness, both awake and asleep.\n" +
+                                         "\n" +
+                                         "Shell Fact Three\n" +
+                                         "A spiny green reduces as much tiredness as a chain melon. Such powerfull foods!\n";
+
+        public const string TirednessScreen = "When your Digimon is exhausted it will have a status modifier in the CONDITION section of the Status tab of the Digimon menu.\n" +
+                                              "\n" +
+                                              "To get to this screen, open the main menu by pressing triangle. Then open the Digimon menu. It opens up at the Status tab, in the bottom left corner you'll find the CONDITION section.\n";
+
+        public const string TirednessOverworld = "Once exhausted its posture will become slumped forward, start panthing and have a sweat icon in an emotion bubble above its head.\n" +
+                                                 "\n" +
+                                                 "Give fellow a break please, he really needs to rest now.";
     }
 }

@@ -24,7 +24,7 @@ public class WeightTopicViewModel : TopicViewModelBase
         OpenDigimonRaiseDataSheetCommand = new CommandHandler(() => Process.Start(new ProcessStartInfo { FileName = Url.DigimonRaiseDataSheet, UseShellExecute = true }));
         OpenFoodDataSheetCommand = new CommandHandler(() => Process.Start(new ProcessStartInfo { FileName = Url.FoodDataSheet, UseShellExecute = true }));
         
-        SpeakWeightProfileScreenCommand = new CommandHandler(() => speakShellmonTextNoDelayAction(ShellmonDigiWikiNarratorText.WeightWiki.WeightProfileScreen, SpeakShellmonTextAction));
+        SpeakWeightProfileScreenCommand = new CommandHandler(() => speakShellmonTextNoDelayAction(ShellmonDigiWikiNarratorText.WeightWiki.WeightScreen, SpeakShellmonTextAction));
         SpeakBigBerryCommand = new CommandHandler(() => speakShellmonTextNoDelayAction(ShellmonDigiWikiNarratorText.WeightWiki.BigBerry, SpeakShellmonTextAction));
         SpeakPricklyPearCommand = new CommandHandler(() => speakShellmonTextNoDelayAction(ShellmonDigiWikiNarratorText.WeightWiki.PricklyPear, SpeakShellmonTextAction));
         SpeakSteakCommand = new CommandHandler(() => speakShellmonTextNoDelayAction(ShellmonDigiWikiNarratorText.WeightWiki.Steak, SpeakShellmonTextAction));

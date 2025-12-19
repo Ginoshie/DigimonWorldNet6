@@ -10,6 +10,7 @@ using DigimonWorld.Frontend.WPF.Windows.Main.UserControls.DigiWiki.UserControls.
 using DigimonWorld.Frontend.WPF.Windows.Main.UserControls.DigiWiki.UserControls.FoodTopic;
 using DigimonWorld.Frontend.WPF.Windows.Main.UserControls.DigiWiki.UserControls.HomeTopic;
 using DigimonWorld.Frontend.WPF.Windows.Main.UserControls.DigiWiki.UserControls.PoopTopic;
+using DigimonWorld.Frontend.WPF.Windows.Main.UserControls.DigiWiki.UserControls.TirednessTopic;
 using DigimonWorld.Frontend.WPF.Windows.Main.UserControls.DigiWiki.UserControls.WeightTopic;
 
 namespace DigimonWorld.Frontend.WPF.Windows.Main.UserControls.DigiWiki;
@@ -51,8 +52,10 @@ public class DigiWikiViewModel : BaseViewModel
         OpenWeightTopicCommand = new CommandHandler(OpenWeightTopic);
 
         OpenPoopTopicCommand = new CommandHandler(OpenPoopTopic);
-        
+
         OpenAgeTopicCommand = new CommandHandler(OpenAgeTopic);
+
+        OpenTirednessTopicCommand = new CommandHandler(OpenTirednessTopic);
 
         _currentSelectedDigiWikiContent = new Home(SpeakShellmonTextLongDelayAction, InstantDisplay);
     }
@@ -61,6 +64,7 @@ public class DigiWikiViewModel : BaseViewModel
     public ICommand OpenWeightTopicCommand { get; }
     public ICommand OpenPoopTopicCommand { get; }
     public ICommand OpenAgeTopicCommand { get; }
+    public ICommand OpenTirednessTopicCommand { get; }
 
     public UserControl CurrentSelectedDigiWikiContent
     {
@@ -72,6 +76,7 @@ public class DigiWikiViewModel : BaseViewModel
     private void OpenWeightTopic() => CurrentSelectedDigiWikiContent = new WeightTopicUserControl(SpeakShellmonTextShortDelayAction, SpeakShellmonTextNoDelayAction, InstantDisplay);
     private void OpenPoopTopic() => CurrentSelectedDigiWikiContent = new PoopTopicUserControl(SpeakShellmonTextShortDelayAction, SpeakShellmonTextNoDelayAction, InstantDisplay);
     private void OpenAgeTopic() => CurrentSelectedDigiWikiContent = new AgeTopicUserControl(SpeakShellmonTextShortDelayAction, SpeakShellmonTextNoDelayAction, InstantDisplay);
+    private void OpenTirednessTopic() => CurrentSelectedDigiWikiContent = new TirednessTopicUserControl(SpeakShellmonTextShortDelayAction, SpeakShellmonTextNoDelayAction, InstantDisplay);
 
     private void InstantDisplay()
     {

@@ -20,8 +20,8 @@ public class PoopTopicViewModel : TopicViewModelBase
     {
         speakShellmonTextShortDelayAction(ShellmonDigiWikiNarratorText.PoopWiki.WikiText, SpeakShellmonTextAction);
 
-        SpeakPoopingConditionOverworldCommand = new CommandHandler(() => speakShellmonTextNoDelayAction(ShellmonDigiWikiNarratorText.PoopWiki.PoopingConditionOverworld, SpeakShellmonTextAction));
-        SpeakPoopingConditionScreenCommand = new CommandHandler(() => speakShellmonTextNoDelayAction(ShellmonDigiWikiNarratorText.PoopWiki.PoopingConditionScreen, SpeakShellmonTextAction));
+        SpeakPoopingConditionOverworldCommand = new CommandHandler(() => speakShellmonTextNoDelayAction(ShellmonDigiWikiNarratorText.PoopWiki.PoopingOverworld, SpeakShellmonTextAction));
+        SpeakPoopingConditionScreenCommand = new CommandHandler(() => speakShellmonTextNoDelayAction(ShellmonDigiWikiNarratorText.PoopWiki.PoopingScreen, SpeakShellmonTextAction));
         OpenGuidePoopingChapterCommand = new CommandHandler(() => Process.Start(new ProcessStartInfo { FileName = Url.GuidePoopingChapter, UseShellExecute = true }));
         OpenYoutubeDiscAndPoopingClipCommand = new CommandHandler(() => Process.Start(new ProcessStartInfo { FileName = Url.YoutubeDiscAndPoopingClip, UseShellExecute = true }));
     }
