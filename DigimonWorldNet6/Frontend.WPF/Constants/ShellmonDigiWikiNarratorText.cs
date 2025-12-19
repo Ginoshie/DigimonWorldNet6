@@ -162,4 +162,46 @@ public static class ShellmonDigiWikiNarratorText
                                                         "\n" +
                                                         "Please get it to a toilet will you.";
     }
+
+    public static class AgeWiki
+    {
+        public const string WikiText = "Every digimon starts out with 360 hours of lifespan. During its lifetime it will reduce each hours naturally but it may also be increased or decreased by certain events.\n" +
+                                       "\n" +
+                                       "The following events increase lifespan:\n" +
+                                       "- Ultimate evoltion (non-item): 96h\n" +
+                                       "- Eating a chainmelon: 20h\n" +
+                                       "- Eating a digiseabas: 3h\n" +
+                                       "\n" +
+                                       "The following events reduce lifspan:\n" +
+                                       "- Each passing hour: 1h\n" +
+                                       "- Every 4th hour: 0-4h, based on happiness\n" +
+                                       "- Feeding a DV chip: 24h";
+
+        public const string ShellFacts = "Whether you're a brother or whether you're a mother\n" +
+                                         "You're stayin' alive. . .  stayin' alive. . . \n" +
+                                         "Feel the city breakin' and everybody shakin'\n" +
+                                         "And we're stayin' alive. . .  stayin' alive. . . \n" +
+                                         "Ah. . . ha. . .  ha. . .  ha. . .  stayin' alive. . .  stayin' alive. . . \n" +
+                                         "Ah. . .  ha. . .  ha. . .  ha. . .  stayin' alive";
+
+        public const string AgeScreen = "You can view the age of your Digimon in the PROFILE section of the Status tab of the Digimon menu.\n" +
+                                        "\n" +
+                                        "To get to this screen, open the main menu by pressing triangle. Then open the Digimon menu. It opens up at the Status tab, at the top you'll find the PROFILE section.\n" +
+                                        "\n" +
+                                        "This number goes up per passing of the day. So your digimon might be less then 24h old but still have an age of 1.\n" +
+                                        "\n" +
+                                        "The remaining lifespan of your digimon is not visible in game. It is to remain a mystery as Jijimon would say.";
+
+        public const string HappinessThresholds = "This image show the happiness thresholds for the lifespan reduction.\n" +
+                                                  "\n" +
+                                                  "From top to bottom the ranges are:\n" +
+                                                  "- 97 to 100\n" +
+                                                  "- 80 to 83\n" +
+                                                  "- 28 to 31\n" +
+                                                  "- -20 to -17\n" +
+                                                  "- -72 to -69\n" +
+                                                  "- -100 to -97\n" +
+                                                  "\n" +
+                                                  "Perhaps you already noticed but. . . the visual of the happiness bar sometimes overlaps two ranges. So you can't reliably use it.";
+    }
 }
