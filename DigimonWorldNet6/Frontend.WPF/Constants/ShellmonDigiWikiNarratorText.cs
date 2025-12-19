@@ -156,7 +156,7 @@ public static class ShellmonDigiWikiNarratorText
                                                      "\n" +
                                                      "On this screen you'll also find the virus bar labelled as Vir.";
 
-        public const string PoopingConditionOverworld = "When your Digimon has to poop it will have an emotion bubble with a meat icon above its head. As long as this emotion bubble is visible it is hungry.\n" +
+        public const string PoopingConditionOverworld = "When your Digimon has to poop it will have an emotion bubble with a turd icon above its head.\n" +
                                                         "\n" +
                                                         "It will stomp its feet and possible even grab its butt.\n" +
                                                         "\n" +
