@@ -75,7 +75,7 @@
                                             Content="📖"
                                             Command="{Binding SpeakWikiTextCommand}">
                                         <Button.ToolTip>
-                                            <ToolTip Style="{StaticResource DefaultToolTipRightStyle}" Content="Opens the Food chapter of the guide" />
+                                            <ToolTip Style="{StaticResource DefaultToolTipRightStyle}" Content="Ask shellmon to explain weight again" />
                                         </Button.ToolTip>
                                     </Button>
                                 </Grid>

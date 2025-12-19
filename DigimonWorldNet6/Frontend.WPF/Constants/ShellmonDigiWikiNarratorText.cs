@@ -199,9 +199,9 @@ public static class ShellmonDigiWikiNarratorText
                                                   "- 97 to 100\n" +
                                                   "- 80 to 83\n" +
                                                   "- 28 to 31\n" +
-                                                  "- -20 to -17\n" +
-                                                  "- -72 to -69\n" +
-                                                  "- -100 to -97\n" +
+                                                  "-  -20 to -17\n" +
+                                                  "-  -72 to -69\n" +
+                                                  "-  -100 to -97\n" +
                                                   "\n" +
                                                   "Perhaps you already noticed but. . . the visual of the happiness bar sometimes overlaps two ranges. So you can't reliably use it.";
     }
@@ -219,7 +219,7 @@ public static class ShellmonDigiWikiNarratorText
                                        "- May get hungry faster\n" +
                                        "- Increased chance of getting sick when staying up too long\n" +
                                        "\n" +
-                                       "Mechanics that reduce or increase tiredness are only listed in the guide due to their sheer number. Click the in the MORE INFO section to open the Tiredness chapter of the guide for more info.";
+                                       "Click the in the MORE INFO section to open the Tiredness chapter of the guide for more info.";
 
 
         public const string ShellFacts = "Shell Fact One\n" +
@@ -238,5 +238,36 @@ public static class ShellmonDigiWikiNarratorText
         public const string TirednessOverworld = "Once exhausted its posture will become slumped forward, start panthing and have a sweat icon in an emotion bubble above its head.\n" +
                                                  "\n" +
                                                  "Give fellow a break please, he really needs to rest now.";
+    }
+
+    public static class SleepWiki
+    {
+        public const string WikiText = "Each and every digimon requires a good sleep from time to time. Keeping them awake past their waking time will result in a care mistakes.\n" +
+                                       "\n" +
+                                       "Fresh and In Training digimon will sleep only 1 hour but need to sleep every 3 hours.\n" +
+                                       "\n" +
+                                       "Rookies stage and up digimon have sleeping schedule based on specifc time slots based on their schedule.\n" +
+                                       "- Sunup: 16:00 - 1:00\n" +
+                                       "- Day: 19:00 - 4:00\n" +
+                                       "- Groggy: 22:00 - 7:00\n" +
+                                       "- Sleepy: 2:00 - 11:00\n" +
+                                       "- Sunset: 7:00 - 16:00\n" +
+                                       "- Night: 10:00 - 19:00\n";
+
+        public const string ShellFacts = "Shell Fact One\n" +
+                                         "Your digimon will get sleepy earlier based on tiredness. At 60 tiredness and up the effect is the strongest and your digimon will get sleeping 10 minutes earlier every 10 minutes.\n" +
+                                         "\n" +
+                                         "Shell Fact Two\n" +
+                                         "The better your digimon sleeps, the more HP/MP will be regened and tiredness reduced" +
+                                         "\n" +
+                                         "Shell Fact Three\n";
+
+        public const string SleepScreen = "When your Digimon is sleepy it will have a status modifier in the CONDITION section of the Status tab of the Digimon menu.\n" +
+                                          "\n" +
+                                          "To get to this screen, open the main menu by pressing triangle. Then open the Digimon menu. It opens up at the Status tab, in the bottom left corner you'll find the CONDITION section.\n";
+        
+        public const string SleepOverworld = "Once sleepy your digimon will appear drowzy and have a sleep icon in an emotion bubble above its head.\n" +
+                                             "\n" +
+                                             "Tell it good night and let it rest. Once it wakes up it'll be ready for another day!";
     }
 }

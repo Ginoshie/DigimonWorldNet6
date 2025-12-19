@@ -47,6 +47,7 @@
                             <navigationButtons:PoopTopicNavigationButton Command="{Binding OpenPoopTopicCommand}" />
                             <navigationButtons:AgeTopicNavigationButton Command="{Binding OpenAgeTopicCommand}" />
                             <navigationButtons:TirednessTopicNavigationButton Command="{Binding OpenTirednessTopicCommand}" />
+                            <navigationButtons:SleepTopicNavigationButton Command="{Binding OpenSleepTopicCommand}" />
                         </WrapPanel>
                     </Grid>
                 </Border>
