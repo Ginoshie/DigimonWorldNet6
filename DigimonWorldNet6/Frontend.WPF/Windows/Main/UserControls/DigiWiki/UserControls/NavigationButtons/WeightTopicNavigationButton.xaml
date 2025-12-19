@@ -36,7 +36,7 @@
                 <ToolTip Style="{StaticResource DefaultToolTipRightStyle}" Content="Information about weight" />
             </Button.ToolTip>
             <Button.Content>
-                <ContentControl Content="/Frontend.WPF;component/Images/Icons/Labels/WEIGHT label.jpg">
+                <ContentControl Content="/Frontend.WPF;component/Images/Icons/Labels/WEIGHT label.png">
                     <ContentControl.ContentTemplate>
                         <DataTemplate>
                             <Image Source="{Binding}" Stretch="Uniform" Margin="2"/>
