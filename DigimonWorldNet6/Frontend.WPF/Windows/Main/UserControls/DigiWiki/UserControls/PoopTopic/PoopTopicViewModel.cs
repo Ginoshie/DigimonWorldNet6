@@ -23,9 +23,11 @@ public class PoopTopicViewModel : TopicViewModelBase
         SpeakPoopingConditionOverworldCommand = new CommandHandler(() => speakShellmonTextNoDelayAction(ShellmonDigiWikiNarratorText.PoopWiki.PoopingConditionOverworld, SpeakShellmonTextAction));
         SpeakPoopingConditionScreenCommand = new CommandHandler(() => speakShellmonTextNoDelayAction(ShellmonDigiWikiNarratorText.PoopWiki.PoopingConditionScreen, SpeakShellmonTextAction));
         OpenGuidePoopingChapterCommand = new CommandHandler(() => Process.Start(new ProcessStartInfo { FileName = Url.GuidePoopingChapter, UseShellExecute = true }));
+        OpenYoutubeDiscAndPoopingClipCommand = new CommandHandler(() => Process.Start(new ProcessStartInfo { FileName = Url.YoutubeDiscAndPoopingClip, UseShellExecute = true }));
     }
 
     public ICommand SpeakPoopingConditionScreenCommand { get; }
     public ICommand SpeakPoopingConditionOverworldCommand { get; }
     public ICommand OpenGuidePoopingChapterCommand { get; }
+    public ICommand OpenYoutubeDiscAndPoopingClipCommand { get; }
 }

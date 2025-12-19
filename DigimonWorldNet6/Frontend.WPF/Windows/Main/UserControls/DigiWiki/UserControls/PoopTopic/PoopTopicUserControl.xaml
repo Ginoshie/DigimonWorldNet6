@@ -111,6 +111,17 @@
                                         <ToolTip Style="{StaticResource DefaultToolTipRightStyle}" Content="Opens the Pooping chapter of the guide" />
                                     </Button.ToolTip>
                                 </Button>
+
+                                <Button FocusVisualStyle="{StaticResource DefaultFocusStyle}"
+                                        Style="{StaticResource DefaultButtonStyle}"
+                                        Margin="0,0, 0, 5"
+                                        Height="{StaticResource DefaultButtonHeight}"
+                                        Content="YT: Disc. and pooping"
+                                        Command="{Binding OpenYoutubeDiscAndPoopingClipCommand}">
+                                    <Button.ToolTip>
+                                        <ToolTip Style="{StaticResource DefaultToolTipRightStyle}" Content="Opens the Discipline and pooping youtube clip" />
+                                    </Button.ToolTip>
+                                </Button>
                             </StackPanel>
                         </Border>
                     </Border>
