@@ -18,7 +18,7 @@ public abstract class TopicViewModelBase : BaseViewModel
     {
         _instantDisplay = instantDisplay;
 
-        SpeakShellFactCommand = new CommandHandler(() => speakShellmonTextNoDelayAction(shellFactText, SpeakShellmonTextAction));
+        SpeakShellFactCommand = string.IsNullOrWhiteSpace(shellFactText) ? new CommandHandler(() => { }) : new CommandHandler(() => speakShellmonTextNoDelayAction(shellFactText, SpeakShellmonTextAction));
         SpeakWikiTextCommand = new CommandHandler(() => speakShellmonTextNoDelayAction(wikiText, SpeakShellmonTextAction));
 
         InstantDisplayCommand = new CommandHandler(InstantDisplay);

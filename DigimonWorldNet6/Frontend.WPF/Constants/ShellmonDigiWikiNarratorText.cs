@@ -270,4 +270,31 @@ public static class ShellmonDigiWikiNarratorText
                                              "\n" +
                                              "Tell it good night and let it rest. Once it wakes up it'll be ready for another day!";
     }
+
+    public static class AreaPreference
+    {
+        public const string WikiText = "Your Digimon might like or dislike a zone, or feel indiferent about it. The latter bis true for most zones.\n" +
+                                       "\n" +
+                                       "When a digimon likes or dislikes a zone you can tell by the animation of the face on of the happiness bar.\n" +
+                                       "\n" +
+                                       "While in a zone your Digimon likes the following effects are active:\n" +
+                                       "- Happiness is increased by 1 every 60 minutes\n" +
+                                       "- Tiredness is decreased by 2 every 60 minutes\n" +
+                                       "- Sleep regenerates 20% more HP and MP and tiredness is reduced by 20% more\n" +
+                                       "\n" +
+                                       "While in a zone your Digimon dislikes the following effects are active:\n" +
+                                       "- Happiness is decreased by 1 every 60 minutes\n" +
+                                       "- Tiredness is increased by 1 every 60 minutes\n" +
+                                       "- Sleeping regenerates 20% less HP and MP and tiredness is reduced by 20% less ";
+
+        public const string ShellFacts = "";
+        
+        public const string HappinessBar = "This shows the happiness bars and their animation when your digimon likes or dislike a zone.\n" +
+                                           "\n" +
+                                           "From top to bottom:\n" +
+                                           "- Disliked area, happiness range 0 to 100\n" +
+                                           "- Disliked area, happiness range -1 to -100\n" +
+                                           "- Liked area, happiness range 0 to 100\n" +
+                                           "- Liked area, happiness range -1 to -100";
+    }
 }

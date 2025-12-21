@@ -7,6 +7,7 @@ using DigimonWorld.Frontend.WPF.Constants;
 using DigimonWorld.Frontend.WPF.Services;
 using DigimonWorld.Frontend.WPF.ViewModelComponents;
 using DigimonWorld.Frontend.WPF.Windows.Main.UserControls.DigiWiki.UserControls.AgeTopic;
+using DigimonWorld.Frontend.WPF.Windows.Main.UserControls.DigiWiki.UserControls.AreaPreferenceTopic;
 using DigimonWorld.Frontend.WPF.Windows.Main.UserControls.DigiWiki.UserControls.FoodTopic;
 using DigimonWorld.Frontend.WPF.Windows.Main.UserControls.DigiWiki.UserControls.HomeTopic;
 using DigimonWorld.Frontend.WPF.Windows.Main.UserControls.DigiWiki.UserControls.PoopTopic;
@@ -59,6 +60,8 @@ public class DigiWikiViewModel : BaseViewModel
         OpenTirednessTopicCommand = new CommandHandler(OpenTirednessTopic);
 
         OpenSleepTopicCommand = new CommandHandler(OpenSleepTopic);
+        
+        OpenAreaPreferenceTopicCommand = new CommandHandler(OpenAreaPreferenceTopic);
 
         _currentSelectedDigiWikiContent = new Home(SpeakShellmonTextLongDelayAction, InstantDisplay);
     }
@@ -69,6 +72,7 @@ public class DigiWikiViewModel : BaseViewModel
     public ICommand OpenAgeTopicCommand { get; }
     public ICommand OpenTirednessTopicCommand { get; }
     public ICommand OpenSleepTopicCommand { get; }
+    public ICommand OpenAreaPreferenceTopicCommand { get; }
 
     public UserControl CurrentSelectedDigiWikiContent
     {
@@ -82,6 +86,7 @@ public class DigiWikiViewModel : BaseViewModel
     private void OpenAgeTopic() => CurrentSelectedDigiWikiContent = new AgeTopicUserControl(SpeakShellmonTextShortDelayAction, SpeakShellmonTextNoDelayAction, InstantDisplay);
     private void OpenTirednessTopic() => CurrentSelectedDigiWikiContent = new TirednessTopicUserControl(SpeakShellmonTextShortDelayAction, SpeakShellmonTextNoDelayAction, InstantDisplay);
     private void OpenSleepTopic() => CurrentSelectedDigiWikiContent = new SleepTopicUserControl(SpeakShellmonTextShortDelayAction, SpeakShellmonTextNoDelayAction, InstantDisplay);
+    private void OpenAreaPreferenceTopic() => CurrentSelectedDigiWikiContent = new AreaPreferenceTopicUserControl(SpeakShellmonTextShortDelayAction, SpeakShellmonTextNoDelayAction, InstantDisplay);
 
     private void InstantDisplay()
     {

@@ -48,6 +48,7 @@
                             <navigationButtons:AgeTopicNavigationButton Command="{Binding OpenAgeTopicCommand}" />
                             <navigationButtons:TirednessTopicNavigationButton Command="{Binding OpenTirednessTopicCommand}" />
                             <navigationButtons:SleepTopicNavigationButton Command="{Binding OpenSleepTopicCommand}" />
+                            <navigationButtons:AreaPreferenceNavigationButton Command="{Binding OpenAreaPreferenceTopicCommand}" />
                         </WrapPanel>
                     </Grid>
                 </Border>
