@@ -131,7 +131,7 @@
             <WrapPanel Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0, 15, 15, 15">
                 <Border BorderBrush="#060100" BorderThickness="3,3,0,0" >
                     <Border BorderBrush="#6789A5" BorderThickness="0,0,3,3" Background="#354A5B">
-                        <Image Width="200" Height="202" Source="Media/pooping-condition-screen.jpg" Stretch="UniformToFill">
+                        <Image Width="286" Height="202" Source="Media/pooping-condition-screen.jpg" Stretch="UniformToFill">
                             <b:Interaction.Triggers>
                                 <b:EventTrigger EventName="MouseLeftButtonDown">
                                     <b:InvokeCommandAction Command="{Binding SpeakPoopingConditionScreenCommand}" />
@@ -142,7 +142,7 @@
                 </Border>
                 <Border BorderBrush="#060100" BorderThickness="3,3,0,0" Margin="15, 0 ,0 ,0" >
                     <Border BorderBrush="#6789A5" BorderThickness="0,0,3,3" Background="#354A5B">
-                        <Image Width="230" Height="202" Source="Media/pooping-condition-overworld.jpg" Stretch="UniformToFill">
+                        <Image Width="270" Height="202" Source="Media/pooping-condition-overworld.jpg" Stretch="UniformToFill">
                             <b:Interaction.Triggers>
                                 <b:EventTrigger EventName="MouseLeftButtonDown">
                                     <b:InvokeCommandAction Command="{Binding SpeakPoopingConditionOverworldCommand}" />
