@@ -10,6 +10,7 @@ public static class Url
     public const string GuideTirednessChapter = "https://docs.google.com/document/d/1aHHXZXjZNDabFTWUdF055M0oshyC57kff5NVc2BTYGE/edit?tab=t.0#heading=h.96qrgi70gh7p";
     public const string GuideSleepingChapter = "https://docs.google.com/document/d/1aHHXZXjZNDabFTWUdF055M0oshyC57kff5NVc2BTYGE/edit?tab=t.0#heading=h.86tzpjxwcjqk";
     public const string GuideAreaPreferenceChapter = "https://docs.google.com/document/d/1aHHXZXjZNDabFTWUdF055M0oshyC57kff5NVc2BTYGE/edit?tab=t.0#heading=h.hmarst4dcboo";
+    public const string GuideButterflyFlowerChapter = "https://docs.google.com/document/d/1aHHXZXjZNDabFTWUdF055M0oshyC57kff5NVc2BTYGE/edit?pli=1&tab=t.0#heading=h.1dqqph8s8z6y";
 
     public const string YoutubeAddress = "www.youtube.com/@ginoshie";
     public const string YoutubeDiscAndPoopingClip = "https://youtu.be/enLO9t6pFWE";

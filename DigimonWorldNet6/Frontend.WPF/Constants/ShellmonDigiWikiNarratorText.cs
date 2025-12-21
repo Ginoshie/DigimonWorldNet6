@@ -266,12 +266,12 @@ public static class ShellmonDigiWikiNarratorText
                                           "\n" +
                                           "To get to this screen, open the main menu by pressing triangle. Then open the Digimon menu. It opens up at the Status tab, in the bottom left corner you'll find the CONDITION section.\n";
         
-        public const string SleepOverworld = "Once sleepy your digimon will appear drowzy and have a sleep icon in an emotion bubble above its head.\n" +
+        public const string SleepOverworld = "Once sleepy your Digimon will appear drowzy and have a sleep icon in an emotion bubble above its head.\n" +
                                              "\n" +
                                              "Tell it good night and let it rest. Once it wakes up it'll be ready for another day!";
     }
 
-    public static class AreaPreference
+    public static class AreaPreferenceWiki
     {
         public const string WikiText = "Your Digimon might like or dislike a zone, or feel indiferent about it. The latter bis true for most zones.\n" +
                                        "\n" +
@@ -296,5 +296,32 @@ public static class ShellmonDigiWikiNarratorText
                                            "- Disliked area, happiness range -1 to -100\n" +
                                            "- Liked area, happiness range 0 to 100\n" +
                                            "- Liked area, happiness range -1 to -100";
+    }
+
+    public static class FlowerWiki
+    {
+        public const string WikiText = "This is a nasty condition, be sure to get rid of it quickly. Your digimon is feeling miserable and is losing stats quickly! It will start feeling better if you let it be though.\n" +
+                                       "\n" +
+                                       "When happiness is negative and your Digimon has no other condition then the butterfly/flower condition may occur at any given moment. This is dependent on RNG and the chance to occur increases as happiness gets lower.\n" +
+                                       "Every 10 minutes the game rolls RNG and if the check passes this condition will be applied\n" +
+                                       "\n" +
+                                       "The calculation is: happiness invert - discipline > RNG value between 0 and 100." +
+                                       "\n" +
+                                       "During this condition the following effects take place:\n" +
+                                       "- Every 0.75 minutes happiness is increased by 1\n" +
+                                       "- Every 15 minutes stats are reduced by 2%";
+        
+        public const string ShellFacts = "Shell Fact One\n" +
+                                         "This condition is exclusive and will disappear when any other condition becomes active.";
+
+        public const string FlowerScreen = "When your Digimon has the butterfly / flower condition it will have a status modifier (flower) in the CONDITION section of the Status tab of the Digimon menu.\n" +
+                                           "\n" +
+                                           "To get to this screen, open the main menu by pressing triangle. Then open the Digimon menu. It opens up at the Status tab, in the bottom left corner you'll find the CONDITION section.\n";
+
+        public const string ButterflyOverworld = "A digimon afflicted by the butterfly / flower condition will gawk at the sky aimlessly and have a butterfly flying around its head.\n" +
+                                                 "\n" +
+                                                 "Cheer him up untill its happiness is positive and the condition will go away! Quick!\n" +
+                                                 "\n" +
+                                                 "Or wait untill its happiness is raised to 0 by the condition, but lose it will lose stats in return. Yikes!";
     }
 }
