@@ -51,6 +51,7 @@
                             <navigationButtons:AreaPreferenceTopicNavigationButton Command="{Binding OpenAreaPreferenceTopicCommand}" />
                             <navigationButtons:FlowerTopicNavigationButton Command="{Binding OpenFlowerTopicCommand}" />
                             <navigationButtons:InjuryTopicNavigationButton Command="{Binding OpenInjuryTopicCommand}" />
+                            <navigationButtons:SicknessTopicNavigationButton Command="{Binding OpenSicknessTopicCommand}" />
                         </WrapPanel>
                     </Grid>
                 </Border>

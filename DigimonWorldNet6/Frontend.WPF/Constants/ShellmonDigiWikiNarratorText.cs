@@ -330,13 +330,13 @@ public static class ShellmonDigiWikiNarratorText
     {
         public const string WikiText = "Battles are an integral part of the game but they injure your digimon. Once your digimon gets injured get it cured or it might fall all after time!" +
                                        "\n" +
-                                       "Cure it by getting him to Centarumon or Punimon or feeding it a bandage.\n" +
+                                       "Cure it by getting him to Centarumon or Punimon or feeding it a bandage or medicine.\n" +
                                        "\n" +
                                        "The chance of your Digimon getting injured after battle is as follows:\n" +
                                        "- Chance for injury = Tiredness - (CurrentHP / MaxHP)";
 
         public const string ShellFacts = "Shell Fact One\n" +
-                                         "Bandages can be bought from the store or obtained as a drop from Psychemon. This has only a 10% chance of dropping though.\n" +
+                                         "Bandages and medicine can be bought from the store. Bandages can also be obtained as a drop from Psychemon. Medicine is dropped by PlatinumSukamon. Both have only a 10% chance of dropping though.\n" +
                                          "\n" +
                                          "Shell Fact Two\n" +
                                          "Punimon will heal you for free if you dont have 300 bits.\n" +
@@ -351,5 +351,33 @@ public static class ShellmonDigiWikiNarratorText
         public const string InjuredOverworld = "A digimon suffering from an injury will hunch forward and have a bandage in an emotion bubble by its head.\n" +
                                                "\n" +
                                                "If not treated this will result in sickness eventually.";
+    }
+
+    public static class SicknessWiki
+    {
+        public const string WikiText = "Oh deary me, has your Digimon fallen ill? This is not good, sickness should be cured quickly before your Digimon loses a life!\n" +
+                                       "\n" +
+                                       "Did it perhaps eat moldy meat or leave it injured for too long? How about staying in a screen of a disliked zone? All these can cause sickness.\n" +
+                                       "\n" +
+                                       "Please cure its sickness by using medicine or getting it cured by Centarumon or Punimon or feeding it a medicine.\n" +
+                                       "\n" +
+                                       "If you happen to have a Sukamon or Numemon you might try your luck by letting it eat poop. The bigger the poop the higher the chance of curing the illness.";
+
+        public const string ShellFacts = "Shell Fact One\n" +
+                                         "Medicine is available in the store, or obtained as a drop from PlatinumSukamon at a drop rate of 10%.\n" +
+                                         "\n" +
+                                         "Shell Fact Two\n" +
+                                         "You can get cured if you're out of bits by visiting Punimon, he wont charge you if you can't pay the 300 bits.\n" +
+                                         "\n" +
+                                         "Shell Fact Three\n" +
+                                         "Rather niche and. . . peculiar. . . but if you have a Numemon or Sukamon then they can heal by eating poop, the bigger the poop the higher the chance of healing!";
+
+        public const string SickScreen = "When your Digimon has the sick condition it will have a status modifier in the CONDITION section of the Status tab of the Digimon menu.\n" +
+                                            "\n" +
+                                            "To get to this screen, open the main menu by pressing triangle. Then open the Digimon menu. It opens up at the Status tab, in the bottom left corner you'll find the CONDITION section.\n";
+
+        public const string SickOverworld = "A digimon suffering from sickness will hunch forward and have a syringe in an emotion bubble by its head.\n" +
+                                               "\n" +
+                                               "If not treated this will result in the loss of a life eventually so be sure to cure it in time!";
     }
 }
