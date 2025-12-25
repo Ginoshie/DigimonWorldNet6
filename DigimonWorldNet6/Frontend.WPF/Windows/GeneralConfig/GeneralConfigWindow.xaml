@@ -114,7 +114,7 @@
                                         Command="{Binding CloseCommand}">
                                     <Button.ToolTip>
                                         <ToolTip Style="{StaticResource DefaultToolTipRightStyle}"
-                                                 Content="Exit this window. (hotkey: ESC)" />
+                                                 Content="Exit this window (hotkey: ESC)" />
                                     </Button.ToolTip>
                                 </Button>
                             </Border>
