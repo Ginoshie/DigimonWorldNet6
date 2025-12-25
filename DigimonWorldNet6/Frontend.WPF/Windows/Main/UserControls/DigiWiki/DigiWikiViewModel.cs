@@ -11,6 +11,7 @@ using DigimonWorld.Frontend.WPF.Windows.Main.UserControls.DigiWiki.UserControls.
 using DigimonWorld.Frontend.WPF.Windows.Main.UserControls.DigiWiki.UserControls.FlowerTopic;
 using DigimonWorld.Frontend.WPF.Windows.Main.UserControls.DigiWiki.UserControls.FoodTopic;
 using DigimonWorld.Frontend.WPF.Windows.Main.UserControls.DigiWiki.UserControls.HomeTopic;
+using DigimonWorld.Frontend.WPF.Windows.Main.UserControls.DigiWiki.UserControls.InjuryTopic;
 using DigimonWorld.Frontend.WPF.Windows.Main.UserControls.DigiWiki.UserControls.PoopTopic;
 using DigimonWorld.Frontend.WPF.Windows.Main.UserControls.DigiWiki.UserControls.SleepTopic;
 using DigimonWorld.Frontend.WPF.Windows.Main.UserControls.DigiWiki.UserControls.TirednessTopic;
@@ -65,6 +66,8 @@ public class DigiWikiViewModel : BaseViewModel
         OpenAreaPreferenceTopicCommand = new CommandHandler(OpenAreaPreferenceTopic);
         
         OpenFlowerTopicCommand = new CommandHandler(OpenFlowerTopic);
+        
+        OpenInjuryTopicCommand = new CommandHandler(OpenInjuryTopic);
 
         _currentSelectedDigiWikiContent = new Home(SpeakShellmonTextLongDelayAction, InstantDisplay);
     }
@@ -77,6 +80,7 @@ public class DigiWikiViewModel : BaseViewModel
     public ICommand OpenSleepTopicCommand { get; }
     public ICommand OpenAreaPreferenceTopicCommand { get; }
     public ICommand OpenFlowerTopicCommand { get; }
+    public ICommand OpenInjuryTopicCommand { get; }
 
     public UserControl CurrentSelectedDigiWikiContent
     {
@@ -92,6 +96,7 @@ public class DigiWikiViewModel : BaseViewModel
     private void OpenSleepTopic() => CurrentSelectedDigiWikiContent = new SleepTopicUserControl(SpeakShellmonTextShortDelayAction, SpeakShellmonTextNoDelayAction, InstantDisplay);
     private void OpenAreaPreferenceTopic() => CurrentSelectedDigiWikiContent = new AreaPreferenceTopicUserControl(SpeakShellmonTextShortDelayAction, SpeakShellmonTextNoDelayAction, InstantDisplay);
     private void OpenFlowerTopic() => CurrentSelectedDigiWikiContent = new FlowerTopicUserControl(SpeakShellmonTextShortDelayAction, SpeakShellmonTextNoDelayAction, InstantDisplay);
+    private void OpenInjuryTopic() => CurrentSelectedDigiWikiContent = new InjuryTopicUserControl(SpeakShellmonTextShortDelayAction, SpeakShellmonTextNoDelayAction, InstantDisplay);
 
     private void InstantDisplay()
     {

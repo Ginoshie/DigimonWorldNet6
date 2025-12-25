@@ -45,11 +45,12 @@
                             <navigationButtons:FoodTopicNavigationButton Command="{Binding OpenFoodTopicCommand}" />
                             <navigationButtons:WeightTopicNavigationButton Command="{Binding OpenWeightTopicCommand}" />
                             <navigationButtons:PoopTopicNavigationButton Command="{Binding OpenPoopTopicCommand}" />
-                            <navigationButtons:AgeTopicNavigationTopicButton Command="{Binding OpenAgeTopicCommand}" />
+                            <navigationButtons:AgeTopicNavigationButton Command="{Binding OpenAgeTopicCommand}" />
                             <navigationButtons:TirednessTopicNavigationButton Command="{Binding OpenTirednessTopicCommand}" />
                             <navigationButtons:SleepTopicNavigationButton Command="{Binding OpenSleepTopicCommand}" />
-                            <navigationButtons:AreaPreferenceNavigationButton Command="{Binding OpenAreaPreferenceTopicCommand}" />
-                            <navigationButtons:FlowerNavigationTopicButton Command="{Binding OpenFlowerTopicCommand}" />
+                            <navigationButtons:AreaPreferenceTopicNavigationButton Command="{Binding OpenAreaPreferenceTopicCommand}" />
+                            <navigationButtons:FlowerTopicNavigationButton Command="{Binding OpenFlowerTopicCommand}" />
+                            <navigationButtons:InjuryTopicNavigationButton Command="{Binding OpenInjuryTopicCommand}" />
                         </WrapPanel>
                     </Grid>
                 </Border>

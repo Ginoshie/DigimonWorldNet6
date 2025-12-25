@@ -229,7 +229,10 @@ public static class ShellmonDigiWikiNarratorText
                                          "If your digimon likes the area its in it will reduce tiredness, both awake and asleep.\n" +
                                          "\n" +
                                          "Shell Fact Three\n" +
-                                         "A spiny green reduces as much tiredness as a chain melon. Such powerfull foods!\n";
+                                         "A spiny green reduces as much tiredness as a chain melon. Such powerfull foods!\n" +
+                                         "\n" +
+                                         "Shell Fact Four\n" +
+                                         "Resting at Punimons reduces tiredness by 10. When healing injure or sickness tiredness will be reduced to 50 if higher even!";
 
         public const string TirednessScreen = "When your Digimon is exhausted it will have a status modifier in the CONDITION section of the Status tab of the Digimon menu.\n" +
                                               "\n" +
@@ -258,9 +261,7 @@ public static class ShellmonDigiWikiNarratorText
                                          "Your digimon will get sleepy earlier based on tiredness. At 60 tiredness and up the effect is the strongest and your digimon will get sleeping 10 minutes earlier every 10 minutes.\n" +
                                          "\n" +
                                          "Shell Fact Two\n" +
-                                         "The better your digimon sleeps, the more HP/MP will be regened and tiredness reduced" +
-                                         "\n" +
-                                         "Shell Fact Three\n";
+                                         "The better your digimon sleeps, the more HP/MP will be regened and tiredness reduced.";
 
         public const string SleepScreen = "When your Digimon is sleepy it will have a status modifier in the CONDITION section of the Status tab of the Digimon menu.\n" +
                                           "\n" +
@@ -303,7 +304,7 @@ public static class ShellmonDigiWikiNarratorText
         public const string WikiText = "This is a nasty condition, be sure to get rid of it quickly. Your digimon is feeling miserable and is losing stats quickly! It will start feeling better if you let it be though.\n" +
                                        "\n" +
                                        "When happiness is negative and your Digimon has no other condition then the butterfly/flower condition may occur at any given moment. This is dependent on RNG and the chance to occur increases as happiness gets lower.\n" +
-                                       "Every 10 minutes the game rolls RNG and if the check passes this condition will be applied\n" +
+                                       "Every 10 minutes the game rolls RNG and if the check passes this condition will be applied.\n" +
                                        "\n" +
                                        "The calculation is: happiness invert - discipline > RNG value between 0 and 100." +
                                        "\n" +
@@ -323,5 +324,32 @@ public static class ShellmonDigiWikiNarratorText
                                                  "Cheer him up untill its happiness is positive and the condition will go away! Quick!\n" +
                                                  "\n" +
                                                  "Or wait untill its happiness is raised to 0 by the condition, but lose it will lose stats in return. Yikes!";
+    }
+
+    public static class InjuredWiki
+    {
+        public const string WikiText = "Battles are an integral part of the game but they injure your digimon. Once your digimon gets injured get it cured or it might fall all after time!" +
+                                       "\n" +
+                                       "Cure it by getting him to Centarumon or Punimon or feeding it a bandage.\n" +
+                                       "\n" +
+                                       "The chance of your Digimon getting injured after battle is as follows:\n" +
+                                       "- Chance for injury = Tiredness - (CurrentHP / MaxHP)";
+
+        public const string ShellFacts = "Shell Fact One\n" +
+                                         "Bandages can be bought from the store or obtained as a drop from Psychemon. This has only a 10% chance of dropping though.\n" +
+                                         "\n" +
+                                         "Shell Fact Two\n" +
+                                         "Punimon will heal you for free if you dont have 300 bits.\n" +
+                                         "\n" +
+                                         "Shell Fact Three\n" +
+                                         "Numemon and Sukamon can heal by eating poop, the bigger the poop the higher the chance of healing!";
+
+        public const string InjuredScreen = "When your Digimon has the injured condition it will have a status modifier in the CONDITION section of the Status tab of the Digimon menu.\n" +
+                                            "\n" +
+                                            "To get to this screen, open the main menu by pressing triangle. Then open the Digimon menu. It opens up at the Status tab, in the bottom left corner you'll find the CONDITION section.\n";
+
+        public const string InjuredOverworld = "A digimon suffering from an injury will hunch forward and have a bandage in an emotion bubble by its head.\n" +
+                                               "\n" +
+                                               "If not treated this will result in sickness eventually.";
     }
 }
