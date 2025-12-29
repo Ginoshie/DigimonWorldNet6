@@ -30,6 +30,7 @@
         </Label>
         <WrapPanel Grid.Row="1" HorizontalAlignment="Center">
             <navigationButtons:HungryTopicNavigationButton Command="{Binding OpenHungryTopicCommand}" />
+            <navigationButtons:PoopyTopicNavigationButton Command="{Binding OpenPoopyTopicCommand}" />
             <navigationButtons:FlowerTopicNavigationButton Command="{Binding OpenFlowerTopicCommand}" />
             <navigationButtons:InjuryTopicNavigationButton Command="{Binding OpenInjuryTopicCommand}" />
         </WrapPanel>

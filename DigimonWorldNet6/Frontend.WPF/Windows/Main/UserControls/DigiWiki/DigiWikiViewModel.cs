@@ -17,6 +17,7 @@ using DigimonWorld.Frontend.WPF.Windows.Main.UserControls.DigiWiki.UserControls.
 using DigimonWorld.Frontend.WPF.Windows.Main.UserControls.DigiWiki.UserControls.Topics.HungryTopic;
 using DigimonWorld.Frontend.WPF.Windows.Main.UserControls.DigiWiki.UserControls.Topics.InjuryTopic;
 using DigimonWorld.Frontend.WPF.Windows.Main.UserControls.DigiWiki.UserControls.Topics.PoopTopic;
+using DigimonWorld.Frontend.WPF.Windows.Main.UserControls.DigiWiki.UserControls.Topics.PoopyTopic;
 using DigimonWorld.Frontend.WPF.Windows.Main.UserControls.DigiWiki.UserControls.Topics.SicknessTopic;
 using DigimonWorld.Frontend.WPF.Windows.Main.UserControls.DigiWiki.UserControls.Topics.SleepTopic;
 using DigimonWorld.Frontend.WPF.Windows.Main.UserControls.DigiWiki.UserControls.Topics.TirednessTopic;
@@ -30,6 +31,7 @@ public class DigiWikiViewModel : BaseViewModel
 
     private CancellationTokenSource? _cancellationTokenSource;
     private UserControl _currentSelectedDigiWikiContent;
+    private UserControl _currentSelectedMenuNavigation;
 
     private void SpeakShellmonText(string shellmonText, Action<string> updateTextAction, int delayInMs)
     {
@@ -77,6 +79,8 @@ public class DigiWikiViewModel : BaseViewModel
         OpenAreaPreferenceTopicCommand = new CommandHandler(OpenAreaPreferenceTopic);
 
         OpenHungryTopicCommand = new CommandHandler(OpenHungryTopic);
+
+        OpenPoopyTopicCommand = new CommandHandler(OpenPoopyTopic);
         
         OpenFlowerTopicCommand = new CommandHandler(OpenFlowerTopic);
 
@@ -85,6 +89,8 @@ public class DigiWikiViewModel : BaseViewModel
         OpenSicknessTopicCommand = new CommandHandler(OpenSicknessTopic);
 
         _currentSelectedDigiWikiContent = new Home(SpeakShellmonTextLongDelayAction, InstantDisplay);
+
+        _currentSelectedMenuNavigation = new ChapterMenuNavigation();
     }
 
     public ICommand OpenTamerMechanicChapterCommand { get; }
@@ -98,6 +104,7 @@ public class DigiWikiViewModel : BaseViewModel
     public ICommand OpenSleepTopicCommand { get; }
     public ICommand OpenAreaPreferenceTopicCommand { get; }
     public ICommand OpenHungryTopicCommand { get; }
+    public ICommand OpenPoopyTopicCommand { get; }
     public ICommand OpenFlowerTopicCommand { get; }
     public ICommand OpenInjuryTopicCommand { get; }
     public ICommand OpenSicknessTopicCommand { get; }
@@ -125,6 +132,7 @@ public class DigiWikiViewModel : BaseViewModel
     private void OpenSleepTopic() => CurrentSelectedDigiWikiContent = new SleepTopicUserControl(SpeakShellmonTextShortDelayAction, SpeakShellmonTextNoDelayAction, InstantDisplay);
     private void OpenAreaPreferenceTopic() => CurrentSelectedDigiWikiContent = new AreaPreferenceTopicUserControl(SpeakShellmonTextShortDelayAction, SpeakShellmonTextNoDelayAction, InstantDisplay);
     private void OpenHungryTopic() => CurrentSelectedDigiWikiContent = new HungryTopicUserControl(SpeakShellmonTextShortDelayAction, SpeakShellmonTextNoDelayAction, InstantDisplay);
+    private void OpenPoopyTopic() => CurrentSelectedDigiWikiContent = new PoopyTopicUserControl(SpeakShellmonTextShortDelayAction, SpeakShellmonTextNoDelayAction, InstantDisplay);
     private void OpenFlowerTopic() => CurrentSelectedDigiWikiContent = new FlowerTopicUserControl(SpeakShellmonTextShortDelayAction, SpeakShellmonTextNoDelayAction, InstantDisplay);
     private void OpenInjuryTopic() => CurrentSelectedDigiWikiContent = new InjuryTopicUserControl(SpeakShellmonTextShortDelayAction, SpeakShellmonTextNoDelayAction, InstantDisplay);
     private void OpenSicknessTopic() => CurrentSelectedDigiWikiContent = new SicknessTopicUserControl(SpeakShellmonTextShortDelayAction, SpeakShellmonTextNoDelayAction, InstantDisplay);

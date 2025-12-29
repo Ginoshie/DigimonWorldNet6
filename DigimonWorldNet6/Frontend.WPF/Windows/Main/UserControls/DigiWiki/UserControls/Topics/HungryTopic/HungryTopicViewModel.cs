@@ -15,8 +15,8 @@ public class HungryTopicViewModel : TopicViewModelBase
         base(
             instantDisplay,
             speakShellmonTextNoDelayAction,
-            ShellmonDigiWikiNarratorText.FoodWiki.ShellFacts,
-            ShellmonDigiWikiNarratorText.FoodWiki.WikiText)
+            ShellmonDigiWikiNarratorText.HungryWiki.ShellFacts,
+            ShellmonDigiWikiNarratorText.HungryWiki.WikiText)
     {
         speakShellmonTextShortDelayAction(ShellmonDigiWikiNarratorText.HungryWiki.WikiText, SpeakShellmonTextAction);
 

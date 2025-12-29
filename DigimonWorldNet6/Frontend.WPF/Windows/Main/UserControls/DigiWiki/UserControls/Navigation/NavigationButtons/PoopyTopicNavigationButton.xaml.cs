@@ -3,12 +3,12 @@ using System.Windows.Input;
 
 namespace DigimonWorld.Frontend.WPF.Windows.Main.UserControls.DigiWiki.UserControls.Navigation.NavigationButtons;
 
-public partial class PoopTopicNavigationButton
+public partial class PoopyTopicNavigationButton
 {
 
-    public static readonly DependencyProperty CommandProperty = DependencyProperty.Register(nameof(Command), typeof(ICommand), typeof(PoopTopicNavigationButton), new PropertyMetadata(null));
+    public static readonly DependencyProperty CommandProperty = DependencyProperty.Register(nameof(Command), typeof(ICommand), typeof(PoopyTopicNavigationButton), new PropertyMetadata(null));
 
-    public PoopTopicNavigationButton() => InitializeComponent();
+    public PoopyTopicNavigationButton() => InitializeComponent();
 
     public ICommand Command
     {

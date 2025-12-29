@@ -127,6 +127,7 @@ public static class ShellmonDigiWikiNarratorText
     public static class PoopWiki
     {
         public const string WikiText = "Digimon poop on a somewhat regular basis. Be sure to find a potty in time or things get stinky.\n" +
+                                       "\n" +
                                        "The interval of the need to poop is based on the stage:\n" +
                                        "- Baby: 3h\n" +
                                        "- Rookie: 4h\n" +
@@ -150,17 +151,15 @@ public static class ShellmonDigiWikiNarratorText
                                          "Shell Fact Four\n" +
                                          "If the size of a poop goes above a certain value the game renders it upside down. Use the cheat sheet for Cheat Engine to change the size of poops on the screen.";
 
-        public const string PoopingScreen = "When your Digimon has to poop it will have a status modifier in the CONDITION section of the Status tab of the Digimon menu.\n" +
-                                            "\n" +
-                                            "To get to this screen, open the main menu by pressing triangle. Then open the Digimon menu. It opens up at the Status tab, in the bottom left corner you'll find the CONDITION section.\n" +
-                                            "\n" +
-                                            "On this screen you'll also find the virus bar labelled as Vir.";
+        public const string ToiletFileCity = "File city has a toilet where you can take your digimon to when it needs to poop.\n" +
+                                             "\n" +
+                                             "Theres a bunch of other places that have toilets too so keep an eye out for them so you know where to go when the time comes.\n" +
+                                             "\n" +
+                                             "If you visit a new place you might wanna buy some Port.potty's just in case.";
 
-        public const string PoopingOverworld = "When your Digimon has to poop it will have an emotion bubble with a turd icon above its head.\n" +
-                                               "\n" +
-                                               "It will stomp its feet and possible even grab its butt.\n" +
-                                               "\n" +
-                                               "Please get it to a toilet will you.";
+        public const string PortpottyShop = "You can buy Port.potty's in the shop in File City. They sure come in handy when you go out exploring and need a toilet in a pinch.\n" +
+                                            "\n" +
+                                            "My advice. . . Always have a couple on you just in case. *smiles*";
     }
 
     public static class AgeWiki
@@ -306,6 +305,8 @@ public static class ShellmonDigiWikiNarratorText
                                        "If you dont feed it in time and the starvation timer runs out then the hunger will go away and the care mistake count goes up by one.\n" +
                                        "\n" +
                                        "Please feed your Digimon though!";
+
+        public const string ShellFacts = "";
         
         public const string HungerScreen = "When hungry, your Digimon will have a status modifier in the CONDITION section of the Status tab of the Digimon menu.\n" +
                                            "\n" +
@@ -316,6 +317,33 @@ public static class ShellmonDigiWikiNarratorText
                                               "It will make a uncomfortable movements and growl.\n" +
                                               "\n" +
                                               "Doesn't it make you want to feed it?";
+    }
+
+    public static class PoopyWiki
+    {
+        public const string WikiText = "Ah its time to find a toilet again!\n" +
+                                       "\n" +
+                                       "On a regular basis your digimon will feel the need to use the toilet.\n" +
+                                       "\n" +
+                                       "Take to a toilet in the overworld or file city or feed it a Port.potty to end this status effect.\n" +
+                                       "\n" +
+                                       "Fail to do so and your Digimon will poop where it is standing which will also end the status effect.\n" +
+                                       "\n" +
+                                       "The higher the discipline the longer your digimon will hold it in. But it can only hold for so long!";
+
+        public const string ShellFacts = "";
+
+        public const string PoopingScreen = "When your Digimon has to poop it will have a status modifier in the CONDITION section of the Status tab of the Digimon menu.\n" +
+                                            "\n" +
+                                            "To get to this screen, open the main menu by pressing triangle. Then open the Digimon menu. It opens up at the Status tab, in the bottom left corner you'll find the CONDITION section.\n" +
+                                            "\n" +
+                                            "On this screen you'll also find the virus bar labelled as Vir.";
+
+        public const string PoopingOverworld = "When your Digimon has to poop it will have an emotion bubble with a turd icon above its head.\n" +
+                                               "\n" +
+                                               "It will stomp its feet and possible even grab its butt.\n" +
+                                               "\n" +
+                                               "Please get it to a toilet will you.";
     }
     
     public static class FlowerWiki

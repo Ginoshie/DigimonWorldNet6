@@ -20,14 +20,14 @@ public class PoopTopicViewModel : TopicViewModelBase
     {
         speakShellmonTextShortDelayAction(ShellmonDigiWikiNarratorText.PoopWiki.WikiText, SpeakShellmonTextAction);
 
-        SpeakPoopingConditionOverworldCommand = new CommandHandler(() => speakShellmonTextNoDelayAction(ShellmonDigiWikiNarratorText.PoopWiki.PoopingOverworld, SpeakShellmonTextAction));
-        SpeakPoopingConditionScreenCommand = new CommandHandler(() => speakShellmonTextNoDelayAction(ShellmonDigiWikiNarratorText.PoopWiki.PoopingScreen, SpeakShellmonTextAction));
+        SpeakToiletFileCityCommand = new CommandHandler(() => speakShellmonTextNoDelayAction(ShellmonDigiWikiNarratorText.PoopWiki.ToiletFileCity, SpeakShellmonTextAction));
+        SpeakPortpottyShopCommand = new CommandHandler(() => speakShellmonTextNoDelayAction(ShellmonDigiWikiNarratorText.PoopWiki.PortpottyShop, SpeakShellmonTextAction));
         OpenGuidePoopingChapterCommand = new CommandHandler(() => Process.Start(new ProcessStartInfo { FileName = Url.GuidePoopingChapter, UseShellExecute = true }));
         OpenYoutubeDiscAndPoopingClipCommand = new CommandHandler(() => Process.Start(new ProcessStartInfo { FileName = Url.YoutubeDiscAndPoopingClip, UseShellExecute = true }));
     }
 
-    public ICommand SpeakPoopingConditionScreenCommand { get; }
-    public ICommand SpeakPoopingConditionOverworldCommand { get; }
+    public ICommand SpeakToiletFileCityCommand { get; }
+    public ICommand SpeakPortpottyShopCommand { get; }
     public ICommand OpenGuidePoopingChapterCommand { get; }
     public ICommand OpenYoutubeDiscAndPoopingClipCommand { get; }
 }

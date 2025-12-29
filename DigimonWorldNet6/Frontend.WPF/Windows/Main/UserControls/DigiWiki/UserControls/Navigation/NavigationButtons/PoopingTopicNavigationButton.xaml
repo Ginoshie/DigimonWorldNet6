@@ -1,4 +1,4 @@
-<UserControl x:Class="DigimonWorld.Frontend.WPF.Windows.Main.UserControls.DigiWiki.UserControls.Navigation.NavigationButtons.PoopTopicNavigationButton"
+<UserControl x:Class="DigimonWorld.Frontend.WPF.Windows.Main.UserControls.DigiWiki.UserControls.Navigation.NavigationButtons.PoopingTopicNavigationButton"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -36,7 +36,7 @@
                 <ToolTip Style="{StaticResource DefaultToolTipRightStyle}" Content="Information about poop" />
             </Button.ToolTip>
             <Button.Content>
-                <ContentControl Content="/Frontend.WPF;component/Images/Icons/Emotions/Poop/poop2.png">
+                <ContentControl Content="/Frontend.WPF;component/Images/Icons/Items/Raising/port-potty-icon.png">
                     <ContentControl.ContentTemplate>
                         <DataTemplate>
                             <Image Source="{Binding}" Stretch="Uniform" Margin="2"/>
@@ -45,7 +45,7 @@
                 </ContentControl>
             </Button.Content>
         </Button>
-        <TextBlock Text="Poop"
+        <TextBlock Text="Pooping"
                    HorizontalAlignment="Center"
                    VerticalAlignment="Center"
                    FontWeight="Bold"
