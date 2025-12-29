@@ -30,35 +30,13 @@
                         </Border.BorderBrush>
                     </Border>
                     <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5">
-                        <Image x:Name="AnimatedImage" Source="/Images/Icons/Menu/Wiki1.png" Width="{StaticResource ButtonWidth}" Stretch="UniformToFill" />
+                        <Image x:Name="AnimatedImage" Source="/Images/Icons/Items/Training/Tr.manual.png" Width="{StaticResource ButtonWidth}" Stretch="UniformToFill" />
                         <TextBlock Width="{StaticResource TextBlockWidth}" TextAlignment="Center" TextWrapping="Wrap">Digi-Wiki</TextBlock>
                     </StackPanel>
                 </Grid>
                 <ControlTemplate.Triggers>
                     <Trigger Property="IsMouseOver" Value="True">
                         <Trigger.EnterActions>
-                            <BeginStoryboard x:Name="ImageHoverStoryboard">
-                                <Storyboard RepeatBehavior="Forever">
-                                    <ObjectAnimationUsingKeyFrames Storyboard.TargetName="AnimatedImage"
-                                                                   Storyboard.TargetProperty="Source">
-                                        <DiscreteObjectKeyFrame KeyTime="0:0:0">
-                                            <DiscreteObjectKeyFrame.Value>
-                                                <BitmapImage UriSource="/Images/Icons/Menu/Wiki1.png" />
-                                            </DiscreteObjectKeyFrame.Value>
-                                        </DiscreteObjectKeyFrame>
-                                        <DiscreteObjectKeyFrame KeyTime="0:0:0.4">
-                                            <DiscreteObjectKeyFrame.Value>
-                                                <BitmapImage UriSource="/Images/Icons/Menu/Wiki2.png" />
-                                            </DiscreteObjectKeyFrame.Value>
-                                        </DiscreteObjectKeyFrame>
-                                        <DiscreteObjectKeyFrame KeyTime="0:0:0.8">
-                                            <DiscreteObjectKeyFrame.Value>
-                                                <BitmapImage UriSource="/Images/Icons/Menu/Wiki1.png" />
-                                            </DiscreteObjectKeyFrame.Value>
-                                        </DiscreteObjectKeyFrame>
-                                    </ObjectAnimationUsingKeyFrames>
-                                </Storyboard>
-                            </BeginStoryboard>
                             <BeginStoryboard x:Name="BorderHoverStoryboard">
                                 <Storyboard RepeatBehavior="Forever">
                                     <ColorAnimationUsingKeyFrames Storyboard.TargetName="outerBrush"
@@ -97,7 +75,6 @@
                             </BeginStoryboard>
                         </Trigger.EnterActions>
                         <Trigger.ExitActions>
-                            <StopStoryboard BeginStoryboardName="ImageHoverStoryboard" />
                             <StopStoryboard BeginStoryboardName="BorderHoverStoryboard" />
                         </Trigger.ExitActions>
                     </Trigger>

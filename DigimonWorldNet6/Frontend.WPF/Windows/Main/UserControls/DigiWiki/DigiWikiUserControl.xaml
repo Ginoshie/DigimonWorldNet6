@@ -4,7 +4,6 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:digiWiki="clr-namespace:DigimonWorld.Frontend.WPF.Windows.Main.UserControls.DigiWiki"
-             xmlns:navigationButtons="clr-namespace:DigimonWorld.Frontend.WPF.Windows.Main.UserControls.DigiWiki.UserControls.NavigationButtons"
              Height="565"
              Width="1093"
              mc:Ignorable="d"

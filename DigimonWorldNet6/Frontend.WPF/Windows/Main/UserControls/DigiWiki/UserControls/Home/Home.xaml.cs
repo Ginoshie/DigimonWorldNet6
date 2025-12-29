@@ -1,7 +1,6 @@
 using System;
-using DigimonWorld.Frontend.WPF.Windows.Main.UserControls.DigiWiki.UserControls.Home;
 
-namespace DigimonWorld.Frontend.WPF.Windows.Main.UserControls.DigiWiki.UserControls.HomeTopic;
+namespace DigimonWorld.Frontend.WPF.Windows.Main.UserControls.DigiWiki.UserControls.Home;
 
 public partial class Home
 {

@@ -1,0 +1,32 @@
+<UserControl x:Class="DigimonWorld.Frontend.WPF.Windows.Main.UserControls.DigiWiki.UserControls.Navigation.MenuNavigation.ChapterMenuNavigation"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:navigationButtons="clr-namespace:DigimonWorld.Frontend.WPF.Windows.Main.UserControls.DigiWiki.UserControls.Navigation.NavigationButtons"
+             xmlns:digiWiki="clr-namespace:DigimonWorld.Frontend.WPF.Windows.Main.UserControls.DigiWiki"
+             mc:Ignorable="d"
+             d:DataContext="{d:DesignInstance Type=digiWiki:DigiWikiViewModel, IsDesignTimeCreatable=True}">
+
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/ResourceDictionaries/Styles/Labels/DefaultSheenLabelStyle.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Label Grid.Row="0" Grid.Column="0" Height="40" Width="100" Margin="0,25, 0, 15" Style="{StaticResource DefaultSheenLabelStyle}" IsTabStop="False">
+            CHAPTERS
+        </Label>
+        <WrapPanel Grid.Row="1" HorizontalAlignment="Center">
+            <navigationButtons:TamerMechanicsChapterNavigationButton Command="{Binding OpenTamerMechanicChapterCommand}" />
+            <navigationButtons:ConditionsChapterNavigationButton Command="{Binding OpenConditionsChapterCommand}" />
+        </WrapPanel>
+    </Grid>
+</UserControl>

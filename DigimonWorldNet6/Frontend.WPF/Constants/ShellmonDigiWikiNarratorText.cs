@@ -24,9 +24,7 @@ public static class ShellmonDigiWikiNarratorText
                                        "Over time and when performing actions energy will go down.  A Digimon becomes hungry at fixed times, indepedent of it's energy level.  When your Digimon gets hungry the starvation timer starts." +
                                        "Either feed it until the energy storage hits a certain threshold or wait for the timer to run out to stop it's hunger.\n" +
                                        "\n" +
-                                       "If the starvation timer runs out while the energy value is below threshold then it'll result in a care mistake.\n" +
-                                       "\n" +
-                                       "Click on the images below if you want me to tell you more about them.";
+                                       "If the starvation timer runs out while the energy value is below threshold then it'll result in a care mistake.\n";
 
         public const string ShellFacts = "Shell Fact One\n" +
                                          "Each Digimon has a favorite food which gives them 40% more energy and +2 Happiness!\n" +
@@ -37,15 +35,17 @@ public static class ShellmonDigiWikiNarratorText
                                          "Shell Fact Three\n" +
                                          "Training increases energy consumption by 1.";
 
-        public const string HungerScreen = "When hungry, your Digimon will have a status modifier in the CONDITION section of the Status tab of the Digimon menu.\n" +
-                                           "\n" +
-                                           "To get to this screen, open the main menu by pressing triangle. Then open the Digimon menu. It opens up at the Status tab, in the bottom left corner you'll find the CONDITION section.";
+        public const string MushroomOverworld = "Mushrooms are one of the common food items you can find in the overworld.\n" +
+                                                "\n" +
+                                                "Keep your eyes peeled for other items too!\n" +
+                                                "\n" +
+                                                "Who knows what you might find.";
 
-        public const string HungerOverworld = "When hungry, your Digimon will have an emotion bubble with a meat icon above its head. As long as this emotion bubble is visible it is hungry.\n" +
-                                              "\n" +
-                                              "It will make a uncomfortable movements and growl.\n" +
-                                              "\n" +
-                                              "Doesn't it make you want to feed it?";
+        public const string MeatFarmOverworld = "Every day you'll be able to get some meat from the meat farm. Yes, we grow meat on a farm.\n" +
+                                                "\n" +
+                                                "For free even!\n" +
+                                                "\n" +
+                                                "It's great stuff! Do give it a go will you. *smiles*";
     }
 
     public static class WeightWiki
@@ -299,6 +299,25 @@ public static class ShellmonDigiWikiNarratorText
                                            "- Liked area, happiness range -1 to -100";
     }
 
+    public static class HungryWiki
+    {
+        public const string WikiText = "After a while your Digimon will get hungry. Feed it food to increase its energy level and once high enough it wont be hungry anymore.\n" +
+                                       "\n" +
+                                       "If you dont feed it in time and the starvation timer runs out then the hunger will go away and the care mistake count goes up by one.\n" +
+                                       "\n" +
+                                       "Please feed your Digimon though!";
+        
+        public const string HungerScreen = "When hungry, your Digimon will have a status modifier in the CONDITION section of the Status tab of the Digimon menu.\n" +
+                                           "\n" +
+                                           "To get to this screen, open the main menu by pressing triangle. Then open the Digimon menu. It opens up at the Status tab, in the bottom left corner you'll find the CONDITION section.";
+
+        public const string HungerOverworld = "When hungry, your Digimon will have an emotion bubble with a meat icon above its head. As long as this emotion bubble is visible it is hungry.\n" +
+                                              "\n" +
+                                              "It will make a uncomfortable movements and growl.\n" +
+                                              "\n" +
+                                              "Doesn't it make you want to feed it?";
+    }
+    
     public static class FlowerWiki
     {
         public const string WikiText = "This is a nasty condition, be sure to get rid of it quickly. Your digimon is feeling miserable and is losing stats quickly! It will start feeling better if you let it be though.\n" +
