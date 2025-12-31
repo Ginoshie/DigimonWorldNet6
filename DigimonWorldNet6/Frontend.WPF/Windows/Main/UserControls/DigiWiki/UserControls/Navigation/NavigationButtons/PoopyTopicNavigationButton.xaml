@@ -36,7 +36,7 @@
                 <ToolTip Style="{StaticResource DefaultToolTipRightStyle}" Content="Information about poop" />
             </Button.ToolTip>
             <Button.Content>
-                <ContentControl Content="/Frontend.WPF;component/Images/Icons/Emotions/Poop/poop2.png">
+                <ContentControl Content="/Frontend.WPF;component/Images/Icons/Emotions/Poop/poopy-condition1.png">
                     <ContentControl.ContentTemplate>
                         <DataTemplate>
                             <Image Source="{Binding}" Stretch="Uniform" Margin="2"/>

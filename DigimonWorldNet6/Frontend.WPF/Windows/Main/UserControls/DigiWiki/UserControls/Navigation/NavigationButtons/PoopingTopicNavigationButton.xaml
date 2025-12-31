@@ -36,7 +36,7 @@
                 <ToolTip Style="{StaticResource DefaultToolTipRightStyle}" Content="Information about poop" />
             </Button.ToolTip>
             <Button.Content>
-                <ContentControl Content="/Frontend.WPF;component/Images/Icons/Items/Raising/port-potty-icon.png">
+                <ContentControl Content="/Frontend.WPF;component/Images/Icons/Emotions/Poop/vir-icon.png">
                     <ContentControl.ContentTemplate>
                         <DataTemplate>
                             <Image Source="{Binding}" Stretch="Uniform" Margin="2"/>

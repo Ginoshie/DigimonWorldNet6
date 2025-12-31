@@ -36,7 +36,7 @@
                 <ToolTip Style="{StaticResource DefaultToolTipRightStyle}" Content="Information about the butterfly / flower condition" />
             </Button.ToolTip>
             <Button.Content>
-                <ContentControl Content="/Frontend.WPF;component/Images/Icons/Emotions/ButterflyFlower/butterfly.jpg">
+                <ContentControl Content="/Frontend.WPF;component/Images/Icons/Emotions/ButterflyFlower/flower-condition.jpg">
                     <ContentControl.ContentTemplate>
                         <DataTemplate>
                             <Image Source="{Binding}" Stretch="Uniform" Margin="2"/>

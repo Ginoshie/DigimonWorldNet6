@@ -22,11 +22,9 @@ public class SleepTopicViewModel : TopicViewModelBase
 
         OpenGuideSleepingChapterCommand = new CommandHandler(() => Process.Start(new ProcessStartInfo { FileName = Url.GuideSleepingChapter, UseShellExecute = true }));
         
-        SpeakSleepyScreenCommand = new CommandHandler(() => speakShellmonTextNoDelayAction(ShellmonDigiWikiNarratorText.SleepWiki.SleepScreen, SpeakShellmonTextAction));
-        SpeakSleepyOverworldCommand = new CommandHandler(() => speakShellmonTextNoDelayAction(ShellmonDigiWikiNarratorText.SleepWiki.SleepOverworld, SpeakShellmonTextAction));
+        SpeakProfileSectionSleepingScheduleCommand = new CommandHandler(() => speakShellmonTextNoDelayAction(ShellmonDigiWikiNarratorText.SleepWiki.SleepingSchedule, SpeakShellmonTextAction));
     }
 
     public ICommand OpenGuideSleepingChapterCommand { get; }
-    public ICommand SpeakSleepyScreenCommand { get; }
-    public ICommand SpeakSleepyOverworldCommand { get; }
+    public ICommand SpeakProfileSectionSleepingScheduleCommand { get; }
 }

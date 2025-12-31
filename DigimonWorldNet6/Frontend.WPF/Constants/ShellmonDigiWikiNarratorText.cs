@@ -207,18 +207,16 @@ public static class ShellmonDigiWikiNarratorText
 
     public static class TirednessWiki
     {
-        public const string WikiText = "Digimon, though being digital, get tired from activities. Once they get too tired they'll become exhausted.\n" +
+        public const string WikiText = "Digimon, though being digital, get tired from activities. Once they get too tired they'll become tired.\n" +
                                        "\n" +
-                                       "The tiredness value can be anywhere between 0 and 100. From 80 and up your digimon will get the exhausted condition.\n" +
-                                       "While exhausted the following applies to your digimon:\n" +
+                                       "The tiredness value can be anywhere between 0 and 100. From 80 and up your digimon will get the tired condition.\n" +
+                                       "While tired the following applies to your digimon:\n" +
                                        "- Lose 2 happiness every 5 minutes\n" +
                                        "- Lose 4 happiness and 3 discipline when training at 100 tiredness\n" +
                                        "- Higher chance of injury after battle\n" +
                                        "- Get sleepy faster\n" +
                                        "- May get hungry faster\n" +
-                                       "- Increased chance of getting sick when staying up too long\n" +
-                                       "\n" +
-                                       "Click the in the MORE INFO section to open the Tiredness chapter of the guide for more info.";
+                                       "- Increased chance of getting sick when staying up too long\n";
 
 
         public const string ShellFacts = "Shell Fact One\n" +
@@ -233,13 +231,21 @@ public static class ShellmonDigiWikiNarratorText
                                          "Shell Fact Four\n" +
                                          "Resting at Punimons reduces tiredness by 10. When healing injure or sickness tiredness will be reduced to 50 if higher even!";
 
-        public const string TirednessScreen = "When your Digimon is exhausted it will have a status modifier in the CONDITION section of the Status tab of the Digimon menu.\n" +
-                                              "\n" +
-                                              "To get to this screen, open the main menu by pressing triangle. Then open the Digimon menu. It opens up at the Status tab, in the bottom left corner you'll find the CONDITION section.\n";
+        public const string DrimogemonCarryDirtQuest = "Drimogemon has you carrying dirt? Good for you! You'll get a nice work out but keep in mind that his does tires out your Digimon rather quickly.\n" +
+                                                       "\n" +
+                                                       "Each load you haul will increase tiredness by 10!\n" +
+                                                       "\n" +
+                                                       "Dont let that stop you though, just rest and eat in time and you'll be alright. *smiles reasuringly*";
 
-        public const string TirednessOverworld = "Once exhausted its posture will become slumped forward, start panthing and have a sweat icon in an emotion bubble above its head.\n" +
-                                                 "\n" +
-                                                 "Give fellow a break please, he really needs to rest now.";
+        public const string TrainingGym = "Training makes your Digimon stronger and allows it to evolve into other great Digimon.\n" +
+                                          "\n" +
+                                          "This makes it an essential aspect of being a good tamer.\n" +
+                                          "\n" +
+                                          "However it makes your digimon tired as well. You, being the great tamer you are, keeps an eye out for its tiredness and knows that training increases tiredness between 6 and 10 per hour of training.\n" +
+                                          "\n" +
+                                          "Keep your digimon well fed and you'll have to rest less.\n" +
+                                          "\n" +
+                                          "Dont overwork your friend!";
     }
 
     public static class SleepWiki
@@ -262,13 +268,11 @@ public static class ShellmonDigiWikiNarratorText
                                          "Shell Fact Two\n" +
                                          "The better your digimon sleeps, the more HP/MP will be regened and tiredness reduced.";
 
-        public const string SleepScreen = "When your Digimon is sleepy it will have a status modifier in the CONDITION section of the Status tab of the Digimon menu.\n" +
-                                          "\n" +
-                                          "To get to this screen, open the main menu by pressing triangle. Then open the Digimon menu. It opens up at the Status tab, in the bottom left corner you'll find the CONDITION section.\n";
-        
-        public const string SleepOverworld = "Once sleepy your Digimon will appear drowzy and have a sleep icon in an emotion bubble above its head.\n" +
-                                             "\n" +
-                                             "Tell it good night and let it rest. Once it wakes up it'll be ready for another day!";
+        public const string SleepingSchedule = "Depending on the sleeping schedule of your Digimon it'll want to sleep during specific hours. You can find its sleeping schedule in the PROFILE section of the Digimon menu.\n" +
+                                               "\n" +
+                                               "To get to this screen, open the main menu by pressing triangle. Then open the Digimon menu. It opens up at the Status tab, in the top section you'll find the PROFILE section and under ACTIVE you'll see the sleeping schedule.\n" +
+                                               "\n" +
+                                               "As you can see this sleeping schedule is the day schedule which means this digimon wants to sleep from 19:00 till 4:00.";
     }
 
     public static class AreaPreferenceWiki
@@ -304,7 +308,7 @@ public static class ShellmonDigiWikiNarratorText
                                        "\n" +
                                        "If you dont feed it in time and the starvation timer runs out then the hunger will go away and the care mistake count goes up by one.\n" +
                                        "\n" +
-                                       "Please feed your Digimon though!";
+                                       "Please feed your Digimon!";
 
         public const string ShellFacts = "";
         
@@ -344,6 +348,53 @@ public static class ShellmonDigiWikiNarratorText
                                                "It will stomp its feet and possible even grab its butt.\n" +
                                                "\n" +
                                                "Please get it to a toilet will you.";
+    }
+
+    public static class TiredWiki
+    {
+        public const string WikiText = "You might not expect this but your digimon can get tired after consuming too much energy. Once tiredness level reaches a critical value of 80 or higher it'll become tired.\n" +
+                                       "\n" +
+                                       "When this happens you'll see the tired emotion appear above its head.\n" +
+                                       "\n" +
+                                       "Give it some food or let it rest to cure it's tired condition.\n" +
+                                       "\n" +
+                                       "Lets not overwork our dearest friend shall we?";
+
+
+        public const string ShellFacts = "";
+
+        public const string TiredScreen = "When your Digimon is tired it will have a status modifier in the CONDITION section of the Status tab of the Digimon menu.\n" +
+                                              "\n" +
+                                              "To get to this screen, open the main menu by pressing triangle. Then open the Digimon menu. It opens up at the Status tab, in the bottom left corner you'll find the CONDITION section.\n";
+
+        public const string TiredOverworld = "You'll notice a change in your Digimons behavior one it gets tired. An emotion bubble with a falling droplet will appear and his posture is slumped forward.\n" +
+                                                 "\n" +
+                                                 "It's time to let it rest or feed it to reduce its tiredness.";
+    }
+
+    public static class SleepyWiki
+    {
+        public const string WikiText = "Each and every digimon requires a good sleep from time to time. Keeping them awake past their waking time will result in a care mistakes.\n" +
+                                       "\n" +
+                                       "Fresh and In Training digimon will sleep only 1 hour but need to sleep every 3 hours.\n" +
+                                       "\n" +
+                                       "Rookies stage and up digimon have sleeping schedule based on specifc time slots based on their schedule.\n" +
+                                       "- Sunup: 16:00 - 1:00\n" +
+                                       "- Day: 19:00 - 4:00\n" +
+                                       "- Groggy: 22:00 - 7:00\n" +
+                                       "- Sleepy: 2:00 - 11:00\n" +
+                                       "- Sunset: 7:00 - 16:00\n" +
+                                       "- Night: 10:00 - 19:00\n";
+
+        public const string ShellFacts = "";
+
+        public const string SleepyScreen = "When your Digimon is sleepy it will have a status modifier in the CONDITION section of the Status tab of the Digimon menu.\n" +
+                                          "\n" +
+                                          "To get to this screen, open the main menu by pressing triangle. Then open the Digimon menu. It opens up at the Status tab, in the bottom left corner you'll find the CONDITION section.";
+        
+        public const string SleepyOverworld = "Once sleepy your Digimon will appear drowzy and have a sleep icon in an emotion bubble above its head.\n" +
+                                             "\n" +
+                                             "Tell it good night and let it rest. Once it wakes up it'll be ready for another day!";
     }
     
     public static class FlowerWiki
@@ -400,7 +451,7 @@ public static class ShellmonDigiWikiNarratorText
                                                "If not treated this will result in sickness eventually.";
     }
 
-    public static class SicknessWiki
+    public static class SickWiki
     {
         public const string WikiText = "Oh deary me, has your Digimon fallen ill? This is not good, sickness should be cured quickly before your Digimon loses a life!\n" +
                                        "\n" +
