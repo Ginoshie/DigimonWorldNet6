@@ -15,9 +15,11 @@ using DigimonWorld.Frontend.WPF.Windows.Main.UserControls.DigiWiki.UserControls.
 using DigimonWorld.Frontend.WPF.Windows.Main.UserControls.DigiWiki.UserControls.Topics.FlowerTopic;
 using DigimonWorld.Frontend.WPF.Windows.Main.UserControls.DigiWiki.UserControls.Topics.FoodTopic;
 using DigimonWorld.Frontend.WPF.Windows.Main.UserControls.DigiWiki.UserControls.Topics.HungryTopic;
-using DigimonWorld.Frontend.WPF.Windows.Main.UserControls.DigiWiki.UserControls.Topics.InjuryTopic;
+using DigimonWorld.Frontend.WPF.Windows.Main.UserControls.DigiWiki.UserControls.Topics.InjuredTopic;
 using DigimonWorld.Frontend.WPF.Windows.Main.UserControls.DigiWiki.UserControls.Topics.PoopTopic;
 using DigimonWorld.Frontend.WPF.Windows.Main.UserControls.DigiWiki.UserControls.Topics.PoopyTopic;
+using DigimonWorld.Frontend.WPF.Windows.Main.UserControls.DigiWiki.UserControls.Topics.PraisingTopic;
+using DigimonWorld.Frontend.WPF.Windows.Main.UserControls.DigiWiki.UserControls.Topics.ScoldingTopic;
 using DigimonWorld.Frontend.WPF.Windows.Main.UserControls.DigiWiki.UserControls.Topics.SickTopic;
 using DigimonWorld.Frontend.WPF.Windows.Main.UserControls.DigiWiki.UserControls.Topics.SleepTopic;
 using DigimonWorld.Frontend.WPF.Windows.Main.UserControls.DigiWiki.UserControls.Topics.SleepyTopic;
@@ -66,6 +68,10 @@ public class DigiWikiViewModel : BaseViewModel
 
         OpenChaptersCommand = new CommandHandler(OpenChapters);
 
+        OpenPraisingTopicCommand = new CommandHandler(OpenPraisingTopic);
+        
+        OpenScoldingTopicCommand = new CommandHandler(OpenScoldingTopic);
+
         OpenFoodTopicCommand = new CommandHandler(OpenFoodTopic);
 
         OpenWeightTopicCommand = new CommandHandler(OpenWeightTopic);
@@ -102,6 +108,8 @@ public class DigiWikiViewModel : BaseViewModel
     public ICommand OpenTamerMechanicChapterCommand { get; }
     public ICommand OpenConditionsChapterCommand { get; }
     public ICommand OpenChaptersCommand { get; }
+    public ICommand OpenPraisingTopicCommand { get; }
+    public ICommand OpenScoldingTopicCommand { get; }
     public ICommand OpenFoodTopicCommand { get; }
     public ICommand OpenWeightTopicCommand { get; }
     public ICommand OpenPoopTopicCommand { get; }
@@ -132,6 +140,8 @@ public class DigiWikiViewModel : BaseViewModel
     private void OpenTamerMechanicsChapter() => CurrentSelectedMenuNavigation = new TamerMechanicTopicsMenuNavigation();
     private void OpenConditionsChapter() => CurrentSelectedMenuNavigation = new ConditionTopicsMenuNavigation();
     private void OpenChapters() => CurrentSelectedMenuNavigation = new ChapterMenuNavigation();
+    private void OpenPraisingTopic() => CurrentSelectedDigiWikiContent = new PraisingTopicUserControl(SpeakShellmonTextShortDelayAction, SpeakShellmonTextNoDelayAction, InstantDisplay);
+    private void OpenScoldingTopic() => CurrentSelectedDigiWikiContent = new ScoldingTopicUserControl(SpeakShellmonTextShortDelayAction, SpeakShellmonTextNoDelayAction, InstantDisplay);
     private void OpenFoodTopic() => CurrentSelectedDigiWikiContent = new FoodTopicUserControl(SpeakShellmonTextShortDelayAction, SpeakShellmonTextNoDelayAction, InstantDisplay);
     private void OpenWeightTopic() => CurrentSelectedDigiWikiContent = new WeightTopicUserControl(SpeakShellmonTextShortDelayAction, SpeakShellmonTextNoDelayAction, InstantDisplay);
     private void OpenPoopTopic() => CurrentSelectedDigiWikiContent = new PoopTopicUserControl(SpeakShellmonTextShortDelayAction, SpeakShellmonTextNoDelayAction, InstantDisplay);
@@ -144,7 +154,7 @@ public class DigiWikiViewModel : BaseViewModel
     private void OpenTiredTopic() => CurrentSelectedDigiWikiContent = new TiredTopicUserControl(SpeakShellmonTextShortDelayAction, SpeakShellmonTextNoDelayAction, InstantDisplay);
     private void OpenSleepyTopic() => CurrentSelectedDigiWikiContent = new SleepyTopicUserControl(SpeakShellmonTextShortDelayAction, SpeakShellmonTextNoDelayAction, InstantDisplay);
     private void OpenFlowerTopic() => CurrentSelectedDigiWikiContent = new FlowerTopicUserControl(SpeakShellmonTextShortDelayAction, SpeakShellmonTextNoDelayAction, InstantDisplay);
-    private void OpenInjuryTopic() => CurrentSelectedDigiWikiContent = new InjuryTopicUserControl(SpeakShellmonTextShortDelayAction, SpeakShellmonTextNoDelayAction, InstantDisplay);
+    private void OpenInjuryTopic() => CurrentSelectedDigiWikiContent = new InjuredTopicUserControl(SpeakShellmonTextShortDelayAction, SpeakShellmonTextNoDelayAction, InstantDisplay);
     private void OpenSickTopic() => CurrentSelectedDigiWikiContent = new SickTopicUserControl(SpeakShellmonTextShortDelayAction, SpeakShellmonTextNoDelayAction, InstantDisplay);
 
     private void InstantDisplay()

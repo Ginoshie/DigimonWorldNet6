@@ -17,6 +17,60 @@ public static class ShellmonDigiWikiNarratorText
                                         "Happy browsing!";
     }
 
+    public static class PraisingWiki
+    {
+        public const string WikiText = "If your Digimon is feeling a bit blue, or you just want it to be even happier. Then praise it!\n" +
+                                       "\n" +
+                                       "By praising your Digimon you'll increase its happiness according to the following formula:\n" +
+                                       "- floor(discipline * 0.1) + 2\n" +
+                                       "\n" +
+                                       "So the higher your discipline the more happiness is gained.\n" +
+                                       "\n" +
+                                       "However, the discipline is reduced since you're such a gentle tamer. Meaning you get a reduced effect after each praise.\n" +
+                                       "\n" +
+                                       "Each praise will lower discipline by 5.";
+
+        public const string ShellFacts = "Shell Fact One\n" +
+                                         "Happiness is a bonus criteria for certain evolutions. Praising can help you reach high threshold values.\n" +
+                                         "\n" +
+                                         "Shell Fact Two\n" +
+                                         "Happy digimon do not lose as much as lifespan compared to unhappy digimon. Check the lifespan topic for more information on this.\n" +
+                                         "\n" +
+                                         "Shell Fact Three\n" +
+                                         "Alternating praising and scolding will reduce both happiness and discipline.";
+
+        public const string PraisingMenuAction = "Open the menu by pressing triangle and you'll find the Praise command.\n" +
+                                                 "\n" +
+                                                 "Issue it to pet on your Digimon and raise its happiness";
+    }
+
+    public static class ScoldingWiki
+    {
+        public const string WikiText = "Are you looking to increase the discipline of your Digimon? Or do you want to get it to eat some of those devlish chips? Look no further!\n" +
+                                       "\n" +
+                                       "You can punish your Digimon when it refuses to eat a Port.potty or even those horrible DV Chips.\n" +
+                                       "\n" +
+                                       "Scold it after it refused to eat an item you tried to feed it or pooping on the ground. This is considered a reasonable scold and it will increase discipline.\n" +
+                                       "\n" +
+                                       "This in turn increases discipline by 8. If you are playing the US version it will also increase happiness by 3! Good for you!\n" +
+                                       "\n" +
+                                       "Scolding in other siuations will always increase discipline by 2 and decrease happiness by 10.";
+
+        public const string ShellFacts = "Shell Fact One\n" +
+                                         "Discipline is a bonus criteria for certain evolutions. Scolding can help you reach high threshold values.\n" +
+                                         "\n" +
+                                         "Shell Fact Two\n" +
+                                         "Highly disciplined Digimon will give you more time to find a toilet once the need to poop arises..\n" +
+                                         "\n" +
+                                         "Shell Fact Three\n" +
+                                         "Alternating scolding and praising will reduce both discipline and happiness.";
+
+        public const string ScoldingMenuAction = "Open the menu by pressing triangle and you'll find the Scold command.\n" +
+                                                 "\n" +
+                                                 "Issue it to tell your Digimon who's the boss around here.\n" +
+                                                 "\n";
+    }
+
     public static class FoodWiki
     {
         public const string WikiText = "Food gives your Digimon a set amount of energy and increase or decrease in weight.  Some foods also reduce Tiredness, increase Happiness and/or Discipline as well as certain stats.\n" +

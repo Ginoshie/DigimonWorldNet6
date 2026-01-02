@@ -34,7 +34,7 @@
             <navigationButtons:TiredTopicNavigationButton Command="{Binding OpenTiredTopicCommand}" />
             <navigationButtons:SleepyTopicNavigationButton Command="{Binding OpenSleepyTopicCommand}" />
             <navigationButtons:FlowerTopicNavigationButton Command="{Binding OpenFlowerTopicCommand}" />
-            <navigationButtons:InjuryTopicNavigationButton Command="{Binding OpenInjuryTopicCommand}" />
+            <navigationButtons:InjuredTopicNavigationButton Command="{Binding OpenInjuryTopicCommand}" />
             <navigationButtons:SickTopicNavigationButton Command="{Binding OpenSickTopicCommand}" />
         </WrapPanel>
         <Button Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Bottom" FocusVisualStyle="{StaticResource DefaultFocusStyle}"

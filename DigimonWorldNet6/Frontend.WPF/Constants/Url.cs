@@ -2,6 +2,8 @@ namespace DigimonWorld.Frontend.WPF.Constants;
 
 public static class Url
 {
+    public const string GuidePraisingChapter = "https://docs.google.com/document/d/1aHHXZXjZNDabFTWUdF055M0oshyC57kff5NVc2BTYGE/edit?pli=1&tab=t.0#heading=h.mhsfr459weyi";
+    public const string GuideScoldingChapter = "https://docs.google.com/document/d/1aHHXZXjZNDabFTWUdF055M0oshyC57kff5NVc2BTYGE/edit?pli=1&tab=t.0#heading=h.jambtrxnh7gy";
     public const string GuideFoodChapter = "https://docs.google.com/document/d/1aHHXZXjZNDabFTWUdF055M0oshyC57kff5NVc2BTYGE/edit?pli=1&tab=t.0#heading=h.30r6zj8pihtm";
     public const string GuideHungryChapter = "https://docs.google.com/document/d/1aHHXZXjZNDabFTWUdF055M0oshyC57kff5NVc2BTYGE/edit?pli=1&tab=t.0#heading=h.a68sxcf3mepw";
     public const string GuideWeightChapter = "https://docs.google.com/document/d/1aHHXZXjZNDabFTWUdF055M0oshyC57kff5NVc2BTYGE/edit?pli=1&tab=t.0#heading=h.ew0g247k5u4x";

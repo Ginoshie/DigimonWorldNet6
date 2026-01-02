@@ -1,4 +1,4 @@
-<UserControl x:Class="DigimonWorld.Frontend.WPF.Windows.Main.UserControls.DigiWiki.UserControls.Navigation.NavigationButtons.SleepTopicNavigationButton"
+<UserControl x:Class="DigimonWorld.Frontend.WPF.Windows.Main.UserControls.DigiWiki.UserControls.Navigation.NavigationButtons.ScoldingTopicNavigationButton"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -33,10 +33,10 @@
                 FontSize="{StaticResource ButtonFontSize}"
                 Margin="0, 0, 0, 5">
             <Button.ToolTip>
-                <ToolTip Style="{StaticResource DefaultToolTipRightStyle}" Content="Information about sleep" />
+                <ToolTip Style="{StaticResource DefaultToolTipRightStyle}" Content="Information about scolding" />
             </Button.ToolTip>
             <Button.Content>
-                <ContentControl Content="/Frontend.WPF;component/Images/Icons/Menu/sleep-menu1.png">
+                <ContentControl Content="/Frontend.WPF;component/Images/Icons/Menu/scold-menu1.png">
                     <ContentControl.ContentTemplate>
                         <DataTemplate>
                             <Image Source="{Binding}" Stretch="Uniform" Margin="2"/>
@@ -45,7 +45,7 @@
                 </ContentControl>
             </Button.Content>
         </Button>
-        <TextBlock Text="Sleep"
+        <TextBlock Text="Scolding"
                    HorizontalAlignment="Center"
                    VerticalAlignment="Center"
                    FontWeight="Bold"

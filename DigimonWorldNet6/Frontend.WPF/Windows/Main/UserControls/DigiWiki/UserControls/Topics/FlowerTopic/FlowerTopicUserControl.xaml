@@ -69,7 +69,7 @@
                                             Content="📖"
                                             Command="{Binding SpeakWikiTextCommand}">
                                         <Button.ToolTip>
-                                            <ToolTip Style="{StaticResource DefaultToolTipRightStyle}" Content="Ask shellmon to explain poop again" />
+                                            <ToolTip Style="{StaticResource DefaultToolTipRightStyle}" Content="Ask shellmon to explain the flower condition again" />
                                         </Button.ToolTip>
                                     </Button>
                                 </Grid>

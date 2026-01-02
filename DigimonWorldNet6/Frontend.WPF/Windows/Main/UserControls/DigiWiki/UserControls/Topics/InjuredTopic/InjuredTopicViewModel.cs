@@ -4,11 +4,11 @@ using System.Windows.Input;
 using DigimonWorld.Frontend.WPF.Constants;
 using DigimonWorld.Frontend.WPF.ViewModelComponents;
 
-namespace DigimonWorld.Frontend.WPF.Windows.Main.UserControls.DigiWiki.UserControls.Topics.InjuryTopic;
+namespace DigimonWorld.Frontend.WPF.Windows.Main.UserControls.DigiWiki.UserControls.Topics.InjuredTopic;
 
-public class InjuryTopicViewModel : TopicViewModelBase
+public class InjuredTopicViewModel : TopicViewModelBase
 {
-    public InjuryTopicViewModel(
+    public InjuredTopicViewModel(
         Action<string, Action<string>> speakShellmonTextShortDelayAction,
         Action<string, Action<string>> speakShellmonTextNoDelayAction,
         Action instantDisplay) :

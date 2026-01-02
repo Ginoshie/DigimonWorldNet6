@@ -1,13 +1,13 @@
-<UserControl x:Class="DigimonWorld.Frontend.WPF.Windows.Main.UserControls.DigiWiki.UserControls.Topics.HungryTopic.HungryTopicUserControl"
+<UserControl x:Class="DigimonWorld.Frontend.WPF.Windows.Main.UserControls.DigiWiki.UserControls.Topics.InjuredTopic.InjuredTopicUserControl"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
-             xmlns:hungryTopic="clr-namespace:DigimonWorld.Frontend.WPF.Windows.Main.UserControls.DigiWiki.UserControls.Topics.HungryTopic"
+             xmlns:injuredTopic="clr-namespace:DigimonWorld.Frontend.WPF.Windows.Main.UserControls.DigiWiki.UserControls.Topics.InjuredTopic"
              Height="554"
              mc:Ignorable="d"
-             d:DataContext="{d:DesignInstance Type=hungryTopic:HungryTopicViewModel, IsDesignTimeCreatable=True}">
+             d:DataContext="{d:DesignInstance Type=injuredTopic:InjuredTopicViewModel, IsDesignTimeCreatable=True}">
 
     <UserControl.Resources>
         <ResourceDictionary>
@@ -69,7 +69,7 @@
                                             Content="📖"
                                             Command="{Binding SpeakWikiTextCommand}">
                                         <Button.ToolTip>
-                                            <ToolTip Style="{StaticResource DefaultToolTipRightStyle}" Content="Ask shellmon to explain the hungry condition again" />
+                                            <ToolTip Style="{StaticResource DefaultToolTipRightStyle}" Content="Ask shellmon to explain the injured condition again" />
                                         </Button.ToolTip>
                                     </Button>
                                 </Grid>
@@ -105,21 +105,10 @@
                                         Style="{StaticResource DefaultButtonStyle}"
                                         Margin="0,0, 0, 5"
                                         Height="{StaticResource DefaultButtonHeight}"
-                                        Content="Guide: Food"
-                                        Command="{Binding OpenGuideFoodChapterCommand}">
+                                        Content="Guide: Injured"
+                                        Command="{Binding OpenGuideInjuredChapterCommand}">
                                     <Button.ToolTip>
-                                        <ToolTip Style="{StaticResource DefaultToolTipRightStyle}" Content="Opens the Food chapter of the guide" />
-                                    </Button.ToolTip>
-                                </Button>
-
-                                <Button FocusVisualStyle="{StaticResource DefaultFocusStyle}"
-                                        Style="{StaticResource DefaultButtonStyle}"
-                                        Margin="0,0, 0, 5"
-                                        Height="{StaticResource DefaultButtonHeight}"
-                                        Content="Guide: Hungry"
-                                        Command="{Binding OpenGuideHungryChapterCommand}">
-                                    <Button.ToolTip>
-                                        <ToolTip Style="{StaticResource DefaultToolTipRightStyle}" Content="Opens the Hungry chapter of the guide" />
+                                        <ToolTip Style="{StaticResource DefaultToolTipRightStyle}" Content="Opens the Injured chapter of the guide" />
                                     </Button.ToolTip>
                                 </Button>
                             </StackPanel>
@@ -131,10 +120,10 @@
             <WrapPanel Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0, 15, 15, 15">
                 <Border BorderBrush="#060100" BorderThickness="3,3,0,0" >
                     <Border BorderBrush="#6789A5" BorderThickness="0,0,3,3" Background="#354A5B">
-                        <Image Width="286" Height="202" Source="Media/hungry-condition-screen.jpg" Stretch="UniformToFill">
+                        <Image Width="286" Height="202" Source="Media/injury-condition-screen.jpg" Stretch="UniformToFill">
                             <b:Interaction.Triggers>
                                 <b:EventTrigger EventName="MouseLeftButtonDown">
-                                    <b:InvokeCommandAction Command="{Binding SpeakHungerConditionScreenCommand}" />
+                                    <b:InvokeCommandAction Command="{Binding SpeakInjuredConditionScreenCommand}" />
                                 </b:EventTrigger>
                             </b:Interaction.Triggers>
                         </Image>
@@ -142,10 +131,10 @@
                 </Border>
                 <Border BorderBrush="#060100" BorderThickness="3,3,0,0" Margin="15, 0 ,0 ,0" >
                     <Border BorderBrush="#6789A5" BorderThickness="0,0,3,3" Background="#354A5B">
-                        <Image Width="270" Height="202" Source="Media/hungry-condition-overworld.jpg" Stretch="UniformToFill">
+                        <Image Width="270" Height="202" Source="Media/injury-condition-overworld.jpg" Stretch="UniformToFill">
                             <b:Interaction.Triggers>
                                 <b:EventTrigger EventName="MouseLeftButtonDown">
-                                    <b:InvokeCommandAction Command="{Binding SpeakHungerConditionOverworldCommand}" />
+                                    <b:InvokeCommandAction Command="{Binding SpeakInjuredConditionOverworldCommand}" />
                                 </b:EventTrigger>
                             </b:Interaction.Triggers>
                         </Image>

@@ -1,4 +1,4 @@
-<UserControl x:Class="DigimonWorld.Frontend.WPF.Windows.Main.UserControls.DigiWiki.UserControls.Navigation.NavigationButtons.PoopingTopicNavigationButton"
+<UserControl x:Class="DigimonWorld.Frontend.WPF.Windows.Main.UserControls.DigiWiki.UserControls.Navigation.NavigationButtons.InjuredTopicNavigationButton"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -33,10 +33,10 @@
                 FontSize="{StaticResource ButtonFontSize}"
                 Margin="0, 0, 0, 5">
             <Button.ToolTip>
-                <ToolTip Style="{StaticResource DefaultToolTipRightStyle}" Content="Information about poop" />
+                <ToolTip Style="{StaticResource DefaultToolTipRightStyle}" Content="Information about injury" />
             </Button.ToolTip>
             <Button.Content>
-                <ContentControl Content="/Frontend.WPF;component/Images/Icons/Emotions/Poop/vir-icon.png">
+                <ContentControl Content="/Frontend.WPF;component/Images/Icons/Emotions/Injury/injury-condition.jpg">
                     <ContentControl.ContentTemplate>
                         <DataTemplate>
                             <Image Source="{Binding}" Stretch="Uniform" Margin="2"/>
@@ -45,7 +45,7 @@
                 </ContentControl>
             </Button.Content>
         </Button>
-        <TextBlock Text="Pooping"
+        <TextBlock Text="Injury"
                    HorizontalAlignment="Center"
                    VerticalAlignment="Center"
                    FontWeight="Bold"
