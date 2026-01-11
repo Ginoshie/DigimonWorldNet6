@@ -20,7 +20,7 @@ public sealed class FromRookieOrChampionEvolutionCalculator : IEvolutionCalculat
     public EvolutionResult DetermineEvolutionResult(Digimon digimon)
     {
         if (digimon.EvolutionStage is not (EvolutionStage.Rookie or EvolutionStage.Champion))
-            throw new ArgumentException($"{digimon.DigimonType} is not a {EvolutionStage.Rookie.ToString()} or {EvolutionStage.Champion.ToString()} stage digimon.");
+            throw new ArgumentException($"{digimon.DigimonType} is not a {nameof(EvolutionStage.Rookie)} or {nameof(EvolutionStage.Champion)} stage digimon.");
 
         List<IEvolutionCriteria> evolutionCriteriaOfPossibleEvolutions = _fromRookieOrChampionEvolutionMapper[digimon.DigimonType].ToList();
 

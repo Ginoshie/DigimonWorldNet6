@@ -30,23 +30,23 @@ public sealed class FromInTrainingEvolutionMapper
         }
     }
 
-    private IEnumerable<IEvolutionCriteria> KoromonEvolutions { get; } = new IEvolutionCriteria[]
-    {
+    private IEnumerable<IEvolutionCriteria> KoromonEvolutions { get; } =
+    [
         new AgumonEvolutionCriteria(), new GabumonEvolutionCriteria()
-    };
+    ];
 
-    private IEnumerable<IEvolutionCriteria> TanemonEvolutions { get; } = new IEvolutionCriteria[]
-    {
+    private IEnumerable<IEvolutionCriteria> TanemonEvolutions { get; } =
+    [
         new PalmonEvolutionCriteria(), new BetamonEvolutionCriteria()
-    };
+    ];
 
-    private IEnumerable<IEvolutionCriteria> TokomonEvolutions { get; } = new IEvolutionCriteria[]
-    {
+    private IEnumerable<IEvolutionCriteria> TokomonEvolutions { get; } =
+    [
         new PatamonEvolutionCriteria(), new BiyomonEvolutionCriteria()
-    };
+    ];
 
-    private IEnumerable<IEvolutionCriteria> TsunomonEvolutions { get; } = new IEvolutionCriteria[]
-    {
+    private IEnumerable<IEvolutionCriteria> TsunomonEvolutions { get; } =
+    [
         new ElecmonEvolutionCriteria(), new PenguinmonEvolutionCriteria()
-    };
+    ];
 }

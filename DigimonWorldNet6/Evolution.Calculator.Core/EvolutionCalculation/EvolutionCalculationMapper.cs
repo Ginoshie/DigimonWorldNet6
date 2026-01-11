@@ -29,6 +29,7 @@ public sealed class EvolutionCalculationMapper
         _evolutionCalculatorMappings[DigimonType.Biyomon] = new FromRookieOrChampionEvolutionCalculator();
         _evolutionCalculatorMappings[DigimonType.Elecmon] = new FromRookieOrChampionEvolutionCalculator();
         _evolutionCalculatorMappings[DigimonType.Gabumon] = new FromRookieOrChampionEvolutionCalculator();
+        _evolutionCalculatorMappings[DigimonType.Kunemon] = new FromRookieOrChampionEvolutionCalculator();
         _evolutionCalculatorMappings[DigimonType.Palmon] = new FromRookieOrChampionEvolutionCalculator();
         _evolutionCalculatorMappings[DigimonType.Patamon] = new FromRookieOrChampionEvolutionCalculator();
         _evolutionCalculatorMappings[DigimonType.Penguinmon] = new FromRookieOrChampionEvolutionCalculator();

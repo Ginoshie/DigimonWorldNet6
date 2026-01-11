@@ -20,9 +20,9 @@ public sealed class EnumToImageConverter : IValueConverter
         if (targetType != typeof(ImageSource))
             throw new ArgumentException($"Can only convert to {typeof(ImageSource)} but tried to convert to {targetType}", nameof(targetType));
 
-        if (stringValue == EvolutionResult.NotApplicable.ToString())
+        if (stringValue == nameof(EvolutionResult.NotApplicable))
         {
-            stringValue = EvolutionResult.None.ToString();
+            stringValue = nameof(EvolutionResult.None);
         }
 
         return new BitmapImage(new Uri($"/Images/Digimon/{stringValue}.jpg", UriKind.Relative));

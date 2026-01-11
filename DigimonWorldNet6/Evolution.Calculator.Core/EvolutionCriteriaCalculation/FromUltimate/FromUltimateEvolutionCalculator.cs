@@ -9,7 +9,8 @@ public sealed class FromUltimateEvolutionCalculator : IEvolutionCalculator
 {
     public EvolutionResult DetermineEvolutionResult(Digimon digimon)
     {
-        if (digimon.EvolutionStage != EvolutionStage.Ultimate) throw new ArgumentException($"{digimon.DigimonType} is not a {EvolutionStage.Ultimate.ToString()} stage digimon.");
+        if (digimon.EvolutionStage != EvolutionStage.Ultimate) 
+            throw new ArgumentException($"{digimon.DigimonType} is not a {nameof(EvolutionStage.Ultimate)} stage digimon.");
         
         return EvolutionResult.None;
     }

@@ -33,6 +33,7 @@ public sealed class EvolutionStageMapper
         _evolutionStageMappings[DigimonType.Kabuterimon] = EvolutionStage.Champion;
         _evolutionStageMappings[DigimonType.Kokatorimon] = EvolutionStage.Champion;
         _evolutionStageMappings[DigimonType.Koromon] = EvolutionStage.InTraining;
+        _evolutionStageMappings[DigimonType.Kunemon] = EvolutionStage.Rookie;
         _evolutionStageMappings[DigimonType.Kuwagamon] = EvolutionStage.Champion;
         _evolutionStageMappings[DigimonType.Leomon] = EvolutionStage.Champion;
         _evolutionStageMappings[DigimonType.Mamemon] = EvolutionStage.Champion;

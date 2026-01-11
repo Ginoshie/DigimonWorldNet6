@@ -14,7 +14,7 @@ public class SpeakingSimulator : IDisposable
     private readonly CompositeDisposable _compositeDisposable;
 
     private CancellationTokenSource? _typingCancellationTokenSource;
-    private bool _instantDisplayRequested;
+    private volatile bool _instantDisplayRequested;
     private SpeakingSimulatorConfig _speakingSimulatorConfig = null!;
 
     public SpeakingSimulator()
@@ -39,10 +39,7 @@ public class SpeakingSimulator : IDisposable
 
     public void RequestInstantDisplay()
     {
-        if (_typingCancellationTokenSource?.IsCancellationRequested != false) return;
-
         _instantDisplayRequested = true;
-        _typingCancellationTokenSource.Cancel();
     }
 
     private void OnConfigChanged(SpeakingSimulatorConfig speakingSimulatorConfig)
@@ -59,13 +56,11 @@ public class SpeakingSimulator : IDisposable
     {
         lock (_lock)
         {
-            if (_typingCancellationTokenSource != null)
-            {
-                _typingCancellationTokenSource.Cancel();
-                _typingCancellationTokenSource.Dispose();
-            }
+            _typingCancellationTokenSource?.Cancel();
+            _typingCancellationTokenSource?.Dispose();
 
             _typingCancellationTokenSource = new CancellationTokenSource();
+            _instantDisplayRequested = false;
         }
     }
 
@@ -77,7 +72,7 @@ public class SpeakingSimulator : IDisposable
         }
         catch (OperationCanceledException)
         {
-            // Task canceled: swallow the exception as it's expected behavior
+            // Expected cancellation
         }
     }
 
@@ -86,62 +81,53 @@ public class SpeakingSimulator : IDisposable
         CancellationToken cancellationToken = _typingCancellationTokenSource!.Token;
         string currentText = string.Empty;
 
-        try
+        string cleanText = fullText.Replace(JijimonEvolutionCalculatorNarratorText.ShowEvolutionResultKeyWord, "");
+
+        if (_speakingSimulatorConfig.NarratorMode == NarratorMode.Instant)
         {
-            string[] words = fullText.Split(' ');
+            updateTextAction(cleanText);
+            showEvolutionAction?.Invoke();
+            return;
+        }
 
-            if (_speakingSimulatorConfig.NarratorMode == NarratorMode.Instant)
+        string[] words = fullText.Split(' ');
+
+        if (!words.Contains(JijimonEvolutionCalculatorNarratorText.ShowEvolutionResultKeyWord))
+        {
+            showEvolutionAction?.Invoke();
+        }
+
+        foreach (string word in words)
+        {
+            if (_instantDisplayRequested || cancellationToken.IsCancellationRequested)
             {
-                updateTextAction(fullText.Replace(JijimonEvolutionCalculatorNarratorText.ShowEvolutionResultKeyWord, ""));
+                updateTextAction(cleanText);
                 showEvolutionAction?.Invoke();
-
                 return;
             }
 
-            if (!words.Contains(JijimonEvolutionCalculatorNarratorText.ShowEvolutionResultKeyWord))
+            if (word == JijimonEvolutionCalculatorNarratorText.ShowEvolutionResultKeyWord)
             {
                 showEvolutionAction?.Invoke();
+                await Task.Delay(500, cancellationToken);
+                continue;
             }
 
-            foreach (string word in words)
+            currentText += word + " ";
+            updateTextAction(currentText);
+
+            string lastFiveChars = currentText.Length >= 6
+                ? currentText[^6..]
+                : currentText;
+
+            if (lastFiveChars.Contains(". . ."))
             {
-                cancellationToken.ThrowIfCancellationRequested();
-
-                if (word == JijimonEvolutionCalculatorNarratorText.ShowEvolutionResultKeyWord)
-                {
-                    showEvolutionAction?.Invoke();
-                    await Task.Delay(500, cancellationToken);
-                    continue;
-                }
-
-                currentText += word + " ";
-                updateTextAction(currentText);
-
-                string lastFiveChars = currentText.Length >= 6
-                    ? currentText[^6..]
-                    : currentText;
-
-                if (lastFiveChars.Contains(". . ."))
-                {
-                    await Task.Delay(800, cancellationToken);
-                }
-                else
-                {
-                    await Task.Delay(150, cancellationToken);
-                }
+                await Task.Delay(800, cancellationToken);
             }
-        }
-        catch (OperationCanceledException)
-        {
-            if (_instantDisplayRequested)
+            else
             {
-                updateTextAction(fullText.Replace(JijimonEvolutionCalculatorNarratorText.ShowEvolutionResultKeyWord, ""));
-                showEvolutionAction?.Invoke();
+                await Task.Delay(150, cancellationToken);
             }
-        }
-        finally
-        {
-            _instantDisplayRequested = false;
         }
     }
 
