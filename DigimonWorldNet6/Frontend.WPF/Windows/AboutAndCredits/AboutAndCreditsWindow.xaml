@@ -103,7 +103,7 @@
                                    Style="{StaticResource DefaultSheenLabelStyle}"
                                    Content="CREDITS ©" />
                             <Label Grid.Row="7" Grid.Column="0" Style="{StaticResource DefaultLabelStyle}" Content="Support and love:" Margin="10, 0, 5, 0" />
-                            <Label Grid.Row="8" Grid.Column="0" Style="{StaticResource DefaultLabelStyle}" Content="Girimon witty text:" Margin="10, 0, 5, 0" />
+                            <Label Grid.Row="8" Grid.Column="0" Style="{StaticResource DefaultLabelStyle}" Content="Giromon witty text:" Margin="10, 0, 5, 0" />
                             <Label Grid.Row="9" Grid.Column="0" Style="{StaticResource DefaultLabelStyle}" Content="Evolution criteria:" Margin="10, 0, 5, 0" />
                             <Label Grid.Row="10" Grid.Column="0" Style="{StaticResource DefaultLabelStyle}" Content="Evolution sprites:" Margin="10, 0, 5, 0" />
                             <Label Grid.Row="11" Grid.Column="0" Style="{StaticResource DefaultLabelStyle}" Content="Digimon sprites:" Margin="10, 0, 5, 0" />
