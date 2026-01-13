@@ -1,4 +1,12 @@
-﻿using System.Windows;
+﻿/*
+Copyright © 2026 Ginoshie
+
+Licensed for non-commercial use only.
+Modification, redistribution, or reuse of this code
+in other projects is strictly prohibited.
+*/
+
+using System.Windows;
 using DigimonWorld.Evolution.Calculator.Core.Modules;
 using DigimonWorld.Frontend.WPF.Windows.Main;
 using Microsoft.Extensions.DependencyInjection;
