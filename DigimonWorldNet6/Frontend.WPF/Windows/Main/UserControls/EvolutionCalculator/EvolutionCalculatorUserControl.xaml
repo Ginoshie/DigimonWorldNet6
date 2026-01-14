@@ -30,8 +30,8 @@
     <Border CornerRadius="5" BorderBrush="#90D9FA" BorderThickness="0" Background="#90D9FA">
         <Grid KeyboardNavigation.TabNavigation="Cycle" Background="Transparent">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="auto" />
+                <ColumnDefinition Width="auto" />
             </Grid.ColumnDefinitions>
             <Border Grid.Column="0" CornerRadius="5" BorderBrush="#90D9FA" BorderThickness="3, 3, 1.5, 3" Background="#90D9FA">
                 <Border CornerRadius="3" BorderBrush="Black" BorderThickness="3">
@@ -58,8 +58,8 @@
                             <Grid>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="auto" />
-                                    <ColumnDefinition Width="*" />
-                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="auto" />
+                                    <ColumnDefinition Width="auto" />
                                 </Grid.ColumnDefinitions>
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="{StaticResource DefaultTextBoxGridRowHeight}" />
