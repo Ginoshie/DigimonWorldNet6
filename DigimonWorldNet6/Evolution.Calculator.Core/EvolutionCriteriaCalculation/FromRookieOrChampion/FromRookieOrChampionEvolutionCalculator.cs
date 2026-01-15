@@ -27,13 +27,15 @@ public sealed class FromRookieOrChampionEvolutionCalculator : IEvolutionCalculat
         GuardAgainstCorruptEvolutionCriteria(evolutionCriteriaOfPossibleEvolutions);
 
         int highestEvolutionScore = 0;
+        int carriedOverStatTotal = 0;
+        int carriedOverCount = 0;
         EvolutionResult evolutionResult = EvolutionResult.None;
 
         foreach (IEvolutionCriteria evolutionCriteria in evolutionCriteriaOfPossibleEvolutions)
         {
             if (!EvolutionEnabled(digimon, evolutionCriteria)) continue;
 
-            int currentEvolutionScore = _fromRookieOrChampionEvolutionScoreCalculator.CalculateEvolutionScore(digimon, evolutionCriteria.Stats);
+            int currentEvolutionScore = _fromRookieOrChampionEvolutionScoreCalculator.CalculateEvolutionScore(digimon, evolutionCriteria.Stats, carriedOverStatTotal, carriedOverCount);
 
             if ((ValidEvolutionResult(evolutionResult) &&
                  CurrentBestEnabledEvolutionIsNewEvolution(evolutionResult.ToDigimonType()) &&

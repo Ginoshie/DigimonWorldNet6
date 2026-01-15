@@ -5,7 +5,7 @@ namespace DigimonWorld.Evolution.Calculator.Core.EvolutionCriteriaCalculation.Fr
 
 public sealed class FromRookieOrChampionEvolutionScoreCalculator
 {
-    public int CalculateEvolutionScore(Digimon digimon, MainCriteriaStats statsCriteria)
+    public int CalculateEvolutionScore(Digimon digimon, MainCriteriaStats statsCriteria, int carriedOverStatTotal, int carriedOverCount)
     {
         int evolutionStatsTotal = 0;
         int evolutionStatCountTotal = 0;
@@ -46,6 +46,6 @@ public sealed class FromRookieOrChampionEvolutionScoreCalculator
             evolutionStatCountTotal++;
         }
 
-        return evolutionStatsTotal / evolutionStatCountTotal;
+        return (evolutionStatsTotal + carriedOverStatTotal) / (evolutionStatCountTotal + carriedOverCount);
     }
 }
