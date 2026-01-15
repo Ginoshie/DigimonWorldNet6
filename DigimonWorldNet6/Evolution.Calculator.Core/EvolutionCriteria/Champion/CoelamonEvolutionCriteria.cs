@@ -12,7 +12,7 @@ public sealed class CoelamonEvolutionCriteria : IEvolutionCriteria
 
     public MainCriteriaStats Stats => new(def: 100);
 
-    public MainCriteriaCareMistakes CareMistakes => new(3, true);
+    public MainCriteriaCareMistakes CareMistakes => new(3);
 
     public MainCriteriaWeight Weight => new(30);
 

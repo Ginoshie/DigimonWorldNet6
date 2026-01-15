@@ -6,7 +6,7 @@ namespace DigimonWorld.Evolution.Calculator.Core.EvolutionCriteria.Ultimate;
 
 public sealed class VademonEvolutionCriteria : IEvolutionCriteria
 {
-    public EvolutionStage EvolutionStage => EvolutionStage.Champion;
+    public EvolutionStage EvolutionStage => EvolutionStage.Ultimate;
 
     public EvolutionResult DigimonType => EvolutionResult.Vademon;
 

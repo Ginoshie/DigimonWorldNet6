@@ -16,5 +16,5 @@ public sealed class BetamonEvolutionCriteria : IEvolutionCriteria
 
     public MainCriteriaWeight Weight => new(15);
 
-    public BonusCriteria BonusCriteria => new(battles: -2, precursorDigimon: EvolutionResult.Tanemon);
+    public BonusCriteria BonusCriteria => new(precursorDigimon: EvolutionResult.Tanemon);
 }

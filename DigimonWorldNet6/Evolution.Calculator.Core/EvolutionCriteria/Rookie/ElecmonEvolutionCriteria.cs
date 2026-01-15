@@ -16,5 +16,5 @@ public sealed class ElecmonEvolutionCriteria : IEvolutionCriteria
 
     public MainCriteriaWeight Weight => new(15);
 
-    public BonusCriteria BonusCriteria => new(battles: -2, isBattlesCriteriaAMaximum: false, precursorDigimon: EvolutionResult.Tsunomon);
+    public BonusCriteria BonusCriteria => new(isBattlesCriteriaAMaximum: false, precursorDigimon: EvolutionResult.Tsunomon);
 }

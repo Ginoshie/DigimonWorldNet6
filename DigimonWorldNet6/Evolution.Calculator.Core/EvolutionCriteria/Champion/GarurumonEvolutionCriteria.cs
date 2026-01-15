@@ -10,7 +10,7 @@ public sealed class GarurumonEvolutionCriteria : IEvolutionCriteria
 
     public EvolutionResult DigimonType => EvolutionResult.Garurumon;
 
-    public MainCriteriaStats Stats => new(mp: 1000, speed: 100, brains: 100);
+    public MainCriteriaStats Stats => new(mp: 1000, speed: 100);
 
     public MainCriteriaCareMistakes CareMistakes => new(1, true);
 

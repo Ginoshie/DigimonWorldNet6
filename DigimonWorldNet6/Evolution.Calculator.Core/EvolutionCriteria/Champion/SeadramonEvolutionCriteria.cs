@@ -16,5 +16,5 @@ public sealed class SeadramonEvolutionCriteria : IEvolutionCriteria
 
     public MainCriteriaWeight Weight => new(30);
 
-    public BonusCriteria BonusCriteria => new(battles: 10, isBattlesCriteriaAMaximum: true, techniqueCount: 28);
+    public BonusCriteria BonusCriteria => new(battles: 5, isBattlesCriteriaAMaximum: true, techniqueCount: 28);
 }
