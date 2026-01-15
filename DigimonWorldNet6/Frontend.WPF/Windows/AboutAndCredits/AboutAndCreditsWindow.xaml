@@ -58,6 +58,8 @@
                                 <RowDefinition Height="*" />
                                 <RowDefinition Height="*" />
                                 <RowDefinition Height="*" />
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="*" />
                                 <RowDefinition Height="25" />
                             </Grid.RowDefinitions>
                             <Grid.ColumnDefinitions>
@@ -74,12 +76,14 @@
                             <Label Grid.Row="2" Grid.Column="0" Style="{StaticResource DefaultLabelStyle}" Content="Created by:" Margin="10, 0, 5, 0" />
                             <Label Grid.Row="3" Grid.Column="0" Style="{StaticResource DefaultLabelStyle}" Content="Contact:" Margin="10, 0, 5, 0" />
                             <Label Grid.Row="4" Grid.Column="0" Style="{StaticResource DefaultLabelStyle}" Content="Youtube:" Margin="10, 0, 5, 0" />
-                            <Label Grid.Row="1" Grid.Column="1" Style="{StaticResource DefaultLabelStyle}" HorizontalAlignment="Left" Content="Digimon World Demistifier" />
+                            <Label Grid.Row="5" Grid.Column="0" Style="{StaticResource DefaultLabelStyle}" Content="Version:" Margin="10, 0, 5, 0" />
+                            <Label Grid.Row="1" Grid.Column="1" Style="{StaticResource DefaultLabelStyle}" HorizontalAlignment="Left" Content="Digimon World Tool" />
                             <Label Grid.Row="2" Grid.Column="1" Style="{StaticResource DefaultLabelStyle}" HorizontalAlignment="Left" Content="Ginoshie" />
                             <Label Grid.Row="3" Grid.Column="1" Style="{StaticResource DefaultLabelStyle}" HorizontalAlignment="Left" Content="{Binding ContactEmailAddress}" />
                             <Label Grid.Row="4" Grid.Column="1" Style="{StaticResource DefaultLabelStyle}" HorizontalAlignment="Left" Content="{Binding YoutubeAddress}" />
+                            <Label Grid.Row="5" Grid.Column="1" Style="{StaticResource DefaultLabelStyle}" HorizontalAlignment="Left" Content="1.0.1" />
 
-                            <StackPanel Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2"
+                            <StackPanel Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="2"
                                         Orientation="Horizontal"
                                         HorizontalAlignment="Center"
                                         Margin="0,5,0,0">
@@ -96,27 +100,27 @@
                                         Command="{Binding OpenYoutubeWebsiteCommand}" />
                             </StackPanel>
 
-                            <Label Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="2"
+                            <Label Grid.Row="8" Grid.Column="0" Grid.ColumnSpan="2"
                                    Height="40"
                                    Width="150"
                                    HorizontalAlignment="Center"
                                    Margin="10, 20, 10, 10"
                                    Style="{StaticResource DefaultSheenLabelStyle}"
                                    Content="CREDITS ©" />
-                            <Label Grid.Row="7" Grid.Column="0" Style="{StaticResource DefaultLabelStyle}" Content="Support and love:" Margin="10, 0, 5, 0" />
-                            <Label Grid.Row="8" Grid.Column="0" Style="{StaticResource DefaultLabelStyle}" Content="Giromon witty text:" Margin="10, 0, 5, 0" />
-                            <Label Grid.Row="9" Grid.Column="0" Style="{StaticResource DefaultLabelStyle}" Content="Evolution criteria:" Margin="10, 0, 5, 0" />
-                            <Label Grid.Row="10" Grid.Column="0" Style="{StaticResource DefaultLabelStyle}" Content="Evolution sprites:" Margin="10, 0, 5, 0" />
-                            <Label Grid.Row="11" Grid.Column="0" Style="{StaticResource DefaultLabelStyle}" Content="Digimon sprites:" Margin="10, 0, 5, 0" />
-                            <Label Grid.Row="12" Grid.Column="0" Style="{StaticResource DefaultLabelStyle}" Content="Digimon images:" Margin="10, 0, 5, 0" />
-                            <Label Grid.Row="7" Grid.Column="1" HorizontalAlignment="Left" Style="{StaticResource DefaultLabelStyle}" Content="Flaminamigo" />
-                            <Label Grid.Row="8" Grid.Column="1" HorizontalAlignment="Left" Style="{StaticResource DefaultLabelStyle}" Content="Flaminamigo" />
-                            <Label Grid.Row="9" Grid.Column="1" HorizontalAlignment="Left" Style="{StaticResource DefaultLabelStyle}" Content="Harceru" />
-                            <Label Grid.Row="10" Grid.Column="1" HorizontalAlignment="Left" Style="{StaticResource DefaultLabelStyle}" Content="Rommstar" />
-                            <Label Grid.Row="11" Grid.Column="1" HorizontalAlignment="Left" Style="{StaticResource DefaultLabelStyle}" Content="www.digimon.fandom.com" />
-                            <Label Grid.Row="12" Grid.Column="1" HorizontalAlignment="Left" Style="{StaticResource DefaultLabelStyle}" Content="www.grindosaur.com" />
+                            <Label Grid.Row="9" Grid.Column="0" Style="{StaticResource DefaultLabelStyle}" Content="Support and love:" Margin="10, 0, 5, 0" />
+                            <Label Grid.Row="10" Grid.Column="0" Style="{StaticResource DefaultLabelStyle}" Content="Giromon witty text:" Margin="10, 0, 5, 0" />
+                            <Label Grid.Row="11" Grid.Column="0" Style="{StaticResource DefaultLabelStyle}" Content="Evolution criteria:" Margin="10, 0, 5, 0" />
+                            <Label Grid.Row="12" Grid.Column="0" Style="{StaticResource DefaultLabelStyle}" Content="Evolution sprites:" Margin="10, 0, 5, 0" />
+                            <Label Grid.Row="13" Grid.Column="0" Style="{StaticResource DefaultLabelStyle}" Content="Digimon sprites:" Margin="10, 0, 5, 0" />
+                            <Label Grid.Row="14" Grid.Column="0" Style="{StaticResource DefaultLabelStyle}" Content="Digimon images:" Margin="10, 0, 5, 0" />
+                            <Label Grid.Row="9" Grid.Column="1" HorizontalAlignment="Left" Style="{StaticResource DefaultLabelStyle}" Content="Flaminamigo" />
+                            <Label Grid.Row="10" Grid.Column="1" HorizontalAlignment="Left" Style="{StaticResource DefaultLabelStyle}" Content="Flaminamigo" />
+                            <Label Grid.Row="11" Grid.Column="1" HorizontalAlignment="Left" Style="{StaticResource DefaultLabelStyle}" Content="Harceru" />
+                            <Label Grid.Row="12" Grid.Column="1" HorizontalAlignment="Left" Style="{StaticResource DefaultLabelStyle}" Content="Rommstar" />
+                            <Label Grid.Row="13" Grid.Column="1" HorizontalAlignment="Left" Style="{StaticResource DefaultLabelStyle}" Content="www.digimon.fandom.com" />
+                            <Label Grid.Row="14" Grid.Column="1" HorizontalAlignment="Left" Style="{StaticResource DefaultLabelStyle}" Content="www.grindosaur.com" />
 
-                            <Button Grid.Row="13" Grid.Column="0" Grid.ColumnSpan="2" Style="{StaticResource DefaultButtonStyle}"
+                            <Button Grid.Row="15" Grid.Column="0" Grid.ColumnSpan="2" Style="{StaticResource DefaultButtonStyle}"
                                     HorizontalAlignment="Center"
                                     Height="{StaticResource DefaultButtonHeight}"
                                     Width="{StaticResource WindowButtonWidth}"
@@ -128,7 +132,7 @@
                                 </Button.ToolTip>
                             </Button>
 
-                            <Label Grid.Row="14" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Center" Style="{StaticResource DefaultLabelStyle}"
+                            <Label Grid.Row="16" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Center" Style="{StaticResource DefaultLabelStyle}"
                                    Content="© 2026 Ginoshie - Non-commercial use only." />
                         </Grid>
                     </Border>
