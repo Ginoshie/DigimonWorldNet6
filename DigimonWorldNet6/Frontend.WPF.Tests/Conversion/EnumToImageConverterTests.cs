@@ -93,7 +93,7 @@ public class EnumToImageConverterTests
         private readonly CultureInfo _cultureInfo = CultureInfo.CurrentCulture;
         private readonly BitmapImage _imageSource = new();
         private readonly Type _targetType = typeof(ImageSource);
-        private readonly string _digimonImageFilePath = string.Concat("/Images/", DIGIMON_FILE_NAME, ".jpg");
+        private readonly string _digimonImageFilePath = string.Concat("/Images/Digimon/", DIGIMON_FILE_NAME, ".jpg");
 
         public (EnumToImageConverter sut, ImageSource imageSource, Type targetType, CultureInfo cultureInfo, string digimonFileName, string digimonImageFilePath) Build()
         {
