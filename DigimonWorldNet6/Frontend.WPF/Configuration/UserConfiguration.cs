@@ -5,4 +5,6 @@ public class UserConfiguration
     public SpeakingSimulatorConfig SpeakingSimulatorConfig { get; set; } = new();
 
     public MusicPlayerConfig MusicPlayerConfig { get; set; } = new();
+
+    public EvolutionCalculatorConfig EvolutionCalculatorConfig { get; set; } = new();
 }

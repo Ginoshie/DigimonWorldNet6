@@ -5,6 +5,7 @@ using DigimonWorld.Frontend.WPF.Constants;
 using DigimonWorld.Frontend.WPF.Services;
 using DigimonWorld.Frontend.WPF.ViewModelComponents;
 using DigimonWorld.Frontend.WPF.Windows.GeneralConfig.UserControls;
+using Generics.Enums;
 
 namespace DigimonWorld.Frontend.WPF.Windows.GeneralConfig;
 
@@ -14,6 +15,7 @@ public class GeneralConfigWindowViewModel : BaseViewModel
     private readonly HomeConfigurationSection _homeConfigurationSection = new();
     private readonly MusicPlayerConfigurationSection _musicPlayerConfigurationSection = new();
     private readonly NarrationConfigurationSection _narrationConfigurationSection = new();
+    private readonly EvolutionConfigurationSection _evolutionConfigurationSection = new();
 
     private bool _narratorModeIsInstant;
     private bool _narratorModeIsSpeech;
@@ -26,6 +28,11 @@ public class GeneralConfigWindowViewModel : BaseViewModel
     private bool _shuffleModeIsOff;
     private bool _pauseOnCloseWindow;
     private bool _doNothingOnCloseWindow;
+    private EvolutionCalculatorMode _evolutionCalculatorMode;
+    private bool _evolutionCalculatorModeOriginal;
+    private bool _evolutionCalculatorModeVice;
+    private bool _evolutionCalculatorModeViceMyotismon;
+    private bool _evolutionCalculatorModeVicePanjyamon;
 
     private UserControl _currentSelectedSettingCategoryUserControl;
 
@@ -42,6 +49,8 @@ public class GeneralConfigWindowViewModel : BaseViewModel
         ShowMusicPlayerConfigurationSectionCommand = new CommandHandler(ShowMusicPlayerConfigurationSection);
 
         ShowNarrationConfigurationSectionCommand = new CommandHandler(ShowNarrationConfigurationSection);
+
+        ShowEvolutionConfigurationSectionCommand = new CommandHandler(ShowEvolutionConfigurationSection);
 
         SetNarratorModeSpeechCommand = new CommandHandler(SetNarratorModeSpeech);
 
@@ -63,6 +72,14 @@ public class GeneralConfigWindowViewModel : BaseViewModel
 
         SetDoNothingOnCloseCommand = new CommandHandler(SetDoNothingOnClose);
 
+        SetEvolutionCalculatorModeOriginalCommand = new CommandHandler(() => SetEvolutionCalculatorMode(EvolutionCalculatorMode.Original));
+
+        SetEvolutionCalculatorModeViceCommand = new CommandHandler(() => SetEvolutionCalculatorMode(EvolutionCalculatorMode.Vice));
+
+        SetEvolutionCalculatorModeViceMyotismonCommand = new CommandHandler(() => SetEvolutionCalculatorMode(EvolutionCalculatorMode.ViceMyotismon));
+
+        SetEvolutionCalculatorVicePanjyamonCommand = new CommandHandler(() => SetEvolutionCalculatorMode(EvolutionCalculatorMode.VicePanjyamon));
+
         _currentSelectedSettingCategoryUserControl = new HomeConfigurationSection();
 
         LoadConfig(UserConfigurationManager.UserConfiguration);
@@ -73,6 +90,7 @@ public class GeneralConfigWindowViewModel : BaseViewModel
     public bool MusicPlayerConfigurationSectionIsSelected => CurrentSelectedSettingCategoryUserControl.GetType() == typeof(MusicPlayerConfigurationSection);
 
     public bool NarrationConfigurationSectionIsSelected => CurrentSelectedSettingCategoryUserControl.GetType() == typeof(NarrationConfigurationSection);
+    public bool EvolutionConfigurationSectionIsSelected => CurrentSelectedSettingCategoryUserControl.GetType() == typeof(EvolutionConfigurationSection);
 
     public bool IsNarratorModeInstant
     {
@@ -145,6 +163,30 @@ public class GeneralConfigWindowViewModel : BaseViewModel
         private set => SetField(ref _doNothingOnCloseWindow, value);
     }
 
+    public bool EvolutionCalculatorModeIsOriginal
+    {
+        get => _evolutionCalculatorModeOriginal;
+        private set => SetField(ref _evolutionCalculatorModeOriginal, value);
+    }
+
+    public bool EvolutionCalculatorModeIsVice
+    {
+        get => _evolutionCalculatorModeVice;
+        private set => SetField(ref _evolutionCalculatorModeVice, value);
+    }
+
+    public bool EvolutionCalculatorModeIsViceMyotismon
+    {
+        get => _evolutionCalculatorModeViceMyotismon;
+        private set => SetField(ref _evolutionCalculatorModeViceMyotismon, value);
+    }
+
+    public bool EvolutionCalculatorModeIsVicePanjyamon
+    {
+        get => _evolutionCalculatorModeVicePanjyamon;
+        private set => SetField(ref _evolutionCalculatorModeVicePanjyamon, value);
+    }
+
     public UserControl CurrentSelectedSettingCategoryUserControl
     {
         get => _currentSelectedSettingCategoryUserControl;
@@ -170,6 +212,8 @@ public class GeneralConfigWindowViewModel : BaseViewModel
 
     public ICommand ShowNarrationConfigurationSectionCommand { get; private set; }
 
+    public ICommand ShowEvolutionConfigurationSectionCommand { get; private set; }
+
     public ICommand SetNarratorModeSpeechCommand { get; private set; }
 
     public ICommand SetNarratorModeInstantCommand { get; private set; }
@@ -190,6 +234,14 @@ public class GeneralConfigWindowViewModel : BaseViewModel
 
     public ICommand SetDoNothingOnCloseCommand { get; private set; }
 
+    public ICommand SetEvolutionCalculatorModeOriginalCommand { get; private set; }
+
+    public ICommand SetEvolutionCalculatorModeViceCommand { get; private set; }
+
+    public ICommand SetEvolutionCalculatorModeViceMyotismonCommand { get; private set; }
+
+    public ICommand SetEvolutionCalculatorVicePanjyamonCommand { get; private set; }
+
     private void Save() => SaveConfiguration();
 
     private void Close() => _window.Close();
@@ -199,6 +251,8 @@ public class GeneralConfigWindowViewModel : BaseViewModel
     private void ShowMusicPlayerConfigurationSection() => CurrentSelectedSettingCategoryUserControl = _musicPlayerConfigurationSection;
 
     private void ShowNarrationConfigurationSection() => CurrentSelectedSettingCategoryUserControl = _narrationConfigurationSection;
+
+    private void ShowEvolutionConfigurationSection() => CurrentSelectedSettingCategoryUserControl = _evolutionConfigurationSection;
 
     private void SetNarratorModeSpeech()
     {
@@ -260,6 +314,16 @@ public class GeneralConfigWindowViewModel : BaseViewModel
         DoNothingOnCloseWindow = true;
     }
 
+    private void SetEvolutionCalculatorMode(EvolutionCalculatorMode mode)
+    {
+        _evolutionCalculatorMode = mode;
+
+        EvolutionCalculatorModeIsOriginal = mode == EvolutionCalculatorMode.Original;
+        EvolutionCalculatorModeIsVice = mode == EvolutionCalculatorMode.Vice;
+        EvolutionCalculatorModeIsViceMyotismon = mode == EvolutionCalculatorMode.ViceMyotismon;
+        EvolutionCalculatorModeIsVicePanjyamon = mode == EvolutionCalculatorMode.VicePanjyamon;
+    }
+
     private void LoadConfig(UserConfiguration userConfiguration)
     {
         MusicPlayerConfig musicPlayerConfig = userConfiguration.MusicPlayerConfig;
@@ -282,6 +346,8 @@ public class GeneralConfigWindowViewModel : BaseViewModel
 
         IsNarratorModeSpeech = speakingSimulatorConfig.NarratorMode == NarratorMode.Speech;
         IsNarratorModeInstant = speakingSimulatorConfig.NarratorMode == NarratorMode.Instant;
+        
+        SetEvolutionCalculatorMode(userConfiguration.EvolutionCalculatorConfig.EvolutionCalculatorMode);
     }
 
     private void SaveConfiguration()
@@ -291,6 +357,7 @@ public class GeneralConfigWindowViewModel : BaseViewModel
         UserConfigurationManager.SetShuffleModeIsOn(ShuffleModeIsOn ? ShuffleMode.Shuffle : ShuffleMode.Chronological);
         UserConfigurationManager.SetRepeatModeIsSingle(RepeatModeIsSingle ? RepeatMode.Single : RepeatMode.All);
         UserConfigurationManager.SetOnCloseAction(PauseOnCloseWindow ? MusicPlayerOnCloseAction.Pause : MusicPlayerOnCloseAction.Nothing);
+        UserConfigurationManager.SetEvolutionCalculatorMode(_evolutionCalculatorMode);
 
         UserConfigurationManager.SaveConfiguration();
     }

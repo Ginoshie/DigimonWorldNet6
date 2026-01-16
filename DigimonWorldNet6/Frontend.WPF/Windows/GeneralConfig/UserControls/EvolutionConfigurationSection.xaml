@@ -1,4 +1,4 @@
-<UserControl x:Class="DigimonWorld.Frontend.WPF.Windows.GeneralConfig.UserControls.NarrationConfigurationSection"
+<UserControl x:Class="DigimonWorld.Frontend.WPF.Windows.GeneralConfig.UserControls.EvolutionConfigurationSection"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -22,11 +22,12 @@
                 <ResourceDictionary Source="../Styles/SaveButtonStyle.xaml" />
             </ResourceDictionary.MergedDictionaries>
 
-            <system:Double x:Key="OptionWidth">75</system:Double>
-            <system:Double x:Key="OptionHeight">24</system:Double>
+            <system:Double x:Key="OptionWidth">100</system:Double>
+            <system:Double x:Key="OptionHeight">48</system:Double>
             <system:Double x:Key="WindowButtonWidth">70</system:Double>
         </ResourceDictionary>
     </UserControl.Resources>
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
@@ -41,26 +42,34 @@
                 <RowDefinition Height="25" />
                 <RowDefinition Height="65" />
             </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="auto" />
-                <ColumnDefinition Width="auto" />
-            </Grid.ColumnDefinitions>
 
-            <Label Grid.Row="0" Grid.Column="0" Style="{StaticResource DefaultLabelStyle}" Content="* Narrator mode:" Margin="0, 0, 5, 0" />
-            <StackPanel Grid.Row="0" Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center">
+            <Label Grid.Row="0" HorizontalAlignment="Center" Style="{StaticResource DefaultLabelStyle}" Content="* Evolution calculator mode" Margin="0, 0, 5, 0" />
+            <WrapPanel Grid.Row="1" Grid.Column="0" Grid.RowSpan="5" Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Center" >
                 <Button Style="{StaticResource DefaultOptionPickerButtonStyle}"
                         Height="{StaticResource OptionHeight}"
                         Width="{StaticResource OptionWidth}"
-                        Content="Speech"
-                        Command="{Binding SetNarratorModeSpeechCommand}"
-                        Tag="{Binding IsNarratorModeSpeech}" />
+                        Content="Original"
+                        Command="{Binding SetEvolutionCalculatorModeOriginalCommand}"
+                        Tag="{Binding EvolutionCalculatorModeIsOriginal}" />
                 <Button Style="{StaticResource DefaultOptionPickerButtonStyle}"
                         Height="{StaticResource OptionHeight}"
                         Width="{StaticResource OptionWidth}"
-                        Content="Instant"
-                        Command="{Binding SetNarratorModeInstantCommand}"
-                        Tag="{Binding IsNarratorModeInstant}" />
-            </StackPanel>
+                        Content="Vice 2 . 1 ( + )"
+                        Command="{Binding SetEvolutionCalculatorModeViceCommand}"
+                        Tag="{Binding EvolutionCalculatorModeIsVice}" />
+                <Button Style="{StaticResource DefaultOptionPickerButtonStyle}"
+                        Height="{StaticResource OptionHeight}"
+                        Width="{StaticResource OptionWidth}"
+                        Content="Myotismon"
+                        Command="{Binding SetEvolutionCalculatorModeViceMyotismonCommand}"
+                        Tag="{Binding EvolutionCalculatorModeIsViceMyotismon}" />
+                <Button Style="{StaticResource DefaultOptionPickerButtonStyle}"
+                        Height="{StaticResource OptionHeight}"
+                        Width="{StaticResource OptionWidth}"
+                        Content="Panjyamon"
+                        Command="{Binding SetEvolutionCalculatorVicePanjyamonCommand}"
+                        Tag="{Binding EvolutionCalculatorModeIsVicePanjyamon}" />
+            </WrapPanel>
         </Grid>
 
         <Button Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center" Style="{StaticResource DefaultButtonStyle}"

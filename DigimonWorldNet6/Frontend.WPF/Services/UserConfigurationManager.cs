@@ -5,13 +5,14 @@ using System.Reactive.Subjects;
 using System.Text.Json;
 using DigimonWorld.Frontend.WPF.Configuration;
 using DigimonWorld.Frontend.WPF.Constants;
+using Generics.Enums;
 using Microsoft.VisualBasic.FileIO;
 
 namespace DigimonWorld.Frontend.WPF.Services;
 
 public static class UserConfigurationManager
 {
-    private static readonly string UserConfigFullPath = FileSystem.CombinePath(AppDomain.CurrentDomain.BaseDirectory,"userconfig.json");
+    private static readonly string UserConfigFullPath = FileSystem.CombinePath(AppDomain.CurrentDomain.BaseDirectory, "userconfig.json");
     private static readonly JsonSerializerOptions JsonSerializerOptions = new() { WriteIndented = true };
 
     private static readonly BehaviorSubject<SpeakingSimulatorConfig> CurrentSpeakingSimulatorConfigSubject;
@@ -47,6 +48,7 @@ public static class UserConfigurationManager
 
     public static void SetRepeatModeIsSingle(RepeatMode repeatMode) => UserConfiguration.MusicPlayerConfig.RepeatMode = repeatMode;
     public static void SetOnCloseAction(MusicPlayerOnCloseAction onCloseAction) => UserConfiguration.MusicPlayerConfig.OnCloseAction = onCloseAction;
+    public static void SetEvolutionCalculatorMode(EvolutionCalculatorMode mode) => UserConfiguration.EvolutionCalculatorConfig.EvolutionCalculatorMode = mode;
 
     public static void SaveConfiguration()
     {
@@ -54,7 +56,7 @@ public static class UserConfigurationManager
         {
             string json = JsonSerializer.Serialize(UserConfiguration, JsonSerializerOptions);
             File.WriteAllText(UserConfigFullPath, json);
-            
+
             CurrentSpeakingSimulatorConfigSubject.OnNext(SpeakingSimulatorConfig);
             CurrentMusicPlayerConfigSubject.OnNext(MusicPlayerConfig);
         }
@@ -74,7 +76,7 @@ public static class UserConfigurationManager
         try
         {
             string json = File.ReadAllText(UserConfigFullPath);
-           return JsonSerializer.Deserialize<UserConfiguration>(json) ?? new UserConfiguration();
+            return JsonSerializer.Deserialize<UserConfiguration>(json) ?? new UserConfiguration();
         }
         catch (Exception ex)
         {

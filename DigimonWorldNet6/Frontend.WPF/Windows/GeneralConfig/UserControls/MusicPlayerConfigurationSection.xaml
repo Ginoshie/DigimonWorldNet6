@@ -31,96 +31,101 @@
 
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="25" />
-            <RowDefinition Height="25" />
-            <RowDefinition Height="25" />
-            <RowDefinition Height="25" />
-            <RowDefinition Height="25" />
-            <RowDefinition Height="65" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="auto" />
         </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="110" />
-            <ColumnDefinition Width="180" />
-        </Grid.ColumnDefinitions>
+        <Grid Grid.Row="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="25" />
+                <RowDefinition Height="25" />
+                <RowDefinition Height="25" />
+                <RowDefinition Height="25" />
+                <RowDefinition Height="25" />
+                <RowDefinition Height="65" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto" />
+                <ColumnDefinition Width="auto" />
+            </Grid.ColumnDefinitions>
 
-        <Label Grid.Row="0" Grid.Column="0" Style="{StaticResource DefaultLabelStyle}" Content="Volume:" Margin="0, 0, 5, 0" />
-        <Label Grid.Row="1" Grid.Column="0" Style="{StaticResource DefaultLabelStyle}" Content="Mute:" Margin="0, 0, 5, 0" />
-        <Label Grid.Row="2" Grid.Column="0" Style="{StaticResource DefaultLabelStyle}" Content="Shuffle mode:" Margin="0, 0, 5, 0" />
-        <Label Grid.Row="3" Grid.Column="0" Style="{StaticResource DefaultLabelStyle}" Content="Repeat mode:" Margin="0, 0, 5, 0" />
-        <Label Grid.Row="4" Grid.Column="0" Style="{StaticResource DefaultLabelStyle}" Content="When closing:" Margin="0, 0, 5, 0" />
-        <TextBox Name="Volume" Grid.Row="0" Grid.Column="1" Style="{StaticResource DefaultTextBoxStyle}"
-                 HorizontalAlignment="Left"
-                 Height="{StaticResource OptionHeight}"
-                 Width="{StaticResource OptionWidth}">
-            <TextBox.Text>
-                <Binding Path="Volume" UpdateSourceTrigger="PropertyChanged" Mode="TwoWay">
-                    <Binding.ValidationRules>
-                        <configuration:ZeroToHundredStringValidationRule ValidationStep="CommittedValue" />
-                    </Binding.ValidationRules>
-                </Binding>
-            </TextBox.Text>
-        </TextBox>
-        <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center">
-            <Button Style="{StaticResource DefaultOptionPickerButtonStyle}"
-                    Height="{StaticResource OptionHeight}"
-                    Width="{StaticResource OptionWidth}"
-                    Content="ON"
-                    Command="{Binding SetMuteOnCommand}"
-                    Tag="{Binding MuteIsOn}" />
-            <Button Style="{StaticResource DefaultOptionPickerButtonStyle}"
-                    Height="{StaticResource OptionHeight}"
-                    Width="{StaticResource OptionWidth}"
-                    Content="OFF"
-                    Command="{Binding SetMuteOffCommand}"
-                    Tag="{Binding MuteIsOff}" />
-        </StackPanel>
-        <StackPanel Grid.Row="2" Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center">
-            <Button Style="{StaticResource DefaultOptionPickerButtonStyle}"
-                    Height="{StaticResource OptionHeight}"
-                    Width="{StaticResource OptionWidth}"
-                    Content="ON"
-                    Command="{Binding SetShuffleModeOnCommand}"
-                    Tag="{Binding ShuffleModeIsOn}" />
-            <Button Style="{StaticResource DefaultOptionPickerButtonStyle}"
-                    Height="{StaticResource OptionHeight}"
-                    Width="{StaticResource OptionWidth}"
-                    Content="OFF"
-                    Command="{Binding SetShuffleModeOffCommand}"
-                    Tag="{Binding ShuffleModeIsOff}" />
-        </StackPanel>
-        <StackPanel Grid.Row="3" Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center">
-            <Button Style="{StaticResource DefaultOptionPickerButtonStyle}"
-                    Height="{StaticResource OptionHeight}"
-                    Width="{StaticResource OptionWidth}"
-                    Content="Single"
-                    Command="{Binding SetRepeatModeSingleCommand}"
-                    Tag="{Binding RepeatModeIsSingle}" />
-            <Button Style="{StaticResource DefaultOptionPickerButtonStyle}"
-                    Height="{StaticResource OptionHeight}"
-                    Width="{StaticResource OptionWidth}"
-                    Content="All"
-                    Command="{Binding SetRepeatModeAllCommand}"
-                    Tag="{Binding RepeatModeIsAll}" />
-        </StackPanel>
-        <StackPanel Grid.Row="4" Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center">
-            <Button Style="{StaticResource DefaultOptionPickerButtonStyle}"
-                    Height="{StaticResource OptionHeight}"
-                    Width="{StaticResource OptionWidth}"
-                    Content="Pause"
-                    Command="{Binding SetPauseOnCloseCommand}"
-                    Tag="{Binding PauseOnCloseWindow}" />
-            <Button Style="{StaticResource DefaultOptionPickerButtonStyle}"
-                    Height="{StaticResource OptionHeight}"
-                    Width="{StaticResource OptionWidth}"
-                    Content="Nothing"
-                    Command="{Binding SetDoNothingOnCloseCommand}"
-                    Tag="{Binding DoNothingOnCloseWindow}" />
-        </StackPanel>
+            <Label Grid.Row="0" Grid.Column="0" Style="{StaticResource DefaultLabelStyle}" Content="Volume:" Margin="0, 0, 5, 0" />
+            <Label Grid.Row="1" Grid.Column="0" Style="{StaticResource DefaultLabelStyle}" Content="Mute:" Margin="0, 0, 5, 0" />
+            <Label Grid.Row="2" Grid.Column="0" Style="{StaticResource DefaultLabelStyle}" Content="Shuffle mode:" Margin="0, 0, 5, 0" />
+            <Label Grid.Row="3" Grid.Column="0" Style="{StaticResource DefaultLabelStyle}" Content="Repeat mode:" Margin="0, 0, 5, 0" />
+            <Label Grid.Row="4" Grid.Column="0" Style="{StaticResource DefaultLabelStyle}" Content="When closing:" Margin="0, 0, 5, 0" />
+            <TextBox Name="Volume" Grid.Row="0" Grid.Column="1" Style="{StaticResource DefaultTextBoxStyle}"
+                     HorizontalAlignment="Left"
+                     Height="{StaticResource OptionHeight}"
+                     Width="{StaticResource OptionWidth}">
+                <TextBox.Text>
+                    <Binding Path="Volume" UpdateSourceTrigger="PropertyChanged" Mode="TwoWay">
+                        <Binding.ValidationRules>
+                            <configuration:ZeroToHundredStringValidationRule ValidationStep="CommittedValue" />
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox.Text>
+            </TextBox>
+            <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center">
+                <Button Style="{StaticResource DefaultOptionPickerButtonStyle}"
+                        Height="{StaticResource OptionHeight}"
+                        Width="{StaticResource OptionWidth}"
+                        Content="ON"
+                        Command="{Binding SetMuteOnCommand}"
+                        Tag="{Binding MuteIsOn}" />
+                <Button Style="{StaticResource DefaultOptionPickerButtonStyle}"
+                        Height="{StaticResource OptionHeight}"
+                        Width="{StaticResource OptionWidth}"
+                        Content="OFF"
+                        Command="{Binding SetMuteOffCommand}"
+                        Tag="{Binding MuteIsOff}" />
+            </StackPanel>
+            <StackPanel Grid.Row="2" Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center">
+                <Button Style="{StaticResource DefaultOptionPickerButtonStyle}"
+                        Height="{StaticResource OptionHeight}"
+                        Width="{StaticResource OptionWidth}"
+                        Content="ON"
+                        Command="{Binding SetShuffleModeOnCommand}"
+                        Tag="{Binding ShuffleModeIsOn}" />
+                <Button Style="{StaticResource DefaultOptionPickerButtonStyle}"
+                        Height="{StaticResource OptionHeight}"
+                        Width="{StaticResource OptionWidth}"
+                        Content="OFF"
+                        Command="{Binding SetShuffleModeOffCommand}"
+                        Tag="{Binding ShuffleModeIsOff}" />
+            </StackPanel>
+            <StackPanel Grid.Row="3" Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center">
+                <Button Style="{StaticResource DefaultOptionPickerButtonStyle}"
+                        Height="{StaticResource OptionHeight}"
+                        Width="{StaticResource OptionWidth}"
+                        Content="Single"
+                        Command="{Binding SetRepeatModeSingleCommand}"
+                        Tag="{Binding RepeatModeIsSingle}" />
+                <Button Style="{StaticResource DefaultOptionPickerButtonStyle}"
+                        Height="{StaticResource OptionHeight}"
+                        Width="{StaticResource OptionWidth}"
+                        Content="All"
+                        Command="{Binding SetRepeatModeAllCommand}"
+                        Tag="{Binding RepeatModeIsAll}" />
+            </StackPanel>
+            <StackPanel Grid.Row="4" Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center">
+                <Button Style="{StaticResource DefaultOptionPickerButtonStyle}"
+                        Height="{StaticResource OptionHeight}"
+                        Width="{StaticResource OptionWidth}"
+                        Content="Pause"
+                        Command="{Binding SetPauseOnCloseCommand}"
+                        Tag="{Binding PauseOnCloseWindow}" />
+                <Button Style="{StaticResource DefaultOptionPickerButtonStyle}"
+                        Height="{StaticResource OptionHeight}"
+                        Width="{StaticResource OptionWidth}"
+                        Content="Nothing"
+                        Command="{Binding SetDoNothingOnCloseCommand}"
+                        Tag="{Binding DoNothingOnCloseWindow}" />
+            </StackPanel>
+        </Grid>
 
-        <Button Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2" Style="{StaticResource SaveButtonStyle}"
+        <Button Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center" Style="{StaticResource SaveButtonStyle}"
                 Height="{StaticResource DefaultButtonHeight}"
                 Width="{StaticResource WindowButtonWidth}"
-                Margin="0, 10, 0, 10"
                 Content="Save"
                 Command="{Binding SaveCommand}">
             <Button.ToolTip>

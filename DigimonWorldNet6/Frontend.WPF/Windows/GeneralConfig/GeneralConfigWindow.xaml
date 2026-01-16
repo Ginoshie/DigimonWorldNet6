@@ -58,9 +58,9 @@
 
                         <Grid Grid.Row="2"  Background="#90D9FA">
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="280" />
+                                <ColumnDefinition Width="auto" />
+                                <ColumnDefinition Width="auto" />
+                                <ColumnDefinition Width="auto" />
                             </Grid.ColumnDefinitions>
 
                             <Border Grid.Column="0" CornerRadius="5" BorderBrush="#90D9FA" BorderThickness="1.5">
@@ -73,13 +73,6 @@
                                                 Content="HOME"
                                                 Command="{Binding ShowHomeConfigurationSectionCommand}"
                                                 Tag="{Binding HomeConfigurationSectionIsSelected}" />
-                                        <!-- <Button Style="{StaticResource DefaultOptionPickerButtonStyle}" -->
-                                        <!--         Height="40" -->
-                                        <!--         Width="150" -->
-                                        <!--         HorizontalAlignment="Center" -->
-                                        <!--         Content="GENERAL" -->
-                                        <!--         Command="{Binding ShowGeneralConfigurationSectionCommand}" -->
-                                        <!--         Tag="{Binding GeneralConfigurationSectionIsSelected}" /> -->
                                         <Button Style="{StaticResource DefaultOptionPickerButtonStyle}"
                                                 Height="40"
                                                 Width="150"
@@ -94,6 +87,13 @@
                                                 Content="NARRATION"
                                                 Command="{Binding ShowNarrationConfigurationSectionCommand}"
                                                 Tag="{Binding NarrationConfigurationSectionIsSelected}" />
+                                        <Button Style="{StaticResource DefaultOptionPickerButtonStyle}"
+                                                Height="40"
+                                                Width="150"
+                                                HorizontalAlignment="Center"
+                                                Content="EVOLUTION"
+                                                Command="{Binding ShowEvolutionConfigurationSectionCommand}"
+                                                Tag="{Binding EvolutionConfigurationSectionIsSelected}" />
                                     </StackPanel>
                                 </Border>
                             </Border>
