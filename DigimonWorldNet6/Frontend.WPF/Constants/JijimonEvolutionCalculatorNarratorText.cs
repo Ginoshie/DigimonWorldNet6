@@ -263,11 +263,11 @@ public static class JijimonEvolutionCalculatorNarratorText
         };
     }
 
-    private static string AOrAn(DigimonType DigimonType)
+    private static string AOrAn(DigimonType digimonType)
     {
         char[] vowelSoundingVowels = ['a', 'e', 'i', 'o'];
-        string DigimonTypeString = DigimonType.ToString();
-        char firstLetter = DigimonTypeString[0];
+        string digimonTypeString = digimonType.ToString();
+        char firstLetter = digimonTypeString[0];
 
         return vowelSoundingVowels.Contains(firstLetter) ? "an" : "a";
     }

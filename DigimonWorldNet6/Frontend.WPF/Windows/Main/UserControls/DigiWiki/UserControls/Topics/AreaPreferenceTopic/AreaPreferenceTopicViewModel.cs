@@ -20,7 +20,7 @@ public class AreaPreferenceTopicViewModel : TopicViewModelBase
     private const string POSITIVE_LIKED_IMAGE_1_PATH = "Media/happiness-bar-positive-liked-1.jpg";
     private const string POSITIVE_LIKED_IMAGE_2_PATH = "Media/happiness-bar-positive-liked-2.jpg";
     
-    private DispatcherTimer _timer;
+    private DispatcherTimer? _timer;
     private bool _showImage1;
     private bool _isRunning;
     private ImageSource _negativeDislikedImageSource = new BitmapImage(new Uri(NEGATIVE_DISLIKED_IMAGE_1_PATH, UriKind.Relative));
@@ -119,7 +119,7 @@ public class AreaPreferenceTopicViewModel : TopicViewModelBase
         {
             Interval = TimeSpan.FromMilliseconds(500)
         };
-        _timer.Tick += (s, e) =>
+        _timer.Tick += (_, _) =>
         {
             SwapImages();
         };
@@ -129,12 +129,12 @@ public class AreaPreferenceTopicViewModel : TopicViewModelBase
     {
         if (_isRunning)
         {
-            _timer.Stop();
+            _timer!.Stop();
         }
         else
         {
             SwapImages();
-            _timer.Start();
+            _timer!.Start();
         }
 
         IsRunning = !IsRunning;
