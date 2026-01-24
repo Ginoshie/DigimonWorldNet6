@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using DigimonWorld.Evolution.Calculator.Core.EvolutionCriteria.Rookie;
+using DigimonWorld.Evolution.Calculator.Core.EvolutionCriteria.Original.Rookie;
 using DigimonWorld.Evolution.Calculator.Core.Interfaces.EvolutionCriteria;
 using Generics.Enums;
 

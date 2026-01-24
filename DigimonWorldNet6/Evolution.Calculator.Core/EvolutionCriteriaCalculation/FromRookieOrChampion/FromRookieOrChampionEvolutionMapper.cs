@@ -1,6 +1,6 @@
 using System.Collections.Generic;
-using DigimonWorld.Evolution.Calculator.Core.EvolutionCriteria.Champion;
-using DigimonWorld.Evolution.Calculator.Core.EvolutionCriteria.Ultimate;
+using DigimonWorld.Evolution.Calculator.Core.EvolutionCriteria.Original.Champion;
+using DigimonWorld.Evolution.Calculator.Core.EvolutionCriteria.Original.Ultimate;
 using DigimonWorld.Evolution.Calculator.Core.Interfaces.EvolutionCriteria;
 using Generics.Enums;
 

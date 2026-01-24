@@ -17,6 +17,7 @@ public static class UserConfigurationManager
 
     private static readonly BehaviorSubject<SpeakingSimulatorConfig> CurrentSpeakingSimulatorConfigSubject;
     private static readonly BehaviorSubject<MusicPlayerConfig> CurrentMusicPlayerConfigSubject;
+    private static readonly BehaviorSubject<EvolutionCalculatorConfig> CurrentEvolutionCalculatorConfigSubject;
 
     static UserConfigurationManager()
     {
@@ -27,16 +28,22 @@ public static class UserConfigurationManager
 
         CurrentMusicPlayerConfigSubject = new BehaviorSubject<MusicPlayerConfig>(UserConfiguration.MusicPlayerConfig);
         CurrentMusicPlayerConfig = CurrentMusicPlayerConfigSubject.AsObservable();
+
+        CurrentEvolutionCalculatorConfigSubject = new BehaviorSubject<EvolutionCalculatorConfig>(UserConfiguration.EvolutionCalculatorConfig);
+        CurrentEvolutionCalculatorConfig = CurrentEvolutionCalculatorConfigSubject.AsObservable();
     }
 
     public static IObservable<SpeakingSimulatorConfig> CurrentSpeakingSimulatorConfig { get; }
     public static IObservable<MusicPlayerConfig> CurrentMusicPlayerConfig { get; }
+    public static IObservable<EvolutionCalculatorConfig> CurrentEvolutionCalculatorConfig { get; }
 
     public static UserConfiguration UserConfiguration { get; }
 
     public static MusicPlayerConfig MusicPlayerConfig => UserConfiguration.MusicPlayerConfig;
 
     public static SpeakingSimulatorConfig SpeakingSimulatorConfig => UserConfiguration.SpeakingSimulatorConfig;
+
+    public static EvolutionCalculatorConfig EvolutionCalculatorConfig => UserConfiguration.EvolutionCalculatorConfig;
 
     public static void SetNarratorMode(NarratorMode mode) => UserConfiguration.SpeakingSimulatorConfig.NarratorMode = mode;
 
@@ -59,6 +66,7 @@ public static class UserConfigurationManager
 
             CurrentSpeakingSimulatorConfigSubject.OnNext(SpeakingSimulatorConfig);
             CurrentMusicPlayerConfigSubject.OnNext(MusicPlayerConfig);
+            CurrentEvolutionCalculatorConfigSubject.OnNext(EvolutionCalculatorConfig);
         }
         catch (Exception ex)
         {

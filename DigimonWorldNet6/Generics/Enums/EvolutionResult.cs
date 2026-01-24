@@ -64,5 +64,11 @@ public enum EvolutionResult
     Vademon,
     Vegiemon,
     Whamon,
-    Yuramon
+    Yuramon,
+    Weregarurumon,
+    Gigadramon,
+    MetalEtemon,
+    Machinedramon,
+    Myotismon,
+    Panjyamon
 }
