@@ -8,13 +8,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Evolution", "Evolution", "{
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Frontend", "Frontend", "{546E8FCD-B53D-473D-A0BB-B05EE41AF349}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Generics", "Generics\Generics.csproj", "{8BB30102-B63D-4AD4-A3C9-5FCA3B2ADB64}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shared", "Shared\Shared.csproj", "{8BB30102-B63D-4AD4-A3C9-5FCA3B2ADB64}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Evolution.Calculator.Tests", "Evolution.Calculator.Tests\Evolution.Calculator.Tests.csproj", "{6C76CDE1-74DB-4810-A4CC-7729D57023C7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Generics.Tests", "Generics.Tests\Generics.Tests.csproj", "{416DE4DC-F9E3-4934-8927-F6FBDA55C151}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shared.Tests", "Shared.Tests\Shared.Tests.csproj", "{416DE4DC-F9E3-4934-8927-F6FBDA55C151}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Generics", "Generics", "{47FE8256-73EB-402B-B991-4A41D7A26B32}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shared", "Shared", "{47FE8256-73EB-402B-B991-4A41D7A26B32}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Frontend.WPF.Tests", "Frontend.WPF.Tests\Frontend.WPF.Tests.csproj", "{4A59E2CD-93BA-4958-8285-02D919E5E7BE}"
 EndProject

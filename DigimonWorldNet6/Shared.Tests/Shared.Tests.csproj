@@ -6,6 +6,7 @@
         <Nullable>enable</Nullable>
         <OutputType>Library</OutputType>
         <LangVersion>default</LangVersion>
+        <RootNamespace>Generics.Tests</RootNamespace>
     </PropertyGroup>
 
     <ItemGroup>
@@ -16,7 +17,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\Generics\Generics.csproj" />
+      <ProjectReference Include="..\Shared\Shared.csproj" />
     </ItemGroup>
 
 </Project>
