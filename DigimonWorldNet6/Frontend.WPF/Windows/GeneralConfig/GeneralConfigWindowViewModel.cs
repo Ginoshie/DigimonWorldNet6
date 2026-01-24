@@ -1,6 +1,5 @@
 using System.Windows.Controls;
 using System.Windows.Input;
-using DigimonWorld.Frontend.WPF.Constants;
 using DigimonWorld.Frontend.WPF.Services;
 using DigimonWorld.Frontend.WPF.ViewModelComponents;
 using DigimonWorld.Frontend.WPF.Windows.GeneralConfig.UserControls;
