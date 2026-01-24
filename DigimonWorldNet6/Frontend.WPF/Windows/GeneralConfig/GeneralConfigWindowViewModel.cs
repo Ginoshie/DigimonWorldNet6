@@ -1,10 +1,10 @@
 using System.Windows.Controls;
 using System.Windows.Input;
-using DigimonWorld.Frontend.WPF.Services;
 using DigimonWorld.Frontend.WPF.ViewModelComponents;
 using DigimonWorld.Frontend.WPF.Windows.GeneralConfig.UserControls;
 using Generics.Configuration;
 using Generics.Enums;
+using Generics.Services;
 
 namespace DigimonWorld.Frontend.WPF.Windows.GeneralConfig;
 

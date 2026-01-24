@@ -62,5 +62,11 @@ public enum DigimonType
     Vademon,
     Vegiemon,
     Whamon,
-    Yuramon
+    Yuramon,
+    Weregarurumon,
+    Gigadramon,
+    MetalEtemon,
+    Machinedramon,
+    Myotismon,
+    Panjyamon
 }

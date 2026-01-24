@@ -1,5 +1,3 @@
-using System;
-using System.IO;
 using System.Reactive.Linq;
 using System.Reactive.Subjects;
 using System.Text.Json;
@@ -7,7 +5,7 @@ using Generics.Configuration;
 using Generics.Enums;
 using Microsoft.VisualBasic.FileIO;
 
-namespace DigimonWorld.Frontend.WPF.Services;
+namespace Generics.Services;
 
 public static class UserConfigurationManager
 {

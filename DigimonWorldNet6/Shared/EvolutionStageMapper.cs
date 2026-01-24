@@ -1,74 +1,28 @@
+using Generics.Configuration;
 using Generics.Enums;
+using Generics.Services;
 
 namespace Generics;
 
 public sealed class EvolutionStageMapper
 {
-    private readonly Dictionary<DigimonType, EvolutionStage> _evolutionStageMappings = new();
+    private readonly Dictionary<DigimonType, EvolutionStage> _originalEvolutionStageMappings;
+    private readonly Dictionary<DigimonType, EvolutionStage> _viceEvolutionStageMappings;
+    private readonly Dictionary<DigimonType, EvolutionStage> _viceMyotismonEvolutionStageMappings;
+    private readonly Dictionary<DigimonType, EvolutionStage> _vicePanjyamonEvolutionStageMappings;
+
+    private Dictionary<DigimonType, EvolutionStage> _evolutionStageMappings;
 
     public EvolutionStageMapper()
     {
-        _evolutionStageMappings[DigimonType.Agumon] = EvolutionStage.Rookie;
-        _evolutionStageMappings[DigimonType.Airdramon] = EvolutionStage.Champion;
-        _evolutionStageMappings[DigimonType.Andromon] = EvolutionStage.Ultimate;
-        _evolutionStageMappings[DigimonType.Angemon] = EvolutionStage.Champion;
-        _evolutionStageMappings[DigimonType.Bakemon] = EvolutionStage.Champion;
-        _evolutionStageMappings[DigimonType.Betamon] = EvolutionStage.Rookie;
-        _evolutionStageMappings[DigimonType.Birdramon] = EvolutionStage.Champion;
-        _evolutionStageMappings[DigimonType.Biyomon] = EvolutionStage.Rookie;
-        _evolutionStageMappings[DigimonType.Botamon] = EvolutionStage.Fresh;
-        _evolutionStageMappings[DigimonType.Centarumon] = EvolutionStage.Champion;
-        _evolutionStageMappings[DigimonType.Coelamon] = EvolutionStage.Champion;
-        _evolutionStageMappings[DigimonType.Devimon] = EvolutionStage.Champion;
-        _evolutionStageMappings[DigimonType.Digitamamon] = EvolutionStage.Ultimate;
-        _evolutionStageMappings[DigimonType.Drimogemon] = EvolutionStage.Champion;
-        _evolutionStageMappings[DigimonType.Elecmon] = EvolutionStage.Rookie;
-        _evolutionStageMappings[DigimonType.Etemon] = EvolutionStage.Ultimate;
-        _evolutionStageMappings[DigimonType.Frigimon] = EvolutionStage.Champion;
-        _evolutionStageMappings[DigimonType.Gabumon] = EvolutionStage.Rookie;
-        _evolutionStageMappings[DigimonType.Garurumon] = EvolutionStage.Champion;
-        _evolutionStageMappings[DigimonType.Giromon] = EvolutionStage.Ultimate;
-        _evolutionStageMappings[DigimonType.Greymon] = EvolutionStage.Champion;
-        _evolutionStageMappings[DigimonType.HerculesKabuterimon] = EvolutionStage.Ultimate;
-        _evolutionStageMappings[DigimonType.Kabuterimon] = EvolutionStage.Champion;
-        _evolutionStageMappings[DigimonType.Kokatorimon] = EvolutionStage.Champion;
-        _evolutionStageMappings[DigimonType.Koromon] = EvolutionStage.InTraining;
-        _evolutionStageMappings[DigimonType.Kunemon] = EvolutionStage.Rookie;
-        _evolutionStageMappings[DigimonType.Kuwagamon] = EvolutionStage.Champion;
-        _evolutionStageMappings[DigimonType.Leomon] = EvolutionStage.Champion;
-        _evolutionStageMappings[DigimonType.Mamemon] = EvolutionStage.Champion;
-        _evolutionStageMappings[DigimonType.Megadramon] = EvolutionStage.Ultimate;
-        _evolutionStageMappings[DigimonType.MegaSeadramon] = EvolutionStage.Ultimate;
-        _evolutionStageMappings[DigimonType.Meramon] = EvolutionStage.Champion;
-        _evolutionStageMappings[DigimonType.MetalGreymon] = EvolutionStage.Ultimate;
-        _evolutionStageMappings[DigimonType.MetalMamemon] = EvolutionStage.Ultimate;
-        _evolutionStageMappings[DigimonType.Mojyamon] = EvolutionStage.Champion;
-        _evolutionStageMappings[DigimonType.Monochromon] = EvolutionStage.Champion;
-        _evolutionStageMappings[DigimonType.Monzaemon] = EvolutionStage.Ultimate;
-        _evolutionStageMappings[DigimonType.Nanimon] = EvolutionStage.Champion;
-        _evolutionStageMappings[DigimonType.Ninjamon] = EvolutionStage.Champion;
-        _evolutionStageMappings[DigimonType.Numemon] = EvolutionStage.Champion;
-        _evolutionStageMappings[DigimonType.Ogremon] = EvolutionStage.Champion;
-        _evolutionStageMappings[DigimonType.Palmon] = EvolutionStage.Rookie;
-        _evolutionStageMappings[DigimonType.Patamon] = EvolutionStage.Rookie;
-        _evolutionStageMappings[DigimonType.Penguinmon] = EvolutionStage.Rookie;
-        _evolutionStageMappings[DigimonType.Phoenixmon] = EvolutionStage.Ultimate;
-        _evolutionStageMappings[DigimonType.Piximon] = EvolutionStage.Champion;
-        _evolutionStageMappings[DigimonType.Poyomon] = EvolutionStage.Fresh;
-        _evolutionStageMappings[DigimonType.Punimon] = EvolutionStage.Fresh;
-        _evolutionStageMappings[DigimonType.Seadramon] = EvolutionStage.Champion;
-        _evolutionStageMappings[DigimonType.Shellmon] = EvolutionStage.Champion;
-        _evolutionStageMappings[DigimonType.SkullGreymon] = EvolutionStage.Ultimate;
-        _evolutionStageMappings[DigimonType.Sukamon] = EvolutionStage.Champion;
-        _evolutionStageMappings[DigimonType.Tanemon] = EvolutionStage.InTraining;
-        _evolutionStageMappings[DigimonType.Tokomon] = EvolutionStage.InTraining;
-        _evolutionStageMappings[DigimonType.Tsunomon] = EvolutionStage.InTraining;
-        _evolutionStageMappings[DigimonType.Tyrannomon] = EvolutionStage.Champion;
-        _evolutionStageMappings[DigimonType.Unimon] = EvolutionStage.Champion;
-        _evolutionStageMappings[DigimonType.Vademon] = EvolutionStage.Ultimate;
-        _evolutionStageMappings[DigimonType.Vegiemon] = EvolutionStage.Champion;
-        _evolutionStageMappings[DigimonType.Whamon] = EvolutionStage.Champion;
-        _evolutionStageMappings[DigimonType.Yuramon] = EvolutionStage.Fresh;
+        _originalEvolutionStageMappings = CreateOriginalEvolutionStageMappings();
+        _viceEvolutionStageMappings = CreateViceEvolutionStageMappings();
+        _viceMyotismonEvolutionStageMappings = CreateViceMyotismonEvolutionStageMappings();
+        _vicePanjyamonEvolutionStageMappings = CreateVicePanjyamonEvolutionStageMappings();
+
+        _evolutionStageMappings = _originalEvolutionStageMappings;
+
+        UserConfigurationManager.CurrentEvolutionCalculatorConfig.Subscribe(OnEvolutionCalculatorConfigChanged);
     }
 
     public EvolutionStage this[DigimonType evolutionResult]
@@ -83,4 +37,136 @@ public sealed class EvolutionStageMapper
             throw new KeyNotFoundException($"Evolution stage mapping for {evolutionResult} was not found in {nameof(EvolutionStageMapper)}");
         }
     }
+
+    private void OnEvolutionCalculatorConfigChanged(EvolutionCalculatorConfig evolutionCalculatorConfig)
+    {
+        switch (evolutionCalculatorConfig.EvolutionCalculatorMode)
+        {
+            case EvolutionCalculatorMode.Original:
+                SetOriginalEvolutionStageMappings();
+                break;
+            case EvolutionCalculatorMode.Vice:
+                SetViceEvolutionStageMappings();
+                break;
+            case EvolutionCalculatorMode.ViceMyotismon:
+                SetViceMyotismonEvolutionStageMappings();
+                break;
+            case EvolutionCalculatorMode.VicePanjyamon:
+                SetVicePanjyamonEvolutionStageMappings();
+                break;
+            default:
+                throw new ArgumentOutOfRangeException(nameof(evolutionCalculatorConfig.EvolutionCalculatorMode));
+        }
+    }
+
+    private Dictionary<DigimonType, EvolutionStage> CreateOriginalEvolutionStageMappings() =>
+        new()
+        {
+            [DigimonType.Agumon] = EvolutionStage.Rookie,
+            [DigimonType.Airdramon] = EvolutionStage.Champion,
+            [DigimonType.Andromon] = EvolutionStage.Ultimate,
+            [DigimonType.Angemon] = EvolutionStage.Champion,
+            [DigimonType.Bakemon] = EvolutionStage.Champion,
+            [DigimonType.Betamon] = EvolutionStage.Rookie,
+            [DigimonType.Birdramon] = EvolutionStage.Champion,
+            [DigimonType.Biyomon] = EvolutionStage.Rookie,
+            [DigimonType.Botamon] = EvolutionStage.Fresh,
+            [DigimonType.Centarumon] = EvolutionStage.Champion,
+            [DigimonType.Coelamon] = EvolutionStage.Champion,
+            [DigimonType.Devimon] = EvolutionStage.Champion,
+            [DigimonType.Digitamamon] = EvolutionStage.Ultimate,
+            [DigimonType.Drimogemon] = EvolutionStage.Champion,
+            [DigimonType.Elecmon] = EvolutionStage.Rookie,
+            [DigimonType.Etemon] = EvolutionStage.Ultimate,
+            [DigimonType.Frigimon] = EvolutionStage.Champion,
+            [DigimonType.Gabumon] = EvolutionStage.Rookie,
+            [DigimonType.Garurumon] = EvolutionStage.Champion,
+            [DigimonType.Giromon] = EvolutionStage.Ultimate,
+            [DigimonType.Greymon] = EvolutionStage.Champion,
+            [DigimonType.HerculesKabuterimon] = EvolutionStage.Ultimate,
+            [DigimonType.Kabuterimon] = EvolutionStage.Champion,
+            [DigimonType.Kokatorimon] = EvolutionStage.Champion,
+            [DigimonType.Koromon] = EvolutionStage.InTraining,
+            [DigimonType.Kunemon] = EvolutionStage.Rookie,
+            [DigimonType.Kuwagamon] = EvolutionStage.Champion,
+            [DigimonType.Leomon] = EvolutionStage.Champion,
+            [DigimonType.Mamemon] = EvolutionStage.Champion,
+            [DigimonType.Megadramon] = EvolutionStage.Ultimate,
+            [DigimonType.MegaSeadramon] = EvolutionStage.Ultimate,
+            [DigimonType.Meramon] = EvolutionStage.Champion,
+            [DigimonType.MetalGreymon] = EvolutionStage.Ultimate,
+            [DigimonType.MetalMamemon] = EvolutionStage.Ultimate,
+            [DigimonType.Mojyamon] = EvolutionStage.Champion,
+            [DigimonType.Monochromon] = EvolutionStage.Champion,
+            [DigimonType.Monzaemon] = EvolutionStage.Ultimate,
+            [DigimonType.Nanimon] = EvolutionStage.Champion,
+            [DigimonType.Ninjamon] = EvolutionStage.Champion,
+            [DigimonType.Numemon] = EvolutionStage.Champion,
+            [DigimonType.Ogremon] = EvolutionStage.Champion,
+            [DigimonType.Palmon] = EvolutionStage.Rookie,
+            [DigimonType.Patamon] = EvolutionStage.Rookie,
+            [DigimonType.Penguinmon] = EvolutionStage.Rookie,
+            [DigimonType.Phoenixmon] = EvolutionStage.Ultimate,
+            [DigimonType.Piximon] = EvolutionStage.Champion,
+            [DigimonType.Poyomon] = EvolutionStage.Fresh,
+            [DigimonType.Punimon] = EvolutionStage.Fresh,
+            [DigimonType.Seadramon] = EvolutionStage.Champion,
+            [DigimonType.Shellmon] = EvolutionStage.Champion,
+            [DigimonType.SkullGreymon] = EvolutionStage.Ultimate,
+            [DigimonType.Sukamon] = EvolutionStage.Champion,
+            [DigimonType.Tanemon] = EvolutionStage.InTraining,
+            [DigimonType.Tokomon] = EvolutionStage.InTraining,
+            [DigimonType.Tsunomon] = EvolutionStage.InTraining,
+            [DigimonType.Tyrannomon] = EvolutionStage.Champion,
+            [DigimonType.Unimon] = EvolutionStage.Champion,
+            [DigimonType.Vademon] = EvolutionStage.Ultimate,
+            [DigimonType.Vegiemon] = EvolutionStage.Champion,
+            [DigimonType.Whamon] = EvolutionStage.Champion,
+            [DigimonType.Yuramon] = EvolutionStage.Fresh
+        };
+
+    private Dictionary<DigimonType, EvolutionStage> CreateViceEvolutionStageMappings()
+    {
+        Dictionary<DigimonType, EvolutionStage> viceEvolutionStageMappings = new(_originalEvolutionStageMappings)
+        {
+            [DigimonType.Weregarurumon] = EvolutionStage.Ultimate,
+            [DigimonType.Gigadramon] = EvolutionStage.Ultimate,
+            [DigimonType.MetalEtemon] = EvolutionStage.Ultimate,
+            [DigimonType.Machinedramon] = EvolutionStage.Ultimate
+        };
+
+        return viceEvolutionStageMappings;
+    }
+
+    private Dictionary<DigimonType, EvolutionStage> CreateViceMyotismonEvolutionStageMappings()
+    {
+        Dictionary<DigimonType, EvolutionStage> viceMyotismonEvolutionStageMappings = new(_viceEvolutionStageMappings)
+        {
+            [DigimonType.Myotismon] = EvolutionStage.Ultimate
+        };
+
+        viceMyotismonEvolutionStageMappings.Remove(DigimonType.Machinedramon);
+
+        return viceMyotismonEvolutionStageMappings;
+    }
+
+    private Dictionary<DigimonType, EvolutionStage> CreateVicePanjyamonEvolutionStageMappings()
+    {
+        Dictionary<DigimonType, EvolutionStage> viceMyotismonEvolutionStageMappings = new(_viceEvolutionStageMappings)
+        {
+            [DigimonType.Panjyamon] = EvolutionStage.Champion
+        };
+
+        viceMyotismonEvolutionStageMappings.Remove(DigimonType.Weregarurumon);
+
+        return viceMyotismonEvolutionStageMappings;
+    }
+
+    private void SetOriginalEvolutionStageMappings() => _evolutionStageMappings = _originalEvolutionStageMappings;
+
+    private void SetViceEvolutionStageMappings() => _evolutionStageMappings = _viceEvolutionStageMappings;
+
+    private void SetViceMyotismonEvolutionStageMappings() => _evolutionStageMappings = _viceMyotismonEvolutionStageMappings;
+
+    private void SetVicePanjyamonEvolutionStageMappings() => _evolutionStageMappings = _vicePanjyamonEvolutionStageMappings;
 }

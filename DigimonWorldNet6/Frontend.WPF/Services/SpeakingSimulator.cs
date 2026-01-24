@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using DigimonWorld.Frontend.WPF.Constants;
 using Generics.Configuration;
 using Generics.Enums;
+using Generics.Services;
 
 namespace DigimonWorld.Frontend.WPF.Services;
 

@@ -10,6 +10,7 @@ using DigimonWorld.Frontend.WPF.Services;
 using DigimonWorld.Frontend.WPF.ViewModelComponents;
 using Generics.Enums;
 using Generics.Extensions;
+using Generics.Services;
 
 namespace DigimonWorld.Frontend.WPF.Windows.Main.UserControls.EvolutionCalculator;
 

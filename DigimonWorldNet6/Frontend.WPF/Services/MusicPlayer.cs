@@ -10,6 +10,7 @@ using System.Reactive.Linq;
 using System.Reactive.Subjects;
 using Generics.Configuration;
 using Generics.Enums;
+using Generics.Services;
 
 namespace DigimonWorld.Frontend.WPF.Services;
 
