@@ -3,8 +3,7 @@ using System.IO;
 using System.Reactive.Linq;
 using System.Reactive.Subjects;
 using System.Text.Json;
-using DigimonWorld.Frontend.WPF.Configuration;
-using DigimonWorld.Frontend.WPF.Constants;
+using Generics.Configuration;
 using Generics.Enums;
 using Microsoft.VisualBasic.FileIO;
 

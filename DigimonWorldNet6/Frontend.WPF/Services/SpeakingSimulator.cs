@@ -3,8 +3,9 @@ using System.Linq;
 using System.Reactive.Disposables;
 using System.Threading;
 using System.Threading.Tasks;
-using DigimonWorld.Frontend.WPF.Configuration;
 using DigimonWorld.Frontend.WPF.Constants;
+using Generics.Configuration;
+using Generics.Enums;
 
 namespace DigimonWorld.Frontend.WPF.Services;
 

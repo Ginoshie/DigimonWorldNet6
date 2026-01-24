@@ -1,6 +1,6 @@
-using DigimonWorld.Frontend.WPF.Constants;
+using Generics.Enums;
 
-namespace DigimonWorld.Frontend.WPF.Configuration;
+namespace Generics.Configuration;
 
 public class SpeakingSimulatorConfig
 {

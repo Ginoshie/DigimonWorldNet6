@@ -3,6 +3,7 @@ using System.Reactive;
 using System.Reactive.Linq;
 using System.Reactive.Subjects;
 using DigimonWorld.Frontend.WPF.Constants;
+using Generics.Enums;
 
 namespace DigimonWorld.Frontend.WPF.Services;
 

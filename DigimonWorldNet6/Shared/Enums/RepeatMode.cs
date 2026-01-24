@@ -1,4 +1,4 @@
-namespace DigimonWorld.Frontend.WPF.Constants;
+namespace Generics.Enums;
 
 public enum RepeatMode
 {
