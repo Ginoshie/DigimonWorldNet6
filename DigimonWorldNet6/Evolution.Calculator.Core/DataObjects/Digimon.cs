@@ -21,10 +21,8 @@ public sealed class Digimon
         Discipline = discipline;
         Battles = battles;
         TechniqueCount = techniqueCount;
-        
-         EvolutionStageMapper evolutionStageMapper = new();
 
-         EvolutionStage = evolutionStageMapper[digimonName];
+         EvolutionStage = EvolutionStageMapper.Get(digimonName);
     }
 
     public DigimonName DigimonName { get; }
