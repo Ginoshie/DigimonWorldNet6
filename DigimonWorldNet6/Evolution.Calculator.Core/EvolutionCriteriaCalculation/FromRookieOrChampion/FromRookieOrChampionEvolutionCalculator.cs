@@ -20,30 +20,32 @@ public sealed class FromRookieOrChampionEvolutionCalculator : IEvolutionCalculat
     public EvolutionResult DetermineEvolutionResult(Digimon digimon)
     {
         if (digimon.EvolutionStage is not (EvolutionStage.Rookie or EvolutionStage.Champion))
-            throw new ArgumentException($"{digimon.DigimonType} is not a {nameof(EvolutionStage.Rookie)} or {nameof(EvolutionStage.Champion)} stage digimon.");
+            throw new ArgumentException($"{digimon.DigimonName} is not a {nameof(EvolutionStage.Rookie)} or {nameof(EvolutionStage.Champion)} stage digimon.");
 
-        List<IEvolutionCriteria> evolutionCriteriaOfPossibleEvolutions = _fromRookieOrChampionEvolutionMapper[digimon.DigimonType].ToList();
+        List<IEvolutionCriteria> evolutionCriteriaOfPossibleEvolutions = _fromRookieOrChampionEvolutionMapper[digimon.DigimonName].ToList();
 
         GuardAgainstCorruptEvolutionCriteria(evolutionCriteriaOfPossibleEvolutions);
 
         int highestEvolutionScore = 0;
         int carriedOverStatTotal = 0;
-        int carriedOverCount = 0;
+        int carriedOverStatCount = 0;
         EvolutionResult evolutionResult = EvolutionResult.None;
 
         foreach (IEvolutionCriteria evolutionCriteria in evolutionCriteriaOfPossibleEvolutions)
         {
             if (!EvolutionEnabled(digimon, evolutionCriteria)) continue;
 
-            int currentEvolutionScore = _fromRookieOrChampionEvolutionScoreCalculator.CalculateEvolutionScore(digimon, evolutionCriteria.Stats, carriedOverStatTotal, carriedOverCount);
+            EvolutionScoreCalculationResult evolutionScoreCalculationResult = _fromRookieOrChampionEvolutionScoreCalculator.CalculateEvolutionScore(digimon, evolutionCriteria.Stats, carriedOverStatTotal, carriedOverStatCount);
 
             if ((ValidEvolutionResult(evolutionResult) &&
                  CurrentBestEnabledEvolutionIsNewEvolution(evolutionResult.ToDigimonType()) &&
-                 NextEvolutionIsHistoricEvolution(evolutionCriteria.DigimonType.ToDigimonType())) ||
-                currentEvolutionScore <= highestEvolutionScore) break;
+                 NextEvolutionIsHistoricEvolution(evolutionCriteria.EvolutionResult.ToDigimonType())) ||
+                evolutionScoreCalculationResult.EvolutionScore <= highestEvolutionScore) break;
 
-            highestEvolutionScore = currentEvolutionScore;
-            evolutionResult = evolutionCriteria.DigimonType;
+            highestEvolutionScore = evolutionScoreCalculationResult.EvolutionScore;
+            carriedOverStatTotal = evolutionScoreCalculationResult.CarriedOverStatTotal;
+            carriedOverStatCount = evolutionScoreCalculationResult.CarriedOverCount;
+            evolutionResult = evolutionCriteria.EvolutionResult;
         }
 
         if (evolutionCriteriaOfPossibleEvolutions.FirstOrDefault()?.EvolutionStage == EvolutionStage.Champion && evolutionResult == EvolutionResult.None)
@@ -79,6 +81,6 @@ public sealed class FromRookieOrChampionEvolutionCalculator : IEvolutionCalculat
 
     private bool ValidEvolutionResult(EvolutionResult evolutionResult) => evolutionResult != EvolutionResult.None;
 
-    private bool CurrentBestEnabledEvolutionIsNewEvolution(DigimonType digimonType) => !Session.HistoricEvolutions.Contains(digimonType);
-    private bool NextEvolutionIsHistoricEvolution(DigimonType digimonType) => Session.HistoricEvolutions.Contains(digimonType);
+    private bool CurrentBestEnabledEvolutionIsNewEvolution(DigimonName digimonName) => !Session.HistoricEvolutions.Contains(digimonName);
+    private bool NextEvolutionIsHistoricEvolution(DigimonName digimonName) => Session.HistoricEvolutions.Contains(digimonName);
 }

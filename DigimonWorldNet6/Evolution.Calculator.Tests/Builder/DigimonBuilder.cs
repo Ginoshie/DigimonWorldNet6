@@ -5,7 +5,7 @@ namespace Evolution.Calculator.Tests.Builder;
 
 public sealed class DigimonBuilder
 {
-    private DigimonType _digimonType;
+    private DigimonName _digimonName;
     private int _hp;
     private int _mp;
     private int _off;
@@ -19,9 +19,9 @@ public sealed class DigimonBuilder
     private int _battles;
     private int _techniqueCount;
 
-    public DigimonBuilder WithDigimonType(DigimonType digimonType)
+    public DigimonBuilder WithDigimonType(DigimonName digimonName)
     {
-        _digimonType = digimonType;
+        _digimonName = digimonName;
 
         return this;
     }
@@ -101,6 +101,6 @@ public sealed class DigimonBuilder
 
     public Digimon Build()
     {
-        return new Digimon(_digimonType, _hp, _mp, _off, _def, _speed, _brains, _careMistakes, _weight, _happiness, _discipline, _battles, _techniqueCount);
+        return new Digimon(_digimonName, _hp, _mp, _off, _def, _speed, _brains, _careMistakes, _weight, _happiness, _discipline, _battles, _techniqueCount);
     }
 }

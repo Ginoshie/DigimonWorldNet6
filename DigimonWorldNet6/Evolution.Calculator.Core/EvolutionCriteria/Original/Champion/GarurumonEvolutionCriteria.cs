@@ -8,7 +8,7 @@ public sealed class GarurumonEvolutionCriteria : IEvolutionCriteria
 {
     public EvolutionStage EvolutionStage => EvolutionStage.Champion;
 
-    public EvolutionResult DigimonType => EvolutionResult.Garurumon;
+    public EvolutionResult EvolutionResult => EvolutionResult.Garurumon;
 
     public MainCriteriaStats Stats => new(mp: 1000, speed: 100);
 

@@ -11,9 +11,9 @@ public class DigimonTypeContainsMultiConverter : IMultiValueConverter
 {
     public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
     {
-        if (values[0] is IList<DigimonType> historicEvolutions && values[1] is DigimonIcon digimonIcon)
+        if (values[0] is IList<DigimonName> historicEvolutions && values[1] is DigimonIcon digimonIcon)
         {
-            return historicEvolutions.Contains(digimonIcon.DigimonType);
+            return historicEvolutions.Contains(digimonIcon.DigimonName);
         }
         return false;
     }

@@ -8,7 +8,7 @@ public sealed class EtemonEvolutionCriteria : IEvolutionCriteria
 {
     public EvolutionStage EvolutionStage => EvolutionStage.Ultimate;
 
-    public EvolutionResult DigimonType => EvolutionResult.Etemon;
+    public EvolutionResult EvolutionResult => EvolutionResult.Etemon;
 
     public MainCriteriaStats Stats => new(hp: 2000, mp: 3000, off: 400, def: 200, speed: 400, brains: 300);
 

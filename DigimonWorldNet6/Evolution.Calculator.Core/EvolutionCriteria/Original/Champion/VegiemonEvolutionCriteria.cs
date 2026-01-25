@@ -8,7 +8,7 @@ public sealed class VegiemonEvolutionCriteria : IEvolutionCriteria
 {
     public EvolutionStage EvolutionStage => EvolutionStage.Champion;
 
-    public EvolutionResult DigimonType => EvolutionResult.Vegiemon;
+    public EvolutionResult EvolutionResult => EvolutionResult.Vegiemon;
 
     public MainCriteriaStats Stats => new(mp: 1000);
 

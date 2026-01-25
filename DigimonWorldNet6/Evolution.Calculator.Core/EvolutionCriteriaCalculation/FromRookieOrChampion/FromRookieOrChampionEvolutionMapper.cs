@@ -8,60 +8,60 @@ namespace DigimonWorld.Evolution.Calculator.Core.EvolutionCriteriaCalculation.Fr
 
 public sealed class FromRookieOrChampionEvolutionMapper
 {
-    private readonly Dictionary<DigimonType, IEnumerable<IEvolutionCriteria>> _fromRookieOrChampionEvolutionMappings = new();
+    private readonly Dictionary<DigimonName, IEnumerable<IEvolutionCriteria>> _fromRookieOrChampionEvolutionMappings = new();
 
     public FromRookieOrChampionEvolutionMapper()
     {
-        _fromRookieOrChampionEvolutionMappings[DigimonType.Agumon] = AgumonEvolutions;
-        _fromRookieOrChampionEvolutionMappings[DigimonType.Airdramon] = AirdramonEvolutions;
-        _fromRookieOrChampionEvolutionMappings[DigimonType.Angemon] = AngemonEvolutions;
-        _fromRookieOrChampionEvolutionMappings[DigimonType.Bakemon] = BakemonEvolutions;
-        _fromRookieOrChampionEvolutionMappings[DigimonType.Betamon] = BetamonEvolutions;
-        _fromRookieOrChampionEvolutionMappings[DigimonType.Birdramon] = BirdramonEvolutions;
-        _fromRookieOrChampionEvolutionMappings[DigimonType.Biyomon] = BiyomonEvolutions;
-        _fromRookieOrChampionEvolutionMappings[DigimonType.Centarumon] = CentarumonEvolutions;
-        _fromRookieOrChampionEvolutionMappings[DigimonType.Coelamon] = CoelamonEvolutions;
-        _fromRookieOrChampionEvolutionMappings[DigimonType.Devimon] = DevimonEvolutions;
-        _fromRookieOrChampionEvolutionMappings[DigimonType.Drimogemon] = DrimogemonEvolutions;
-        _fromRookieOrChampionEvolutionMappings[DigimonType.Elecmon] = ElecmonEvolutions;
-        _fromRookieOrChampionEvolutionMappings[DigimonType.Frigimon] = FrigimonEvolutions;
-        _fromRookieOrChampionEvolutionMappings[DigimonType.Gabumon] = GabumonEvolutions;
-        _fromRookieOrChampionEvolutionMappings[DigimonType.Garurumon] = GarurumonEvolutions;
-        _fromRookieOrChampionEvolutionMappings[DigimonType.Greymon] = GreymonEvolutions;
-        _fromRookieOrChampionEvolutionMappings[DigimonType.Kabuterimon] = KabuterimonEvolutions;
-        _fromRookieOrChampionEvolutionMappings[DigimonType.Kokatorimon] = KokatorimonEvolutions;
-        _fromRookieOrChampionEvolutionMappings[DigimonType.Kunemon] = KunemonEvolutions;
-        _fromRookieOrChampionEvolutionMappings[DigimonType.Kuwagamon] = KuwagamonEvolutions;
-        _fromRookieOrChampionEvolutionMappings[DigimonType.Leomon] = LeomonEvolutions;
-        _fromRookieOrChampionEvolutionMappings[DigimonType.Meramon] = MeramonEvolutions;
-        _fromRookieOrChampionEvolutionMappings[DigimonType.Mojyamon] = MojyamonEvolutions;
-        _fromRookieOrChampionEvolutionMappings[DigimonType.Monochromon] = MonochromonEvolutions;
-        _fromRookieOrChampionEvolutionMappings[DigimonType.Nanimon] = NanimonEvolutions;
-        _fromRookieOrChampionEvolutionMappings[DigimonType.Ninjamon] = NinjamonEvolutions;
-        _fromRookieOrChampionEvolutionMappings[DigimonType.Numemon] = NumemonEvolutions;
-        _fromRookieOrChampionEvolutionMappings[DigimonType.Ogremon] = OgremonEvolutions;
-        _fromRookieOrChampionEvolutionMappings[DigimonType.Palmon] = PalmonEvolutions;
-        _fromRookieOrChampionEvolutionMappings[DigimonType.Patamon] = PatamonEvolutions;
-        _fromRookieOrChampionEvolutionMappings[DigimonType.Penguinmon] = PenguinmonEvolutions;
-        _fromRookieOrChampionEvolutionMappings[DigimonType.Seadramon] = SeadramonEvolutions;
-        _fromRookieOrChampionEvolutionMappings[DigimonType.Shellmon] = ShellmonEvolutions;
-        _fromRookieOrChampionEvolutionMappings[DigimonType.Sukamon] = SukamonEvolutions;
-        _fromRookieOrChampionEvolutionMappings[DigimonType.Tyrannomon] = TyrannomonEvolutions;
-        _fromRookieOrChampionEvolutionMappings[DigimonType.Unimon] = UnimonEvolutions;
-        _fromRookieOrChampionEvolutionMappings[DigimonType.Vegiemon] = VegiemonEvolutions;
-        _fromRookieOrChampionEvolutionMappings[DigimonType.Whamon] = WhamonEvolutions;
+        _fromRookieOrChampionEvolutionMappings[DigimonName.Agumon] = AgumonEvolutions;
+        _fromRookieOrChampionEvolutionMappings[DigimonName.Airdramon] = AirdramonEvolutions;
+        _fromRookieOrChampionEvolutionMappings[DigimonName.Angemon] = AngemonEvolutions;
+        _fromRookieOrChampionEvolutionMappings[DigimonName.Bakemon] = BakemonEvolutions;
+        _fromRookieOrChampionEvolutionMappings[DigimonName.Betamon] = BetamonEvolutions;
+        _fromRookieOrChampionEvolutionMappings[DigimonName.Birdramon] = BirdramonEvolutions;
+        _fromRookieOrChampionEvolutionMappings[DigimonName.Biyomon] = BiyomonEvolutions;
+        _fromRookieOrChampionEvolutionMappings[DigimonName.Centarumon] = CentarumonEvolutions;
+        _fromRookieOrChampionEvolutionMappings[DigimonName.Coelamon] = CoelamonEvolutions;
+        _fromRookieOrChampionEvolutionMappings[DigimonName.Devimon] = DevimonEvolutions;
+        _fromRookieOrChampionEvolutionMappings[DigimonName.Drimogemon] = DrimogemonEvolutions;
+        _fromRookieOrChampionEvolutionMappings[DigimonName.Elecmon] = ElecmonEvolutions;
+        _fromRookieOrChampionEvolutionMappings[DigimonName.Frigimon] = FrigimonEvolutions;
+        _fromRookieOrChampionEvolutionMappings[DigimonName.Gabumon] = GabumonEvolutions;
+        _fromRookieOrChampionEvolutionMappings[DigimonName.Garurumon] = GarurumonEvolutions;
+        _fromRookieOrChampionEvolutionMappings[DigimonName.Greymon] = GreymonEvolutions;
+        _fromRookieOrChampionEvolutionMappings[DigimonName.Kabuterimon] = KabuterimonEvolutions;
+        _fromRookieOrChampionEvolutionMappings[DigimonName.Kokatorimon] = KokatorimonEvolutions;
+        _fromRookieOrChampionEvolutionMappings[DigimonName.Kunemon] = KunemonEvolutions;
+        _fromRookieOrChampionEvolutionMappings[DigimonName.Kuwagamon] = KuwagamonEvolutions;
+        _fromRookieOrChampionEvolutionMappings[DigimonName.Leomon] = LeomonEvolutions;
+        _fromRookieOrChampionEvolutionMappings[DigimonName.Meramon] = MeramonEvolutions;
+        _fromRookieOrChampionEvolutionMappings[DigimonName.Mojyamon] = MojyamonEvolutions;
+        _fromRookieOrChampionEvolutionMappings[DigimonName.Monochromon] = MonochromonEvolutions;
+        _fromRookieOrChampionEvolutionMappings[DigimonName.Nanimon] = NanimonEvolutions;
+        _fromRookieOrChampionEvolutionMappings[DigimonName.Ninjamon] = NinjamonEvolutions;
+        _fromRookieOrChampionEvolutionMappings[DigimonName.Numemon] = NumemonEvolutions;
+        _fromRookieOrChampionEvolutionMappings[DigimonName.Ogremon] = OgremonEvolutions;
+        _fromRookieOrChampionEvolutionMappings[DigimonName.Palmon] = PalmonEvolutions;
+        _fromRookieOrChampionEvolutionMappings[DigimonName.Patamon] = PatamonEvolutions;
+        _fromRookieOrChampionEvolutionMappings[DigimonName.Penguinmon] = PenguinmonEvolutions;
+        _fromRookieOrChampionEvolutionMappings[DigimonName.Seadramon] = SeadramonEvolutions;
+        _fromRookieOrChampionEvolutionMappings[DigimonName.Shellmon] = ShellmonEvolutions;
+        _fromRookieOrChampionEvolutionMappings[DigimonName.Sukamon] = SukamonEvolutions;
+        _fromRookieOrChampionEvolutionMappings[DigimonName.Tyrannomon] = TyrannomonEvolutions;
+        _fromRookieOrChampionEvolutionMappings[DigimonName.Unimon] = UnimonEvolutions;
+        _fromRookieOrChampionEvolutionMappings[DigimonName.Vegiemon] = VegiemonEvolutions;
+        _fromRookieOrChampionEvolutionMappings[DigimonName.Whamon] = WhamonEvolutions;
     }
 
-    public IEnumerable<IEvolutionCriteria> this[DigimonType digimonType]
+    public IEnumerable<IEvolutionCriteria> this[DigimonName digimonName]
     {
         get
         {
-            if (_fromRookieOrChampionEvolutionMappings.TryGetValue(digimonType, out IEnumerable<IEvolutionCriteria>? evolutionResult))
+            if (_fromRookieOrChampionEvolutionMappings.TryGetValue(digimonName, out IEnumerable<IEvolutionCriteria>? evolutionResult))
             {
                 return evolutionResult;
             }
 
-            throw new KeyNotFoundException($"Evolution mapping for {digimonType} was not found in {nameof(FromRookieOrChampionEvolutionMapper)}");
+            throw new KeyNotFoundException($"Evolution mapping for {digimonName} was not found in {nameof(FromRookieOrChampionEvolutionMapper)}");
         }
     }
 

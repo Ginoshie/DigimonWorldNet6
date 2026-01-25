@@ -8,7 +8,7 @@ public sealed class HerculesKabuterimonEvolutionCriteria : IEvolutionCriteria
 {
     public EvolutionStage EvolutionStage => EvolutionStage.Ultimate;
 
-    public EvolutionResult DigimonType => EvolutionResult.HerculesKabuterimon;
+    public EvolutionResult EvolutionResult => EvolutionResult.HerculesKabuterimon;
 
     public MainCriteriaStats Stats => new(hp: 7000, off: 400, def: 600, speed: 400);
 

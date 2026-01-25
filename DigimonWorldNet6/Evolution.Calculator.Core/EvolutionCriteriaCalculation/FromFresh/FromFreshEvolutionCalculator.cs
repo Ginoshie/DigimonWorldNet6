@@ -12,8 +12,8 @@ public sealed class FromFreshEvolutionCalculator : IEvolutionCalculator
     public EvolutionResult DetermineEvolutionResult(Digimon digimon)
     {
         if (digimon.EvolutionStage != EvolutionStage.Fresh) 
-            throw new ArgumentException($"{digimon.DigimonType} is not a {nameof(EvolutionStage.Fresh)} stage digimon.");
+            throw new ArgumentException($"{digimon.DigimonName} is not a {nameof(EvolutionStage.Fresh)} stage digimon.");
         
-        return _fromFreshEvolutionMapper[digimon.DigimonType];
+        return _fromFreshEvolutionMapper[digimon.DigimonName];
     }
 }

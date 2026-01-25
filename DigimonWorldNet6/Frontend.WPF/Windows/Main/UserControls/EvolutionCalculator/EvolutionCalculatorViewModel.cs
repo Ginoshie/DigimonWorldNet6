@@ -1,16 +1,20 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Reactive.Disposables;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using DigimonWorld.Evolution.Calculator.Core;
-using DigimonWorld.Evolution.Calculator.Core.DataObjects;
 using DigimonWorld.Frontend.WPF.Constants;
 using DigimonWorld.Frontend.WPF.Services;
 using DigimonWorld.Frontend.WPF.ViewModelComponents;
+using Generics.Configuration;
+using Generics.Constants;
 using Generics.Enums;
 using Generics.Extensions;
 using Generics.Services;
+using Digimon = DigimonWorld.Evolution.Calculator.Core.DataObjects.Digimon;
 
 namespace DigimonWorld.Frontend.WPF.Windows.Main.UserControls.EvolutionCalculator;
 
@@ -21,6 +25,7 @@ public sealed class EvolutionCalculatorViewModel : BaseViewModel, IDisposable
 
     private string _jijimonText = string.Empty;
 
+    private IEnumerable<DigimonName> _availableDigimonTypes;
     private string _hp = "0";
     private string _mp = "0";
     private string _off = "0";
@@ -33,7 +38,7 @@ public sealed class EvolutionCalculatorViewModel : BaseViewModel, IDisposable
     private string _discipline = "0";
     private string _battles = "0";
     private string _techniques = "0";
-    private DigimonType _digimonType;
+    private DigimonName _playerDigimonType;
     private EvolutionResult _evolutionResult = EvolutionResult.Unknown;
     private bool _flipToRight;
 
@@ -54,6 +59,9 @@ public sealed class EvolutionCalculatorViewModel : BaseViewModel, IDisposable
         Task.Delay(initialDelay)
             .WaitAsync(CancellationToken.None)
             .ContinueWith(_ => _speakingSimulator.WriteTextAsSpeechAsync(JijimonEvolutionCalculatorNarratorText.IntroText, textOutput => JijimonText = textOutput));
+
+        _availableDigimonTypes = DigimonTypes.Get(UserConfigurationManager.EvolutionCalculatorConfig.EvolutionCalculatorMode);
+        UserConfigurationManager.CurrentEvolutionCalculatorConfig.Subscribe(OnEvolutionCalculatorConfigChanged);
     }
 
     public ICommand SetEvolutionResult { get; }
@@ -68,14 +76,14 @@ public sealed class EvolutionCalculatorViewModel : BaseViewModel, IDisposable
         set => SetField(ref _jijimonText, value);
     }
 
-    public DigimonType DigimonType
+    public DigimonName PlayerDigimonType
     {
-        get => _digimonType;
+        get => _playerDigimonType;
         set
         {
-            if (_digimonType == value) return;
+            if (_playerDigimonType == value) return;
 
-            _digimonType = value;
+            _playerDigimonType = value;
 
             EvolutionResult = EvolutionResult.Unknown;
 
@@ -181,16 +189,28 @@ public sealed class EvolutionCalculatorViewModel : BaseViewModel, IDisposable
         }
     }
 
+    public IEnumerable<DigimonName> AvailableDigimonTypes
+    {
+        get => _availableDigimonTypes;
+        private set
+        {
+            if(Equals(_availableDigimonTypes, value)) return;
+            
+            _availableDigimonTypes = value;
+            OnPropertyChanged();
+        }
+    }
+
     private void CalculateEvolutionResult()
     {
         _evolutionResult = EvolutionResult.Unknown;
 
         OnPropertyChanged(nameof(EvolutionResult));
 
-        Digimon currentDigimon = new(DigimonType, int.Parse(HP), int.Parse(MP), int.Parse(Off), int.Parse(Def), int.Parse(Speed), int.Parse(Brains), int.Parse(CareMistakes), int.Parse(Weight), int.Parse(Happiness), int.Parse(Discipline),
+        Digimon currentDigimon = new(PlayerDigimonType, int.Parse(HP), int.Parse(MP), int.Parse(Off), int.Parse(Def), int.Parse(Speed), int.Parse(Brains), int.Parse(CareMistakes), int.Parse(Weight), int.Parse(Happiness), int.Parse(Discipline),
             int.Parse(Battles), int.Parse(Techniques));
 
-        EvolutionResult = currentDigimon.DigimonType.EvolutionStage() == EvolutionStage.Ultimate
+        EvolutionResult = currentDigimon.DigimonName.EvolutionStage() == EvolutionStage.Ultimate
             ? EvolutionResult.NotApplicable
             : ServiceRelay.CalculateEvolutionResult(currentDigimon);
 
@@ -198,6 +218,17 @@ public sealed class EvolutionCalculatorViewModel : BaseViewModel, IDisposable
     }
 
     private void InstantDisplay() => _speakingSimulator.RequestInstantDisplay();
+
+    private void OnEvolutionCalculatorConfigChanged(EvolutionCalculatorConfig evolutionCalculatorConfig)
+    {
+        AvailableDigimonTypes = DigimonTypes.Get(UserConfigurationManager.EvolutionCalculatorConfig.EvolutionCalculatorMode);
+
+        IEnumerable<DigimonName> availableDigimonTypes = AvailableDigimonTypes as DigimonName[] ?? AvailableDigimonTypes.ToArray();
+        if (!availableDigimonTypes.Contains(PlayerDigimonType))
+        {
+            PlayerDigimonType = availableDigimonTypes.First();
+        }
+    }
 
     public void Dispose()
     {

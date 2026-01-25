@@ -8,7 +8,7 @@ public sealed class NumemonEvolutionCriteria : IEvolutionCriteria
 {
     public EvolutionStage EvolutionStage => EvolutionStage.Champion;
 
-    public EvolutionResult DigimonType => EvolutionResult.Numemon;
+    public EvolutionResult EvolutionResult => EvolutionResult.Numemon;
 
     public MainCriteriaStats Stats => new();
 

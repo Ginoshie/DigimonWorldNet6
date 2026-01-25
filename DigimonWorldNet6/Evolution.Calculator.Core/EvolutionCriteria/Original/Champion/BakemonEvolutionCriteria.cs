@@ -8,7 +8,7 @@ public sealed class BakemonEvolutionCriteria : IEvolutionCriteria
 {
     public EvolutionStage EvolutionStage => EvolutionStage.Champion;
 
-    public EvolutionResult DigimonType => EvolutionResult.Bakemon;
+    public EvolutionResult EvolutionResult => EvolutionResult.Bakemon;
 
     public MainCriteriaStats Stats => new(mp: 1000);
 

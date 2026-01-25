@@ -8,7 +8,7 @@ public sealed class LeomonEvolutionCriteria : IEvolutionCriteria
 {
     public EvolutionStage EvolutionStage => EvolutionStage.Champion;
 
-    public EvolutionResult DigimonType => EvolutionResult.Leomon;
+    public EvolutionResult EvolutionResult => EvolutionResult.Leomon;
 
     public MainCriteriaStats Stats => new(off: 100, speed: 100, brains: 100);
 

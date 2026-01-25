@@ -8,7 +8,7 @@ public sealed class UnimonEvolutionCriteria : IEvolutionCriteria
 {
     public EvolutionStage EvolutionStage => EvolutionStage.Champion;
 
-    public EvolutionResult DigimonType => EvolutionResult.Unimon;
+    public EvolutionResult EvolutionResult => EvolutionResult.Unimon;
 
     public MainCriteriaStats Stats => new(hp: 1000, speed: 100);
 

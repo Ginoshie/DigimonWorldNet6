@@ -12,20 +12,20 @@ namespace Evolution.Calculator.Tests.EvolutionCriteriaCalculation.FromInTraining
 public sealed class FromInTrainingEvolutionCalculatorTests
 {
     [Test]
-    [TestCase(DigimonType.Tokomon, 1000, 200, 20, 20, 20, 20, 50, 15, 80, 80, 0, 10, EvolutionResult.Patamon)]
-    [TestCase(DigimonType.Tokomon, 200, 200, 100, 20, 20, 20, 50, 15, 80, 80, 0, 10, EvolutionResult.Patamon)]
-    [TestCase(DigimonType.Tokomon, 200, 200, 20, 20, 20, 100, 50, 15, 80, 80, 0, 10, EvolutionResult.Patamon)]
-    [TestCase(DigimonType.Tokomon, 200, 1000, 20, 20, 20, 20, 50, 15, 80, 80, 0, 10, EvolutionResult.Biyomon)]
-    [TestCase(DigimonType.Tokomon, 200, 200, 20, 100, 20, 20, 50, 15, 80, 80, 0, 10, EvolutionResult.Biyomon)]
-    [TestCase(DigimonType.Tokomon, 200, 200, 20, 20, 100, 20, 50, 15, 80, 80, 0, 10, EvolutionResult.Biyomon)]
-    public void DetermineEvolutionResult_ShouldReturnExpectedDigimon(DigimonType digimonType, int hp, int mp, int off, int def, int speed, int brains, int careMistakes, int weight, int happiness,
+    [TestCase(DigimonName.Tokomon, 1000, 200, 20, 20, 20, 20, 50, 15, 80, 80, 0, 10, EvolutionResult.Patamon)]
+    [TestCase(DigimonName.Tokomon, 200, 200, 100, 20, 20, 20, 50, 15, 80, 80, 0, 10, EvolutionResult.Patamon)]
+    [TestCase(DigimonName.Tokomon, 200, 200, 20, 20, 20, 100, 50, 15, 80, 80, 0, 10, EvolutionResult.Patamon)]
+    [TestCase(DigimonName.Tokomon, 200, 1000, 20, 20, 20, 20, 50, 15, 80, 80, 0, 10, EvolutionResult.Biyomon)]
+    [TestCase(DigimonName.Tokomon, 200, 200, 20, 100, 20, 20, 50, 15, 80, 80, 0, 10, EvolutionResult.Biyomon)]
+    [TestCase(DigimonName.Tokomon, 200, 200, 20, 20, 100, 20, 50, 15, 80, 80, 0, 10, EvolutionResult.Biyomon)]
+    public void DetermineEvolutionResult_ShouldReturnExpectedDigimon(DigimonName digimonName, int hp, int mp, int off, int def, int speed, int brains, int careMistakes, int weight, int happiness,
         int discipline, int battles, int techniqueCount, EvolutionResult evolutionResult)
     {
         // Arrange
         FromInTrainingEvolutionCalculator sut = new SetupBuilder()
             .Build();
         Digimon digimon = new DigimonBuilder()
-            .WithDigimonType(digimonType)
+            .WithDigimonType(digimonName)
             .WithHP(hp)
             .WithMP(mp)
             .WithOff(off)
@@ -48,18 +48,18 @@ public sealed class FromInTrainingEvolutionCalculatorTests
     }
     
     [Test]
-    [TestCase(DigimonType.Yuramon, 1000, 200, 20, 20, 20, 20, 50, 15, 80, 80, 0, 10)]
-    [TestCase(DigimonType.Gabumon, 1000, 200, 20, 20, 20, 20, 50, 15, 80, 80, 0, 10)]
-    [TestCase(DigimonType.Garurumon, 1000, 200, 20, 20, 20, 20, 50, 15, 80, 80, 0, 10)]
-    [TestCase(DigimonType.Monzaemon, 1000, 200, 20, 20, 20, 20, 50, 15, 80, 80, 0, 10)]
-    public void DetermineEvolutionResult__ShouldThrowException_WhenDigimonIsNotAnInTraining(DigimonType digimonType, int hp, int mp, int off, int def, int speed, int brains, int careMistakes, int weight, int happiness,
+    [TestCase(DigimonName.Yuramon, 1000, 200, 20, 20, 20, 20, 50, 15, 80, 80, 0, 10)]
+    [TestCase(DigimonName.Gabumon, 1000, 200, 20, 20, 20, 20, 50, 15, 80, 80, 0, 10)]
+    [TestCase(DigimonName.Garurumon, 1000, 200, 20, 20, 20, 20, 50, 15, 80, 80, 0, 10)]
+    [TestCase(DigimonName.Monzaemon, 1000, 200, 20, 20, 20, 20, 50, 15, 80, 80, 0, 10)]
+    public void DetermineEvolutionResult__ShouldThrowException_WhenDigimonIsNotAnInTraining(DigimonName digimonName, int hp, int mp, int off, int def, int speed, int brains, int careMistakes, int weight, int happiness,
         int discipline, int battles, int techniqueCount)
     {
         // Arrange
         FromInTrainingEvolutionCalculator sut = new SetupBuilder()
             .Build();
         Digimon digimon = new DigimonBuilder()
-            .WithDigimonType(digimonType)
+            .WithDigimonType(digimonName)
             .WithHP(hp)
             .WithMP(mp)
             .WithOff(off)

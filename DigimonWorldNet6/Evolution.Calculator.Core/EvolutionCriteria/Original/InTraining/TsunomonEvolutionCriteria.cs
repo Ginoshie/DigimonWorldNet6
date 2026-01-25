@@ -8,7 +8,7 @@ public sealed class TsunomonEvolutionCriteria : IEvolutionCriteria
 {
     public EvolutionStage EvolutionStage => EvolutionStage.InTraining;
 
-    public EvolutionResult DigimonType => EvolutionResult.Tsunomon;
+    public EvolutionResult EvolutionResult => EvolutionResult.Tsunomon;
 
     public MainCriteriaStats Stats => new();
 

@@ -10,78 +10,78 @@ namespace DigimonWorld.Evolution.Calculator.Core.EvolutionCalculation;
 
 public sealed class EvolutionCalculationMapper
 {
-    private readonly Dictionary<DigimonType, IEvolutionCalculator> _evolutionCalculatorMappings = new();
+    private readonly Dictionary<DigimonName, IEvolutionCalculator> _evolutionCalculatorMappings = new();
 
     public EvolutionCalculationMapper()
     {
-        _evolutionCalculatorMappings[DigimonType.Botamon] = new FromFreshEvolutionCalculator();
-        _evolutionCalculatorMappings[DigimonType.Poyomon] = new FromFreshEvolutionCalculator();
-        _evolutionCalculatorMappings[DigimonType.Punimon] = new FromFreshEvolutionCalculator();
-        _evolutionCalculatorMappings[DigimonType.Yuramon] = new FromFreshEvolutionCalculator();
+        _evolutionCalculatorMappings[DigimonName.Botamon] = new FromFreshEvolutionCalculator();
+        _evolutionCalculatorMappings[DigimonName.Poyomon] = new FromFreshEvolutionCalculator();
+        _evolutionCalculatorMappings[DigimonName.Punimon] = new FromFreshEvolutionCalculator();
+        _evolutionCalculatorMappings[DigimonName.Yuramon] = new FromFreshEvolutionCalculator();
         
-        _evolutionCalculatorMappings[DigimonType.Koromon] = new FromInTrainingEvolutionCalculator();
-        _evolutionCalculatorMappings[DigimonType.Tanemon] = new FromInTrainingEvolutionCalculator();
-        _evolutionCalculatorMappings[DigimonType.Tokomon] = new FromInTrainingEvolutionCalculator();
-        _evolutionCalculatorMappings[DigimonType.Tsunomon] = new FromInTrainingEvolutionCalculator();
+        _evolutionCalculatorMappings[DigimonName.Koromon] = new FromInTrainingEvolutionCalculator();
+        _evolutionCalculatorMappings[DigimonName.Tanemon] = new FromInTrainingEvolutionCalculator();
+        _evolutionCalculatorMappings[DigimonName.Tokomon] = new FromInTrainingEvolutionCalculator();
+        _evolutionCalculatorMappings[DigimonName.Tsunomon] = new FromInTrainingEvolutionCalculator();
         
-        _evolutionCalculatorMappings[DigimonType.Agumon] = new FromRookieOrChampionEvolutionCalculator();
-        _evolutionCalculatorMappings[DigimonType.Betamon] = new FromRookieOrChampionEvolutionCalculator();
-        _evolutionCalculatorMappings[DigimonType.Biyomon] = new FromRookieOrChampionEvolutionCalculator();
-        _evolutionCalculatorMappings[DigimonType.Elecmon] = new FromRookieOrChampionEvolutionCalculator();
-        _evolutionCalculatorMappings[DigimonType.Gabumon] = new FromRookieOrChampionEvolutionCalculator();
-        _evolutionCalculatorMappings[DigimonType.Kunemon] = new FromRookieOrChampionEvolutionCalculator();
-        _evolutionCalculatorMappings[DigimonType.Palmon] = new FromRookieOrChampionEvolutionCalculator();
-        _evolutionCalculatorMappings[DigimonType.Patamon] = new FromRookieOrChampionEvolutionCalculator();
-        _evolutionCalculatorMappings[DigimonType.Penguinmon] = new FromRookieOrChampionEvolutionCalculator();
+        _evolutionCalculatorMappings[DigimonName.Agumon] = new FromRookieOrChampionEvolutionCalculator();
+        _evolutionCalculatorMappings[DigimonName.Betamon] = new FromRookieOrChampionEvolutionCalculator();
+        _evolutionCalculatorMappings[DigimonName.Biyomon] = new FromRookieOrChampionEvolutionCalculator();
+        _evolutionCalculatorMappings[DigimonName.Elecmon] = new FromRookieOrChampionEvolutionCalculator();
+        _evolutionCalculatorMappings[DigimonName.Gabumon] = new FromRookieOrChampionEvolutionCalculator();
+        _evolutionCalculatorMappings[DigimonName.Kunemon] = new FromRookieOrChampionEvolutionCalculator();
+        _evolutionCalculatorMappings[DigimonName.Palmon] = new FromRookieOrChampionEvolutionCalculator();
+        _evolutionCalculatorMappings[DigimonName.Patamon] = new FromRookieOrChampionEvolutionCalculator();
+        _evolutionCalculatorMappings[DigimonName.Penguinmon] = new FromRookieOrChampionEvolutionCalculator();
         
-        _evolutionCalculatorMappings[DigimonType.Airdramon] = new FromRookieOrChampionEvolutionCalculator();
-        _evolutionCalculatorMappings[DigimonType.Angemon] = new FromRookieOrChampionEvolutionCalculator();
-        _evolutionCalculatorMappings[DigimonType.Bakemon] = new FromRookieOrChampionEvolutionCalculator();
-        _evolutionCalculatorMappings[DigimonType.Birdramon] = new FromRookieOrChampionEvolutionCalculator();
-        _evolutionCalculatorMappings[DigimonType.Centarumon] = new FromRookieOrChampionEvolutionCalculator();
-        _evolutionCalculatorMappings[DigimonType.Coelamon] = new FromRookieOrChampionEvolutionCalculator();
-        _evolutionCalculatorMappings[DigimonType.Devimon] = new FromRookieOrChampionEvolutionCalculator();
-        _evolutionCalculatorMappings[DigimonType.Drimogemon] = new FromRookieOrChampionEvolutionCalculator();
-        _evolutionCalculatorMappings[DigimonType.Frigimon] = new FromRookieOrChampionEvolutionCalculator();
-        _evolutionCalculatorMappings[DigimonType.Garurumon] = new FromRookieOrChampionEvolutionCalculator();
-        _evolutionCalculatorMappings[DigimonType.Greymon] = new FromRookieOrChampionEvolutionCalculator();
-        _evolutionCalculatorMappings[DigimonType.Kabuterimon] = new FromRookieOrChampionEvolutionCalculator();
-        _evolutionCalculatorMappings[DigimonType.Kokatorimon] = new FromRookieOrChampionEvolutionCalculator();
-        _evolutionCalculatorMappings[DigimonType.Kuwagamon] = new FromRookieOrChampionEvolutionCalculator();
-        _evolutionCalculatorMappings[DigimonType.Leomon] = new FromRookieOrChampionEvolutionCalculator();
-        _evolutionCalculatorMappings[DigimonType.Meramon] = new FromRookieOrChampionEvolutionCalculator();
-        _evolutionCalculatorMappings[DigimonType.Mojyamon] = new FromRookieOrChampionEvolutionCalculator();
-        _evolutionCalculatorMappings[DigimonType.Monochromon] = new FromRookieOrChampionEvolutionCalculator();
-        _evolutionCalculatorMappings[DigimonType.Nanimon] = new FromRookieOrChampionEvolutionCalculator();
-        _evolutionCalculatorMappings[DigimonType.Ninjamon] = new FromRookieOrChampionEvolutionCalculator();
-        _evolutionCalculatorMappings[DigimonType.Numemon] = new FromRookieOrChampionEvolutionCalculator();
-        _evolutionCalculatorMappings[DigimonType.Ogremon] = new FromRookieOrChampionEvolutionCalculator();
-        _evolutionCalculatorMappings[DigimonType.Seadramon] = new FromRookieOrChampionEvolutionCalculator();
-        _evolutionCalculatorMappings[DigimonType.Shellmon] = new FromRookieOrChampionEvolutionCalculator();
-        _evolutionCalculatorMappings[DigimonType.Sukamon] = new FromRookieOrChampionEvolutionCalculator();
-        _evolutionCalculatorMappings[DigimonType.Tyrannomon] = new FromRookieOrChampionEvolutionCalculator();
-        _evolutionCalculatorMappings[DigimonType.Unimon] = new FromRookieOrChampionEvolutionCalculator();
-        _evolutionCalculatorMappings[DigimonType.Vegiemon] = new FromRookieOrChampionEvolutionCalculator();
-        _evolutionCalculatorMappings[DigimonType.Whamon] = new FromRookieOrChampionEvolutionCalculator();
+        _evolutionCalculatorMappings[DigimonName.Airdramon] = new FromRookieOrChampionEvolutionCalculator();
+        _evolutionCalculatorMappings[DigimonName.Angemon] = new FromRookieOrChampionEvolutionCalculator();
+        _evolutionCalculatorMappings[DigimonName.Bakemon] = new FromRookieOrChampionEvolutionCalculator();
+        _evolutionCalculatorMappings[DigimonName.Birdramon] = new FromRookieOrChampionEvolutionCalculator();
+        _evolutionCalculatorMappings[DigimonName.Centarumon] = new FromRookieOrChampionEvolutionCalculator();
+        _evolutionCalculatorMappings[DigimonName.Coelamon] = new FromRookieOrChampionEvolutionCalculator();
+        _evolutionCalculatorMappings[DigimonName.Devimon] = new FromRookieOrChampionEvolutionCalculator();
+        _evolutionCalculatorMappings[DigimonName.Drimogemon] = new FromRookieOrChampionEvolutionCalculator();
+        _evolutionCalculatorMappings[DigimonName.Frigimon] = new FromRookieOrChampionEvolutionCalculator();
+        _evolutionCalculatorMappings[DigimonName.Garurumon] = new FromRookieOrChampionEvolutionCalculator();
+        _evolutionCalculatorMappings[DigimonName.Greymon] = new FromRookieOrChampionEvolutionCalculator();
+        _evolutionCalculatorMappings[DigimonName.Kabuterimon] = new FromRookieOrChampionEvolutionCalculator();
+        _evolutionCalculatorMappings[DigimonName.Kokatorimon] = new FromRookieOrChampionEvolutionCalculator();
+        _evolutionCalculatorMappings[DigimonName.Kuwagamon] = new FromRookieOrChampionEvolutionCalculator();
+        _evolutionCalculatorMappings[DigimonName.Leomon] = new FromRookieOrChampionEvolutionCalculator();
+        _evolutionCalculatorMappings[DigimonName.Meramon] = new FromRookieOrChampionEvolutionCalculator();
+        _evolutionCalculatorMappings[DigimonName.Mojyamon] = new FromRookieOrChampionEvolutionCalculator();
+        _evolutionCalculatorMappings[DigimonName.Monochromon] = new FromRookieOrChampionEvolutionCalculator();
+        _evolutionCalculatorMappings[DigimonName.Nanimon] = new FromRookieOrChampionEvolutionCalculator();
+        _evolutionCalculatorMappings[DigimonName.Ninjamon] = new FromRookieOrChampionEvolutionCalculator();
+        _evolutionCalculatorMappings[DigimonName.Numemon] = new FromRookieOrChampionEvolutionCalculator();
+        _evolutionCalculatorMappings[DigimonName.Ogremon] = new FromRookieOrChampionEvolutionCalculator();
+        _evolutionCalculatorMappings[DigimonName.Seadramon] = new FromRookieOrChampionEvolutionCalculator();
+        _evolutionCalculatorMappings[DigimonName.Shellmon] = new FromRookieOrChampionEvolutionCalculator();
+        _evolutionCalculatorMappings[DigimonName.Sukamon] = new FromRookieOrChampionEvolutionCalculator();
+        _evolutionCalculatorMappings[DigimonName.Tyrannomon] = new FromRookieOrChampionEvolutionCalculator();
+        _evolutionCalculatorMappings[DigimonName.Unimon] = new FromRookieOrChampionEvolutionCalculator();
+        _evolutionCalculatorMappings[DigimonName.Vegiemon] = new FromRookieOrChampionEvolutionCalculator();
+        _evolutionCalculatorMappings[DigimonName.Whamon] = new FromRookieOrChampionEvolutionCalculator();
         
-        _evolutionCalculatorMappings[DigimonType.Andromon] = new FromUltimateEvolutionCalculator();
-        _evolutionCalculatorMappings[DigimonType.Digitamamon] = new FromUltimateEvolutionCalculator();
-        _evolutionCalculatorMappings[DigimonType.Etemon] = new FromUltimateEvolutionCalculator();
-        _evolutionCalculatorMappings[DigimonType.Giromon] = new FromUltimateEvolutionCalculator();
-        _evolutionCalculatorMappings[DigimonType.HerculesKabuterimon] = new FromUltimateEvolutionCalculator();
-        _evolutionCalculatorMappings[DigimonType.Mamemon] = new FromUltimateEvolutionCalculator();
-        _evolutionCalculatorMappings[DigimonType.Megadramon] = new FromUltimateEvolutionCalculator();
-        _evolutionCalculatorMappings[DigimonType.MegaSeadramon] = new FromUltimateEvolutionCalculator();
-        _evolutionCalculatorMappings[DigimonType.MetalGreymon] = new FromUltimateEvolutionCalculator();
-        _evolutionCalculatorMappings[DigimonType.MetalMamemon] = new FromUltimateEvolutionCalculator();
-        _evolutionCalculatorMappings[DigimonType.Monzaemon] = new FromUltimateEvolutionCalculator();
-        _evolutionCalculatorMappings[DigimonType.Phoenixmon] = new FromUltimateEvolutionCalculator();
-        _evolutionCalculatorMappings[DigimonType.Piximon] = new FromUltimateEvolutionCalculator();
-        _evolutionCalculatorMappings[DigimonType.SkullGreymon] = new FromUltimateEvolutionCalculator();
-        _evolutionCalculatorMappings[DigimonType.Vademon] = new FromUltimateEvolutionCalculator();
+        _evolutionCalculatorMappings[DigimonName.Andromon] = new FromUltimateEvolutionCalculator();
+        _evolutionCalculatorMappings[DigimonName.Digitamamon] = new FromUltimateEvolutionCalculator();
+        _evolutionCalculatorMappings[DigimonName.Etemon] = new FromUltimateEvolutionCalculator();
+        _evolutionCalculatorMappings[DigimonName.Giromon] = new FromUltimateEvolutionCalculator();
+        _evolutionCalculatorMappings[DigimonName.HerculesKabuterimon] = new FromUltimateEvolutionCalculator();
+        _evolutionCalculatorMappings[DigimonName.Mamemon] = new FromUltimateEvolutionCalculator();
+        _evolutionCalculatorMappings[DigimonName.Megadramon] = new FromUltimateEvolutionCalculator();
+        _evolutionCalculatorMappings[DigimonName.MegaSeadramon] = new FromUltimateEvolutionCalculator();
+        _evolutionCalculatorMappings[DigimonName.MetalGreymon] = new FromUltimateEvolutionCalculator();
+        _evolutionCalculatorMappings[DigimonName.MetalMamemon] = new FromUltimateEvolutionCalculator();
+        _evolutionCalculatorMappings[DigimonName.Monzaemon] = new FromUltimateEvolutionCalculator();
+        _evolutionCalculatorMappings[DigimonName.Phoenixmon] = new FromUltimateEvolutionCalculator();
+        _evolutionCalculatorMappings[DigimonName.Piximon] = new FromUltimateEvolutionCalculator();
+        _evolutionCalculatorMappings[DigimonName.SkullGreymon] = new FromUltimateEvolutionCalculator();
+        _evolutionCalculatorMappings[DigimonName.Vademon] = new FromUltimateEvolutionCalculator();
     }
 
-    public IEvolutionCalculator this[DigimonType evolutionResult] =>
+    public IEvolutionCalculator this[DigimonName evolutionResult] =>
         _evolutionCalculatorMappings[evolutionResult] ??
         throw new KeyNotFoundException($"Evolution mapping for {evolutionResult} was not found in {nameof(EvolutionCalculationMapper)}");
 }

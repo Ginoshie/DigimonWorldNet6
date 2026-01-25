@@ -8,7 +8,7 @@ public sealed class MetalGreymonEvolutionCriteria : IEvolutionCriteria
 {
     public EvolutionStage EvolutionStage => EvolutionStage.Ultimate;
 
-    public EvolutionResult DigimonType => EvolutionResult.MetalGreymon;
+    public EvolutionResult EvolutionResult => EvolutionResult.MetalGreymon;
 
     public MainCriteriaStats Stats => new(hp: 4000, mp: 3000, off: 500, def: 500, speed: 300, brains: 300);
 

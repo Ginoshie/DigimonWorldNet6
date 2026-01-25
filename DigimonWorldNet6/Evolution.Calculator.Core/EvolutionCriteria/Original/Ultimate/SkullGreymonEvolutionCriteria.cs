@@ -8,7 +8,7 @@ public sealed class SkullGreymonEvolutionCriteria : IEvolutionCriteria
 {
     public EvolutionStage EvolutionStage => EvolutionStage.Ultimate;
 
-    public EvolutionResult DigimonType => EvolutionResult.SkullGreymon;
+    public EvolutionResult EvolutionResult => EvolutionResult.SkullGreymon;
 
     public MainCriteriaStats Stats => new(hp: 4000, mp: 6000, off: 400, def: 400, speed: 200, brains: 500);
 

@@ -7,26 +7,26 @@ namespace DigimonWorld.Evolution.Calculator.Core.EvolutionCriteriaCalculation.Fr
 
 public sealed class FromInTrainingEvolutionMapper
 {
-    private readonly Dictionary<DigimonType, IEnumerable<IEvolutionCriteria>> _fromInTrainingEvolutionMappings = new();
+    private readonly Dictionary<DigimonName, IEnumerable<IEvolutionCriteria>> _fromInTrainingEvolutionMappings = new();
 
     public FromInTrainingEvolutionMapper()
     {
-        _fromInTrainingEvolutionMappings[DigimonType.Koromon] = KoromonEvolutions;
-        _fromInTrainingEvolutionMappings[DigimonType.Tanemon] = TanemonEvolutions;
-        _fromInTrainingEvolutionMappings[DigimonType.Tokomon] = TokomonEvolutions;
-        _fromInTrainingEvolutionMappings[DigimonType.Tsunomon] = TsunomonEvolutions;
+        _fromInTrainingEvolutionMappings[DigimonName.Koromon] = KoromonEvolutions;
+        _fromInTrainingEvolutionMappings[DigimonName.Tanemon] = TanemonEvolutions;
+        _fromInTrainingEvolutionMappings[DigimonName.Tokomon] = TokomonEvolutions;
+        _fromInTrainingEvolutionMappings[DigimonName.Tsunomon] = TsunomonEvolutions;
     }
 
-    public IEnumerable<IEvolutionCriteria> this[DigimonType digimonType]
+    public IEnumerable<IEvolutionCriteria> this[DigimonName digimonName]
     {
         get
         {
-            if (_fromInTrainingEvolutionMappings.TryGetValue(digimonType, out IEnumerable<IEvolutionCriteria>? evolutionResult))
+            if (_fromInTrainingEvolutionMappings.TryGetValue(digimonName, out IEnumerable<IEvolutionCriteria>? evolutionResult))
             {
                 return evolutionResult;
             }
 
-            throw new KeyNotFoundException($"Evolution mapping for {digimonType} was not found in {nameof(FromInTrainingEvolutionMapper)}");
+            throw new KeyNotFoundException($"Evolution mapping for {digimonName} was not found in {nameof(FromInTrainingEvolutionMapper)}");
         }
     }
 

@@ -8,7 +8,7 @@ public sealed class PhoenixmonEvolutionCriteria : IEvolutionCriteria
 {
     public EvolutionStage EvolutionStage => EvolutionStage.Ultimate;
 
-    public EvolutionResult DigimonType => EvolutionResult.Phoenixmon;
+    public EvolutionResult EvolutionResult => EvolutionResult.Phoenixmon;
 
     public MainCriteriaStats Stats => new(hp: 4000, mp: 4000, speed: 400, brains: 600);
 

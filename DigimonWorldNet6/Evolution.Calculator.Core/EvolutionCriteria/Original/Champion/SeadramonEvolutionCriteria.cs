@@ -8,7 +8,7 @@ public sealed class SeadramonEvolutionCriteria : IEvolutionCriteria
 {
     public EvolutionStage EvolutionStage => EvolutionStage.Champion;
 
-    public EvolutionResult DigimonType => EvolutionResult.Seadramon;
+    public EvolutionResult EvolutionResult => EvolutionResult.Seadramon;
 
     public MainCriteriaStats Stats => new(hp: 1000, mp: 1000);
 

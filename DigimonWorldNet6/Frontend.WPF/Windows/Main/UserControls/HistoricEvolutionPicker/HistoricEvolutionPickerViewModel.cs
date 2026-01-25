@@ -16,13 +16,13 @@ public class HistoricEvolutionPickerViewModel : BaseViewModel
     
     public ICommand HistoricEvolutionClickedCommand { get; }
     
-    public IList<DigimonType> HistoricEvolutions => Session.HistoricEvolutions;
+    public IList<DigimonName> HistoricEvolutions => Session.HistoricEvolutions;
 
     private void UpdateHistoricEvolution(DigimonIcon digimonIcon)
     {
-        if (!HistoricEvolutions.Remove(digimonIcon.DigimonType))
+        if (!HistoricEvolutions.Remove(digimonIcon.DigimonName))
         {
-            HistoricEvolutions.Add(digimonIcon.DigimonType);
+            HistoricEvolutions.Add(digimonIcon.DigimonName);
         }
         
         OnPropertyChanged(nameof(HistoricEvolutions));

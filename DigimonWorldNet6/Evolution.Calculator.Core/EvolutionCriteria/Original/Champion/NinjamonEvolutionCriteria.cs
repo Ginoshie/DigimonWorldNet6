@@ -8,7 +8,7 @@ public sealed class NinjamonEvolutionCriteria : IEvolutionCriteria
 {
     public EvolutionStage EvolutionStage => EvolutionStage.Champion;
 
-    public EvolutionResult DigimonType => EvolutionResult.Ninjamon;
+    public EvolutionResult EvolutionResult => EvolutionResult.Ninjamon;
 
     public MainCriteriaStats Stats => new(mp: 1000, off: 100, speed: 100);
 

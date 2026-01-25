@@ -8,7 +8,7 @@ public sealed class FrigimonEvolutionCriteria : IEvolutionCriteria
 {
     public EvolutionStage EvolutionStage => EvolutionStage.Champion;
 
-    public EvolutionResult DigimonType => EvolutionResult.Frigimon;
+    public EvolutionResult EvolutionResult => EvolutionResult.Frigimon;
 
     public MainCriteriaStats Stats => new(mp: 1000, brains: 100);
 

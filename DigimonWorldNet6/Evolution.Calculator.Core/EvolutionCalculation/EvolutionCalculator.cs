@@ -10,7 +10,7 @@ public sealed class EvolutionCalculator
     
     public EvolutionResult CalculateEvolutionResult(Digimon digimon)
     {
-        IEvolutionCalculator evolutionCalculator = _evolutionCalculationMapper[digimon.DigimonType];
+        IEvolutionCalculator evolutionCalculator = _evolutionCalculationMapper[digimon.DigimonName];
         EvolutionResult evolutionResult = evolutionCalculator.DetermineEvolutionResult(digimon);
 
         return evolutionResult;

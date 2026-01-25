@@ -12,20 +12,20 @@ namespace Evolution.Calculator.Tests.EvolutionCriteriaCalculation.FromUltimate;
 public sealed class FromUltimateEvolutionCalculatorTests
 {
     [Test]
-    [TestCase(DigimonType.Andromon, 9999, 9999, 999, 999, 999, 999, 0, 30, 100, 100, 100, 58)]
-    [TestCase(DigimonType.Digitamamon, 9999, 9999, 999, 999, 999, 999, 0, 30, 100, 100, 100, 58)]
-    [TestCase(DigimonType.Etemon, 9999, 9999, 999, 999, 999, 999, 0, 30, 100, 100, 100, 58)]
-    [TestCase(DigimonType.Andromon, 100, 100, 10, 10, 10, 10, 0, 30, 100, 100, 100, 58)]
-    [TestCase(DigimonType.Digitamamon, 100, 100, 10, 10, 10, 10, 0, 30, 100, 100, 100, 58)]
-    [TestCase(DigimonType.Etemon, 100, 100, 10, 10, 10, 10, 0, 30, 100, 100, 100, 58)]
-    public void DetermineEvolutionResult_ShouldReturnExpectedDigimon(DigimonType digimonType, int hp, int mp, int off, int def, int speed, int brains, int careMistakes, int weight, int happiness,
+    [TestCase(DigimonName.Andromon, 9999, 9999, 999, 999, 999, 999, 0, 30, 100, 100, 100, 58)]
+    [TestCase(DigimonName.Digitamamon, 9999, 9999, 999, 999, 999, 999, 0, 30, 100, 100, 100, 58)]
+    [TestCase(DigimonName.Etemon, 9999, 9999, 999, 999, 999, 999, 0, 30, 100, 100, 100, 58)]
+    [TestCase(DigimonName.Andromon, 100, 100, 10, 10, 10, 10, 0, 30, 100, 100, 100, 58)]
+    [TestCase(DigimonName.Digitamamon, 100, 100, 10, 10, 10, 10, 0, 30, 100, 100, 100, 58)]
+    [TestCase(DigimonName.Etemon, 100, 100, 10, 10, 10, 10, 0, 30, 100, 100, 100, 58)]
+    public void DetermineEvolutionResult_ShouldReturnExpectedDigimon(DigimonName digimonName, int hp, int mp, int off, int def, int speed, int brains, int careMistakes, int weight, int happiness,
         int discipline, int battles, int techniqueCount)
     {
         // Arrange
         FromUltimateEvolutionCalculator sut = new SetupBuilder()
             .Build();
         Digimon digimon = new DigimonBuilder()
-            .WithDigimonType(digimonType)
+            .WithDigimonType(digimonName)
             .WithHP(hp)
             .WithMP(mp)
             .WithOff(off)
@@ -48,22 +48,22 @@ public sealed class FromUltimateEvolutionCalculatorTests
     }
     
     [Test]
-    [TestCase(DigimonType.Yuramon, 9999, 9999, 999, 999, 999, 999, 0, 30, 100, 100, 100, 58)]
-    [TestCase(DigimonType.Tsunomon, 9999, 9999, 999, 999, 999, 999, 0, 30, 100, 100, 100, 58)]
-    [TestCase(DigimonType.Agumon, 9999, 9999, 999, 999, 999, 999, 0, 30, 100, 100, 100, 58)]
-    [TestCase(DigimonType.Kabuterimon, 9999, 9999, 999, 999, 999, 999, 0, 30, 100, 100, 100, 58)]
-    [TestCase(DigimonType.Yuramon, 100, 100, 10, 10, 10, 10, 0, 30, 100, 100, 100, 58)]
-    [TestCase(DigimonType.Tsunomon, 100, 100, 10, 10, 10, 10, 0, 30, 100, 100, 100, 58)]
-    [TestCase(DigimonType.Agumon, 100, 100, 10, 10, 10, 10, 0, 30, 100, 100, 100, 58)]
-    [TestCase(DigimonType.Kabuterimon, 100, 100, 10, 10, 10, 10, 0, 30, 100, 100, 100, 58)]
-    public void DetermineEvolutionResult_ShouldThrowException_WhenDigimonIsNotAnUltimate(DigimonType digimonType, int hp, int mp, int off, int def, int speed, int brains, int careMistakes, int weight, int happiness,
+    [TestCase(DigimonName.Yuramon, 9999, 9999, 999, 999, 999, 999, 0, 30, 100, 100, 100, 58)]
+    [TestCase(DigimonName.Tsunomon, 9999, 9999, 999, 999, 999, 999, 0, 30, 100, 100, 100, 58)]
+    [TestCase(DigimonName.Agumon, 9999, 9999, 999, 999, 999, 999, 0, 30, 100, 100, 100, 58)]
+    [TestCase(DigimonName.Kabuterimon, 9999, 9999, 999, 999, 999, 999, 0, 30, 100, 100, 100, 58)]
+    [TestCase(DigimonName.Yuramon, 100, 100, 10, 10, 10, 10, 0, 30, 100, 100, 100, 58)]
+    [TestCase(DigimonName.Tsunomon, 100, 100, 10, 10, 10, 10, 0, 30, 100, 100, 100, 58)]
+    [TestCase(DigimonName.Agumon, 100, 100, 10, 10, 10, 10, 0, 30, 100, 100, 100, 58)]
+    [TestCase(DigimonName.Kabuterimon, 100, 100, 10, 10, 10, 10, 0, 30, 100, 100, 100, 58)]
+    public void DetermineEvolutionResult_ShouldThrowException_WhenDigimonIsNotAnUltimate(DigimonName digimonName, int hp, int mp, int off, int def, int speed, int brains, int careMistakes, int weight, int happiness,
         int discipline, int battles, int techniqueCount)
     {
         // Arrange
         FromUltimateEvolutionCalculator sut = new SetupBuilder()
             .Build();
         Digimon digimon = new DigimonBuilder()
-            .WithDigimonType(digimonType)
+            .WithDigimonType(digimonName)
             .WithHP(hp)
             .WithMP(mp)
             .WithOff(off)

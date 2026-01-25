@@ -8,7 +8,7 @@ public sealed class AirdramonEvolutionCriteria : IEvolutionCriteria
 {
     public EvolutionStage EvolutionStage => EvolutionStage.Champion;
 
-    public EvolutionResult DigimonType => EvolutionResult.Airdramon;
+    public EvolutionResult EvolutionResult => EvolutionResult.Airdramon;
 
     public MainCriteriaStats Stats => new(mp: 1000, speed: 100, brains: 100);
 

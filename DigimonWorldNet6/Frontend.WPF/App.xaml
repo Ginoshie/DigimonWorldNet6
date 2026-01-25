@@ -27,13 +27,6 @@
 
             <conversion:EnumToImageConverter x:Key="EnumToImageConverter" />
 
-            <ObjectDataProvider x:Key="DigimonTypes"
-                                MethodName="GetValues" ObjectType="{x:Type enums:DigimonType}">
-                <ObjectDataProvider.MethodParameters>
-                    <x:Type TypeName="enums:DigimonType" />
-                </ObjectDataProvider.MethodParameters>
-            </ObjectDataProvider>
-
             <GridLength x:Key="DefaultTextBoxGridRowHeight">30</GridLength>
 
             <Style TargetType="TextBlock">

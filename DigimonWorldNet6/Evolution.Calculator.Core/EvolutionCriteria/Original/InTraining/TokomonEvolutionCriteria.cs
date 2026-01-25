@@ -8,7 +8,7 @@ public sealed class TokomonEvolutionCriteria : IEvolutionCriteria
 {
     public EvolutionStage EvolutionStage => EvolutionStage.InTraining;
 
-    public EvolutionResult DigimonType => EvolutionResult.Tokomon;
+    public EvolutionResult EvolutionResult => EvolutionResult.Tokomon;
 
     public MainCriteriaStats Stats => new();
 

@@ -59,11 +59,11 @@ public sealed class BonusCriteriaCalculator
 
     private bool PrecursorDigimonCriteriaIsEnabled(BonusCriteria bonusCriteria)
     {
-        return bonusCriteria.PrecursorDigimon != EvolutionResult.None;
+        return bonusCriteria.PrecursorDigimon != null;
     }
 
     private bool PrecursorDigimonCriteriaIsMet(Digimon digimon, BonusCriteria bonusCriteria)
     {
-        return (EvolutionResult)digimon.DigimonType == bonusCriteria.PrecursorDigimon;
+        return digimon.DigimonName == bonusCriteria.PrecursorDigimon;
     }
 }

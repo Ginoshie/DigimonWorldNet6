@@ -12,33 +12,33 @@ namespace Evolution.Calculator.Tests.EvolutionCriteriaCalculation.FromRookieOrCh
 public class FromRookieOrChampionEvolutionMapperTests
 {
     [Test]
-    public void FromFreshEvolutionMapperIndexer_ShouldNotThrow_WhenMappingExists([Values(DigimonType.Agumon, DigimonType.Airdramon, DigimonType.Angemon, DigimonType.Bakemon, DigimonType.Betamon,
-            DigimonType.Birdramon, DigimonType.Biyomon, DigimonType.Centarumon, DigimonType.Coelamon, DigimonType.Devimon, DigimonType.Drimogemon, DigimonType.Elecmon, DigimonType.Frigimon,
-            DigimonType.Gabumon, DigimonType.Garurumon, DigimonType.Greymon, DigimonType.Kabuterimon, DigimonType.Kokatorimon, DigimonType.Kuwagamon, DigimonType.Leomon, DigimonType.Meramon,
-            DigimonType.Mojyamon, DigimonType.Monochromon, DigimonType.Nanimon, DigimonType.Ninjamon, DigimonType.Numemon, DigimonType.Ogremon, DigimonType.Palmon, DigimonType.Patamon,
-            DigimonType.Penguinmon, DigimonType.Seadramon, DigimonType.Shellmon, DigimonType.Sukamon, DigimonType.Tyrannomon, DigimonType.Unimon, DigimonType.Vegiemon, DigimonType.Whamon)]
-        DigimonType digimonType)
+    public void FromFreshEvolutionMapperIndexer_ShouldNotThrow_WhenMappingExists([Values(DigimonName.Agumon, DigimonName.Airdramon, DigimonName.Angemon, DigimonName.Bakemon, DigimonName.Betamon,
+            DigimonName.Birdramon, DigimonName.Biyomon, DigimonName.Centarumon, DigimonName.Coelamon, DigimonName.Devimon, DigimonName.Drimogemon, DigimonName.Elecmon, DigimonName.Frigimon,
+            DigimonName.Gabumon, DigimonName.Garurumon, DigimonName.Greymon, DigimonName.Kabuterimon, DigimonName.Kokatorimon, DigimonName.Kuwagamon, DigimonName.Leomon, DigimonName.Meramon,
+            DigimonName.Mojyamon, DigimonName.Monochromon, DigimonName.Nanimon, DigimonName.Ninjamon, DigimonName.Numemon, DigimonName.Ogremon, DigimonName.Palmon, DigimonName.Patamon,
+            DigimonName.Penguinmon, DigimonName.Seadramon, DigimonName.Shellmon, DigimonName.Sukamon, DigimonName.Tyrannomon, DigimonName.Unimon, DigimonName.Vegiemon, DigimonName.Whamon)]
+        DigimonName digimonName)
     {
         // Arrange
         FromRookieOrChampionEvolutionMapper sut = new SetupBuilder()
             .Build();
 
         // Act
-        Func<IEnumerable<IEvolutionCriteria>> mappingNotThrowingException = () => sut[digimonType];
+        Func<IEnumerable<IEvolutionCriteria>> mappingNotThrowingException = () => sut[digimonName];
 
         // Assert
         mappingNotThrowingException.ShouldNotThrow();
     }
 
     [Test]
-    public void FromFreshEvolutionMapperIndexer_ShouldThrowException_WhenMappingDoesNotExist([Values(DigimonType.Yuramon, DigimonType.Tsunomon, DigimonType.Vademon)] DigimonType digimonType)
+    public void FromFreshEvolutionMapperIndexer_ShouldThrowException_WhenMappingDoesNotExist([Values(DigimonName.Yuramon, DigimonName.Tsunomon, DigimonName.Vademon)] DigimonName digimonName)
     {
         // Arrange
         FromRookieOrChampionEvolutionMapper sut = new SetupBuilder()
             .Build();
 
         // Act
-        Func<object?> mappingThrowingException = () => sut[digimonType];
+        Func<object?> mappingThrowingException = () => sut[digimonName];
 
         // Assert
         mappingThrowingException.ShouldThrow<Exception>();

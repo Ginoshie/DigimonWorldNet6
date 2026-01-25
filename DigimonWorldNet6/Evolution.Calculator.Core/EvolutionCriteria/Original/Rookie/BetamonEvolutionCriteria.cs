@@ -8,7 +8,7 @@ public sealed class BetamonEvolutionCriteria : IEvolutionCriteria
 {
     public EvolutionStage EvolutionStage => EvolutionStage.Rookie;
 
-    public EvolutionResult DigimonType => EvolutionResult.Betamon;
+    public EvolutionResult EvolutionResult => EvolutionResult.Betamon;
 
     public MainCriteriaStats Stats => new(hp: 10, mp: 10, def: 1);
 
@@ -16,5 +16,5 @@ public sealed class BetamonEvolutionCriteria : IEvolutionCriteria
 
     public MainCriteriaWeight Weight => new(15);
 
-    public BonusCriteria BonusCriteria => new(precursorDigimon: EvolutionResult.Tanemon);
+    public BonusCriteria BonusCriteria => new(precursorDigimon: DigimonName.Tanemon);
 }

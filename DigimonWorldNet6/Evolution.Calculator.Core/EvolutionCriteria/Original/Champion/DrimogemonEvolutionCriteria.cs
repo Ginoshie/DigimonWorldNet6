@@ -8,7 +8,7 @@ public sealed class DrimogemonEvolutionCriteria : IEvolutionCriteria
 {
     public EvolutionStage EvolutionStage => EvolutionStage.Champion;
 
-    public EvolutionResult DigimonType => EvolutionResult.Drimogemon;
+    public EvolutionResult EvolutionResult => EvolutionResult.Drimogemon;
 
     public MainCriteriaStats Stats => new(off: 100);
 

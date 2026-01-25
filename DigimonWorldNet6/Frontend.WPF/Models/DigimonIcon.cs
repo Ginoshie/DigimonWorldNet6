@@ -4,12 +4,12 @@ namespace DigimonWorld.Frontend.WPF.Models;
 
 public struct DigimonIcon
 {
-    public DigimonType DigimonType { get; }
+    public DigimonName DigimonName { get; }
     public string IconPath { get; }
     
-    public DigimonIcon(DigimonType digimonType, string iconPath)
+    public DigimonIcon(DigimonName digimonName, string iconPath)
     {
-        DigimonType = digimonType;
+        DigimonName = digimonName;
         IconPath = iconPath;
     }
 }

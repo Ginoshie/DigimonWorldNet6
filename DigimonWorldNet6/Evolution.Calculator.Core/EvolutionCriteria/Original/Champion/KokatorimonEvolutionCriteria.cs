@@ -8,7 +8,7 @@ public sealed class KokatorimonEvolutionCriteria : IEvolutionCriteria
 {
     public EvolutionStage EvolutionStage => EvolutionStage.Champion;
 
-    public EvolutionResult DigimonType => EvolutionResult.Kokatorimon;
+    public EvolutionResult EvolutionResult => EvolutionResult.Kokatorimon;
 
     public MainCriteriaStats Stats => new(hp: 1000);
 
@@ -16,5 +16,5 @@ public sealed class KokatorimonEvolutionCriteria : IEvolutionCriteria
 
     public MainCriteriaWeight Weight => new(30);
 
-    public BonusCriteria BonusCriteria => new(techniqueCount: 28, precursorDigimon: EvolutionResult.Biyomon);
+    public BonusCriteria BonusCriteria => new(techniqueCount: 28, precursorDigimon: DigimonName.Biyomon);
 }

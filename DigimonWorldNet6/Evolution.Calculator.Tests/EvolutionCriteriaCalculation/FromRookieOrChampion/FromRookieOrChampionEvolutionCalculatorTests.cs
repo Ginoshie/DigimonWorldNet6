@@ -13,14 +13,14 @@ namespace Evolution.Calculator.Tests.EvolutionCriteriaCalculation.FromRookieOrCh
 public sealed class FromRookieOrChampionEvolutionCalculatorTests
 {
     [Test]
-    [TestCase(DigimonType.Agumon, 1000, 1000, 250, 200, 500, 150, 3, 20, 80, 80, 0, 10, EvolutionResult.Birdramon)]
-    [TestCase(DigimonType.Agumon, 1500, 1000, 100, 100, 100, 150, 0, 20, 80, 80, 0, 10, EvolutionResult.Centarumon)]
-    [TestCase(DigimonType.Agumon, 1100, 1000, 100, 100, 150, 100, 0, 20, 80, 80, 0, 10, EvolutionResult.Tyrannomon)]
-    [TestCase(DigimonType.Agumon, 1000, 1000, 100, 100, 100, 100, 0, 20, 80, 80, 0, 10, EvolutionResult.Centarumon)]
-    [TestCase(DigimonType.Greymon, 4000, 3000, 500, 500, 300, 300, 0, 65, 80, 80, 0, 10, EvolutionResult.MetalGreymon)]
-    [TestCase(DigimonType.Greymon, 4000, 3000, 500, 500, 300, 300, 0, 30, 80, 80, 0, 10, EvolutionResult.None)]
-    [TestCase(DigimonType.Greymon, 4000, 6000, 500, 500, 300, 600, 30, 25, 80, 80, 0, 10, EvolutionResult.SkullGreymon)]
-    public void DetermineEvolutionResult_ShouldReturnExpectedDigimon_WhenThereAreNoHistoricEvolutions(DigimonType digimonType, int hp, int mp, int off, int def, int speed, int brains, int careMistakes, int weight, int happiness,
+    [TestCase(DigimonName.Agumon, 1000, 1000, 250, 200, 500, 150, 3, 20, 80, 80, 0, 10, EvolutionResult.Birdramon)]
+    [TestCase(DigimonName.Agumon, 1500, 1000, 100, 100, 100, 150, 0, 20, 80, 80, 0, 10, EvolutionResult.Centarumon)]
+    [TestCase(DigimonName.Agumon, 1100, 1000, 100, 100, 150, 100, 0, 20, 80, 80, 0, 10, EvolutionResult.Tyrannomon)]
+    [TestCase(DigimonName.Agumon, 1000, 1000, 100, 100, 100, 100, 0, 20, 80, 80, 0, 10, EvolutionResult.Centarumon)]
+    [TestCase(DigimonName.Greymon, 4000, 3000, 500, 500, 300, 300, 0, 65, 80, 80, 0, 10, EvolutionResult.MetalGreymon)]
+    [TestCase(DigimonName.Greymon, 4000, 3000, 500, 500, 300, 300, 0, 30, 80, 80, 0, 10, EvolutionResult.None)]
+    [TestCase(DigimonName.Greymon, 4000, 6000, 500, 500, 300, 600, 30, 25, 80, 80, 0, 10, EvolutionResult.SkullGreymon)]
+    public void DetermineEvolutionResult_ShouldReturnExpectedDigimon_WhenThereAreNoHistoricEvolutions(DigimonName digimonName, int hp, int mp, int off, int def, int speed, int brains, int careMistakes, int weight, int happiness,
         int discipline, int battles, int techniqueCount, EvolutionResult evolutionResult)
     {
         // Arrange
@@ -28,7 +28,7 @@ public sealed class FromRookieOrChampionEvolutionCalculatorTests
             .Build();
 
         Digimon digimon = new DigimonBuilder()
-            .WithDigimonType(digimonType)
+            .WithDigimonType(digimonName)
             .WithHP(hp)
             .WithMP(mp)
             .WithOff(off)
@@ -51,8 +51,8 @@ public sealed class FromRookieOrChampionEvolutionCalculatorTests
     }
 
     [Test]
-    [TestCase(DigimonType.Agumon, 900, 1500, 90, 90, 150, 130, 0, 30, 0, 100, 0, 1, EvolutionResult.Centarumon)]
-    public void DetermineEvolutionResult_ShouldReturnCentarumon_WhenCentarumonAndGarurumonAreEnabled(DigimonType digimonType, int hp, int mp, int off, int def, int speed, int brains, int careMistakes, int weight, int happiness,
+    [TestCase(DigimonName.Agumon, 900, 1500, 90, 90, 150, 130, 0, 30, 0, 100, 0, 1, EvolutionResult.Centarumon)]
+    public void DetermineEvolutionResult_ShouldReturnCentarumon_WhenCentarumonAndGarurumonAreEnabled(DigimonName digimonName, int hp, int mp, int off, int def, int speed, int brains, int careMistakes, int weight, int happiness,
         int discipline, int battles, int techniqueCount, EvolutionResult evolutionResult)
     {
         // Arrange
@@ -60,7 +60,7 @@ public sealed class FromRookieOrChampionEvolutionCalculatorTests
             .Build();
 
         Digimon digimon = new DigimonBuilder()
-            .WithDigimonType(digimonType)
+            .WithDigimonType(digimonName)
             .WithHP(hp)
             .WithMP(mp)
             .WithOff(off)
@@ -83,18 +83,18 @@ public sealed class FromRookieOrChampionEvolutionCalculatorTests
     }
 
     [Test]
-    [TestCase(DigimonType.Agumon, 1000, 1000, 90, 100, 100, 100, 0, 25, 100, 100, 0, 40, EvolutionResult.Greymon)]
-    public void DetermineEvolutionResult_ShouldReturnGreymon_WhenBirdramonHasHigherPrioScoreThanGreymonAndGreymonIsNotAHistoricEvolutionAndBirdramonIsAHistoricEvolution(DigimonType digimonType, int hp, int mp, int off, int def, int speed, int brains,
+    [TestCase(DigimonName.Agumon, 1000, 1000, 90, 100, 100, 100, 0, 25, 100, 100, 0, 40, EvolutionResult.Greymon)]
+    public void DetermineEvolutionResult_ShouldReturnGreymon_WhenBirdramonHasHigherPrioScoreThanGreymonAndGreymonIsNotAHistoricEvolutionAndBirdramonIsAHistoricEvolution(DigimonName digimonName, int hp, int mp, int off, int def, int speed, int brains,
         int careMistakes, int weight, int happiness,
         int discipline, int battles, int techniqueCount, EvolutionResult evolutionResult)
     {
         // Arrange
         FromRookieOrChampionEvolutionCalculator sut = new SetupBuilder()
-            .WithHistoricEvolution(DigimonType.Birdramon)
+            .WithHistoricEvolution(DigimonName.Birdramon)
             .Build();
 
         Digimon digimon = new DigimonBuilder()
-            .WithDigimonType(digimonType)
+            .WithDigimonType(digimonName)
             .WithHP(hp)
             .WithMP(mp)
             .WithOff(off)
@@ -117,8 +117,8 @@ public sealed class FromRookieOrChampionEvolutionCalculatorTests
     }
 
     [Test]
-    [TestCase(DigimonType.Agumon, 1000, 1000, 90, 100, 100, 100, 0, 25, 100, 100, 0, 40, EvolutionResult.Birdramon)]
-    public void DetermineEvolutionResult_ShouldReturnBirdramon_WhenBirdramonHasHigherPrioScoreThanGreymonAndAreAHistoricEvolution(DigimonType digimonType, int hp, int mp, int off, int def, int speed, int brains, int careMistakes, int weight,
+    [TestCase(DigimonName.Agumon, 1000, 1000, 90, 100, 100, 100, 0, 25, 100, 100, 0, 40, EvolutionResult.Birdramon)]
+    public void DetermineEvolutionResult_ShouldReturnBirdramon_WhenBirdramonHasHigherPrioScoreThanGreymonAndAreAHistoricEvolution(DigimonName digimonName, int hp, int mp, int off, int def, int speed, int brains, int careMistakes, int weight,
         int happiness,
         int discipline, int battles, int techniqueCount, EvolutionResult evolutionResult)
     {
@@ -127,7 +127,7 @@ public sealed class FromRookieOrChampionEvolutionCalculatorTests
             .Build();
 
         Digimon digimon = new DigimonBuilder()
-            .WithDigimonType(digimonType)
+            .WithDigimonType(digimonName)
             .WithHP(hp)
             .WithMP(mp)
             .WithOff(off)
@@ -150,19 +150,19 @@ public sealed class FromRookieOrChampionEvolutionCalculatorTests
     }
 
     [Test]
-    [TestCase(DigimonType.Agumon, 1000, 1000, 90, 100, 100, 100, 0, 25, 100, 100, 0, 40, EvolutionResult.Birdramon)]
-    public void DetermineEvolutionResult_ShouldReturnBirdramon_WhenBirdramonHasHigherPrioScoreThanGreymonAndBothGreymonAndBirdramonAreHistoricEvolutions(DigimonType digimonType, int hp, int mp, int off, int def, int speed, int brains,
+    [TestCase(DigimonName.Agumon, 1000, 1000, 90, 100, 100, 100, 0, 25, 100, 100, 0, 40, EvolutionResult.Birdramon)]
+    public void DetermineEvolutionResult_ShouldReturnBirdramon_WhenBirdramonHasHigherPrioScoreThanGreymonAndBothGreymonAndBirdramonAreHistoricEvolutions(DigimonName digimonName, int hp, int mp, int off, int def, int speed, int brains,
         int careMistakes, int weight, int happiness,
         int discipline, int battles, int techniqueCount, EvolutionResult evolutionResult)
     {
         // Arrange
         FromRookieOrChampionEvolutionCalculator sut = new SetupBuilder()
-            .WithHistoricEvolution(DigimonType.Greymon)
-            .WithHistoricEvolution(DigimonType.Birdramon)
+            .WithHistoricEvolution(DigimonName.Greymon)
+            .WithHistoricEvolution(DigimonName.Birdramon)
             .Build();
 
         Digimon digimon = new DigimonBuilder()
-            .WithDigimonType(digimonType)
+            .WithDigimonType(digimonName)
             .WithHP(hp)
             .WithMP(mp)
             .WithOff(off)
@@ -185,13 +185,13 @@ public sealed class FromRookieOrChampionEvolutionCalculatorTests
     }
 
     [Test]
-    [TestCase(DigimonType.Yuramon, 9999, 9999, 999, 999, 999, 999, 0, 30, 100, 100, 100, 58)]
-    [TestCase(DigimonType.Tsunomon, 9999, 9999, 999, 999, 999, 999, 0, 30, 100, 100, 100, 58)]
-    [TestCase(DigimonType.Andromon, 9999, 9999, 999, 999, 999, 999, 0, 30, 100, 100, 100, 58)]
-    [TestCase(DigimonType.Yuramon, 100, 100, 10, 10, 10, 10, 0, 30, 100, 100, 100, 58)]
-    [TestCase(DigimonType.Tsunomon, 100, 100, 10, 10, 10, 10, 0, 30, 100, 100, 100, 58)]
-    [TestCase(DigimonType.Andromon, 100, 100, 10, 10, 10, 10, 0, 30, 100, 100, 100, 58)]
-    public void DetermineEvolutionResult_ShouldThrowException_WhenDigimonIsNotARookieOrChampion(DigimonType digimonType, int hp, int mp, int off, int def, int speed, int brains, int careMistakes, int weight, int happiness,
+    [TestCase(DigimonName.Yuramon, 9999, 9999, 999, 999, 999, 999, 0, 30, 100, 100, 100, 58)]
+    [TestCase(DigimonName.Tsunomon, 9999, 9999, 999, 999, 999, 999, 0, 30, 100, 100, 100, 58)]
+    [TestCase(DigimonName.Andromon, 9999, 9999, 999, 999, 999, 999, 0, 30, 100, 100, 100, 58)]
+    [TestCase(DigimonName.Yuramon, 100, 100, 10, 10, 10, 10, 0, 30, 100, 100, 100, 58)]
+    [TestCase(DigimonName.Tsunomon, 100, 100, 10, 10, 10, 10, 0, 30, 100, 100, 100, 58)]
+    [TestCase(DigimonName.Andromon, 100, 100, 10, 10, 10, 10, 0, 30, 100, 100, 100, 58)]
+    public void DetermineEvolutionResult_ShouldThrowException_WhenDigimonIsNotARookieOrChampion(DigimonName digimonName, int hp, int mp, int off, int def, int speed, int brains, int careMistakes, int weight, int happiness,
         int discipline, int battles, int techniqueCount)
     {
         // Arrange
@@ -199,7 +199,7 @@ public sealed class FromRookieOrChampionEvolutionCalculatorTests
             .Build();
 
         Digimon digimon = new DigimonBuilder()
-            .WithDigimonType(digimonType)
+            .WithDigimonType(digimonName)
             .WithHP(hp)
             .WithMP(mp)
             .WithOff(off)
@@ -228,9 +228,9 @@ public sealed class FromRookieOrChampionEvolutionCalculatorTests
             Session.HistoricEvolutions.Clear();
         }
 
-        public SetupBuilder WithHistoricEvolution(DigimonType digimonType)
+        public SetupBuilder WithHistoricEvolution(DigimonName digimonName)
         {
-            Session.HistoricEvolutions.Add(digimonType);
+            Session.HistoricEvolutions.Add(digimonName);
 
             return this;
         }

@@ -8,7 +8,7 @@ public sealed class VademonEvolutionCriteria : IEvolutionCriteria
 {
     public EvolutionStage EvolutionStage => EvolutionStage.Ultimate;
 
-    public EvolutionResult DigimonType => EvolutionResult.Vademon;
+    public EvolutionResult EvolutionResult => EvolutionResult.Vademon;
 
     public MainCriteriaStats Stats => new();
 

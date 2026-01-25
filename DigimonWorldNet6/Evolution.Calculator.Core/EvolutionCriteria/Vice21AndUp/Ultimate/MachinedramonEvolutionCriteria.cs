@@ -8,7 +8,7 @@ public sealed class MachinedramonEvolutionCriteria : IEvolutionCriteria
 {
     public EvolutionStage EvolutionStage => EvolutionStage.Ultimate;
 
-    public EvolutionResult DigimonType => EvolutionResult.Machinedramon;
+    public EvolutionResult EvolutionResult => EvolutionResult.Machinedramon;
 
     public MainCriteriaStats Stats => new(hp: 5000, mp: 5000, off: 500, def: 500, speed: 500, brains: 500);
 

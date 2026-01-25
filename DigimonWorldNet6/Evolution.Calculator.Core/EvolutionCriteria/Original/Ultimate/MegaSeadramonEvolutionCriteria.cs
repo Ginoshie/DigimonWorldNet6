@@ -8,7 +8,7 @@ public sealed class MegaSeadramonEvolutionCriteria : IEvolutionCriteria
 {
     public EvolutionStage EvolutionStage => EvolutionStage.Ultimate;
 
-    public EvolutionResult DigimonType => EvolutionResult.MegaSeadramon;
+    public EvolutionResult EvolutionResult => EvolutionResult.MegaSeadramon;
 
     public MainCriteriaStats Stats => new(mp: 4000, off: 500, def: 400, brains: 400);
 

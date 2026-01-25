@@ -8,7 +8,7 @@ public sealed class NanimonEvolutionCriteria : IEvolutionCriteria
 {
     public EvolutionStage EvolutionStage => EvolutionStage.Champion;
 
-    public EvolutionResult DigimonType => EvolutionResult.Nanimon;
+    public EvolutionResult EvolutionResult => EvolutionResult.Nanimon;
 
     public MainCriteriaStats Stats => new();
 

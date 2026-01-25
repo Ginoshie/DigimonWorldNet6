@@ -8,14 +8,14 @@ namespace Generics.Tests;
 public sealed class EvolutionStageMapperTests
 {
     [Test]
-    public void EvolutionStageMapper_ShouldNotThrowException_WhenValidIndexIsUsed([Values] DigimonType digimonType)
+    public void EvolutionStageMapper_ShouldNotThrowException_WhenValidIndexIsUsed([Values] DigimonName digimonName)
     {
         // Arrange
         EvolutionStageMapper sut = new SetupBuilder()
             .Build();
 
         // Act
-        Func<EvolutionStage> applyValidIndex = () => sut[digimonType];
+        Func<EvolutionStage> applyValidIndex = () => sut[digimonName];
 
         // Assert
         applyValidIndex.ShouldNotThrow();
@@ -25,7 +25,7 @@ public sealed class EvolutionStageMapperTests
     public void EvolutionStageMapper_ShouldNotThrowException_WhenValidIndexIsUsed()
     {
         // Arrange
-        const DigimonType invalidDigimonTypeIndex = (DigimonType)999;
+        const DigimonName invalidDigimonTypeIndex = (DigimonName)999;
         
         EvolutionStageMapper sut = new SetupBuilder()
             .Build();

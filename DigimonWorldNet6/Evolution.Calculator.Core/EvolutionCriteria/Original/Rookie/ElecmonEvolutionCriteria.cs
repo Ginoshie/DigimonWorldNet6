@@ -8,7 +8,7 @@ public sealed class ElecmonEvolutionCriteria : IEvolutionCriteria
 {
     public EvolutionStage EvolutionStage => EvolutionStage.Rookie;
 
-    public EvolutionResult DigimonType => EvolutionResult.Elecmon;
+    public EvolutionResult EvolutionResult => EvolutionResult.Elecmon;
 
     public MainCriteriaStats Stats => new(hp: 10, off: 10, speed: 1);
 
@@ -16,5 +16,5 @@ public sealed class ElecmonEvolutionCriteria : IEvolutionCriteria
 
     public MainCriteriaWeight Weight => new(15);
 
-    public BonusCriteria BonusCriteria => new(isBattlesCriteriaAMaximum: false, precursorDigimon: EvolutionResult.Tsunomon);
+    public BonusCriteria BonusCriteria => new(isBattlesCriteriaAMaximum: false, precursorDigimon: DigimonName.Tsunomon);
 }

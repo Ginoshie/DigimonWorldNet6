@@ -33,240 +33,240 @@ public static class JijimonEvolutionCalculatorNarratorText
                        "*whispers* . . .  The world holds many a secret though. . .  *smiles*";
         }
 
-        DigimonType evolutionDigimonType = evolutionResult.ToDigimonType();
-        EvolutionStage evolutionResultEvolutionStage = evolutionDigimonType.EvolutionStage();
+        DigimonName evolutionDigimonName = evolutionResult.ToDigimonType();
+        EvolutionStage evolutionResultEvolutionStage = evolutionDigimonName.EvolutionStage();
 
         return evolutionResultEvolutionStage switch
         {
-            EvolutionStage.Fresh => throw new ArgumentOutOfRangeException(nameof(evolutionDigimonType), evolutionDigimonType, $"{evolutionDigimonType} is not a valid evolution target because fresh Digimon hatch from eggs."),
+            EvolutionStage.Fresh => throw new ArgumentOutOfRangeException(nameof(evolutionDigimonName), evolutionDigimonName, $"{evolutionDigimonName} is not a valid evolution target because fresh Digimon hatch from eggs."),
             EvolutionStage.InTraining => "Oh look at that!\n" +
                                          "\n" +
-                                         $"It will become {AOrAn(evolutionDigimonType)} {evolutionDigimonType}.\n" +
+                                         $"It will become {AOrAn(evolutionDigimonName)} {evolutionDigimonName}.\n" +
                                          "\n" +
                                          "What a cute little fellow.",
-            EvolutionStage.Rookie => RookieResponses(evolutionDigimonType),
-            EvolutionStage.Champion => ChampionResponses(evolutionDigimonType),
-            EvolutionStage.Ultimate => UltimateResponses(evolutionDigimonType),
-            _ => throw new ArgumentOutOfRangeException(nameof(evolutionDigimonType), evolutionDigimonType, $"{evolutionDigimonType} is not supported.")
+            EvolutionStage.Rookie => RookieResponses(evolutionDigimonName),
+            EvolutionStage.Champion => ChampionResponses(evolutionDigimonName),
+            EvolutionStage.Ultimate => UltimateResponses(evolutionDigimonName),
+            _ => throw new ArgumentOutOfRangeException(nameof(evolutionDigimonName), evolutionDigimonName, $"{evolutionDigimonName} is not supported.")
         };
     }
 
-    private static string RookieResponses(DigimonType evolutionDigimonType)
+    private static string RookieResponses(DigimonName evolutionDigimonName)
     {
-        if (evolutionDigimonType.EvolutionStage() != EvolutionStage.Champion)
+        if (evolutionDigimonName.EvolutionStage() != EvolutionStage.Champion)
         {
-            throw new ArgumentOutOfRangeException(nameof(evolutionDigimonType), evolutionDigimonType,
-                $"{evolutionDigimonType} is not a champion evolution target. These responses are only meant for champion evolutions.");
+            throw new ArgumentOutOfRangeException(nameof(evolutionDigimonName), evolutionDigimonName,
+                $"{evolutionDigimonName} is not a champion evolution target. These responses are only meant for champion evolutions.");
         }
 
-        return evolutionDigimonType switch
+        return evolutionDigimonName switch
         {
-            DigimonType.Penguinmon => "Evolution time? Hmm somethings fishy about this one . . . \n" +
+            DigimonName.Penguinmon => "Evolution time? Hmm somethings fishy about this one . . . \n" +
                                       "\n" +
-                                      $"Ah! No wonder, it's a {evolutionDigimonType}.  *laughs*\n" +
+                                      $"Ah! No wonder, it's a {evolutionDigimonName}.  *laughs*\n" +
                                       "\n" +
                                       "Take it for a curl, you'll have a blast.",
-            DigimonType.Agumon => "Evolution time! I can already tell this is a good one\n" +
+            DigimonName.Agumon => "Evolution time! I can already tell this is a good one\n" +
                                   "\n" +
-                                  $"Yes! yes! yes! It's an {evolutionDigimonType}\n" +
+                                  $"Yes! yes! yes! It's an {evolutionDigimonName}\n" +
                                   "\n" +
                                   "I'm chuffed!  *smiles widely*",
-            DigimonType.Gabumon => "Oh yet another evolution, I am chuffed!\n" +
+            DigimonName.Gabumon => "Oh yet another evolution, I am chuffed!\n" +
                                    "\n" +
                                    "Oh look at that, it's a {evolutionDigimonType}!\n" +
                                    "\n" +
                                    "A long time ago a player enjoyed this little guys presence a lot." +
                                    "\n" +
                                    "Great memories . . .  *smiles widely*",
-            _ => $"Very nice, it's going to become {AOrAn(evolutionDigimonType)} {evolutionDigimonType}.\n" +
+            _ => $"Very nice, it's going to become {AOrAn(evolutionDigimonName)} {evolutionDigimonName}.\n" +
                  "\n" +
                  "They grow up so fast, don't they."
         };
     }
 
-    private static string ChampionResponses(DigimonType evolutionDigimonType)
+    private static string ChampionResponses(DigimonName evolutionDigimonName)
     {
-        if (evolutionDigimonType.EvolutionStage() != EvolutionStage.Champion)
+        if (evolutionDigimonName.EvolutionStage() != EvolutionStage.Champion)
         {
-            throw new ArgumentOutOfRangeException(nameof(evolutionDigimonType), evolutionDigimonType,
-                $"{evolutionDigimonType} is not a champion evolution target. These responses are only meant for champion evolutions.");
+            throw new ArgumentOutOfRangeException(nameof(evolutionDigimonName), evolutionDigimonName,
+                $"{evolutionDigimonName} is not a champion evolution target. These responses are only meant for champion evolutions.");
         }
 
-        return evolutionDigimonType switch
+        return evolutionDigimonName switch
         {
-            DigimonType.Vegiemon => $"Good job, it will evolve to the champion stage.\n {ShowEvolutionResultKeyWord} " +
+            DigimonName.Vegiemon => $"Good job, it will evolve to the champion stage.\n {ShowEvolutionResultKeyWord} " +
                                     "\n" +
-                                    $"A {evolutionDigimonType}, he got some major beef . . . \n" +
+                                    $"A {evolutionDigimonName}, he got some major beef . . . \n" +
                                     "\n" +
-                                    $"{DigimonType.Tyrannomon} will be very happy.  *chuckles*",
-            DigimonType.Sukamon => $"Hmm this is going to be special . . . \n {ShowEvolutionResultKeyWord} " +
+                                    $"{DigimonName.Tyrannomon} will be very happy.  *chuckles*",
+            DigimonName.Sukamon => $"Hmm this is going to be special . . . \n {ShowEvolutionResultKeyWord} " +
                                    "\n" +
                                    "In a . . . good . . . way ofcourse.\n" +
                                    "\n" +
-                                   $"It'll become a {evolutionDigimonType}.\n" +
+                                   $"It'll become a {evolutionDigimonName}.\n" +
                                    "\n" +
                                    "It's time to clean up the city.",
-            DigimonType.Shellmon => $"Another exciting evolution!\n {ShowEvolutionResultKeyWord} " +
+            DigimonName.Shellmon => $"Another exciting evolution!\n {ShowEvolutionResultKeyWord} " +
                                     "\n" +
-                                    $"Great! It's a {evolutionDigimonType}.\n" +
+                                    $"Great! It's a {evolutionDigimonName}.\n" +
                                     "\n" +
-                                    $"Have you got any rumors for us {evolutionDigimonType}?  *leans in eagerly*",
-            DigimonType.Ogremon => $"Oh this is going to be a special one . . . \n {ShowEvolutionResultKeyWord} " +
+                                    $"Have you got any rumors for us {evolutionDigimonName}?  *leans in eagerly*",
+            DigimonName.Ogremon => $"Oh this is going to be a special one . . . \n {ShowEvolutionResultKeyWord} " +
                                    "\n" +
                                    "There it is, perhaps not looking like it but . . . \n" +
                                    "\n" +
-                                   $"{evolutionDigimonType} has a gentle soul, you'd be surprised.  *nods*",
-            DigimonType.Meramon => $"Watch closely, it's going to evolve\n {ShowEvolutionResultKeyWord} " +
+                                   $"{evolutionDigimonName} has a gentle soul, you'd be surprised.  *nods*",
+            DigimonName.Meramon => $"Watch closely, it's going to evolve\n {ShowEvolutionResultKeyWord} " +
                                    "\n" +
                                    "*sudden rise in temperature*\n" +
                                    "\n" +
-                                   $"Oof . . . hot . . . This must be a . . . {evolutionDigimonType}!\n" +
+                                   $"Oof . . . hot . . . This must be a . . . {evolutionDigimonName}!\n" +
                                    "\n" +
                                    "*yelps* Don't burn my house!",
-            DigimonType.Leomon => $"It's evolving, with such fierce power . . . \n {ShowEvolutionResultKeyWord} " +
+            DigimonName.Leomon => $"It's evolving, with such fierce power . . . \n {ShowEvolutionResultKeyWord} " +
                                   "\n" +
-                                  $"No wonder I could sense it's power. It's a {evolutionDigimonType}\n" +
-                                  $"*starts humming the {evolutionDigimonType} theme*",
-            DigimonType.Kokatorimon => $"It's evolving, let's wait for the result\n {ShowEvolutionResultKeyWord} " +
+                                  $"No wonder I could sense it's power. It's a {evolutionDigimonName}\n" +
+                                  $"*starts humming the {evolutionDigimonName} theme*",
+            DigimonName.Kokatorimon => $"It's evolving, let's wait for the result\n {ShowEvolutionResultKeyWord} " +
                                        "\n" +
-                                       $"Great, it's a {evolutionDigimonType}\n" +
+                                       $"Great, it's a {evolutionDigimonName}\n" +
                                        "\n" +
                                        "You two can race for the worm in the morning.  *smiles gently*",
-            DigimonType.Greymon => $"How nice, another evolution incoming.\n {ShowEvolutionResultKeyWord} " +
+            DigimonName.Greymon => $"How nice, another evolution incoming.\n {ShowEvolutionResultKeyWord} " +
                                    "\n" +
-                                   $"Look at that, a {evolutionDigimonType}.\n" +
+                                   $"Look at that, a {evolutionDigimonName}.\n" +
                                    "\n" +
                                    "Without the confused aggression, I might add.\n" +
                                    "\n" +
                                    "Nice.",
-            DigimonType.Garurumon => $"Very nice, another evolution.\n {ShowEvolutionResultKeyWord} " +
+            DigimonName.Garurumon => $"Very nice, another evolution.\n {ShowEvolutionResultKeyWord} " +
                                      "\n" +
-                                     $"Oh a {evolutionDigimonType}.\n" +
+                                     $"Oh a {evolutionDigimonName}.\n" +
                                      "\n" +
                                      "Welcome back pack leader, please no howling in the night",
-            DigimonType.Frigimon => "Goodness, we've got another evolution coming up!\n" +
+            DigimonName.Frigimon => "Goodness, we've got another evolution coming up!\n" +
                                     "\n" +
                                     $"*sudden temperature drop*\n {ShowEvolutionResultKeyWord} " +
                                     "\n" +
-                                    $"*shivers* Brrr, so chilly with {evolutionDigimonType} in the room",
-            DigimonType.Drimogemon => "*strange noise* Giin giin . . . Giin giin . . . \n" +
+                                    $"*shivers* Brrr, so chilly with {evolutionDigimonName} in the room",
+            DigimonName.Drimogemon => "*strange noise* Giin giin . . . Giin giin . . . \n" +
                                       "\n" +
                                       $"Whats this sound I hear . . . \n {ShowEvolutionResultKeyWord} " +
                                       "\n" +
-                                      $"Oh that explains it, {evolutionDigimonType}'s horn drill.",
-            DigimonType.Devimon => $"Lets see what cheeky bugger it'll become this time.\n {ShowEvolutionResultKeyWord} " +
+                                      $"Oh that explains it, {evolutionDigimonName}'s horn drill.",
+            DigimonName.Devimon => $"Lets see what cheeky bugger it'll become this time.\n {ShowEvolutionResultKeyWord} " +
                                    "\n" +
                                    "Speak of the devil . . . \n" +
-                                   $"\n It's going to become a {evolutionDigimonType}.",
-            DigimonType.Coelamon => "Is it a plain?\n" +
+                                   $"\n It's going to become a {evolutionDigimonName}.",
+            DigimonName.Coelamon => "Is it a plain?\n" +
                                     "Is it a fish?\n" +
                                     "Is it a floater?\n" +
                                     $"\n {ShowEvolutionResultKeyWord} " +
-                                    $"No! It's a {evolutionDigimonType}",
-            DigimonType.Centarumon => $"Here we go, another evolution.\n {ShowEvolutionResultKeyWord} " +
+                                    $"No! It's a {evolutionDigimonName}",
+            DigimonName.Centarumon => $"Here we go, another evolution.\n {ShowEvolutionResultKeyWord} " +
                                       "\n" +
-                                      $"Ohh! It's a {evolutionDigimonType}.\n" +
+                                      $"Ohh! It's a {evolutionDigimonName}.\n" +
                                       "\n" +
                                       "No need for 'Is there a doctor in the room' I suppose.",
-            DigimonType.Birdramon => $"Great work it is going to evolve.\n {ShowEvolutionResultKeyWord} " +
+            DigimonName.Birdramon => $"Great work it is going to evolve.\n {ShowEvolutionResultKeyWord} " +
                                      "\n" +
-                                     $"Oh, the greatest parent of all, a {evolutionDigimonType}.\n" +
+                                     $"Oh, the greatest parent of all, a {evolutionDigimonName}.\n" +
                                      "\n" +
                                      "It'll take good care of you.",
-            DigimonType.Bakemon => $"Bakke bakke! Bakkee bakke bakkeee!\n {ShowEvolutionResultKeyWord} " +
+            DigimonName.Bakemon => $"Bakke bakke! Bakkee bakke bakkeee!\n {ShowEvolutionResultKeyWord} " +
                                    "\n" +
-                                   $"Haha, just kidding, it's going to become a {evolutionDigimonType}!\n" +
+                                   $"Haha, just kidding, it's going to become a {evolutionDigimonName}!\n" +
                                    "\n" +
                                    "He's a great narrator himself, go give it a try.  *chuckles*",
-            DigimonType.Numemon => $"It is going to evolve . . . hmm . . . \n {ShowEvolutionResultKeyWord} " +
+            DigimonName.Numemon => $"It is going to evolve . . . hmm . . . \n {ShowEvolutionResultKeyWord} " +
                                    "\n" +
-                                   $"Well . . . That is  *a* champion, congrats on your {evolutionDigimonType}\n" +
+                                   $"Well . . . That is  *a* champion, congrats on your {evolutionDigimonName}\n" +
                                    "\n" +
                                    "*whispers* . . . Perhaps be a bit more careful next time?  *chuckles*",
-            DigimonType.Tyrannomon => $"Oh look it's going to evolve!\n {ShowEvolutionResultKeyWord} " +
+            DigimonName.Tyrannomon => $"Oh look it's going to evolve!\n {ShowEvolutionResultKeyWord} " +
                                       "\n" +
-                                      $"Nice work, lets see. It's . . . {evolutionDigimonType}\n" +
+                                      $"Nice work, lets see. It's . . . {evolutionDigimonName}\n" +
                                       "\n" +
                                       "*mumbles* . . . Better stock up on meat you must . . . ",
             _ => $"Great work!\n {ShowEvolutionResultKeyWord} " +
                  "\n" +
-                 $"It will become a mighty {evolutionDigimonType}"
+                 $"It will become a mighty {evolutionDigimonName}"
         };
     }
 
-    private static string UltimateResponses(DigimonType evolutionDigimonType)
+    private static string UltimateResponses(DigimonName evolutionDigimonName)
     {
-        if (evolutionDigimonType.EvolutionStage() != EvolutionStage.Ultimate)
+        if (evolutionDigimonName.EvolutionStage() != EvolutionStage.Ultimate)
         {
-            throw new ArgumentOutOfRangeException(nameof(evolutionDigimonType), evolutionDigimonType,
-                $"{evolutionDigimonType} is not a champion evolution target. These responses are only meant for champion evolutions.");
+            throw new ArgumentOutOfRangeException(nameof(evolutionDigimonName), evolutionDigimonName,
+                $"{evolutionDigimonName} is not a champion evolution target. These responses are only meant for champion evolutions.");
         }
 
-        return evolutionDigimonType switch
+        return evolutionDigimonName switch
         {
-            DigimonType.SkullGreymon => $"Oh this is a dreaded aura . . . this must be . . . \n {ShowEvolutionResultKeyWord} " +
+            DigimonName.SkullGreymon => $"Oh this is a dreaded aura . . . this must be . . . \n {ShowEvolutionResultKeyWord} " +
                                         "\n" +
-                                        $"Welcome . . . {evolutionDigimonType}\n" +
+                                        $"Welcome . . . {evolutionDigimonName}\n" +
                                         "\n" +
                                         "Please be good to it player, it deserves it.",
-            DigimonType.Vademon => $"Look at that, now this is something special. {ShowEvolutionResultKeyWord} \n" +
+            DigimonName.Vademon => $"Look at that, now this is something special. {ShowEvolutionResultKeyWord} \n" +
                                    "\n" +
-                                   $"You gave your Digimon long life and you are rewarded with a {evolutionDigimonType}." +
+                                   $"You gave your Digimon long life and you are rewarded with a {evolutionDigimonName}." +
                                    "\n" +
                                    "Thank you for taking great care of your Digimon.  *smiles",
-            DigimonType.Phoenixmon => $"Great it is evolving, lets see what it will become.\n {ShowEvolutionResultKeyWord} " +
+            DigimonName.Phoenixmon => $"Great it is evolving, lets see what it will become.\n {ShowEvolutionResultKeyWord} " +
                                       "\n" +
-                                      $"Oh . . . behold the grace and beauty of {evolutionDigimonType}.\n" +
+                                      $"Oh . . . behold the grace and beauty of {evolutionDigimonName}.\n" +
                                       "\n" +
                                       "*Jijimon smiles widely and wobbles back and forth in contained excitement*",
-            DigimonType.Monzaemon => $"Wow! Your {DigimonType.Numemon} is evolving!?\n" +
+            DigimonName.Monzaemon => $"Wow! Your {DigimonName.Numemon} is evolving!?\n" +
                                      "\n" +
                                      "Amazing work player!\n" +
                                      "\n" +
                                      "This can mean only one thing . . . \n" +
                                      $"\n {ShowEvolutionResultKeyWord} " +
-                                     $"It's a {evolutionDigimonType}",
-            DigimonType.MetalGreymon => $"Such presence already and it hasn't fully evolved yet . . . \n {ShowEvolutionResultKeyWord} " +
+                                     $"It's a {evolutionDigimonName}",
+            DigimonName.MetalGreymon => $"Such presence already and it hasn't fully evolved yet . . . \n {ShowEvolutionResultKeyWord} " +
                                         "\n" +
-                                        $"Yes, I figured, it's a {evolutionDigimonType}\n" +
+                                        $"Yes, I figured, it's a {evolutionDigimonName}\n" +
                                         "\n" +
                                         "Nipple rockets in your honor player.",
-            DigimonType.Andromon => $"Exciting, we got an ultimate evolution\n {ShowEvolutionResultKeyWord} " +
+            DigimonName.Andromon => $"Exciting, we got an ultimate evolution\n {ShowEvolutionResultKeyWord} " +
                                     "\n" +
-                                    $"Oh it's an {evolutionDigimonType}.\n" +
+                                    $"Oh it's an {evolutionDigimonName}.\n" +
                                     "\n" +
                                     "Whats the officer problem?  *chuckles*",
-            DigimonType.Digitamamon => $"Oh goody, it's evolving . . . \n {ShowEvolutionResultKeyWord} " +
+            DigimonName.Digitamamon => $"Oh goody, it's evolving . . . \n {ShowEvolutionResultKeyWord} " +
                                        "\n" +
-                                       $"Great, it's a {evolutionDigimonType}.\n" +
+                                       $"Great, it's a {evolutionDigimonName}.\n" +
                                        "\n" +
                                        "He broke his egg so now he can make us omelettes.  *chuckles*",
-            DigimonType.Etemon => "Ohh this is going to be a cheeky evolution . . . \n" +
+            DigimonName.Etemon => "Ohh this is going to be a cheeky evolution . . . \n" +
                                   "\n" +
-                                  $"Oh yes, it's an {evolutionDigimonType}." +
+                                  $"Oh yes, it's an {evolutionDigimonName}." +
                                   "\n" +
                                   "Not your average greengrocer but much better!",
-            DigimonType.Giromon => "*intense industrial machinery noise*\n" +
+            DigimonName.Giromon => "*intense industrial machinery noise*\n" +
                                    "\n" +
                                    $"This can only be a . . . \n  {ShowEvolutionResultKeyWord} " +
                                    "\n" +
-                                   $"{evolutionDigimonType}!\n" +
+                                   $"{evolutionDigimonName}!\n" +
                                    "\n" +
                                    "The trash metal lover of the city, or 'crash metal' for our NTSC friends.",
             _ => "Amazing, it's evolving to the ultimate stage.\n" +
                  "\n" +
                  $"Lets see. The final form is . . . {ShowEvolutionResultKeyWord} \n" +
                  "\n" +
-                 $"{evolutionDigimonType}, congratulations!\n" +
+                 $"{evolutionDigimonName}, congratulations!\n" +
                  "\n" +
                  "You make an old Digimon proud.  *smiles*"
         };
     }
 
-    private static string AOrAn(DigimonType digimonType)
+    private static string AOrAn(DigimonName digimonName)
     {
         char[] vowelSoundingVowels = ['a', 'e', 'i', 'o'];
-        string digimonTypeString = digimonType.ToString();
+        string digimonTypeString = digimonName.ToString();
         char firstLetter = digimonTypeString[0];
 
         return vowelSoundingVowels.Contains(firstLetter) ? "an" : "a";

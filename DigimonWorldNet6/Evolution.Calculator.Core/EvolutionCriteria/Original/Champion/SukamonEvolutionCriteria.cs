@@ -8,7 +8,7 @@ public sealed class SukamonEvolutionCriteria : IEvolutionCriteria
 {
     public EvolutionStage EvolutionStage => EvolutionStage.Champion;
 
-    public EvolutionResult DigimonType => EvolutionResult.Sukamon;
+    public EvolutionResult EvolutionResult => EvolutionResult.Sukamon;
 
     public MainCriteriaStats Stats => new();
 

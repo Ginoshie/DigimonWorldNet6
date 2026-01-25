@@ -1,6 +1,6 @@
 namespace Generics.Enums;
 
-public enum DigimonType
+public enum DigimonName
 {
     Agumon,
     Airdramon,

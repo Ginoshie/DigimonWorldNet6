@@ -8,7 +8,7 @@ public sealed class GabumonEvolutionCriteria : IEvolutionCriteria
 {
     public EvolutionStage EvolutionStage => EvolutionStage.Rookie;
 
-    public EvolutionResult DigimonType => EvolutionResult.Gabumon;
+    public EvolutionResult EvolutionResult => EvolutionResult.Gabumon;
 
     public MainCriteriaStats Stats => new(def: 1, speed: 1, brains: 1);
 
@@ -16,5 +16,5 @@ public sealed class GabumonEvolutionCriteria : IEvolutionCriteria
 
     public MainCriteriaWeight Weight => new(15);
 
-    public BonusCriteria BonusCriteria => new(isBattlesCriteriaAMaximum: false, precursorDigimon: EvolutionResult.Koromon);
+    public BonusCriteria BonusCriteria => new(isBattlesCriteriaAMaximum: false, precursorDigimon: DigimonName.Koromon);
 }

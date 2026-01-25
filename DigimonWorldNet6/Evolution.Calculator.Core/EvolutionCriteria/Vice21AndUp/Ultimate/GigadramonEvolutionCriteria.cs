@@ -8,7 +8,7 @@ public sealed class GigadramonEvolutionCriteria : IEvolutionCriteria
 {
     public EvolutionStage EvolutionStage => EvolutionStage.Ultimate;
 
-    public EvolutionResult DigimonType => EvolutionResult.Gigadramon;
+    public EvolutionResult EvolutionResult => EvolutionResult.Gigadramon;
 
     public MainCriteriaStats Stats => new(hp: 4000, mp: 5000, off: 600, speed: 400);
 

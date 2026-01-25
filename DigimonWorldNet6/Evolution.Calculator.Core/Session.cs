@@ -5,5 +5,5 @@ namespace DigimonWorld.Evolution.Calculator.Core;
 
 public static class Session
 {
-    public static IList<DigimonType> HistoricEvolutions { get; } = [];
+    public static IList<DigimonName> HistoricEvolutions { get; } = [];
 }

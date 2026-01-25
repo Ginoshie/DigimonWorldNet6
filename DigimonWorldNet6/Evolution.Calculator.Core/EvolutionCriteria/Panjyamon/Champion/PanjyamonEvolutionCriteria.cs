@@ -8,7 +8,7 @@ public sealed class PanjyamonEvolutionCriteria : IEvolutionCriteria
 {
     public EvolutionStage EvolutionStage => EvolutionStage.Champion;
 
-    public EvolutionResult DigimonType => EvolutionResult.Panjyamon;
+    public EvolutionResult EvolutionResult => EvolutionResult.Panjyamon;
 
     public MainCriteriaStats Stats => new(off: 100, speed: 100, brains: 100);
 
@@ -16,5 +16,5 @@ public sealed class PanjyamonEvolutionCriteria : IEvolutionCriteria
 
     public MainCriteriaWeight Weight => new(20);
 
-    public BonusCriteria BonusCriteria => new(battles: 10, isBattlesCriteriaAMaximum: true, techniqueCount: 35, precursorDigimon: EvolutionResult.Gabumon);
+    public BonusCriteria BonusCriteria => new(battles: 10, isBattlesCriteriaAMaximum: true, techniqueCount: 35, precursorDigimon: DigimonName.Gabumon);
 }

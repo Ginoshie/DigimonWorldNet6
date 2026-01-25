@@ -8,7 +8,7 @@ public sealed class OgremonEvolutionCriteria : IEvolutionCriteria
 {
     public EvolutionStage EvolutionStage => EvolutionStage.Champion;
 
-    public EvolutionResult DigimonType => EvolutionResult.Ogremon;
+    public EvolutionResult EvolutionResult => EvolutionResult.Ogremon;
 
     public MainCriteriaStats Stats => new(hp: 1000, off: 100);
 

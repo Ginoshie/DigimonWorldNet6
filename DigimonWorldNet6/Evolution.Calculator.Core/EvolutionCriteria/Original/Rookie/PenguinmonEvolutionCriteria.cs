@@ -8,7 +8,7 @@ public sealed class PenguinmonEvolutionCriteria : IEvolutionCriteria
 {
     public EvolutionStage EvolutionStage => EvolutionStage.Rookie;
 
-    public EvolutionResult DigimonType => EvolutionResult.Penguinmon;
+    public EvolutionResult EvolutionResult => EvolutionResult.Penguinmon;
 
     public MainCriteriaStats Stats => new(mp: 10, def: 1, brains: 1);
 
@@ -16,5 +16,5 @@ public sealed class PenguinmonEvolutionCriteria : IEvolutionCriteria
 
     public MainCriteriaWeight Weight => new(15);
 
-    public BonusCriteria BonusCriteria => new(isBattlesCriteriaAMaximum: false, precursorDigimon: EvolutionResult.Tsunomon);
+    public BonusCriteria BonusCriteria => new(isBattlesCriteriaAMaximum: false, precursorDigimon: DigimonName.Tsunomon);
 }

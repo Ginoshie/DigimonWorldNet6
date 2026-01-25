@@ -8,7 +8,7 @@ public sealed class GreymonEvolutionCriteria : IEvolutionCriteria
 {
     public EvolutionStage EvolutionStage => EvolutionStage.Champion;
 
-    public EvolutionResult DigimonType => EvolutionResult.Greymon;
+    public EvolutionResult EvolutionResult => EvolutionResult.Greymon;
 
     public MainCriteriaStats Stats => new(off: 100, def: 100, speed: 100, brains: 100);
 

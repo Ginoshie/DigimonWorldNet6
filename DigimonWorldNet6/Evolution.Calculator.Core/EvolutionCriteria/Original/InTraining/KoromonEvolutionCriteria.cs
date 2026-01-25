@@ -8,7 +8,7 @@ public sealed class KoromonEvolutionCriteria : IEvolutionCriteria
 {
     public EvolutionStage EvolutionStage => EvolutionStage.InTraining;
 
-    public EvolutionResult DigimonType => EvolutionResult.Koromon;
+    public EvolutionResult EvolutionResult => EvolutionResult.Koromon;
 
     public MainCriteriaStats Stats => new();
 

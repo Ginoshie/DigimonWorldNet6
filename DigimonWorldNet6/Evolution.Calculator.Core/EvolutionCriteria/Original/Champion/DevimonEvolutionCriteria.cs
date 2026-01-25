@@ -8,7 +8,7 @@ public sealed class DevimonEvolutionCriteria : IEvolutionCriteria
 {
     public EvolutionStage EvolutionStage => EvolutionStage.Champion;
 
-    public EvolutionResult DigimonType => EvolutionResult.Devimon;
+    public EvolutionResult EvolutionResult => EvolutionResult.Devimon;
 
     public MainCriteriaStats Stats => new();
 

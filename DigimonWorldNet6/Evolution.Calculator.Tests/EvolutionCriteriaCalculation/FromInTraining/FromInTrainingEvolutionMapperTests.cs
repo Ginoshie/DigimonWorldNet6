@@ -12,14 +12,14 @@ namespace Evolution.Calculator.Tests.EvolutionCriteriaCalculation.FromInTraining
 public class FromInTrainingEvolutionMapperTests
 {
     [Test]
-    public void FromFreshEvolutionMapperIndexer_ShouldNotThrow_WhenMappingExists([Values(DigimonType.Koromon, DigimonType.Tokomon, DigimonType.Tsunomon, DigimonType.Tanemon)] DigimonType digimonType)
+    public void FromFreshEvolutionMapperIndexer_ShouldNotThrow_WhenMappingExists([Values(DigimonName.Koromon, DigimonName.Tokomon, DigimonName.Tsunomon, DigimonName.Tanemon)] DigimonName digimonName)
     {
         // Arrange
         FromInTrainingEvolutionMapper sut = new SetupBuilder()
             .Build();
 
         // Act
-        Func<IEnumerable<IEvolutionCriteria>> mappingNotThrowingException = () => sut[digimonType];
+        Func<IEnumerable<IEvolutionCriteria>> mappingNotThrowingException = () => sut[digimonName];
 
         // Assert
         mappingNotThrowingException.ShouldNotThrow();
@@ -27,15 +27,15 @@ public class FromInTrainingEvolutionMapperTests
 
     [Test]
     public void FromFreshEvolutionMapperIndexer_ShouldThrowException_WhenMappingDoesNotExist(
-        [Values(DigimonType.Yuramon, DigimonType.Penguinmon, DigimonType.Bakemon, DigimonType.Vademon)]
-        DigimonType digimonType)
+        [Values(DigimonName.Yuramon, DigimonName.Penguinmon, DigimonName.Bakemon, DigimonName.Vademon)]
+        DigimonName digimonName)
     {
         // Arrange
         FromInTrainingEvolutionMapper sut = new SetupBuilder()
             .Build();
 
         // Act
-        Func<object?> mappingThrowingException = () => sut[digimonType];
+        Func<object?> mappingThrowingException = () => sut[digimonName];
 
         // Assert
         mappingThrowingException.ShouldThrow<Exception>();

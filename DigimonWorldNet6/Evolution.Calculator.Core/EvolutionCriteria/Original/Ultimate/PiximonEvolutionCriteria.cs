@@ -8,7 +8,7 @@ public sealed class PiximonEvolutionCriteria : IEvolutionCriteria
 {
     public EvolutionStage EvolutionStage => EvolutionStage.Ultimate;
 
-    public EvolutionResult DigimonType => EvolutionResult.Piximon;
+    public EvolutionResult EvolutionResult => EvolutionResult.Piximon;
 
     public MainCriteriaStats Stats => new(off: 300, def: 300, speed: 400, brains: 400);
 

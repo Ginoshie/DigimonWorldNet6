@@ -8,7 +8,7 @@ public sealed class DigitamamonEvolutionCriteria : IEvolutionCriteria
 {
     public EvolutionStage EvolutionStage => EvolutionStage.Ultimate;
 
-    public EvolutionResult DigimonType => EvolutionResult.Digitamamon;
+    public EvolutionResult EvolutionResult => EvolutionResult.Digitamamon;
 
     public MainCriteriaStats Stats => new(hp: 3000, mp: 3000, off: 400, def: 400, speed: 400, brains: 300);
 

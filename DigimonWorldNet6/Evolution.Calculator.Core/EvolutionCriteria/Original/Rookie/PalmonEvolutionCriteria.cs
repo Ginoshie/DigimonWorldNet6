@@ -8,7 +8,7 @@ public sealed class PalmonEvolutionCriteria : IEvolutionCriteria
 {
     public EvolutionStage EvolutionStage => EvolutionStage.Rookie;
 
-    public EvolutionResult DigimonType => EvolutionResult.Palmon;
+    public EvolutionResult EvolutionResult => EvolutionResult.Palmon;
 
     public MainCriteriaStats Stats => new(mp: 10, speed: 1, brains: 1);
 
@@ -16,5 +16,5 @@ public sealed class PalmonEvolutionCriteria : IEvolutionCriteria
 
     public MainCriteriaWeight Weight => new(15);
 
-    public BonusCriteria BonusCriteria => new(isBattlesCriteriaAMaximum: false, precursorDigimon: EvolutionResult.Tanemon);
+    public BonusCriteria BonusCriteria => new(isBattlesCriteriaAMaximum: false, precursorDigimon: DigimonName.Tanemon);
 }

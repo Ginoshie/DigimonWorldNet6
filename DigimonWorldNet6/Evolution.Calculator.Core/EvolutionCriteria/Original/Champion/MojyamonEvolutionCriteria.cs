@@ -8,7 +8,7 @@ public sealed class MojyamonEvolutionCriteria : IEvolutionCriteria
 {
     public EvolutionStage EvolutionStage => EvolutionStage.Champion;
 
-    public EvolutionResult DigimonType => EvolutionResult.Mojyamon;
+    public EvolutionResult EvolutionResult => EvolutionResult.Mojyamon;
 
     public MainCriteriaStats Stats => new(hp: 1000);
 

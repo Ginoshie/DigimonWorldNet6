@@ -8,7 +8,7 @@ public sealed class TanemonEvolutionCriteria : IEvolutionCriteria
 {
     public EvolutionStage EvolutionStage => EvolutionStage.InTraining;
 
-    public EvolutionResult DigimonType => EvolutionResult.Tanemon;
+    public EvolutionResult EvolutionResult => EvolutionResult.Tanemon;
 
     public MainCriteriaStats Stats => new();
 

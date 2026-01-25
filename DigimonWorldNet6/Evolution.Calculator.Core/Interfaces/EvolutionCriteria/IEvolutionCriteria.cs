@@ -7,7 +7,7 @@ public interface IEvolutionCriteria
 {
     EvolutionStage EvolutionStage { get; }
 
-    EvolutionResult DigimonType { get; }
+    EvolutionResult EvolutionResult { get; }
 
     MainCriteriaStats Stats { get; }
 

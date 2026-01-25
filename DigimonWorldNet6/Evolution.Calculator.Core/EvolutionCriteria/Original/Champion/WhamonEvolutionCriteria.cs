@@ -8,7 +8,7 @@ public sealed class WhamonEvolutionCriteria : IEvolutionCriteria
 {
     public EvolutionStage EvolutionStage => EvolutionStage.Champion;
 
-    public EvolutionResult DigimonType => EvolutionResult.Whamon;
+    public EvolutionResult EvolutionResult => EvolutionResult.Whamon;
 
     public MainCriteriaStats Stats => new(hp: 1000, brains: 100);
 

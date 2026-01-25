@@ -8,7 +8,7 @@ public sealed class CoelamonEvolutionCriteria : IEvolutionCriteria
 {
     public EvolutionStage EvolutionStage => EvolutionStage.Champion;
 
-    public EvolutionResult DigimonType => EvolutionResult.Coelamon;
+    public EvolutionResult EvolutionResult => EvolutionResult.Coelamon;
 
     public MainCriteriaStats Stats => new(def: 100);
 

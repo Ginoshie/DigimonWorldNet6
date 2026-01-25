@@ -8,7 +8,7 @@ public sealed class MonochromonEvolutionCriteria : IEvolutionCriteria
 {
     public EvolutionStage EvolutionStage => EvolutionStage.Champion;
 
-    public EvolutionResult DigimonType => EvolutionResult.Monochromon;
+    public EvolutionResult EvolutionResult => EvolutionResult.Monochromon;
 
     public MainCriteriaStats Stats => new(hp: 1000, def: 100, brains: 100);
 

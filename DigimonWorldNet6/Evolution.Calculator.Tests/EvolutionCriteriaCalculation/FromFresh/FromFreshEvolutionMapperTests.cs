@@ -10,32 +10,32 @@ namespace Evolution.Calculator.Tests.EvolutionCriteriaCalculation.FromFresh;
 public class FromFreshEvolutionMapperTests
 {
     [Test]
-    [TestCase(DigimonType.Botamon, EvolutionResult.Koromon)]
-    [TestCase(DigimonType.Poyomon, EvolutionResult.Tokomon)]
-    [TestCase( DigimonType.Punimon, EvolutionResult.Tsunomon)]
-    [TestCase(DigimonType.Yuramon, EvolutionResult.Tanemon)]
-    public void FromFreshEvolutionMapperIndexer_ShouldReturnExpectedResult(DigimonType digimonType, EvolutionResult expectedEvolutionResult)
+    [TestCase(DigimonName.Botamon, EvolutionResult.Koromon)]
+    [TestCase(DigimonName.Poyomon, EvolutionResult.Tokomon)]
+    [TestCase( DigimonName.Punimon, EvolutionResult.Tsunomon)]
+    [TestCase(DigimonName.Yuramon, EvolutionResult.Tanemon)]
+    public void FromFreshEvolutionMapperIndexer_ShouldReturnExpectedResult(DigimonName digimonName, EvolutionResult expectedEvolutionResult)
     {
         // Arrange
         FromFreshEvolutionMapper sut = new SetupBuilder()
             .Build();
 
         // Act
-        EvolutionResult result = sut[digimonType];
+        EvolutionResult result = sut[digimonName];
 
         // Assert
         result.ShouldBe(expectedEvolutionResult);
     }
     
     [Test]
-    public void FromFreshEvolutionMapperIndexer_ShouldThrowException_WhenMappingDoesNotExist([Values(DigimonType.Tsunomon, DigimonType.Penguinmon, DigimonType.Bakemon, DigimonType.Vademon)] DigimonType digimonType)
+    public void FromFreshEvolutionMapperIndexer_ShouldThrowException_WhenMappingDoesNotExist([Values(DigimonName.Tsunomon, DigimonName.Penguinmon, DigimonName.Bakemon, DigimonName.Vademon)] DigimonName digimonName)
     {
         // Arrange
         FromFreshEvolutionMapper sut = new SetupBuilder()
             .Build();
 
         // Act
-        Func<object?> mappingThrowingException = () => sut[digimonType];
+        Func<object?> mappingThrowingException = () => sut[digimonName];
 
         // Assert
         mappingThrowingException.ShouldThrow<Exception>();

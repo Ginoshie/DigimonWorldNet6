@@ -8,7 +8,7 @@ public sealed class MamemonEvolutionCriteria : IEvolutionCriteria
 {
     public EvolutionStage EvolutionStage => EvolutionStage.Ultimate;
 
-    public EvolutionResult DigimonType => EvolutionResult.Mamemon;
+    public EvolutionResult EvolutionResult => EvolutionResult.Mamemon;
 
     public MainCriteriaStats Stats => new(off: 400, def: 300, speed: 300, brains: 400);
 

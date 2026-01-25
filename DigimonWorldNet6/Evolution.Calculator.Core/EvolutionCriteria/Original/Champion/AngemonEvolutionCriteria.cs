@@ -8,7 +8,7 @@ public sealed class AngemonEvolutionCriteria : IEvolutionCriteria
 {
     public EvolutionStage EvolutionStage => EvolutionStage.Champion;
 
-    public EvolutionResult DigimonType => EvolutionResult.Angemon;
+    public EvolutionResult EvolutionResult => EvolutionResult.Angemon;
 
     public MainCriteriaStats Stats => new(mp: 1000, brains: 100);
 
@@ -16,5 +16,5 @@ public sealed class AngemonEvolutionCriteria : IEvolutionCriteria
 
     public MainCriteriaWeight Weight => new(20);
 
-    public BonusCriteria BonusCriteria => new(techniqueCount: 35, precursorDigimon: EvolutionResult.Patamon);
+    public BonusCriteria BonusCriteria => new(techniqueCount: 35, precursorDigimon: DigimonName.Patamon);
 }

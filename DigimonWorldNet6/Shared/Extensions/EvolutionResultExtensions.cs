@@ -4,9 +4,9 @@ namespace Generics.Extensions;
 
 public static class EvolutionResultExtensions
 {
-    public static DigimonType ToDigimonType(this EvolutionResult evolutionResult)
+    public static DigimonName ToDigimonType(this EvolutionResult evolutionResult)
     {
-        if (Enum.TryParse(evolutionResult.ToString(), out DigimonType digimonType))
+        if (Enum.TryParse(evolutionResult.ToString(), out DigimonName digimonType))
         {
             return digimonType;
         }

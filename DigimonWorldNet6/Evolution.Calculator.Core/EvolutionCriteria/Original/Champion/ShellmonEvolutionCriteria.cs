@@ -8,7 +8,7 @@ public sealed class ShellmonEvolutionCriteria : IEvolutionCriteria
 {
     public EvolutionStage EvolutionStage => EvolutionStage.Champion;
 
-    public EvolutionResult DigimonType => EvolutionResult.Shellmon;
+    public EvolutionResult EvolutionResult => EvolutionResult.Shellmon;
 
     public MainCriteriaStats Stats => new(hp: 1000, def: 100);
 
@@ -16,5 +16,5 @@ public sealed class ShellmonEvolutionCriteria : IEvolutionCriteria
 
     public MainCriteriaWeight Weight => new(40);
 
-    public BonusCriteria BonusCriteria => new(techniqueCount: 35, precursorDigimon: EvolutionResult.Betamon);
+    public BonusCriteria BonusCriteria => new(techniqueCount: 35, precursorDigimon: DigimonName.Betamon);
 }

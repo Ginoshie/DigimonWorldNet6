@@ -8,7 +8,7 @@ public sealed class AndromonEvolutionCriteria : IEvolutionCriteria
 {
     public EvolutionStage EvolutionStage => EvolutionStage.Ultimate;
 
-    public EvolutionResult DigimonType => EvolutionResult.Andromon;
+    public EvolutionResult EvolutionResult => EvolutionResult.Andromon;
 
     public MainCriteriaStats Stats => new(hp: 2000, mp: 4000, off: 200, def: 400, speed: 200, brains: 400);
 

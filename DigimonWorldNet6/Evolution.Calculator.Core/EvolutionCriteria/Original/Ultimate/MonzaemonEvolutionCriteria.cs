@@ -8,7 +8,7 @@ public sealed class MonzaemonEvolutionCriteria : IEvolutionCriteria
 {
     public EvolutionStage EvolutionStage => EvolutionStage.Ultimate;
 
-    public EvolutionResult DigimonType => EvolutionResult.Monzaemon;
+    public EvolutionResult EvolutionResult => EvolutionResult.Monzaemon;
 
     public MainCriteriaStats Stats => new(hp: 3000, mp: 3000, off: 300, def: 300, speed: 300, brains: 300);
 

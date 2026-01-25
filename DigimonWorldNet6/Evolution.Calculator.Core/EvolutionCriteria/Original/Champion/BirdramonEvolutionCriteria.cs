@@ -8,7 +8,7 @@ public sealed class BirdramonEvolutionCriteria : IEvolutionCriteria
 {
     public EvolutionStage EvolutionStage => EvolutionStage.Champion;
 
-    public EvolutionResult DigimonType => EvolutionResult.Birdramon;
+    public EvolutionResult EvolutionResult => EvolutionResult.Birdramon;
 
     public MainCriteriaStats Stats => new(speed: 100);
 
@@ -16,5 +16,5 @@ public sealed class BirdramonEvolutionCriteria : IEvolutionCriteria
 
     public MainCriteriaWeight Weight => new(20);
 
-    public BonusCriteria BonusCriteria => new(techniqueCount: 35, precursorDigimon: EvolutionResult.Biyomon);
+    public BonusCriteria BonusCriteria => new(techniqueCount: 35, precursorDigimon: DigimonName.Biyomon);
 }

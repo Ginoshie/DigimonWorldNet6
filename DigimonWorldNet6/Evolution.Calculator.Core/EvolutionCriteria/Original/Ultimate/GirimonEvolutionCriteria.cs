@@ -8,7 +8,7 @@ public sealed class GiromonEvolutionCriteria : IEvolutionCriteria
 {
     public EvolutionStage EvolutionStage => EvolutionStage.Ultimate;
 
-    public EvolutionResult DigimonType => EvolutionResult.Giromon;
+    public EvolutionResult EvolutionResult => EvolutionResult.Giromon;
 
     public MainCriteriaStats Stats => new(off: 400, speed: 3200, brains: 400);
 

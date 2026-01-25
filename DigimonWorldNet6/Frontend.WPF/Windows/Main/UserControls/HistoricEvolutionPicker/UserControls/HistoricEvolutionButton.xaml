@@ -42,7 +42,7 @@
                         CommandParameter="{Binding}">
                     <Button.ToolTip>
                         <ToolTip Style="{StaticResource DefaultToolTipRightStyle}">
-                            <TextBlock Text="{Binding (models:DigimonIcon.DigimonType)}" />
+                            <TextBlock Text="{Binding (models:DigimonIcon.DigimonName)}" />
                         </ToolTip>
                     </Button.ToolTip>
                     <Image Source="{Binding (models:DigimonIcon.IconPath)}" Stretch="Fill">
