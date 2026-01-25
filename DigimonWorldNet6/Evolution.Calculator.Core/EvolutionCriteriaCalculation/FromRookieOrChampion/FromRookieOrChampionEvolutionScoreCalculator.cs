@@ -1,12 +1,31 @@
+using System;
 using DigimonWorld.Evolution.Calculator.Core.DataObjects;
 using DigimonWorld.Evolution.Calculator.Core.DataObjects.EvolutionCriteria;
+using Generics.Configuration;
+using Generics.Enums;
+using Generics.Services;
 
 namespace DigimonWorld.Evolution.Calculator.Core.EvolutionCriteriaCalculation.FromRookieOrChampion;
 
 public sealed class FromRookieOrChampionEvolutionScoreCalculator
 {
+    private bool _dontUseCarriedOverStats;
+
+    public FromRookieOrChampionEvolutionScoreCalculator()
+    {
+        UserConfigurationManager.CurrentEvolutionCalculatorConfig.Subscribe(OnEvolutionCalculatorConfigChanged);
+    }
+
+    private void OnEvolutionCalculatorConfigChanged(EvolutionCalculatorConfig evolutionCalculatorConfig) => _dontUseCarriedOverStats = evolutionCalculatorConfig.EvolutionCalculatorMode != EvolutionCalculatorMode.Original;
+
     public EvolutionScoreCalculationResult CalculateEvolutionScore(Digimon digimon, MainCriteriaStats statsCriteria, int carriedOverStatTotal, int carriedOverStatCount)
     {
+        if (_dontUseCarriedOverStats)
+        {
+            carriedOverStatTotal = 0;
+            carriedOverStatCount = 0;
+        }
+        
         int evolutionStatsTotal = 0;
         int evolutionStatCountTotal = 0;
 
