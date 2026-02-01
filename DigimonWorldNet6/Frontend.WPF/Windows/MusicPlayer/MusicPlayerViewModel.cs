@@ -107,7 +107,10 @@ public class MusicPlayerViewModel : BaseWindowViewModel, IDisposable
         get => _currentPosition;
         set
         {
-            if (!(Math.Abs(_currentPosition - value) > 0.1)) return;
+            if (!(Math.Abs(_currentPosition - value) > 0.1))
+            {
+                return;
+            }
 
             _currentPosition = value;
 
@@ -123,7 +126,10 @@ public class MusicPlayerViewModel : BaseWindowViewModel, IDisposable
         get => _songLength.TotalSeconds;
         private set
         {
-            if (Math.Abs(_songLength.TotalSeconds - value) < 0.1) return;
+            if (Math.Abs(_songLength.TotalSeconds - value) < 0.1)
+            {
+                return;
+            }
 
             _songLength = TimeSpan.FromSeconds(value);
 
@@ -139,7 +145,10 @@ public class MusicPlayerViewModel : BaseWindowViewModel, IDisposable
         get => _shuffleEnabled;
         private set
         {
-            if (value == _shuffleEnabled) return;
+            if (value == _shuffleEnabled)
+            {
+                return;
+            }
 
             _shuffleEnabled = value;
 
@@ -154,7 +163,10 @@ public class MusicPlayerViewModel : BaseWindowViewModel, IDisposable
         get => _repeatSingleSongEnabled;
         private set
         {
-            if (value == _repeatSingleSongEnabled) return;
+            if (value == _repeatSingleSongEnabled)
+            {
+                return;
+            }
 
             _repeatSingleSongEnabled = value;
 
@@ -175,7 +187,10 @@ public class MusicPlayerViewModel : BaseWindowViewModel, IDisposable
         get => _volume;
         set
         {
-            if (Math.Abs(Services.MusicPlayer.Volume - value) < 0.001) return;
+            if (Math.Abs(Services.MusicPlayer.Volume - value) < 0.001)
+            {
+                return;
+            }
 
             Services.MusicPlayer.Volume = value / 100;
 
@@ -298,7 +313,10 @@ public class MusicPlayerViewModel : BaseWindowViewModel, IDisposable
 
     private async Task OnMuteModeChanged(MuteMode muteMode)
     {
-        if (MuteEnabled && muteMode == MuteMode.Mute || !MuteEnabled && muteMode == MuteMode.Unmuted) return;
+        if (MuteEnabled && muteMode == MuteMode.Mute || !MuteEnabled && muteMode == MuteMode.Unmuted)
+        {
+            return;
+        }
 
         switch (muteMode)
         {

@@ -5,9 +5,9 @@ namespace DigimonWorld.Evolution.Calculator.Core.EvolutionCriteriaCalculation.Fr
 
 public sealed class CareMistakeCriteriaCalculator
 {
-    public bool CriteriaIsMet(Digimon digimon, MainCriteriaCareMistakes careMistakeCriteria)
+    public bool CriteriaIsMet(UserDigimon userDigimon, MainCriteriaCareMistakes careMistakeCriteria)
     {
-        return (digimon.CareMistakes <= careMistakeCriteria.CareMistakes && careMistakeCriteria.IsCareMistakesCriteriaAMaximum) ||
-               (digimon.CareMistakes >= careMistakeCriteria.CareMistakes && !careMistakeCriteria.IsCareMistakesCriteriaAMaximum);
+        return (userDigimon.CareMistakes <= careMistakeCriteria.CareMistakes && careMistakeCriteria.IsCareMistakesCriteriaAMaximum) ||
+               (userDigimon.CareMistakes >= careMistakeCriteria.CareMistakes && !careMistakeCriteria.IsCareMistakesCriteriaAMaximum);
     }
 }

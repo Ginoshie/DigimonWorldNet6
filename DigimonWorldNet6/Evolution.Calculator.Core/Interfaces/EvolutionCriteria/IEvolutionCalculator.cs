@@ -5,5 +5,5 @@ namespace DigimonWorld.Evolution.Calculator.Core.Interfaces.EvolutionCriteria;
 
 public interface IEvolutionCalculator
 {
-    public EvolutionResult DetermineEvolutionResult(Digimon digimon);
+    public EvolutionResult DetermineEvolutionResult(UserDigimon userDigimon);
 }

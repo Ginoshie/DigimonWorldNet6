@@ -13,5 +13,5 @@ public static class ServiceRelay
         EvolutionCalculator = new EvolutionCalculator();
     }
 
-    public static EvolutionResult CalculateEvolutionResult(Digimon digimon) => EvolutionCalculator.CalculateEvolutionResult(digimon);
+    public static EvolutionResult CalculateEvolutionResult(UserDigimon userDigimon) => EvolutionCalculator.CalculateEvolutionResult(userDigimon);
 }

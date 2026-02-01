@@ -1,12 +1,13 @@
 using Generics;
-using Generics.Constants;
 using Generics.Enums;
 
 namespace DigimonWorld.Evolution.Calculator.Core.DataObjects;
 
-public sealed class Digimon
+public sealed class UserDigimon
 {
-    public Digimon(DigimonName digimonName, int hp, int mp, int off, int def, int speed, int brains, int careMistakes, int weight, int happiness, int discipline, int battles, int techniqueCount)
+    private DigimonName _digimonName;
+
+    public UserDigimon(DigimonName digimonName, int hp, int mp, int off, int def, int speed, int brains, int careMistakes, int weight, int happiness, int discipline, int battles, int techniqueCount)
     {
         DigimonName = digimonName;
         HP = hp;
@@ -22,12 +23,20 @@ public sealed class Digimon
         Battles = battles;
         TechniqueCount = techniqueCount;
 
-         EvolutionStage = EvolutionStageMapper.Get(digimonName);
+        EvolutionStage = EvolutionStageMapper.Get(digimonName);
     }
 
-    public DigimonName DigimonName { get; }
+    public DigimonName DigimonName
+    {
+        get => _digimonName;
+        private set
+        {
+            EvolutionStage = EvolutionStageMapper.Get(value);
+            _digimonName = value;
+        }
+    }
 
-    public EvolutionStage EvolutionStage { get; }
+    public EvolutionStage EvolutionStage { get; private set; }
 
     public int HP { get; }
 

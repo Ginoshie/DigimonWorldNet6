@@ -5,11 +5,11 @@ namespace DigimonWorld.Evolution.Calculator.Core.EvolutionCriteriaCalculation.Fr
 
 public sealed class FromInTrainingEvolutionScoreCalculator
 {
-    public int CalculateEvolutionScore(Digimon digimon, MainCriteriaStats statsCriteria)
+    public int CalculateEvolutionScore(UserDigimon userDigimon, MainCriteriaStats statsCriteria)
     {
         int highestEvolutionStat = 0;
-        int hpScore = digimon.HP / 10;
-        int mpScore = digimon.MP / 10;
+        int hpScore = userDigimon.HP / 10;
+        int mpScore = userDigimon.MP / 10;
 
         if (statsCriteria.HP > 0 && hpScore > highestEvolutionStat)
         {
@@ -21,24 +21,24 @@ public sealed class FromInTrainingEvolutionScoreCalculator
             highestEvolutionStat = mpScore;
         }
 
-        if (statsCriteria.Off > 0 && digimon.Off > highestEvolutionStat)
+        if (statsCriteria.Off > 0 && userDigimon.Off > highestEvolutionStat)
         {
-            highestEvolutionStat = digimon.Off;
+            highestEvolutionStat = userDigimon.Off;
         }
 
-        if (statsCriteria.Def > 0 && digimon.Def > highestEvolutionStat)
+        if (statsCriteria.Def > 0 && userDigimon.Def > highestEvolutionStat)
         {
-            highestEvolutionStat = digimon.Def;
+            highestEvolutionStat = userDigimon.Def;
         }
 
-        if (statsCriteria.Speed > 0 && digimon.Speed > highestEvolutionStat)
+        if (statsCriteria.Speed > 0 && userDigimon.Speed > highestEvolutionStat)
         {
-            highestEvolutionStat = digimon.Speed;
+            highestEvolutionStat = userDigimon.Speed;
         }
 
-        if (statsCriteria.Brains > 0 && digimon.Brains > highestEvolutionStat)
+        if (statsCriteria.Brains > 0 && userDigimon.Brains > highestEvolutionStat)
         {
-            highestEvolutionStat = digimon.Brains;
+            highestEvolutionStat = userDigimon.Brains;
         }
 
         return highestEvolutionStat;

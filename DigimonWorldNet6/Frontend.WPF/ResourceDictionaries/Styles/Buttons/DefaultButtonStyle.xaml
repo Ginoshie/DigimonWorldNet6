@@ -17,6 +17,10 @@
                             <Setter TargetName="OuterBorder" Property="BorderBrush" Value="#060100" />
                             <Setter TargetName="InnerBorder" Property="BorderBrush" Value="#6789A5" />
                         </Trigger>
+
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Opacity" Value="0.5"/>
+                        </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>

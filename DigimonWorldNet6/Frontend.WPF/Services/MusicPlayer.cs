@@ -77,7 +77,10 @@ public static class MusicPlayer
         get => SoundOut.Volume;
         set
         {
-            if (Math.Abs(SoundOut.Volume - value) < 0.001) return;
+            if (Math.Abs(SoundOut.Volume - value) < 0.001)
+            {
+                return;
+            }
 
             SoundOut.Volume = value;
             
@@ -106,11 +109,17 @@ public static class MusicPlayer
 
         LoadCurrentTrack();
 
-        if (PlayMode == PlayMode.Stopped) return;
+        if (PlayMode == PlayMode.Stopped)
+        {
+            return;
+        }
 
         SoundOut.Play();
 
-        if (_currentSongTitle == LEOMON_SONG_TITLE) return;
+        if (_currentSongTitle == LEOMON_SONG_TITLE)
+        {
+            return;
+        }
 
         EventHub.SignalPreviousSongStarted();
     }
@@ -143,11 +152,17 @@ public static class MusicPlayer
 
         LoadCurrentTrack();
 
-        if (PlayMode == PlayMode.Stopped) return;
+        if (PlayMode == PlayMode.Stopped)
+        {
+            return;
+        }
 
         SoundOut.Play();
 
-        if (_currentSongTitle == LEOMON_SONG_TITLE) return;
+        if (_currentSongTitle == LEOMON_SONG_TITLE)
+        {
+            return;
+        }
 
         EventHub.SignalNextSongStarted();
     }
@@ -161,7 +176,10 @@ public static class MusicPlayer
 
     public static void Mute()
     {
-        if (Volume == 0) return;
+        if (Volume == 0)
+        {
+            return;
+        }
 
         _volumeBeforeMute = SoundOut.Volume;
 
@@ -170,7 +188,10 @@ public static class MusicPlayer
 
     public static void UnMute()
     {
-        if (_volumeBeforeMute == 0) return;
+        if (_volumeBeforeMute == 0)
+        {
+            return;
+        }
 
         Volume = _volumeBeforeMute;
     }
@@ -323,7 +344,10 @@ public static class MusicPlayer
 
     private static void OnPlaybackStopped(object? sender, PlaybackStoppedEventArgs e)
     {
-        if (SoundOut.PlaybackState != PlaybackState.Stopped || PlayMode == PlayMode.Paused) return;
+        if (SoundOut.PlaybackState != PlaybackState.Stopped || PlayMode == PlayMode.Paused)
+        {
+            return;
+        }
 
         if (RepeatMode == RepeatMode.All)
         {

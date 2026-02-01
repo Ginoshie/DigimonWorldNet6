@@ -16,9 +16,9 @@ public sealed class FromRookieOrChampionEvolutionScoreCalculator
         UserConfigurationManager.CurrentEvolutionCalculatorConfig.Subscribe(OnEvolutionCalculatorConfigChanged);
     }
 
-    private void OnEvolutionCalculatorConfigChanged(EvolutionCalculatorConfig evolutionCalculatorConfig) => _dontUseCarriedOverStats = evolutionCalculatorConfig.EvolutionCalculatorMode != EvolutionCalculatorMode.Original;
+    private void OnEvolutionCalculatorConfigChanged(EvolutionCalculatorConfig evolutionCalculatorConfig) => _dontUseCarriedOverStats = evolutionCalculatorConfig.GameVariant != GameVariant.Original;
 
-    public EvolutionScoreCalculationResult CalculateEvolutionScore(Digimon digimon, MainCriteriaStats statsCriteria, int carriedOverStatTotal, int carriedOverStatCount)
+    public EvolutionScoreCalculationResult CalculateEvolutionScore(UserDigimon userDigimon, MainCriteriaStats statsCriteria, int carriedOverStatTotal, int carriedOverStatCount)
     {
         if (_dontUseCarriedOverStats)
         {
@@ -31,37 +31,37 @@ public sealed class FromRookieOrChampionEvolutionScoreCalculator
 
         if (statsCriteria.HP > 0)
         {
-            evolutionStatsTotal += digimon.HP / 10;
+            evolutionStatsTotal += userDigimon.HP / 10;
             evolutionStatCountTotal++;
         }
 
         if (statsCriteria.MP > 0)
         {
-            evolutionStatsTotal += digimon.MP / 10;
+            evolutionStatsTotal += userDigimon.MP / 10;
             evolutionStatCountTotal++;
         }
 
         if (statsCriteria.Off > 0)
         {
-            evolutionStatsTotal += digimon.Off;
+            evolutionStatsTotal += userDigimon.Off;
             evolutionStatCountTotal++;
         }
 
         if (statsCriteria.Def > 0)
         {
-            evolutionStatsTotal += digimon.Def;
+            evolutionStatsTotal += userDigimon.Def;
             evolutionStatCountTotal++;
         }
 
         if (statsCriteria.Speed > 0)
         {
-            evolutionStatsTotal += digimon.Speed;
+            evolutionStatsTotal += userDigimon.Speed;
             evolutionStatCountTotal++;
         }
 
         if (statsCriteria.Brains > 0)
         {
-            evolutionStatsTotal += digimon.Brains;
+            evolutionStatsTotal += userDigimon.Brains;
             evolutionStatCountTotal++;
         }
 

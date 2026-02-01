@@ -1,69 +1,119 @@
+using System;
 using System.Collections.Generic;
+using System.Linq;
+using DigimonWorld.Evolution.Calculator.Core.EvolutionCriteria.Myotismon.Ultimate;
 using DigimonWorld.Evolution.Calculator.Core.EvolutionCriteria.Original.Champion;
 using DigimonWorld.Evolution.Calculator.Core.EvolutionCriteria.Original.Ultimate;
+using DigimonWorld.Evolution.Calculator.Core.EvolutionCriteria.Panjyamon.Champion;
+using DigimonWorld.Evolution.Calculator.Core.EvolutionCriteria.Vice21AndUp.Ultimate;
 using DigimonWorld.Evolution.Calculator.Core.Interfaces.EvolutionCriteria;
+using Generics.Constants;
 using Generics.Enums;
+using Generics.Extensions;
+using Generics.Services;
 
 namespace DigimonWorld.Evolution.Calculator.Core.EvolutionCriteriaCalculation.FromRookieOrChampion;
 
 public sealed class FromRookieOrChampionEvolutionMapper
 {
-    private readonly Dictionary<DigimonName, IEnumerable<IEvolutionCriteria>> _fromRookieOrChampionEvolutionMappings = new();
+    private readonly Dictionary<DigimonType, IEnumerable<IEvolutionCriteria>> _fromRookieOrChampionEvolutionMappings = new();
+
+    private GameVariant _gameVariant = GameVariant.Original;
 
     public FromRookieOrChampionEvolutionMapper()
     {
-        _fromRookieOrChampionEvolutionMappings[DigimonName.Agumon] = AgumonEvolutions;
-        _fromRookieOrChampionEvolutionMappings[DigimonName.Airdramon] = AirdramonEvolutions;
-        _fromRookieOrChampionEvolutionMappings[DigimonName.Angemon] = AngemonEvolutions;
-        _fromRookieOrChampionEvolutionMappings[DigimonName.Bakemon] = BakemonEvolutions;
-        _fromRookieOrChampionEvolutionMappings[DigimonName.Betamon] = BetamonEvolutions;
-        _fromRookieOrChampionEvolutionMappings[DigimonName.Birdramon] = BirdramonEvolutions;
-        _fromRookieOrChampionEvolutionMappings[DigimonName.Biyomon] = BiyomonEvolutions;
-        _fromRookieOrChampionEvolutionMappings[DigimonName.Centarumon] = CentarumonEvolutions;
-        _fromRookieOrChampionEvolutionMappings[DigimonName.Coelamon] = CoelamonEvolutions;
-        _fromRookieOrChampionEvolutionMappings[DigimonName.Devimon] = DevimonEvolutions;
-        _fromRookieOrChampionEvolutionMappings[DigimonName.Drimogemon] = DrimogemonEvolutions;
-        _fromRookieOrChampionEvolutionMappings[DigimonName.Elecmon] = ElecmonEvolutions;
-        _fromRookieOrChampionEvolutionMappings[DigimonName.Frigimon] = FrigimonEvolutions;
-        _fromRookieOrChampionEvolutionMappings[DigimonName.Gabumon] = GabumonEvolutions;
-        _fromRookieOrChampionEvolutionMappings[DigimonName.Garurumon] = GarurumonEvolutions;
-        _fromRookieOrChampionEvolutionMappings[DigimonName.Greymon] = GreymonEvolutions;
-        _fromRookieOrChampionEvolutionMappings[DigimonName.Kabuterimon] = KabuterimonEvolutions;
-        _fromRookieOrChampionEvolutionMappings[DigimonName.Kokatorimon] = KokatorimonEvolutions;
-        _fromRookieOrChampionEvolutionMappings[DigimonName.Kunemon] = KunemonEvolutions;
-        _fromRookieOrChampionEvolutionMappings[DigimonName.Kuwagamon] = KuwagamonEvolutions;
-        _fromRookieOrChampionEvolutionMappings[DigimonName.Leomon] = LeomonEvolutions;
-        _fromRookieOrChampionEvolutionMappings[DigimonName.Meramon] = MeramonEvolutions;
-        _fromRookieOrChampionEvolutionMappings[DigimonName.Mojyamon] = MojyamonEvolutions;
-        _fromRookieOrChampionEvolutionMappings[DigimonName.Monochromon] = MonochromonEvolutions;
-        _fromRookieOrChampionEvolutionMappings[DigimonName.Nanimon] = NanimonEvolutions;
-        _fromRookieOrChampionEvolutionMappings[DigimonName.Ninjamon] = NinjamonEvolutions;
-        _fromRookieOrChampionEvolutionMappings[DigimonName.Numemon] = NumemonEvolutions;
-        _fromRookieOrChampionEvolutionMappings[DigimonName.Ogremon] = OgremonEvolutions;
-        _fromRookieOrChampionEvolutionMappings[DigimonName.Palmon] = PalmonEvolutions;
-        _fromRookieOrChampionEvolutionMappings[DigimonName.Patamon] = PatamonEvolutions;
-        _fromRookieOrChampionEvolutionMappings[DigimonName.Penguinmon] = PenguinmonEvolutions;
-        _fromRookieOrChampionEvolutionMappings[DigimonName.Seadramon] = SeadramonEvolutions;
-        _fromRookieOrChampionEvolutionMappings[DigimonName.Shellmon] = ShellmonEvolutions;
-        _fromRookieOrChampionEvolutionMappings[DigimonName.Sukamon] = SukamonEvolutions;
-        _fromRookieOrChampionEvolutionMappings[DigimonName.Tyrannomon] = TyrannomonEvolutions;
-        _fromRookieOrChampionEvolutionMappings[DigimonName.Unimon] = UnimonEvolutions;
-        _fromRookieOrChampionEvolutionMappings[DigimonName.Vegiemon] = VegiemonEvolutions;
-        _fromRookieOrChampionEvolutionMappings[DigimonName.Whamon] = WhamonEvolutions;
+        UserConfigurationManager.CurrentEvolutionCalculatorConfig.Subscribe(evolutionCalculatorConfig => _gameVariant = evolutionCalculatorConfig.GameVariant);
+
+        _fromRookieOrChampionEvolutionMappings[DigimonTypes.Agumon] = AgumonEvolutions;
+        _fromRookieOrChampionEvolutionMappings[DigimonTypes.Airdramon] = AirdramonEvolutions;
+        _fromRookieOrChampionEvolutionMappings[DigimonTypes.Angemon] = AngemonEvolutions;
+        _fromRookieOrChampionEvolutionMappings[DigimonTypes.AngemonVice] = AngemonViceEvolutions;
+        _fromRookieOrChampionEvolutionMappings[DigimonTypes.Bakemon] = BakemonEvolutions;
+        _fromRookieOrChampionEvolutionMappings[DigimonTypes.Betamon] = BetamonEvolutions;
+        _fromRookieOrChampionEvolutionMappings[DigimonTypes.Birdramon] = BirdramonEvolutions;
+        _fromRookieOrChampionEvolutionMappings[DigimonTypes.BirdramonVice] = BirdramonViceEvolutions;
+        _fromRookieOrChampionEvolutionMappings[DigimonTypes.Biyomon] = BiyomonEvolutions;
+        _fromRookieOrChampionEvolutionMappings[DigimonTypes.Centarumon] = CentarumonEvolutions;
+        _fromRookieOrChampionEvolutionMappings[DigimonTypes.CentarumonVice] = CentarumonViceEvolutions;
+        _fromRookieOrChampionEvolutionMappings[DigimonTypes.Coelamon] = CoelamonEvolutions;
+        _fromRookieOrChampionEvolutionMappings[DigimonTypes.CoelamonVice] = CoelamonViceEvolutions;
+        _fromRookieOrChampionEvolutionMappings[DigimonTypes.Devimon] = DevimonEvolutions;
+        _fromRookieOrChampionEvolutionMappings[DigimonTypes.DevimonMyotismon] = DevimonMyotismonEvolutions;
+        _fromRookieOrChampionEvolutionMappings[DigimonTypes.Drimogemon] = DrimogemonEvolutions;
+        _fromRookieOrChampionEvolutionMappings[DigimonTypes.DrimogemonVice] = DrimogemonViceEvolutions;
+        _fromRookieOrChampionEvolutionMappings[DigimonTypes.Elecmon] = ElecmonEvolutions;
+        _fromRookieOrChampionEvolutionMappings[DigimonTypes.Frigimon] = FrigimonEvolutions;
+        _fromRookieOrChampionEvolutionMappings[DigimonTypes.FrigimonVice] = FrigimonViceEvolutions;
+        _fromRookieOrChampionEvolutionMappings[DigimonTypes.Gabumon] = GabumonEvolutions;
+        _fromRookieOrChampionEvolutionMappings[DigimonTypes.GabumonPanjyamon] = GabumonPanjyamonEvolutions;
+        _fromRookieOrChampionEvolutionMappings[DigimonTypes.Garurumon] = GarurumonEvolutions;
+        _fromRookieOrChampionEvolutionMappings[DigimonTypes.GarurumonVice] = GarurumonViceEvolutions;
+        _fromRookieOrChampionEvolutionMappings[DigimonTypes.Greymon] = GreymonEvolutions;
+        _fromRookieOrChampionEvolutionMappings[DigimonTypes.GreymonVice] = GreymonViceEvolutions;
+        _fromRookieOrChampionEvolutionMappings[DigimonTypes.Kabuterimon] = KabuterimonEvolutions;
+        _fromRookieOrChampionEvolutionMappings[DigimonTypes.Kokatorimon] = KokatorimonEvolutions;
+        _fromRookieOrChampionEvolutionMappings[DigimonTypes.Kunemon] = KunemonEvolutions;
+        _fromRookieOrChampionEvolutionMappings[DigimonTypes.Kuwagamon] = KuwagamonEvolutions;
+        _fromRookieOrChampionEvolutionMappings[DigimonTypes.Leomon] = LeomonEvolutions;
+        _fromRookieOrChampionEvolutionMappings[DigimonTypes.Meramon] = MeramonEvolutions;
+        _fromRookieOrChampionEvolutionMappings[DigimonTypes.MeramonVice] = MeramonViceEvolutions;
+        _fromRookieOrChampionEvolutionMappings[DigimonTypes.Mojyamon] = MojyamonEvolutions;
+        _fromRookieOrChampionEvolutionMappings[DigimonTypes.Monochromon] = MonochromonEvolutions;
+        _fromRookieOrChampionEvolutionMappings[DigimonTypes.Nanimon] = NanimonEvolutions;
+        _fromRookieOrChampionEvolutionMappings[DigimonTypes.NanimonMyotismon] = NanimonMyotismonEvolutions;
+        _fromRookieOrChampionEvolutionMappings[DigimonTypes.Ninjamon] = NinjamonEvolutions;
+        _fromRookieOrChampionEvolutionMappings[DigimonTypes.Numemon] = NumemonEvolutions;
+        _fromRookieOrChampionEvolutionMappings[DigimonTypes.NumemonVice] = NumemonViceEvolutions;
+        _fromRookieOrChampionEvolutionMappings[DigimonTypes.Ogremon] = OgremonEvolutions;
+        _fromRookieOrChampionEvolutionMappings[DigimonTypes.OgremonVice] = OgremonViceEvolutions;
+        _fromRookieOrChampionEvolutionMappings[DigimonTypes.Palmon] = PalmonEvolutions;
+        _fromRookieOrChampionEvolutionMappings[DigimonTypes.PanjyamonPanjyamon] = PanjamonPanjamonEvolutions;
+        _fromRookieOrChampionEvolutionMappings[DigimonTypes.PanjamonPanjamonAndMyotismon] = PanjamonPanjamonAndMyotismonEvolutions;
+        _fromRookieOrChampionEvolutionMappings[DigimonTypes.Patamon] = PatamonEvolutions;
+        _fromRookieOrChampionEvolutionMappings[DigimonTypes.Penguinmon] = PenguinmonEvolutions;
+        _fromRookieOrChampionEvolutionMappings[DigimonTypes.Seadramon] = SeadramonEvolutions;
+        _fromRookieOrChampionEvolutionMappings[DigimonTypes.Shellmon] = ShellmonEvolutions;
+        _fromRookieOrChampionEvolutionMappings[DigimonTypes.Sukamon] = SukamonEvolutions;
+        _fromRookieOrChampionEvolutionMappings[DigimonTypes.SukamonVice] = SukamonViceEvolutions;
+        _fromRookieOrChampionEvolutionMappings[DigimonTypes.Tyrannomon] = TyrannomonEvolutions;
+        _fromRookieOrChampionEvolutionMappings[DigimonTypes.Unimon] = UnimonEvolutions;
+        _fromRookieOrChampionEvolutionMappings[DigimonTypes.Vegiemon] = VegiemonEvolutions;
+        _fromRookieOrChampionEvolutionMappings[DigimonTypes.VegiemonVice] = VegiemonViceEvolutions;
+        _fromRookieOrChampionEvolutionMappings[DigimonTypes.VegiemonMyotismon] = VegiemonMyotismonEvolutions;
+        _fromRookieOrChampionEvolutionMappings[DigimonTypes.Whamon] = WhamonEvolutions;
     }
 
-    public IEnumerable<IEvolutionCriteria> this[DigimonName digimonName]
+    public List<IEvolutionCriteria> GetEvolutionCriteria(DigimonName digimonName)
     {
-        get
-        {
-            if (_fromRookieOrChampionEvolutionMappings.TryGetValue(digimonName, out IEnumerable<IEvolutionCriteria>? evolutionResult))
-            {
-                return evolutionResult;
-            }
+        const GameVariant patchFlags = GameVariant.MyotismonPatch | GameVariant.PanjyamonPatch;
 
-            throw new KeyNotFoundException($"Evolution mapping for {digimonName} was not found in {nameof(FromRookieOrChampionEvolutionMapper)}");
+        bool isVice = _gameVariant.HasFlag(GameVariant.Vice);
+        GameVariant activePatches = _gameVariant & patchFlags;
+
+        List<KeyValuePair<DigimonType, IEnumerable<IEvolutionCriteria>>> candidates = _fromRookieOrChampionEvolutionMappings
+            .Where(e =>
+                e.Key.Digimon == digimonName &&
+                isVice
+                    ? e.Key.IncludeGameVariantFlags.HasFlag(GameVariant.Vice)
+                    : e.Key.IncludeGameVariantFlags.HasFlag(GameVariant.Original))
+            .ToList();
+
+        if (isVice)
+        {
+            candidates = candidates
+                .Where(e => (e.Key.IncludeGameVariantFlags & patchFlags) == activePatches)
+                .ToList();
         }
+        else
+        {
+            candidates = candidates
+                .Where(e => (e.Key.IncludeGameVariantFlags & patchFlags) == 0)
+                .ToList();
+        }
+
+        return candidates.Single().Value.ToList();
     }
+
 
     private IEnumerable<IEvolutionCriteria> AgumonEvolutions { get; } =
     [
@@ -81,6 +131,11 @@ public sealed class FromRookieOrChampionEvolutionMapper
         new AndromonEvolutionCriteria(), new PhoenixmonEvolutionCriteria()
     ];
 
+    private IEnumerable<IEvolutionCriteria> AngemonViceEvolutions { get; } =
+    [
+        new MetalEtemonEvolutionCriteria(), new AndromonEvolutionCriteria(), new PhoenixmonEvolutionCriteria()
+    ];
+
     private IEnumerable<IEvolutionCriteria> BakemonEvolutions { get; } =
     [
         new SkullGreymonEvolutionCriteria(), new GiromonEvolutionCriteria()
@@ -96,6 +151,11 @@ public sealed class FromRookieOrChampionEvolutionMapper
         new PhoenixmonEvolutionCriteria()
     ];
 
+    private IEnumerable<IEvolutionCriteria> BirdramonViceEvolutions { get; } =
+    [
+        new PhoenixmonEvolutionCriteria(), new GigadramonEvolutionCriteria()
+    ];
+
     private IEnumerable<IEvolutionCriteria> BiyomonEvolutions { get; } =
     [
         new BirdramonEvolutionCriteria(), new AirdramonEvolutionCriteria(), new KokatorimonEvolutionCriteria(), new UnimonEvolutionCriteria(), new KabuterimonEvolutionCriteria()
@@ -106,9 +166,19 @@ public sealed class FromRookieOrChampionEvolutionMapper
         new AndromonEvolutionCriteria(), new GiromonEvolutionCriteria()
     ];
 
+    private IEnumerable<IEvolutionCriteria> CentarumonViceEvolutions { get; } =
+    [
+        new GigadramonEvolutionCriteria(), new AndromonEvolutionCriteria(), new GiromonEvolutionCriteria()
+    ];
+
     private IEnumerable<IEvolutionCriteria> CoelamonEvolutions { get; } =
     [
         new MegaSeadramonEvolutionCriteria()
+    ];
+
+    private IEnumerable<IEvolutionCriteria> CoelamonViceEvolutions { get; } =
+    [
+        new MegaSeadramonEvolutionCriteria(), new WeregarurumonEvolutionCriteria()
     ];
 
     private IEnumerable<IEvolutionCriteria> DevimonEvolutions { get; } =
@@ -116,9 +186,19 @@ public sealed class FromRookieOrChampionEvolutionMapper
         new SkullGreymonEvolutionCriteria(), new MegadramonEvolutionCriteria()
     ];
 
+    private IEnumerable<IEvolutionCriteria> DevimonMyotismonEvolutions { get; } =
+    [
+        new MyotismonEvolutionCriteria(), new SkullGreymonEvolutionCriteria(), new MegadramonEvolutionCriteria()
+    ];
+
     private IEnumerable<IEvolutionCriteria> DrimogemonEvolutions { get; } =
     [
         new MetalGreymonEvolutionCriteria()
+    ];
+
+    private IEnumerable<IEvolutionCriteria> DrimogemonViceEvolutions { get; } =
+    [
+        new MetalGreymonEvolutionCriteria(), new MetalEtemonEvolutionCriteria()
     ];
 
     private IEnumerable<IEvolutionCriteria> ElecmonEvolutions { get; } =
@@ -131,9 +211,20 @@ public sealed class FromRookieOrChampionEvolutionMapper
         new MetalMamemonEvolutionCriteria(), new MamemonEvolutionCriteria()
     ];
 
+    private IEnumerable<IEvolutionCriteria> FrigimonViceEvolutions { get; } =
+    [
+        new WeregarurumonEvolutionCriteria(), new MetalMamemonEvolutionCriteria(), new MamemonEvolutionCriteria()
+    ];
+
     private IEnumerable<IEvolutionCriteria> GabumonEvolutions { get; } =
     [
         new CentarumonEvolutionCriteria(), new MonochromonEvolutionCriteria(), new DrimogemonEvolutionCriteria(), new TyrannomonEvolutionCriteria(), new OgremonEvolutionCriteria(),
+        new GarurumonEvolutionCriteria()
+    ];
+
+    private IEnumerable<IEvolutionCriteria> GabumonPanjyamonEvolutions { get; } =
+    [
+        new CentarumonEvolutionCriteria(), new MonochromonEvolutionCriteria(), new DrimogemonEvolutionCriteria(), new TyrannomonEvolutionCriteria(), new PanjyamonEvolutionCriteria(),
         new GarurumonEvolutionCriteria()
     ];
 
@@ -142,9 +233,19 @@ public sealed class FromRookieOrChampionEvolutionMapper
         new SkullGreymonEvolutionCriteria(), new MegaSeadramonEvolutionCriteria()
     ];
 
+    private IEnumerable<IEvolutionCriteria> GarurumonViceEvolutions { get; } =
+    [
+        new WeregarurumonEvolutionCriteria(), new SkullGreymonEvolutionCriteria(), new MegaSeadramonEvolutionCriteria()
+    ];
+
     private IEnumerable<IEvolutionCriteria> GreymonEvolutions { get; } =
     [
         new MetalGreymonEvolutionCriteria(), new SkullGreymonEvolutionCriteria()
+    ];
+
+    private IEnumerable<IEvolutionCriteria> GreymonViceEvolutions { get; } =
+    [
+        new GigadramonEvolutionCriteria(), new MetalGreymonEvolutionCriteria(), new SkullGreymonEvolutionCriteria()
     ];
 
     private IEnumerable<IEvolutionCriteria> KabuterimonEvolutions { get; } =
@@ -157,7 +258,7 @@ public sealed class FromRookieOrChampionEvolutionMapper
         new PhoenixmonEvolutionCriteria(), new PiximonEvolutionCriteria()
     ];
 
-    private IEnumerable<IEvolutionCriteria> KunemonEvolutions { get; } = 
+    private IEnumerable<IEvolutionCriteria> KunemonEvolutions { get; } =
     [
         new BakemonEvolutionCriteria(), new KabuterimonEvolutionCriteria(), new KuwagamonEvolutionCriteria(), new VegiemonEvolutionCriteria()
     ];
@@ -177,6 +278,11 @@ public sealed class FromRookieOrChampionEvolutionMapper
         new MetalGreymonEvolutionCriteria(), new AndromonEvolutionCriteria()
     ];
 
+    private IEnumerable<IEvolutionCriteria> MeramonViceEvolutions { get; } =
+    [
+        new GigadramonEvolutionCriteria(), new MetalGreymonEvolutionCriteria(), new AndromonEvolutionCriteria()
+    ];
+
     private IEnumerable<IEvolutionCriteria> MojyamonEvolutions { get; } =
     [
         new SkullGreymonEvolutionCriteria(), new MamemonEvolutionCriteria()
@@ -192,6 +298,11 @@ public sealed class FromRookieOrChampionEvolutionMapper
         new DigitamamonEvolutionCriteria()
     ];
 
+    private IEnumerable<IEvolutionCriteria> NanimonMyotismonEvolutions { get; } =
+    [
+        new DigitamamonEvolutionCriteria(), new MyotismonEvolutionCriteria()
+    ];
+
     private IEnumerable<IEvolutionCriteria> NinjamonEvolutions { get; } =
     [
         new PiximonEvolutionCriteria(), new MetalMamemonEvolutionCriteria(), new MamemonEvolutionCriteria()
@@ -202,14 +313,35 @@ public sealed class FromRookieOrChampionEvolutionMapper
         new MonzaemonEvolutionCriteria()
     ];
 
+    private IEnumerable<IEvolutionCriteria> NumemonViceEvolutions { get; } =
+    [
+        new MonzaemonEvolutionCriteria(), new MachinedramonEvolutionCriteria()
+    ];
+
     private IEnumerable<IEvolutionCriteria> OgremonEvolutions { get; } =
     [
         new AndromonEvolutionCriteria(), new GiromonEvolutionCriteria()
     ];
 
+
+    private IEnumerable<IEvolutionCriteria> OgremonViceEvolutions { get; } =
+    [
+        new MetalEtemonEvolutionCriteria(), new AndromonEvolutionCriteria(), new GiromonEvolutionCriteria()
+    ];
+
     private IEnumerable<IEvolutionCriteria> PalmonEvolutions { get; } =
     [
         new KuwagamonEvolutionCriteria(), new VegiemonEvolutionCriteria(), new NinjamonEvolutionCriteria(), new WhamonEvolutionCriteria(), new CoelamonEvolutionCriteria()
+    ];
+
+    private IEnumerable<IEvolutionCriteria> PanjamonPanjamonEvolutions { get; } =
+    [
+        new GigadramonEvolutionCriteria(), new MetalEtemonEvolutionCriteria(), new MachinedramonEvolutionCriteria()
+    ];
+
+    private IEnumerable<IEvolutionCriteria> PanjamonPanjamonAndMyotismonEvolutions { get; } =
+    [
+        new GigadramonEvolutionCriteria(), new MetalEtemonEvolutionCriteria(), new MyotismonEvolutionCriteria()
     ];
 
     private IEnumerable<IEvolutionCriteria> PatamonEvolutions { get; } =
@@ -238,6 +370,11 @@ public sealed class FromRookieOrChampionEvolutionMapper
         new EtemonEvolutionCriteria()
     ];
 
+    private IEnumerable<IEvolutionCriteria> SukamonViceEvolutions { get; } =
+    [
+        new EtemonEvolutionCriteria(), new MachinedramonEvolutionCriteria()
+    ];
+
     private IEnumerable<IEvolutionCriteria> TyrannomonEvolutions { get; } =
     [
         new MetalGreymonEvolutionCriteria(), new MegadramonEvolutionCriteria()
@@ -251,6 +388,16 @@ public sealed class FromRookieOrChampionEvolutionMapper
     private IEnumerable<IEvolutionCriteria> VegiemonEvolutions { get; } =
     [
         new PiximonEvolutionCriteria()
+    ];
+
+    private IEnumerable<IEvolutionCriteria> VegiemonViceEvolutions { get; } =
+    [
+        new PiximonEvolutionCriteria(), new MachinedramonEvolutionCriteria()
+    ];
+
+    private IEnumerable<IEvolutionCriteria> VegiemonMyotismonEvolutions { get; } =
+    [
+        new PiximonEvolutionCriteria(), new MyotismonEvolutionCriteria()
     ];
 
     private IEnumerable<IEvolutionCriteria> WhamonEvolutions { get; } =

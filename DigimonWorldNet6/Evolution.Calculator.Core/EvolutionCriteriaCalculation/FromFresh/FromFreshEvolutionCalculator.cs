@@ -9,11 +9,13 @@ public sealed class FromFreshEvolutionCalculator : IEvolutionCalculator
 {
     private readonly FromFreshEvolutionMapper _fromFreshEvolutionMapper = new();
     
-    public EvolutionResult DetermineEvolutionResult(Digimon digimon)
+    public EvolutionResult DetermineEvolutionResult(UserDigimon userDigimon)
     {
-        if (digimon.EvolutionStage != EvolutionStage.Fresh) 
-            throw new ArgumentException($"{digimon.DigimonName} is not a {nameof(EvolutionStage.Fresh)} stage digimon.");
-        
-        return _fromFreshEvolutionMapper[digimon.DigimonName];
+        if (userDigimon.EvolutionStage != EvolutionStage.Fresh)
+        {
+            throw new ArgumentException($"{userDigimon.DigimonName} is not a {nameof(EvolutionStage.Fresh)} stage digimon.");
+        }
+
+        return _fromFreshEvolutionMapper[userDigimon.DigimonName];
     }
 }

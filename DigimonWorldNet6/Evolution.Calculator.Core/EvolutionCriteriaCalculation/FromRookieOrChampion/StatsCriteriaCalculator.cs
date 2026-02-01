@@ -5,13 +5,13 @@ namespace DigimonWorld.Evolution.Calculator.Core.EvolutionCriteriaCalculation.Fr
 
 public sealed class StatsCriteriaCalculator
 {
-    public bool CriteriaIsMet(Digimon digimon, MainCriteriaStats statsCriteria)
+    public bool CriteriaIsMet(UserDigimon userDigimon, MainCriteriaStats statsCriteria)
     {
-        return digimon.HP >= statsCriteria.HP &&
-               digimon.MP >= statsCriteria.MP &&
-               digimon.Off >= statsCriteria.Off &&
-               digimon.Speed >= statsCriteria.Speed &&
-               digimon.Def >= statsCriteria.Def &&
-               digimon.Brains >= statsCriteria.Brains;
+        return userDigimon.HP >= statsCriteria.HP &&
+               userDigimon.MP >= statsCriteria.MP &&
+               userDigimon.Off >= statsCriteria.Off &&
+               userDigimon.Speed >= statsCriteria.Speed &&
+               userDigimon.Def >= statsCriteria.Def &&
+               userDigimon.Brains >= statsCriteria.Brains;
     }
 }

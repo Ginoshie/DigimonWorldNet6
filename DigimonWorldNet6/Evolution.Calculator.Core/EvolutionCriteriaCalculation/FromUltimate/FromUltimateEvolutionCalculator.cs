@@ -7,11 +7,13 @@ namespace DigimonWorld.Evolution.Calculator.Core.EvolutionCriteriaCalculation.Fr
 
 public sealed class FromUltimateEvolutionCalculator : IEvolutionCalculator
 {
-    public EvolutionResult DetermineEvolutionResult(Digimon digimon)
+    public EvolutionResult DetermineEvolutionResult(UserDigimon userDigimon)
     {
-        if (digimon.EvolutionStage != EvolutionStage.Ultimate) 
-            throw new ArgumentException($"{digimon.DigimonName} is not a {nameof(EvolutionStage.Ultimate)} stage digimon.");
-        
+        if (userDigimon.EvolutionStage != EvolutionStage.Ultimate)
+        {
+            throw new ArgumentException($"{userDigimon.DigimonName} is not an {nameof(EvolutionStage.Ultimate)} stage digimon.");
+        }
+
         return EvolutionResult.None;
     }
 }

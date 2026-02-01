@@ -24,7 +24,7 @@ public class FromRookieOrChampionEvolutionMapperTests
             .Build();
 
         // Act
-        Func<IEnumerable<IEvolutionCriteria>> mappingNotThrowingException = () => sut[digimonName];
+        Func<IEnumerable<IEvolutionCriteria>> mappingNotThrowingException = () => sut.GetEvolutionCriteria(digimonName);
 
         // Assert
         mappingNotThrowingException.ShouldNotThrow();
@@ -38,7 +38,7 @@ public class FromRookieOrChampionEvolutionMapperTests
             .Build();
 
         // Act
-        Func<object?> mappingThrowingException = () => sut[digimonName];
+        Func<object?> mappingThrowingException = () => sut.GetEvolutionCriteria(digimonName);
 
         // Assert
         mappingThrowingException.ShouldThrow<Exception>();

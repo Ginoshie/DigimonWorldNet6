@@ -12,11 +12,14 @@ public sealed class FromInTrainingEvolutionCalculator : IEvolutionCalculator
     private readonly FromInTrainingEvolutionMapper _fromInTrainingEvolutionMapper = new();
     private readonly FromInTrainingEvolutionScoreCalculator _fromInTrainingEvolutionScoreCalculator = new();
 
-    public EvolutionResult DetermineEvolutionResult(Digimon digimon)
+    public EvolutionResult DetermineEvolutionResult(UserDigimon userDigimon)
     {
-        if (digimon.EvolutionStage != EvolutionStage.InTraining) throw new ArgumentException($"{digimon.DigimonName} is not a {nameof(EvolutionStage.InTraining)} stage digimon.");
-        
-        List<IEvolutionCriteria> evolutionCriteriaOfPossibleEvolutions = _fromInTrainingEvolutionMapper[digimon.DigimonName].ToList();
+        if (userDigimon.EvolutionStage != EvolutionStage.InTraining)
+        {
+            throw new ArgumentException($"{userDigimon.DigimonName} is not a {nameof(EvolutionStage.InTraining)} stage digimon.");
+        }
+
+        List<IEvolutionCriteria> evolutionCriteriaOfPossibleEvolutions = _fromInTrainingEvolutionMapper[userDigimon.DigimonName].ToList();
 
         GuardAgainstCorruptEvolutionCriteria(evolutionCriteriaOfPossibleEvolutions);
 
@@ -25,10 +28,13 @@ public sealed class FromInTrainingEvolutionCalculator : IEvolutionCalculator
 
         foreach (IEvolutionCriteria evolutionCriteria in evolutionCriteriaOfPossibleEvolutions)
         {
-            int evolutionScore = _fromInTrainingEvolutionScoreCalculator.CalculateEvolutionScore(digimon, evolutionCriteria.Stats);
+            int evolutionScore = _fromInTrainingEvolutionScoreCalculator.CalculateEvolutionScore(userDigimon, evolutionCriteria.Stats);
 
-            if (evolutionScore <= highestEvolutionScore) continue;
-            
+            if (evolutionScore <= highestEvolutionScore)
+            {
+                continue;
+            }
+
             highestEvolutionScore = evolutionScore;
             evolutionResult = evolutionCriteria.EvolutionResult;
         }
@@ -42,7 +48,9 @@ public sealed class FromInTrainingEvolutionCalculator : IEvolutionCalculator
             evolutionCriteriaOfPossibleEvolutions.Where(evolutionCriteria => evolutionCriteria.EvolutionStage != EvolutionStage.Rookie);
         string formattedCorruptEvolutionOptions = string.Join(", ", corruptEvolutionOptions);
         if (evolutionCriteriaOfPossibleEvolutions.Any(evolutionCriteria => evolutionCriteria.EvolutionStage != EvolutionStage.Rookie))
+        {
             throw new ArgumentException(
                 $"Evolution options are corrupt, all options should be {EvolutionStage.Rookie}; Corrupt evolution options: {formattedCorruptEvolutionOptions}");
+        }
     }
 }

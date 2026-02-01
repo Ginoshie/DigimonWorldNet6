@@ -123,7 +123,10 @@ public class MainWindowViewModel : BaseWindowViewModel, IDisposable
 
     private void OpenMusicPlayerWindow()
     {
-        if (_musicPlayerIsOpen) return;
+        if (_musicPlayerIsOpen)
+        {
+            return;
+        }
 
         MusicPlayerWindow musicPlayerWindow = new()
         {

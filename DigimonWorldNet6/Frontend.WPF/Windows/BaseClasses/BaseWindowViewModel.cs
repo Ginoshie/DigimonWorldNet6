@@ -28,7 +28,10 @@ public abstract class BaseWindowViewModel : BaseViewModel
 
     protected virtual void DragWindow(Window window)
     {
-        if (Mouse.PrimaryDevice.LeftButton != MouseButtonState.Pressed) return;
+        if (Mouse.PrimaryDevice.LeftButton != MouseButtonState.Pressed)
+        {
+            return;
+        }
 
         try
         {

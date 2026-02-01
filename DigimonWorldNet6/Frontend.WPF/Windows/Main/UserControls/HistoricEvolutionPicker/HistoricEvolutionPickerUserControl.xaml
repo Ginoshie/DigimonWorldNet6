@@ -3,11 +3,10 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:constants="clr-namespace:DigimonWorld.Frontend.WPF.Constants"
-             xmlns:historicEvolutionPicker1="clr-namespace:DigimonWorld.Frontend.WPF.Windows.Main.UserControls.HistoricEvolutionPicker"
+             xmlns:historicEvolutionPicker="clr-namespace:DigimonWorld.Frontend.WPF.Windows.Main.UserControls.HistoricEvolutionPicker"
              xmlns:userControls="clr-namespace:DigimonWorld.Frontend.WPF.Windows.Main.UserControls.HistoricEvolutionPicker.UserControls"
              mc:Ignorable="d"
-             d:DataContext="{d:DesignInstance Type=historicEvolutionPicker1:HistoricEvolutionPickerViewModel, IsDesignTimeCreatable=True}">
+             d:DataContext="{d:DesignInstance Type=historicEvolutionPicker:HistoricEvolutionPickerViewModel, IsDesignTimeCreatable=True}">
 
     <Grid KeyboardNavigation.TabNavigation="None">
         <Grid.ColumnDefinitions>
@@ -44,7 +43,7 @@
         </TextBlock>
 
         <userControls:HistoricEvolutionButton Grid.Row="1" Grid.Column="0"
-                                              Tag="{x:Static constants:EvolutionIcons.FreshStageIcons}" />
+                                              Tag="{Binding  FreshStageIcons}" />
 
         <Border Grid.Row="0" Grid.RowSpan="2" Grid.Column="1"
                 BorderBrush="#A27B9A"
@@ -62,7 +61,7 @@
         </TextBlock>
 
         <userControls:HistoricEvolutionButton Grid.Row="1" Grid.Column="1"
-                                              Tag="{x:Static constants:EvolutionIcons.InTrainingStageIcons}" />
+                                              Tag="{Binding InTrainingStageIcons}" />
 
         <Border Grid.Row="0" Grid.RowSpan="2" Grid.Column="2"
                 BorderBrush="#5483C2"
@@ -81,7 +80,7 @@
         </TextBlock>
 
         <userControls:HistoricEvolutionButton Grid.Row="1" Grid.Column="2"
-                                              Tag="{x:Static constants:EvolutionIcons.RookieStageIcons}" />
+                                              Tag="{Binding RookieStageIcons}" />
 
         <Border Grid.Row="0" Grid.RowSpan="2" Grid.Column="3"
                 BorderBrush="#59B06E"
@@ -100,7 +99,7 @@
         </TextBlock>
 
         <userControls:HistoricEvolutionButton Grid.Row="1" Grid.Column="3"
-                                              Tag="{x:Static constants:EvolutionIcons.ChampionStageIcons}" />
+                                              Tag="{Binding ChampionStageIcons}" />
 
         <Border Grid.Row="0" Grid.RowSpan="2" Grid.Column="4"
                 BorderBrush="#D19667"
@@ -119,7 +118,7 @@
         </TextBlock>
 
         <userControls:HistoricEvolutionButton Grid.Row="1" Grid.Column="4"
-                                              Tag="{x:Static constants:EvolutionIcons.UltimateStageIcons}" />
+                                              Tag="{Binding UltimateStageIcons}" />
 
     </Grid>
 </UserControl>

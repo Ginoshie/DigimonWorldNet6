@@ -23,7 +23,9 @@
             </ResourceDictionary.MergedDictionaries>
 
             <system:Double x:Key="OptionWidth">100</system:Double>
-            <system:Double x:Key="OptionHeight">48</system:Double>
+            <system:Double x:Key="OptionHeight">35</system:Double>
+            <system:Double x:Key="ToggleOptionWidth">75</system:Double>
+            <system:Double x:Key="ToggleOptionHeight">24</system:Double>
             <system:Double x:Key="WindowButtonWidth">70</system:Double>
         </ResourceDictionary>
     </UserControl.Resources>
@@ -32,19 +34,23 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
             <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
         </Grid.RowDefinitions>
         <Grid Grid.Row="0">
             <Grid.RowDefinitions>
-                <RowDefinition Height="25" />
-                <RowDefinition Height="25" />
-                <RowDefinition Height="25" />
-                <RowDefinition Height="25" />
-                <RowDefinition Height="25" />
-                <RowDefinition Height="65" />
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
             </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
 
-            <Label Grid.Row="0" HorizontalAlignment="Center" Style="{StaticResource DefaultLabelStyle}" Content="* Evolution calculator mode" Margin="0, 0, 5, 0" />
-            <WrapPanel Grid.Row="1" Grid.Column="0" Grid.RowSpan="5" Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Center" >
+            <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Center" Style="{StaticResource DefaultLabelStyle}" Content="* Original or mod" Margin="0, 0, 5, 0" />
+            <WrapPanel Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0, 0, 0, 10">
                 <Button Style="{StaticResource DefaultOptionPickerButtonStyle}"
                         Height="{StaticResource OptionHeight}"
                         Width="{StaticResource OptionWidth}"
@@ -57,22 +63,54 @@
                         Content="Vice 2 . 1 ( + )"
                         Command="{Binding SetEvolutionCalculatorModeViceCommand}"
                         Tag="{Binding EvolutionCalculatorModeIsVice}" />
-                <Button Style="{StaticResource DefaultOptionPickerButtonStyle}"
-                        Height="{StaticResource OptionHeight}"
-                        Width="{StaticResource OptionWidth}"
-                        Content="Myotismon"
-                        Command="{Binding SetEvolutionCalculatorModeViceMyotismonCommand}"
-                        Tag="{Binding EvolutionCalculatorModeIsViceMyotismon}" />
-                <Button Style="{StaticResource DefaultOptionPickerButtonStyle}"
-                        Height="{StaticResource OptionHeight}"
-                        Width="{StaticResource OptionWidth}"
-                        Content="Panjyamon"
-                        Command="{Binding SetEvolutionCalculatorVicePanjyamonCommand}"
-                        Tag="{Binding EvolutionCalculatorModeIsVicePanjyamon}" />
             </WrapPanel>
+
+            <Label Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Center" Style="{StaticResource DefaultLabelStyle}" Content="* Optional Vice patches (Vice only)"
+                   Margin="0, 0, 5, 0" />
+            <Label Grid.Row="3" Grid.Column="0" Style="{StaticResource DefaultLabelStyle}" 
+                   Content="Myotismon:" 
+                   Margin="0, 0, 5, 0" 
+                   IsEnabled="{Binding GameVariantContainsVice}" />
+            <StackPanel Grid.Row="3" Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center">
+                <Button Style="{StaticResource DefaultOptionPickerButtonStyle}"
+                        Height="{StaticResource ToggleOptionHeight}"
+                        Width="{StaticResource ToggleOptionWidth}"
+                        Content="ON"
+                        Command="{Binding SetEvolutionCalculatorModeViceMyotismonEnabledCommand}"
+                        Tag="{Binding ViceMyotismonEnabled}"
+                        IsEnabled="{Binding GameVariantContainsVice}" />
+                <Button Style="{StaticResource DefaultOptionPickerButtonStyle}"
+                        Height="{StaticResource ToggleOptionHeight}"
+                        Width="{StaticResource ToggleOptionWidth}"
+                        Content="OFF"
+                        Command="{Binding SetEvolutionCalculatorModeViceMyotismonDisabledCommand}"
+                        Tag="{Binding ViceMyotismonDisabled}"
+                        IsEnabled="{Binding GameVariantContainsVice}" />
+            </StackPanel>
+
+            <Label Grid.Row="4" Grid.Column="0" Style="{StaticResource DefaultLabelStyle}" 
+                   Content="Panjyamon:" 
+                   Margin="0, 0, 5, 0"
+                   IsEnabled="{Binding GameVariantContainsVice}" />
+            <StackPanel Grid.Row="4" Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center">
+                <Button Style="{StaticResource DefaultOptionPickerButtonStyle}"
+                        Height="{StaticResource ToggleOptionHeight}"
+                        Width="{StaticResource ToggleOptionWidth}"
+                        Content="ON"
+                        Command="{Binding SetEvolutionCalculatorModeVicePanjyamonEnabledCommand}"
+                        Tag="{Binding VicePanjyamonEnabled}"
+                        IsEnabled="{Binding GameVariantContainsVice}" />
+                <Button Style="{StaticResource DefaultOptionPickerButtonStyle}"
+                        Height="{StaticResource ToggleOptionHeight}"
+                        Width="{StaticResource ToggleOptionWidth}"
+                        Content="OFF"
+                        Command="{Binding SetEvolutionCalculatorModeVicePanjyamonDisabledCommand}"
+                        Tag="{Binding VicePanjyamonDisabled}"
+                        IsEnabled="{Binding GameVariantContainsVice}" />
+            </StackPanel>
         </Grid>
 
-        <Button Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center" Style="{StaticResource DefaultButtonStyle}"
+        <Button Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Center" Style="{StaticResource DefaultButtonStyle}"
                 Height="{StaticResource DefaultButtonHeight}"
                 Width="{StaticResource WindowButtonWidth}"
                 Content="Save"

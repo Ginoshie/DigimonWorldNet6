@@ -1,3 +1,4 @@
+using System;
 using System.Windows.Controls;
 using System.Windows.Input;
 using DigimonWorld.Frontend.WPF.ViewModelComponents;
@@ -27,12 +28,8 @@ public class GeneralConfigWindowViewModel : BaseViewModel
     private bool _shuffleModeIsOff;
     private bool _pauseOnCloseWindow;
     private bool _doNothingOnCloseWindow;
-    private EvolutionCalculatorMode _evolutionCalculatorMode;
-    private bool _evolutionCalculatorModeOriginal;
-    private bool _evolutionCalculatorModeVice;
-    private bool _evolutionCalculatorModeViceMyotismon;
-    private bool _evolutionCalculatorModeVicePanjyamon;
 
+    private GameVariant _gameVariant;
     private UserControl _currentSelectedSettingCategoryUserControl;
 
     public GeneralConfigWindowViewModel(GeneralConfigWindow window)
@@ -40,56 +37,50 @@ public class GeneralConfigWindowViewModel : BaseViewModel
         _window = window;
 
         SaveCommand = new CommandHandler(Save);
-
         CloseCommand = new CommandHandler(Close);
 
-        ShowHomeConfigurationSectionCommand = new CommandHandler(ShowHomeConfigurationSection);
+        ShowHomeConfigurationSectionCommand = new CommandHandler(() => CurrentSelectedSettingCategoryUserControl = _homeConfigurationSection);
+        ShowMusicPlayerConfigurationSectionCommand = new CommandHandler(() => CurrentSelectedSettingCategoryUserControl = _musicPlayerConfigurationSection);
+        ShowNarrationConfigurationSectionCommand = new CommandHandler(() => CurrentSelectedSettingCategoryUserControl = _narrationConfigurationSection);
+        ShowEvolutionConfigurationSectionCommand = new CommandHandler(() => CurrentSelectedSettingCategoryUserControl = _evolutionConfigurationSection);
 
-        ShowMusicPlayerConfigurationSectionCommand = new CommandHandler(ShowMusicPlayerConfigurationSection);
+        SetNarratorModeSpeechCommand = new CommandHandler(() => SetNarratorMode(NarratorMode.Speech));
+        SetNarratorModeInstantCommand = new CommandHandler(() => SetNarratorMode(NarratorMode.Instant));
 
-        ShowNarrationConfigurationSectionCommand = new CommandHandler(ShowNarrationConfigurationSection);
+        SetMuteOnCommand = new CommandHandler(() => SetMuteMode(MuteMode.Mute));
+        SetMuteOffCommand = new CommandHandler(() => SetMuteMode(MuteMode.Unmuted));
 
-        ShowEvolutionConfigurationSectionCommand = new CommandHandler(ShowEvolutionConfigurationSection);
+        SetShuffleModeOnCommand = new CommandHandler(() => SetShuffleMode(ShuffleMode.Shuffle));
+        SetShuffleModeOffCommand = new CommandHandler(() => SetShuffleMode(ShuffleMode.Chronological));
 
-        SetNarratorModeSpeechCommand = new CommandHandler(SetNarratorModeSpeech);
+        SetRepeatModeSingleCommand = new CommandHandler(() => SetRepeatMode(RepeatMode.Single));
+        SetRepeatModeAllCommand = new CommandHandler(() => SetRepeatMode(RepeatMode.All));
 
-        SetNarratorModeInstantCommand = new CommandHandler(SetNarratorModeInstant);
+        SetPauseOnCloseCommand = new CommandHandler(() => SetOnCloseAction(MusicPlayerOnCloseAction.Pause));
+        SetDoNothingOnCloseCommand = new CommandHandler(() => SetOnCloseAction(MusicPlayerOnCloseAction.Nothing));
 
-        SetMuteOnCommand = new CommandHandler(SetMuteOn);
+        SetEvolutionCalculatorModeOriginalCommand = new CommandHandler(() => SetEvolutionCalculatorBaseMode(GameVariant.Original));
+        SetEvolutionCalculatorModeViceCommand = new CommandHandler(() => SetEvolutionCalculatorBaseMode(GameVariant.Vice));
+        SetEvolutionCalculatorModeViceMyotismonEnabledCommand = new CommandHandler(() => SetVicePatch(GameVariant.MyotismonPatch, true));
+        SetEvolutionCalculatorModeViceMyotismonDisabledCommand = new CommandHandler(() => SetVicePatch(GameVariant.MyotismonPatch, false));
+        SetEvolutionCalculatorModeVicePanjyamonEnabledCommand = new CommandHandler(() => SetVicePatch(GameVariant.PanjyamonPatch, true));
+        SetEvolutionCalculatorModeVicePanjyamonDisabledCommand = new CommandHandler(() => SetVicePatch(GameVariant.PanjyamonPatch, false));
 
-        SetMuteOffCommand = new CommandHandler(SetMuteOff);
-
-        SetShuffleModeOnCommand = new CommandHandler(SetShuffleModeOn);
-
-        SetShuffleModeOffCommand = new CommandHandler(SetShuffleModeOff);
-
-        SetRepeatModeSingleCommand = new CommandHandler(SetRepeatModeSingle);
-
-        SetRepeatModeAllCommand = new CommandHandler(SetRepeatModeAll);
-
-        SetPauseOnCloseCommand = new CommandHandler(SetPauseOnClose);
-
-        SetDoNothingOnCloseCommand = new CommandHandler(SetDoNothingOnClose);
-
-        SetEvolutionCalculatorModeOriginalCommand = new CommandHandler(() => SetEvolutionCalculatorMode(EvolutionCalculatorMode.Original));
-
-        SetEvolutionCalculatorModeViceCommand = new CommandHandler(() => SetEvolutionCalculatorMode(EvolutionCalculatorMode.Vice));
-
-        SetEvolutionCalculatorModeViceMyotismonCommand = new CommandHandler(() => SetEvolutionCalculatorMode(EvolutionCalculatorMode.ViceMyotismon));
-
-        SetEvolutionCalculatorVicePanjyamonCommand = new CommandHandler(() => SetEvolutionCalculatorMode(EvolutionCalculatorMode.VicePanjyamon));
-
-        _currentSelectedSettingCategoryUserControl = new HomeConfigurationSection();
+        _currentSelectedSettingCategoryUserControl = _homeConfigurationSection;
 
         LoadConfig(UserConfigurationManager.UserConfiguration);
     }
 
+    #region UserControl Selection Properties
+
     public bool HomeConfigurationSectionIsSelected => CurrentSelectedSettingCategoryUserControl.GetType() == typeof(HomeConfigurationSection);
-
     public bool MusicPlayerConfigurationSectionIsSelected => CurrentSelectedSettingCategoryUserControl.GetType() == typeof(MusicPlayerConfigurationSection);
-
     public bool NarrationConfigurationSectionIsSelected => CurrentSelectedSettingCategoryUserControl.GetType() == typeof(NarrationConfigurationSection);
     public bool EvolutionConfigurationSectionIsSelected => CurrentSelectedSettingCategoryUserControl.GetType() == typeof(EvolutionConfigurationSection);
+
+    #endregion
+
+    #region Audio & Narration Properties
 
     public bool IsNarratorModeInstant
     {
@@ -109,7 +100,6 @@ public class GeneralConfigWindowViewModel : BaseViewModel
         set
         {
             SetField(ref _volume, value);
-
             UserConfigurationManager.SetVolume(_volume);
         }
     }
@@ -162,29 +152,21 @@ public class GeneralConfigWindowViewModel : BaseViewModel
         private set => SetField(ref _doNothingOnCloseWindow, value);
     }
 
-    public bool EvolutionCalculatorModeIsOriginal
-    {
-        get => _evolutionCalculatorModeOriginal;
-        private set => SetField(ref _evolutionCalculatorModeOriginal, value);
-    }
+    #endregion
 
-    public bool EvolutionCalculatorModeIsVice
-    {
-        get => _evolutionCalculatorModeVice;
-        private set => SetField(ref _evolutionCalculatorModeVice, value);
-    }
+    #region Game Variant Properties
 
-    public bool EvolutionCalculatorModeIsViceMyotismon
-    {
-        get => _evolutionCalculatorModeViceMyotismon;
-        private set => SetField(ref _evolutionCalculatorModeViceMyotismon, value);
-    }
+    public bool EvolutionCalculatorModeIsOriginal => _gameVariant.HasFlag(GameVariant.Original);
+    public bool EvolutionCalculatorModeIsVice => _gameVariant.HasFlag(GameVariant.Vice);
+    public bool ViceMyotismonEnabled => EvolutionCalculatorModeIsVice && _gameVariant.HasFlag(GameVariant.MyotismonPatch);
+    public bool VicePanjyamonEnabled => EvolutionCalculatorModeIsVice && _gameVariant.HasFlag(GameVariant.PanjyamonPatch);
+    public bool ViceMyotismonDisabled => !ViceMyotismonEnabled;
+    public bool VicePanjyamonDisabled => !VicePanjyamonEnabled;
+    public bool GameVariantContainsVice => _gameVariant.HasFlag(GameVariant.Vice);
 
-    public bool EvolutionCalculatorModeIsVicePanjyamon
-    {
-        get => _evolutionCalculatorModeVicePanjyamon;
-        private set => SetField(ref _evolutionCalculatorModeVicePanjyamon, value);
-    }
+    #endregion
+
+    #region Current UserControl
 
     public UserControl CurrentSelectedSettingCategoryUserControl
     {
@@ -192,161 +174,147 @@ public class GeneralConfigWindowViewModel : BaseViewModel
         private set
         {
             LoadConfig(UserConfigurationManager.UserConfiguration);
-
             SetField(ref _currentSelectedSettingCategoryUserControl, value);
-
             OnPropertyChanged(nameof(HomeConfigurationSectionIsSelected));
             OnPropertyChanged(nameof(MusicPlayerConfigurationSectionIsSelected));
             OnPropertyChanged(nameof(NarrationConfigurationSectionIsSelected));
+            OnPropertyChanged(nameof(EvolutionConfigurationSectionIsSelected));
         }
     }
 
-    public ICommand SaveCommand { get; private set; }
+    #endregion
 
-    public ICommand CloseCommand { get; private set; }
+    #region Commands
 
-    public ICommand ShowHomeConfigurationSectionCommand { get; private set; }
+    public ICommand SaveCommand { get; }
+    public ICommand CloseCommand { get; }
+    public ICommand ShowHomeConfigurationSectionCommand { get; }
+    public ICommand ShowMusicPlayerConfigurationSectionCommand { get; }
+    public ICommand ShowNarrationConfigurationSectionCommand { get; }
+    public ICommand ShowEvolutionConfigurationSectionCommand { get; }
+    public ICommand SetNarratorModeSpeechCommand { get; }
+    public ICommand SetNarratorModeInstantCommand { get; }
+    public ICommand SetMuteOnCommand { get; }
+    public ICommand SetMuteOffCommand { get; }
+    public ICommand SetShuffleModeOnCommand { get; }
+    public ICommand SetShuffleModeOffCommand { get; }
+    public ICommand SetRepeatModeSingleCommand { get; }
+    public ICommand SetRepeatModeAllCommand { get; }
+    public ICommand SetPauseOnCloseCommand { get; }
+    public ICommand SetDoNothingOnCloseCommand { get; }
+    public ICommand SetEvolutionCalculatorModeOriginalCommand { get; }
+    public ICommand SetEvolutionCalculatorModeViceCommand { get; }
+    public ICommand SetEvolutionCalculatorModeViceMyotismonEnabledCommand { get; }
+    public ICommand SetEvolutionCalculatorModeViceMyotismonDisabledCommand { get; }
+    public ICommand SetEvolutionCalculatorModeVicePanjyamonEnabledCommand { get; }
+    public ICommand SetEvolutionCalculatorModeVicePanjyamonDisabledCommand { get; }
 
-    public ICommand ShowMusicPlayerConfigurationSectionCommand { get; private set; }
+    #endregion
 
-    public ICommand ShowNarrationConfigurationSectionCommand { get; private set; }
-
-    public ICommand ShowEvolutionConfigurationSectionCommand { get; private set; }
-
-    public ICommand SetNarratorModeSpeechCommand { get; private set; }
-
-    public ICommand SetNarratorModeInstantCommand { get; private set; }
-
-    public ICommand SetMuteOnCommand { get; private set; }
-
-    public ICommand SetMuteOffCommand { get; private set; }
-
-    public ICommand SetShuffleModeOnCommand { get; private set; }
-
-    public ICommand SetShuffleModeOffCommand { get; private set; }
-
-    public ICommand SetRepeatModeSingleCommand { get; private set; }
-
-    public ICommand SetRepeatModeAllCommand { get; private set; }
-
-    public ICommand SetPauseOnCloseCommand { get; private set; }
-
-    public ICommand SetDoNothingOnCloseCommand { get; private set; }
-
-    public ICommand SetEvolutionCalculatorModeOriginalCommand { get; private set; }
-
-    public ICommand SetEvolutionCalculatorModeViceCommand { get; private set; }
-
-    public ICommand SetEvolutionCalculatorModeViceMyotismonCommand { get; private set; }
-
-    public ICommand SetEvolutionCalculatorVicePanjyamonCommand { get; private set; }
+    #region Methods
 
     private void Save() => SaveConfiguration();
-
     private void Close() => _window.Close();
 
-    private void ShowHomeConfigurationSection() => CurrentSelectedSettingCategoryUserControl = _homeConfigurationSection;
-
-    private void ShowMusicPlayerConfigurationSection() => CurrentSelectedSettingCategoryUserControl = _musicPlayerConfigurationSection;
-
-    private void ShowNarrationConfigurationSection() => CurrentSelectedSettingCategoryUserControl = _narrationConfigurationSection;
-
-    private void ShowEvolutionConfigurationSection() => CurrentSelectedSettingCategoryUserControl = _evolutionConfigurationSection;
-
-    private void SetNarratorModeSpeech()
+    private void SetNarratorMode(NarratorMode mode)
     {
-        IsNarratorModeSpeech = true;
-        IsNarratorModeInstant = false;
+        IsNarratorModeSpeech = mode == NarratorMode.Speech;
+        IsNarratorModeInstant = mode == NarratorMode.Instant;
     }
 
-    private void SetNarratorModeInstant()
+    private void SetMuteMode(MuteMode mode)
     {
-        IsNarratorModeSpeech = false;
-        IsNarratorModeInstant = true;
+        MuteIsOn = mode == MuteMode.Mute;
+        MuteIsOff = mode == MuteMode.Unmuted;
     }
 
-    private void SetMuteOn()
+    private void SetShuffleMode(ShuffleMode mode)
     {
-        MuteIsOn = true;
-        MuteIsOff = false;
+        ShuffleModeIsOn = mode == ShuffleMode.Shuffle;
+        ShuffleModeIsOff = mode == ShuffleMode.Chronological;
     }
 
-    private void SetMuteOff()
+    private void SetRepeatMode(RepeatMode mode)
     {
-        MuteIsOn = false;
-        MuteIsOff = true;
+        RepeatModeIsSingle = mode == RepeatMode.Single;
+        RepeatModeIsAll = mode == RepeatMode.All;
     }
 
-    private void SetShuffleModeOn()
+    private void SetOnCloseAction(MusicPlayerOnCloseAction action)
     {
-        ShuffleModeIsOn = true;
-        ShuffleModeIsOff = false;
+        PauseOnCloseWindow = action == MusicPlayerOnCloseAction.Pause;
+        DoNothingOnCloseWindow = action == MusicPlayerOnCloseAction.Nothing;
     }
 
-    private void SetShuffleModeOff()
+    private void SetEvolutionCalculatorBaseMode(GameVariant baseMode)
     {
-        ShuffleModeIsOn = false;
-        ShuffleModeIsOff = true;
+        if (baseMode != GameVariant.Original && baseMode != GameVariant.Vice)
+        {
+            throw new ArgumentException("Only Original or Vice are valid base modes.");
+        }
+
+        _gameVariant &= ~(GameVariant.Original | GameVariant.Vice);
+        _gameVariant |= baseMode;
+
+        if (baseMode != GameVariant.Vice)
+        {
+            _gameVariant &= ~(GameVariant.MyotismonPatch | GameVariant.PanjyamonPatch);
+        }
+
+        RaiseEvolutionCalculatorProperties();
+        ApplyEvolutionCalculatorMode();
     }
 
-    private void SetRepeatModeSingle()
+    private void SetVicePatch(GameVariant gameVariant, bool enabled)
     {
-        RepeatModeIsSingle = true;
-        RepeatModeIsAll = false;
+        if (!EvolutionCalculatorModeIsVice)
+        {
+            return;
+        }
+
+        if (enabled)
+        {
+            _gameVariant |= gameVariant;
+        }
+        else
+        {
+            _gameVariant &= ~gameVariant;
+        }
+
+        RaiseEvolutionCalculatorProperties();
+        ApplyEvolutionCalculatorMode();
     }
 
-    private void SetRepeatModeAll()
+    private void ApplyEvolutionCalculatorMode()
     {
-        RepeatModeIsSingle = false;
-        RepeatModeIsAll = true;
+        UserConfigurationManager.SetEvolutionCalculatorMode(_gameVariant);
     }
 
-    private void SetPauseOnClose()
+    private void RaiseEvolutionCalculatorProperties()
     {
-        PauseOnCloseWindow = true;
-        DoNothingOnCloseWindow = false;
+        OnPropertyChanged(nameof(EvolutionCalculatorModeIsOriginal));
+        OnPropertyChanged(nameof(EvolutionCalculatorModeIsVice));
+        OnPropertyChanged(nameof(ViceMyotismonEnabled));
+        OnPropertyChanged(nameof(VicePanjyamonEnabled));
+        OnPropertyChanged(nameof(ViceMyotismonDisabled));
+        OnPropertyChanged(nameof(VicePanjyamonDisabled));
+        OnPropertyChanged(nameof(GameVariantContainsVice));
     }
 
-    private void SetDoNothingOnClose()
+    private void LoadConfig(UserConfiguration config)
     {
-        PauseOnCloseWindow = false;
-        DoNothingOnCloseWindow = true;
-    }
+        MusicPlayerConfig music = config.MusicPlayerConfig;
+        Volume = music.Volume;
+        SetMuteMode(music.MuteMode);
+        SetShuffleMode(music.ShuffleMode);
+        SetRepeatMode(music.RepeatMode);
+        SetOnCloseAction(music.OnCloseAction);
 
-    private void SetEvolutionCalculatorMode(EvolutionCalculatorMode mode)
-    {
-        _evolutionCalculatorMode = mode;
+        SpeakingSimulatorConfig sim = config.SpeakingSimulatorConfig;
+        SetNarratorMode(sim.NarratorMode);
 
-        EvolutionCalculatorModeIsOriginal = mode == EvolutionCalculatorMode.Original;
-        EvolutionCalculatorModeIsVice = mode == EvolutionCalculatorMode.Vice;
-        EvolutionCalculatorModeIsViceMyotismon = mode == EvolutionCalculatorMode.ViceMyotismon;
-        EvolutionCalculatorModeIsVicePanjyamon = mode == EvolutionCalculatorMode.VicePanjyamon;
-    }
-
-    private void LoadConfig(UserConfiguration userConfiguration)
-    {
-        MusicPlayerConfig musicPlayerConfig = userConfiguration.MusicPlayerConfig;
-
-        Volume = musicPlayerConfig.Volume;
-
-        MuteIsOn = musicPlayerConfig.MuteMode == MuteMode.Mute;
-        MuteIsOff = musicPlayerConfig.MuteMode == MuteMode.Unmuted;
-
-        ShuffleModeIsOn = musicPlayerConfig.ShuffleMode == ShuffleMode.Shuffle;
-        ShuffleModeIsOff = musicPlayerConfig.ShuffleMode == ShuffleMode.Chronological;
-
-        RepeatModeIsSingle = musicPlayerConfig.RepeatMode == RepeatMode.Single;
-        RepeatModeIsAll = musicPlayerConfig.RepeatMode == RepeatMode.All;
-
-        PauseOnCloseWindow = musicPlayerConfig.OnCloseAction == MusicPlayerOnCloseAction.Pause;
-        _doNothingOnCloseWindow = musicPlayerConfig.OnCloseAction == MusicPlayerOnCloseAction.Nothing;
-
-        SpeakingSimulatorConfig speakingSimulatorConfig = userConfiguration.SpeakingSimulatorConfig;
-
-        IsNarratorModeSpeech = speakingSimulatorConfig.NarratorMode == NarratorMode.Speech;
-        IsNarratorModeInstant = speakingSimulatorConfig.NarratorMode == NarratorMode.Instant;
-        
-        SetEvolutionCalculatorMode(userConfiguration.EvolutionCalculatorConfig.EvolutionCalculatorMode);
+        _gameVariant = config.EvolutionCalculatorConfig.GameVariant;
+        RaiseEvolutionCalculatorProperties();
     }
 
     private void SaveConfiguration()
@@ -356,8 +324,9 @@ public class GeneralConfigWindowViewModel : BaseViewModel
         UserConfigurationManager.SetShuffleModeIsOn(ShuffleModeIsOn ? ShuffleMode.Shuffle : ShuffleMode.Chronological);
         UserConfigurationManager.SetRepeatModeIsSingle(RepeatModeIsSingle ? RepeatMode.Single : RepeatMode.All);
         UserConfigurationManager.SetOnCloseAction(PauseOnCloseWindow ? MusicPlayerOnCloseAction.Pause : MusicPlayerOnCloseAction.Nothing);
-        UserConfigurationManager.SetEvolutionCalculatorMode(_evolutionCalculatorMode);
-
+        UserConfigurationManager.SetEvolutionCalculatorMode(_gameVariant);
         UserConfigurationManager.SaveConfiguration();
     }
+
+    #endregion
 }

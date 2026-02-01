@@ -91,7 +91,7 @@
                                                 Height="40"
                                                 Width="150"
                                                 HorizontalAlignment="Center"
-                                                Content="EVOLUTION"
+                                                Content="MOD / PATCHES"
                                                 Command="{Binding ShowEvolutionConfigurationSectionCommand}"
                                                 Tag="{Binding EvolutionConfigurationSectionIsSelected}" />
                                     </StackPanel>
@@ -99,7 +99,7 @@
                             </Border>
                             <Border Grid.Row="0" Grid.Column="2" CornerRadius="5" BorderBrush="#90D9FA" BorderThickness="1.5">
                                 <Border CornerRadius="3" BorderBrush="Black" BorderThickness="3" Background="#2E3841">
-                                    <ContentControl Content="{Binding CurrentSelectedSettingCategoryUserControl}" Margin="10" Height="180" />
+                                    <ContentControl Content="{Binding CurrentSelectedSettingCategoryUserControl}" Margin="5" Height="180" />
                                 </Border>
                             </Border>
                         </Grid>

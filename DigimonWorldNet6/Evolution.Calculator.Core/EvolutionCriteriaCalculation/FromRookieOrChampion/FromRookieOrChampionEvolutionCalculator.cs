@@ -17,12 +17,14 @@ public sealed class FromRookieOrChampionEvolutionCalculator : IEvolutionCalculat
     private readonly WeightCriteriaCalculator _weightMainCriteriaCalculator = new();
     private readonly BonusCriteriaCalculator _bonusCriteriaCalculator = new();
 
-    public EvolutionResult DetermineEvolutionResult(Digimon digimon)
+    public EvolutionResult DetermineEvolutionResult(UserDigimon userDigimon)
     {
-        if (digimon.EvolutionStage is not (EvolutionStage.Rookie or EvolutionStage.Champion))
-            throw new ArgumentException($"{digimon.DigimonName} is not a {nameof(EvolutionStage.Rookie)} or {nameof(EvolutionStage.Champion)} stage digimon.");
+        if (userDigimon.EvolutionStage is not (EvolutionStage.Rookie or EvolutionStage.Champion))
+        {
+            throw new ArgumentException($"{userDigimon.DigimonName} is not a {nameof(EvolutionStage.Rookie)} or {nameof(EvolutionStage.Champion)} stage digimon.");
+        }
 
-        List<IEvolutionCriteria> evolutionCriteriaOfPossibleEvolutions = _fromRookieOrChampionEvolutionMapper[digimon.DigimonName].ToList();
+        List<IEvolutionCriteria> evolutionCriteriaOfPossibleEvolutions = _fromRookieOrChampionEvolutionMapper.GetEvolutionCriteria(userDigimon.DigimonName);
 
         GuardAgainstCorruptEvolutionCriteria(evolutionCriteriaOfPossibleEvolutions);
 
@@ -33,14 +35,20 @@ public sealed class FromRookieOrChampionEvolutionCalculator : IEvolutionCalculat
 
         foreach (IEvolutionCriteria evolutionCriteria in evolutionCriteriaOfPossibleEvolutions)
         {
-            if (!EvolutionEnabled(digimon, evolutionCriteria)) continue;
+            if (!EvolutionEnabled(userDigimon, evolutionCriteria))
+            {
+                continue;
+            }
 
-            EvolutionScoreCalculationResult evolutionScoreCalculationResult = _fromRookieOrChampionEvolutionScoreCalculator.CalculateEvolutionScore(digimon, evolutionCriteria.Stats, carriedOverStatTotal, carriedOverStatCount);
+            EvolutionScoreCalculationResult evolutionScoreCalculationResult = _fromRookieOrChampionEvolutionScoreCalculator.CalculateEvolutionScore(userDigimon, evolutionCriteria.Stats, carriedOverStatTotal, carriedOverStatCount);
 
             if ((ValidEvolutionResult(evolutionResult) &&
                  CurrentBestEnabledEvolutionIsNewEvolution(evolutionResult.ToDigimonType()) &&
                  NextEvolutionIsHistoricEvolution(evolutionCriteria.EvolutionResult.ToDigimonType())) ||
-                evolutionScoreCalculationResult.EvolutionScore <= highestEvolutionScore) break;
+                evolutionScoreCalculationResult.EvolutionScore <= highestEvolutionScore)
+            {
+                break;
+            }
 
             highestEvolutionScore = evolutionScoreCalculationResult.EvolutionScore;
             carriedOverStatTotal = evolutionScoreCalculationResult.CarriedOverStatTotal;
@@ -59,7 +67,10 @@ public sealed class FromRookieOrChampionEvolutionCalculator : IEvolutionCalculat
     private void GuardAgainstCorruptEvolutionCriteria(List<IEvolutionCriteria> evolutionCriteriaOfPossibleEvolutions)
     {
         if (evolutionCriteriaOfPossibleEvolutions.All(evolutionCriteria => evolutionCriteria.EvolutionStage == EvolutionStage.Champion) ||
-            evolutionCriteriaOfPossibleEvolutions.All(evolutionCriteria => evolutionCriteria.EvolutionStage == EvolutionStage.Ultimate)) return;
+            evolutionCriteriaOfPossibleEvolutions.All(evolutionCriteria => evolutionCriteria.EvolutionStage == EvolutionStage.Ultimate))
+        {
+            return;
+        }
 
         IEnumerable<IEvolutionCriteria> corruptEvolutionOptions = evolutionCriteriaOfPossibleEvolutions.Where(evolutionCriteria => evolutionCriteria.EvolutionStage is not (EvolutionStage.Champion or EvolutionStage.Ultimate));
         string formattedCorruptEvolutionOptions = string.Join(", ", corruptEvolutionOptions);
@@ -67,14 +78,29 @@ public sealed class FromRookieOrChampionEvolutionCalculator : IEvolutionCalculat
         throw new ArgumentException($"Evolution options are corrupt, all options should be either {EvolutionStage.Champion} or {EvolutionStage.Ultimate}; Corrupt evolution options: {formattedCorruptEvolutionOptions}");
     }
 
-    private bool EvolutionEnabled(Digimon digimon, IEvolutionCriteria evolutionCriteria)
+    private bool EvolutionEnabled(UserDigimon userDigimon, IEvolutionCriteria evolutionCriteria)
     {
         int criteriaMetCount = 0;
 
-        if (_statsMainCriteriaCalculator.CriteriaIsMet(digimon, evolutionCriteria.Stats)) criteriaMetCount++;
-        if (_careMistakesMainCriteriaCalculator.CriteriaIsMet(digimon, evolutionCriteria.CareMistakes)) criteriaMetCount++;
-        if (_weightMainCriteriaCalculator.CriteriaIsMet(digimon, evolutionCriteria.Weight)) criteriaMetCount++;
-        if (_bonusCriteriaCalculator.CriteriaIsMet(digimon, evolutionCriteria.BonusCriteria)) criteriaMetCount++;
+        if (_statsMainCriteriaCalculator.CriteriaIsMet(userDigimon, evolutionCriteria.Stats))
+        {
+            criteriaMetCount++;
+        }
+
+        if (_careMistakesMainCriteriaCalculator.CriteriaIsMet(userDigimon, evolutionCriteria.CareMistakes))
+        {
+            criteriaMetCount++;
+        }
+
+        if (_weightMainCriteriaCalculator.CriteriaIsMet(userDigimon, evolutionCriteria.Weight))
+        {
+            criteriaMetCount++;
+        }
+
+        if (_bonusCriteriaCalculator.CriteriaIsMet(userDigimon, evolutionCriteria.BonusCriteria))
+        {
+            criteriaMetCount++;
+        }
 
         return criteriaMetCount >= 3;
     }

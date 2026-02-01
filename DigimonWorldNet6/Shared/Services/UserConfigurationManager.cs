@@ -52,7 +52,12 @@ public static class UserConfigurationManager
 
     public static void SetRepeatModeIsSingle(RepeatMode repeatMode) => UserConfiguration.MusicPlayerConfig.RepeatMode = repeatMode;
     public static void SetOnCloseAction(MusicPlayerOnCloseAction onCloseAction) => UserConfiguration.MusicPlayerConfig.OnCloseAction = onCloseAction;
-    public static void SetEvolutionCalculatorMode(EvolutionCalculatorMode mode) => UserConfiguration.EvolutionCalculatorConfig.EvolutionCalculatorMode = mode;
+    public static void SetEvolutionCalculatorMode(GameVariant mode)
+    {
+        UserConfiguration.EvolutionCalculatorConfig.GameVariant = mode;
+        
+        CurrentEvolutionCalculatorConfigSubject.OnNext(EvolutionCalculatorConfig);
+    }
 
     public static void SaveConfiguration()
     {

@@ -99,8 +99,8 @@ public sealed class DigimonBuilder
     }
 
 
-    public Digimon Build()
+    public UserDigimon Build()
     {
-        return new Digimon(_digimonName, _hp, _mp, _off, _def, _speed, _brains, _careMistakes, _weight, _happiness, _discipline, _battles, _techniqueCount);
+        return new UserDigimon(_digimonName, _hp, _mp, _off, _def, _speed, _brains, _careMistakes, _weight, _happiness, _discipline, _battles, _techniqueCount);
     }
 }

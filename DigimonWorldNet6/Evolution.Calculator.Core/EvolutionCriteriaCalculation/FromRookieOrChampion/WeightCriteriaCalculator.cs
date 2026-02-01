@@ -5,9 +5,9 @@ namespace DigimonWorld.Evolution.Calculator.Core.EvolutionCriteriaCalculation.Fr
 
 public sealed class WeightCriteriaCalculator
 {
-    public bool CriteriaIsMet(Digimon digimon, MainCriteriaWeight weightCriteria)
+    public bool CriteriaIsMet(UserDigimon userDigimon, MainCriteriaWeight weightCriteria)
     {
-        return digimon.Weight >= weightCriteria.LowerWeightLimit &&
-               digimon.Weight <= weightCriteria.UpperWeightLimit;
+        return userDigimon.Weight >= weightCriteria.LowerWeightLimit &&
+               userDigimon.Weight <= weightCriteria.UpperWeightLimit;
     }
 }

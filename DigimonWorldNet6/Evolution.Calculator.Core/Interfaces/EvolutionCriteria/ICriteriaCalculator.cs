@@ -4,5 +4,5 @@ namespace DigimonWorld.Evolution.Calculator.Core.Interfaces.EvolutionCriteria;
 
 public interface ICriteriaCalculator<T>
 {
-    public bool CriteriaIsMet(Digimon digimon, T evolutionCriteria);
+    public bool CriteriaIsMet(UserDigimon userDigimon, T evolutionCriteria);
 }

@@ -18,7 +18,9 @@ public sealed class EnumToImageConverter : IValueConverter
         ArgumentException.ThrowIfNullOrWhiteSpace(stringValue);
 
         if (targetType != typeof(ImageSource))
+        {
             throw new ArgumentException($"Can only convert to {typeof(ImageSource)} but tried to convert to {targetType}", nameof(targetType));
+        }
 
         if (stringValue == nameof(EvolutionResult.NotApplicable))
         {

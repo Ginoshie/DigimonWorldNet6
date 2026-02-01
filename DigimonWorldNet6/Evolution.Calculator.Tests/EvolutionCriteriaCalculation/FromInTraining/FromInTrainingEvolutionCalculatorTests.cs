@@ -24,7 +24,7 @@ public sealed class FromInTrainingEvolutionCalculatorTests
         // Arrange
         FromInTrainingEvolutionCalculator sut = new SetupBuilder()
             .Build();
-        Digimon digimon = new DigimonBuilder()
+        UserDigimon userDigimon = new DigimonBuilder()
             .WithDigimonType(digimonName)
             .WithHP(hp)
             .WithMP(mp)
@@ -41,7 +41,7 @@ public sealed class FromInTrainingEvolutionCalculatorTests
             .Build();
 
         // Act
-        EvolutionResult result = sut.DetermineEvolutionResult(digimon);
+        EvolutionResult result = sut.DetermineEvolutionResult(userDigimon);
 
         // Assert
         result.ShouldBe(evolutionResult);
@@ -58,7 +58,7 @@ public sealed class FromInTrainingEvolutionCalculatorTests
         // Arrange
         FromInTrainingEvolutionCalculator sut = new SetupBuilder()
             .Build();
-        Digimon digimon = new DigimonBuilder()
+        UserDigimon userDigimon = new DigimonBuilder()
             .WithDigimonType(digimonName)
             .WithHP(hp)
             .WithMP(mp)
@@ -75,7 +75,7 @@ public sealed class FromInTrainingEvolutionCalculatorTests
             .Build();
 
         // Act
-        Action determineEvolutionResultThrowingException = () => sut.DetermineEvolutionResult(digimon);
+        Action determineEvolutionResultThrowingException = () => sut.DetermineEvolutionResult(userDigimon);
 
         // Assert
         determineEvolutionResultThrowingException.ShouldThrow<Exception>();

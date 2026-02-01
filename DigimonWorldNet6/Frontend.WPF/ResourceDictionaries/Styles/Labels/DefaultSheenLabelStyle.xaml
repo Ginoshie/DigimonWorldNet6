@@ -1,57 +1,63 @@
 <ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-    
+
     <Style x:Key="DefaultSheenLabelStyle" TargetType="Label">
-            <!-- Main Background with linear gradient for horizontal reflection -->
-            <Setter Property="Background">
-                <Setter.Value>
-                    <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
-                        <!-- Horizontal gradient -->
-                        <GradientStop Color="#F7D600" Offset="0.0" /> <!-- Gold starts at the very top -->
-                        <GradientStop Color="White" Offset="0.15" />  <!-- White sheen starts at 1/5th -->
-                        <GradientStop Color="#F7D600" Offset="0.3" /> <!-- Gold resumes -->
-                        <GradientStop Color="#DEB500" Offset="0.7" /> <!-- Darker gold -->
-                        <GradientStop Color="#AD7B00" Offset="1" />   <!-- Deep brown at the bottom -->
-                    </LinearGradientBrush>
-                </Setter.Value>
-            </Setter>
+        <!-- Main Background with linear gradient for horizontal reflection -->
+        <Setter Property="Background">
+            <Setter.Value>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                    <!-- Horizontal gradient -->
+                    <GradientStop Color="#F7D600" Offset="0.0" /> <!-- Gold starts at the very top -->
+                    <GradientStop Color="White" Offset="0.15" />  <!-- White sheen starts at 1/5th -->
+                    <GradientStop Color="#F7D600" Offset="0.3" /> <!-- Gold resumes -->
+                    <GradientStop Color="#DEB500" Offset="0.7" /> <!-- Darker gold -->
+                    <GradientStop Color="#AD7B00" Offset="1" />   <!-- Deep brown at the bottom -->
+                </LinearGradientBrush>
+            </Setter.Value>
+        </Setter>
 
-            <!-- Text color -->
-            <Setter Property="Foreground" Value="Black" />
+        <!-- Text color -->
+        <Setter Property="Foreground" Value="Black" />
 
-            <!-- Border settings -->
-            <Setter Property="Margin" Value="10" />
-            <Setter Property="BorderBrush" Value="Black" />
-            <Setter Property="BorderThickness" Value="2" />
+        <!-- Border settings -->
+        <Setter Property="Margin" Value="10" />
+        <Setter Property="BorderBrush" Value="Black" />
+        <Setter Property="BorderThickness" Value="2" />
 
-            <!-- Rounded corners and vertical sheen effect -->
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="Label">
-                        <Grid>
-                            <!-- Base Border with Main Horizontal Gradient -->
-                            <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="0,0,2,2" CornerRadius="2">
-                                <Border BorderBrush="#B0B0B0" BorderThickness="2,2,0,0" CornerRadius="2" Padding="10">
-                                </Border>
+        <!-- Rounded corners and vertical sheen effect -->
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Label">
+                    <Grid>
+                        <!-- Base Border with Main Horizontal Gradient -->
+                        <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="0,0,2,2" CornerRadius="2">
+                            <Border BorderBrush="#B0B0B0" BorderThickness="2,2,0,0" CornerRadius="2" Padding="10">
                             </Border>
+                        </Border>
 
-                            <!-- Label Content -->
-                            <ContentPresenter HorizontalAlignment="Center"
-                                              VerticalAlignment="Center"
-                                              RecognizesAccessKey="True">
-                                <!-- Wrapping text content in a TextBlock -->
-                                <ContentPresenter.ContentTemplate>
-                                    <DataTemplate>
-                                        <TextBlock Text="{Binding}"
-                                                   Foreground="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Foreground}"
-                                                   TextAlignment="Center" />
-                                    </DataTemplate>
-                                </ContentPresenter.ContentTemplate>
-                            </ContentPresenter>
-                        </Grid>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
-    
+                        <!-- Label Content -->
+                        <ContentPresenter HorizontalAlignment="Center"
+                                          VerticalAlignment="Center"
+                                          RecognizesAccessKey="True">
+                            <!-- Wrapping text content in a TextBlock -->
+                            <ContentPresenter.ContentTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding}"
+                                               Foreground="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Foreground}"
+                                               TextAlignment="Center" />
+                                </DataTemplate>
+                            </ContentPresenter.ContentTemplate>
+                        </ContentPresenter>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+
+        <Style.Triggers>
+            <Trigger Property="IsEnabled" Value="False">
+                <Setter Property="Opacity" Value="0.5" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
 </ResourceDictionary>

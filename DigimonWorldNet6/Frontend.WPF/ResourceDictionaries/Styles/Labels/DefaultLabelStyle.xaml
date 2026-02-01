@@ -9,6 +9,12 @@
             <Setter Property="VerticalAlignment" Value="Center" />
             <Setter Property="Height" Value="{StaticResource DefaultTextHeightSpacing}" />
         </Style.Setters>
+        
+        <Style.Triggers>
+            <Trigger Property="IsEnabled" Value="False">
+                <Setter Property="Opacity" Value="0.5"/>
+            </Trigger>
+        </Style.Triggers>
     </Style>
     
 </ResourceDictionary>

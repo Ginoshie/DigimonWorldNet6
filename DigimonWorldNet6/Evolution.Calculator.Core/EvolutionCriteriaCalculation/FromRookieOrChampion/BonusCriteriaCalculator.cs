@@ -1,22 +1,36 @@
 using DigimonWorld.Evolution.Calculator.Core.DataObjects;
 using DigimonWorld.Evolution.Calculator.Core.DataObjects.EvolutionCriteria;
-using Generics.Enums;
 
 namespace DigimonWorld.Evolution.Calculator.Core.EvolutionCriteriaCalculation.FromRookieOrChampion;
 
 public sealed class BonusCriteriaCalculator
 {
-    public bool CriteriaIsMet(Digimon digimon, BonusCriteria bonusCriteria)
+    public bool CriteriaIsMet(UserDigimon userDigimon, BonusCriteria bonusCriteria)
     {
-        if (HappinessCriteriaEnabled(bonusCriteria) && HappinessCriteriaIsMet(digimon, bonusCriteria)) return true;
+        if (HappinessCriteriaEnabled(bonusCriteria) && HappinessCriteriaIsMet(userDigimon, bonusCriteria))
+        {
+            return true;
+        }
 
-        if (DisciplineCriteriaEnabled(bonusCriteria) && DisciplineCriteriaIsMet(digimon, bonusCriteria)) return true;
+        if (DisciplineCriteriaEnabled(bonusCriteria) && DisciplineCriteriaIsMet(userDigimon, bonusCriteria))
+        {
+            return true;
+        }
 
-        if (BattleCriteriaEnabled(bonusCriteria) && BattleCriteriaIsMet(digimon, bonusCriteria)) return true;
+        if (BattleCriteriaEnabled(bonusCriteria) && BattleCriteriaIsMet(userDigimon, bonusCriteria))
+        {
+            return true;
+        }
 
-        if (TechniqueCriteriaIsMet(digimon, bonusCriteria)) return true;
+        if (TechniqueCriteriaIsMet(userDigimon, bonusCriteria))
+        {
+            return true;
+        }
 
-        if (PrecursorDigimonCriteriaIsEnabled(bonusCriteria) && PrecursorDigimonCriteriaIsMet(digimon, bonusCriteria)) return true;
+        if (PrecursorDigimonCriteriaIsEnabled(bonusCriteria) && PrecursorDigimonCriteriaIsMet(userDigimon, bonusCriteria))
+        {
+            return true;
+        }
 
         return false;
     }
@@ -26,9 +40,9 @@ public sealed class BonusCriteriaCalculator
         return bonusCriteria.Happiness >= 0;
     }
 
-    private bool HappinessCriteriaIsMet(Digimon digimon, BonusCriteria bonusCriteria)
+    private bool HappinessCriteriaIsMet(UserDigimon userDigimon, BonusCriteria bonusCriteria)
     {
-        return digimon.Happiness >= bonusCriteria.Happiness;
+        return userDigimon.Happiness >= bonusCriteria.Happiness;
     }
 
     private bool DisciplineCriteriaEnabled(BonusCriteria bonusCriteria)
@@ -36,9 +50,9 @@ public sealed class BonusCriteriaCalculator
         return bonusCriteria.Discipline >= 0;
     }
 
-    private bool DisciplineCriteriaIsMet(Digimon digimon, BonusCriteria bonusCriteria)
+    private bool DisciplineCriteriaIsMet(UserDigimon userDigimon, BonusCriteria bonusCriteria)
     {
-        return digimon.Discipline >= bonusCriteria.Discipline;
+        return userDigimon.Discipline >= bonusCriteria.Discipline;
     }
 
     private bool BattleCriteriaEnabled(BonusCriteria bonusCriteria)
@@ -46,15 +60,15 @@ public sealed class BonusCriteriaCalculator
         return bonusCriteria.Battles >= 0;
     }
 
-    private bool BattleCriteriaIsMet(Digimon digimon, BonusCriteria bonusCriteria)
+    private bool BattleCriteriaIsMet(UserDigimon userDigimon, BonusCriteria bonusCriteria)
     {
-        return (digimon.Battles <= bonusCriteria.Battles && bonusCriteria.IsBattlesCriteriaAMaximum) ||
-               (digimon.Battles >= bonusCriteria.Battles && !bonusCriteria.IsBattlesCriteriaAMaximum);
+        return (userDigimon.Battles <= bonusCriteria.Battles && bonusCriteria.IsBattlesCriteriaAMaximum) ||
+               (userDigimon.Battles >= bonusCriteria.Battles && !bonusCriteria.IsBattlesCriteriaAMaximum);
     }
 
-    private bool TechniqueCriteriaIsMet(Digimon digimon, BonusCriteria bonusCriteria)
+    private bool TechniqueCriteriaIsMet(UserDigimon userDigimon, BonusCriteria bonusCriteria)
     {
-        return digimon.TechniqueCount >= bonusCriteria.TechniqueCount;
+        return userDigimon.TechniqueCount >= bonusCriteria.TechniqueCount;
     }
 
     private bool PrecursorDigimonCriteriaIsEnabled(BonusCriteria bonusCriteria)
@@ -62,8 +76,8 @@ public sealed class BonusCriteriaCalculator
         return bonusCriteria.PrecursorDigimon != null;
     }
 
-    private bool PrecursorDigimonCriteriaIsMet(Digimon digimon, BonusCriteria bonusCriteria)
+    private bool PrecursorDigimonCriteriaIsMet(UserDigimon userDigimon, BonusCriteria bonusCriteria)
     {
-        return digimon.DigimonName == bonusCriteria.PrecursorDigimon;
+        return userDigimon.DigimonName == bonusCriteria.PrecursorDigimon;
     }
 }

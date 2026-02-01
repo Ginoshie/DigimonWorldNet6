@@ -15,8 +15,11 @@ public abstract class BaseDialogWindow : Window
     {
         UIElement? mainWindowUiElement = Application.Current.MainWindow?.FindName("OuterBorderWindow") as UIElement;
 
-        if (mainWindowUiElement is not FrameworkElement mainWindowFrameworkElement) return; 
-        
+        if (mainWindowUiElement is not FrameworkElement mainWindowFrameworkElement)
+        {
+            return;
+        }
+
         Point position = mainWindowFrameworkElement
             .TransformToAncestor(Application.Current.MainWindow!)
             .Transform(new Point(0, 0));
