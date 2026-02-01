@@ -58,7 +58,7 @@
                             <Grid>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="auto" />
-                                    <ColumnDefinition Width="auto" />
+                                    <ColumnDefinition Width="180" />
                                     <ColumnDefinition Width="auto" />
                                 </Grid.ColumnDefinitions>
                                 <Grid.RowDefinitions>
@@ -85,12 +85,11 @@
                                         </ToolTip>
                                     </Label.ToolTip>
                                 </Label>
-                                <ComboBox Name="Digimon" Grid.Column="1" Grid.Row="0" Grid.ColumnSpan="2" HorizontalAlignment="Left" FocusVisualStyle="{StaticResource DefaultFocusStyle}"
+                                <ComboBox Name="Digimon" Grid.Column="1" Grid.Row="0" Grid.ColumnSpan="2"  FocusVisualStyle="{StaticResource DefaultFocusStyle}"
                                           Style="{StaticResource DefaultComboboxStyle}"
                                           SelectedIndex="0"
                                           ItemsSource="{Binding Path=AvailableDigimonTypes}"
-                                          SelectedItem="{Binding PlayerDigimonType}"
-                                          Width="178">
+                                          SelectedItem="{Binding PlayerDigimonType}">
                                     <ComboBox.ToolTip>
                                         <ToolTip Content="The digimon type of your Digimon." Style="{StaticResource DefaultToolTipRightStyle}" />
                                     </ComboBox.ToolTip>
@@ -103,7 +102,7 @@
                                         </ToolTip>
                                     </Label.ToolTip>
                                 </Label>
-                                <TextBox Name="Hp" Grid.Column="1" Grid.Row="1" FocusVisualStyle="{StaticResource DefaultFocusStyle}" Style="{StaticResource DefaultTextBoxStyle}">
+                                <TextBox Name="Hp" Grid.Column="1" Grid.Row="1" FocusVisualStyle="{StaticResource DefaultFocusStyle}" Style="{StaticResource DefaultTextBoxStyle}" >
                                     <TextBox.ToolTip>
                                         <ToolTip Style="{StaticResource DefaultToolTipRightStyle}">
                                             <TextBlock Text="The 'HP' stat value of your Digimon." />
