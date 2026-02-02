@@ -23,10 +23,6 @@ public class AreaPreferenceTopicViewModel : TopicViewModelBase
     private DispatcherTimer? _timer;
     private bool _showImage1;
     private bool _isRunning;
-    private ImageSource _negativeDislikedImageSource = new BitmapImage(new Uri(NEGATIVE_DISLIKED_IMAGE_1_PATH, UriKind.Relative));
-    private ImageSource _negativeLikedImageSource = new BitmapImage(new Uri(NEGATIVE_LIKED_IMAGE_1_PATH, UriKind.Relative));
-    private ImageSource _positiveDislikedDislikedImageSource = new BitmapImage(new Uri(POSITIVE_DISLIKED_IMAGE_1_PATH, UriKind.Relative));
-    private ImageSource _positiveLikedImageSource = new BitmapImage(new Uri(POSITIVE_LIKED_IMAGE_1_PATH, UriKind.Relative));
 
     public AreaPreferenceTopicViewModel(
         Action<string, Action<string>> speakShellmonTextShortDelayAction,
@@ -63,47 +59,47 @@ public class AreaPreferenceTopicViewModel : TopicViewModelBase
             OnPropertyChanged(nameof(AnimationToolTipText));
         }
     }
-    
+
     public ImageSource NegativeDislikedImageSource
     {
-        get => _negativeDislikedImageSource;
+        get;
         set
         {
-            _negativeDislikedImageSource = value;
+            field = value;
             OnPropertyChanged();
         }
-    }
-    
+    } = new BitmapImage(new Uri(NEGATIVE_DISLIKED_IMAGE_1_PATH, UriKind.Relative));
+
     public ImageSource NegativeLikedImageSource
     {
-        get => _negativeLikedImageSource;
+        get;
         set
         {
-            _negativeLikedImageSource = value;
+            field = value;
             OnPropertyChanged();
         }
-    }
-    
+    } = new BitmapImage(new Uri(NEGATIVE_LIKED_IMAGE_1_PATH, UriKind.Relative));
+
     public ImageSource PositiveDislikedImageSource
     {
-        get => _positiveDislikedDislikedImageSource;
+        get;
         set
         {
-            _positiveDislikedDislikedImageSource = value;
+            field = value;
             OnPropertyChanged();
         }
-    }
-    
+    } = new BitmapImage(new Uri(POSITIVE_DISLIKED_IMAGE_1_PATH, UriKind.Relative));
+
     public ImageSource PositiveLikedImageSource
     {
-        get => _positiveLikedImageSource;
+        get;
         set
         {
-            _positiveLikedImageSource = value;
+            field = value;
             OnPropertyChanged();
         }
-    }
-    
+    } = new BitmapImage(new Uri(POSITIVE_LIKED_IMAGE_1_PATH, UriKind.Relative));
+
     public string AnimationButtonIcon =>
         IsRunning ? "||" : "▶️";
 

@@ -8,8 +8,6 @@ public abstract class TopicViewModelBase : BaseViewModel
 {
     private readonly Action _instantDisplay;
 
-    private string _shellmonText = string.Empty;
-
     protected TopicViewModelBase(
         Action instantDisplay,
         Action<string, Action<string>> speakShellmonTextNoDelayAction,
@@ -35,7 +33,7 @@ public abstract class TopicViewModelBase : BaseViewModel
 
     public string ShellmonText
     {
-        get => _shellmonText;
-        private set => SetField(ref _shellmonText, value);
-    }
+        get;
+        private set => SetField(ref field, value);
+    } = string.Empty;
 }

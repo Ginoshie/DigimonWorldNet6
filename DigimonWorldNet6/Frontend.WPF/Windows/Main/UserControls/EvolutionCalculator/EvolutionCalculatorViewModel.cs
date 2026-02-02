@@ -23,24 +23,7 @@ public sealed class EvolutionCalculatorViewModel : BaseViewModel, IDisposable
     private readonly SpeakingSimulator _speakingSimulator;
     private readonly CompositeDisposable _compositeDisposable;
 
-    private string _jijimonText = string.Empty;
-
-    private IEnumerable<DigimonName> _availableDigimonTypes = [];
-    private string _hp = "0";
-    private string _mp = "0";
-    private string _off = "0";
-    private string _def = "0";
-    private string _speed = "0";
-    private string _brains = "0";
-    private string _careMistakes = "0";
-    private string _weight = "0";
-    private string _happiness = "0";
-    private string _discipline = "0";
-    private string _battles = "0";
-    private string _techniques = "0";
-    private DigimonName _playerDigimonType;
     private EvolutionResult _evolutionResult = EvolutionResult.Unknown;
-    private bool _flipToRight;
 
     public EvolutionCalculatorViewModel()
     {
@@ -71,21 +54,21 @@ public sealed class EvolutionCalculatorViewModel : BaseViewModel, IDisposable
 
     public string JijimonText
     {
-        get => _jijimonText;
-        set => SetField(ref _jijimonText, value);
-    }
+        get;
+        set => SetField(ref field, value);
+    } = string.Empty;
 
     public DigimonName PlayerDigimonType
     {
-        get => _playerDigimonType;
+        get;
         set
         {
-            if (_playerDigimonType == value)
+            if (field == value)
             {
                 return;
             }
 
-            _playerDigimonType = value;
+            field = value;
 
             EvolutionResult = EvolutionResult.Unknown;
 
@@ -97,75 +80,75 @@ public sealed class EvolutionCalculatorViewModel : BaseViewModel, IDisposable
 
     public string HP
     {
-        get => _hp;
-        set => SetField(ref _hp, value);
-    }
+        get;
+        set => SetField(ref field, value);
+    } = "0";
 
     public string MP
     {
-        get => _mp;
-        set => SetField(ref _mp, value);
-    }
+        get;
+        set => SetField(ref field, value);
+    } = "0";
 
     public string Off
     {
-        get => _off;
-        set => SetField(ref _off, value);
-    }
+        get;
+        set => SetField(ref field, value);
+    } = "0";
 
     public string Def
     {
-        get => _def;
-        set => SetField(ref _def, value);
-    }
+        get;
+        set => SetField(ref field, value);
+    } = "0";
 
     public string Speed
     {
-        get => _speed;
-        set => SetField(ref _speed, value);
-    }
+        get;
+        set => SetField(ref field, value);
+    } = "0";
 
     public string Brains
     {
-        get => _brains;
-        set => SetField(ref _brains, value);
-    }
+        get;
+        set => SetField(ref field, value);
+    } = "0";
 
     public string CareMistakes
     {
-        get => _careMistakes;
-        set => SetField(ref _careMistakes, value);
-    }
+        get;
+        set => SetField(ref field, value);
+    } = "0";
 
     public string Weight
     {
-        get => _weight;
-        set => SetField(ref _weight, value);
-    }
+        get;
+        set => SetField(ref field, value);
+    } = "0";
 
     public string Happiness
     {
-        get => _happiness;
-        set => SetField(ref _happiness, value);
-    }
+        get;
+        set => SetField(ref field, value);
+    } = "0";
 
     public string Discipline
     {
-        get => _discipline;
-        set => SetField(ref _discipline, value);
-    }
+        get;
+        set => SetField(ref field, value);
+    } = "0";
 
     public string Battles
     {
-        get => _battles;
-        set => SetField(ref _battles, value);
-    }
+        get;
+        set => SetField(ref field, value);
+    } = "0";
 
     public string Techniques
     {
-        get => _techniques;
-        set => SetField(ref _techniques, value);
-    }
+        get;
+        set => SetField(ref field, value);
+    } = "0";
 
     public EvolutionResult EvolutionResult
     {
@@ -185,33 +168,33 @@ public sealed class EvolutionCalculatorViewModel : BaseViewModel, IDisposable
 
     public bool FlipToRight
     {
-        get => _flipToRight;
+        get;
         set
         {
-            if (_flipToRight == value)
+            if (field == value)
             {
                 return;
             }
 
-            _flipToRight = value;
+            field = value;
             OnPropertyChanged();
         }
     }
 
     public IEnumerable<DigimonName> AvailableDigimonTypes
     {
-        get => _availableDigimonTypes;
+        get;
         private set
         {
-            if(Equals(_availableDigimonTypes, value))
+            if (Equals(field, value))
             {
                 return;
             }
 
-            _availableDigimonTypes = value;
+            field = value;
             OnPropertyChanged();
         }
-    }
+    } = [];
 
     private void CalculateEvolutionResult()
     {

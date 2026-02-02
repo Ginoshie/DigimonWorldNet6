@@ -19,14 +19,8 @@ public class MusicPlayerViewModel : BaseWindowViewModel, IDisposable
     private readonly SpeakingSimulator _speakingSimulator;
     private readonly CompositeDisposable _compositeDisposable;
 
-    private string _currentSongTitle = string.Empty;
-    private double _currentPosition;
     private TimeSpan _songLength;
-    private bool _shuffleEnabled = Services.MusicPlayer.ShuffleMode == ShuffleMode.Shuffle;
-    private bool _repeatSingleSongEnabled = Services.MusicPlayer.RepeatMode == RepeatMode.Single;
-    private bool _muteEnabled = Services.MusicPlayer.Volume > 0;
     private int _volume = (int)(Services.MusicPlayer.Volume * 100f);
-    private string _giromonText = string.Empty;
 
     public MusicPlayerViewModel(Window window) : base(window)
     {
@@ -98,21 +92,21 @@ public class MusicPlayerViewModel : BaseWindowViewModel, IDisposable
 
     public string CurrentSongTitle
     {
-        get => _currentSongTitle;
-        private set => SetField(ref _currentSongTitle, value);
-    }
+        get;
+        private set => SetField(ref field, value);
+    } = string.Empty;
 
     public double CurrentPosition
     {
-        get => _currentPosition;
+        get;
         set
         {
-            if (!(Math.Abs(_currentPosition - value) > 0.1))
+            if (!(Math.Abs(field - value) > 0.1))
             {
                 return;
             }
 
-            _currentPosition = value;
+            field = value;
 
             OnPropertyChanged();
             OnPropertyChanged(nameof(CurrentPositionString));
@@ -142,45 +136,45 @@ public class MusicPlayerViewModel : BaseWindowViewModel, IDisposable
 
     public bool ShuffleEnabled
     {
-        get => _shuffleEnabled;
+        get;
         private set
         {
-            if (value == _shuffleEnabled)
+            if (value == field)
             {
                 return;
             }
 
-            _shuffleEnabled = value;
+            field = value;
 
-            Services.MusicPlayer.SetShuffleMode(_shuffleEnabled ? ShuffleMode.Shuffle : ShuffleMode.Chronological);
+            Services.MusicPlayer.SetShuffleMode(field ? ShuffleMode.Shuffle : ShuffleMode.Chronological);
 
             OnPropertyChanged();
         }
-    }
+    } = Services.MusicPlayer.ShuffleMode == ShuffleMode.Shuffle;
 
     public bool RepeatSingleSongEnabled
     {
-        get => _repeatSingleSongEnabled;
+        get;
         private set
         {
-            if (value == _repeatSingleSongEnabled)
+            if (value == field)
             {
                 return;
             }
 
-            _repeatSingleSongEnabled = value;
+            field = value;
 
-            Services.MusicPlayer.SetRepeatMode(_repeatSingleSongEnabled ? RepeatMode.Single : RepeatMode.All);
+            Services.MusicPlayer.SetRepeatMode(field ? RepeatMode.Single : RepeatMode.All);
 
             OnPropertyChanged();
         }
-    }
+    } = Services.MusicPlayer.RepeatMode == RepeatMode.Single;
 
     public bool MuteEnabled
     {
-        get => _muteEnabled;
-        set => SetField(ref _muteEnabled, value);
-    }
+        get;
+        set => SetField(ref field, value);
+    } = Services.MusicPlayer.Volume > 0;
 
     public float Volume
     {
@@ -200,9 +194,9 @@ public class MusicPlayerViewModel : BaseWindowViewModel, IDisposable
 
     public string GiromonText
     {
-        get => _giromonText;
-        set => SetField(ref _giromonText, value);
-    }
+        get;
+        set => SetField(ref field, value);
+    } = string.Empty;
 
     protected override void CloseApplication()
     {

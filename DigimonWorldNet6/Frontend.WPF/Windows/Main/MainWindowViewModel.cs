@@ -18,8 +18,6 @@ public class MainWindowViewModel : BaseWindowViewModel, IDisposable
 {
     private readonly CompositeDisposable _compositeDisposable;
 
-    private bool _bottomPaneIsOpen;
-    private bool _leftPaneIsOpen;
     private bool _musicPlayerIsOpen;
     private UserControl _currentSelectedMainWindowContent;
 
@@ -54,14 +52,14 @@ public class MainWindowViewModel : BaseWindowViewModel, IDisposable
 
     public bool LeftPaneIsOpen
     {
-        get => _leftPaneIsOpen;
-        private set => SetField(ref _leftPaneIsOpen, value);
+        get;
+        private set => SetField(ref field, value);
     }
 
     public bool BottomPaneIsOpen
     {
-        get => _bottomPaneIsOpen;
-        private set => SetField(ref _bottomPaneIsOpen, value);
+        get;
+        private set => SetField(ref field, value);
     }
 
     public ICommand ToggleLeftPaneCommand { get; }

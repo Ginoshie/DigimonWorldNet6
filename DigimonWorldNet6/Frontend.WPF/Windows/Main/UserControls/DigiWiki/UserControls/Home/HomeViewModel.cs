@@ -9,8 +9,6 @@ public class HomeViewModel : BaseViewModel
 {
     private readonly Action _instantDisplay;
 
-    private string _shellmonText = string.Empty;
-    
     public HomeViewModel(Action<string, Action<string>> speakShellmonTextAction, Action instantDisplay)
     {
         _instantDisplay = instantDisplay;
@@ -28,7 +26,7 @@ public class HomeViewModel : BaseViewModel
 
     public string ShellmonText
     {
-        get => _shellmonText;
-        private set => SetField(ref _shellmonText, value);
-    }
+        get;
+        private set => SetField(ref field, value);
+    } = string.Empty;
 }

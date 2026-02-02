@@ -5,8 +5,6 @@ namespace DigimonWorld.Evolution.Calculator.Core.DataObjects;
 
 public sealed class UserDigimon
 {
-    private DigimonName _digimonName;
-
     public UserDigimon(DigimonName digimonName, int hp, int mp, int off, int def, int speed, int brains, int careMistakes, int weight, int happiness, int discipline, int battles, int techniqueCount)
     {
         DigimonName = digimonName;
@@ -28,11 +26,11 @@ public sealed class UserDigimon
 
     public DigimonName DigimonName
     {
-        get => _digimonName;
+        get;
         private set
         {
             EvolutionStage = EvolutionStageMapper.Get(value);
-            _digimonName = value;
+            field = value;
         }
     }
 

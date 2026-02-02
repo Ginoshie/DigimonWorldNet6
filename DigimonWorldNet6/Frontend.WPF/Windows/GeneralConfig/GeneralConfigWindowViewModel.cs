@@ -17,18 +17,6 @@ public class GeneralConfigWindowViewModel : BaseViewModel
     private readonly NarrationConfigurationSection _narrationConfigurationSection = new();
     private readonly EvolutionConfigurationSection _evolutionConfigurationSection = new();
 
-    private bool _narratorModeIsInstant;
-    private bool _narratorModeIsSpeech;
-    private int _volume;
-    private bool _muteIsOn;
-    private bool _muteIsOff;
-    private bool _repeatModeIsSingle;
-    private bool _repeatModeIsAll;
-    private bool _shuffleModeIsOn;
-    private bool _shuffleModeIsOff;
-    private bool _pauseOnCloseWindow;
-    private bool _doNothingOnCloseWindow;
-
     private GameVariant _gameVariant;
     private UserControl _currentSelectedSettingCategoryUserControl;
 
@@ -84,72 +72,72 @@ public class GeneralConfigWindowViewModel : BaseViewModel
 
     public bool IsNarratorModeInstant
     {
-        get => _narratorModeIsInstant;
-        private set => SetField(ref _narratorModeIsInstant, value);
+        get;
+        private set => SetField(ref field, value);
     }
 
     public bool IsNarratorModeSpeech
     {
-        get => _narratorModeIsSpeech;
-        private set => SetField(ref _narratorModeIsSpeech, value);
+        get;
+        private set => SetField(ref field, value);
     }
 
     public int Volume
     {
-        get => _volume;
+        get;
         set
         {
-            SetField(ref _volume, value);
-            UserConfigurationManager.SetVolume(_volume);
+            SetField(ref field, value);
+            UserConfigurationManager.SetVolume(field);
         }
     }
 
     public bool MuteIsOn
     {
-        get => _muteIsOn;
-        private set => SetField(ref _muteIsOn, value);
+        get;
+        private set => SetField(ref field, value);
     }
 
     public bool MuteIsOff
     {
-        get => _muteIsOff;
-        private set => SetField(ref _muteIsOff, value);
+        get;
+        private set => SetField(ref field, value);
     }
 
     public bool ShuffleModeIsOn
     {
-        get => _shuffleModeIsOn;
-        private set => SetField(ref _shuffleModeIsOn, value);
+        get;
+        private set => SetField(ref field, value);
     }
 
     public bool ShuffleModeIsOff
     {
-        get => _shuffleModeIsOff;
-        private set => SetField(ref _shuffleModeIsOff, value);
+        get;
+        private set => SetField(ref field, value);
     }
 
     public bool RepeatModeIsSingle
     {
-        get => _repeatModeIsSingle;
-        private set => SetField(ref _repeatModeIsSingle, value);
+        get;
+        private set => SetField(ref field, value);
     }
 
     public bool RepeatModeIsAll
     {
-        get => _repeatModeIsAll;
-        private set => SetField(ref _repeatModeIsAll, value);
+        get;
+        private set => SetField(ref field, value);
     }
 
     public bool PauseOnCloseWindow
     {
-        get => _pauseOnCloseWindow;
-        private set => SetField(ref _pauseOnCloseWindow, value);
+        get;
+        private set => SetField(ref field, value);
     }
 
     public bool DoNothingOnCloseWindow
     {
-        get => _doNothingOnCloseWindow;
-        private set => SetField(ref _doNothingOnCloseWindow, value);
+        get;
+        private set => SetField(ref field, value);
     }
 
     #endregion
