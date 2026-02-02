@@ -42,7 +42,12 @@ public static class UserConfigurationManager
 
     public static EvolutionCalculatorConfig EvolutionCalculatorConfig => UserConfiguration.EvolutionCalculatorConfig;
 
-    public static void SetNarratorMode(NarratorMode mode) => UserConfiguration.SpeakingSimulatorConfig.NarratorMode = mode;
+    public static void SetNarratorMode(NarratorMode mode)
+    {
+        UserConfiguration.SpeakingSimulatorConfig.NarratorMode = mode;
+        
+        CurrentSpeakingSimulatorConfigSubject.OnNext(SpeakingSimulatorConfig);
+    }
 
     public static void SetVolume(int volume) => UserConfiguration.MusicPlayerConfig.Volume = volume;
 

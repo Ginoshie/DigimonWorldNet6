@@ -3,54 +3,86 @@ using System.Reactive.Disposables;
 using System.Threading;
 using System.Threading.Tasks;
 using DigimonWorld.Frontend.WPF.Constants;
+using DigimonWorld.Frontend.WPF.Enums;
 using Shared.Configuration;
 using Shared.Enums;
 using Shared.Services;
 
 namespace DigimonWorld.Frontend.WPF.Services;
 
-public class SpeakingSimulator : IDisposable
+public sealed class SpeakingSimulator : IDisposable
 {
     private readonly Lock _lock = new();
     private readonly CompositeDisposable _compositeDisposable;
 
     private CancellationTokenSource? _typingCancellationTokenSource;
     private volatile bool _instantDisplayRequested;
-    private SpeakingSimulatorConfig _speakingSimulatorConfig = null!;
+    private volatile bool _configInstantMode;
 
     public SpeakingSimulator()
     {
-        _compositeDisposable = new CompositeDisposable
-        (
+        _compositeDisposable = new CompositeDisposable(
             UserConfigurationManager.CurrentSpeakingSimulatorConfig.Subscribe(OnConfigChanged)
         );
     }
 
-    public async Task WriteTextAsSpeechAsync(string fullText, Action<string> updateTextAction)
+    public async Task SpeakAsync(
+        string fullText,
+        Action<string> updateTextAction,
+        SpeechDelay delay = SpeechDelay.None,
+        Action? showEvolutionAction = null)
     {
         CancelAndReset();
-        await StartNewSpeechTask(() => WriteTextAsSpeech(fullText, updateTextAction, null));
+
+        CancellationToken token = _typingCancellationTokenSource!.Token;
+
+        try
+        {
+            int delayMs = ResolveDelay(delay);
+
+            if (delayMs > 0)
+            {
+                await DelayResponsiveAsync(delayMs, token);
+            }
+
+            await WriteTextAsSpeech(
+                fullText,
+                updateTextAction,
+                showEvolutionAction,
+                token);
+        }
+        catch (OperationCanceledException)
+        {
+            // expected
+        }
     }
 
-    public async Task WriteEvolutionTextAsSpeech(string fullText, Action<string> updateTextAction, Action? showEvolutionAction)
-    {
-        CancelAndReset();
-        await StartNewSpeechTask(() => WriteTextAsSpeech(fullText, updateTextAction, showEvolutionAction));
-    }
 
     public void RequestInstantDisplay()
     {
         _instantDisplayRequested = true;
     }
-
-    private void OnConfigChanged(SpeakingSimulatorConfig speakingSimulatorConfig)
+    
+    private int ResolveDelay(SpeechDelay delay) => delay switch
     {
-        if (speakingSimulatorConfig.NarratorMode == NarratorMode.Instant)
-        {
-            RequestInstantDisplay();
-        }
+        SpeechDelay.None => 0,
+        SpeechDelay.Short => 600,
+        SpeechDelay.Long => 1500,
+        _ => 0
+    };
 
-        _speakingSimulatorConfig = speakingSimulatorConfig;
+
+    private void OnConfigChanged(SpeakingSimulatorConfig config)
+    {
+        if (config.NarratorMode == NarratorMode.Instant)
+        {
+            _configInstantMode = true;
+            _instantDisplayRequested = true;
+        }
+        else
+        {
+            _configInstantMode = false;
+        }
     }
 
     private void CancelAndReset()
@@ -65,26 +97,17 @@ public class SpeakingSimulator : IDisposable
         }
     }
 
-    private async Task StartNewSpeechTask(Func<Task> speechTask)
+    private async Task WriteTextAsSpeech(
+        string fullText,
+        Action<string> updateTextAction,
+        Action? showEvolutionAction,
+        CancellationToken token)
     {
-        try
-        {
-            await speechTask();
-        }
-        catch (OperationCanceledException)
-        {
-            // Expected cancellation
-        }
-    }
+        string cleanText = fullText.Replace(
+            JijimonEvolutionCalculatorNarratorText.ShowEvolutionResultKeyWord,
+            string.Empty);
 
-    private async Task WriteTextAsSpeech(string fullText, Action<string> updateTextAction, Action? showEvolutionAction)
-    {
-        CancellationToken cancellationToken = _typingCancellationTokenSource!.Token;
-        string currentText = string.Empty;
-
-        string cleanText = fullText.Replace(JijimonEvolutionCalculatorNarratorText.ShowEvolutionResultKeyWord, "");
-
-        if (_speakingSimulatorConfig.NarratorMode == NarratorMode.Instant)
+        if (_configInstantMode)
         {
             updateTextAction(cleanText);
             showEvolutionAction?.Invoke();
@@ -98,9 +121,13 @@ public class SpeakingSimulator : IDisposable
             showEvolutionAction?.Invoke();
         }
 
+        string currentText = string.Empty;
+
         foreach (string word in words)
         {
-            if (_instantDisplayRequested || cancellationToken.IsCancellationRequested)
+            token.ThrowIfCancellationRequested();
+
+            if (_instantDisplayRequested)
             {
                 updateTextAction(cleanText);
                 showEvolutionAction?.Invoke();
@@ -110,25 +137,40 @@ public class SpeakingSimulator : IDisposable
             if (word == JijimonEvolutionCalculatorNarratorText.ShowEvolutionResultKeyWord)
             {
                 showEvolutionAction?.Invoke();
-                await Task.Delay(500, cancellationToken);
+                await DelayResponsiveAsync(500, token);
                 continue;
             }
 
             currentText += word + " ";
             updateTextAction(currentText);
 
-            string lastFiveChars = currentText.Length >= 6
-                ? currentText[^6..]
-                : currentText;
+            bool hasEllipsis =
+                currentText.Length >= 6 &&
+                currentText[^6..].Contains(". . .");
 
-            if (lastFiveChars.Contains(". . ."))
+            await DelayResponsiveAsync(hasEllipsis ? 800 : 150, token);
+        }
+
+        updateTextAction(cleanText);
+    }
+
+    private async Task DelayResponsiveAsync(int milliseconds, CancellationToken token)
+    {
+        const int slice = 20;
+        int elapsed = 0;
+
+        while (elapsed < milliseconds)
+        {
+            token.ThrowIfCancellationRequested();
+
+            if (_instantDisplayRequested)
             {
-                await Task.Delay(800, cancellationToken);
+                return;
             }
-            else
-            {
-                await Task.Delay(150, cancellationToken);
-            }
+
+            int delay = Math.Min(slice, milliseconds - elapsed);
+            await Task.Delay(delay, token);
+            elapsed += delay;
         }
     }
 

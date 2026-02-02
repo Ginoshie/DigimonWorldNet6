@@ -2,12 +2,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reactive.Disposables;
-using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Input;
 using DigimonWorld.Evolution.Calculator.Core;
 using DigimonWorld.Evolution.Calculator.Core.DataObjects;
 using DigimonWorld.Frontend.WPF.Constants;
+using DigimonWorld.Frontend.WPF.Enums;
 using DigimonWorld.Frontend.WPF.Services;
 using DigimonWorld.Frontend.WPF.ViewModelComponents;
 using Shared.Configuration;
@@ -37,11 +36,12 @@ public sealed class EvolutionCalculatorViewModel : BaseViewModel, IDisposable
 
         InstantDisplayCommand = new CommandHandler(InstantDisplay);
 
-        int initialDelay = UserConfigurationManager.SpeakingSimulatorConfig.NarratorMode == NarratorMode.Instant ? 0 : 1500;
+        SpeechDelay initialDelay = UserConfigurationManager.SpeakingSimulatorConfig.NarratorMode == NarratorMode.Instant ? SpeechDelay.None : SpeechDelay.Long;
 
-        Task.Delay(initialDelay)
-            .WaitAsync(CancellationToken.None)
-            .ContinueWith(_ => _speakingSimulator.WriteTextAsSpeechAsync(JijimonEvolutionCalculatorNarratorText.IntroText, textOutput => JijimonText = textOutput));
+        _ = _speakingSimulator.SpeakAsync(
+            JijimonEvolutionCalculatorNarratorText.IntroText,
+            textOutput => JijimonText = textOutput,
+            initialDelay);
 
         UserConfigurationManager.CurrentEvolutionCalculatorConfig.Subscribe(OnEvolutionCalculatorConfigChanged);
     }
@@ -162,7 +162,7 @@ public sealed class EvolutionCalculatorViewModel : BaseViewModel, IDisposable
 
             _evolutionResult = value;
 
-            _ = _speakingSimulator.WriteEvolutionTextAsSpeech(JijimonEvolutionCalculatorNarratorText.EvolutionResultCalculated(value), textOutput => JijimonText = textOutput, () => OnPropertyChanged());
+            _ = _speakingSimulator.SpeakAsync(JijimonEvolutionCalculatorNarratorText.EvolutionResultCalculated(value), textOutput => JijimonText = textOutput, 0, () => OnPropertyChanged());
         }
     }
 

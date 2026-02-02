@@ -1,8 +1,7 @@
 using System;
-using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Input;
+using DigimonWorld.Frontend.WPF.Enums;
 using DigimonWorld.Frontend.WPF.Services;
 using DigimonWorld.Frontend.WPF.ViewModelComponents;
 using DigimonWorld.Frontend.WPF.Windows.Main.UserControls.DigiWiki.UserControls.Home;
@@ -25,8 +24,6 @@ using DigimonWorld.Frontend.WPF.Windows.Main.UserControls.DigiWiki.UserControls.
 using DigimonWorld.Frontend.WPF.Windows.Main.UserControls.DigiWiki.UserControls.Topics.TirednessTopic;
 using DigimonWorld.Frontend.WPF.Windows.Main.UserControls.DigiWiki.UserControls.Topics.TiredTopic;
 using DigimonWorld.Frontend.WPF.Windows.Main.UserControls.DigiWiki.UserControls.Topics.WeightTopic;
-using Shared.Enums;
-using Shared.Services;
 
 namespace DigimonWorld.Frontend.WPF.Windows.Main.UserControls.DigiWiki;
 
@@ -34,32 +31,23 @@ public class DigiWikiViewModel : BaseViewModel
 {
     private readonly SpeakingSimulator _speakingSimulator = new();
 
-    private CancellationTokenSource? _cancellationTokenSource;
     private UserControl _currentSelectedDigiWikiContent;
     private UserControl _currentSelectedMenuNavigation;
 
-    private void SpeakShellmonText(string shellmonText, Action<string> updateTextAction, int delayInMs)
+    private void SpeakShellmonTextAsync(string shellmonText, Action<string> updateTextAction, SpeechDelay delayInMs)
     {
-        _cancellationTokenSource?.Cancel();
-        _cancellationTokenSource = new CancellationTokenSource();
-        CancellationToken token = _cancellationTokenSource.Token;
-
-        int initialDelay = UserConfigurationManager.SpeakingSimulatorConfig.NarratorMode == NarratorMode.Instant ? 0 : delayInMs;
-
-        Task.Delay(initialDelay, token)
-            .WaitAsync(token)
-            .ContinueWith(_ =>
-            {
-                Task writeTextAsSpeechTask = _speakingSimulator.WriteTextAsSpeechAsync(shellmonText, updateTextAction);
-
-                return writeTextAsSpeechTask;
-            });
+        _ = _speakingSimulator.SpeakAsync(
+            shellmonText,
+            updateTextAction,
+            delayInMs);
     }
 
-    private Action<string, Action<string>> SpeakShellmonTextLongDelayAction => (shellmonText, updateTextAction) => SpeakShellmonText(shellmonText, updateTextAction, 1500);
+    private Action<string, Action<string>> SpeakShellmonTextLongDelayAction => (text, update) => SpeakShellmonTextAsync(text, update, SpeechDelay.Long);
 
-    private Action<string, Action<string>> SpeakShellmonTextShortDelayAction => (shellmonText, updateTextAction) => SpeakShellmonText(shellmonText, updateTextAction, 600);
-    private Action<string, Action<string>> SpeakShellmonTextNoDelayAction => (shellmonText, updateTextAction) => SpeakShellmonText(shellmonText, updateTextAction, 0);
+    private Action<string, Action<string>> SpeakShellmonTextShortDelayAction => (text, update) => SpeakShellmonTextAsync(text, update, SpeechDelay.Short);
+
+    private Action<string, Action<string>> SpeakShellmonTextNoDelayAction => (text, update) => SpeakShellmonTextAsync(text, update, SpeechDelay.None);
+
 
     public DigiWikiViewModel()
     {
@@ -70,7 +58,7 @@ public class DigiWikiViewModel : BaseViewModel
         OpenChaptersCommand = new CommandHandler(OpenChapters);
 
         OpenPraisingTopicCommand = new CommandHandler(OpenPraisingTopic);
-        
+
         OpenScoldingTopicCommand = new CommandHandler(OpenScoldingTopic);
 
         OpenFoodTopicCommand = new CommandHandler(OpenFoodTopic);
@@ -92,7 +80,7 @@ public class DigiWikiViewModel : BaseViewModel
         OpenPoopyTopicCommand = new CommandHandler(OpenPoopyTopic);
 
         OpenTiredTopicCommand = new CommandHandler(OpenTiredTopic);
-        
+
         OpenSleepyTopicCommand = new CommandHandler(OpenSleepyTopic);
 
         OpenFlowerTopicCommand = new CommandHandler(OpenFlowerTopic);
@@ -160,8 +148,6 @@ public class DigiWikiViewModel : BaseViewModel
 
     private void InstantDisplay()
     {
-        _cancellationTokenSource?.Cancel();
-
         _speakingSimulator.RequestInstantDisplay();
     }
 }

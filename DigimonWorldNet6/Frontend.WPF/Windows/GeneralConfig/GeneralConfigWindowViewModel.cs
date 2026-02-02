@@ -208,6 +208,8 @@ public class GeneralConfigWindowViewModel : BaseViewModel
     {
         IsNarratorModeSpeech = mode == NarratorMode.Speech;
         IsNarratorModeInstant = mode == NarratorMode.Instant;
+        
+        UserConfigurationManager.SetNarratorMode(mode);
     }
 
     private void SetMuteMode(MuteMode mode)

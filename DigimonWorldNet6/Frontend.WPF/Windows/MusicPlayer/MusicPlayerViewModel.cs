@@ -1,11 +1,11 @@
 using System;
 using System.Reactive.Disposables;
 using System.Reactive.Linq;
-using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using DigimonWorld.Frontend.WPF.Constants;
+using DigimonWorld.Frontend.WPF.Enums;
 using DigimonWorld.Frontend.WPF.Services;
 using DigimonWorld.Frontend.WPF.ViewModelComponents;
 using DigimonWorld.Frontend.WPF.Windows.BaseClasses;
@@ -27,17 +27,11 @@ public class MusicPlayerViewModel : BaseWindowViewModel, IDisposable
         _speakingSimulator = new SpeakingSimulator();
 
         ToggleShuffleCommand = new CommandHandler(ToggleShuffle);
-
         PreviousSongCommand = new CommandHandler(PreviousSong);
-
         PlayPauseCommand = new CommandHandler(PlayPause);
-
         NextSongCommand = new CommandHandler(NextSong);
-
         ToggleRepeatSingleSongCommand = new CommandHandler(ToggleRepeatSingleSongEnabled);
-
         ToggleMuteEnabledCommand = new CommandHandler(ToggleMuteEnabled);
-
         InstantDisplayCommand = new CommandHandler(InstantDisplay);
 
         _compositeDisposable = new CompositeDisposable(
@@ -163,9 +157,7 @@ public class MusicPlayerViewModel : BaseWindowViewModel, IDisposable
             }
 
             field = value;
-
             Services.MusicPlayer.SetRepeatMode(field ? RepeatMode.Single : RepeatMode.All);
-
             OnPropertyChanged();
         }
     } = Services.MusicPlayer.RepeatMode == RepeatMode.Single;
@@ -205,11 +197,7 @@ public class MusicPlayerViewModel : BaseWindowViewModel, IDisposable
         base.CloseApplication();
     }
 
-    private void ToggleShuffle()
-    {
-        ShuffleMode toggledShuffleMode = !ShuffleEnabled ? ShuffleMode.Shuffle : ShuffleMode.Chronological;
-        Services.MusicPlayer.SetShuffleMode(toggledShuffleMode);
-    }
+    private void ToggleShuffle() => Services.MusicPlayer.SetShuffleMode(!ShuffleEnabled ? ShuffleMode.Shuffle : ShuffleMode.Chronological);
 
     private void PreviousSong() => Services.MusicPlayer.PreviousSong();
 
@@ -217,11 +205,7 @@ public class MusicPlayerViewModel : BaseWindowViewModel, IDisposable
 
     private void NextSong() => Services.MusicPlayer.NextSong();
 
-    private void ToggleRepeatSingleSongEnabled()
-    {
-        RepeatMode toggledRepeatMode = !RepeatSingleSongEnabled ? RepeatMode.Single : RepeatMode.All;
-        Services.MusicPlayer.SetRepeatMode(toggledRepeatMode);
-    }
+    private void ToggleRepeatSingleSongEnabled() => Services.MusicPlayer.SetRepeatMode(!RepeatSingleSongEnabled ? RepeatMode.Single : RepeatMode.All);
 
     private void ToggleMuteEnabled()
     {
@@ -237,105 +221,71 @@ public class MusicPlayerViewModel : BaseWindowViewModel, IDisposable
 
     private void InstantDisplay() => _speakingSimulator.RequestInstantDisplay();
 
+    private Task SpeakGiromonTextAsync(string text, SpeechDelay delayMs = SpeechDelay.None) => _speakingSimulator.SpeakAsync(text, output => GiromonText = output, delayMs);
+
     private async Task OnMusicPlayerOpened()
     {
-        int initialDelay = UserConfigurationManager.SpeakingSimulatorConfig.NarratorMode == NarratorMode.Instant ? 0 : 750;
+        SpeechDelay delay = UserConfigurationManager.SpeakingSimulatorConfig.NarratorMode == NarratorMode.Instant ? SpeechDelay.None : SpeechDelay.Short;
 
-        await Task
-            .Delay(initialDelay)
-            .WaitAsync(CancellationToken.None)
-            .ContinueWith(_ => _speakingSimulator.WriteTextAsSpeechAsync(GiromonMusicPlayerNarratorText.IntroText, textOutput => GiromonText = textOutput));
+        await SpeakGiromonTextAsync(GiromonMusicPlayerNarratorText.IntroText, delay);
     }
 
-    private async Task OnMusicPlayerClosed() => await _speakingSimulator.WriteTextAsSpeechAsync(string.Empty, textOutput => GiromonText = textOutput);
+    private Task OnMusicPlayerClosed() => SpeakGiromonTextAsync(string.Empty);
 
-    private async Task OnLeomonSongStarted() => await _speakingSimulator.WriteTextAsSpeechAsync(GiromonMusicPlayerNarratorText.LeomonsTheme, textOutput => GiromonText = textOutput);
+    private Task OnLeomonSongStarted() => SpeakGiromonTextAsync(GiromonMusicPlayerNarratorText.LeomonsTheme);
+    private Task OnPreviousSongStarted() => SpeakGiromonTextAsync(GiromonMusicPlayerNarratorText.PreviousSong);
+
+    private Task OnNextSongStarted() => SpeakGiromonTextAsync(GiromonMusicPlayerNarratorText.NextSong);
 
     private async Task OnShuffleModeChanged(ShuffleMode shuffleMode)
     {
-        switch (shuffleMode)
-        {
-            case ShuffleMode.Shuffle:
-                ShuffleEnabled = true;
-                await _speakingSimulator.WriteTextAsSpeechAsync(GiromonMusicPlayerNarratorText.ShuffleEnabled, textOutput => GiromonText = textOutput);
-                return;
-            case ShuffleMode.Chronological:
-                ShuffleEnabled = false;
-                await _speakingSimulator.WriteTextAsSpeechAsync(GiromonMusicPlayerNarratorText.ShuffleDisabled, textOutput => GiromonText = textOutput);
-                return;
-            default:
-                throw new ArgumentOutOfRangeException(nameof(shuffleMode), shuffleMode, null);
-        }
-    }
+        ShuffleEnabled = shuffleMode == ShuffleMode.Shuffle;
 
-    private async Task OnPreviousSongStarted() => await _speakingSimulator.WriteTextAsSpeechAsync(GiromonMusicPlayerNarratorText.PreviousSong, textOutput => GiromonText = textOutput);
+        string text = shuffleMode == ShuffleMode.Shuffle ? GiromonMusicPlayerNarratorText.ShuffleEnabled : GiromonMusicPlayerNarratorText.ShuffleDisabled;
+
+        await SpeakGiromonTextAsync(text);
+    }
 
     private async Task OnPlayModeChanged(PlayMode playMode)
     {
-        switch (playMode)
+        string text = playMode switch
         {
-            case PlayMode.Paused:
-                await _speakingSimulator.WriteTextAsSpeechAsync(GiromonMusicPlayerNarratorText.Pause, textOutput => GiromonText = textOutput);
-                return;
-            case PlayMode.Playing:
-                await _speakingSimulator.WriteTextAsSpeechAsync(GiromonMusicPlayerNarratorText.Play, textOutput => GiromonText = textOutput);
-                return;
-            case PlayMode.Stopped:
-            default:
-                throw new ArgumentOutOfRangeException(nameof(playMode), playMode, null);
-        }
-    }
+            PlayMode.Paused => GiromonMusicPlayerNarratorText.Pause,
+            PlayMode.Playing => GiromonMusicPlayerNarratorText.Play,
+            _ => throw new ArgumentOutOfRangeException(nameof(playMode), playMode, null)
+        };
 
-    private async Task OnNextSongStarted() => await _speakingSimulator.WriteTextAsSpeechAsync(GiromonMusicPlayerNarratorText.NextSong, textOutput => GiromonText = textOutput);
+        await SpeakGiromonTextAsync(text);
+    }
 
     private async Task OnRepeatModeChanged(RepeatMode repeatMode)
     {
-        switch (repeatMode)
-        {
-            case RepeatMode.All:
-                RepeatSingleSongEnabled = false;
-                await _speakingSimulator.WriteTextAsSpeechAsync(GiromonMusicPlayerNarratorText.PlayAllSongs, textOutput => GiromonText = textOutput);
-                return;
-            case RepeatMode.Single:
-                RepeatSingleSongEnabled = true;
-                await _speakingSimulator.WriteTextAsSpeechAsync(GiromonMusicPlayerNarratorText.RepeatCurrent, textOutput => GiromonText = textOutput);
-                return;
-            default:
-                throw new ArgumentOutOfRangeException(nameof(repeatMode), repeatMode, null);
-        }
+        RepeatSingleSongEnabled = repeatMode == RepeatMode.Single;
+
+        string text = repeatMode == RepeatMode.Single ? GiromonMusicPlayerNarratorText.RepeatCurrent : GiromonMusicPlayerNarratorText.PlayAllSongs;
+
+        await SpeakGiromonTextAsync(text);
     }
 
     private async Task OnMuteModeChanged(MuteMode muteMode)
     {
-        if (MuteEnabled && muteMode == MuteMode.Mute || !MuteEnabled && muteMode == MuteMode.Unmuted)
+        if ((MuteEnabled && muteMode == MuteMode.Mute) || (!MuteEnabled && muteMode == MuteMode.Unmuted))
         {
             return;
         }
 
-        switch (muteMode)
-        {
-            case MuteMode.Mute:
-                MuteEnabled = true;
-                await _speakingSimulator.WriteTextAsSpeechAsync(GiromonMusicPlayerNarratorText.Mute, textOutput => GiromonText = textOutput);
-                return;
-            case MuteMode.Unmuted:
-                MuteEnabled = false;
-                await _speakingSimulator.WriteTextAsSpeechAsync(GiromonMusicPlayerNarratorText.Unmute, textOutput => GiromonText = textOutput);
-                return;
-            default:
-                throw new ArgumentOutOfRangeException(nameof(muteMode), muteMode, null);
-        }
+        MuteEnabled = muteMode == MuteMode.Mute;
+
+        string text = muteMode == MuteMode.Mute ? GiromonMusicPlayerNarratorText.Mute : GiromonMusicPlayerNarratorText.Unmute;
+
+        await SpeakGiromonTextAsync(text);
     }
 
     private void OnVolumeChanged(float newVolume)
     {
         _volume = (int)(newVolume * 100f);
-
         OnPropertyChanged(nameof(Volume));
     }
 
-    public void Dispose()
-    {
-        _compositeDisposable.Dispose();
-    }
+    public void Dispose() => _compositeDisposable.Dispose();
 }
