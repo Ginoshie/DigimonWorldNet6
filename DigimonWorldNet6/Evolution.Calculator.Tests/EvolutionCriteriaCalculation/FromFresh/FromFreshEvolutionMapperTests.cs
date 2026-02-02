@@ -1,6 +1,6 @@
 using System;
 using DigimonWorld.Evolution.Calculator.Core.EvolutionCriteriaCalculation.FromFresh;
-using Generics.Enums;
+using Shared.Enums;
 using NUnit.Framework;
 using Shouldly;
 

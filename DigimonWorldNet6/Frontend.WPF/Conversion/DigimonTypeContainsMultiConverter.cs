@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Windows.Data;
 using DigimonWorld.Frontend.WPF.Models;
-using Generics.Enums;
+using Shared.Enums;
 
 namespace DigimonWorld.Frontend.WPF.Conversion;
 

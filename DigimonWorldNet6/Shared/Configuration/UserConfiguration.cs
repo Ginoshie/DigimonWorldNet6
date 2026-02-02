@@ -1,4 +1,4 @@
-namespace Generics.Configuration;
+namespace Shared.Configuration;
 
 public class UserConfiguration
 {

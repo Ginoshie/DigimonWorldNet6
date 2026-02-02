@@ -8,9 +8,9 @@ using System.Linq;
 using System.Reactive.Disposables;
 using System.Reactive.Linq;
 using System.Reactive.Subjects;
-using Generics.Configuration;
-using Generics.Enums;
-using Generics.Services;
+using Shared.Configuration;
+using Shared.Enums;
+using Shared.Services;
 
 namespace DigimonWorld.Frontend.WPF.Services;
 

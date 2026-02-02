@@ -1,6 +1,6 @@
-using Generics.Enums;
+using Shared.Enums;
 
-namespace Generics.Extensions;
+namespace Shared.Extensions;
 
 public static class GameVariantExtensions
 {

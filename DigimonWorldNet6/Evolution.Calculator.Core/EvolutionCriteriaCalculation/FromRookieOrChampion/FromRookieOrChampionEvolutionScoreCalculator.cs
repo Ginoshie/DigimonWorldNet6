@@ -1,9 +1,9 @@
 using System;
 using DigimonWorld.Evolution.Calculator.Core.DataObjects;
 using DigimonWorld.Evolution.Calculator.Core.DataObjects.EvolutionCriteria;
-using Generics.Configuration;
-using Generics.Enums;
-using Generics.Services;
+using Shared.Configuration;
+using Shared.Enums;
+using Shared.Services;
 
 namespace DigimonWorld.Evolution.Calculator.Core.EvolutionCriteriaCalculation.FromRookieOrChampion;
 

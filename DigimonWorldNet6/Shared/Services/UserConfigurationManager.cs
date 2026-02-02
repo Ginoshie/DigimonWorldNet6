@@ -1,11 +1,11 @@
 using System.Reactive.Linq;
 using System.Reactive.Subjects;
 using System.Text.Json;
-using Generics.Configuration;
-using Generics.Enums;
 using Microsoft.VisualBasic.FileIO;
+using Shared.Configuration;
+using Shared.Enums;
 
-namespace Generics.Services;
+namespace Shared.Services;
 
 public static class UserConfigurationManager
 {

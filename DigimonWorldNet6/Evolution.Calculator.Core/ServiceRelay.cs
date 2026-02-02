@@ -1,6 +1,6 @@
 using DigimonWorld.Evolution.Calculator.Core.DataObjects;
 using DigimonWorld.Evolution.Calculator.Core.EvolutionCalculation;
-using Generics.Enums;
+using Shared.Enums;
 
 namespace DigimonWorld.Evolution.Calculator.Core;
 

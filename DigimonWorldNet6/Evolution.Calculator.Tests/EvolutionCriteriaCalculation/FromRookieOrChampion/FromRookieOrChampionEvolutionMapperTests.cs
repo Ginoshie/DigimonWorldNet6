@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using DigimonWorld.Evolution.Calculator.Core.EvolutionCriteriaCalculation.FromRookieOrChampion;
 using DigimonWorld.Evolution.Calculator.Core.Interfaces.EvolutionCriteria;
-using Generics.Enums;
+using Shared.Enums;
 using NUnit.Framework;
 using Shouldly;
 

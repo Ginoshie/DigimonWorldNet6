@@ -3,7 +3,7 @@ using DigimonWorld.Evolution.Calculator.Core;
 using DigimonWorld.Evolution.Calculator.Core.DataObjects;
 using DigimonWorld.Evolution.Calculator.Core.EvolutionCriteriaCalculation.FromRookieOrChampion;
 using Evolution.Calculator.Tests.Builder;
-using Generics.Enums;
+using Shared.Enums;
 using NUnit.Framework;
 using Shouldly;
 

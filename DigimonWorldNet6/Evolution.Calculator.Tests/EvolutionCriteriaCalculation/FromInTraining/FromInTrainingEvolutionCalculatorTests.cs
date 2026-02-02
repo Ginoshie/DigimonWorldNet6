@@ -2,7 +2,7 @@ using System;
 using DigimonWorld.Evolution.Calculator.Core.DataObjects;
 using DigimonWorld.Evolution.Calculator.Core.EvolutionCriteriaCalculation.FromInTraining;
 using Evolution.Calculator.Tests.Builder;
-using Generics.Enums;
+using Shared.Enums;
 using NUnit.Framework;
 using Shouldly;
 

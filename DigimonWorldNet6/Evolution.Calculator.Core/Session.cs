@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using Generics.Enums;
+using Shared.Enums;
 
 namespace DigimonWorld.Evolution.Calculator.Core;
 

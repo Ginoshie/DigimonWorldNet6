@@ -9,8 +9,8 @@ using DigimonWorld.Frontend.WPF.Constants;
 using DigimonWorld.Frontend.WPF.Services;
 using DigimonWorld.Frontend.WPF.ViewModelComponents;
 using DigimonWorld.Frontend.WPF.Windows.BaseClasses;
-using Generics.Enums;
-using Generics.Services;
+using Shared.Enums;
+using Shared.Services;
 
 namespace DigimonWorld.Frontend.WPF.Windows.MusicPlayer;
 

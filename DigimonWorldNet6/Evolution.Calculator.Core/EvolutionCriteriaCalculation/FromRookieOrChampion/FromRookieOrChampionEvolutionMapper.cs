@@ -7,10 +7,10 @@ using DigimonWorld.Evolution.Calculator.Core.EvolutionCriteria.Original.Ultimate
 using DigimonWorld.Evolution.Calculator.Core.EvolutionCriteria.Panjyamon.Champion;
 using DigimonWorld.Evolution.Calculator.Core.EvolutionCriteria.Vice21AndUp.Ultimate;
 using DigimonWorld.Evolution.Calculator.Core.Interfaces.EvolutionCriteria;
-using Generics.Constants;
-using Generics.Enums;
-using Generics.Extensions;
-using Generics.Services;
+using Shared.Constants;
+using Shared.Enums;
+using Shared.Extensions;
+using Shared.Services;
 
 namespace DigimonWorld.Evolution.Calculator.Core.EvolutionCriteriaCalculation.FromRookieOrChampion;
 

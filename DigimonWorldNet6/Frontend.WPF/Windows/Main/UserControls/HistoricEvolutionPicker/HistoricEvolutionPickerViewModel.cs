@@ -8,9 +8,9 @@ using DigimonWorld.Evolution.Calculator.Core;
 using DigimonWorld.Frontend.WPF.Models;
 using DigimonWorld.Frontend.WPF.Services;
 using DigimonWorld.Frontend.WPF.ViewModelComponents;
-using Generics.Configuration;
-using Generics.Enums;
-using Generics.Services;
+using Shared.Configuration;
+using Shared.Enums;
+using Shared.Services;
 
 namespace DigimonWorld.Frontend.WPF.Windows.Main.UserControls.HistoricEvolutionPicker;
 

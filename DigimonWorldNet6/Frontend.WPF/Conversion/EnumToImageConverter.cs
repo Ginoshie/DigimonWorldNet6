@@ -3,7 +3,7 @@ using System.Globalization;
 using System.Windows.Data;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using Generics.Enums;
+using Shared.Enums;
 
 namespace DigimonWorld.Frontend.WPF.Conversion;
 

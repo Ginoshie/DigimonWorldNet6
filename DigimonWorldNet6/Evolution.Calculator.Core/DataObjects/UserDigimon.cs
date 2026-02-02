@@ -1,5 +1,5 @@
-using Generics;
-using Generics.Enums;
+using Shared;
+using Shared.Enums;
 
 namespace DigimonWorld.Evolution.Calculator.Core.DataObjects;
 

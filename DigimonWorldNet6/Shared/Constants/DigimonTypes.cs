@@ -1,7 +1,7 @@
-using Generics.Enums;
-using Generics.Extensions;
+using Shared.Extensions;
+using Shared.Enums;
 
-namespace Generics.Constants;
+namespace Shared.Constants;
 
 public static class DigimonTypes
 {

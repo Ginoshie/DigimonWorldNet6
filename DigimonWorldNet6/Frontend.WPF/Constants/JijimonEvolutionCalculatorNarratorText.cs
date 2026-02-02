@@ -1,7 +1,7 @@
 using System;
 using System.Linq;
-using Generics.Enums;
-using Generics.Extensions;
+using Shared.Enums;
+using Shared.Extensions;
 
 namespace DigimonWorld.Frontend.WPF.Constants;
 

@@ -25,8 +25,8 @@ using DigimonWorld.Frontend.WPF.Windows.Main.UserControls.DigiWiki.UserControls.
 using DigimonWorld.Frontend.WPF.Windows.Main.UserControls.DigiWiki.UserControls.Topics.TirednessTopic;
 using DigimonWorld.Frontend.WPF.Windows.Main.UserControls.DigiWiki.UserControls.Topics.TiredTopic;
 using DigimonWorld.Frontend.WPF.Windows.Main.UserControls.DigiWiki.UserControls.Topics.WeightTopic;
-using Generics.Enums;
-using Generics.Services;
+using Shared.Enums;
+using Shared.Services;
 
 namespace DigimonWorld.Frontend.WPF.Windows.Main.UserControls.DigiWiki;
 

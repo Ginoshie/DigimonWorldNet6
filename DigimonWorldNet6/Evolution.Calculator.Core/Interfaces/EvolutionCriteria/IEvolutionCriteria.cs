@@ -1,5 +1,5 @@
 using DigimonWorld.Evolution.Calculator.Core.DataObjects.EvolutionCriteria;
-using Generics.Enums;
+using Shared.Enums;
 
 namespace DigimonWorld.Evolution.Calculator.Core.Interfaces.EvolutionCriteria;
 

@@ -1,5 +1,5 @@
-using Generics.Enums;
+using Shared.Enums;
 
-namespace Generics.Constants;
+namespace Shared.Constants;
 
 public readonly record struct DigimonType(DigimonName Digimon, GameVariant IncludeGameVariantFlags, GameVariant ExcludeGameVariantFlags = 0);

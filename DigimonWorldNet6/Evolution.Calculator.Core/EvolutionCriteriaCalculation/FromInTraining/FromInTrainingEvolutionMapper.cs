@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using DigimonWorld.Evolution.Calculator.Core.EvolutionCriteria.Original.Rookie;
 using DigimonWorld.Evolution.Calculator.Core.Interfaces.EvolutionCriteria;
-using Generics.Enums;
+using Shared.Enums;
 
 namespace DigimonWorld.Evolution.Calculator.Core.EvolutionCriteriaCalculation.FromInTraining;
 

@@ -1,4 +1,4 @@
-namespace Generics.Enums;
+namespace Shared.Enums;
 
 [Flags]
 public enum GameVariant

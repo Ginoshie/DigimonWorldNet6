@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using DigimonWorld.Evolution.Calculator.Core.DataObjects;
 using DigimonWorld.Evolution.Calculator.Core.Interfaces.EvolutionCriteria;
-using Generics.Enums;
-using Generics.Extensions;
+using Shared.Enums;
+using Shared.Extensions;
 
 namespace DigimonWorld.Evolution.Calculator.Core.EvolutionCriteriaCalculation.FromRookieOrChampion;
 

@@ -1,6 +1,6 @@
-using Generics.Enums;
+using Shared.Enums;
 
-namespace Generics;
+namespace Shared;
 
 public static class EvolutionStageMapper
 {

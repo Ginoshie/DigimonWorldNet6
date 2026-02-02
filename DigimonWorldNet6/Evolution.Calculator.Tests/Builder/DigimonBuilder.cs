@@ -1,5 +1,5 @@
 using DigimonWorld.Evolution.Calculator.Core.DataObjects;
-using Generics.Enums;
+using Shared.Enums;
 
 namespace Evolution.Calculator.Tests.Builder;
 

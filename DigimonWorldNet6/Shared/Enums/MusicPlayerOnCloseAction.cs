@@ -1,4 +1,4 @@
-namespace Generics.Enums;
+namespace Shared.Enums;
 
 public enum MusicPlayerOnCloseAction
 {

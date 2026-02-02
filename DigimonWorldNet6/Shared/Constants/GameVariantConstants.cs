@@ -1,6 +1,6 @@
-using Generics.Enums;
+using Shared.Enums;
 
-namespace Generics.Constants;
+namespace Shared.Constants;
 
 public static class GameVariantConstants
 {

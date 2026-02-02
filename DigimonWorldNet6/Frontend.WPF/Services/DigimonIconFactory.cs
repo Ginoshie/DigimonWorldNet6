@@ -1,7 +1,7 @@
 using System.Collections.ObjectModel;
 using System.Linq;
 using DigimonWorld.Frontend.WPF.Models;
-using Generics.Enums;
+using Shared.Enums;
 
 namespace DigimonWorld.Frontend.WPF.Services;
 

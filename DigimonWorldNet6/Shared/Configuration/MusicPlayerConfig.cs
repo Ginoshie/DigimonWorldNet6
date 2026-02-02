@@ -1,6 +1,6 @@
-using Generics.Enums;
+using Shared.Enums;
 
-namespace Generics.Configuration;
+namespace Shared.Configuration;
 
 public class MusicPlayerConfig
 {

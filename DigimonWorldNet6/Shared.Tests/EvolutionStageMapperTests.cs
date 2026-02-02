@@ -1,8 +1,8 @@
-using Generics.Enums;
 using NUnit.Framework;
+using Shared.Enums;
 using Shouldly;
 
-namespace Generics.Tests;
+namespace Shared.Tests;
 
 [TestFixture]
 public sealed class EvolutionStageMapperTests

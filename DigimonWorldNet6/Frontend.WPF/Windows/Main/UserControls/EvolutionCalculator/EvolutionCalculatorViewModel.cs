@@ -10,11 +10,11 @@ using DigimonWorld.Evolution.Calculator.Core.DataObjects;
 using DigimonWorld.Frontend.WPF.Constants;
 using DigimonWorld.Frontend.WPF.Services;
 using DigimonWorld.Frontend.WPF.ViewModelComponents;
-using Generics.Configuration;
-using Generics.Constants;
-using Generics.Enums;
-using Generics.Extensions;
-using Generics.Services;
+using Shared.Configuration;
+using Shared.Constants;
+using Shared.Enums;
+using Shared.Extensions;
+using Shared.Services;
 
 namespace DigimonWorld.Frontend.WPF.Windows.Main.UserControls.EvolutionCalculator;
 
