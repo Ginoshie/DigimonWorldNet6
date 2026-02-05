@@ -40,4 +40,22 @@
         </None>
     </ItemGroup>
 
+    <ItemGroup>
+      <Page Update="Windows\Main\UserControls\EmulatorLink\UserControls\SyncProfileSectionUserControl.xaml">
+        <Generator>MSBuild:Compile</Generator>
+        <XamlRuntime>Wpf</XamlRuntime>
+        <SubType>Designer</SubType>
+      </Page>
+      <Page Update="Windows\Main\UserControls\EmulatorLink\UserControls\SyncConditionSectionUserControl.xaml">
+        <Generator>MSBuild:Compile</Generator>
+        <XamlRuntime>Wpf</XamlRuntime>
+        <SubType>Designer</SubType>
+      </Page>
+      <Page Update="Windows\GeneralConfig\Dialogs\EmulatorProcessPickerDialog.xaml">
+        <Generator>MSBuild:Compile</Generator>
+        <XamlRuntime>Wpf</XamlRuntime>
+        <SubType>Designer</SubType>
+      </Page>
+    </ItemGroup>
+
 </Project>

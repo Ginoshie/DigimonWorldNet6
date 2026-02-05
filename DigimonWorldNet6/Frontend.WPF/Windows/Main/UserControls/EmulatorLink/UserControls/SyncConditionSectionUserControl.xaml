@@ -1,0 +1,150 @@
+<UserControl x:Class="DigimonWorld.Frontend.WPF.Windows.Main.UserControls.EmulatorLink.UserControls.SyncConditionSection"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:emulatorLink="clr-namespace:DigimonWorld.Frontend.WPF.Windows.Main.UserControls.EmulatorLink"
+             xmlns:conversion="clr-namespace:DigimonWorld.Frontend.WPF.Conversion"
+             mc:Ignorable="d"
+             d:DataContext="{d:DesignInstance Type=emulatorLink:EmulatorLinkViewModel, IsDesignTimeCreatable=True}">
+
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <conversion:TooltipTextConverter x:Key="TooltipTextConverter" />
+
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../../../../../ResourceDictionaries/Styles/Buttons/StretchContentButtonStyle.xaml" />
+                <ResourceDictionary Source="/ResourceDictionaries/Styles/Buttons/DefaultButtonStyle.xaml" />
+                <ResourceDictionary Source="/ResourceDictionaries/Styles/Labels/DefaultSheenLabelStyle.xaml" />
+                <ResourceDictionary Source="../../../../../ResourceDictionaries/Styles/ToolTips/DefaultTooltipRightStyle.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+
+        </ResourceDictionary>
+    </UserControl.Resources>
+
+    <Grid Width="{Binding SyncColumnWidth}" >
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <Label Grid.Row="0"
+               Content="CONDITION"
+               HorizontalAlignment="Stretch"
+               Height="35"
+               Margin="0,0,0,5"
+               Style="{StaticResource DefaultSheenLabelStyle}"
+               IsTabStop="False" />
+
+        <Button Grid.Row="1"
+                Height="{Binding ButtonHeight}"
+                Width="{Binding RectangularButtonWidth}"
+                Margin="3"
+                HorizontalAlignment="Center"
+                Style="{StaticResource DefaultButtonStyle}"
+                Command="{Binding SignalSetAllEmulatorConditionStatsCommand}">
+            <Button.ToolTip>
+                <ToolTip Style="{StaticResource DefaultToolTipRightStyle}">
+                    <TextBlock Text="{Binding ., Converter={StaticResource TooltipTextConverter}, ConverterParameter=all Condition Stats}" />
+                </ToolTip>
+            </Button.ToolTip>
+            <Image Source="/Images/Icons/Labels/CONDITION label.jpg"
+                   Margin="2" />
+        </Button>
+        <WrapPanel Grid.Row="2" Width="103" Orientation="Horizontal">
+            <Button ToolTipService.InitialShowDelay="{StaticResource DefaultTooltipDelay}" Style="{StaticResource StretchContentButtonStyle}"
+                    Width="{Binding SquareButtonWidth}"
+                    Height="{Binding ButtonHeight}"
+                    Margin="3"
+                    Command="{Binding SetDigimonHappinessFromEmulator}"
+                    CommandParameter="{Binding}">
+                <Button.ToolTip>
+                    <ToolTip Style="{StaticResource DefaultToolTipRightStyle}">
+                        <TextBlock Text="{Binding ., Converter={StaticResource TooltipTextConverter}, ConverterParameter=HAPPINESS}" />
+                    </ToolTip>
+                </Button.ToolTip>
+                <Image Stretch="Uniform">
+                    <Image.Style>
+                        <Style TargetType="Image">
+                            <Setter Property="Source" Value="/Images/Icons/Emotions/Happiness/happy-icon.jpg" />
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding IsHappy}" Value="False">
+                                    <Setter Property="Source"
+                                            Value="/Images/Icons/Emotions/Happiness/angry-icon.jpg" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Image.Style>
+                </Image>
+            </Button>
+            <Button ToolTipService.InitialShowDelay="{StaticResource DefaultTooltipDelay}" Style="{StaticResource StretchContentButtonStyle}"
+                    Width="{Binding SquareButtonWidth}"
+                    Height="{Binding ButtonHeight}"
+                    Margin="3"
+                    Command="{Binding SetDigimonDisciplineFromEmulator}"
+                    CommandParameter="{Binding}">
+                <Button.ToolTip>
+                    <ToolTip Style="{StaticResource DefaultToolTipRightStyle}">
+                        <TextBlock Text="{Binding ., Converter={StaticResource TooltipTextConverter}, ConverterParameter=DISCIPLINE}" />
+                    </ToolTip>
+                </Button.ToolTip>
+                <Image Stretch="Uniform">
+                    <Image.Style>
+                        <Style TargetType="Image">
+                            <Setter Property="Source"
+                                    Value="/Images/Icons/Emotions/Discipline/high-discipline.jpg" />
+
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding IsDisciplined}" Value="False">
+                                    <Setter Property="Source"
+                                            Value="/Images/Icons/Emotions/Discipline/low-discipline.jpg" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Image.Style>
+                </Image>
+            </Button>
+            <Button ToolTipService.InitialShowDelay="{StaticResource DefaultTooltipDelay}" Style="{StaticResource StretchContentButtonStyle}"
+                    Width="{Binding SquareButtonWidth}"
+                    Height="{Binding ButtonHeight}"
+                    Margin="3"
+                    Command="{Binding SetDigimonCareMistakesFromEmulator}"
+                    CommandParameter="{Binding}">
+                <Button.ToolTip>
+                    <ToolTip Style="{StaticResource DefaultToolTipRightStyle}">
+                        <TextBlock Text="{Binding ., Converter={StaticResource TooltipTextConverter}, ConverterParameter=Care Mistakes}" />
+                    </ToolTip>
+                </Button.ToolTip>
+                <Image Source="/Images/Icons/Emotions/Monochromon shop/monochromon-sad.jpg" Stretch="Uniform" Margin="1" />
+            </Button>
+            <Button ToolTipService.InitialShowDelay="{StaticResource DefaultTooltipDelay}" Style="{StaticResource StretchContentButtonStyle}"
+                    Width="{Binding SquareButtonWidth}"
+                    Height="{Binding ButtonHeight}"
+                    Margin="3"
+                    Command="{Binding SetDigimonTechniquesCountFromEmulator}"
+                    CommandParameter="{Binding}">
+                <Button.ToolTip>
+                    <ToolTip Style="{StaticResource DefaultToolTipRightStyle}">
+                        <TextBlock Text="{Binding ., Converter={StaticResource TooltipTextConverter}, ConverterParameter=Techniques}" />
+                    </ToolTip>
+                </Button.ToolTip>
+                <Image Source="/Images/Icons/Techniques/battle-icon.jpg" Stretch="Uniform" Margin="1" />
+            </Button>
+            <Button ToolTipService.InitialShowDelay="{StaticResource DefaultTooltipDelay}" Style="{StaticResource StretchContentButtonStyle}"
+                    Width="{Binding SquareButtonWidth}"
+                    Height="{Binding ButtonHeight}"
+                    Margin="3, 3,3, 0"
+                    Command="{Binding SetDigimonBattlesCountFromEmulator}"
+                    CommandParameter="{Binding}">
+                <Button.ToolTip>
+                    <ToolTip Style="{StaticResource DefaultToolTipRightStyle}">
+                        <TextBlock Text="{Binding ., Converter={StaticResource TooltipTextConverter}, ConverterParameter=Battles}" />
+                    </ToolTip>
+                </Button.ToolTip>
+                <Image Source="/Images/Icons/Combat/combat-emotion.jpg" Stretch="Uniform" Margin="1" />
+            </Button>
+        </WrapPanel>
+
+    </Grid>
+</UserControl>

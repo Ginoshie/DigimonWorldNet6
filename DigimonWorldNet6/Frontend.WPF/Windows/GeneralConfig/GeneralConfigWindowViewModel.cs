@@ -1,7 +1,10 @@
 using System;
+using System.Reactive.Disposables;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using DigimonWorld.Frontend.WPF.ViewModelComponents;
+using DigimonWorld.Frontend.WPF.Windows.GeneralConfig.Dialogs;
 using DigimonWorld.Frontend.WPF.Windows.GeneralConfig.UserControls;
 using Shared.Configuration;
 using Shared.Enums;
@@ -9,20 +12,23 @@ using Shared.Services;
 
 namespace DigimonWorld.Frontend.WPF.Windows.GeneralConfig;
 
-public class GeneralConfigWindowViewModel : BaseViewModel
+public class GeneralConfigWindowViewModel : BaseViewModel, IDisposable
 {
-    private readonly GeneralConfigWindow _window;
+    private readonly CompositeDisposable _disposables;
+    private readonly Window _window;
     private readonly HomeConfigurationSection _homeConfigurationSection = new();
     private readonly MusicPlayerConfigurationSection _musicPlayerConfigurationSection = new();
     private readonly NarrationConfigurationSection _narrationConfigurationSection = new();
     private readonly EvolutionConfigurationSection _evolutionConfigurationSection = new();
+    private readonly EmulatorLinkConfigurationSection _emulatorLinkConfigurationSection = new();
 
     private GameVariant _gameVariant;
     private UserControl _currentSelectedSettingCategoryUserControl;
 
-    public GeneralConfigWindowViewModel(GeneralConfigWindow window)
+    public GeneralConfigWindowViewModel(Window window)
     {
         _window = window;
+        EmulatorProcessPickerViewModel = new EmulatorProcessPickerViewModel(_window);
 
         SaveCommand = new CommandHandler(Save);
         CloseCommand = new CommandHandler(Close);
@@ -31,6 +37,7 @@ public class GeneralConfigWindowViewModel : BaseViewModel
         ShowMusicPlayerConfigurationSectionCommand = new CommandHandler(() => CurrentSelectedSettingCategoryUserControl = _musicPlayerConfigurationSection);
         ShowNarrationConfigurationSectionCommand = new CommandHandler(() => CurrentSelectedSettingCategoryUserControl = _narrationConfigurationSection);
         ShowEvolutionConfigurationSectionCommand = new CommandHandler(() => CurrentSelectedSettingCategoryUserControl = _evolutionConfigurationSection);
+        ShowEmulatorLinkConfigurationSectionCommand = new CommandHandler(() => CurrentSelectedSettingCategoryUserControl = _emulatorLinkConfigurationSection);
 
         SetNarratorModeSpeechCommand = new CommandHandler(() => SetNarratorMode(NarratorMode.Speech));
         SetNarratorModeInstantCommand = new CommandHandler(() => SetNarratorMode(NarratorMode.Instant));
@@ -54,10 +61,18 @@ public class GeneralConfigWindowViewModel : BaseViewModel
         SetEvolutionCalculatorModeVicePanjyamonEnabledCommand = new CommandHandler(() => SetVicePatch(GameVariant.PanjyamonPatch, true));
         SetEvolutionCalculatorModeVicePanjyamonDisabledCommand = new CommandHandler(() => SetVicePatch(GameVariant.PanjyamonPatch, false));
 
+        OpenEmulatorSelectorCommand = new CommandHandler(OpenEmulatorSelector);
+
         _currentSelectedSettingCategoryUserControl = _homeConfigurationSection;
 
-        LoadConfig(UserConfigurationManager.UserConfiguration);
+        _disposables = new CompositeDisposable(
+            UserConfigurationManager.CurrentEmulatorLinkConfig.Subscribe(_ => OnPropertyChanged(nameof(SelectedEmulatorProcessName)))
+        );
+
+        LoadConfig();
     }
+
+    public EmulatorProcessPickerViewModel EmulatorProcessPickerViewModel { get; }
 
     #region UserControl Selection Properties
 
@@ -65,6 +80,7 @@ public class GeneralConfigWindowViewModel : BaseViewModel
     public bool MusicPlayerConfigurationSectionIsSelected => CurrentSelectedSettingCategoryUserControl.GetType() == typeof(MusicPlayerConfigurationSection);
     public bool NarrationConfigurationSectionIsSelected => CurrentSelectedSettingCategoryUserControl.GetType() == typeof(NarrationConfigurationSection);
     public bool EvolutionConfigurationSectionIsSelected => CurrentSelectedSettingCategoryUserControl.GetType() == typeof(EvolutionConfigurationSection);
+    public bool EmulatorLinkConfigurationSectionIsSelected => CurrentSelectedSettingCategoryUserControl.GetType() == typeof(EmulatorLinkConfigurationSection);
 
     #endregion
 
@@ -161,12 +177,15 @@ public class GeneralConfigWindowViewModel : BaseViewModel
         get => _currentSelectedSettingCategoryUserControl;
         private set
         {
-            LoadConfig(UserConfigurationManager.UserConfiguration);
+            LoadConfig();
+
             SetField(ref _currentSelectedSettingCategoryUserControl, value);
+
             OnPropertyChanged(nameof(HomeConfigurationSectionIsSelected));
             OnPropertyChanged(nameof(MusicPlayerConfigurationSectionIsSelected));
             OnPropertyChanged(nameof(NarrationConfigurationSectionIsSelected));
             OnPropertyChanged(nameof(EvolutionConfigurationSectionIsSelected));
+            OnPropertyChanged(nameof(EmulatorLinkConfigurationSectionIsSelected));
         }
     }
 
@@ -180,6 +199,7 @@ public class GeneralConfigWindowViewModel : BaseViewModel
     public ICommand ShowMusicPlayerConfigurationSectionCommand { get; }
     public ICommand ShowNarrationConfigurationSectionCommand { get; }
     public ICommand ShowEvolutionConfigurationSectionCommand { get; }
+    public ICommand ShowEmulatorLinkConfigurationSectionCommand { get; }
     public ICommand SetNarratorModeSpeechCommand { get; }
     public ICommand SetNarratorModeInstantCommand { get; }
     public ICommand SetMuteOnCommand { get; }
@@ -196,6 +216,7 @@ public class GeneralConfigWindowViewModel : BaseViewModel
     public ICommand SetEvolutionCalculatorModeViceMyotismonDisabledCommand { get; }
     public ICommand SetEvolutionCalculatorModeVicePanjyamonEnabledCommand { get; }
     public ICommand SetEvolutionCalculatorModeVicePanjyamonDisabledCommand { get; }
+    public ICommand OpenEmulatorSelectorCommand { get; }
 
     #endregion
 
@@ -208,7 +229,7 @@ public class GeneralConfigWindowViewModel : BaseViewModel
     {
         IsNarratorModeSpeech = mode == NarratorMode.Speech;
         IsNarratorModeInstant = mode == NarratorMode.Instant;
-        
+
         UserConfigurationManager.SetNarratorMode(mode);
     }
 
@@ -291,19 +312,19 @@ public class GeneralConfigWindowViewModel : BaseViewModel
         OnPropertyChanged(nameof(GameVariantContainsVice));
     }
 
-    private void LoadConfig(UserConfiguration config)
+    private void LoadConfig()
     {
-        MusicPlayerConfig music = config.MusicPlayerConfig;
-        Volume = music.Volume;
-        SetMuteMode(music.MuteMode);
-        SetShuffleMode(music.ShuffleMode);
-        SetRepeatMode(music.RepeatMode);
-        SetOnCloseAction(music.OnCloseAction);
+        MusicPlayerConfig musicPlayerConfig = UserConfigurationManager.MusicPlayerConfig;
+        Volume = musicPlayerConfig.Volume;
+        SetMuteMode(musicPlayerConfig.MuteMode);
+        SetShuffleMode(musicPlayerConfig.ShuffleMode);
+        SetRepeatMode(musicPlayerConfig.RepeatMode);
+        SetOnCloseAction(musicPlayerConfig.OnCloseAction);
 
-        SpeakingSimulatorConfig sim = config.SpeakingSimulatorConfig;
+        SpeakingSimulatorConfig sim = UserConfigurationManager.SpeakingSimulatorConfig;
         SetNarratorMode(sim.NarratorMode);
 
-        _gameVariant = config.EvolutionCalculatorConfig.GameVariant;
+        _gameVariant = UserConfigurationManager.EvolutionCalculatorConfig.GameVariant;
         RaiseEvolutionCalculatorProperties();
     }
 
@@ -319,4 +340,26 @@ public class GeneralConfigWindowViewModel : BaseViewModel
     }
 
     #endregion
+
+    public string SelectedEmulatorProcessName => UserConfigurationManager.EmulatorLinkConfig.SelectedProcessName;
+
+    private void OpenEmulatorSelector()
+    {
+        EmulatorProcessPickerDialog dialog = new()
+        {
+            Owner = _window
+        };
+
+        EmulatorProcessPickerViewModel vm = new(dialog);
+        vm.LoadProcesses();
+
+        dialog.DataContext = vm;
+
+        dialog.ShowDialog();
+    }
+
+    public void Dispose()
+    {
+        _disposables.Dispose();
+    }
 }

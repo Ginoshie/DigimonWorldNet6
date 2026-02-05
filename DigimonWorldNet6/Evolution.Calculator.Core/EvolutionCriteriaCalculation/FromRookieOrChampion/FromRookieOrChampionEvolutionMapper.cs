@@ -67,7 +67,7 @@ public sealed class FromRookieOrChampionEvolutionMapper
         _fromRookieOrChampionEvolutionMappings[DigimonTypes.OgremonVice] = OgremonViceEvolutions;
         _fromRookieOrChampionEvolutionMappings[DigimonTypes.Palmon] = PalmonEvolutions;
         _fromRookieOrChampionEvolutionMappings[DigimonTypes.PanjyamonPanjyamon] = PanjamonPanjamonEvolutions;
-        _fromRookieOrChampionEvolutionMappings[DigimonTypes.PanjamonPanjamonAndMyotismon] = PanjamonPanjamonAndMyotismonEvolutions;
+        _fromRookieOrChampionEvolutionMappings[DigimonTypes.PanjyamonPanjyamonAndMyotismon] = PanjamonPanjamonAndMyotismonEvolutions;
         _fromRookieOrChampionEvolutionMappings[DigimonTypes.Patamon] = PatamonEvolutions;
         _fromRookieOrChampionEvolutionMappings[DigimonTypes.Penguinmon] = PenguinmonEvolutions;
         _fromRookieOrChampionEvolutionMappings[DigimonTypes.Seadramon] = SeadramonEvolutions;

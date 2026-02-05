@@ -7,4 +7,6 @@ public class UserConfiguration
     public MusicPlayerConfig MusicPlayerConfig { get; init; } = new();
 
     public EvolutionCalculatorConfig EvolutionCalculatorConfig { get; init; } = new();
+
+    public EmulatorLinkConfig EmulatorLinkConfiguration { get; set; } = new();
 }

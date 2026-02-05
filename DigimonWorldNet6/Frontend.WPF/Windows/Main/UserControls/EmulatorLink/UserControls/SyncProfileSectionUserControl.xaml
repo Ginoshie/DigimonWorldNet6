@@ -1,0 +1,84 @@
+<UserControl x:Class="DigimonWorld.Frontend.WPF.Windows.Main.UserControls.EmulatorLink.UserControls.SyncProfileSection"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:emulatorLink="clr-namespace:DigimonWorld.Frontend.WPF.Windows.Main.UserControls.EmulatorLink"
+             xmlns:conversion="clr-namespace:DigimonWorld.Frontend.WPF.Conversion"
+             mc:Ignorable="d"
+             d:DataContext="{d:DesignInstance Type=emulatorLink:EmulatorLinkViewModel, IsDesignTimeCreatable=True}">
+
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <conversion:TooltipTextConverter x:Key="TooltipTextConverter" />
+
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../../../../../ResourceDictionaries/Styles/Buttons/StretchContentButtonStyle.xaml" />
+                <ResourceDictionary Source="/ResourceDictionaries/Styles/Buttons/DefaultButtonStyle.xaml" />
+                <ResourceDictionary Source="/ResourceDictionaries/Styles/Labels/DefaultSheenLabelStyle.xaml" />
+                <ResourceDictionary Source="../../../../../ResourceDictionaries/Styles/ToolTips/DefaultTooltipRightStyle.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+
+    <Grid Width="{Binding SyncColumnWidth}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <Label Grid.Row="0"
+               Content="PROFILE"
+               HorizontalAlignment="Stretch"
+               Height="35"
+               Margin="0,0,0,5"
+               Style="{StaticResource DefaultSheenLabelStyle}"
+               IsTabStop="False" />
+
+        <Button Grid.Row="1"
+                Height="{Binding ButtonHeight}"
+                Width="{Binding RectangularButtonWidth}"
+                Margin="3"
+                HorizontalAlignment="Center"
+                Style="{StaticResource DefaultButtonStyle}"
+                Command="{Binding SignalSetAllEmulatorProfileStatsCommand}">
+            <Button.ToolTip>
+                <ToolTip Style="{StaticResource DefaultToolTipRightStyle}">
+                    <TextBlock Text="{Binding ., Converter={StaticResource TooltipTextConverter}, ConverterParameter=all Profile Stats}" />
+                </ToolTip>
+            </Button.ToolTip>
+            <Image Source="/Images/Icons/Labels/PROFILE label.jpg"
+                   Margin="2" />
+        </Button>
+        <WrapPanel Grid.Row="2" Width="103" Orientation="Horizontal">
+            <Button ToolTipService.InitialShowDelay="{StaticResource DefaultTooltipDelay}" Style="{StaticResource StretchContentButtonStyle}"
+                    Width="{Binding SquareButtonWidth}"
+                    Height="{Binding ButtonHeight}"
+                    Margin="3, 3,3, 0"
+                    Command="{Binding SetDigimonTypeFromEmulator}"
+                    CommandParameter="{Binding}">
+                <Button.ToolTip>
+                    <ToolTip Style="{StaticResource DefaultToolTipRightStyle}">
+                        <TextBlock Text="{Binding ., Converter={StaticResource TooltipTextConverter}, ConverterParameter=Digimon Type}" />
+                    </ToolTip>
+                </Button.ToolTip>
+                <Image Source="/Images/Icons/Labels/DIGI label.jpg" Stretch="Uniform" Margin="2" />
+            </Button>
+            <Button ToolTipService.InitialShowDelay="{StaticResource DefaultTooltipDelay}" Style="{StaticResource StretchContentButtonStyle}"
+                    Width="{Binding SquareButtonWidth}"
+                    Height="{Binding ButtonHeight}"
+                    Margin="3, 3,3, 0"
+                    Command="{Binding SetDigimonWeightFromEmulator}"
+                    CommandParameter="{Binding}">
+                <Button.ToolTip>
+                    <ToolTip Style="{StaticResource DefaultToolTipRightStyle}">
+                        <TextBlock Text="{Binding ., Converter={StaticResource TooltipTextConverter}, ConverterParameter=WEIGHT}" />
+                    </ToolTip>
+                </Button.ToolTip>
+                <Image Source="/Images/Icons/Labels/WEIGHT label.png" Stretch="Uniform" Margin="2" />
+            </Button>
+        </WrapPanel>
+
+    </Grid>
+</UserControl>

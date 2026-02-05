@@ -5,10 +5,10 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:system="clr-namespace:System;assembly=System.Runtime"
              xmlns:conversion="clr-namespace:DigimonWorld.Frontend.WPF.Conversion"
-             xmlns:historicEvolutionPicker1="clr-namespace:DigimonWorld.Frontend.WPF.Windows.Main.UserControls.HistoricEvolutionPicker"
+             xmlns:historicEvolutionPicker="clr-namespace:DigimonWorld.Frontend.WPF.Windows.Main.UserControls.HistoricEvolutionPicker"
              xmlns:models="clr-namespace:DigimonWorld.Frontend.WPF.Models"
              mc:Ignorable="d"
-             d:DataContext="{d:DesignInstance Type=historicEvolutionPicker1:HistoricEvolutionPickerViewModel, IsDesignTimeCreatable=True}">
+             d:DataContext="{d:DesignInstance Type=historicEvolutionPicker:HistoricEvolutionPickerViewModel, IsDesignTimeCreatable=True}">
 
     <UserControl.Resources>
         <ResourceDictionary>

@@ -25,6 +25,12 @@
 
             <conversion:EnumToImageConverter x:Key="EnumToImageConverter" />
 
+            <conversion:EnumToImageConverter x:Key="DigimonStatToImageConverter" />
+            
+            <conversion:TrueToVisibilityConverter x:Key="TrueToVisibility" />
+            
+            <conversion:TrueToHiddenConverter x:Key="TrueToHidden" />
+
             <system:Double x:Key="DefaultTextBoxHeight">30</system:Double>
 
             <Style TargetType="TextBlock">

@@ -11,6 +11,7 @@ using DigimonWorld.Frontend.WPF.Windows.GeneralConfig;
 using DigimonWorld.Frontend.WPF.Windows.Main.UserControls.DigiWiki;
 using DigimonWorld.Frontend.WPF.Windows.Main.UserControls.EvolutionCalculator;
 using DigimonWorld.Frontend.WPF.Windows.MusicPlayer;
+using Shared.Services;
 
 namespace DigimonWorld.Frontend.WPF.Windows.Main;
 
@@ -23,9 +24,11 @@ public class MainWindowViewModel : BaseWindowViewModel, IDisposable
 
     public MainWindowViewModel(Window window) : base(window)
     {
+        ToggleLeftPaneCommand = new CommandHandler(ToggleLeftPane);
+
         ToggleBottomPaneCommand = new CommandHandler(ToggleBottomPane);
 
-        ToggleLeftPaneCommand = new CommandHandler(ToggleLeftPane);
+        ToggleRightPaneCommand = new CommandHandler(ToggleRightPane);
 
         ShowEvolutionCalculatorCommand = new CommandHandler(ShowEvolutionCalculator);
 
@@ -62,13 +65,21 @@ public class MainWindowViewModel : BaseWindowViewModel, IDisposable
         private set => SetField(ref field, value);
     }
 
-    public ICommand ToggleLeftPaneCommand { get; }
+    public bool RightPaneIsOpen
+    {
+        get;
+        private set => SetField(ref field, value);
+    }
 
     public ICommand ShowEvolutionCalculatorCommand { get; }
 
     public ICommand ShowDigiWikiCommand { get; }
 
+    public ICommand ToggleLeftPaneCommand { get; }
+
     public ICommand ToggleBottomPaneCommand { get; }
+
+    public ICommand ToggleRightPaneCommand { get; }
 
     public ICommand OpenConfigurationWindowCommand { get; }
 
@@ -86,6 +97,8 @@ public class MainWindowViewModel : BaseWindowViewModel, IDisposable
     private void ToggleLeftPane() => LeftPaneIsOpen = !LeftPaneIsOpen;
 
     private void ToggleBottomPane() => BottomPaneIsOpen = !BottomPaneIsOpen;
+
+    private void ToggleRightPane() => RightPaneIsOpen = !RightPaneIsOpen;
 
     private void ShowEvolutionCalculator() => CurrentSelectedMainWindowContent = new EvolutionCalculatorUserControl();
 
