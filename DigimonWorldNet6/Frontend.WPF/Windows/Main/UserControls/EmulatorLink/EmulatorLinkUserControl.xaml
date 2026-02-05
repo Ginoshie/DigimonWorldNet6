@@ -1,0 +1,42 @@
+<UserControl x:Class="DigimonWorld.Frontend.WPF.Windows.Main.UserControls.EmulatorLink.EmulatorLinkUserControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:userControls="clr-namespace:DigimonWorld.Frontend.WPF.Windows.Main.UserControls.EmulatorLink.UserControls"
+             xmlns:emulatorLink="clr-namespace:DigimonWorld.Frontend.WPF.Windows.Main.UserControls.EmulatorLink"
+             xmlns:memory="clr-namespace:MemoryAccess;assembly=MemoryAccess"
+             mc:Ignorable="d"
+             d:DataContext="{d:DesignInstance Type=emulatorLink:EmulatorLinkViewModel, IsDesignTimeCreatable=True}">
+
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/ResourceDictionaries/Styles/Buttons/DefaultButtonStyle.xaml" />
+                <ResourceDictionary Source="/ResourceDictionaries/Styles/Labels/DefaultSheenLabelStyle.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="Auto" />
+        </Grid.ColumnDefinitions>
+
+        <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"
+                   Text="Emulator Connected"
+                   Visibility="{Binding Source={x:Static memory:LiveMemoryReader.Instance},
+                                Path=Connected,
+                                Converter={StaticResource BoolToVisibility}}" />
+
+        <userControls:SyncProfileSection Grid.Row="1" Grid.Column="0" Margin="10,0" />
+        <userControls:SyncParameterSection Grid.Row="1" Grid.Column="1" Margin="0,0, 10, 0 " />
+        <userControls:SyncConditionSection Grid.Row="1" Grid.Column="2" Margin="0,0, 10, 0 " />
+    </Grid>
+</UserControl>

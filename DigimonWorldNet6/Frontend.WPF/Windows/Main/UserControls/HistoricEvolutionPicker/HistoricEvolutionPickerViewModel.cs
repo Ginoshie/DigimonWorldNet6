@@ -20,8 +20,7 @@ public class HistoricEvolutionPickerViewModel : BaseViewModel, IDisposable
 
     public HistoricEvolutionPickerViewModel()
     {
-        HistoricEvolutionClickedCommand =
-            new RelayCommand<DigimonIcon>(UpdateHistoricEvolution);
+        HistoricEvolutionClickedCommand = new RelayCommand<DigimonIcon>(UpdateHistoricEvolution);
 
         _disposables = new CompositeDisposable
         {
@@ -34,11 +33,11 @@ public class HistoricEvolutionPickerViewModel : BaseViewModel, IDisposable
 
     public IList<DigimonName> HistoricEvolutions => Session.HistoricEvolutions;
 
-    public ObservableCollection<DigimonIcon> FreshStageIcons { get; private set; } = DigimonIconFactory.Create(FreshStageDigimonNames);
+    public ObservableCollection<DigimonIcon> FreshStageIcons { get; private set; } = DigimonIconFactory.Create(_freshStageDigimonNames);
 
-    public ObservableCollection<DigimonIcon> InTrainingStageIcons { get; private set; } = DigimonIconFactory.Create(InTrainingStageDigimonNames);
+    public ObservableCollection<DigimonIcon> InTrainingStageIcons { get; private set; } = DigimonIconFactory.Create(_inTrainingStageDigimonNames);
 
-    public ObservableCollection<DigimonIcon> RookieStageIcons { get; private set; } = DigimonIconFactory.Create(RookieStageDigimonNames);
+    public ObservableCollection<DigimonIcon> RookieStageIcons { get; private set; } = DigimonIconFactory.Create(_rookieStageDigimonNames);
 
     public ObservableCollection<DigimonIcon> ChampionStageIcons
     {
@@ -48,7 +47,7 @@ public class HistoricEvolutionPickerViewModel : BaseViewModel, IDisposable
             field = value;
             OnPropertyChanged();
         }
-    } = DigimonIconFactory.Create(ChampionStageDigimonNames);
+    } = DigimonIconFactory.Create(_championStageDigimonNames);
 
     public ObservableCollection<DigimonIcon> UltimateStageIcons
     {
@@ -58,9 +57,9 @@ public class HistoricEvolutionPickerViewModel : BaseViewModel, IDisposable
             field = value;
             OnPropertyChanged();
         }
-    } = DigimonIconFactory.Create(UltimateStageDigimonNames);
+    } = DigimonIconFactory.Create(_ultimateStageDigimonNames);
 
-    private static readonly DigimonName[] FreshStageDigimonNames =
+    private static readonly DigimonName[] _freshStageDigimonNames =
     [
         DigimonName.Botamon,
         DigimonName.Poyomon,
@@ -68,7 +67,7 @@ public class HistoricEvolutionPickerViewModel : BaseViewModel, IDisposable
         DigimonName.Yuramon
     ];
 
-    private static readonly DigimonName[] InTrainingStageDigimonNames =
+    private static readonly DigimonName[] _inTrainingStageDigimonNames =
     [
         DigimonName.Koromon,
         DigimonName.Tokomon,
@@ -76,7 +75,7 @@ public class HistoricEvolutionPickerViewModel : BaseViewModel, IDisposable
         DigimonName.Tanemon
     ];
 
-    private static readonly DigimonName[] RookieStageDigimonNames =
+    private static readonly DigimonName[] _rookieStageDigimonNames =
     [
         DigimonName.Agumon,
         DigimonName.Gabumon,
@@ -89,7 +88,7 @@ public class HistoricEvolutionPickerViewModel : BaseViewModel, IDisposable
         DigimonName.Penguinmon
     ];
 
-    private static readonly DigimonName[] ChampionStageDigimonNames =
+    private static readonly DigimonName[] _championStageDigimonNames =
     [
         DigimonName.Greymon,
         DigimonName.Monochromon,
@@ -122,7 +121,7 @@ public class HistoricEvolutionPickerViewModel : BaseViewModel, IDisposable
         DigimonName.Sukamon
     ];
 
-    private static readonly DigimonName[] UltimateStageDigimonNames =
+    private static readonly DigimonName[] _ultimateStageDigimonNames =
     [
         DigimonName.MetalGreymon,
         DigimonName.SkullGreymon,
@@ -141,7 +140,7 @@ public class HistoricEvolutionPickerViewModel : BaseViewModel, IDisposable
         DigimonName.Digitamamon
     ];
 
-    private static readonly DigimonName[] ViceUltimateStageDigimonNames = UltimateStageDigimonNames.Concat([
+    private static readonly DigimonName[] _viceUltimateStageDigimonNames = _ultimateStageDigimonNames.Concat([
         DigimonName.Weregarurumon,
         DigimonName.Gigadramon,
         DigimonName.MetalEtemon,
@@ -190,16 +189,16 @@ public class HistoricEvolutionPickerViewModel : BaseViewModel, IDisposable
 
     private void OnEvolutionCalculatorModeOriginal()
     {
-        ChampionStageIcons = DigimonIconFactory.Create(ChampionStageDigimonNames);
+        ChampionStageIcons = DigimonIconFactory.Create(_championStageDigimonNames);
 
-        UltimateStageIcons = DigimonIconFactory.Create(UltimateStageDigimonNames);
+        UltimateStageIcons = DigimonIconFactory.Create(_ultimateStageDigimonNames);
     }
 
     private void OnEvolutionCalculatorModeVice()
     {
-        ChampionStageIcons = DigimonIconFactory.Create(ChampionStageDigimonNames);
+        ChampionStageIcons = DigimonIconFactory.Create(_championStageDigimonNames);
 
-        UltimateStageIcons = DigimonIconFactory.Create(ViceUltimateStageDigimonNames);
+        UltimateStageIcons = DigimonIconFactory.Create(_viceUltimateStageDigimonNames);
     }
 
     private void OnEvolutionCalculatorModeMyotismon()
@@ -215,7 +214,7 @@ public class HistoricEvolutionPickerViewModel : BaseViewModel, IDisposable
 
     private void OnEvolutionCalculatorModePanjyamon()
     {
-        DigimonName[] patchedChampionDigimonNames = ChampionStageDigimonNames
+        DigimonName[] patchedChampionDigimonNames = _championStageDigimonNames
             .Concat([DigimonName.Panjyamon])
             .ToArray();
 

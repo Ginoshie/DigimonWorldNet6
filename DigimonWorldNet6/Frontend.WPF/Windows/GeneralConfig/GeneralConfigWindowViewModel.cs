@@ -293,12 +293,12 @@ public class GeneralConfigWindowViewModel : BaseViewModel
 
     private void LoadConfig(UserConfiguration config)
     {
-        MusicPlayerConfig music = config.MusicPlayerConfig;
-        Volume = music.Volume;
-        SetMuteMode(music.MuteMode);
-        SetShuffleMode(music.ShuffleMode);
-        SetRepeatMode(music.RepeatMode);
-        SetOnCloseAction(music.OnCloseAction);
+        MusicPlayerConfig musicPlayerConfig = config.MusicPlayerConfig;
+        Volume = musicPlayerConfig.Volume;
+        SetMuteMode(musicPlayerConfig.MuteMode);
+        SetShuffleMode(musicPlayerConfig.ShuffleMode);
+        SetRepeatMode(musicPlayerConfig.RepeatMode);
+        SetOnCloseAction(musicPlayerConfig.OnCloseAction);
 
         SpeakingSimulatorConfig sim = config.SpeakingSimulatorConfig;
         SetNarratorMode(sim.NarratorMode);

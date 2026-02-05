@@ -9,25 +9,25 @@ namespace Shared.Services;
 
 public static class UserConfigurationManager
 {
-    private static readonly string UserConfigFullPath = FileSystem.CombinePath(AppDomain.CurrentDomain.BaseDirectory, "userconfig.json");
-    private static readonly JsonSerializerOptions JsonSerializerOptions = new() { WriteIndented = true };
+    private static readonly string _userConfigFullPath = FileSystem.CombinePath(AppDomain.CurrentDomain.BaseDirectory, "userconfig.json");
+    private static readonly JsonSerializerOptions _jsonSerializerOptions = new() { WriteIndented = true };
 
-    private static readonly BehaviorSubject<SpeakingSimulatorConfig> CurrentSpeakingSimulatorConfigSubject;
-    private static readonly BehaviorSubject<MusicPlayerConfig> CurrentMusicPlayerConfigSubject;
-    private static readonly BehaviorSubject<EvolutionCalculatorConfig> CurrentEvolutionCalculatorConfigSubject;
+    private static readonly BehaviorSubject<SpeakingSimulatorConfig> _currentSpeakingSimulatorConfigSubject;
+    private static readonly BehaviorSubject<MusicPlayerConfig> _currentMusicPlayerConfigSubject;
+    private static readonly BehaviorSubject<EvolutionCalculatorConfig> _currentEvolutionCalculatorConfigSubject;
 
     static UserConfigurationManager()
     {
         UserConfiguration = GetConfiguration();
 
-        CurrentSpeakingSimulatorConfigSubject = new BehaviorSubject<SpeakingSimulatorConfig>(UserConfiguration.SpeakingSimulatorConfig);
-        CurrentSpeakingSimulatorConfig = CurrentSpeakingSimulatorConfigSubject.AsObservable();
+        _currentSpeakingSimulatorConfigSubject = new BehaviorSubject<SpeakingSimulatorConfig>(UserConfiguration.SpeakingSimulatorConfig);
+        CurrentSpeakingSimulatorConfig = _currentSpeakingSimulatorConfigSubject.AsObservable();
 
-        CurrentMusicPlayerConfigSubject = new BehaviorSubject<MusicPlayerConfig>(UserConfiguration.MusicPlayerConfig);
-        CurrentMusicPlayerConfig = CurrentMusicPlayerConfigSubject.AsObservable();
+        _currentMusicPlayerConfigSubject = new BehaviorSubject<MusicPlayerConfig>(UserConfiguration.MusicPlayerConfig);
+        CurrentMusicPlayerConfig = _currentMusicPlayerConfigSubject.AsObservable();
 
-        CurrentEvolutionCalculatorConfigSubject = new BehaviorSubject<EvolutionCalculatorConfig>(UserConfiguration.EvolutionCalculatorConfig);
-        CurrentEvolutionCalculatorConfig = CurrentEvolutionCalculatorConfigSubject.AsObservable();
+        _currentEvolutionCalculatorConfigSubject = new BehaviorSubject<EvolutionCalculatorConfig>(UserConfiguration.EvolutionCalculatorConfig);
+        CurrentEvolutionCalculatorConfig = _currentEvolutionCalculatorConfigSubject.AsObservable();
     }
 
     public static IObservable<SpeakingSimulatorConfig> CurrentSpeakingSimulatorConfig { get; }
@@ -46,7 +46,7 @@ public static class UserConfigurationManager
     {
         UserConfiguration.SpeakingSimulatorConfig.NarratorMode = mode;
         
-        CurrentSpeakingSimulatorConfigSubject.OnNext(SpeakingSimulatorConfig);
+        _currentSpeakingSimulatorConfigSubject.OnNext(SpeakingSimulatorConfig);
     }
 
     public static void SetVolume(int volume) => UserConfiguration.MusicPlayerConfig.Volume = volume;
@@ -61,19 +61,19 @@ public static class UserConfigurationManager
     {
         UserConfiguration.EvolutionCalculatorConfig.GameVariant = mode;
         
-        CurrentEvolutionCalculatorConfigSubject.OnNext(EvolutionCalculatorConfig);
+        _currentEvolutionCalculatorConfigSubject.OnNext(EvolutionCalculatorConfig);
     }
 
     public static void SaveConfiguration()
     {
         try
         {
-            string json = JsonSerializer.Serialize(UserConfiguration, JsonSerializerOptions);
-            File.WriteAllText(UserConfigFullPath, json);
+            string json = JsonSerializer.Serialize(UserConfiguration, _jsonSerializerOptions);
+            File.WriteAllText(_userConfigFullPath, json);
 
-            CurrentSpeakingSimulatorConfigSubject.OnNext(SpeakingSimulatorConfig);
-            CurrentMusicPlayerConfigSubject.OnNext(MusicPlayerConfig);
-            CurrentEvolutionCalculatorConfigSubject.OnNext(EvolutionCalculatorConfig);
+            _currentSpeakingSimulatorConfigSubject.OnNext(SpeakingSimulatorConfig);
+            _currentMusicPlayerConfigSubject.OnNext(MusicPlayerConfig);
+            _currentEvolutionCalculatorConfigSubject.OnNext(EvolutionCalculatorConfig);
         }
         catch (Exception ex)
         {
@@ -83,14 +83,14 @@ public static class UserConfigurationManager
 
     private static UserConfiguration GetConfiguration()
     {
-        if (!File.Exists(UserConfigFullPath))
+        if (!File.Exists(_userConfigFullPath))
         {
             return new UserConfiguration();
         }
 
         try
         {
-            string json = File.ReadAllText(UserConfigFullPath);
+            string json = File.ReadAllText(_userConfigFullPath);
             return JsonSerializer.Deserialize<UserConfiguration>(json) ?? new UserConfiguration();
         }
         catch (Exception ex)

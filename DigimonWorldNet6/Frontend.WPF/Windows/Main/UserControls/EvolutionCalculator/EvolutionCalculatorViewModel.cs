@@ -23,13 +23,38 @@ public sealed class EvolutionCalculatorViewModel : BaseViewModel, IDisposable
     private readonly CompositeDisposable _compositeDisposable;
 
     private EvolutionResult _evolutionResult = EvolutionResult.Unknown;
+    private GameVariant _gameVariant = GameVariant.Original;
 
     public EvolutionCalculatorViewModel()
     {
         _speakingSimulator = new SpeakingSimulator();
 
         _compositeDisposable = new CompositeDisposable(
-            _speakingSimulator
+            _speakingSimulator,
+            // Profile
+            EventHub.SetAllEmulatorProfileStatsObservable.Subscribe(_ => SetAllProfileStats()),
+            EventHub.SetEmulatorDigimonTypeObservable.Subscribe(_ => SetEmulatorDigimonType()),
+            EventHub.SetEmulatorWeightObservable.Subscribe(_ => SetEmulatorWeight()),
+
+            // Parameter
+            EventHub.SetAllEmulatorParameterStatsObservable.Subscribe(_ => OnSetAllEmulatorCombatStats()),
+            EventHub.SetEmulatorHPObservable.Subscribe(_ => SetEmulatorHP()),
+            EventHub.SetEmulatorMPObservable.Subscribe(_ => SetEmulatorMP()),
+            EventHub.SetEmulatorOffObservable.Subscribe(_ => SetEmulatorOff()),
+            EventHub.SetEmulatorDefObservable.Subscribe(_ => SetEmulatorDef()),
+            EventHub.SetEmulatorSpdObservable.Subscribe(_ => SetEmulatorSpeed()),
+            EventHub.SetEmulatorBrnObservable.Subscribe(_ => SetEmulatorBrains()),
+
+            // Condition
+            EventHub.SetAllEmulatorConditionStatsObservable.Subscribe(_ => OnSetAllEmulatorConditionStats()),
+            EventHub.SetEmulatorHappinessObservable.Subscribe(_ => SetEmulatorHappiness()),
+            EventHub.SetEmulatorDisciplineObservable.Subscribe(_ => SetEmulatorDiscipline()),
+            EventHub.SetEmulatorCareMistakesObservable.Subscribe(_ => SetEmulatorCareMistakes()),
+            EventHub.SetEmulatorTechniqueCountObservable.Subscribe(_ => SetEmulatorTechniqueCount()),
+            EventHub.SetEmulatorBattlesCountObservable.Subscribe(_ => SetEmulatorBattlesCount()),
+
+            // UserConfig
+            UserConfigurationManager.CurrentEvolutionCalculatorConfig.Subscribe(OnEvolutionCalculatorConfigChanged)
         );
 
         SetEvolutionResult = new CommandHandler(CalculateEvolutionResult);
@@ -42,8 +67,6 @@ public sealed class EvolutionCalculatorViewModel : BaseViewModel, IDisposable
             JijimonEvolutionCalculatorNarratorText.IntroText,
             textOutput => JijimonText = textOutput,
             initialDelay);
-
-        UserConfigurationManager.CurrentEvolutionCalculatorConfig.Subscribe(OnEvolutionCalculatorConfigChanged);
     }
 
     public ICommand SetEvolutionResult { get; }
@@ -77,6 +100,39 @@ public sealed class EvolutionCalculatorViewModel : BaseViewModel, IDisposable
             OnPropertyChanged();
         }
     }
+    
+    // Profile
+    private void SetAllProfileStats()
+    {
+        SetEmulatorWeight();
+        SetEmulatorDigimonType();
+    }
+    private void SetEmulatorWeight() => Weight = ServiceRelay.LiveMemoryReader.DigimonProfileStats.Weight.ToString();
+    private void SetEmulatorDigimonType() => PlayerDigimonType = DigimonTypes.Get(ServiceRelay.LiveMemoryReader.DigimonProfileStats.DigimonType, _gameVariant).Digimon;
+    
+    
+    // Parameter
+    private void SetEmulatorHP() => HP = ServiceRelay.LiveMemoryReader.DigimonParameterStats.HP.ToString();
+    private void SetEmulatorMP() => MP = ServiceRelay.LiveMemoryReader.DigimonParameterStats.MP.ToString();
+    private void SetEmulatorOff() => Off = ServiceRelay.LiveMemoryReader.DigimonParameterStats.Offense.ToString();
+    private void SetEmulatorDef() => Def = ServiceRelay.LiveMemoryReader.DigimonParameterStats.Defense.ToString();
+    private void SetEmulatorSpeed() => Speed = ServiceRelay.LiveMemoryReader.DigimonParameterStats.Speed.ToString();
+    private void SetEmulatorBrains() => Brains = ServiceRelay.LiveMemoryReader.DigimonParameterStats.Brains.ToString();
+    
+    // Condition
+    private void OnSetAllEmulatorConditionStats()
+    {
+        SetEmulatorHappiness();
+        SetEmulatorDiscipline();
+        SetEmulatorCareMistakes();
+        SetEmulatorTechniqueCount();
+        SetEmulatorBattlesCount();
+    }
+    private void SetEmulatorHappiness() => Discipline = ServiceRelay.LiveMemoryReader.DigimonConditionStats.Discipline.ToString();
+    private void SetEmulatorDiscipline() => Happiness = ServiceRelay.LiveMemoryReader.DigimonConditionStats.Happiness.ToString();
+    private void SetEmulatorCareMistakes() => CareMistakes = ServiceRelay.LiveMemoryReader.DigimonConditionStats.CareMistakes.ToString();
+    private void SetEmulatorTechniqueCount() => Techniques = ServiceRelay.LiveMemoryReader.DigimonTechniqueStats.LearnedTechniqueCount().ToString();
+    private void SetEmulatorBattlesCount() => Battles = ServiceRelay.LiveMemoryReader.DigimonConditionStats.Battles.ToString();
 
     public string HP
     {
@@ -202,7 +258,8 @@ public sealed class EvolutionCalculatorViewModel : BaseViewModel, IDisposable
 
         OnPropertyChanged(nameof(EvolutionResult));
 
-        UserDigimon currentUserDigimon = new(PlayerDigimonType, int.Parse(HP), int.Parse(MP), int.Parse(Off), int.Parse(Def), int.Parse(Speed), int.Parse(Brains), int.Parse(CareMistakes), int.Parse(Weight), int.Parse(Happiness), int.Parse(Discipline),
+        UserDigimon currentUserDigimon = new(PlayerDigimonType, int.Parse(HP), int.Parse(MP), int.Parse(Off), int.Parse(Def), int.Parse(Speed), int.Parse(Brains), int.Parse(CareMistakes), int.Parse(Weight), int.Parse(Happiness),
+            int.Parse(Discipline),
             int.Parse(Battles), int.Parse(Techniques));
 
         EvolutionResult = currentUserDigimon.DigimonName.EvolutionStage() == EvolutionStage.Ultimate
@@ -214,8 +271,20 @@ public sealed class EvolutionCalculatorViewModel : BaseViewModel, IDisposable
 
     private void InstantDisplay() => _speakingSimulator.RequestInstantDisplay();
 
+    private void OnSetAllEmulatorCombatStats()
+    {
+        SetEmulatorHP();
+        SetEmulatorMP();
+        SetEmulatorOff();
+        SetEmulatorDef();
+        SetEmulatorSpeed();
+        SetEmulatorBrains();
+    }
+
     private void OnEvolutionCalculatorConfigChanged(EvolutionCalculatorConfig evolutionCalculatorConfig)
     {
+        _gameVariant = UserConfigurationManager.EvolutionCalculatorConfig.GameVariant;
+
         AvailableDigimonTypes = DigimonTypes.Get(UserConfigurationManager.EvolutionCalculatorConfig.GameVariant);
 
         IEnumerable<DigimonName> availableDigimonTypes = AvailableDigimonTypes as DigimonName[] ?? AvailableDigimonTypes.ToArray();

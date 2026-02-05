@@ -9,6 +9,7 @@ in other projects is strictly prohibited.
 using System.Windows;
 using DigimonWorld.Evolution.Calculator.Core.Modules;
 using DigimonWorld.Frontend.WPF.Windows.Main;
+using MemoryAccess;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
@@ -20,12 +21,11 @@ public partial class App
 
     public App()
     {
-        
         AppHost = Host.CreateDefaultBuilder()
             .ConfigureServices((_, services) =>
             {
                 services.AddSingleton<MainWindow>();
-                
+
                 EvolutionCalculatorModule evolutionCalculatorModule = new();
                 evolutionCalculatorModule.RegisterServices(services);
             })
@@ -38,14 +38,16 @@ public partial class App
 
         MainWindow startupForm = AppHost.Services.GetRequiredService<MainWindow>();
         startupForm.Show();
-        
+
         base.OnStartup(e);
+
+        LiveMemoryReader.Instance.Start();
     }
 
     protected override async void OnExit(ExitEventArgs e)
     {
         await AppHost!.StopAsync();
-        
+
         base.OnExit(e);
     }
 }
