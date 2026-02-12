@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Windows;
 using System.Windows.Input;
+using System.Windows.Threading;
 using DigimonWorld.Frontend.WPF.ViewModelComponents;
 using DigimonWorld.Frontend.WPF.Windows.GeneralConfig.Utility;
 using Shared.Services;
@@ -13,25 +14,41 @@ namespace DigimonWorld.Frontend.WPF.Windows.GeneralConfig.Dialogs;
 public class EmulatorProcessPickerViewModel : BaseViewModel
 {
     private readonly Window _owner;
+    private DispatcherTimer _timer = null!;
 
     public EmulatorProcessPickerViewModel(Window owner)
     {
         _owner = owner;
 
-        SetEmulatorProcessNameCommand = new CommandHandler(SetEmulatorProcessName);
+        LoadProcesses();
+
+        SetupRefreshProcessList();
+
+        AttachEmulatorProcessCommand = new CommandHandler(AttachEmulatorProcess);
 
         CancelCommand = new CommandHandler(Cancel);
+    }
+
+    private void SetupRefreshProcessList()
+    {
+        _timer = new DispatcherTimer
+        {
+            Interval = TimeSpan.FromSeconds(1)
+        };
+
+        _timer.Tick += (_, _) => LoadProcesses();
+        _timer.Start();
     }
 
     public ObservableCollection<ProcessItemViewModel> Processes { get; } = [];
 
     public ProcessItemViewModel? SelectedProcess
     {
-        get ;
+        get;
         set => SetField(ref field, value);
     }
 
-    public ICommand SetEmulatorProcessNameCommand { get; }
+    public ICommand AttachEmulatorProcessCommand { get; }
     public ICommand CancelCommand { get; }
 
     public void LoadProcesses()
@@ -47,8 +64,10 @@ public class EmulatorProcessPickerViewModel : BaseViewModel
         }
     }
 
-    private void SetEmulatorProcessName()
+    private void AttachEmulatorProcess()
     {
+        _timer.Stop();
+        
         if (SelectedProcess == null)
         {
             return;

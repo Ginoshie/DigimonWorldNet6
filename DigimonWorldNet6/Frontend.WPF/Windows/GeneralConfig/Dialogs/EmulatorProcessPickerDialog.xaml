@@ -28,24 +28,26 @@
         <Border CornerRadius="8" BorderBrush="Black" BorderThickness="3" SnapsToDevicePixels="True" UseLayoutRounding="True">
             <Border CornerRadius="8" BorderBrush="#4A9FC5" BorderThickness="3" SnapsToDevicePixels="True" UseLayoutRounding="True">
                 <Border CornerRadius="5" BorderBrush="#90D9FA" BorderThickness="3" SnapsToDevicePixels="True" UseLayoutRounding="True">
-                    <Border CornerRadius="3" BorderBrush="Black" BorderThickness="3" Background="#2E3841">
-                        <Grid>
+                    <Border CornerRadius="3" BorderBrush="Black" BorderThickness="3" Background="#2E3841" Padding="5">
+                        <Grid Margin="5">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
                             <Grid.RowDefinitions>
-                                <RowDefinition Height="300" />
+                                <RowDefinition Height="200" />
                                 <RowDefinition Height="Auto" />
                             </Grid.RowDefinitions>
 
-                            <ListBox Style="{StaticResource DefaultListboxStyle}"
-                                ItemsSource="{Binding Processes}"
-                                SelectedItem="{Binding SelectedProcess}"
-                                Margin="5">
+                            <ListBox Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" Style="{StaticResource DefaultListboxStyle}"
+                                     ItemsSource="{Binding Processes}"
+                                     SelectedItem="{Binding SelectedProcess}"
+                                     Margin="0,0,0,10">
                                 <ListBox.ItemTemplate>
                                     <DataTemplate>
-                                        <StackPanel Orientation="Horizontal" Margin="4">
-                                            <Image Width="20" Height="20"
-                                                   Source="{Binding Icon}"
-                                                   Margin="0,0,6,0" />
-
+                                        <StackPanel Orientation="Horizontal">
+                                            <Image Width="20" Height="20" Source="{Binding Icon}" Margin="0,0,6,0" />
                                             <StackPanel>
                                                 <TextBlock Text="{Binding Name}" />
                                                 <TextBlock Text="{Binding Title}" />
@@ -55,9 +57,11 @@
                                 </ListBox.ItemTemplate>
                             </ListBox>
 
-                            <StackPanel Grid.Row="1" Margin="5" Orientation="Horizontal" HorizontalAlignment="Right">
-                                <Button Height="45" Style="{StaticResource DefaultButtonStyle}" Content="Attach" Margin="5" Padding="15,5" Command="{Binding SetEmulatorProcessNameCommand}" IsDefault="True" />
-                                <Button Height="45" Style="{StaticResource DefaultButtonStyle}" Content="Cancel" Margin="5" Padding="15,5" Command="{Binding CancelCommand}" IsCancel="True" />
+                            <StackPanel Grid.Row="1" Grid.Column="2" Orientation="Horizontal" HorizontalAlignment="Right">
+                                <Button Height="45" Style="{StaticResource DefaultButtonStyle}" Content="Cancel"
+                                        Margin="0,0,10,0" Padding="15,5" Command="{Binding CancelCommand}" IsCancel="True" />
+                                <Button Height="45" Style="{StaticResource DefaultButtonStyle}" Content="Attach"
+                                        Padding="15,5" Command="{Binding AttachEmulatorProcessCommand}" IsDefault="True" />
                             </StackPanel>
                         </Grid>
                     </Border>

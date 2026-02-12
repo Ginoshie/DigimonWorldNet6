@@ -348,7 +348,6 @@ public class GeneralConfigWindowViewModel : BaseViewModel, IDisposable
         };
 
         EmulatorProcessPickerViewModel vm = new(dialog);
-        vm.LoadProcesses();
 
         dialog.DataContext = vm;
 
