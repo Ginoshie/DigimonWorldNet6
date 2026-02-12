@@ -6,40 +6,61 @@
                               xmlns:baseClasses="clr-namespace:DigimonWorld.Frontend.WPF.Windows.BaseClasses"
                               xmlns:dialogs="clr-namespace:DigimonWorld.Frontend.WPF.Windows.GeneralConfig.Dialogs"
                               mc:Ignorable="d"
-                              d:DataContext="{d:DesignInstance Type=dialogs:EmulatorProcessPickerViewModel, IsDesignTimeCreatable=True}">
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="*" />
-            <RowDefinition Height="auto" />
-        </Grid.RowDefinitions>
-        <Grid Grid.Row="0" Margin="10">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="300"/>
-                <RowDefinition Height="Auto" />
-            </Grid.RowDefinitions>
+                              d:DataContext="{d:DesignInstance Type=dialogs:EmulatorProcessPickerViewModel, IsDesignTimeCreatable=True}"
+                              Title="Emulator Picker"
+                              ResizeMode="NoResize"
+                              SizeToContent="WidthAndHeight"
+                              WindowStyle="None"
+                              AllowsTransparency="True"
+                              Background="Transparent"
+                              WindowStartupLocation="Manual">
 
-            <ListBox ItemsSource="{Binding Processes}"
-                     SelectedItem="{Binding SelectedProcess}">
-                <ListBox.ItemTemplate>
-                    <DataTemplate>
-                        <StackPanel Orientation="Horizontal" Margin="4">
-                            <Image Width="20" Height="20"
-                                   Source="{Binding Icon}"
-                                   Margin="0,0,6,0" />
+    <baseClasses:BaseDialogWindow.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/ResourceDictionaries/Styles/Buttons/DefaultButtonStyle.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </baseClasses:BaseDialogWindow.Resources>
 
-                            <StackPanel>
-                                <TextBlock Text="{Binding Name}" />
-                                <TextBlock Text="{Binding Title}" />
+    <Border Background="Transparent" Panel.ZIndex="1" KeyboardNavigation.TabNavigation="None">
+        <Border CornerRadius="8" BorderBrush="Black" BorderThickness="3" SnapsToDevicePixels="True" UseLayoutRounding="True">
+            <Border CornerRadius="8" BorderBrush="#4A9FC5" BorderThickness="3" SnapsToDevicePixels="True" UseLayoutRounding="True">
+                <Border CornerRadius="5" BorderBrush="#90D9FA" BorderThickness="3" SnapsToDevicePixels="True" UseLayoutRounding="True">
+                    <Border CornerRadius="3" BorderBrush="Black" BorderThickness="3" Background="#2E3841">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="300" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+
+                            <ListBox ItemsSource="{Binding Processes}"
+                                     SelectedItem="{Binding SelectedProcess}"
+                                     Margin="5">
+                                <ListBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <StackPanel Orientation="Horizontal" Margin="4">
+                                            <Image Width="20" Height="20"
+                                                   Source="{Binding Icon}"
+                                                   Margin="0,0,6,0" />
+
+                                            <StackPanel>
+                                                <TextBlock Text="{Binding Name}" />
+                                                <TextBlock Text="{Binding Title}" />
+                                            </StackPanel>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </ListBox.ItemTemplate>
+                            </ListBox>
+
+                            <StackPanel Grid.Row="1" Margin="5" Orientation="Horizontal" HorizontalAlignment="Right">
+                                <Button Height="45" Style="{StaticResource DefaultButtonStyle}" Content="Attach" Margin="5" Command="{Binding SetEmulatorProcessNameCommand}" IsDefault="True"/>
+                                <Button Height="45" Style="{StaticResource DefaultButtonStyle}" Content="Cancel" Margin="5" Command="{Binding CancelCommand}" IsCancel="True" />
                             </StackPanel>
-                        </StackPanel>
-                    </DataTemplate>
-                </ListBox.ItemTemplate>
-            </ListBox>
-
-            <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right">
-                <Button Content="Attach" Margin="5" Command="{Binding SetEmulatorProcessNameCommand}"/>
-                <Button Content="Cancel" Margin="5" Command="{Binding CancelCommand}"/>
-            </StackPanel>
-        </Grid>
-    </Grid>
+                        </Grid>
+                    </Border>
+                </Border>
+            </Border>
+        </Border>
+    </Border>
 </baseClasses:BaseDialogWindow>
