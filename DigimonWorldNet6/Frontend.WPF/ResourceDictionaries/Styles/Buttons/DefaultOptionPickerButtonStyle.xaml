@@ -8,7 +8,7 @@
                     <Grid>
                         <Border x:Name="OuterBorder" BorderBrush="#B0B0B0" BorderThickness="2,2,0,0" Background="#575C60">
                             <Border x:Name="InnerBorder" BorderBrush="#060100" BorderThickness="0,0,2,2">
-                                <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center" />
+                                <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center" Margin="{TemplateBinding Padding}" />
                             </Border>
                         </Border>
                     </Grid>

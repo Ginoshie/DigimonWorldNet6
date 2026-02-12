@@ -2,20 +2,33 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
     <Style x:Key="DefaultButtonStyle" TargetType="Button">
+
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
                     <Grid>
-                        <Border x:Name="OuterBorder" BorderBrush="#B0B0B0" BorderThickness="3,3,0,0" Background="#575C60">
-                            <Border x:Name="InnerBorder" BorderBrush="#060100" BorderThickness="0,0,3,3">
-                                <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center" />
+                        <Border x:Name="OuterBorder"
+                                BorderBrush="#B0B0B0"
+                                BorderThickness="3,3,0,0"
+                                Background="#575C60">
+
+                            <Border x:Name="InnerBorder"
+                                    BorderBrush="#060100"
+                                    BorderThickness="0,0,3,3"
+                                    Padding="{TemplateBinding Padding}">
+
+                                <ContentPresenter
+                                    VerticalAlignment="Center"
+                                    HorizontalAlignment="Center"/>
+
                             </Border>
                         </Border>
                     </Grid>
+
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsPressed" Value="True">
-                            <Setter TargetName="OuterBorder" Property="BorderBrush" Value="#060100" />
-                            <Setter TargetName="InnerBorder" Property="BorderBrush" Value="#6789A5" />
+                            <Setter TargetName="OuterBorder" Property="BorderBrush" Value="#060100"/>
+                            <Setter TargetName="InnerBorder" Property="BorderBrush" Value="#6789A5"/>
                         </Trigger>
 
                         <Trigger Property="IsEnabled" Value="False">

@@ -2,16 +2,30 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
     <Style x:Key="DefaultSmallButtonStyle" TargetType="Button">
+        <Setter Property="Padding" Value="5"/>
+
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
                     <Grid>
-                        <Border x:Name="OuterBorder" BorderBrush="#B0B0B0" BorderThickness="2,2,0,0" Background="#575C60">
-                            <Border x:Name="InnerBorder" BorderBrush="#060100" BorderThickness="0,0,2,2">
-                                <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center" />
+                        <Border x:Name="OuterBorder"
+                                BorderBrush="#B0B0B0"
+                                BorderThickness="2,2,0,0"
+                                Background="#575C60">
+
+                            <Border x:Name="InnerBorder"
+                                    BorderBrush="#060100"
+                                    BorderThickness="0,0,2,2">
+
+                                <ContentPresenter
+                                    VerticalAlignment="Center"
+                                    HorizontalAlignment="Center"
+                                    Margin="{TemplateBinding Padding}" />
+
                             </Border>
                         </Border>
                     </Grid>
+
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsPressed" Value="True">
                             <Setter TargetName="OuterBorder" Property="BorderBrush" Value="#060100" />
@@ -26,5 +40,6 @@
             </Setter.Value>
         </Setter>
     </Style>
+
 
 </ResourceDictionary>

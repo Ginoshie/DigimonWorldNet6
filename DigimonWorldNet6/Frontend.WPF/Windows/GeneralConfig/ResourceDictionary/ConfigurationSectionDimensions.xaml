@@ -3,6 +3,6 @@
                     xmlns:system="clr-namespace:System;assembly=System.Runtime">
 
     <system:Double x:Key="ConfigurationSectionHeight">180</system:Double>
-    <system:Double x:Key="ConfigurationSectionWidth">260</system:Double>
+    <system:Double x:Key="ConfigurationSectionWidth">280</system:Double>
 
 </ResourceDictionary>

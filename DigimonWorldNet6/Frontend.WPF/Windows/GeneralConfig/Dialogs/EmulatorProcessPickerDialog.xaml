@@ -19,6 +19,7 @@
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="/ResourceDictionaries/Styles/Buttons/DefaultButtonStyle.xaml" />
+                <ResourceDictionary Source="/ResourceDictionaries/Styles/DefaultListboxStyle.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </baseClasses:BaseDialogWindow.Resources>
@@ -34,9 +35,10 @@
                                 <RowDefinition Height="Auto" />
                             </Grid.RowDefinitions>
 
-                            <ListBox ItemsSource="{Binding Processes}"
-                                     SelectedItem="{Binding SelectedProcess}"
-                                     Margin="5">
+                            <ListBox Style="{StaticResource DefaultListboxStyle}"
+                                ItemsSource="{Binding Processes}"
+                                SelectedItem="{Binding SelectedProcess}"
+                                Margin="5">
                                 <ListBox.ItemTemplate>
                                     <DataTemplate>
                                         <StackPanel Orientation="Horizontal" Margin="4">
@@ -54,8 +56,8 @@
                             </ListBox>
 
                             <StackPanel Grid.Row="1" Margin="5" Orientation="Horizontal" HorizontalAlignment="Right">
-                                <Button Height="45" Style="{StaticResource DefaultButtonStyle}" Content="Attach" Margin="5" Command="{Binding SetEmulatorProcessNameCommand}" IsDefault="True"/>
-                                <Button Height="45" Style="{StaticResource DefaultButtonStyle}" Content="Cancel" Margin="5" Command="{Binding CancelCommand}" IsCancel="True" />
+                                <Button Height="45" Style="{StaticResource DefaultButtonStyle}" Content="Attach" Margin="5" Padding="15,5" Command="{Binding SetEmulatorProcessNameCommand}" IsDefault="True" />
+                                <Button Height="45" Style="{StaticResource DefaultButtonStyle}" Content="Cancel" Margin="5" Padding="15,5" Command="{Binding CancelCommand}" IsCancel="True" />
                             </StackPanel>
                         </Grid>
                     </Border>

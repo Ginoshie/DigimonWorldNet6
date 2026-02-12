@@ -42,9 +42,8 @@
         <Button Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Bottom" FocusVisualStyle="{StaticResource DefaultFocusStyle}"
                 Style="{StaticResource DefaultButtonStyle}"
                 Margin="0,20, 0, 20"
-                Width="150"
-                Height="{StaticResource DefaultButtonHeight}"
-                Content="Back chapters"
+                Padding="10"
+                Content="Back to chapters"
                 Command="{Binding OpenChaptersCommand}">
             <Button.ToolTip>
                 <ToolTip Style="{StaticResource DefaultToolTipRightStyle}" Content="Navigate back to the wiki chapters" />

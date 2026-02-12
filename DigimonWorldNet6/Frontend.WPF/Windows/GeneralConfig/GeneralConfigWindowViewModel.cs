@@ -30,8 +30,8 @@ public class GeneralConfigWindowViewModel : BaseViewModel, IDisposable
         _window = window;
         EmulatorProcessPickerViewModel = new EmulatorProcessPickerViewModel(_window);
 
-        SaveCommand = new CommandHandler(Save);
-        CloseCommand = new CommandHandler(Close);
+        SaveCommand = new CommandHandler(SaveConfiguration);
+        CloseCommand = new CommandHandler(() =>_window.Close());
 
         ShowHomeConfigurationSectionCommand = new CommandHandler(() => CurrentSelectedSettingCategoryUserControl = _homeConfigurationSection);
         ShowMusicPlayerConfigurationSectionCommand = new CommandHandler(() => CurrentSelectedSettingCategoryUserControl = _musicPlayerConfigurationSection);
@@ -222,9 +222,6 @@ public class GeneralConfigWindowViewModel : BaseViewModel, IDisposable
 
     #region Methods
 
-    private void Save() => SaveConfiguration();
-    private void Close() => _window.Close();
-
     private void SetNarratorMode(NarratorMode mode)
     {
         IsNarratorModeSpeech = mode == NarratorMode.Speech;
@@ -358,8 +355,5 @@ public class GeneralConfigWindowViewModel : BaseViewModel, IDisposable
         dialog.ShowDialog();
     }
 
-    public void Dispose()
-    {
-        _disposables.Dispose();
-    }
+    public void Dispose() => _disposables.Dispose();
 }

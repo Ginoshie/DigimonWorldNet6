@@ -27,15 +27,8 @@
                 <ResourceDictionary Source="../../ResourceDictionaries/Styles/ToolTips/DefaultTooltipRightStyle.xaml" />
             </ResourceDictionary.MergedDictionaries>
 
-            <system:Double x:Key="WindowButtonWidth">70</system:Double>
-            <system:Double x:Key="DefaultButtonTextHeightSpacing">22</system:Double>
-
         </ResourceDictionary>
     </baseClasses:BaseDialogWindow.Resources>
-
-    <Window.InputBindings>
-        <KeyBinding Key="Escape" Command="{Binding CloseWindowCommand}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}" />
-    </Window.InputBindings>
 
     <Border Background="Transparent" Panel.ZIndex="1" KeyboardNavigation.TabNavigation="None">
         <Border CornerRadius="8" BorderBrush="Black" BorderThickness="3" Background="Black">
@@ -89,13 +82,9 @@
                                         Margin="0,5,0,0">
                                 <Button Style="{StaticResource DefaultSmallButtonStyle}"
                                         Content="Copy e-mail"
-                                        Height="{StaticResource DefaultButtonTextHeightSpacing}"
-                                        Width="85"
                                         Command="{Binding CopyContactEmailCommand}" />
                                 <Button Style="{StaticResource DefaultSmallButtonStyle}"
                                         Content="Go to youtube"
-                                        Height="{StaticResource DefaultButtonTextHeightSpacing}"
-                                        Width="110"
                                         Margin="5, 0, 0, 0"
                                         Command="{Binding OpenYoutubeWebsiteCommand}" />
                             </StackPanel>
@@ -122,11 +111,11 @@
 
                             <Button Grid.Row="15" Grid.Column="0" Grid.ColumnSpan="2" Style="{StaticResource DefaultButtonStyle}"
                                     HorizontalAlignment="Center"
-                                    Height="{StaticResource DefaultButtonHeight}"
-                                    Width="{StaticResource WindowButtonWidth}"
+                                    Padding="10"
                                     Margin="0, 15, 0, 5"
                                     Content="Close"
-                                    Command="{Binding CloseWindowCommand}">
+                                    Command="{Binding CloseWindowCommand}"
+                                    IsCancel="True">
                                 <Button.ToolTip>
                                     <ToolTip Style="{StaticResource DefaultToolTipRightStyle}" Content="Exit this window (hotkey: ESC)" />
                                 </Button.ToolTip>

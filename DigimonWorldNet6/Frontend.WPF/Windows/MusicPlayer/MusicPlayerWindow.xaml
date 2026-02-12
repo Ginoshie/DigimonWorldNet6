@@ -30,7 +30,7 @@
                 <ResourceDictionary Source="./Styles/VolumeMuteButtonStyle.xaml" />
             </ResourceDictionary.MergedDictionaries>
 
-            <system:Double x:Key="ButtonDimension">40</system:Double>
+            <system:Double x:Key="ButtonDimension">42</system:Double>
             <system:Double x:Key="ButtonFontSize">25</system:Double>
 
         </ResourceDictionary>
@@ -194,11 +194,11 @@
 
                             <Grid>
                                 <Grid.RowDefinitions>
-                                    <RowDefinition Height="auto" />
-                                    <RowDefinition Height="auto" />
-                                    <RowDefinition Height="auto" />
-                                    <RowDefinition Height="auto" />
-                                    <RowDefinition Height="auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
                                 </Grid.RowDefinitions>
 
                                 <!-- Giromon narrator -->
