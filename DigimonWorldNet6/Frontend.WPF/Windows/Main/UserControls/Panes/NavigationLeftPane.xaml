@@ -32,11 +32,11 @@
 
             <Storyboard x:Key="OpenLeftPane">
                 <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.X)"
-                                 To="10" Duration="0:0:0.3" />
+                                 To="10" Duration="{StaticResource PanelAnimationDuration}" />
             </Storyboard>
             <Storyboard x:Key="CloseLeftPane">
                 <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.X)"
-                                 To="{StaticResource LeftPanelYOffset}" Duration="0:0:0.3" />
+                                 To="{StaticResource LeftPanelYOffset}" Duration="{StaticResource PanelAnimationDuration}" />
             </Storyboard>
 
         </ResourceDictionary>

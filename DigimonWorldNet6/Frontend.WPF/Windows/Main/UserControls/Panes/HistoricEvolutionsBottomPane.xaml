@@ -12,11 +12,19 @@
 
     <UserControl.Resources>
         <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/ResourceDictionaries/Styles/Buttons/DefaultButtonStyle.xaml" />
+                <ResourceDictionary Source="/ResourceDictionaries/Styles/ToolTips/DefaultTooltipRightStyle.xaml" />
+            </ResourceDictionary.MergedDictionaries>
 
-            <GridLength x:Key="PanelLabelThickness">45</GridLength>
-            <GridLength x:Key="BottomPanelHeight">475</GridLength>
-
-            <system:Double x:Key="BottomPanelYOffset">-475</system:Double>
+            <system:Double x:Key="BottomPanelOpenedYOffset">-12</system:Double>
+            <system:Double x:Key="BottomPanelClosedYOffset">-475</system:Double>
+            
+            <system:Double x:Key="EmulatorSyncButtonDimension">30</system:Double>
+            <system:Double x:Key="EmulatorSyncButtonSectionOpenedYOffset">-13</system:Double>
+            <system:Double x:Key="EmulatorSyncButtonSectionClosedYOffset">-57</system:Double>
+            
+            <Thickness x:Key="EmulatorLinkButtonMargin">3</Thickness>
 
             <BitmapImage x:Key="ClosedBottomPaneImage" UriSource="pack://application:,,,/Frontend.WPF;component/Images/ComponentLabels/label-bottom-no-focus.png" />
             <BitmapImage x:Key="OpenBottomPaneImage" UriSource="pack://application:,,,/Frontend.WPF;component/Images/ComponentLabels/label-bottom-focus.png" />
@@ -24,7 +32,7 @@
             <Style x:Key="BottomPaneLabelStyle" TargetType="Image">
                 <Setter Property="Source" Value="{StaticResource ClosedBottomPaneImage}" />
                 <Style.Triggers>
-                    <DataTrigger Binding="{Binding BottomPaneIsOpen}" Value="True">
+                    <DataTrigger Binding="{Binding BottomPaneViewModelComponent.BottomPaneIsOpen}" Value="True">
                         <Setter Property="Source" Value="{StaticResource OpenBottomPaneImage}" />
                     </DataTrigger>
                 </Style.Triggers>
@@ -32,11 +40,24 @@
 
             <Storyboard x:Key="OpenBottomPane">
                 <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.Y)"
-                                 To="-12" Duration="0:0:0.3" />
+                                 To="{StaticResource BottomPanelOpenedYOffset}" 
+                                 Duration="{StaticResource PanelAnimationDuration}" />
             </Storyboard>
             <Storyboard x:Key="CloseBottomPane">
                 <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.Y)"
-                                 To="{StaticResource BottomPanelYOffset}" Duration="0:0:0.3" />
+                                 To="{StaticResource BottomPanelClosedYOffset}" 
+                                 Duration="{StaticResource PanelAnimationDuration}" />
+            </Storyboard>
+
+            <Storyboard x:Key="OpenEmulatorSyncButtonSection">
+                <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.Y)"
+                                 To="{StaticResource EmulatorSyncButtonSectionOpenedYOffset}" 
+                                 Duration="{StaticResource PanelAnimationDuration}"/>
+            </Storyboard>
+            <Storyboard x:Key="CloseEmulatorSyncButtonSection">
+                <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.Y)"
+                                 To="{StaticResource EmulatorSyncButtonSectionClosedYOffset}" 
+                                 Duration="{StaticResource PanelAnimationDuration}" />
             </Storyboard>
 
         </ResourceDictionary>
@@ -44,7 +65,7 @@
 
     <Grid Background="Transparent" SnapsToDevicePixels="True" UseLayoutRounding="True" RenderTransformOrigin="0.5,0.5" Panel.ZIndex="0">
         <Grid.RenderTransform>
-            <TranslateTransform Y="{StaticResource BottomPanelYOffset}" />
+            <TranslateTransform Y="{StaticResource BottomPanelClosedYOffset}" />
         </Grid.RenderTransform>
 
         <Grid.ColumnDefinitions>
@@ -54,8 +75,8 @@
         </Grid.ColumnDefinitions>
 
         <Grid.RowDefinitions>
-            <RowDefinition Height="{StaticResource BottomPanelHeight}" />
-            <RowDefinition Height="{StaticResource PanelLabelThickness}" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
         <Border Grid.Row="0" Grid.Column="1" Background="Transparent" Panel.ZIndex="1">
@@ -70,11 +91,11 @@
             </Border>
         </Border>
 
-        <Grid Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Top" Background="Transparent">
+        <Grid Grid.Row="1" Grid.Column="1" Height="45" HorizontalAlignment="Center" VerticalAlignment="Top" Background="Transparent">
             <Image Style="{StaticResource BottomPaneLabelStyle}" Margin="0,-2, 0, 0">
                 <b:Interaction.Triggers>
                     <b:EventTrigger EventName="MouseLeftButtonDown">
-                        <b:InvokeCommandAction Command="{Binding ToggleBottomPaneCommand}" />
+                        <b:InvokeCommandAction Command="{Binding BottomPaneViewModelComponent.ToggleBottomPaneCommand}" />
                     </b:EventTrigger>
                 </b:Interaction.Triggers>
             </Image>
@@ -91,7 +112,7 @@
                         <Setter Property="FontWeight" Value="Bold" />
                         <Setter Property="Foreground" Value="#D6D6D8" />
                         <Style.Triggers>
-                            <DataTrigger Binding="{Binding BottomPaneIsOpen}" Value="True">
+                            <DataTrigger Binding="{Binding BottomPaneViewModelComponent.BottomPaneIsOpen}" Value="True">
                                 <Setter Property="Foreground" Value="Black" />
                             </DataTrigger>
                         </Style.Triggers>
@@ -99,16 +120,138 @@
                 </TextBlock.Style>
                 <b:Interaction.Triggers>
                     <b:EventTrigger EventName="MouseLeftButtonDown">
-                        <b:InvokeCommandAction Command="{Binding ToggleBottomPaneCommand}" />
+                        <b:InvokeCommandAction Command="{Binding BottomPaneViewModelComponent.ToggleBottomPaneCommand}" />
                     </b:EventTrigger>
                 </b:Interaction.Triggers>
             </TextBlock>
         </Grid>
 
+        <Border Grid.Row="1" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,0, 15, 0" Background="Transparent" Panel.ZIndex="0">
+            <Border.RenderTransform>
+                <TranslateTransform Y="{StaticResource EmulatorSyncButtonSectionClosedYOffset}" />
+            </Border.RenderTransform>
+            <Border.Style>
+                <Style TargetType="Border">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding BottomPaneViewModelComponent.EmulatorSyncButtonSectionIsOpen}" Value="True">
+                            <DataTrigger.EnterActions>
+                                <BeginStoryboard Storyboard="{StaticResource OpenEmulatorSyncButtonSection}" />
+                            </DataTrigger.EnterActions>
+                            <DataTrigger.ExitActions>
+                                <BeginStoryboard Storyboard="{StaticResource CloseEmulatorSyncButtonSection}" />
+                            </DataTrigger.ExitActions>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Border.Style>
+            <Border CornerRadius="8" BorderBrush="Black" BorderThickness="3" Padding="0">
+                <Border CornerRadius="8" BorderBrush="#4A9FC5" BorderThickness="3" Padding="0">
+                    <Border CornerRadius="5" BorderBrush="#90D9FA" BorderThickness="3" Padding="0">
+                        <Border CornerRadius="5" BorderBrush="Black" BorderThickness="3" Background="#2E3841">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition />
+                                </Grid.ColumnDefinitions>
+                                <Button Grid.Column="0"
+                                        Width="{StaticResource EmulatorSyncButtonDimension}"
+                                        Height="{StaticResource EmulatorSyncButtonDimension}"
+                                        Style="{StaticResource DefaultButtonStyle}"
+                                        Command="{Binding BottomPaneViewModelComponent.SignalSyncFreshStageHistoricEvolutionsCommand}"
+                                        Margin="{StaticResource EmulatorLinkButtonMargin}">
+                                    <Button.ToolTip>
+                                        <ToolTip Style="{StaticResource DefaultToolTipRightStyle}" 
+                                                 Content="Sync fresh stage historic evolutions" />
+                                    </Button.ToolTip>
+                                    <Image Source="/Frontend.WPF;component/Images/Icons/Emotions/Evolution/evo1.png"
+                                           Stretch="Uniform"
+                                           Margin="2" />
+                                </Button>
+                                <Button Grid.Column="1"
+                                        Width="{StaticResource EmulatorSyncButtonDimension}"
+                                        Height="{StaticResource EmulatorSyncButtonDimension}"
+                                        Style="{StaticResource DefaultButtonStyle}"
+                                        Command="{Binding BottomPaneViewModelComponent.SignalSyncInTrainingStageHistoricEvolutionsCommand}"
+                                        Margin="{StaticResource EmulatorLinkButtonMargin}">
+                                    <Button.ToolTip>
+                                        <ToolTip Style="{StaticResource DefaultToolTipRightStyle}" 
+                                                 Content="Sync in-training stage historic evolutions" />
+                                    </Button.ToolTip>
+                                    <Image Source="/Frontend.WPF;component/Images/Icons/Emotions/Evolution/evo2.png"
+                                           Stretch="Uniform"
+                                           Margin="2" />
+                                </Button>
+                                <Button Grid.Column="2"
+                                        Width="{StaticResource EmulatorSyncButtonDimension}"
+                                        Height="{StaticResource EmulatorSyncButtonDimension}"
+                                        Style="{StaticResource DefaultButtonStyle}"
+                                        Command="{Binding BottomPaneViewModelComponent.SignalSyncRookieStageHistoricEvolutionsCommand}"
+                                        Margin="{StaticResource EmulatorLinkButtonMargin}">
+                                    <Button.ToolTip>
+                                        <ToolTip Style="{StaticResource DefaultToolTipRightStyle}" 
+                                                 Content="Sync rookie stage historic evolutions" />
+                                    </Button.ToolTip>
+                                    <Image Source="/Frontend.WPF;component/Images/Icons/Emotions/Evolution/evo3.png"
+                                           Stretch="Uniform"
+                                           Margin="2" />
+                                </Button>
+                                <Button Grid.Column="3"
+                                        Width="{StaticResource EmulatorSyncButtonDimension}"
+                                        Height="{StaticResource EmulatorSyncButtonDimension}"
+                                        Style="{StaticResource DefaultButtonStyle}"
+                                        Command="{Binding BottomPaneViewModelComponent.SignalSyncChampionStageHistoricEvolutionsCommand}"
+                                        Margin="{StaticResource EmulatorLinkButtonMargin}">
+                                    <Button.ToolTip>
+                                        <ToolTip Style="{StaticResource DefaultToolTipRightStyle}" 
+                                                 Content="Sync champion stage historic evolutions" />
+                                    </Button.ToolTip>
+                                    <Image Source="/Frontend.WPF;component/Images/Icons/Emotions/Evolution/evo4.png"
+                                           Stretch="Uniform"
+                                           Margin="2" />
+                                </Button>
+                                <Button Grid.Column="4"
+                                        Width="{StaticResource EmulatorSyncButtonDimension}"
+                                        Height="{StaticResource EmulatorSyncButtonDimension}"
+                                        Style="{StaticResource DefaultButtonStyle}"
+                                        Command="{Binding BottomPaneViewModelComponent.SignalSyncUltimateStageHistoricEvolutionsCommand}"
+                                        Margin="{StaticResource EmulatorLinkButtonMargin}">
+                                    <Button.ToolTip>
+                                        <ToolTip Style="{StaticResource DefaultToolTipRightStyle}" 
+                                                 Content="Sync ultimate stage  historic evolutions" />
+                                    </Button.ToolTip>
+                                    <Image Source="/Frontend.WPF;component/Images/Icons/Type/virus-type.jpg"
+                                           Stretch="Uniform"
+                                           Margin="2" />
+                                </Button>
+                                <Button Grid.Column="5"
+                                        Width="{StaticResource EmulatorSyncButtonDimension}"
+                                        Height="{StaticResource EmulatorSyncButtonDimension}"
+                                        Style="{StaticResource DefaultButtonStyle}"
+                                        Command="{Binding BottomPaneViewModelComponent.SignalSyncAllStagesHistoricEvolutionsCommand}"
+                                        Margin="{StaticResource EmulatorLinkButtonMargin}">
+                                    <Button.ToolTip>
+                                        <ToolTip Style="{StaticResource DefaultToolTipRightStyle}" 
+                                                 Content="Sync all stages historic evolutions" />
+                                    </Button.ToolTip>
+                                    <Image Source="/Frontend.WPF;component/Images/Icons/Emotions/Evolution/all.jpg"
+                                           Stretch="Uniform"
+                                           />
+                                </Button>
+                            </Grid>
+                        </Border>
+                    </Border>
+                </Border>
+            </Border>
+        </Border>
+
         <Grid.Style>
             <Style TargetType="Grid">
                 <Style.Triggers>
-                    <DataTrigger Binding="{Binding BottomPaneIsOpen}" Value="True">
+                    <DataTrigger Binding="{Binding BottomPaneViewModelComponent.BottomPaneIsOpen}" Value="True">
                         <DataTrigger.EnterActions>
                             <BeginStoryboard Storyboard="{StaticResource OpenBottomPane}" />
                         </DataTrigger.EnterActions>

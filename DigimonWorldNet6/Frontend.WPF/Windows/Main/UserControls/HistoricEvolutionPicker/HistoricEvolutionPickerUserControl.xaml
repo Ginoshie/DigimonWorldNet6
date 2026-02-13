@@ -8,6 +8,13 @@
              mc:Ignorable="d"
              d:DataContext="{d:DesignInstance Type=historicEvolutionPicker:HistoricEvolutionPickerViewModel, IsDesignTimeCreatable=True}">
 
+
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <Thickness x:Key="ButtonGroupMargin">10,0</Thickness>
+        </ResourceDictionary>
+    </UserControl.Resources>
+
     <Grid KeyboardNavigation.TabNavigation="None">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto" />
@@ -43,7 +50,8 @@
         </TextBlock>
 
         <userControls:HistoricEvolutionButton Grid.Row="1" Grid.Column="0"
-                                              Tag="{Binding  FreshStageIcons}" />
+                                              Tag="{Binding  FreshStageIcons}"
+                                              Margin="{StaticResource ButtonGroupMargin}"/>
 
         <Border Grid.Row="0" Grid.RowSpan="2" Grid.Column="1"
                 BorderBrush="#A27B9A"
@@ -61,7 +69,8 @@
         </TextBlock>
 
         <userControls:HistoricEvolutionButton Grid.Row="1" Grid.Column="1"
-                                              Tag="{Binding InTrainingStageIcons}" />
+                                              Tag="{Binding InTrainingStageIcons}"
+                                              Margin="{StaticResource ButtonGroupMargin}"/>
 
         <Border Grid.Row="0" Grid.RowSpan="2" Grid.Column="2"
                 BorderBrush="#5483C2"
@@ -80,7 +89,8 @@
         </TextBlock>
 
         <userControls:HistoricEvolutionButton Grid.Row="1" Grid.Column="2"
-                                              Tag="{Binding RookieStageIcons}" />
+                                              Tag="{Binding RookieStageIcons}"
+                                              Margin="{StaticResource ButtonGroupMargin}"/>
 
         <Border Grid.Row="0" Grid.RowSpan="2" Grid.Column="3"
                 BorderBrush="#59B06E"
@@ -99,7 +109,8 @@
         </TextBlock>
 
         <userControls:HistoricEvolutionButton Grid.Row="1" Grid.Column="3"
-                                              Tag="{Binding ChampionStageIcons}" />
+                                              Tag="{Binding ChampionStageIcons}"
+                                              Margin="{StaticResource ButtonGroupMargin}"/>
 
         <Border Grid.Row="0" Grid.RowSpan="2" Grid.Column="4"
                 BorderBrush="#D19667"
@@ -118,7 +129,8 @@
         </TextBlock>
 
         <userControls:HistoricEvolutionButton Grid.Row="1" Grid.Column="4"
-                                              Tag="{Binding UltimateStageIcons}" />
+                                              Tag="{Binding UltimateStageIcons}"
+                                              Margin="{StaticResource ButtonGroupMargin}"/>
 
     </Grid>
 </UserControl>

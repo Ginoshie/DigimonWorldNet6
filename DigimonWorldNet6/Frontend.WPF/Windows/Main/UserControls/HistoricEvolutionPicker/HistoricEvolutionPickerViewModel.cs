@@ -11,6 +11,7 @@ using DigimonWorld.Frontend.WPF.ViewModelComponents;
 using Shared.Configuration;
 using Shared.Enums;
 using Shared.Services;
+using Shared.Services.Events;
 
 namespace DigimonWorld.Frontend.WPF.Windows.Main.UserControls.HistoricEvolutionPicker;
 
@@ -24,8 +25,13 @@ public class HistoricEvolutionPickerViewModel : BaseViewModel, IDisposable
 
         _disposables = new CompositeDisposable
         {
-            UserConfigurationManager.CurrentEvolutionCalculatorConfig
-                .Subscribe(OnCurrentEvolutionCalculatorConfigChanged)
+            UserConfigurationManager.CurrentEvolutionCalculatorConfig.Subscribe(OnCurrentEvolutionCalculatorConfigChanged),
+            HistoricEvolutionEventhub.SyncFreshStageHistoricEvolutionsObservable.Subscribe(_ => SyncHistoricEvolutions(AllActiveFreshDigimonNames)),
+            HistoricEvolutionEventhub.SyncInTrainingStageHistoricEvolutionsObservable.Subscribe(_ => SyncHistoricEvolutions(AllActiveInTrainingDigimonNames)),
+            HistoricEvolutionEventhub.SyncRookieStageHistoricEvolutionsObservable.Subscribe(_ => SyncHistoricEvolutions(AllActiveRookieDigimonNames)),
+            HistoricEvolutionEventhub.SyncChampionStageHistoricEvolutionsObservable.Subscribe(_ => SyncHistoricEvolutions(AllActiveChampionDigimonNames)),
+            HistoricEvolutionEventhub.SyncUltimateStageHistoricEvolutionsObservable.Subscribe(_ => SyncHistoricEvolutions(AllActiveUltimateDigimonNames)),
+            HistoricEvolutionEventhub.SyncAllStagesHistoricEvolutionsObservable.Subscribe(_ => SyncHistoricEvolutions(AllActiveDigimonNames()))
         };
     }
 
@@ -147,6 +153,19 @@ public class HistoricEvolutionPickerViewModel : BaseViewModel, IDisposable
         DigimonName.Machinedramon
     ]).ToArray();
 
+    private DigimonName[] AllActiveFreshDigimonNames => FreshStageIcons.Select(dn => dn.DigimonName).ToArray();
+    private DigimonName[] AllActiveInTrainingDigimonNames => InTrainingStageIcons.Select(dn => dn.DigimonName).ToArray();
+    private DigimonName[] AllActiveRookieDigimonNames => RookieStageIcons.Select(dn => dn.DigimonName).ToArray();
+    private DigimonName[] AllActiveChampionDigimonNames => ChampionStageIcons.Select(dn => dn.DigimonName).ToArray();
+    private DigimonName[] AllActiveUltimateDigimonNames => UltimateStageIcons.Select(dn => dn.DigimonName).ToArray();
+    
+    private DigimonName[] AllActiveDigimonNames() => FreshStageIcons.Select(dn => dn.DigimonName)
+        .Concat(InTrainingStageIcons.Select(dn => dn.DigimonName))
+        .Concat(RookieStageIcons.Select(dn => dn.DigimonName))
+        .Concat(ChampionStageIcons.Select(dn => dn.DigimonName))
+        .Concat(UltimateStageIcons.Select(dn => dn.DigimonName))
+        .ToArray();
+
     private void UpdateHistoricEvolution(DigimonIcon digimonIcon)
     {
         if (!HistoricEvolutions.Remove(digimonIcon.DigimonName))
@@ -184,6 +203,26 @@ public class HistoricEvolutionPickerViewModel : BaseViewModel, IDisposable
         {
             OnEvolutionCalculatorModePanjyamon();
         }
+    }
+
+    private void SyncHistoricEvolutions(DigimonName[] digimonNames)
+    {
+        foreach (DigimonName freshStageDigimonName in digimonNames)
+        {
+            if (ServiceRelay.LiveMemoryReader.HistoricEvolutions.IsHistoricEvolution(freshStageDigimonName))
+            {
+                if (!HistoricEvolutions.Contains(freshStageDigimonName))
+                {
+                    HistoricEvolutions.Add(freshStageDigimonName);
+                }
+            }
+            else
+            {
+                HistoricEvolutions.Remove(freshStageDigimonName);
+            }
+        }
+
+        OnPropertyChanged(nameof(HistoricEvolutions));
     }
 
 

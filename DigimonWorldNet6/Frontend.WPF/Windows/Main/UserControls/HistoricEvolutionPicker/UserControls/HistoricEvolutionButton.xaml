@@ -21,7 +21,7 @@
 
             <system:Double x:Key="Width">50</system:Double>
             <system:Double x:Key="Height">50</system:Double>
-            <Thickness x:Key="Margin">8</Thickness>
+            <Thickness x:Key="Margin">7</Thickness>
         </ResourceDictionary>
     </UserControl.Resources>
     

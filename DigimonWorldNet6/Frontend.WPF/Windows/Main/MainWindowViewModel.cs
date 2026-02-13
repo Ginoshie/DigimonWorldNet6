@@ -10,7 +10,6 @@ using DigimonWorld.Frontend.WPF.Windows.GeneralConfig;
 using DigimonWorld.Frontend.WPF.Windows.Main.UserControls.EvolutionCalculator;
 using DigimonWorld.Frontend.WPF.Windows.Main.UserControls.Panes;
 using DigimonWorld.Frontend.WPF.Windows.MusicPlayer;
-using Shared.Services;
 using Shared.Services.Events;
 
 namespace DigimonWorld.Frontend.WPF.Windows.Main;
@@ -23,8 +22,6 @@ public class MainWindowViewModel : BaseWindowViewModel, IDisposable
 
     public MainWindowViewModel(Window window) : base(window)
     {
-        ToggleBottomPaneCommand = new CommandHandler(ToggleBottomPane);
-
         OpenConfigurationWindowCommand = new CommandHandler(OpenConfigurationWindow);
 
         OpenAboutAndCreditsWindowCommand = new CommandHandler(OpenAboutAndCreditsWindow);
@@ -34,29 +31,25 @@ public class MainWindowViewModel : BaseWindowViewModel, IDisposable
         _compositeDisposable = new CompositeDisposable(
             MusicPlayerEventHub.MusicPlayerClosedObservable.Subscribe(_ => _musicPlayerIsOpen = false)
         );
-        
+
         CurrentSelectedMainWindowContent = new EvolutionCalculatorUserControl();
 
         LeftPaneViewModelComponent = new NavigationLeftPaneViewModelComponent(uc => CurrentSelectedMainWindowContent = uc);
+
+        BottomPaneViewModelComponent = new HistoricEvolutionsBottomPaneViewModelComponent();
+
         RightPaneViewModelComponent = new EmulatorLinkRightPaneViewModelComponent();
     }
-    
-    public EmulatorLinkRightPaneViewModelComponent RightPaneViewModelComponent { get; private set; }
+
     public NavigationLeftPaneViewModelComponent LeftPaneViewModelComponent { get; private set; }
+    public HistoricEvolutionsBottomPaneViewModelComponent BottomPaneViewModelComponent { get; private set; }
+    public EmulatorLinkRightPaneViewModelComponent RightPaneViewModelComponent { get; private set; }
 
     public UserControl CurrentSelectedMainWindowContent
     {
         get;
         private set => SetField(ref field, value);
     }
-
-    public bool BottomPaneIsOpen
-    {
-        get;
-        private set => SetField(ref field, value);
-    }
-
-    public ICommand ToggleBottomPaneCommand { get; }
 
     public ICommand OpenConfigurationWindowCommand { get; }
 
@@ -70,8 +63,6 @@ public class MainWindowViewModel : BaseWindowViewModel, IDisposable
 
         Window.Close();
     }
-
-    private void ToggleBottomPane() => BottomPaneIsOpen = !BottomPaneIsOpen;
 
     private void OpenConfigurationWindow()
     {

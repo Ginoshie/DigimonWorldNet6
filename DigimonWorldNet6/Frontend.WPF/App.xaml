@@ -21,6 +21,8 @@
             <system:Double x:Key="ButtonWidth">50</system:Double>
             <system:Double x:Key="TextBlockWidth">80</system:Double>
             
+            <Duration x:Key="PanelAnimationDuration">0:0:0.5</Duration>
+            
             <SolidColorBrush x:Key="DefaultBackGroundColor" Color="#2E3841"/>
 
             <conversion:EnumToImageConverter x:Key="EnumToImageConverter" />

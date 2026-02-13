@@ -32,11 +32,11 @@
 
             <Storyboard x:Key="OpenRightPane">
                 <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.X)"
-                                 To="-12" Duration="0:0:0.3" />
+                                 To="-12" Duration="{StaticResource PanelAnimationDuration}" />
             </Storyboard>
             <Storyboard x:Key="CloseRightPane">
                 <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.X)"
-                                 To="{StaticResource RightPanelYOffset}" Duration="0:0:0.3" />
+                                 To="{StaticResource RightPanelYOffset}" Duration="{StaticResource PanelAnimationDuration}" />
             </Storyboard>
 
         </ResourceDictionary>

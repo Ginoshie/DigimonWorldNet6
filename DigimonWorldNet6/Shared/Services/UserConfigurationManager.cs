@@ -78,6 +78,11 @@ public static class UserConfigurationManager
 
     public static void SetEmulatorProcessName(string processName)
     {
+        if (EmulatorLinkConfig.SelectedProcessName == processName)
+        {
+            return;
+        }
+
         EmulatorLinkConfig.SelectedProcessName = processName;
 
         _currentEmulatorLinkConfigSubject.OnNext(EmulatorLinkConfig);

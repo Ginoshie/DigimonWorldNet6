@@ -4,7 +4,6 @@ using System.Windows.Input;
 using System.Windows.Threading;
 using DigimonWorld.Frontend.WPF.ViewModelComponents;
 using MemoryAccess;
-using Shared.Services;
 using Shared.Services.Events;
 
 namespace DigimonWorld.Frontend.WPF.Windows.Main.UserControls.EmulatorLink;
@@ -17,26 +16,26 @@ public class EmulatorLinkViewModel : BaseViewModel, IDisposable
     public EmulatorLinkViewModel()
     {
         // Profile stats
-        SignalSetAllEmulatorProfileStatsCommand = new CommandHandler(DigimonStatsEventHub.SignalSetAllEmulatorProfileStats);
-        SetDigimonTypeFromEmulator = new CommandHandler(DigimonStatsEventHub.SignalSetEmulatorDigimonType);
-        SetDigimonWeightFromEmulator = new CommandHandler(DigimonStatsEventHub.SignalSetEmulatorWeight);
+        SignalSetAllEmulatorProfileStatsCommand = new CommandHandler(DigimonStatsEventHub.SignalSyncAllEmulatorProfileStats);
+        SetDigimonTypeFromEmulator = new CommandHandler(DigimonStatsEventHub.SignalSyncEmulatorDigimonType);
+        SetDigimonWeightFromEmulator = new CommandHandler(DigimonStatsEventHub.SignalSyncEmulatorWeight);
 
         // Parameter stats
-        SignalSetAllEmulatorParameterStatsCommand = new CommandHandler(DigimonStatsEventHub.SignalSetAllEmulatorParameterStats);
-        SignalSetEmulatorHPCommand = new CommandHandler(DigimonStatsEventHub.SignalSetEmulatorHP);
-        SignalSetEmulatorMPCommand = new CommandHandler(DigimonStatsEventHub.SignalSetEmulatorMP);
-        SignalSetEmulatorOffCommand = new CommandHandler(DigimonStatsEventHub.SignalSetEmulatorOff);
-        SignalSetEmulatorDefCommand = new CommandHandler(DigimonStatsEventHub.SignalSetEmulatorDef);
-        SignalSetEmulatorSpdCommand = new CommandHandler(DigimonStatsEventHub.SignalSetEmulatorSpd);
-        SignalSetEmulatorBrnCommand = new CommandHandler(DigimonStatsEventHub.SignalSetEmulatorBrn);
+        SignalSetAllEmulatorParameterStatsCommand = new CommandHandler(DigimonStatsEventHub.SignalSyncAllEmulatorParameterStats);
+        SignalSetEmulatorHPCommand = new CommandHandler(DigimonStatsEventHub.SignalSyncEmulatorHP);
+        SignalSetEmulatorMPCommand = new CommandHandler(DigimonStatsEventHub.SignalSyncEmulatorMP);
+        SignalSetEmulatorOffCommand = new CommandHandler(DigimonStatsEventHub.SignalSyncEmulatorOff);
+        SignalSetEmulatorDefCommand = new CommandHandler(DigimonStatsEventHub.SignalSyncEmulatorDef);
+        SignalSetEmulatorSpdCommand = new CommandHandler(DigimonStatsEventHub.SignalSyncEmulatorSpd);
+        SignalSetEmulatorBrnCommand = new CommandHandler(DigimonStatsEventHub.SignalSyncEmulatorBrn);
 
         // Condition stats
-        SignalSetAllEmulatorConditionStatsCommand = new CommandHandler(DigimonStatsEventHub.SignalSetAllEmulatorConditionStats);
-        SetDigimonHappinessFromEmulator = new CommandHandler(DigimonStatsEventHub.SignalSetEmulatorHappiness);
-        SetDigimonDisciplineFromEmulator = new CommandHandler(DigimonStatsEventHub.SignalSetEmulatorDiscipline);
-        SetDigimonCareMistakesFromEmulator = new CommandHandler(DigimonStatsEventHub.SignalSetEmulatorCareMistakes);
-        SetDigimonTechniquesCountFromEmulator = new CommandHandler(DigimonStatsEventHub.SignalSetEmulatorTechniqueCount);
-        SetDigimonBattlesCountFromEmulator = new CommandHandler(DigimonStatsEventHub.SignalSetEmulatorBattlesCount);
+        SignalSetAllEmulatorConditionStatsCommand = new CommandHandler(DigimonStatsEventHub.SignalSyncAllEmulatorConditionStats);
+        SetDigimonHappinessFromEmulator = new CommandHandler(DigimonStatsEventHub.SignalSyncEmulatorHappiness);
+        SetDigimonDisciplineFromEmulator = new CommandHandler(DigimonStatsEventHub.SignalSyncEmulatorDiscipline);
+        SetDigimonCareMistakesFromEmulator = new CommandHandler(DigimonStatsEventHub.SignalSyncEmulatorCareMistakes);
+        SetDigimonTechniquesCountFromEmulator = new CommandHandler(DigimonStatsEventHub.SignalSyncEmulatorTechniqueCount);
+        SetDigimonBattlesCountFromEmulator = new CommandHandler(DigimonStatsEventHub.SignalSyncEmulatorBattlesCount);
 
         SetupMemorySyncTimer();
 

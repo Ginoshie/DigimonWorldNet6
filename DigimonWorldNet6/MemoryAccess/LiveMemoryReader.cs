@@ -136,12 +136,14 @@ public sealed class LiveMemoryReader : INotifyPropertyChanged, IDisposable
         DigimonConditionStats = new DigimonConditionStats(mem, ram);
         DigimonProfileStats = new DigimonProfileStats(mem, ram);
         DigimonTechniqueStats = new DigimonTechniqueStats(mem, ram);
+        HistoricEvolutions = new HistoricEvolutions(mem, ram);
     }
 
     public DigimonParameterStats DigimonParameterStats { get; private set; } = DigimonParameterStats.Empty;
     public DigimonConditionStats DigimonConditionStats { get; private set; } = DigimonConditionStats.Empty;
     public DigimonProfileStats DigimonProfileStats { get; private set; } = DigimonProfileStats.Empty;
     public DigimonTechniqueStats DigimonTechniqueStats { get; private set; } = DigimonTechniqueStats.Empty;
+    public HistoricEvolutions HistoricEvolutions { get; private set; } = HistoricEvolutions.Empty;
 
     public event PropertyChangedEventHandler? PropertyChanged;
 

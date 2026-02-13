@@ -56,7 +56,7 @@ public class EmulatorProcessPickerViewModel : BaseViewModel
     {
         List<Process> currentProcesses = Process
             .GetProcesses()
-            .Where(p => p.MainWindowHandle != IntPtr.Zero)
+            .Where(p => p.MainWindowHandle != IntPtr.Zero && p.MainWindowTitle != "Digimon World Tool")
             .OrderBy(p => p.ProcessName)
             .ToList();
 
