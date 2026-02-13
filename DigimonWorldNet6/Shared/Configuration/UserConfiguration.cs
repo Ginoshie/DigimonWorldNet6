@@ -8,5 +8,5 @@ public class UserConfiguration
 
     public EvolutionCalculatorConfig EvolutionCalculatorConfig { get; init; } = new();
 
-    public EmulatorLinkConfig EmulatorLinkConfiguration { get; set; } = new();
+    public EmulatorLinkConfig EmulatorLinkConfiguration { get; init; } = new();
 }

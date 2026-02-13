@@ -21,7 +21,7 @@ public static class UserConfigurationManager
     static UserConfigurationManager()
     {
         _userConfiguration = GetConfiguration();
-        
+
         MusicPlayerConfig = _userConfiguration.MusicPlayerConfig;
         SpeakingSimulatorConfig = _userConfiguration.SpeakingSimulatorConfig;
         EvolutionCalculatorConfig = _userConfiguration.EvolutionCalculatorConfig;
@@ -120,6 +120,4 @@ public static class UserConfigurationManager
             return new UserConfiguration();
         }
     }
-
-    public static void SetSelectedProcessName(string selectedProcessName) => EmulatorLinkConfig.SelectedProcessName = selectedProcessName;
 }
