@@ -1,0 +1,122 @@
+<UserControl x:Class="DigimonWorld.Frontend.WPF.Windows.Main.UserControls.Panes.NavigationLeftPane"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
+             xmlns:main="clr-namespace:DigimonWorld.Frontend.WPF.Windows.Main"
+             xmlns:navigation="clr-namespace:DigimonWorld.Frontend.WPF.Windows.Main.UserControls.Navigation"
+             xmlns:system="clr-namespace:System;assembly=System.Runtime"
+             mc:Ignorable="d"
+             d:DataContext="{d:DesignInstance Type=main:MainWindowViewModel, IsDesignTimeCreatable=True}">
+
+    <UserControl.Resources>
+        <ResourceDictionary>
+
+            <GridLength x:Key="PanelLabelThickness">45</GridLength>
+            <GridLength x:Key="LeftPanelWidth">120</GridLength>
+
+            <system:Double x:Key="LeftPanelYOffset">120</system:Double>
+
+            <BitmapImage x:Key="ClosedLeftPaneImage" UriSource="pack://application:,,,/Frontend.WPF;component/Images/ComponentLabels/label-left-no-focus.png" />
+            <BitmapImage x:Key="OpenLeftPaneImage" UriSource="pack://application:,,,/Frontend.WPF;component/Images/ComponentLabels/label-left-focus.png" />
+
+            <Style x:Key="LeftPaneLabelStyle" TargetType="Image">
+                <Setter Property="Source" Value="{StaticResource ClosedLeftPaneImage}" />
+                <Style.Triggers>
+                    <DataTrigger Binding="{Binding LeftPaneViewModelComponent.LeftPaneIsOpen}" Value="True">
+                        <Setter Property="Source" Value="{StaticResource OpenLeftPaneImage}" />
+                    </DataTrigger>
+                </Style.Triggers>
+            </Style>
+
+            <Storyboard x:Key="OpenLeftPane">
+                <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.X)"
+                                 To="10" Duration="0:0:0.3" />
+            </Storyboard>
+            <Storyboard x:Key="CloseLeftPane">
+                <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.X)"
+                                 To="{StaticResource LeftPanelYOffset}" Duration="0:0:0.3" />
+            </Storyboard>
+
+        </ResourceDictionary>
+    </UserControl.Resources>
+
+    <Grid Background="Transparent" VerticalAlignment="Center" SnapsToDevicePixels="True" UseLayoutRounding="True" Panel.ZIndex="0">
+        <Grid.RenderTransform>
+            <TranslateTransform X="{StaticResource LeftPanelYOffset}" />
+        </Grid.RenderTransform>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="{StaticResource PanelLabelThickness}" />
+            <ColumnDefinition Width="{StaticResource LeftPanelWidth}" />
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="400" />
+        </Grid.RowDefinitions>
+
+        <Border Grid.Row="0" Grid.Column="1" Background="Transparent" Panel.ZIndex="1">
+            <Border CornerRadius="8" BorderBrush="Black" BorderThickness="3" Padding="0">
+                <Border CornerRadius="8" BorderBrush="#4A9FC5" BorderThickness="3" Margin="0" Padding="0">
+                    <Border CornerRadius="5" BorderBrush="#90D9FA" BorderThickness="3" Padding="0">
+                        <Border CornerRadius="5" BorderBrush="Black" BorderThickness="3" Padding="0" Background="#80202020">
+                            <navigation:NavigationUserControl HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        </Border>
+                    </Border>
+                </Border>
+            </Border>
+        </Border>
+
+        <Grid Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" Background="Transparent">
+            <Image Style="{StaticResource LeftPaneLabelStyle}" Margin="0,0, -2, 0">
+                <b:Interaction.Triggers>
+                    <b:EventTrigger EventName="MouseLeftButtonDown">
+                        <b:InvokeCommandAction Command="{Binding LeftPaneViewModelComponent.ToggleLeftPaneCommand}" />
+                    </b:EventTrigger>
+                </b:Interaction.Triggers>
+            </Image>
+
+            <TextBlock Text="N&#x0a;a&#x0a;v&#x0a;i&#x0a;g&#x0a;a&#x0a;t&#x0a;i&#x0a;o&#x0a;n"
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Center"
+                       FontWeight="Bold"
+                       TextAlignment="Center">
+
+                <TextBlock.Style>
+                    <Style TargetType="TextBlock">
+                        <Setter Property="FontFamily" Value="{StaticResource Dw1Font}" />
+                        <Setter Property="FontWeight" Value="Bold" />
+                        <Setter Property="Foreground" Value="#D6D6D8" />
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding LeftPaneViewModelComponent.LeftPaneIsOpen}" Value="True">
+                                <Setter Property="Foreground" Value="Black" />
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </TextBlock.Style>
+                <b:Interaction.Triggers>
+                    <b:EventTrigger EventName="MouseLeftButtonDown">
+                        <b:InvokeCommandAction Command="{Binding LeftPaneViewModelComponent.ToggleLeftPaneCommand}" />
+                    </b:EventTrigger>
+                </b:Interaction.Triggers>
+            </TextBlock>
+        </Grid>
+
+        <Grid.Style>
+            <Style TargetType="Grid">
+                <Style.Triggers>
+                    <DataTrigger Binding="{Binding LeftPaneViewModelComponent.LeftPaneIsOpen}" Value="True">
+                        <DataTrigger.EnterActions>
+                            <BeginStoryboard Storyboard="{StaticResource OpenLeftPane}" />
+                        </DataTrigger.EnterActions>
+                        <DataTrigger.ExitActions>
+                            <BeginStoryboard Storyboard="{StaticResource CloseLeftPane}" />
+                        </DataTrigger.ExitActions>
+                    </DataTrigger>
+                </Style.Triggers>
+            </Style>
+        </Grid.Style>
+    </Grid>
+
+</UserControl>

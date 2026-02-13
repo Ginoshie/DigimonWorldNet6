@@ -3,13 +3,12 @@ using System.Reactive.Disposables;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using DigimonWorld.Frontend.WPF.Services;
 using DigimonWorld.Frontend.WPF.ViewModelComponents;
 using DigimonWorld.Frontend.WPF.Windows.AboutAndCredits;
 using DigimonWorld.Frontend.WPF.Windows.BaseClasses;
 using DigimonWorld.Frontend.WPF.Windows.GeneralConfig;
-using DigimonWorld.Frontend.WPF.Windows.Main.UserControls.DigiWiki;
 using DigimonWorld.Frontend.WPF.Windows.Main.UserControls.EvolutionCalculator;
+using DigimonWorld.Frontend.WPF.Windows.Main.UserControls.Panes;
 using DigimonWorld.Frontend.WPF.Windows.MusicPlayer;
 using Shared.Services;
 
@@ -20,19 +19,10 @@ public class MainWindowViewModel : BaseWindowViewModel, IDisposable
     private readonly CompositeDisposable _compositeDisposable;
 
     private bool _musicPlayerIsOpen;
-    private UserControl _currentSelectedMainWindowContent;
 
     public MainWindowViewModel(Window window) : base(window)
     {
-        ToggleLeftPaneCommand = new CommandHandler(ToggleLeftPane);
-
         ToggleBottomPaneCommand = new CommandHandler(ToggleBottomPane);
-
-        ToggleRightPaneCommand = new CommandHandler(ToggleRightPane);
-
-        ShowEvolutionCalculatorCommand = new CommandHandler(ShowEvolutionCalculator);
-
-        ShowDigiWikiCommand = new CommandHandler(ShowDigiWiki);
 
         OpenConfigurationWindowCommand = new CommandHandler(OpenConfigurationWindow);
 
@@ -43,17 +33,17 @@ public class MainWindowViewModel : BaseWindowViewModel, IDisposable
         _compositeDisposable = new CompositeDisposable(
             EventHub.MusicPlayerClosedObservable.Subscribe(_ => _musicPlayerIsOpen = false)
         );
+        
+        CurrentSelectedMainWindowContent = new EvolutionCalculatorUserControl();
 
-        _currentSelectedMainWindowContent = new EvolutionCalculatorUserControl();
+        LeftPaneViewModelComponent = new NavigationLeftPaneViewModelComponent(uc => CurrentSelectedMainWindowContent = uc);
+        RightPaneViewModelComponent = new EmulatorLinkRightPaneViewModelComponent();
     }
+    
+    public EmulatorLinkRightPaneViewModelComponent RightPaneViewModelComponent { get; private set; }
+    public NavigationLeftPaneViewModelComponent LeftPaneViewModelComponent { get; private set; }
 
     public UserControl CurrentSelectedMainWindowContent
-    {
-        get => _currentSelectedMainWindowContent;
-        private set => SetField(ref _currentSelectedMainWindowContent, value);
-    }
-
-    public bool LeftPaneIsOpen
     {
         get;
         private set => SetField(ref field, value);
@@ -65,21 +55,7 @@ public class MainWindowViewModel : BaseWindowViewModel, IDisposable
         private set => SetField(ref field, value);
     }
 
-    public bool RightPaneIsOpen
-    {
-        get;
-        private set => SetField(ref field, value);
-    }
-
-    public ICommand ShowEvolutionCalculatorCommand { get; }
-
-    public ICommand ShowDigiWikiCommand { get; }
-
-    public ICommand ToggleLeftPaneCommand { get; }
-
     public ICommand ToggleBottomPaneCommand { get; }
-
-    public ICommand ToggleRightPaneCommand { get; }
 
     public ICommand OpenConfigurationWindowCommand { get; }
 
@@ -94,15 +70,7 @@ public class MainWindowViewModel : BaseWindowViewModel, IDisposable
         Window.Close();
     }
 
-    private void ToggleLeftPane() => LeftPaneIsOpen = !LeftPaneIsOpen;
-
     private void ToggleBottomPane() => BottomPaneIsOpen = !BottomPaneIsOpen;
-
-    private void ToggleRightPane() => RightPaneIsOpen = !RightPaneIsOpen;
-
-    private void ShowEvolutionCalculator() => CurrentSelectedMainWindowContent = new EvolutionCalculatorUserControl();
-
-    private void ShowDigiWiki() => CurrentSelectedMainWindowContent = new DigiWikiUserControl();
 
     private void OpenConfigurationWindow()
     {

@@ -3,9 +3,11 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             mc:Ignorable="d">
+             xmlns:main="clr-namespace:DigimonWorld.Frontend.WPF.Windows.Main"
+             mc:Ignorable="d"
+             d:DataContext="{d:DesignInstance Type=main:MainWindowViewModel, IsDesignTimeCreatable=True}">
 
-    <Button Background="Transparent" BorderThickness="0" Focusable="False" Command="{Binding DataContext.ShowEvolutionCalculatorCommand, RelativeSource={RelativeSource AncestorType=Window}}">
+    <Button Background="Transparent" BorderThickness="0" Focusable="False" Command="{Binding LeftPaneViewModelComponent.ShowEvolutionCalculatorCommand}">
         <Button.Template>
             <ControlTemplate TargetType="Button">
                 <Grid Background="Transparent" Margin="7">
