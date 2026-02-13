@@ -11,6 +11,7 @@ using DigimonWorld.Frontend.WPF.ViewModelComponents;
 using DigimonWorld.Frontend.WPF.Windows.BaseClasses;
 using Shared.Enums;
 using Shared.Services;
+using Shared.Services.Events;
 
 namespace DigimonWorld.Frontend.WPF.Windows.MusicPlayer;
 
@@ -39,34 +40,34 @@ public class MusicPlayerViewModel : BaseWindowViewModel, IDisposable
             Services.MusicPlayer.CurrentSongTitleObservable.Subscribe(currentSongTitle => CurrentSongTitle = currentSongTitle),
             Services.MusicPlayer.CurrentPositionObservable.Subscribe(currentPosition => CurrentPosition = currentPosition),
             Services.MusicPlayer.SongLengthObservable.Subscribe(songLength => SongLength = songLength),
-            EventHub.MusicPlayerOpenedObservable
+            MusicPlayerEventHub.MusicPlayerOpenedObservable
                 .SelectMany(_ => Observable.FromAsync(OnMusicPlayerOpened))
                 .Subscribe(),
-            EventHub.MusicPlayerClosedObservable
+            MusicPlayerEventHub.MusicPlayerClosedObservable
                 .SelectMany(_ => Observable.FromAsync(OnMusicPlayerClosed))
                 .Subscribe(),
-            EventHub.LeomonsThemeStartedObservable
+            MusicPlayerEventHub.LeomonsThemeStartedObservable
                 .SelectMany(_ => Observable.FromAsync(OnLeomonSongStarted))
                 .Subscribe(),
-            EventHub.ShuffleModeChangedObservable
+            MusicPlayerEventHub.ShuffleModeChangedObservable
                 .SelectMany(mode => Observable.FromAsync(() => OnShuffleModeChanged(mode)))
                 .Subscribe(),
-            EventHub.PreviousSongStartedObservable
+            MusicPlayerEventHub.PreviousSongStartedObservable
                 .SelectMany(Observable.FromAsync(OnPreviousSongStarted))
                 .Subscribe(),
-            EventHub.PlayModeChangedObservable
+            MusicPlayerEventHub.PlayModeChangedObservable
                 .SelectMany(mode => Observable.FromAsync(() => OnPlayModeChanged(mode)))
                 .Subscribe(),
-            EventHub.NextSongStartedObservable
+            MusicPlayerEventHub.NextSongStartedObservable
                 .SelectMany(Observable.FromAsync(OnNextSongStarted))
                 .Subscribe(),
-            EventHub.RepeatModeChangedObservable
+            MusicPlayerEventHub.RepeatModeChangedObservable
                 .SelectMany(mode => Observable.FromAsync(() => OnRepeatModeChanged(mode)))
                 .Subscribe(),
-            EventHub.MuteModeChangedObservable
+            MusicPlayerEventHub.MuteModeChangedObservable
                 .SelectMany(mode => Observable.FromAsync(() => OnMuteModeChanged(mode)))
                 .Subscribe(),
-            EventHub.VolumeChangedObservable.Subscribe(OnVolumeChanged)
+            MusicPlayerEventHub.VolumeChangedObservable.Subscribe(OnVolumeChanged)
         );
     }
 
@@ -192,7 +193,7 @@ public class MusicPlayerViewModel : BaseWindowViewModel, IDisposable
 
     protected override void CloseApplication()
     {
-        EventHub.SignalMusicPlayerClosed();
+        MusicPlayerEventHub.SignalMusicPlayerClosed();
 
         base.CloseApplication();
     }

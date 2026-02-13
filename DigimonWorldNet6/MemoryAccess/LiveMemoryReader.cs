@@ -5,6 +5,7 @@ using MemoryAccess.Core;
 using MemoryAccess.MemoryValues;
 using Shared.Configuration;
 using Shared.Services;
+using Shared.Services.Events;
 
 namespace MemoryAccess;
 
@@ -40,11 +41,11 @@ public sealed class LiveMemoryReader : INotifyPropertyChanged, IDisposable
 
             if (field)
             {
-                EventHub.SignalEmulatorConnected();
+                EmulatorLinkEventHub.SignalEmulatorConnected();
             }
             else
             {
-                EventHub.SignalEmulatorDisconnected();
+                EmulatorLinkEventHub.SignalEmulatorDisconnected();
             }
 
             OnPropertyChanged(nameof(Connected));

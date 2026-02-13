@@ -14,6 +14,7 @@ using Shared.Constants;
 using Shared.Enums;
 using Shared.Extensions;
 using Shared.Services;
+using Shared.Services.Events;
 
 namespace DigimonWorld.Frontend.WPF.Windows.Main.UserControls.EvolutionCalculator;
 
@@ -32,26 +33,26 @@ public sealed class EvolutionCalculatorViewModel : BaseViewModel, IDisposable
         _compositeDisposable = new CompositeDisposable(
             _speakingSimulator,
             // Profile
-            EventHub.SetAllEmulatorProfileStatsObservable.Subscribe(_ => SetAllProfileStats()),
-            EventHub.SetEmulatorDigimonTypeObservable.Subscribe(_ => SetEmulatorDigimonType()),
-            EventHub.SetEmulatorWeightObservable.Subscribe(_ => SetEmulatorWeight()),
+            DigimonStatsEventHub.SetAllEmulatorProfileStatsObservable.Subscribe(_ => SetAllProfileStats()),
+            DigimonStatsEventHub.SetEmulatorDigimonTypeObservable.Subscribe(_ => SetEmulatorDigimonType()),
+            DigimonStatsEventHub.SetEmulatorWeightObservable.Subscribe(_ => SetEmulatorWeight()),
 
             // Parameter
-            EventHub.SetAllEmulatorParameterStatsObservable.Subscribe(_ => OnSetAllEmulatorCombatStats()),
-            EventHub.SetEmulatorHPObservable.Subscribe(_ => SetEmulatorHP()),
-            EventHub.SetEmulatorMPObservable.Subscribe(_ => SetEmulatorMP()),
-            EventHub.SetEmulatorOffObservable.Subscribe(_ => SetEmulatorOff()),
-            EventHub.SetEmulatorDefObservable.Subscribe(_ => SetEmulatorDef()),
-            EventHub.SetEmulatorSpdObservable.Subscribe(_ => SetEmulatorSpeed()),
-            EventHub.SetEmulatorBrnObservable.Subscribe(_ => SetEmulatorBrains()),
+            DigimonStatsEventHub.SetAllEmulatorParameterStatsObservable.Subscribe(_ => OnSetAllEmulatorCombatStats()),
+            DigimonStatsEventHub.SetEmulatorHPObservable.Subscribe(_ => SetEmulatorHP()),
+            DigimonStatsEventHub.SetEmulatorMPObservable.Subscribe(_ => SetEmulatorMP()),
+            DigimonStatsEventHub.SetEmulatorOffObservable.Subscribe(_ => SetEmulatorOff()),
+            DigimonStatsEventHub.SetEmulatorDefObservable.Subscribe(_ => SetEmulatorDef()),
+            DigimonStatsEventHub.SetEmulatorSpdObservable.Subscribe(_ => SetEmulatorSpeed()),
+            DigimonStatsEventHub.SetEmulatorBrnObservable.Subscribe(_ => SetEmulatorBrains()),
 
             // Condition
-            EventHub.SetAllEmulatorConditionStatsObservable.Subscribe(_ => OnSetAllEmulatorConditionStats()),
-            EventHub.SetEmulatorHappinessObservable.Subscribe(_ => SetEmulatorHappiness()),
-            EventHub.SetEmulatorDisciplineObservable.Subscribe(_ => SetEmulatorDiscipline()),
-            EventHub.SetEmulatorCareMistakesObservable.Subscribe(_ => SetEmulatorCareMistakes()),
-            EventHub.SetEmulatorTechniqueCountObservable.Subscribe(_ => SetEmulatorTechniqueCount()),
-            EventHub.SetEmulatorBattlesCountObservable.Subscribe(_ => SetEmulatorBattlesCount()),
+            DigimonStatsEventHub.SetAllEmulatorConditionStatsObservable.Subscribe(_ => OnSetAllEmulatorConditionStats()),
+            DigimonStatsEventHub.SetEmulatorHappinessObservable.Subscribe(_ => SetEmulatorHappiness()),
+            DigimonStatsEventHub.SetEmulatorDisciplineObservable.Subscribe(_ => SetEmulatorDiscipline()),
+            DigimonStatsEventHub.SetEmulatorCareMistakesObservable.Subscribe(_ => SetEmulatorCareMistakes()),
+            DigimonStatsEventHub.SetEmulatorTechniqueCountObservable.Subscribe(_ => SetEmulatorTechniqueCount()),
+            DigimonStatsEventHub.SetEmulatorBattlesCountObservable.Subscribe(_ => SetEmulatorBattlesCount()),
 
             // UserConfig
             UserConfigurationManager.CurrentEvolutionCalculatorConfig.Subscribe(OnEvolutionCalculatorConfigChanged)

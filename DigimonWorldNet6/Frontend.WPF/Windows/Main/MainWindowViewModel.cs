@@ -11,6 +11,7 @@ using DigimonWorld.Frontend.WPF.Windows.Main.UserControls.EvolutionCalculator;
 using DigimonWorld.Frontend.WPF.Windows.Main.UserControls.Panes;
 using DigimonWorld.Frontend.WPF.Windows.MusicPlayer;
 using Shared.Services;
+using Shared.Services.Events;
 
 namespace DigimonWorld.Frontend.WPF.Windows.Main;
 
@@ -31,7 +32,7 @@ public class MainWindowViewModel : BaseWindowViewModel, IDisposable
         OpenMusicPlayerWindowCommand = new CommandHandler(OpenMusicPlayerWindow);
 
         _compositeDisposable = new CompositeDisposable(
-            EventHub.MusicPlayerClosedObservable.Subscribe(_ => _musicPlayerIsOpen = false)
+            MusicPlayerEventHub.MusicPlayerClosedObservable.Subscribe(_ => _musicPlayerIsOpen = false)
         );
         
         CurrentSelectedMainWindowContent = new EvolutionCalculatorUserControl();
@@ -124,7 +125,7 @@ public class MainWindowViewModel : BaseWindowViewModel, IDisposable
 
         musicPlayerWindow.Show();
 
-        EventHub.SignalMusicPlayerOpened();
+        MusicPlayerEventHub.SignalMusicPlayerOpened();
 
         _musicPlayerIsOpen = true;
     }

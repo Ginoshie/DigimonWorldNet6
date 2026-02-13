@@ -11,6 +11,7 @@ using System.Reactive.Subjects;
 using Shared.Configuration;
 using Shared.Enums;
 using Shared.Services;
+using Shared.Services.Events;
 
 namespace DigimonWorld.Frontend.WPF.Services;
 
@@ -52,7 +53,7 @@ public static class MusicPlayer
             CurrentSongTitleSubject,
             CurrentPositionSubject,
             SongLengthSubject,
-            EventHub.MusicPlayerClosedObservable.Subscribe(_ => OnMusicPlayerClosed())
+            MusicPlayerEventHub.MusicPlayerClosedObservable.Subscribe(_ => OnMusicPlayerClosed())
         );
 
         LoadMusicResources();
@@ -84,9 +85,9 @@ public static class MusicPlayer
 
             SoundOut.Volume = value;
             
-            EventHub.SignalVolumeChanged(value);
+            MusicPlayerEventHub.SignalVolumeChanged(value);
 
-            EventHub.SignalMuteMode(value == 0 ? MuteMode.Mute : MuteMode.Unmuted);
+            MusicPlayerEventHub.SignalMuteMode(value == 0 ? MuteMode.Mute : MuteMode.Unmuted);
         }
     }
 
@@ -98,7 +99,7 @@ public static class MusicPlayer
     {
         ShuffleMode = shuffleMode;
 
-        EventHub.SignalShuffleMode(shuffleMode);
+        MusicPlayerEventHub.SignalShuffleMode(shuffleMode);
     }
 
     public static void PreviousSong()
@@ -121,7 +122,7 @@ public static class MusicPlayer
             return;
         }
 
-        EventHub.SignalPreviousSongStarted();
+        MusicPlayerEventHub.SignalPreviousSongStarted();
     }
 
     public static void PlayPause()
@@ -141,7 +142,7 @@ public static class MusicPlayer
                 throw new ArgumentOutOfRangeException();
         }
 
-        EventHub.SignalPlayModeChanged(PlayMode);
+        MusicPlayerEventHub.SignalPlayModeChanged(PlayMode);
     }
 
     public static void NextSong()
@@ -164,14 +165,14 @@ public static class MusicPlayer
             return;
         }
 
-        EventHub.SignalNextSongStarted();
+        MusicPlayerEventHub.SignalNextSongStarted();
     }
 
     public static void SetRepeatMode(RepeatMode repeatMode)
     {
         RepeatMode = repeatMode;
 
-        EventHub.SignalRepeatMode(RepeatMode);
+        MusicPlayerEventHub.SignalRepeatMode(RepeatMode);
     }
 
     public static void Mute()
@@ -363,7 +364,7 @@ public static class MusicPlayer
     {
         if (songTitle == LEOMON_SONG_TITLE)
         {
-            EventHub.SignalLeomonsThemeStarted();
+            MusicPlayerEventHub.SignalLeomonsThemeStarted();
         }
     }
 

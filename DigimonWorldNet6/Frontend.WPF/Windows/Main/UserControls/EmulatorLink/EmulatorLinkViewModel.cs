@@ -5,6 +5,7 @@ using System.Windows.Threading;
 using DigimonWorld.Frontend.WPF.ViewModelComponents;
 using MemoryAccess;
 using Shared.Services;
+using Shared.Services.Events;
 
 namespace DigimonWorld.Frontend.WPF.Windows.Main.UserControls.EmulatorLink;
 
@@ -16,32 +17,32 @@ public class EmulatorLinkViewModel : BaseViewModel, IDisposable
     public EmulatorLinkViewModel()
     {
         // Profile stats
-        SignalSetAllEmulatorProfileStatsCommand = new CommandHandler(EventHub.SignalSetAllEmulatorProfileStats);
-        SetDigimonTypeFromEmulator = new CommandHandler(EventHub.SignalSetEmulatorDigimonType);
-        SetDigimonWeightFromEmulator = new CommandHandler(EventHub.SignalSetEmulatorWeight);
+        SignalSetAllEmulatorProfileStatsCommand = new CommandHandler(DigimonStatsEventHub.SignalSetAllEmulatorProfileStats);
+        SetDigimonTypeFromEmulator = new CommandHandler(DigimonStatsEventHub.SignalSetEmulatorDigimonType);
+        SetDigimonWeightFromEmulator = new CommandHandler(DigimonStatsEventHub.SignalSetEmulatorWeight);
 
         // Parameter stats
-        SignalSetAllEmulatorParameterStatsCommand = new CommandHandler(EventHub.SignalSetAllEmulatorParameterStats);
-        SignalSetEmulatorHPCommand = new CommandHandler(EventHub.SignalSetEmulatorHP);
-        SignalSetEmulatorMPCommand = new CommandHandler(EventHub.SignalSetEmulatorMP);
-        SignalSetEmulatorOffCommand = new CommandHandler(EventHub.SignalSetEmulatorOff);
-        SignalSetEmulatorDefCommand = new CommandHandler(EventHub.SignalSetEmulatorDef);
-        SignalSetEmulatorSpdCommand = new CommandHandler(EventHub.SignalSetEmulatorSpd);
-        SignalSetEmulatorBrnCommand = new CommandHandler(EventHub.SignalSetEmulatorBrn);
+        SignalSetAllEmulatorParameterStatsCommand = new CommandHandler(DigimonStatsEventHub.SignalSetAllEmulatorParameterStats);
+        SignalSetEmulatorHPCommand = new CommandHandler(DigimonStatsEventHub.SignalSetEmulatorHP);
+        SignalSetEmulatorMPCommand = new CommandHandler(DigimonStatsEventHub.SignalSetEmulatorMP);
+        SignalSetEmulatorOffCommand = new CommandHandler(DigimonStatsEventHub.SignalSetEmulatorOff);
+        SignalSetEmulatorDefCommand = new CommandHandler(DigimonStatsEventHub.SignalSetEmulatorDef);
+        SignalSetEmulatorSpdCommand = new CommandHandler(DigimonStatsEventHub.SignalSetEmulatorSpd);
+        SignalSetEmulatorBrnCommand = new CommandHandler(DigimonStatsEventHub.SignalSetEmulatorBrn);
 
         // Condition stats
-        SignalSetAllEmulatorConditionStatsCommand = new CommandHandler(EventHub.SignalSetAllEmulatorConditionStats);
-        SetDigimonHappinessFromEmulator = new CommandHandler(EventHub.SignalSetEmulatorHappiness);
-        SetDigimonDisciplineFromEmulator = new CommandHandler(EventHub.SignalSetEmulatorDiscipline);
-        SetDigimonCareMistakesFromEmulator = new CommandHandler(EventHub.SignalSetEmulatorCareMistakes);
-        SetDigimonTechniquesCountFromEmulator = new CommandHandler(EventHub.SignalSetEmulatorTechniqueCount);
-        SetDigimonBattlesCountFromEmulator = new CommandHandler(EventHub.SignalSetEmulatorBattlesCount);
+        SignalSetAllEmulatorConditionStatsCommand = new CommandHandler(DigimonStatsEventHub.SignalSetAllEmulatorConditionStats);
+        SetDigimonHappinessFromEmulator = new CommandHandler(DigimonStatsEventHub.SignalSetEmulatorHappiness);
+        SetDigimonDisciplineFromEmulator = new CommandHandler(DigimonStatsEventHub.SignalSetEmulatorDiscipline);
+        SetDigimonCareMistakesFromEmulator = new CommandHandler(DigimonStatsEventHub.SignalSetEmulatorCareMistakes);
+        SetDigimonTechniquesCountFromEmulator = new CommandHandler(DigimonStatsEventHub.SignalSetEmulatorTechniqueCount);
+        SetDigimonBattlesCountFromEmulator = new CommandHandler(DigimonStatsEventHub.SignalSetEmulatorBattlesCount);
 
         SetupMemorySyncTimer();
 
         _disposable = new CompositeDisposable(
-            EventHub.EmulatorConnectedObservable.Subscribe(_ => OnEmulatorConnected()),
-            EventHub.EmulatorDisconnectedObservable.Subscribe(_ => OnEmulatorDisconnected())
+            EmulatorLinkEventHub.EmulatorConnectedObservable.Subscribe(_ => OnEmulatorConnected()),
+            EmulatorLinkEventHub.EmulatorDisconnectedObservable.Subscribe(_ => OnEmulatorDisconnected())
         );
     }
     
