@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
@@ -53,21 +54,30 @@ public class EmulatorProcessPickerViewModel : BaseViewModel
 
     public void LoadProcesses()
     {
-        Processes.Clear();
+        List<Process> currentProcesses = Process
+            .GetProcesses()
+            .Where(p => p.MainWindowHandle != IntPtr.Zero)
+            .OrderBy(p => p.ProcessName)
+            .ToList();
 
-        foreach (Process p in Process
-                     .GetProcesses()
-                     .Where(p => p.MainWindowHandle != IntPtr.Zero)
-                     .OrderBy(p => p.ProcessName))
+        for (int i = Processes.Count - 1; i >= 0; i--)
         {
-            Processes.Add(new ProcessItemViewModel(p));
+            if (currentProcesses.All(p => p.Id != Processes[i].Process.Id))
+            {
+                Processes.RemoveAt(i);
+            }
+        }
+
+        foreach (Process process in currentProcesses.Where(process => Processes.All(p => p.Process.Id != process.Id)))
+        {
+            Processes.Add(new ProcessItemViewModel(process));
         }
     }
 
     private void AttachEmulatorProcess()
     {
         _timer.Stop();
-        
+
         if (SelectedProcess == null)
         {
             return;
