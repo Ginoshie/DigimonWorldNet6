@@ -9,6 +9,7 @@ using DigimonWorld.Evolution.Calculator.Core.EvolutionCriteria.Vice21AndUp.Ultim
 using DigimonWorld.Evolution.Calculator.Core.Interfaces.EvolutionCriteria;
 using Shared.Constants;
 using Shared.Enums;
+using Shared.Extensions;
 using Shared.Services;
 
 namespace DigimonWorld.Evolution.Calculator.Core.EvolutionCriteriaCalculation.FromRookieOrChampion;
@@ -84,32 +85,8 @@ public sealed class FromRookieOrChampionEvolutionMapper
 
     public List<IEvolutionCriteria> GetEvolutionCriteria(DigimonName digimonName)
     {
-        const GameVariant patchFlags =
-            GameVariant.MyotismonPatch | GameVariant.PanjyamonPatch;
-
-        bool isVice = _gameVariant.HasFlag(GameVariant.Vice);
-        GameVariant activePatches = _gameVariant & patchFlags;
-
         List<KeyValuePair<DigimonType, IEnumerable<IEvolutionCriteria>>> candidates = _fromRookieOrChampionEvolutionMappings
-            .Where(e =>
-            {
-                DigimonType type = e.Key;
-
-                bool matchesDigimon =
-                    type.Digimon == digimonName;
-
-                bool matchesVariant =
-                    isVice
-                        ? type.IncludeGameVariantFlags.HasFlag(GameVariant.Vice)
-                        : type.IncludeGameVariantFlags.HasFlag(GameVariant.Original);
-
-                bool matchesPatches =
-                    isVice
-                        ? (type.IncludeGameVariantFlags & patchFlags) == activePatches
-                        : (type.IncludeGameVariantFlags & patchFlags) == 0;
-
-                return matchesDigimon && matchesVariant && matchesPatches;
-            })
+            .Where(e => e.Key.IncludeGameVariantFlags.IsAvailableIn(e.Key.ExcludeGameVariantFlags, _gameVariant) && e.Key.Digimon == digimonName)
             .ToList();
 
         return candidates.Single().Value.ToList();

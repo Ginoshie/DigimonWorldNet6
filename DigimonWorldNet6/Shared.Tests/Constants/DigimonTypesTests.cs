@@ -8,7 +8,7 @@ public class DigimonTypesTests
 {
     #region DigimonNameCollections
 
-    private static readonly DigimonName[] AllOriginalDigimonNames =
+    private static readonly DigimonName[] _allOriginalDigimonNames =
     [
         DigimonName.Agumon,
         DigimonName.Airdramon,
@@ -73,7 +73,7 @@ public class DigimonTypesTests
         DigimonName.Yuramon
     ];
 
-    private static readonly DigimonName[] AllViceDigimonNames = AllOriginalDigimonNames
+    private static readonly DigimonName[] _allViceDigimonNames = _allOriginalDigimonNames
         .Concat([
             DigimonName.Weregarurumon,
             DigimonName.Gigadramon,
@@ -82,7 +82,7 @@ public class DigimonTypesTests
         ])
         .ToArray();
 
-    private static readonly DigimonName[] AllMyotismonPatchDigimonNames = AllOriginalDigimonNames
+    private static readonly DigimonName[] _allMyotismonPatchDigimonNames = _allOriginalDigimonNames
         .Concat([
             DigimonName.Weregarurumon,
             DigimonName.Gigadramon,
@@ -91,7 +91,7 @@ public class DigimonTypesTests
         ])
         .ToArray();
 
-    private static readonly DigimonName[] AllPanjyamonPatchDigimonNames = AllOriginalDigimonNames
+    private static readonly DigimonName[] _allPanjyamonPatchDigimonNames = _allOriginalDigimonNames
         .Concat([
             DigimonName.Gigadramon,
             DigimonName.MetalEtemon,
@@ -100,7 +100,7 @@ public class DigimonTypesTests
         ])
         .ToArray();
 
-    private static readonly DigimonName[] AllMyotismonAndPanjyamonPatchDigimonNames = AllOriginalDigimonNames
+    private static readonly DigimonName[] _allMyotismonAndPanjyamonPatchDigimonNames = _allOriginalDigimonNames
         .Concat([
             DigimonName.Gigadramon,
             DigimonName.MetalEtemon,
@@ -118,7 +118,7 @@ public class DigimonTypesTests
         IEnumerable<DigimonName> result = DigimonTypes.Get(GameVariant.Original);
 
         // Assert
-        Assert.That(result, Is.EquivalentTo(AllOriginalDigimonNames));
+        Assert.That(result, Is.EquivalentTo(_allOriginalDigimonNames));
     }
 
     [Test]
@@ -128,7 +128,7 @@ public class DigimonTypesTests
         IEnumerable<DigimonName> result = DigimonTypes.Get(GameVariant.Vice);
 
         // Assert
-        Assert.That(result, Is.EquivalentTo(AllViceDigimonNames));
+        Assert.That(result, Is.EquivalentTo(_allViceDigimonNames));
     }
 
     [Test]
@@ -138,7 +138,7 @@ public class DigimonTypesTests
         IEnumerable<DigimonName> result = DigimonTypes.Get(GameVariant.Vice | GameVariant.MyotismonPatch);
 
         // Assert
-        Assert.That(result, Is.EquivalentTo(AllMyotismonPatchDigimonNames));
+        Assert.That(result, Is.EquivalentTo(_allMyotismonPatchDigimonNames));
     }
 
     [Test]
@@ -148,7 +148,7 @@ public class DigimonTypesTests
         IEnumerable<DigimonName> result = DigimonTypes.Get(GameVariant.Vice | GameVariant.PanjyamonPatch);
 
         // Assert
-        Assert.That(result, Is.EquivalentTo(AllPanjyamonPatchDigimonNames));
+        Assert.That(result, Is.EquivalentTo(_allPanjyamonPatchDigimonNames));
     }
 
     [Test]
@@ -158,6 +158,6 @@ public class DigimonTypesTests
         IEnumerable<DigimonName> result = DigimonTypes.Get(GameVariant.Vice | GameVariant.MyotismonPatch | GameVariant.PanjyamonPatch);
 
         // Assert
-        Assert.That(result, Is.EquivalentTo(AllMyotismonAndPanjyamonPatchDigimonNames));
+        Assert.That(result, Is.EquivalentTo(_allMyotismonAndPanjyamonPatchDigimonNames));
     }
 }

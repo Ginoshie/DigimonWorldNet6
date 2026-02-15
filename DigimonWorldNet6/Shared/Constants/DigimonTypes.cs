@@ -31,7 +31,7 @@ public static class DigimonTypes
     public static DigimonType Coelamon { get; } = new(49, DigimonName.Coelamon, GameVariant.Original);
     public static DigimonType CoelamonVice { get; } = new(49, DigimonName.Coelamon, GameVariant.Vice);
 
-    public static DigimonType Devimon { get; } = new(6, DigimonName.Devimon, GameVariant.Original | GameVariant.Vice);
+    public static DigimonType Devimon { get; } = new(6, DigimonName.Devimon, GameVariant.Original | GameVariant.Vice, GameVariant.MyotismonPatch);
     public static DigimonType DevimonMyotismon { get; } = new(6, DigimonName.Devimon, GameVariant.Vice | GameVariant.MyotismonPatch);
 
     public static DigimonType Digitamamon { get; } = new(56, DigimonName.Digitamamon, GameVariant.Original | GameVariant.Vice);
@@ -46,8 +46,8 @@ public static class DigimonTypes
     public static DigimonType Frigimon { get; } = new(23, DigimonName.Frigimon, GameVariant.Original);
     public static DigimonType FrigimonVice { get; } = new(23, DigimonName.Frigimon, GameVariant.Vice);
 
-    public static DigimonType Gabumon { get; } = new(17, DigimonName.Gabumon, GameVariant.Original | GameVariant.Vice);
-    public static DigimonType GabumonPanjyamon { get; } = new(17, DigimonName.Gabumon, GameVariant.Vice);
+    public static DigimonType Gabumon { get; } = new(17, DigimonName.Gabumon, GameVariant.Original | GameVariant.Vice, GameVariant.PanjyamonPatch);
+    public static DigimonType GabumonPanjyamon { get; } = new(17, DigimonName.Gabumon, GameVariant.Vice | GameVariant.PanjyamonPatch);
 
     public static DigimonType Garurumon { get; } = new(22, DigimonName.Garurumon, GameVariant.Original);
     public static DigimonType GarurumonVice { get; } = new(22, DigimonName.Garurumon, GameVariant.Vice);
@@ -73,7 +73,7 @@ public static class DigimonTypes
 
     public static DigimonType Leomon { get; } = new(48, DigimonName.Leomon, GameVariant.Original | GameVariant.Vice);
 
-    public static DigimonType Machinedramon { get; } = new(62, DigimonName.Machinedramon, GameVariant.Vice);
+    public static DigimonType Machinedramon { get; } = new(62, DigimonName.Machinedramon, GameVariant.Vice, GameVariant.MyotismonPatch);
 
     public static DigimonType Mamemon { get; } = new(13, DigimonName.Mamemon, GameVariant.Original | GameVariant.Vice);
 
@@ -96,10 +96,10 @@ public static class DigimonTypes
 
     public static DigimonType Monzaemon { get; } = new(14, DigimonName.Monzaemon, GameVariant.Original | GameVariant.Vice);
 
-    public static DigimonType Myotismon { get; } = new(63, DigimonName.Myotismon, GameVariant.Vice);
+    public static DigimonType Myotismon { get; } = new(63, DigimonName.Myotismon, GameVariant.Vice | GameVariant.MyotismonPatch);
 
-    public static DigimonType Nanimon { get; } = new(53, DigimonName.Nanimon, GameVariant.Original | GameVariant.Vice);
-    public static DigimonType NanimonMyotismon { get; } = new(53, DigimonName.Nanimon, GameVariant.Vice);
+    public static DigimonType Nanimon { get; } = new(53, DigimonName.Nanimon, GameVariant.Original | GameVariant.Vice, GameVariant.MyotismonPatch);
+    public static DigimonType NanimonMyotismon { get; } = new(53, DigimonName.Nanimon, GameVariant.Vice | GameVariant.MyotismonPatch);
 
     public static DigimonType Ninjamon { get; } = new(58, DigimonName.Ninjamon, GameVariant.Original | GameVariant.Vice);
 
@@ -147,15 +147,15 @@ public static class DigimonTypes
 
     public static DigimonType Vademon { get; } = new(28, DigimonName.Vademon, GameVariant.Original | GameVariant.Vice);
 
-    public static DigimonType Vegiemon { get; } = new(25, DigimonName.Vegiemon, GameVariant.Original);
-    public static DigimonType VegiemonVice { get; } = new(25, DigimonName.Vegiemon, GameVariant.Vice);
+    public static DigimonType Vegiemon { get; } = new(25, DigimonName.Vegiemon, GameVariant.Original, GameVariant.Vice);
+    public static DigimonType VegiemonVice { get; } = new(25, DigimonName.Vegiemon, GameVariant.Vice, GameVariant.Original | GameVariant.MyotismonPatch);
     public static DigimonType VegiemonMyotismon { get; } = new(25, DigimonName.Vegiemon, GameVariant.Vice | GameVariant.MyotismonPatch);
 
     public static DigimonType Whamon { get; } = new(24, DigimonName.Whamon, GameVariant.Original | GameVariant.Vice);
 
     public static DigimonType Yuramon { get; } = new(43, DigimonName.Yuramon, GameVariant.Original | GameVariant.Vice);
 
-    public static DigimonType Weregarurumon { get; } = new(63, DigimonName.Weregarurumon, GameVariant.Vice);
+    public static DigimonType Weregarurumon { get; } = new(63, DigimonName.Weregarurumon, GameVariant.Vice, GameVariant.Original | GameVariant.PanjyamonPatch);
 
     public static IReadOnlyList<DigimonType> AllDigimonTypes { get; } =
     [
