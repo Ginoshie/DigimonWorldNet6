@@ -27,7 +27,7 @@
         </ResourceDictionary>
     </UserControl.Resources>
 
-    <Border CornerRadius="5" BorderBrush="#90D9FA" BorderThickness="0" Background="#90D9FA">
+    <Border CornerRadius="8" BorderBrush="#90D9FA" BorderThickness="0" Background="#90D9FA">
         <Grid KeyboardNavigation.TabNavigation="Cycle" Background="Transparent">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto" />

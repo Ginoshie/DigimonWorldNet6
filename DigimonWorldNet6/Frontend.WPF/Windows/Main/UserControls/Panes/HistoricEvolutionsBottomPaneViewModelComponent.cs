@@ -18,7 +18,7 @@ public class HistoricEvolutionsBottomPaneViewModelComponent : PaneBaseViewModel,
     private const double PANEL_OPENED_X_OFFSET = -12;
     private const double PANEL_CLOSED_X_OFFSET = -475;
     private const double EMULATOR_SYNC_BUTTON_SECTION_OPENED_X_OFFSET = -10;
-    private const double EMULATOR_SYNC_BUTTON_SECTION_CLOSED_X_OFFSET = -63;
+    private const double EMULATOR_SYNC_BUTTON_SECTION_CLOSED_X_OFFSET = -65;
 
     private readonly CompositeDisposable _disposable;
 

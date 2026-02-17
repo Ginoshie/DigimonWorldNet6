@@ -51,9 +51,9 @@
         </Grid.RowDefinitions>
 
         <Border Grid.Row="0" Grid.Column="1" Background="Transparent" Panel.ZIndex="1">
-            <Border CornerRadius="8" BorderBrush="Black" BorderThickness="3" Padding="0">
-                <Border CornerRadius="8" BorderBrush="#4A9FC5" BorderThickness="3" Padding="0">
-                    <Border CornerRadius="5" BorderBrush="#90D9FA" BorderThickness="3" Padding="0">
+            <Border CornerRadius="13" BorderBrush="Black" BorderThickness="3" >
+                <Border CornerRadius="10" BorderBrush="#4A9FC5" BorderThickness="3" >
+                    <Border CornerRadius="8" BorderBrush="#90D9FA" BorderThickness="3" >
                         <Border CornerRadius="5" BorderBrush="Black" BorderThickness="3" Padding="10" Background="#2E3841">
                             <historicEvolutionPicker:HistoricEvolutionPickerUserControl VerticalAlignment="Center" />
                         </Border>
@@ -97,10 +97,10 @@
             </TextBlock>
         </Grid>
 
-        <Border Grid.Row="1" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,0, 15, 0" CornerRadius="8" BorderBrush="Black" BorderThickness="3" Padding="0"
+        <Border Grid.Row="1" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,0, 15, 0" CornerRadius="13" BorderBrush="Black" BorderThickness="3" Padding="0"
                 Panel.ZIndex="0">
-            <Border CornerRadius="8" BorderBrush="#4A9FC5" BorderThickness="3" Padding="0">
-                <Border CornerRadius="5" BorderBrush="#90D9FA" BorderThickness="3" Padding="0">
+            <Border CornerRadius="10" BorderBrush="#4A9FC5" BorderThickness="3" Padding="0">
+                <Border CornerRadius="8" BorderBrush="#90D9FA" BorderThickness="3" Padding="0">
                     <Border CornerRadius="5" BorderBrush="Black" BorderThickness="3" Background="#2E3841">
                         <Grid>
                             <Grid.ColumnDefinitions>
