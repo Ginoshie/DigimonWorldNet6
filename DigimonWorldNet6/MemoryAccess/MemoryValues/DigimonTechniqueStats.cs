@@ -96,7 +96,7 @@ public sealed class DigimonTechniqueStats
     public bool MetalSprinter  => HasBit(MECH_ADDR, 2);
     public bool PulseLaser     => HasBit(MECH_ADDR, 3);
     public bool DeleteProgram  => HasBit(MECH_ADDR, 4);
-    public bool DGDimension    => HasBit(MECH_ADDR, 5);
+    public bool DgDimension    => HasBit(MECH_ADDR, 5);
     public bool FullPotential  => HasBit(MECH_ADDR, 6);
     public bool ReverseProgram => HasBit(MECH_ADDR, 7);
     

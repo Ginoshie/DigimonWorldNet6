@@ -4,7 +4,6 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:main="clr-namespace:DigimonWorld.Frontend.WPF.Windows.Main"
-             xmlns:system="clr-namespace:System;assembly=System.Runtime"
              xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
              xmlns:emulatorLink="clr-namespace:DigimonWorld.Frontend.WPF.Windows.Main.UserControls.EmulatorLink"
              mc:Ignorable="d"
@@ -12,11 +11,13 @@
 
     <UserControl.Resources>
         <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/ResourceDictionaries/Styles/Buttons/DefaultOptionPickerButtonStyle.xaml" />
+                <ResourceDictionary Source="/ResourceDictionaries/Styles/Labels/DefaultLabelStyle.xaml" />
+            </ResourceDictionary.MergedDictionaries>
 
             <GridLength x:Key="PanelLabelThickness">45</GridLength>
             <GridLength x:Key="RightPanelWidth">420</GridLength>
-
-            <system:Double x:Key="RightPanelYOffset">-420</system:Double>
 
             <BitmapImage x:Key="ClosedRightPaneImage" UriSource="pack://application:,,,/Frontend.WPF;component/Images/ComponentLabels/label-right-no-focus.png" />
             <BitmapImage x:Key="OpenRightPaneImage" UriSource="pack://application:,,,/Frontend.WPF;component/Images/ComponentLabels/label-right-focus.png" />
@@ -24,27 +25,18 @@
             <Style x:Key="RightPaneLabelStyle" TargetType="Image">
                 <Setter Property="Source" Value="{StaticResource ClosedRightPaneImage}" />
                 <Style.Triggers>
-                    <DataTrigger Binding="{Binding RightPaneViewModelComponent.RightPaneIsOpen}" Value="True">
+                    <DataTrigger Binding="{Binding RightPaneViewModelComponent.PaneIsOpen}" Value="True">
                         <Setter Property="Source" Value="{StaticResource OpenRightPaneImage}" />
                     </DataTrigger>
                 </Style.Triggers>
             </Style>
-
-            <Storyboard x:Key="OpenRightPane">
-                <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.X)"
-                                 To="-12" Duration="{StaticResource PanelAnimationDuration}" />
-            </Storyboard>
-            <Storyboard x:Key="CloseRightPane">
-                <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.X)"
-                                 To="{StaticResource RightPanelYOffset}" Duration="{StaticResource PanelAnimationDuration}" />
-            </Storyboard>
 
         </ResourceDictionary>
     </UserControl.Resources>
 
     <Grid Background="Transparent" VerticalAlignment="Center" SnapsToDevicePixels="True" UseLayoutRounding="True" Panel.ZIndex="0">
         <Grid.RenderTransform>
-            <TranslateTransform X="{StaticResource RightPanelYOffset}" />
+            <TranslateTransform X="{Binding RightPaneViewModelComponent.PaneOffset}" />
         </Grid.RenderTransform>
 
         <Grid.ColumnDefinitions>
@@ -89,7 +81,7 @@
                         <Setter Property="FontWeight" Value="Bold" />
                         <Setter Property="Foreground" Value="#D6D6D8" />
                         <Style.Triggers>
-                            <DataTrigger Binding="{Binding RightPaneViewModelComponent.RightPaneIsOpen}" Value="True">
+                            <DataTrigger Binding="{Binding RightPaneViewModelComponent.PaneIsOpen}" Value="True">
                                 <Setter Property="Foreground" Value="Black" />
                             </DataTrigger>
                         </Style.Triggers>
@@ -102,21 +94,6 @@
                 </b:Interaction.Triggers>
             </TextBlock>
         </Grid>
-
-        <Grid.Style>
-            <Style TargetType="Grid">
-                <Style.Triggers>
-                    <DataTrigger Binding="{Binding RightPaneViewModelComponent.RightPaneIsOpen}" Value="True">
-                        <DataTrigger.EnterActions>
-                            <BeginStoryboard Storyboard="{StaticResource OpenRightPane}" />
-                        </DataTrigger.EnterActions>
-                        <DataTrigger.ExitActions>
-                            <BeginStoryboard Storyboard="{StaticResource CloseRightPane}" />
-                        </DataTrigger.ExitActions>
-                    </DataTrigger>
-                </Style.Triggers>
-            </Style>
-        </Grid.Style>
     </Grid>
 
 </UserControl>

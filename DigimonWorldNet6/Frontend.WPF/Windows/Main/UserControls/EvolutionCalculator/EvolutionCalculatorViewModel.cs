@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reactive.Disposables;
+using System.Reactive.Linq;
 using System.Windows.Input;
 using DigimonWorld.Evolution.Calculator.Core;
 using DigimonWorld.Evolution.Calculator.Core.DataObjects;
@@ -25,6 +26,8 @@ public sealed class EvolutionCalculatorViewModel : BaseViewModel, IDisposable
 
     private EvolutionResult _evolutionResult = EvolutionResult.Unknown;
     private GameVariant _gameVariant = GameVariant.Original;
+    private bool _emulatorIsConnected;
+    private EmulatorLinkSyncMode _emulatorSyncMode;
 
     public EvolutionCalculatorViewModel()
     {
@@ -32,6 +35,7 @@ public sealed class EvolutionCalculatorViewModel : BaseViewModel, IDisposable
 
         _compositeDisposable = new CompositeDisposable(
             _speakingSimulator,
+
             // Profile
             DigimonStatsEventHub.SyncAllEmulatorProfileStatsObservable.Subscribe(_ => SyncAllProfileStats()),
             DigimonStatsEventHub.SyncEmulatorDigimonTypeObservable.Subscribe(_ => SetEmulatorDigimonType()),
@@ -54,6 +58,11 @@ public sealed class EvolutionCalculatorViewModel : BaseViewModel, IDisposable
             DigimonStatsEventHub.SyncEmulatorTechniqueCountObservable.Subscribe(_ => SyncEmulatorTechniqueCount()),
             DigimonStatsEventHub.SyncEmulatorBattlesCountObservable.Subscribe(_ => SyncEmulatorBattlesCount()),
 
+            // Emulator Link
+            EmulatorLinkEventHub.EmulatorLinkSyncModeChangedObservable.Subscribe(UpdateEmulatorLinkSyncMode),
+            EmulatorLinkEventHub.EmulatorConnectedObservable.Subscribe(_ => OnEmulatorConnected()),
+            EmulatorLinkEventHub.EmulatorDisconnectedObservable.Subscribe(_ => OnEmulatorDisconnected()),
+
             // UserConfig
             UserConfigurationManager.CurrentEvolutionCalculatorConfig.Subscribe(UpdateAvailableDigimon)
         );
@@ -63,6 +72,8 @@ public sealed class EvolutionCalculatorViewModel : BaseViewModel, IDisposable
         InstantDisplayCommand = new CommandHandler(InstantDisplay);
 
         SpeechDelay initialDelay = UserConfigurationManager.SpeakingSimulatorConfig.NarratorMode == NarratorMode.Instant ? SpeechDelay.None : SpeechDelay.Long;
+
+        _emulatorSyncMode = UserConfigurationManager.EmulatorLinkConfig.EmulatorLinkSyncMode;
 
         _ = _speakingSimulator.SpeakAsync(
             JijimonEvolutionCalculatorNarratorText.IntroText,
@@ -101,39 +112,6 @@ public sealed class EvolutionCalculatorViewModel : BaseViewModel, IDisposable
             OnPropertyChanged();
         }
     }
-    
-    // Profile
-    private void SyncAllProfileStats()
-    {
-        SetEmulatorWeight();
-        SetEmulatorDigimonType();
-    }
-    private void SetEmulatorWeight() => Weight = ServiceRelay.LiveMemoryReader.DigimonProfileStats.Weight.ToString();
-    private void SetEmulatorDigimonType() => PlayerDigimonType = DigimonTypes.Get(ServiceRelay.LiveMemoryReader.DigimonProfileStats.DigimonType, _gameVariant).Digimon;
-    
-    
-    // Parameter
-    private void SyncEmulatorHP() => HP = ServiceRelay.LiveMemoryReader.DigimonParameterStats.HP.ToString();
-    private void SyncEmulatorMP() => MP = ServiceRelay.LiveMemoryReader.DigimonParameterStats.MP.ToString();
-    private void SyncEmulatorOff() => Off = ServiceRelay.LiveMemoryReader.DigimonParameterStats.Offense.ToString();
-    private void SyncEmulatorDef() => Def = ServiceRelay.LiveMemoryReader.DigimonParameterStats.Defense.ToString();
-    private void SyncEmulatorSpeed() => Speed = ServiceRelay.LiveMemoryReader.DigimonParameterStats.Speed.ToString();
-    private void SyncEmulatorBrains() => Brains = ServiceRelay.LiveMemoryReader.DigimonParameterStats.Brains.ToString();
-    
-    // Condition
-    private void SyncAllEmulatorConditionStats()
-    {
-        SyncEmulatorHappiness();
-        SyncEmulatorDiscipline();
-        SyncEmulatorCareMistakes();
-        SyncEmulatorTechniqueCount();
-        SyncEmulatorBattlesCount();
-    }
-    private void SyncEmulatorHappiness() => Discipline = ServiceRelay.LiveMemoryReader.DigimonConditionStats.Discipline.ToString();
-    private void SyncEmulatorDiscipline() => Happiness = ServiceRelay.LiveMemoryReader.DigimonConditionStats.Happiness.ToString();
-    private void SyncEmulatorCareMistakes() => CareMistakes = ServiceRelay.LiveMemoryReader.DigimonConditionStats.CareMistakes.ToString();
-    private void SyncEmulatorTechniqueCount() => Techniques = ServiceRelay.LiveMemoryReader.DigimonTechniqueStats.LearnedTechniqueCount().ToString();
-    private void SyncEmulatorBattlesCount() => Battles = ServiceRelay.LiveMemoryReader.DigimonConditionStats.Battles.ToString();
 
     public string HP
     {
@@ -272,6 +250,17 @@ public sealed class EvolutionCalculatorViewModel : BaseViewModel, IDisposable
 
     private void InstantDisplay() => _speakingSimulator.RequestInstantDisplay();
 
+    // Profile
+    private void SyncAllProfileStats()
+    {
+        SetEmulatorWeight();
+        SetEmulatorDigimonType();
+    }
+
+    private void SetEmulatorWeight() => Weight = ServiceRelay.LiveMemoryReader.DigimonProfileStats.Weight.ToString();
+    private void SetEmulatorDigimonType() => PlayerDigimonType = DigimonTypes.Get(ServiceRelay.LiveMemoryReader.DigimonProfileStats.DigimonType, _gameVariant).Digimon;
+
+    // Parameter
     private void SyncAllEmulatorCombatStats()
     {
         SyncEmulatorHP();
@@ -282,11 +271,102 @@ public sealed class EvolutionCalculatorViewModel : BaseViewModel, IDisposable
         SyncEmulatorBrains();
     }
 
+    private void SyncEmulatorHP() => HP = ServiceRelay.LiveMemoryReader.DigimonParameterStats.HP.ToString();
+    private void SyncEmulatorMP() => MP = ServiceRelay.LiveMemoryReader.DigimonParameterStats.MP.ToString();
+    private void SyncEmulatorOff() => Off = ServiceRelay.LiveMemoryReader.DigimonParameterStats.Offense.ToString();
+    private void SyncEmulatorDef() => Def = ServiceRelay.LiveMemoryReader.DigimonParameterStats.Defense.ToString();
+    private void SyncEmulatorSpeed() => Speed = ServiceRelay.LiveMemoryReader.DigimonParameterStats.Speed.ToString();
+    private void SyncEmulatorBrains() => Brains = ServiceRelay.LiveMemoryReader.DigimonParameterStats.Brains.ToString();
+
+    // Condition
+    private void SyncAllEmulatorConditionStats()
+    {
+        SyncEmulatorHappiness();
+        SyncEmulatorDiscipline();
+        SyncEmulatorCareMistakes();
+        SyncEmulatorTechniqueCount();
+        SyncEmulatorBattlesCount();
+    }
+
+    private void SyncEmulatorHappiness() => Discipline = ServiceRelay.LiveMemoryReader.DigimonConditionStats.Happiness.ToString();
+    private void SyncEmulatorDiscipline() => Happiness = ServiceRelay.LiveMemoryReader.DigimonConditionStats.Discipline.ToString();
+    private void SyncEmulatorCareMistakes() => CareMistakes = ServiceRelay.LiveMemoryReader.DigimonConditionStats.CareMistakes.ToString();
+    private void SyncEmulatorTechniqueCount() => Techniques = ServiceRelay.LiveMemoryReader.DigimonTechniqueStats.LearnedTechniqueCount().ToString();
+    private void SyncEmulatorBattlesCount() => Battles = ServiceRelay.LiveMemoryReader.DigimonConditionStats.Battles.ToString();
+
+    private void UpdateEmulatorLinkSyncMode(EmulatorLinkSyncMode mode)
+    {
+        _emulatorSyncMode = mode;
+        
+        switch (mode)
+        {
+            case EmulatorLinkSyncMode.Auto:
+            {
+                if (_emulatorIsConnected)
+                {
+                    StartMemorySync();
+                }
+
+                break;
+            }
+            case EmulatorLinkSyncMode.Manual:
+                StopMemorySync();
+                break;
+            default:
+                throw new ArgumentOutOfRangeException();
+        }
+    }
+
+    private readonly SerialDisposable _memorySyncDisposable = new();
+
+    private void StartMemorySync()
+    {
+        _memorySyncDisposable.Disposable = Observable
+            .Interval(TimeSpan.FromSeconds(2))
+            .TakeUntil(EmulatorLinkEventHub.EmulatorDisconnectedObservable)
+            .Subscribe(_ =>
+            {
+                if (!_emulatorIsConnected) return;
+
+                try
+                {
+                    SyncAllProfileStats();
+                    SyncAllEmulatorCombatStats();
+                    SyncAllEmulatorConditionStats();
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"Error syncing stats: {ex}");
+                }
+            });
+    }
+
+    private void StopMemorySync()
+    {
+        _memorySyncDisposable.Disposable = null;
+    }
+
+    private void OnEmulatorConnected()
+    {
+        _emulatorIsConnected = true;
+
+        if (_emulatorSyncMode == EmulatorLinkSyncMode.Auto)
+        {
+            StartMemorySync();
+        }
+    }
+
+    private void OnEmulatorDisconnected()
+    {
+        _emulatorIsConnected = false;
+        StopMemorySync();
+    }
+
     private void UpdateAvailableDigimon(EvolutionCalculatorConfig evolutionCalculatorConfig)
     {
-        _gameVariant = UserConfigurationManager.EvolutionCalculatorConfig.GameVariant;
+        _gameVariant = evolutionCalculatorConfig.GameVariant;
 
-        AvailableDigimonTypes = DigimonTypes.Get(UserConfigurationManager.EvolutionCalculatorConfig.GameVariant);
+        AvailableDigimonTypes = DigimonTypes.Get(evolutionCalculatorConfig.GameVariant);
 
         IEnumerable<DigimonName> availableDigimonTypes = AvailableDigimonTypes as DigimonName[] ?? AvailableDigimonTypes.ToArray();
         if (!availableDigimonTypes.Contains(PlayerDigimonType))
@@ -295,9 +375,5 @@ public sealed class EvolutionCalculatorViewModel : BaseViewModel, IDisposable
         }
     }
 
-    public void Dispose()
-    {
-        _speakingSimulator.Dispose();
-        _compositeDisposable.Dispose();
-    }
+    public void Dispose() => _compositeDisposable.Dispose();
 }

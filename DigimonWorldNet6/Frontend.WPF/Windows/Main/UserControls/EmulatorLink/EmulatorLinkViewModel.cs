@@ -1,7 +1,7 @@
 using System;
 using System.Reactive.Disposables;
+using System.Reactive.Linq;
 using System.Windows.Input;
-using System.Windows.Threading;
 using DigimonWorld.Frontend.WPF.ViewModelComponents;
 using MemoryAccess;
 using Shared.Services.Events;
@@ -11,7 +11,8 @@ namespace DigimonWorld.Frontend.WPF.Windows.Main.UserControls.EmulatorLink;
 public class EmulatorLinkViewModel : BaseViewModel, IDisposable
 {
     private readonly CompositeDisposable _disposable;
-    private DispatcherTimer _memorySyncTimer = null!;
+
+    private IDisposable? _memorySyncSubscription;
 
     public EmulatorLinkViewModel()
     {
@@ -37,14 +38,12 @@ public class EmulatorLinkViewModel : BaseViewModel, IDisposable
         SetDigimonTechniquesCountFromEmulator = new CommandHandler(DigimonStatsEventHub.SignalSyncEmulatorTechniqueCount);
         SetDigimonBattlesCountFromEmulator = new CommandHandler(DigimonStatsEventHub.SignalSyncEmulatorBattlesCount);
 
-        SetupMemorySyncTimer();
-
         _disposable = new CompositeDisposable(
             EmulatorLinkEventHub.EmulatorConnectedObservable.Subscribe(_ => OnEmulatorConnected()),
             EmulatorLinkEventHub.EmulatorDisconnectedObservable.Subscribe(_ => OnEmulatorDisconnected())
         );
     }
-    
+
     public bool EmulatorConnected
     {
         get;
@@ -73,7 +72,7 @@ public class EmulatorLinkViewModel : BaseViewModel, IDisposable
     public ICommand SetDigimonCareMistakesFromEmulator { get; }
     public ICommand SetDigimonTechniquesCountFromEmulator { get; }
     public ICommand SetDigimonBattlesCountFromEmulator { get; }
-    
+
     public double SyncColumnWidth => 120;
     public double RectangularButtonWidth => 97;
     public double SquareButtonWidth => 45;
@@ -91,47 +90,30 @@ public class EmulatorLinkViewModel : BaseViewModel, IDisposable
         private set => SetField(ref field, value);
     }
 
-    private void SetupMemorySyncTimer()
-    {
-        _memorySyncTimer = new DispatcherTimer
-        {
-            Interval = TimeSpan.FromMilliseconds(500)
-        };
-
-        _memorySyncTimer.Tick += (_, _) => SyncFromMemory();
-    }
-
     private void OnEmulatorConnected()
     {
-        SyncFromMemory();
-        _memorySyncTimer.Start();
+        _memorySyncSubscription = Observable.Interval(TimeSpan.FromMilliseconds(500)).Subscribe(_ => SyncFromEmulator());
 
         EmulatorConnected = true;
     }
 
     private void OnEmulatorDisconnected()
     {
-        _memorySyncTimer.Stop();
-
+        _memorySyncSubscription?.Dispose();
+        
         EmulatorConnected = false;
     }
 
-    private void SyncFromMemory()
-    {
-        DispatcherTimer timer = new()
-        {
-            Interval = TimeSpan.FromMilliseconds(500)
-        };
-
-        timer.Tick += (_, _) => RefreshFromMemory();
-        timer.Start();
-    }
-
-    private void RefreshFromMemory()
+    private void SyncFromEmulator()
     {
         IsHappy = LiveMemoryReader.Instance.DigimonConditionStats.Happiness >= 0;
         IsDisciplined = LiveMemoryReader.Instance.DigimonConditionStats.Discipline >= 50;
     }
 
-    public void Dispose() => _disposable.Dispose();
+    public void Dispose()
+    {
+        _disposable.Dispose();
+        
+        _memorySyncSubscription?.Dispose();
+    }
 }

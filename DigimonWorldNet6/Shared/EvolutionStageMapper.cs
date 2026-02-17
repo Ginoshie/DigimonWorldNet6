@@ -4,7 +4,7 @@ namespace Shared;
 
 public static class EvolutionStageMapper
 {
-    private static readonly Dictionary<DigimonName, EvolutionStage> EvolutionStageMappings = new()
+    private static readonly Dictionary<DigimonName, EvolutionStage> _evolutionStageMappings = new()
     {
         [DigimonName.Agumon] = EvolutionStage.Rookie,
         [DigimonName.Airdramon] = EvolutionStage.Champion,
@@ -77,7 +77,7 @@ public static class EvolutionStageMapper
 
     public static EvolutionStage Get(DigimonName digimonName)
     {
-        if (EvolutionStageMappings.TryGetValue(digimonName, out EvolutionStage evolutionStage))
+        if (_evolutionStageMappings.TryGetValue(digimonName, out EvolutionStage evolutionStage))
         {
             return evolutionStage;
         }

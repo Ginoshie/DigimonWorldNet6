@@ -3,8 +3,6 @@ using System.Diagnostics;
 using System.Reactive.Disposables;
 using MemoryAccess.Core;
 using MemoryAccess.MemoryValues;
-using Shared.Configuration;
-using Shared.Services;
 using Shared.Services.Events;
 
 namespace MemoryAccess;
@@ -23,7 +21,7 @@ public sealed class LiveMemoryReader : INotifyPropertyChanged, IDisposable
     private LiveMemoryReader()
     {
         _disposables = new CompositeDisposable(
-            UserConfigurationManager.CurrentEmulatorLinkConfig.Subscribe(OnEmulatorLinkConfigurationChanged)
+            EmulatorLinkEventHub.EmulatorProcessNameChangedObservable.Subscribe(OnEmulatorProcessNameChanged)
         );
     }
 
@@ -70,11 +68,16 @@ public sealed class LiveMemoryReader : INotifyPropertyChanged, IDisposable
         _cts = null;
     }
 
-    private void OnEmulatorLinkConfigurationChanged(EmulatorLinkConfig emulatorLinkConfig)
+    private void OnEmulatorProcessNameChanged(string emulatorProcessName)
     {
+        if (_emulatorProcessName == emulatorProcessName)
+        {
+            return;
+        }
+        
         Stop();
 
-        _emulatorProcessName = emulatorLinkConfig.SelectedProcessName;
+        _emulatorProcessName = emulatorProcessName;
 
         Start();
     }

@@ -19,16 +19,16 @@ public static class MusicPlayer
 {
     private const string LEOMON_SONG_TITLE = "19) Leomon";
 
-    private static readonly WasapiOut SoundOut;
-    private static readonly CompositeDisposable CompositeDisposable;
+    private static readonly WasapiOut _soundOut;
+    private static readonly CompositeDisposable _compositeDisposable;
 
-    private static readonly BehaviorSubject<string> CurrentSongTitleSubject = new(string.Empty);
-    private static readonly BehaviorSubject<double> CurrentPositionSubject = new(0);
-    private static readonly BehaviorSubject<double> SongLengthSubject = new(0);
+    private static readonly BehaviorSubject<string> _currentSongTitleSubject = new(string.Empty);
+    private static readonly BehaviorSubject<double> _currentPositionSubject = new(0);
+    private static readonly BehaviorSubject<double> _songLengthSubject = new(0);
 
-    private static readonly IObservable<long> IntervalObservable = Observable.Interval(TimeSpan.FromMilliseconds(100));
+    private static readonly IObservable<long> _intervalObservable = Observable.Interval(TimeSpan.FromMilliseconds(100));
 
-    private static readonly List<string> ActivePlaylist = [];
+    private static readonly List<string> _activePlaylist = [];
 
     private static IDisposable? _currentPositionSubscription;
 
@@ -40,19 +40,19 @@ public static class MusicPlayer
     private static float _volumeBeforeMute;
     private static string? _currentSongTitle;
 
-    public static readonly IObservable<string> CurrentSongTitleObservable = CurrentSongTitleSubject.AsObservable();
-    public static readonly IObservable<double> CurrentPositionObservable = CurrentPositionSubject.AsObservable();
-    public static readonly IObservable<double> SongLengthObservable = SongLengthSubject.AsObservable();
+    public static readonly IObservable<string> CurrentSongTitleObservable = _currentSongTitleSubject.AsObservable();
+    public static readonly IObservable<double> CurrentPositionObservable = _currentPositionSubject.AsObservable();
+    public static readonly IObservable<double> SongLengthObservable = _songLengthSubject.AsObservable();
     private static PlayMode _playMode = PlayMode.Stopped;
 
     static MusicPlayer()
     {
-        SoundOut = new WasapiOut();
+        _soundOut = new WasapiOut();
 
-        CompositeDisposable = new CompositeDisposable(SoundOut,
-            CurrentSongTitleSubject,
-            CurrentPositionSubject,
-            SongLengthSubject,
+        _compositeDisposable = new CompositeDisposable(_soundOut,
+            _currentSongTitleSubject,
+            _currentPositionSubject,
+            _songLengthSubject,
             MusicPlayerEventHub.MusicPlayerClosedObservable.Subscribe(_ => OnMusicPlayerClosed())
         );
 
@@ -62,7 +62,7 @@ public static class MusicPlayer
 
         LoadConfig(UserConfigurationManager.CurrentMusicPlayerConfig.FirstAsync().Wait());
         
-        SoundOut.Stopped += OnPlaybackStopped;
+        _soundOut.Stopped += OnPlaybackStopped;
 
         CurrentSongTitleObservable.Subscribe(OnLeomonsSongStarted);
     }
@@ -75,15 +75,15 @@ public static class MusicPlayer
 
     public static float Volume
     {
-        get => SoundOut.Volume;
+        get => _soundOut.Volume;
         set
         {
-            if (Math.Abs(SoundOut.Volume - value) < 0.001)
+            if (Math.Abs(_soundOut.Volume - value) < 0.001)
             {
                 return;
             }
 
-            SoundOut.Volume = value;
+            _soundOut.Volume = value;
             
             MusicPlayerEventHub.SignalVolumeChanged(value);
 
@@ -104,9 +104,9 @@ public static class MusicPlayer
 
     public static void PreviousSong()
     {
-        int trackIndexIncrease = ShuffleMode == ShuffleMode.Shuffle ? new Random().Next(0, ActivePlaylist.Count) : 1;
+        int trackIndexIncrease = ShuffleMode == ShuffleMode.Shuffle ? new Random().Next(0, _activePlaylist.Count) : 1;
 
-        _currentTrackIndex = (_currentTrackIndex - trackIndexIncrease + ActivePlaylist.Count) % ActivePlaylist.Count;
+        _currentTrackIndex = (_currentTrackIndex - trackIndexIncrease + _activePlaylist.Count) % _activePlaylist.Count;
 
         LoadCurrentTrack();
 
@@ -115,7 +115,7 @@ public static class MusicPlayer
             return;
         }
 
-        SoundOut.Play();
+        _soundOut.Play();
 
         if (_currentSongTitle == LEOMON_SONG_TITLE)
         {
@@ -127,7 +127,7 @@ public static class MusicPlayer
 
     public static void PlayPause()
     {
-        switch (SoundOut.PlaybackState)
+        switch (_soundOut.PlaybackState)
         {
             case PlaybackState.Stopped:
                 StartPlaying();
@@ -147,9 +147,9 @@ public static class MusicPlayer
 
     public static void NextSong()
     {
-        int trackIndexIncrease = ShuffleMode == ShuffleMode.Shuffle ? new Random().Next(0, ActivePlaylist.Count) : 1;
+        int trackIndexIncrease = ShuffleMode == ShuffleMode.Shuffle ? new Random().Next(0, _activePlaylist.Count) : 1;
 
-        _currentTrackIndex = (_currentTrackIndex + trackIndexIncrease) % ActivePlaylist.Count;
+        _currentTrackIndex = (_currentTrackIndex + trackIndexIncrease) % _activePlaylist.Count;
 
         LoadCurrentTrack();
 
@@ -158,7 +158,7 @@ public static class MusicPlayer
             return;
         }
 
-        SoundOut.Play();
+        _soundOut.Play();
 
         if (_currentSongTitle == LEOMON_SONG_TITLE)
         {
@@ -182,7 +182,7 @@ public static class MusicPlayer
             return;
         }
 
-        _volumeBeforeMute = SoundOut.Volume;
+        _volumeBeforeMute = _soundOut.Volume;
 
         Volume = 0;
     }
@@ -230,7 +230,7 @@ public static class MusicPlayer
             throw new Exception("No music files found in the directory.");
         }
 
-        ActivePlaylist.AddRange(fileNames);
+        _activePlaylist.AddRange(fileNames);
     }
 
 
@@ -240,27 +240,27 @@ public static class MusicPlayer
         {
             _currentPositionSubscription.Dispose();
 
-            CompositeDisposable.Remove(_currentPositionSubscription);
+            _compositeDisposable.Remove(_currentPositionSubscription);
         }
 
-        if (SoundOut.PlaybackState != PlaybackState.Stopped)
+        if (_soundOut.PlaybackState != PlaybackState.Stopped)
         {
-            SoundOut.Stop();
+            _soundOut.Stop();
         }
 
         if (_currentWaveSource != null)
         {
-            CompositeDisposable.Remove(_currentWaveSource);
+            _compositeDisposable.Remove(_currentWaveSource);
 
             _currentWaveSource.Dispose();
         }
 
-        if (_currentTrackIndex < 0 || _currentTrackIndex >= ActivePlaylist.Count)
+        if (_currentTrackIndex < 0 || _currentTrackIndex >= _activePlaylist.Count)
         {
             throw new IndexOutOfRangeException($"Current track index {_currentTrackIndex} is out of range.");
         }
 
-        string resourceName = ActivePlaylist[_currentTrackIndex];
+        string resourceName = _activePlaylist[_currentTrackIndex];
 
         string outputDirectory = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Frontend.WPF", "Music");
 
@@ -273,20 +273,20 @@ public static class MusicPlayer
 
         _currentWaveSource = CodecFactory.Instance.GetCodec(filePath);
 
-        SongLengthSubject.OnNext(_currentWaveSource.GetLength().TotalSeconds);
+        _songLengthSubject.OnNext(_currentWaveSource.GetLength().TotalSeconds);
 
-        float currentVolume = SoundOut.Volume;
+        float currentVolume = _soundOut.Volume;
 
-        SoundOut.Initialize(_currentWaveSource);
+        _soundOut.Initialize(_currentWaveSource);
 
         Volume = currentVolume;
 
-        _currentPositionSubscription = IntervalObservable.Subscribe(_ => CurrentPositionSubject.OnNext(_currentWaveSource.GetPosition().TotalSeconds));
+        _currentPositionSubscription = _intervalObservable.Subscribe(_ => _currentPositionSubject.OnNext(_currentWaveSource.GetPosition().TotalSeconds));
 
-        CompositeDisposable.Add(_currentPositionSubscription);
+        _compositeDisposable.Add(_currentPositionSubscription);
 
         _currentSongTitle = Path.GetFileNameWithoutExtension(filePath);
-        CurrentSongTitleSubject.OnNext(_currentSongTitle);
+        _currentSongTitleSubject.OnNext(_currentSongTitle);
     }
 
     private static void LoadConfig(MusicPlayerConfig musicPlayerConfig)
@@ -315,11 +315,11 @@ public static class MusicPlayer
     {
         LoadCurrentTrack();
 
-        SoundOut.Play();
+        _soundOut.Play();
 
-        _currentPositionSubscription = IntervalObservable.Subscribe(_ => CurrentPositionSubject.OnNext(_currentWaveSource.GetPosition().TotalSeconds));
+        _currentPositionSubscription = _intervalObservable.Subscribe(_ => _currentPositionSubject.OnNext(_currentWaveSource.GetPosition().TotalSeconds));
 
-        CompositeDisposable.Add(_currentPositionSubscription);
+        _compositeDisposable.Add(_currentPositionSubscription);
     }
 
     private static void StartPlaying()
@@ -331,30 +331,30 @@ public static class MusicPlayer
 
     private static void Unpause()
     {
-        SoundOut.Resume();
+        _soundOut.Resume();
 
         PlayMode = PlayMode.Playing;
     }
 
     private static void Pause()
     {
-        SoundOut.Pause();
+        _soundOut.Pause();
 
         PlayMode = PlayMode.Paused;
     }
 
     private static void OnPlaybackStopped(object? sender, PlaybackStoppedEventArgs e)
     {
-        if (SoundOut.PlaybackState != PlaybackState.Stopped || PlayMode == PlayMode.Paused)
+        if (_soundOut.PlaybackState != PlaybackState.Stopped || PlayMode == PlayMode.Paused)
         {
             return;
         }
 
         if (RepeatMode == RepeatMode.All)
         {
-            int trackIndexIncrease = ShuffleMode == ShuffleMode.Shuffle ? new Random().Next(0, ActivePlaylist.Count) : 1;
+            int trackIndexIncrease = ShuffleMode == ShuffleMode.Shuffle ? new Random().Next(0, _activePlaylist.Count) : 1;
 
-            _currentTrackIndex = (_currentTrackIndex + trackIndexIncrease) % ActivePlaylist.Count;
+            _currentTrackIndex = (_currentTrackIndex + trackIndexIncrease) % _activePlaylist.Count;
         }
 
         PlayCurrentTrack();
@@ -370,8 +370,8 @@ public static class MusicPlayer
 
     public static void Dispose()
     {
-        SoundOut.Stopped -= OnPlaybackStopped;
+        _soundOut.Stopped -= OnPlaybackStopped;
 
-        CompositeDisposable.Dispose();
+        _compositeDisposable.Dispose();
     }
 }

@@ -1,14 +1,25 @@
 using System;
 using System.Reactive.Disposables;
+using System.Reactive.Disposables.Fluent;
+using System.Reactive.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using DigimonWorld.Frontend.WPF.ViewModelComponents;
+using ReactiveUI;
+using Shared.Enums;
+using Shared.Services;
 using Shared.Services.Events;
 
 namespace DigimonWorld.Frontend.WPF.Windows.Main.UserControls.Panes;
 
-public class HistoricEvolutionsBottomPaneViewModelComponent : BaseViewModel, IDisposable
+public class HistoricEvolutionsBottomPaneViewModelComponent : PaneBaseViewModel, IDisposable
 {
+    private const double PANEL_OPENED_X_OFFSET = -12;
+    private const double PANEL_CLOSED_X_OFFSET = -475;
+    private const double EMULATOR_SYNC_BUTTON_SECTION_OPENED_X_OFFSET = -10;
+    private const double EMULATOR_SYNC_BUTTON_SECTION_CLOSED_X_OFFSET = -63;
+
     private readonly CompositeDisposable _disposable;
 
     public HistoricEvolutionsBottomPaneViewModelComponent()
@@ -24,8 +35,31 @@ public class HistoricEvolutionsBottomPaneViewModelComponent : BaseViewModel, IDi
 
         _disposable = new CompositeDisposable(
             EmulatorLinkEventHub.EmulatorConnectedObservable.Subscribe(_ => OnEmulatorConnected()),
-            EmulatorLinkEventHub.EmulatorDisconnectedObservable.Subscribe(_ => OnEmulatorDisconnected())
+            EmulatorLinkEventHub.EmulatorDisconnectedObservable.Subscribe(_ => OnEmulatorDisconnected()),
+            EmulatorLinkEventHub.EmulatorLinkSyncModeChangedObservable.Subscribe(UpdateEmulatorLinkSyncMode)
         );
+
+        PaneOffset = PaneIsOpen ? PANEL_OPENED_X_OFFSET : PANEL_CLOSED_X_OFFSET;
+
+        this.WhenAnyValue(x => x.PaneIsOpen)
+            .Select(paneIsOpen => paneIsOpen ? PANEL_OPENED_X_OFFSET : PANEL_CLOSED_X_OFFSET)
+            .DistinctUntilChanged()
+            .SelectMany(targetOffset => AnimateOffset(PaneOffset, targetOffset))
+            .ObserveOn(SynchronizationContext.Current!)
+            .Subscribe(v => PaneOffset = v)
+            .DisposeWith(_disposable);
+
+        EmulatorButtonSectionOffset = EmulatorSyncButtonSectionIsOpen ? EMULATOR_SYNC_BUTTON_SECTION_OPENED_X_OFFSET : EMULATOR_SYNC_BUTTON_SECTION_CLOSED_X_OFFSET;
+
+        this.WhenAnyValue(x => x.EmulatorSyncButtonSectionIsOpen)
+            .Select(emulatorSyncButtonSectionIsOpen => emulatorSyncButtonSectionIsOpen ? EMULATOR_SYNC_BUTTON_SECTION_OPENED_X_OFFSET : EMULATOR_SYNC_BUTTON_SECTION_CLOSED_X_OFFSET)
+            .DistinctUntilChanged()
+            .SelectMany(targetOffset => AnimateOffset(EmulatorButtonSectionOffset, targetOffset))
+            .ObserveOn(SynchronizationContext.Current!)
+            .Subscribe(v => EmulatorButtonSectionOffset = v)
+            .DisposeWith(_disposable);
+
+        EmulatorLinkSyncMode = UserConfigurationManager.EmulatorLinkConfig.EmulatorLinkSyncMode;
     }
 
     public ICommand ToggleBottomPaneCommand { get; }
@@ -41,21 +75,42 @@ public class HistoricEvolutionsBottomPaneViewModelComponent : BaseViewModel, IDi
 
     public ICommand SignalSyncAllStagesHistoricEvolutionsCommand { get; }
 
-    public bool BottomPaneIsOpen
+    public bool PaneIsOpen
     {
         get;
         private set
         {
-            if (SetField(ref field, value))
+            if (!SetField(ref field, value))
+            {
+                return;
+            }
+
+            if (value)
             {
                 _ = NotifyEmulatorSyncButtonSectionDelayedAsync();
+            }
+            else
+            {
+                OnPropertyChanged(nameof(EmulatorSyncButtonSectionIsOpen));
             }
         }
     }
 
+    public double PaneOffset
+    {
+        get;
+        private set => SetField(ref field, value);
+    }
+
+    public double EmulatorButtonSectionOffset
+    {
+        get;
+        private set => SetField(ref field, value);
+    }
+
     private async Task NotifyEmulatorSyncButtonSectionDelayedAsync()
     {
-        await Task.Delay(500);
+        await Task.Delay(ANIMATION_DURATION_IN_MS);
         OnPropertyChanged(nameof(EmulatorSyncButtonSectionIsOpen));
     }
 
@@ -71,9 +126,18 @@ public class HistoricEvolutionsBottomPaneViewModelComponent : BaseViewModel, IDi
         }
     }
 
-    public bool EmulatorSyncButtonSectionIsOpen => BottomPaneIsOpen && EmulatorConnected;
+    public EmulatorLinkSyncMode EmulatorLinkSyncMode
+    {
+        get;
+        set
+        {
+            SetField(ref field, value);
+        }
+    } = UserConfigurationManager.EmulatorLinkConfig.EmulatorLinkSyncMode;
 
-    private void ToggleBottomPane() => BottomPaneIsOpen = !BottomPaneIsOpen;
+    public bool EmulatorSyncButtonSectionIsOpen => PaneIsOpen && EmulatorConnected && EmulatorLinkSyncMode == EmulatorLinkSyncMode.Manual;
+
+    private void ToggleBottomPane() => PaneIsOpen = !PaneIsOpen;
 
     private void SignalSyncFreshStageHistoricEvolutions() => HistoricEvolutionEventhub.SignalSyncFreshStageHistoricEvolutions();
 
@@ -87,9 +151,74 @@ public class HistoricEvolutionsBottomPaneViewModelComponent : BaseViewModel, IDi
 
     private void SignalSyncAllStagesHistoricEvolutions() => HistoricEvolutionEventhub.SignalSyncAllStagesHistoricEvolutions();
 
-    private void OnEmulatorConnected() => EmulatorConnected = true;
+    private void OnEmulatorConnected()
+    {
+        EmulatorConnected = true;
 
-    private void OnEmulatorDisconnected() => EmulatorConnected = false;
+        if (EmulatorLinkSyncMode == EmulatorLinkSyncMode.Auto)
+        {
+            StartMemorySync();
+        }
+    }
+
+    private void OnEmulatorDisconnected()
+    {
+        EmulatorConnected = false;
+
+        StopMemorySync();
+    }
+
+    private void UpdateEmulatorLinkSyncMode(EmulatorLinkSyncMode mode)
+    {
+        EmulatorLinkSyncMode = mode;
+        
+        OnPropertyChanged(nameof(EmulatorSyncButtonSectionIsOpen));
+
+        switch (mode)
+        {
+            case EmulatorLinkSyncMode.Auto:
+            {
+                if (EmulatorConnected)
+                {
+                    StartMemorySync();
+                }
+
+                break;
+            }
+            case EmulatorLinkSyncMode.Manual:
+                StopMemorySync();
+                break;
+            default:
+                throw new ArgumentOutOfRangeException();
+        }
+    }
+
+    private readonly SerialDisposable _memorySyncDisposable = new();
+
+    private void StartMemorySync()
+    {
+        _memorySyncDisposable.Disposable = Observable
+            .Interval(TimeSpan.FromSeconds(2))
+            .TakeUntil(EmulatorLinkEventHub.EmulatorDisconnectedObservable)
+            .Subscribe(_ =>
+            {
+                if (!EmulatorConnected) return;
+
+                try
+                {
+                    SignalSyncAllStagesHistoricEvolutions();
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"Error syncing historic evolutions: {ex}");
+                }
+            });
+    }
+
+    private void StopMemorySync()
+    {
+        _memorySyncDisposable.Disposable = null;
+    }
 
     public void Dispose() => _disposable.Dispose();
 }

@@ -4,6 +4,7 @@ using System.Text.Json;
 using Microsoft.VisualBasic.FileIO;
 using Shared.Configuration;
 using Shared.Enums;
+using Shared.Services.Events;
 
 namespace Shared.Services;
 
@@ -14,9 +15,7 @@ public static class UserConfigurationManager
     private static readonly JsonSerializerOptions _jsonSerializerOptions = new() { WriteIndented = true };
 
     private static readonly BehaviorSubject<SpeakingSimulatorConfig> _currentSpeakingSimulatorConfigSubject;
-    private static readonly BehaviorSubject<MusicPlayerConfig> _currentMusicPlayerConfigSubject;
     private static readonly BehaviorSubject<EvolutionCalculatorConfig> _currentEvolutionCalculatorConfigSubject;
-    private static readonly BehaviorSubject<EmulatorLinkConfig> _currentEmulatorLinkConfigSubject;
 
     static UserConfigurationManager()
     {
@@ -30,20 +29,16 @@ public static class UserConfigurationManager
         _currentSpeakingSimulatorConfigSubject = new BehaviorSubject<SpeakingSimulatorConfig>(SpeakingSimulatorConfig);
         CurrentSpeakingSimulatorConfig = _currentSpeakingSimulatorConfigSubject.AsObservable();
 
-        _currentMusicPlayerConfigSubject = new BehaviorSubject<MusicPlayerConfig>(MusicPlayerConfig);
-        CurrentMusicPlayerConfig = _currentMusicPlayerConfigSubject.AsObservable();
+        BehaviorSubject<MusicPlayerConfig> currentMusicPlayerConfigSubject = new(MusicPlayerConfig);
+        CurrentMusicPlayerConfig = currentMusicPlayerConfigSubject.AsObservable();
 
         _currentEvolutionCalculatorConfigSubject = new BehaviorSubject<EvolutionCalculatorConfig>(EvolutionCalculatorConfig);
         CurrentEvolutionCalculatorConfig = _currentEvolutionCalculatorConfigSubject.AsObservable();
-
-        _currentEmulatorLinkConfigSubject = new BehaviorSubject<EmulatorLinkConfig>(EmulatorLinkConfig);
-        CurrentEmulatorLinkConfig = _currentEmulatorLinkConfigSubject.AsObservable();
     }
 
     public static IObservable<SpeakingSimulatorConfig> CurrentSpeakingSimulatorConfig { get; }
     public static IObservable<MusicPlayerConfig> CurrentMusicPlayerConfig { get; }
     public static IObservable<EvolutionCalculatorConfig> CurrentEvolutionCalculatorConfig { get; }
-    public static IObservable<EmulatorLinkConfig> CurrentEmulatorLinkConfig { get; }
 
     public static MusicPlayerConfig MusicPlayerConfig { get; }
 
@@ -85,7 +80,14 @@ public static class UserConfigurationManager
 
         EmulatorLinkConfig.SelectedProcessName = processName;
 
-        _currentEmulatorLinkConfigSubject.OnNext(EmulatorLinkConfig);
+        EmulatorLinkEventHub.SignalEmulatorProcessNameChanged(EmulatorLinkConfig.SelectedProcessName);
+    }
+
+    public static void SetEmulatorLinkSyncMode(EmulatorLinkSyncMode mode)
+    {
+        EmulatorLinkConfig.EmulatorLinkSyncMode = mode;
+
+        EmulatorLinkEventHub.SignalEmulatorLinkSyncModeChanged(EmulatorLinkConfig.EmulatorLinkSyncMode);
     }
 
     public static void SaveConfiguration()
@@ -94,11 +96,6 @@ public static class UserConfigurationManager
         {
             string json = JsonSerializer.Serialize(_userConfiguration, _jsonSerializerOptions);
             File.WriteAllText(_userConfigFullPath, json);
-
-            _currentSpeakingSimulatorConfigSubject.OnNext(SpeakingSimulatorConfig);
-            _currentMusicPlayerConfigSubject.OnNext(MusicPlayerConfig);
-            _currentEvolutionCalculatorConfigSubject.OnNext(EvolutionCalculatorConfig);
-            _currentEmulatorLinkConfigSubject.OnNext(EmulatorLinkConfig);
         }
         catch (Exception ex)
         {

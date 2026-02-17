@@ -9,6 +9,7 @@ using DigimonWorld.Frontend.WPF.Windows.GeneralConfig.UserControls;
 using Shared.Configuration;
 using Shared.Enums;
 using Shared.Services;
+using Shared.Services.Events;
 
 namespace DigimonWorld.Frontend.WPF.Windows.GeneralConfig;
 
@@ -28,10 +29,9 @@ public class GeneralConfigWindowViewModel : BaseViewModel, IDisposable
     public GeneralConfigWindowViewModel(Window window)
     {
         _window = window;
-        EmulatorProcessPickerViewModel = new EmulatorProcessPickerViewModel(_window);
 
         SaveCommand = new CommandHandler(SaveConfiguration);
-        CloseCommand = new CommandHandler(() =>_window.Close());
+        CloseCommand = new CommandHandler(() => _window.Close());
 
         ShowHomeConfigurationSectionCommand = new CommandHandler(() => CurrentSelectedSettingCategoryUserControl = _homeConfigurationSection);
         ShowMusicPlayerConfigurationSectionCommand = new CommandHandler(() => CurrentSelectedSettingCategoryUserControl = _musicPlayerConfigurationSection);
@@ -62,17 +62,17 @@ public class GeneralConfigWindowViewModel : BaseViewModel, IDisposable
         SetEvolutionCalculatorModeVicePanjyamonDisabledCommand = new CommandHandler(() => SetVicePatch(GameVariant.PanjyamonPatch, false));
 
         OpenEmulatorSelectorCommand = new CommandHandler(OpenEmulatorSelector);
+        SetEmulatorSyncModeAutoCommand = new CommandHandler(SetEmulatorSyncModeAuto);
+        SetEmulatorSyncModeManualCommand = new CommandHandler(SetEmulatorSyncModeManual);
 
         _currentSelectedSettingCategoryUserControl = _homeConfigurationSection;
 
         _disposables = new CompositeDisposable(
-            UserConfigurationManager.CurrentEmulatorLinkConfig.Subscribe(_ => OnPropertyChanged(nameof(SelectedEmulatorProcessName)))
+            EmulatorLinkEventHub.EmulatorProcessNameChangedObservable.Subscribe(processName => SelectedEmulatorProcessName = processName)
         );
 
         LoadConfig();
     }
-
-    public EmulatorProcessPickerViewModel EmulatorProcessPickerViewModel { get; }
 
     #region UserControl Selection Properties
 
@@ -170,6 +170,23 @@ public class GeneralConfigWindowViewModel : BaseViewModel, IDisposable
 
     #endregion
 
+    #region Emulator Link Properties
+
+    public bool EmulatorModeIsAuto
+    {
+        get;
+        private set
+        {
+            SetField(ref field, value);
+
+            OnPropertyChanged(nameof(EmulatorModeIsManual));
+        }
+    }
+
+    public bool EmulatorModeIsManual => !EmulatorModeIsAuto;
+
+    #endregion
+
     #region Current UserControl
 
     public UserControl CurrentSelectedSettingCategoryUserControl
@@ -217,6 +234,8 @@ public class GeneralConfigWindowViewModel : BaseViewModel, IDisposable
     public ICommand SetEvolutionCalculatorModeVicePanjyamonEnabledCommand { get; }
     public ICommand SetEvolutionCalculatorModeVicePanjyamonDisabledCommand { get; }
     public ICommand OpenEmulatorSelectorCommand { get; }
+    public ICommand SetEmulatorSyncModeAutoCommand { get; }
+    public ICommand SetEmulatorSyncModeManualCommand { get; }
 
     #endregion
 
@@ -293,10 +312,14 @@ public class GeneralConfigWindowViewModel : BaseViewModel, IDisposable
         ApplyEvolutionCalculatorMode();
     }
 
-    private void ApplyEvolutionCalculatorMode()
+    private void SetEmulatorLinkSyncMode(EmulatorLinkSyncMode mode)
     {
-        UserConfigurationManager.SetEvolutionCalculatorMode(_gameVariant);
+        EmulatorModeIsAuto = mode == EmulatorLinkSyncMode.Auto;
+
+        UserConfigurationManager.SetEmulatorLinkSyncMode(mode);
     }
+
+    private void ApplyEvolutionCalculatorMode() => UserConfigurationManager.SetEvolutionCalculatorMode(_gameVariant);
 
     private void RaiseEvolutionCalculatorProperties()
     {
@@ -318,11 +341,13 @@ public class GeneralConfigWindowViewModel : BaseViewModel, IDisposable
         SetRepeatMode(musicPlayerConfig.RepeatMode);
         SetOnCloseAction(musicPlayerConfig.OnCloseAction);
 
-        SpeakingSimulatorConfig sim = UserConfigurationManager.SpeakingSimulatorConfig;
-        SetNarratorMode(sim.NarratorMode);
+        SetNarratorMode(UserConfigurationManager.SpeakingSimulatorConfig.NarratorMode);
 
         _gameVariant = UserConfigurationManager.EvolutionCalculatorConfig.GameVariant;
         RaiseEvolutionCalculatorProperties();
+
+        SetEmulatorLinkSyncMode(UserConfigurationManager.EmulatorLinkConfig.EmulatorLinkSyncMode);
+        SelectedEmulatorProcessName = UserConfigurationManager.EmulatorLinkConfig.SelectedProcessName;
     }
 
     private void SaveConfiguration()
@@ -333,12 +358,17 @@ public class GeneralConfigWindowViewModel : BaseViewModel, IDisposable
         UserConfigurationManager.SetRepeatModeIsSingle(RepeatModeIsSingle ? RepeatMode.Single : RepeatMode.All);
         UserConfigurationManager.SetOnCloseAction(PauseOnCloseWindow ? MusicPlayerOnCloseAction.Pause : MusicPlayerOnCloseAction.Nothing);
         UserConfigurationManager.SetEvolutionCalculatorMode(_gameVariant);
+        UserConfigurationManager.SetEmulatorLinkSyncMode(EmulatorModeIsAuto ? EmulatorLinkSyncMode.Auto : EmulatorLinkSyncMode.Manual);
         UserConfigurationManager.SaveConfiguration();
     }
 
     #endregion
 
-    public string SelectedEmulatorProcessName => UserConfigurationManager.EmulatorLinkConfig.SelectedProcessName;
+    public string SelectedEmulatorProcessName
+    {
+        get;
+        private set => SetField(ref field, value);
+    } 
 
     private void OpenEmulatorSelector()
     {
@@ -352,6 +382,20 @@ public class GeneralConfigWindowViewModel : BaseViewModel, IDisposable
         dialog.DataContext = vm;
 
         dialog.ShowDialog();
+    }
+
+    private void SetEmulatorSyncModeAuto()
+    {
+        EmulatorModeIsAuto = true;
+
+        UserConfigurationManager.SetEmulatorLinkSyncMode(EmulatorLinkSyncMode.Auto);
+    }
+
+    private void SetEmulatorSyncModeManual()
+    {
+        EmulatorModeIsAuto = false;
+
+        UserConfigurationManager.SetEmulatorLinkSyncMode(EmulatorLinkSyncMode.Manual);
     }
 
     public void Dispose() => _disposables.Dispose();

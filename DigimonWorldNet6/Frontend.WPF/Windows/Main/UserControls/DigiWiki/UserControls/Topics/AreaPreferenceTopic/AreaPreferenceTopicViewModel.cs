@@ -1,9 +1,10 @@
 using System;
 using System.Diagnostics;
+using System.Reactive.Linq;
+using System.Threading;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Threading;
 using DigimonWorld.Frontend.WPF.Constants;
 using DigimonWorld.Frontend.WPF.ViewModelComponents;
 
@@ -19,8 +20,9 @@ public class AreaPreferenceTopicViewModel : TopicViewModelBase
     private const string POSITIVE_DISLIKED_IMAGE_2_PATH = "Media/happiness-bar-positive-disliked-2.jpg";
     private const string POSITIVE_LIKED_IMAGE_1_PATH = "Media/happiness-bar-positive-liked-1.jpg";
     private const string POSITIVE_LIKED_IMAGE_2_PATH = "Media/happiness-bar-positive-liked-2.jpg";
-    
-    private DispatcherTimer? _timer;
+
+    private IDisposable? _swapImagesSubscription;
+
     private bool _showImage1;
     private bool _isRunning;
 
@@ -38,8 +40,6 @@ public class AreaPreferenceTopicViewModel : TopicViewModelBase
 
         SpeakAreaPreferenceHappinessBarCommand = new CommandHandler(() => speakShellmonTextNoDelayAction(ShellmonDigiWikiNarratorText.AreaPreferenceWiki.HappinessBar, SpeakShellmonTextAction));
         OpenGuideAreaPreferenceChapterCommand = new CommandHandler(() => Process.Start(new ProcessStartInfo { FileName = Url.GuideAreaPreferenceChapter, UseShellExecute = true }));
-
-        SetupAnimationTimer();
 
         ToggleAnimationCommand = new CommandHandler(ToggleAnimation);
     }
@@ -106,31 +106,18 @@ public class AreaPreferenceTopicViewModel : TopicViewModelBase
     public string AnimationToolTipText =>
         IsRunning ? "Stop animation" : "Start animation";
 
-    private void SetupAnimationTimer()
-    {
-        IsRunning = false;
-        _showImage1  = false;
-        
-        _timer = new DispatcherTimer
-        {
-            Interval = TimeSpan.FromMilliseconds(500)
-        };
-        _timer.Tick += (_, _) =>
-        {
-            SwapImages();
-        };
-    }
-
     private void ToggleAnimation()
     {
         if (_isRunning)
         {
-            _timer!.Stop();
+            _swapImagesSubscription?.Dispose();
         }
         else
         {
-            SwapImages();
-            _timer!.Start();
+            _swapImagesSubscription = Observable
+                .Interval(TimeSpan.FromMilliseconds(500))
+                .ObserveOn(SynchronizationContext.Current!)
+                .Subscribe(_ => SwapImages());
         }
 
         IsRunning = !IsRunning;
@@ -143,7 +130,7 @@ public class AreaPreferenceTopicViewModel : TopicViewModelBase
                     ? POSITIVE_DISLIKED_IMAGE_1_PATH
                     : POSITIVE_DISLIKED_IMAGE_2_PATH,
                 UriKind.Relative));
-        
+
         NegativeDislikedImageSource = new BitmapImage(
             new Uri(_showImage1
                     ? NEGATIVE_DISLIKED_IMAGE_1_PATH
@@ -159,7 +146,7 @@ public class AreaPreferenceTopicViewModel : TopicViewModelBase
                     ? NEGATIVE_LIKED_IMAGE_1_PATH
                     : NEGATIVE_LIKED_IMAGE_2_PATH,
                 UriKind.Relative));
-            
+
         _showImage1 = !_showImage1;
     }
 }

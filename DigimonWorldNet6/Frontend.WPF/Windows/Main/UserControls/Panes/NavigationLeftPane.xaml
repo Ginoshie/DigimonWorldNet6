@@ -6,7 +6,6 @@
              xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
              xmlns:main="clr-namespace:DigimonWorld.Frontend.WPF.Windows.Main"
              xmlns:navigation="clr-namespace:DigimonWorld.Frontend.WPF.Windows.Main.UserControls.Navigation"
-             xmlns:system="clr-namespace:System;assembly=System.Runtime"
              mc:Ignorable="d"
              d:DataContext="{d:DesignInstance Type=main:MainWindowViewModel, IsDesignTimeCreatable=True}">
 
@@ -16,35 +15,24 @@
             <GridLength x:Key="PanelLabelThickness">45</GridLength>
             <GridLength x:Key="LeftPanelWidth">120</GridLength>
 
-            <system:Double x:Key="LeftPanelYOffset">120</system:Double>
-
             <BitmapImage x:Key="ClosedLeftPaneImage" UriSource="pack://application:,,,/Frontend.WPF;component/Images/ComponentLabels/label-left-no-focus.png" />
             <BitmapImage x:Key="OpenLeftPaneImage" UriSource="pack://application:,,,/Frontend.WPF;component/Images/ComponentLabels/label-left-focus.png" />
 
             <Style x:Key="LeftPaneLabelStyle" TargetType="Image">
                 <Setter Property="Source" Value="{StaticResource ClosedLeftPaneImage}" />
                 <Style.Triggers>
-                    <DataTrigger Binding="{Binding LeftPaneViewModelComponent.LeftPaneIsOpen}" Value="True">
+                    <DataTrigger Binding="{Binding LeftPaneViewModelComponent.PaneIsOpen}" Value="True">
                         <Setter Property="Source" Value="{StaticResource OpenLeftPaneImage}" />
                     </DataTrigger>
                 </Style.Triggers>
             </Style>
-
-            <Storyboard x:Key="OpenLeftPane">
-                <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.X)"
-                                 To="10" Duration="{StaticResource PanelAnimationDuration}" />
-            </Storyboard>
-            <Storyboard x:Key="CloseLeftPane">
-                <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.X)"
-                                 To="{StaticResource LeftPanelYOffset}" Duration="{StaticResource PanelAnimationDuration}" />
-            </Storyboard>
 
         </ResourceDictionary>
     </UserControl.Resources>
 
     <Grid Background="Transparent" VerticalAlignment="Center" SnapsToDevicePixels="True" UseLayoutRounding="True" Panel.ZIndex="0">
         <Grid.RenderTransform>
-            <TranslateTransform X="{StaticResource LeftPanelYOffset}" />
+            <TranslateTransform X="{Binding LeftPaneViewModelComponent.PaneOffset}" />
         </Grid.RenderTransform>
 
         <Grid.ColumnDefinitions>
@@ -89,7 +77,7 @@
                         <Setter Property="FontWeight" Value="Bold" />
                         <Setter Property="Foreground" Value="#D6D6D8" />
                         <Style.Triggers>
-                            <DataTrigger Binding="{Binding LeftPaneViewModelComponent.LeftPaneIsOpen}" Value="True">
+                            <DataTrigger Binding="{Binding LeftPaneViewModelComponent.PaneIsOpen}" Value="True">
                                 <Setter Property="Foreground" Value="Black" />
                             </DataTrigger>
                         </Style.Triggers>
@@ -102,21 +90,6 @@
                 </b:Interaction.Triggers>
             </TextBlock>
         </Grid>
-
-        <Grid.Style>
-            <Style TargetType="Grid">
-                <Style.Triggers>
-                    <DataTrigger Binding="{Binding LeftPaneViewModelComponent.LeftPaneIsOpen}" Value="True">
-                        <DataTrigger.EnterActions>
-                            <BeginStoryboard Storyboard="{StaticResource OpenLeftPane}" />
-                        </DataTrigger.EnterActions>
-                        <DataTrigger.ExitActions>
-                            <BeginStoryboard Storyboard="{StaticResource CloseLeftPane}" />
-                        </DataTrigger.ExitActions>
-                    </DataTrigger>
-                </Style.Triggers>
-            </Style>
-        </Grid.Style>
     </Grid>
 
 </UserControl>

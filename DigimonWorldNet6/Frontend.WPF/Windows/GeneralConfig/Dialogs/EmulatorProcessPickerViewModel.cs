@@ -3,19 +3,21 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
+using System.Reactive.Linq;
+using System.Threading;
 using System.Windows;
 using System.Windows.Input;
-using System.Windows.Threading;
 using DigimonWorld.Frontend.WPF.ViewModelComponents;
 using DigimonWorld.Frontend.WPF.Windows.GeneralConfig.Utility;
 using Shared.Services;
 
 namespace DigimonWorld.Frontend.WPF.Windows.GeneralConfig.Dialogs;
 
-public class EmulatorProcessPickerViewModel : BaseViewModel
+public class EmulatorProcessPickerViewModel : BaseViewModel, IDisposable
 {
     private readonly Window _owner;
-    private DispatcherTimer _timer = null!;
+
+    private readonly IDisposable? _memorySyncSubscription;
 
     public EmulatorProcessPickerViewModel(Window owner)
     {
@@ -23,22 +25,14 @@ public class EmulatorProcessPickerViewModel : BaseViewModel
 
         LoadProcesses();
 
-        SetupRefreshProcessList();
+        _memorySyncSubscription = Observable
+            .Interval(TimeSpan.FromSeconds(1))
+            .ObserveOn(SynchronizationContext.Current!)
+            .Subscribe(_ => LoadProcesses());
 
         AttachEmulatorProcessCommand = new CommandHandler(AttachEmulatorProcess);
 
         CancelCommand = new CommandHandler(Cancel);
-    }
-
-    private void SetupRefreshProcessList()
-    {
-        _timer = new DispatcherTimer
-        {
-            Interval = TimeSpan.FromSeconds(1)
-        };
-
-        _timer.Tick += (_, _) => LoadProcesses();
-        _timer.Start();
     }
 
     public ObservableCollection<ProcessItemViewModel> Processes { get; } = [];
@@ -76,7 +70,7 @@ public class EmulatorProcessPickerViewModel : BaseViewModel
 
     private void AttachEmulatorProcess()
     {
-        _timer.Stop();
+        _memorySyncSubscription?.Dispose();
 
         if (SelectedProcess == null)
         {
@@ -88,5 +82,12 @@ public class EmulatorProcessPickerViewModel : BaseViewModel
         _owner.DialogResult = true;
     }
 
-    private void Cancel() => _owner.DialogResult = false;
+    private void Cancel()
+    {
+        _memorySyncSubscription?.Dispose();
+
+        _owner.DialogResult = false;
+    }
+
+    public void Dispose() => _memorySyncSubscription?.Dispose();
 }
