@@ -2,23 +2,12 @@ using MemoryAccess.Core;
 
 namespace MemoryAccess.MemoryValues;
 
-public sealed class DigimonConditionStats
+public sealed class DigimonConditionStats(ProcessMemory mem, PsxRam ram)
 {
-    private readonly ProcessMemory _mem;
-    private readonly PsxRam _ram;
+    private DigimonConditionStats() : this(ProcessMemory.Empty, PsxRam.Empty)
+    {
+    }
 
-    private DigimonConditionStats()
-    {
-        _mem = ProcessMemory.Empty;
-        _ram = PsxRam.Empty;
-    }
-    
-    public DigimonConditionStats(ProcessMemory mem, PsxRam ram)
-    {
-        _mem = mem;
-        _ram = ram;
-    }
-    
     public static DigimonConditionStats Empty { get; } = new();
 
     public bool Sleepy => (Flags & 1) != 0;
@@ -29,15 +18,15 @@ public sealed class DigimonConditionStats
     public bool Injured => (Flags & 32) != 0;
     public bool Sick => (Flags & 64) != 0;
 
-    public short Tiredness => _mem.ReadInt16(_ram.A(0x00138482));
+    public short Tiredness => mem.ReadInt16(ram.A(0x00138482));
 
-    public short Happiness => _mem.ReadInt16(_ram.A(0x0013848A));
+    public short Happiness => mem.ReadInt16(ram.A(0x0013848A));
 
-    public short Discipline => _mem.ReadInt16(_ram.A(0x00138488));
+    public short Discipline => mem.ReadInt16(ram.A(0x00138488));
     
-    public short CareMistakes => _mem.ReadInt16(_ram.A(0x001384B2));
+    public short CareMistakes => mem.ReadInt16(ram.A(0x001384B2));
     
-    public short Battles => _mem.ReadInt16(_ram.A(0x001384B4));
+    public short Battles => mem.ReadInt16(ram.A(0x001384B4));
 
-    private byte Flags => _mem.ReadByte(_ram.A(0x00138460));
+    private byte Flags => mem.ReadByte(ram.A(0x00138460));
 }

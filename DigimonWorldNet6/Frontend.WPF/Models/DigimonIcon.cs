@@ -2,14 +2,8 @@ using Shared.Enums;
 
 namespace DigimonWorld.Frontend.WPF.Models;
 
-public readonly struct DigimonIcon
+public readonly struct DigimonIcon(DigimonName digimonName, string iconPath)
 {
-    public DigimonName DigimonName { get; }
-    public string IconPath { get; }
-
-    public DigimonIcon(DigimonName digimonName, string iconPath)
-    {
-        DigimonName = digimonName;
-        IconPath = iconPath;
-    }
+    public DigimonName DigimonName { get; } = digimonName;
+    public string IconPath { get; } = iconPath;
 }

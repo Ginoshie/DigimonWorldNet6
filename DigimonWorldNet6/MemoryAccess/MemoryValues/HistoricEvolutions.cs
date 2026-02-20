@@ -3,7 +3,7 @@ using Shared.Enums;
 
 namespace MemoryAccess.MemoryValues;
 
-public class HistoricEvolutions
+public class HistoricEvolutions(ProcessMemory mem, PsxRam ram)
 {
     private const int ADDR_225 = 0x001BE00D;
     private const int ADDR_226 = 0x001BE00E;
@@ -15,19 +15,8 @@ public class HistoricEvolutions
     private const int ADDR_232 = 0x001BE014;
     private const int ADDR_233 = 0x001BE015;
 
-    private readonly ProcessMemory _mem;
-    private readonly PsxRam _ram;
-
-    private HistoricEvolutions()
+    private HistoricEvolutions() : this(ProcessMemory.Empty, PsxRam.Empty)
     {
-        _mem = ProcessMemory.Empty;
-        _ram = PsxRam.Empty;
-    }
-
-    public HistoricEvolutions(ProcessMemory mem, PsxRam ram)
-    {
-        _mem = mem;
-        _ram = ram;
     }
 
     public static HistoricEvolutions Empty { get; } = new();
@@ -193,7 +182,7 @@ public class HistoricEvolutions
 
     private bool HasBit(int address, int bit)
     {
-        byte value = _mem.ReadByte(_ram.A(address));
+        byte value = mem.ReadByte(ram.A(address));
         return (value & (1 << bit)) != 0;
     }
 }

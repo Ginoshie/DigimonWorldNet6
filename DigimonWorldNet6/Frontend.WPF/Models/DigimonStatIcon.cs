@@ -2,14 +2,8 @@ using Shared.Enums;
 
 namespace DigimonWorld.Frontend.WPF.Models;
 
-public class DigimonStatIcon
+public class DigimonStatIcon(DigimonStatName digimonStatName, string iconPath)
 {
-    public DigimonStatName DigimonStatName { get; }
-    public string IconPath { get; }
-
-    public DigimonStatIcon(DigimonStatName digimonStatName, string iconPath)
-    {
-        DigimonStatName = digimonStatName;
-        IconPath = iconPath;
-    }
+    public DigimonStatName DigimonStatName { get; } = digimonStatName;
+    public string IconPath { get; } = iconPath;
 }

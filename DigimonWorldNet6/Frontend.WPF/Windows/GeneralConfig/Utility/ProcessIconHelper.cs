@@ -6,7 +6,7 @@ using System.Windows.Media.Imaging;
 
 namespace DigimonWorld.Frontend.WPF.Windows.GeneralConfig.Utility;
 
-public class ProcessIconHelper
+public abstract class ProcessIconHelper
 {
     public static ImageSource? GetIcon(Process process)
     {

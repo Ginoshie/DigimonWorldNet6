@@ -2,26 +2,15 @@ using MemoryAccess.Core;
 
 namespace MemoryAccess.MemoryValues;
 
-public class DigimonProfileStats
+public class DigimonProfileStats(ProcessMemory mem, PsxRam ram)
 {
-    private readonly ProcessMemory _mem;
-    private readonly PsxRam _ram;
-
-    private DigimonProfileStats()
+    private DigimonProfileStats() : this(ProcessMemory.Empty, PsxRam.Empty)
     {
-        _mem = ProcessMemory.Empty;
-        _ram = PsxRam.Empty;
-    }
-
-    public DigimonProfileStats(ProcessMemory mem, PsxRam ram)
-    {
-        _mem = mem;
-        _ram = ram;
     }
 
     public static DigimonProfileStats Empty { get; } = new();
 
-    public byte DigimonType => _mem.ReadByte(_ram.A(0x001557A8));
+    public byte DigimonType => mem.ReadByte(ram.A(0x001557A8));
 
-    public short Weight => _mem.ReadInt16(_ram.A(0x001384A2));
+    public short Weight => mem.ReadInt16(ram.A(0x001384A2));
 }

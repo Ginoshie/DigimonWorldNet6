@@ -3,7 +3,7 @@ using MemoryAccess.Core;
 
 namespace MemoryAccess.MemoryValues;
 
-public sealed class DigimonTechniqueStats
+public sealed class DigimonTechniqueStats(ProcessMemory mem, PsxRam ram)
 {
     // ===== Technique flag addresses =====
     private const int FIRE_ADDR   = 0x00155800;
@@ -12,20 +12,9 @@ public sealed class DigimonTechniqueStats
     private const int MECH_ADDR   = 0x00155803;
     private const int EARTH_ADDR  = 0x00155804;
     private const int BATTLE_ADDR = 0x00155805;
-    
-    private readonly ProcessMemory _mem;
-    private readonly PsxRam _ram;
 
-    private DigimonTechniqueStats()
+    private DigimonTechniqueStats() : this(ProcessMemory.Empty, PsxRam.Empty)
     {
-        _mem = ProcessMemory.Empty;
-        _ram = PsxRam.Empty;
-    }
-
-    public DigimonTechniqueStats(ProcessMemory mem, PsxRam ram)
-    {
-        _mem = mem;
-        _ram = ram;
     }
 
     public static DigimonTechniqueStats Empty { get; } = new();
@@ -102,12 +91,12 @@ public sealed class DigimonTechniqueStats
     
     private int CountBits(int address)
     {
-        return BitOperations.PopCount(_mem.ReadByte(_ram.A(address)));
+        return BitOperations.PopCount(mem.ReadByte(ram.A(address)));
     }
 
     private bool HasBit(int address, int bit)
     {
-        byte value = _mem.ReadByte(_ram.A(address));
+        byte value = mem.ReadByte(ram.A(address));
         return (value & (1 << bit)) != 0;
     }
 }

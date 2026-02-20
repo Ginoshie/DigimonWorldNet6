@@ -5,12 +5,12 @@ namespace DigimonWorld.Frontend.WPF.ViewModelComponents;
 
 public class PaneBaseViewModel : BaseViewModel
 {
-    public const int ANIMATION_DURATION_IN_MS = 600;
+    public const int AnimationDurationInMs = 600;
     
     protected IObservable<double> AnimateOffset(double start, double target)
     {
         const int fps = 60;
-        const int steps = ANIMATION_DURATION_IN_MS * fps / 1000;
+        const int steps = AnimationDurationInMs * fps / 1000;
 
         return Observable
             .Interval(TimeSpan.FromMilliseconds(1000.0 / fps))

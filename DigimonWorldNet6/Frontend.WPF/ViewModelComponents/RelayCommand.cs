@@ -3,14 +3,9 @@ using System.Windows.Input;
 
 namespace DigimonWorld.Frontend.WPF.ViewModelComponents;
 
-public class RelayCommand<T> : ICommand
+public class RelayCommand<T>(Action<T> execute) : ICommand
 {
-    private readonly Action<T> _execute;
-
-    public RelayCommand(Action<T> execute)
-    {
-        _execute = execute ?? throw new ArgumentNullException(nameof(execute));
-    }
+    private readonly Action<T> _execute = execute ?? throw new ArgumentNullException(nameof(execute));
 
     public bool CanExecute(object? parameter) => true;
 

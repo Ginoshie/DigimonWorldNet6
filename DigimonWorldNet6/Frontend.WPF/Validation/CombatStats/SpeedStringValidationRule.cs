@@ -1,6 +1,4 @@
-﻿
-
-using DigimonWorld.Frontend.WPF.Validation.Bases;
+﻿using DigimonWorld.Frontend.WPF.Validation.Bases;
 
 namespace DigimonWorld.Frontend.WPF.Validation.CombatStats;
 

@@ -1,14 +1,8 @@
 namespace DigimonWorld.Evolution.Calculator.Core.DataObjects.EvolutionCriteria;
 
-public sealed class MainCriteriaCareMistakes
+public sealed class MainCriteriaCareMistakes(int careMistakes = -1, bool isCareMistakesCriteriaMaximum = false)
 {
-    public MainCriteriaCareMistakes(int careMistakes = -1, bool isCareMistakesCriteriaMaximum = false)
-    {
-        CareMistakes = careMistakes;
-        IsCareMistakesCriteriaAMaximum = isCareMistakesCriteriaMaximum;
-    }
+    public bool IsCareMistakesCriteriaAMaximum { get; } = isCareMistakesCriteriaMaximum;
 
-    public bool IsCareMistakesCriteriaAMaximum { get; }
-
-    public int CareMistakes { get; }
+    public int CareMistakes { get; } = careMistakes;
 }

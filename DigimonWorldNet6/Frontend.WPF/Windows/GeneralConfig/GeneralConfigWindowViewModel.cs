@@ -368,7 +368,7 @@ public class GeneralConfigWindowViewModel : BaseViewModel, IDisposable
     {
         get;
         private set => SetField(ref field, value);
-    } 
+    } = null!;
 
     private void OpenEmulatorSelector()
     {
