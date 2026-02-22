@@ -6,6 +6,7 @@ Modification, redistribution, or reuse of this code
 in other projects is strictly prohibited.
 */
 
+using System.Text;
 using System.Windows;
 using DigimonWorld.Evolution.Calculator.Core.Modules;
 using DigimonWorld.Frontend.WPF.Windows.Main;
@@ -42,6 +43,8 @@ public partial class App
         base.OnStartup(e);
 
         LiveMemoryReader.Instance.Start();
+        
+        Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
     }
 
     protected override async void OnExit(ExitEventArgs e)

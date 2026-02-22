@@ -4,6 +4,7 @@ using System.Globalization;
 using System.Windows.Data;
 using DigimonWorld.Frontend.WPF.Models;
 using Shared.Enums;
+using Type = System.Type;
 
 namespace DigimonWorld.Frontend.WPF.Conversion;
 

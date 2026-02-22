@@ -34,8 +34,7 @@ public class HistoricEvolutionsBottomPaneViewModelComponent : PaneBaseViewModel,
         SignalSyncAllStagesHistoricEvolutionsCommand = new CommandHandler(SignalSyncAllStagesHistoricEvolutions);
 
         _disposable = new CompositeDisposable(
-            EmulatorLinkEventHub.EmulatorConnectedObservable.Subscribe(_ => OnEmulatorConnected()),
-            EmulatorLinkEventHub.EmulatorDisconnectedObservable.Subscribe(_ => OnEmulatorDisconnected()),
+            EmulatorLinkEventHub.EmulatorConnectedObservable.Subscribe(OnEmulatorConnectedChanged),
             EmulatorLinkEventHub.EmulatorLinkSyncModeChangedObservable.Subscribe(UpdateEmulatorLinkSyncMode)
         );
 
@@ -129,10 +128,7 @@ public class HistoricEvolutionsBottomPaneViewModelComponent : PaneBaseViewModel,
     public EmulatorLinkSyncMode EmulatorLinkSyncMode
     {
         get;
-        set
-        {
-            SetField(ref field, value);
-        }
+        set { SetField(ref field, value); }
     } = UserConfigurationManager.EmulatorLinkConfig.EmulatorLinkSyncMode;
 
     public bool EmulatorSyncButtonSectionIsOpen => PaneIsOpen && EmulatorConnected && EmulatorLinkSyncMode == EmulatorLinkSyncMode.Manual;
@@ -151,27 +147,30 @@ public class HistoricEvolutionsBottomPaneViewModelComponent : PaneBaseViewModel,
 
     private void SignalSyncAllStagesHistoricEvolutions() => HistoricEvolutionEventhub.SignalSyncAllStagesHistoricEvolutions();
 
-    private void OnEmulatorConnected()
+    private void OnEmulatorConnectedChanged(bool isConnected)
     {
-        EmulatorConnected = true;
-
-        if (EmulatorLinkSyncMode == EmulatorLinkSyncMode.Auto)
+        if (isConnected)
         {
-            StartMemorySync();
+            EmulatorConnected = true;
+
+            if (EmulatorLinkSyncMode == EmulatorLinkSyncMode.Auto)
+            {
+                StartMemorySync();
+            }
         }
-    }
+        else
 
-    private void OnEmulatorDisconnected()
-    {
-        EmulatorConnected = false;
+        {
+            EmulatorConnected = false;
 
-        StopMemorySync();
+            StopMemorySync();
+        }
     }
 
     private void UpdateEmulatorLinkSyncMode(EmulatorLinkSyncMode mode)
     {
         EmulatorLinkSyncMode = mode;
-        
+
         OnPropertyChanged(nameof(EmulatorSyncButtonSectionIsOpen));
 
         switch (mode)
@@ -199,7 +198,7 @@ public class HistoricEvolutionsBottomPaneViewModelComponent : PaneBaseViewModel,
     {
         _memorySyncDisposable.Disposable = Observable
             .Interval(TimeSpan.FromSeconds(2))
-            .TakeUntil(EmulatorLinkEventHub.EmulatorDisconnectedObservable)
+            .TakeUntil(_ => !EmulatorConnected)
             .Subscribe(_ =>
             {
                 if (!EmulatorConnected) return;
@@ -215,10 +214,7 @@ public class HistoricEvolutionsBottomPaneViewModelComponent : PaneBaseViewModel,
             });
     }
 
-    private void StopMemorySync()
-    {
-        _memorySyncDisposable.Disposable = null;
-    }
+    private void StopMemorySync() => _memorySyncDisposable.Disposable = null;
 
     public void Dispose() => _disposable.Dispose();
 }

@@ -177,9 +177,9 @@
                                     <ToolTip Style="{StaticResource DefaultToolTipRightStyle}"
                                              Content="Sync ultimate stage  historic evolutions" />
                                 </Button.ToolTip>
-                                <Image Source="/Frontend.WPF;component/Images/Icons/Type/virus-type.jpg"
+                                <Image Source="/Frontend.WPF;component/Images/Icons/Type/virus-type-icon-button-centered.jpg"
                                        Stretch="Uniform"
-                                       Margin="2" />
+                                       Margin="1"/>
                             </Button>
                             <Button Grid.Column="5"
                                     Width="{StaticResource EmulatorSyncButtonDimension}"

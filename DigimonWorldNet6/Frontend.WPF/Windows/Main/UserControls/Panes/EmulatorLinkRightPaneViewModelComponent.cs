@@ -28,8 +28,7 @@ public class EmulatorLinkRightPaneViewModelComponent : PaneBaseViewModel, IDispo
         EmulatorLinkSyncModeIsManual = UserConfigurationManager.EmulatorLinkConfig.EmulatorLinkSyncMode == EmulatorLinkSyncMode.Manual;
 
         _disposable = new CompositeDisposable(
-            EmulatorLinkEventHub.EmulatorConnectedObservable.Subscribe(_ => OnEmulatorConnected()),
-            EmulatorLinkEventHub.EmulatorDisconnectedObservable.Subscribe(_ => OnEmulatorDisconnected()),
+            EmulatorLinkEventHub.EmulatorConnectedObservable.Subscribe(OnEmulatorConnectedChanged),
             EmulatorLinkEventHub.EmulatorLinkSyncModeChangedObservable.Subscribe(OnEmulatorSyncModeChanged)
         );
 
@@ -128,9 +127,7 @@ public class EmulatorLinkRightPaneViewModelComponent : PaneBaseViewModel, IDispo
 
     private void ToggleRightPane() => PaneIsOpen = !PaneIsOpen;
 
-    private void OnEmulatorConnected() => EmulatorConnected = true;
-
-    private void OnEmulatorDisconnected() => EmulatorConnected = false;
+    private void OnEmulatorConnectedChanged(bool isConnected) => EmulatorConnected = isConnected;
 
     private void OnEmulatorSyncModeChanged(EmulatorLinkSyncMode mode) => EmulatorLinkSyncModeIsManual = mode == EmulatorLinkSyncMode.Manual;
 

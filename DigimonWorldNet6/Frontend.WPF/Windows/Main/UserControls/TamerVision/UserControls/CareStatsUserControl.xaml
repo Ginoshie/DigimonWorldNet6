@@ -1,0 +1,424 @@
+<UserControl x:Class="DigimonWorld.Frontend.WPF.Windows.Main.UserControls.TamerVision.UserControls.CareStatsUserControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:tamerVision="clr-namespace:DigimonWorld.Frontend.WPF.Windows.Main.UserControls.TamerVision" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:system="clr-namespace:System;assembly=System.Runtime"
+             mc:Ignorable="d"
+             d:DataContext="{d:DesignInstance tamerVision:TamerVisionViewModel}">
+
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/ResourceDictionaries/Styles/DefaultTextboxStyle.xaml" />
+                <ResourceDictionary Source="/ResourceDictionaries/Styles/DefaultComboboxStyle.xaml" />
+                <ResourceDictionary Source="/ResourceDictionaries/Styles/DefaultFocusStyle.xaml" />
+                <ResourceDictionary Source="/ResourceDictionaries/Styles/Labels/DefaultSheenLabelStyle.xaml" />
+                <ResourceDictionary Source="/ResourceDictionaries/Styles/Labels/DefaultLabelStyle.xaml" />
+                <ResourceDictionary Source="/ResourceDictionaries/Styles/ToolTips/DefaultTooltipRightStyle.xaml" />
+                <ResourceDictionary Source="/ResourceDictionaries/Styles/ToolTips/DefaultTooltipLeftStyle.xaml" />
+                <ResourceDictionary Source="/ResourceDictionaries/Styles/Buttons/DefaultButtonStyle.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+
+            <system:Double x:Key="DefaultTextBoxWidth">45</system:Double>
+
+            <GridLength x:Key="LabelTextboxSpacing">5</GridLength>
+
+            <Thickness x:Key="RowMargin">0, 1</Thickness>
+        </ResourceDictionary>
+    </UserControl.Resources>
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="Auto" />
+        </Grid.ColumnDefinitions>
+        <Grid Grid.Row="0" Grid.Column="0" Grid.IsSharedSizeScope="True" Margin="0, 0, 5, 0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="1" Grid.Column="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" SharedSizeGroup="CareStatsLabelColumn" />
+                    <ColumnDefinition Width="{StaticResource LabelTextboxSpacing}" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <Label Grid.Column="0" Grid.Row="0" Style="{StaticResource DefaultLabelStyle}" Content="Happiness:">
+                    <Label.ToolTip>
+                        <ToolTip Style="{StaticResource DefaultToolTipLeftStyle}">
+                            <TextBlock Text="The happiness of your digimon." />
+                        </ToolTip>
+                    </Label.ToolTip>
+                </Label>
+                <TextBox Grid.Column="2"
+                         Name="Happiness"
+                         HorizontalContentAlignment="Center"
+                         Style="{StaticResource DefaultTextBoxStyle}"
+                         Width="{StaticResource DefaultTextBoxWidth}"
+                         Margin="{StaticResource RowMargin}"
+                         Text="{Binding Happiness}">
+                    <TextBox.ToolTip>
+                        <ToolTip Style="{StaticResource DefaultToolTipRightStyle}">
+                            <TextBlock Text="The happiness of your digimon." />
+                        </ToolTip>
+                    </TextBox.ToolTip>
+                </TextBox>
+            </Grid>
+            <Grid Grid.Row="2" Grid.Column="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" SharedSizeGroup="CareStatsLabelColumn" />
+                    <ColumnDefinition Width="{StaticResource LabelTextboxSpacing}" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <Label Grid.Column="0" Grid.Row="0" Style="{StaticResource DefaultLabelStyle}" Content="Discipline:">
+                    <Label.ToolTip>
+                        <ToolTip Style="{StaticResource DefaultToolTipLeftStyle}">
+                            <TextBlock Text="The discipline of your digimon." />
+                        </ToolTip>
+                    </Label.ToolTip>
+                </Label>
+                <TextBox Grid.Column="2"
+                         Name="Discipline"
+                         HorizontalContentAlignment="Center"
+                         Style="{StaticResource DefaultTextBoxStyle}"
+                         Width="{StaticResource DefaultTextBoxWidth}"
+                         Margin="{StaticResource RowMargin}"
+                         Text="{Binding Discipline}">
+                    <TextBox.ToolTip>
+                        <ToolTip Style="{StaticResource DefaultToolTipRightStyle}">
+                            <TextBlock Text="The discipline of your digimon." />
+                        </ToolTip>
+                    </TextBox.ToolTip>
+                </TextBox>
+            </Grid>
+            <Grid Grid.Row="4" Grid.Column="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" SharedSizeGroup="CareStatsLabelColumn" />
+                    <ColumnDefinition Width="{StaticResource LabelTextboxSpacing}" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <Label Grid.Column="0" Grid.Row="0" Style="{StaticResource DefaultLabelStyle}" Content="Weight:">
+                    <Label.ToolTip>
+                        <ToolTip Style="{StaticResource DefaultToolTipLeftStyle}">
+                            <TextBlock Text="The weight of your digimon." />
+                        </ToolTip>
+                    </Label.ToolTip>
+                </Label>
+                <TextBox Grid.Column="2"
+                         Name="Weight"
+                         HorizontalContentAlignment="Center"
+                         Style="{StaticResource DefaultTextBoxStyle}"
+                         Width="{StaticResource DefaultTextBoxWidth}"
+                         Margin="{StaticResource RowMargin}"
+                         Text="{Binding Weight}">
+                    <TextBox.ToolTip>
+                        <ToolTip Style="{StaticResource DefaultToolTipRightStyle}">
+                            <TextBlock Text="The weight of your Digimon." />
+                        </ToolTip>
+                    </TextBox.ToolTip>
+                </TextBox>
+            </Grid>
+            <Grid Grid.Row="5" Grid.Column="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" SharedSizeGroup="CareStatsLabelColumn" />
+                    <ColumnDefinition Width="{StaticResource LabelTextboxSpacing}" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <Label Grid.Column="0" Grid.Row="0" Style="{StaticResource DefaultLabelStyle}" Content="Care mistakes:">
+                    <Label.ToolTip>
+                        <ToolTip Style="{StaticResource DefaultToolTipLeftStyle}">
+                            <TextBlock Text="The care mistakes for your digimon." />
+                        </ToolTip>
+                    </Label.ToolTip>
+                </Label>
+                <TextBox Grid.Column="2"
+                         Name="CareMistakes"
+                         HorizontalContentAlignment="Center"
+                         Style="{StaticResource DefaultTextBoxStyle}"
+                         Width="{StaticResource DefaultTextBoxWidth}"
+                         Margin="{StaticResource RowMargin}"
+                         Text="{Binding CareMistakes}">
+                    <TextBox.ToolTip>
+                        <ToolTip Style="{StaticResource DefaultToolTipRightStyle}">
+                            <TextBlock Text="The care mistakes for your Digimon." />
+                        </ToolTip>
+                    </TextBox.ToolTip>
+                </TextBox>
+            </Grid>
+            <Grid Grid.Row="6" Grid.Column="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" SharedSizeGroup="CareStatsLabelColumn" />
+                    <ColumnDefinition Width="{StaticResource LabelTextboxSpacing}" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <Label Grid.Column="0" Grid.Row="0" Style="{StaticResource DefaultLabelStyle}" Content="Battles:">
+                    <Label.ToolTip>
+                        <ToolTip Style="{StaticResource DefaultToolTipLeftStyle}">
+                            <TextBlock Text="The battle count of your digimon." />
+                        </ToolTip>
+                    </Label.ToolTip>
+                </Label>
+                <TextBox Grid.Column="2"
+                         Name="Battles"
+                         HorizontalContentAlignment="Center"
+                         Style="{StaticResource DefaultTextBoxStyle}"
+                         Width="{StaticResource DefaultTextBoxWidth}"
+                         Margin="{StaticResource RowMargin}"
+                         Text="{Binding Battles}">
+                    <TextBox.ToolTip>
+                        <ToolTip Style="{StaticResource DefaultToolTipRightStyle}">
+                            <TextBlock Text="The battle count of your digimon." />
+                        </ToolTip>
+                    </TextBox.ToolTip>
+                </TextBox>
+            </Grid>
+            <Grid Grid.Row="3" Grid.Column="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" SharedSizeGroup="CareStatsLabelColumn" />
+                    <ColumnDefinition Width="{StaticResource LabelTextboxSpacing}" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <Label Grid.Column="0" Grid.Row="0" Style="{StaticResource DefaultLabelStyle}" Content="Tech count:">
+                    <Label.ToolTip>
+                        <ToolTip Style="{StaticResource DefaultToolTipLeftStyle}">
+                            <TextBlock Text="The number of techniques you have learned, this is not the number of techniques your current digimon can use." />
+                        </ToolTip>
+                    </Label.ToolTip>
+                </Label>
+                <TextBox Grid.Column="2"
+                         Name="TechniqueCount"
+                         HorizontalContentAlignment="Center"
+                         Style="{StaticResource DefaultTextBoxStyle}"
+                         Width="{StaticResource DefaultTextBoxWidth}"
+                         Margin="{StaticResource RowMargin}"
+                         Text="{Binding TechniqueCount}">
+                    <TextBox.ToolTip>
+                        <ToolTip Style="{StaticResource DefaultToolTipRightStyle}">
+                            <TextBlock Text="The number of techniques you have learned, this is not the number of techniques your current digimon can use." />
+                        </ToolTip>
+                    </TextBox.ToolTip>
+                </TextBox>
+            </Grid>
+        </Grid>
+        <Grid Grid.Row="0" Grid.Column="1" Grid.IsSharedSizeScope="True"
+              Margin="5,0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0" Grid.Column="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" SharedSizeGroup="CareStatsLabelColumn" />
+                    <ColumnDefinition Width="{StaticResource LabelTextboxSpacing}" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <Label Grid.Column="0" Grid.Row="0" Style="{StaticResource DefaultLabelStyle}" Content="Poop level:">
+                    <Label.ToolTip>
+                        <ToolTip Style="{StaticResource DefaultToolTipLeftStyle}">
+                            <TextBlock Text="The happiness of your digimon." />
+                        </ToolTip>
+                    </Label.ToolTip>
+                </Label>
+                <TextBox Grid.Column="2"
+                         Name="PoopLevel"
+                         HorizontalContentAlignment="Center"
+                         Style="{StaticResource DefaultTextBoxStyle}"
+                         Width="{StaticResource DefaultTextBoxWidth}"
+                         Margin="{StaticResource RowMargin}"
+                         Text="{Binding PoopLevel}">
+                    <TextBox.ToolTip>
+                        <ToolTip Style="{StaticResource DefaultToolTipRightStyle}">
+                            <TextBlock Text="The happiness of your digimon." />
+                        </ToolTip>
+                    </TextBox.ToolTip>
+                </TextBox>
+            </Grid>
+            <Grid Grid.Row="1" Grid.Column="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" SharedSizeGroup="CareStatsLabelColumn" />
+                    <ColumnDefinition Width="{StaticResource LabelTextboxSpacing}" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <Label Grid.Column="0" Grid.Row="0" Style="{StaticResource DefaultLabelStyle}" Content="Pooping timer:">
+                    <Label.ToolTip>
+                        <ToolTip Style="{StaticResource DefaultToolTipLeftStyle}">
+                            <TextBlock Text="The discipline of your digimon." />
+                        </ToolTip>
+                    </Label.ToolTip>
+                </Label>
+                <TextBox Grid.Column="2"
+                         Name="PoopingTimer"
+                         HorizontalContentAlignment="Center"
+                         Style="{StaticResource DefaultTextBoxStyle}"
+                         Width="{StaticResource DefaultTextBoxWidth}"
+                         Margin="{StaticResource RowMargin}"
+                         Text="{Binding PoopingTimer}">
+                    <TextBox.ToolTip>
+                        <ToolTip Style="{StaticResource DefaultToolTipRightStyle}">
+                            <TextBlock Text="The discipline of your digimon." />
+                        </ToolTip>
+                    </TextBox.ToolTip>
+                </TextBox>
+            </Grid>
+            <Grid Grid.Row="2" Grid.Column="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" SharedSizeGroup="CareStatsLabelColumn" />
+                    <ColumnDefinition Width="{StaticResource LabelTextboxSpacing}" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <Label Grid.Column="0" Grid.Row="0" Style="{StaticResource DefaultLabelStyle}" Content="Tiredness:">
+                    <Label.ToolTip>
+                        <ToolTip Style="{StaticResource DefaultToolTipLeftStyle}">
+                            <TextBlock Text="The virus count, when this reaches 16 your digimon will evolve into Sukamon." />
+                        </ToolTip>
+                    </Label.ToolTip>
+                </Label>
+                <TextBox Grid.Column="2"
+                         Name="Tiredness"
+                         HorizontalContentAlignment="Center"
+                         Style="{StaticResource DefaultTextBoxStyle}"
+                         Width="{StaticResource DefaultTextBoxWidth}"
+                         Margin="{StaticResource RowMargin}"
+                         Text="{Binding Tiredness}">
+                    <TextBox.ToolTip>
+                        <ToolTip Style="{StaticResource DefaultToolTipRightStyle}">
+                            <TextBlock Text="The virus count, when this reaches 16 your digimon will evolve into Sukamon." />
+                        </ToolTip>
+                    </TextBox.ToolTip>
+                </TextBox>
+            </Grid>
+            <Grid Grid.Row="3" Grid.Column="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" SharedSizeGroup="CareStatsLabelColumn" />
+                    <ColumnDefinition Width="{StaticResource LabelTextboxSpacing}" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <Label Grid.Column="0" Grid.Row="0" Style="{StaticResource DefaultLabelStyle}" Content="Energy level:">
+                    <Label.ToolTip>
+                        <ToolTip Style="{StaticResource DefaultToolTipLeftStyle}">
+                            <TextBlock Text="The weight of your digimon." />
+                        </ToolTip>
+                    </Label.ToolTip>
+                </Label>
+                <TextBox Grid.Column="2"
+                         Name="EnergyLevel"
+                         HorizontalContentAlignment="Center"
+                         Style="{StaticResource DefaultTextBoxStyle}"
+                         Width="{StaticResource DefaultTextBoxWidth}"
+                         Margin="{StaticResource RowMargin}"
+                         Text="{Binding EnergyLevel}">
+                    <TextBox.ToolTip>
+                        <ToolTip Style="{StaticResource DefaultToolTipRightStyle}">
+                            <TextBlock Text="The weight of your Digimon." />
+                        </ToolTip>
+                    </TextBox.ToolTip>
+                </TextBox>
+            </Grid>
+            <Grid Grid.Row="4" Grid.Column="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" SharedSizeGroup="CareStatsLabelColumn" />
+                    <ColumnDefinition Width="{StaticResource LabelTextboxSpacing}" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <Label Grid.Column="0" Grid.Row="0" Style="{StaticResource DefaultLabelStyle}" Content="Hunger timer:">
+                    <Label.ToolTip>
+                        <ToolTip Style="{StaticResource DefaultToolTipLeftStyle}">
+                            <TextBlock Text="The care mistakes for your digimon." />
+                        </ToolTip>
+                    </Label.ToolTip>
+                </Label>
+                <TextBox Grid.Column="2"
+                         Name="HungryTimer"
+                         HorizontalContentAlignment="Center"
+                         Style="{StaticResource DefaultTextBoxStyle}"
+                         Width="{StaticResource DefaultTextBoxWidth}"
+                         Margin="{StaticResource RowMargin}"
+                         Text="{Binding HungryTimer}">
+                    <TextBox.ToolTip>
+                        <ToolTip Style="{StaticResource DefaultToolTipRightStyle}">
+                            <TextBlock Text="The care mistakes for your Digimon." />
+                        </ToolTip>
+                    </TextBox.ToolTip>
+                </TextBox>
+            </Grid>
+            <Grid Grid.Row="5" Grid.Column="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" SharedSizeGroup="CareStatsLabelColumn" />
+                    <ColumnDefinition Width="{StaticResource LabelTextboxSpacing}" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <Label Grid.Column="0" Grid.Row="0" Style="{StaticResource DefaultLabelStyle}" Content="StarvationTimer:">
+                    <Label.ToolTip>
+                        <ToolTip Style="{StaticResource DefaultToolTipLeftStyle}">
+                            <TextBlock Text="The battle count of your digimon." />
+                        </ToolTip>
+                    </Label.ToolTip>
+                </Label>
+                <TextBox Grid.Column="2"
+                         Name="StarvationTimer"
+                         HorizontalContentAlignment="Center"
+                         Style="{StaticResource DefaultTextBoxStyle}"
+                         Width="{StaticResource DefaultTextBoxWidth}"
+                         Margin="{StaticResource RowMargin}"
+                         Text="{Binding StarvationTimer}">
+                    <TextBox.ToolTip>
+                        <ToolTip Style="{StaticResource DefaultToolTipRightStyle}">
+                            <TextBlock Text="The battle count of your digimon." />
+                        </ToolTip>
+                    </TextBox.ToolTip>
+                </TextBox>
+            </Grid>
+        </Grid>
+        <Grid Grid.Row="0" Grid.Column="2" Grid.IsSharedSizeScope="True"
+              Margin="0, 0, 5,0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            
+            <Grid Grid.Row="1" Grid.Column="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" SharedSizeGroup="CareStatsLabelColumn" />
+                    <ColumnDefinition Width="{StaticResource LabelTextboxSpacing}" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <Label Grid.Column="0" Grid.Row="0" Style="{StaticResource DefaultLabelStyle}" Content="Virus:">
+                    <Label.ToolTip>
+                        <ToolTip Style="{StaticResource DefaultToolTipLeftStyle}">
+                            <TextBlock Text="The virus count, when this reaches 16 your digimon will evolve into Sukamon." />
+                        </ToolTip>
+                    </Label.ToolTip>
+                </Label>
+                <TextBox Grid.Column="2"
+                         Name="Virus"
+                         HorizontalContentAlignment="Center"
+                         Style="{StaticResource DefaultTextBoxStyle}"
+                         Width="{StaticResource DefaultTextBoxWidth}"
+                         Margin="{StaticResource RowMargin}"
+                         Text="{Binding Virus}">
+                    <TextBox.ToolTip>
+                        <ToolTip Style="{StaticResource DefaultToolTipRightStyle}">
+                            <TextBlock Text="The virus count, when this reaches 16 your digimon will evolve into Sukamon." />
+                        </ToolTip>
+                    </TextBox.ToolTip>
+                </TextBox>
+            </Grid>
+            
+        </Grid>
+    </Grid>
+</UserControl>

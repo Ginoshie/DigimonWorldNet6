@@ -11,12 +11,13 @@ using Shared.Constants;
 using Shared.Enums;
 using Shared.Extensions;
 using Shared.Services;
+using GameVariant = Shared.Enums.GameVariant;
 
 namespace DigimonWorld.Evolution.Calculator.Core.EvolutionCriteriaCalculation.FromRookieOrChampion;
 
 public sealed class FromRookieOrChampionEvolutionMapper
 {
-    private readonly Dictionary<DigimonType, IEnumerable<IEvolutionCriteria>> _fromRookieOrChampionEvolutionMappings = new();
+    private readonly Dictionary<Digimon, IEnumerable<IEvolutionCriteria>> _fromRookieOrChampionEvolutionMappings = new();
 
     private GameVariant _gameVariant = GameVariant.Original;
 
@@ -85,8 +86,8 @@ public sealed class FromRookieOrChampionEvolutionMapper
 
     public List<IEvolutionCriteria> GetEvolutionCriteria(DigimonName digimonName)
     {
-        List<KeyValuePair<DigimonType, IEnumerable<IEvolutionCriteria>>> candidates = _fromRookieOrChampionEvolutionMappings
-            .Where(e => e.Key.IncludeGameVariantFlags.IsAvailableIn(e.Key.ExcludeGameVariantFlags, _gameVariant) && e.Key.Digimon == digimonName)
+        List<KeyValuePair<Digimon, IEnumerable<IEvolutionCriteria>>> candidates = _fromRookieOrChampionEvolutionMappings
+            .Where(e => e.Key.IncludeGameVariantFlags.IsAvailableIn(e.Key.ExcludeGameVariantFlags, _gameVariant) && e.Key.DigimonName == digimonName)
             .ToList();
 
         return candidates.Single().Value.ToList();

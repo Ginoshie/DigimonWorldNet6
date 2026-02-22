@@ -129,7 +129,7 @@
                         <TextBlock Text="{Binding ., Converter={StaticResource TooltipTextConverter}, ConverterParameter=Techniques}" />
                     </ToolTip>
                 </Button.ToolTip>
-                <Image Source="/Images/Icons/Techniques/battle-icon.jpg" Stretch="Uniform" Margin="1" />
+                <Image Source="/Images/Icons/Techniques/battle-icon-1-button.jpg" Stretch="Uniform" Margin="1" />
             </Button>
             <Button ToolTipService.InitialShowDelay="{StaticResource DefaultTooltipDelay}" Style="{StaticResource StretchContentButtonStyle}"
                     Width="{Binding SquareButtonWidth}"

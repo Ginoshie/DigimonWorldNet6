@@ -11,6 +11,6 @@ public static class EvolutionResultExtensions
             return digimonType;
         }
 
-        throw new ArgumentException($"No matching DigimonType found for EvolutionResult: {evolutionResult}", nameof(evolutionResult));
+        throw new ArgumentException($"No matching Digimon found for EvolutionResult: {evolutionResult}", nameof(evolutionResult));
     }
 }

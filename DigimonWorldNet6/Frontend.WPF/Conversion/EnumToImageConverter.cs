@@ -4,6 +4,7 @@ using System.Windows.Data;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using Shared.Enums;
+using Type = System.Type;
 
 namespace DigimonWorld.Frontend.WPF.Conversion;
 
@@ -27,7 +28,7 @@ public sealed class EnumToImageConverter : IValueConverter
             stringValue = nameof(EvolutionResult.None);
         }
 
-        return new BitmapImage(new Uri($"/Images/Digimon/{stringValue}.jpg", UriKind.Relative));
+        return new BitmapImage(new Uri($"/Images/Digimon/{stringValue}.png", UriKind.Relative));
     }
 
     public object ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture)

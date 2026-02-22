@@ -39,8 +39,7 @@ public class EmulatorLinkViewModel : BaseViewModel, IDisposable
         SetDigimonBattlesCountFromEmulator = new CommandHandler(DigimonStatsEventHub.SignalSyncEmulatorBattlesCount);
 
         _disposable = new CompositeDisposable(
-            EmulatorLinkEventHub.EmulatorConnectedObservable.Subscribe(_ => OnEmulatorConnected()),
-            EmulatorLinkEventHub.EmulatorDisconnectedObservable.Subscribe(_ => OnEmulatorDisconnected())
+            EmulatorLinkEventHub.EmulatorConnectedObservable.Subscribe(OnEmulatorConnectedChanged)
         );
     }
 
@@ -90,24 +89,26 @@ public class EmulatorLinkViewModel : BaseViewModel, IDisposable
         private set => SetField(ref field, value);
     }
 
-    private void OnEmulatorConnected()
+    private void OnEmulatorConnectedChanged(bool isConnected)
     {
-        _memorySyncSubscription = Observable.Interval(TimeSpan.FromMilliseconds(500)).Subscribe(_ => SyncFromEmulator());
+        if (isConnected)
+        {
+            _memorySyncSubscription = Observable.Interval(TimeSpan.FromMilliseconds(500)).Subscribe(_ => SyncFromEmulator());
 
-        EmulatorConnected = true;
-    }
-
-    private void OnEmulatorDisconnected()
-    {
-        _memorySyncSubscription?.Dispose();
+            EmulatorConnected = true;
+        }
+        else
+        {
+            _memorySyncSubscription?.Dispose();
         
-        EmulatorConnected = false;
+            EmulatorConnected = false;
+        }
     }
 
     private void SyncFromEmulator()
     {
-        IsHappy = LiveMemoryReader.Instance.DigimonConditionStats.Happiness >= 0;
-        IsDisciplined = LiveMemoryReader.Instance.DigimonConditionStats.Discipline >= 50;
+        IsHappy = LiveMemoryReader.Instance.ConditionStats.Happiness >= 0;
+        IsDisciplined = LiveMemoryReader.Instance.ConditionStats.Discipline >= 50;
     }
 
     public void Dispose()

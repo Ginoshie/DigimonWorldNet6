@@ -75,6 +75,16 @@ public static class EvolutionStageMapper
         [DigimonName.Panjyamon] = EvolutionStage.Champion
     };
 
+    public static EvolutionStage Get(string digimonName)
+    {
+        if(!Enum.TryParse(digimonName, out DigimonName digimonNameEnum))
+        {
+            throw new KeyNotFoundException($"{digimonName} was not parsable to enum '{typeof(DigimonName)}'");
+        }
+        
+        return Get(digimonNameEnum);
+    }
+
     public static EvolutionStage Get(DigimonName digimonName)
     {
         if (_evolutionStageMappings.TryGetValue(digimonName, out EvolutionStage evolutionStage))

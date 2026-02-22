@@ -1,0 +1,149 @@
+<UserControl x:Class="DigimonWorld.Frontend.WPF.Windows.Main.UserControls.TamerVision.UserControls.EvolutionStatsUserControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:tamerVision="clr-namespace:DigimonWorld.Frontend.WPF.Windows.Main.UserControls.TamerVision" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d"
+             d:DataContext="{d:DesignInstance tamerVision:TamerVisionViewModel}">
+
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/ResourceDictionaries/Styles/DefaultTextboxStyle.xaml" />
+                <ResourceDictionary Source="/ResourceDictionaries/Styles/DefaultComboboxStyle.xaml" />
+                <ResourceDictionary Source="/ResourceDictionaries/Styles/DefaultFocusStyle.xaml" />
+                <ResourceDictionary Source="/ResourceDictionaries/Styles/Labels/DefaultSheenLabelStyle.xaml" />
+                <ResourceDictionary Source="/ResourceDictionaries/Styles/Labels/DefaultLabelStyle.xaml" />
+                <ResourceDictionary Source="/ResourceDictionaries/Styles/ToolTips/DefaultTooltipRightStyle.xaml" />
+                <ResourceDictionary Source="/ResourceDictionaries/Styles/ToolTips/DefaultTooltipLeftStyle.xaml" />
+                <ResourceDictionary Source="/ResourceDictionaries/Styles/Buttons/DefaultOptionPickerButtonStyle.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+
+            <Thickness x:Key="RowMargin">0, 1</Thickness>
+        </ResourceDictionary>
+    </UserControl.Resources>
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="Auto" />
+        </Grid.ColumnDefinitions>
+        <Grid Grid.Row="0" Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <Label Grid.Row="0" Grid.Column="0" Style="{StaticResource DefaultLabelStyle}" Content="Evo age:" Margin="0,0,5,0">
+                <Label.ToolTip>
+                    <ToolTip Style="{StaticResource DefaultToolTipLeftStyle}">
+                        <TextBlock Text="The time in hours of your digimon in this form used for evolution." />
+                    </ToolTip>
+                </Label.ToolTip>
+            </Label>
+            <TextBox Grid.Row="0" Grid.Column="1"
+                     Name="EvoAge"
+                     HorizontalContentAlignment="Center"
+                     Style="{StaticResource DefaultTextBoxStyle}"
+                     Margin="{StaticResource RowMargin}"
+                     Width="40"
+                     Text="{Binding EvoAge}">
+                <TextBox.ToolTip>
+                    <ToolTip Style="{StaticResource DefaultToolTipRightStyle}">
+                        <TextBlock Text="The time in hours of your digimon in this form used for evolution." />
+                    </ToolTip>
+                </TextBox.ToolTip>
+            </TextBox>
+            <Label Grid.Row="1" Grid.Column="0" Style="{StaticResource DefaultLabelStyle}" Content="Evo ready age:" Margin="0,0,5,0">
+                <Label.ToolTip>
+                    <ToolTip Style="{StaticResource DefaultToolTipLeftStyle}">
+                        <TextBlock Text="The time in hours of your digimon in this form used for evolution." />
+                    </ToolTip>
+                </Label.ToolTip>
+            </Label>
+            <TextBox Grid.Row="1" Grid.Column="1"
+                     Name="EvoEligibleAge"
+                     HorizontalContentAlignment="Center"
+                     Style="{StaticResource DefaultTextBoxStyle}"
+                     Margin="{StaticResource RowMargin}"
+                     Width="40"
+                     Text="{Binding EvoReadyAge}">
+                <TextBox.ToolTip>
+                    <ToolTip Style="{StaticResource DefaultToolTipRightStyle}">
+                        <TextBlock Text="The time in hours of your digimon in this form used for evolution." />
+                    </ToolTip>
+                </TextBox.ToolTip>
+            </TextBox>
+            <Grid Grid.Row="4" Grid.Column="0" ColumnSpan="2" HorizontalAlignment="Center" Margin="5">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Content="Show/Hide evo" />
+                <Button Grid.Row="1" Grid.Column="0" Style="{StaticResource DefaultOptionPickerButtonStyle}" Tag="{Binding ShowEvo}" Content="Show" Command="{Binding SetShowEvoCommand}" />
+                <Button Grid.Row="1" Grid.Column="1" Style="{StaticResource DefaultOptionPickerButtonStyle}" Tag="{Binding HideEvo}" Content="Hide" Command="{Binding SetHideEvoCommand}" />
+            </Grid>
+            <Grid HorizontalAlignment="Center" Grid.Row="5" Grid.Column="0" ColumnSpan="2">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <Label Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" Grid.ColumnSpan="2" Content="Evo result mask" />
+                <Button Grid.Row="1" Grid.Column="0" Width="90" Padding="1" Style="{StaticResource DefaultOptionPickerButtonStyle}" Tag="{Binding EvoResultMaskNoneIsSelected}" Content="None"
+                        Command="{Binding SetEvoResultMaskNoneCommand}" />
+                <Button Grid.Row="1" Grid.Column="1" Width="90" Padding="1" Style="{StaticResource DefaultOptionPickerButtonStyle}" Tag="{Binding EvoResultMaskBlurredIsSelected}" Content="Blurred"
+                        Command="{Binding SetEvoResultMaskBlurredCommand}" />
+                <Button Grid.Row="2" Grid.Column="0" Width="90" Padding="1" Style="{StaticResource DefaultOptionPickerButtonStyle}" Tag="{Binding EvoResultMaskDigiGuessIsSelected}" Content="DigiGuess"
+                        Command="{Binding SetEvoResultMaskDigiGuessCommand}" />
+                <Button Grid.Row="2" Grid.Column="1" Width="90" Padding="1" Style="{StaticResource DefaultOptionPickerButtonStyle}" Tag="{Binding EvoResultMaskAnonymousIsSelected}"
+                        Content="Anonymous" Command="{Binding SetEvoResultMaskAnonymousCommand}" />
+            </Grid>
+        </Grid>
+        <Border Grid.Column="1" Grid.Row="0" BorderBrush="#060100" BorderThickness="3,3,0,0" Margin="10, 0" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Border BorderBrush="#6789A5" BorderThickness="0,0,3,3" Background="{Binding EvoResultBackground}">
+                <Image Width="190" Height="190" Source="{Binding EvoResultImage}" Stretch="Uniform" RenderTransformOrigin="0.5,0.5">
+                    <Image.Style>
+                        <Style TargetType="Image">
+                            <Setter Property="RenderTransform">
+                                <Setter.Value>
+                                    <ScaleTransform ScaleX="1" ScaleY="1"/>
+                                </Setter.Value>
+                            </Setter>
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding EvoResultDigiGuessIsShown}" Value="True">
+                                    <Setter Property="RenderTransform">
+                                        <Setter.Value>
+                                            <ScaleTransform ScaleX="0.75" ScaleY="0.75"/>
+                                        </Setter.Value>
+                                    </Setter>
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding EvoResultBlurredIsShown}" Value="True">
+                                    <Setter Property="Effect">
+                                        <Setter.Value>
+                                            <BlurEffect Radius="30"/>
+                                        </Setter.Value>
+                                    </Setter>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Image.Style>
+                </Image>
+            </Border>
+        </Border>
+    </Grid>
+</UserControl>

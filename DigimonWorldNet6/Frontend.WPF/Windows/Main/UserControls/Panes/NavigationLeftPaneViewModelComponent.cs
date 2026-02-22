@@ -7,6 +7,7 @@ using System.Windows.Input;
 using DigimonWorld.Frontend.WPF.ViewModelComponents;
 using DigimonWorld.Frontend.WPF.Windows.Main.UserControls.DigiWiki;
 using DigimonWorld.Frontend.WPF.Windows.Main.UserControls.EvolutionCalculator;
+using DigimonWorld.Frontend.WPF.Windows.Main.UserControls.TamerVision;
 using ReactiveUI;
 
 namespace DigimonWorld.Frontend.WPF.Windows.Main.UserControls.Panes;
@@ -28,6 +29,8 @@ public class NavigationLeftPaneViewModelComponent : PaneBaseViewModel, IDisposab
 
         ShowDigiWikiCommand = new CommandHandler(ShowDigiWiki);
 
+        ShowTamerVisionCommand = new CommandHandler(ShowTamerWiki);
+
         PaneOffset = PaneIsOpen ? PANEL_OPENED_X_OFFSET : PANEL_CLOSED_X_OFFSET;
 
         _disposable = new CompositeDisposable(
@@ -45,9 +48,13 @@ public class NavigationLeftPaneViewModelComponent : PaneBaseViewModel, IDisposab
 
     public ICommand ShowDigiWikiCommand { get; }
 
+    public ICommand ShowTamerVisionCommand { get; }
+
     private void ShowEvolutionCalculator() => _setCurrentSelectedMainWindowContent(new EvolutionCalculatorUserControl());
 
     private void ShowDigiWiki() => _setCurrentSelectedMainWindowContent(new DigiWikiUserControl());
+
+    private void ShowTamerWiki() => _setCurrentSelectedMainWindowContent(new TamerVisionUserControl());
 
     public bool PaneIsOpen
     {

@@ -63,7 +63,7 @@
                         <TextBlock Text="{Binding ., Converter={StaticResource TooltipTextConverter}, ConverterParameter=Digimon Type}" />
                     </ToolTip>
                 </Button.ToolTip>
-                <Image Source="/Images/Icons/Labels/DIGI label.jpg" Stretch="Uniform" Margin="2" />
+                <Image Source="/Images/Icons/Labels/DIGI label-button.jpg" Stretch="Uniform" Margin="2" />
             </Button>
             <Button ToolTipService.InitialShowDelay="{StaticResource DefaultTooltipDelay}" Style="{StaticResource StretchContentButtonStyle}"
                     Width="{Binding SquareButtonWidth}"
@@ -76,7 +76,7 @@
                         <TextBlock Text="{Binding ., Converter={StaticResource TooltipTextConverter}, ConverterParameter=WEIGHT}" />
                     </ToolTip>
                 </Button.ToolTip>
-                <Image Source="/Images/Icons/Labels/WEIGHT label.png" Stretch="Uniform" Margin="2" />
+                <Image Source="/Images/Icons/Labels/WEIGHT label-button.jpg" Stretch="Uniform" Margin="2" />
             </Button>
         </WrapPanel>
 
