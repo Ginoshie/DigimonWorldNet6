@@ -8,7 +8,7 @@
              xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
              xmlns:behaviors="clr-namespace:DigimonWorld.Frontend.WPF.Behaviors"
              xmlns:evolutionCalculator="clr-namespace:DigimonWorld.Frontend.WPF.Windows.Main.UserControls.EvolutionCalculator"
-             xmlns:userControls1="clr-namespace:DigimonWorld.Frontend.WPF.Windows.Main.UserControls.EvolutionCalculator.UserControls"
+             xmlns:userControls="clr-namespace:DigimonWorld.Frontend.WPF.Windows.Main.UserControls.EvolutionCalculator.UserControls"
              mc:Ignorable="d"
              d:DataContext="{d:DesignInstance Type=evolutionCalculator:EvolutionCalculatorViewModel, IsDesignTimeCreatable=True}">
 
@@ -44,9 +44,7 @@
                             <RowDefinition Height="*" />
                             <RowDefinition Height="*" />
                         </Grid.RowDefinitions>
-                        <Label Grid.Row="0" Grid.Column="0" Height="40" Width="150" Style="{StaticResource DefaultSheenLabelStyle}" IsTabStop="False">
-                            YOUR DIGIMON
-                        </Label>
+                        <Label Grid.Row="0" Grid.Column="0" Height="40" Width="150" Style="{StaticResource DefaultSheenLabelStyle}" IsTabStop="False" Content="YOUR DIGIMON"/>
                         <GroupBox Grid.Column="0" Grid.Row="1" Header="Your Digimon">
                             <GroupBox.Template>
                                 <ControlTemplate TargetType="GroupBox">
@@ -432,9 +430,9 @@
                                 <ColumnDefinition Width="600" />
                             </Grid.ColumnDefinitions>
 
-                            <userControls1:JijimonNarrator Grid.Column="0" Grid.Row="0" />
+                            <userControls:JijimonNarrator Grid.Column="0" Grid.Row="0" />
 
-                            <userControls1:JijimonNaratorTextDisplay Grid.Row="0" Grid.Column="1" />
+                            <userControls:JijimonNaratorTextDisplay Grid.Row="0" Grid.Column="1" />
 
                         </Grid>
                         <Grid Grid.Row="1">

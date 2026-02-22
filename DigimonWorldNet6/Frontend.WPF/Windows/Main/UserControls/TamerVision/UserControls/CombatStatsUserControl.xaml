@@ -1,0 +1,233 @@
+<UserControl x:Class="DigimonWorld.Frontend.WPF.Windows.Main.UserControls.TamerVision.UserControls.CombatStatsUserControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:tamerVision="clr-namespace:DigimonWorld.Frontend.WPF.Windows.Main.UserControls.TamerVision" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d"
+             d:DataContext="{d:DesignInstance tamerVision:TamerVisionViewModel}">
+
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/ResourceDictionaries/Styles/DefaultTextboxStyle.xaml" />
+                <ResourceDictionary Source="/ResourceDictionaries/Styles/DefaultComboboxStyle.xaml" />
+                <ResourceDictionary Source="/ResourceDictionaries/Styles/DefaultFocusStyle.xaml" />
+                <ResourceDictionary Source="/ResourceDictionaries/Styles/Labels/DefaultSheenLabelStyle.xaml" />
+                <ResourceDictionary Source="/ResourceDictionaries/Styles/Labels/DefaultLabelStyle.xaml" />
+                <ResourceDictionary Source="/ResourceDictionaries/Styles/ToolTips/DefaultTooltipRightStyle.xaml" />
+                <ResourceDictionary Source="/ResourceDictionaries/Styles/ToolTips/DefaultTooltipLeftStyle.xaml" />
+                <ResourceDictionary Source="/ResourceDictionaries/Styles/Buttons/DefaultButtonStyle.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+
+            <GridLength x:Key="LabelTextboxSpacing">5</GridLength>
+
+            <Thickness x:Key="RowMargin">0, 1</Thickness>
+        </ResourceDictionary>
+    </UserControl.Resources>
+
+    <Grid Grid.IsSharedSizeScope="True" 
+          Width="155"
+          Margin="10,0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" SharedSizeGroup="CombatStatsCareStatsLabelColumn" />
+                <ColumnDefinition Width="{StaticResource LabelTextboxSpacing}" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Label Grid.Column="0" Grid.Row="0" Style="{StaticResource DefaultLabelStyle}" Content="HP:">
+                <Label.ToolTip>
+                    <ToolTip Style="{StaticResource DefaultToolTipLeftStyle}">
+                        <TextBlock Text="The max and current HP of your digimon." />
+                    </ToolTip>
+                </Label.ToolTip>
+            </Label>
+            <TextBox Grid.Column="2"
+                     Name="Hp"
+                     HorizontalContentAlignment="Center"
+                     Style="{StaticResource DefaultTextBoxStyle}"
+                     Margin="{StaticResource RowMargin}"
+                     Text="{Binding HP}">
+                <TextBox.ToolTip>
+                    <ToolTip Style="{StaticResource DefaultToolTipRightStyle}">
+                        <TextBlock Text="The max HP of your digimon." />
+                    </ToolTip>
+                </TextBox.ToolTip>
+            </TextBox>
+            <Label Grid.Column="3" Grid.Row="0" Style="{StaticResource DefaultLabelStyle}" Margin="3,0" Content="/" />
+            <TextBox Grid.Column="4"
+                     Name="CurrentHp"
+                     HorizontalContentAlignment="Center"
+                     Style="{StaticResource DefaultTextBoxStyle}"
+                     Margin="{StaticResource RowMargin}"
+                     Text="{Binding CurrentHP}">
+                <TextBox.ToolTip>
+                    <ToolTip Style="{StaticResource DefaultToolTipRightStyle}">
+                        <TextBlock Text="The current HP of your digimon." />
+                    </ToolTip>
+                </TextBox.ToolTip>
+            </TextBox>
+        </Grid>
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" SharedSizeGroup="CombatStatsCareStatsLabelColumn" />
+                <ColumnDefinition Width="{StaticResource LabelTextboxSpacing}" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Label Grid.Column="0" Grid.Row="0" Style="{StaticResource DefaultLabelStyle}" Content="MP:">
+                <Label.ToolTip>
+                    <ToolTip Style="{StaticResource DefaultToolTipLeftStyle}">
+                        <TextBlock Text="The max and current MP of your digimon." />
+                    </ToolTip>
+                </Label.ToolTip>
+            </Label>
+            <TextBox Grid.Column="2"
+                     Name="Mp"
+                     Style="{StaticResource DefaultTextBoxStyle}"
+                     Margin="{StaticResource RowMargin}"
+                     Text="{Binding MP}">
+                <TextBox.ToolTip>
+                    <ToolTip Style="{StaticResource DefaultToolTipRightStyle}">
+                        <TextBlock Text="The max MP of your digimon." />
+                    </ToolTip>
+                </TextBox.ToolTip>
+            </TextBox>
+            <TextBox Grid.Column="2"
+                     Name="MaxMp"
+                     HorizontalContentAlignment="Center"
+                     Style="{StaticResource DefaultTextBoxStyle}"
+                     Margin="{StaticResource RowMargin}"
+                     Text="{Binding MP}">
+                <TextBox.ToolTip>
+                    <ToolTip Style="{StaticResource DefaultToolTipRightStyle}">
+                        <TextBlock Text="The max MP of your digimon." />
+                    </ToolTip>
+                </TextBox.ToolTip>
+            </TextBox>
+            <Label Grid.Column="3" Grid.Row="0" Style="{StaticResource DefaultLabelStyle}" Margin="3,0" Content="/" />
+            <TextBox Grid.Column="4"
+                     Name="CurrentMp"
+                     HorizontalContentAlignment="Center"
+                     Style="{StaticResource DefaultTextBoxStyle}"
+                     Margin="{StaticResource RowMargin}"
+                     Text="{Binding CurrentMP}">
+                <TextBox.ToolTip>
+                    <ToolTip Style="{StaticResource DefaultToolTipRightStyle}">
+                        <TextBlock Text="The current MP of your digimon." />
+                    </ToolTip>
+                </TextBox.ToolTip>
+            </TextBox>
+        </Grid>
+        <Grid Grid.Row="3">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" SharedSizeGroup="CombatStatsCareStatsLabelColumn" />
+                <ColumnDefinition Width="{StaticResource LabelTextboxSpacing}" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Label Grid.Column="0" Grid.Row="0" Style="{StaticResource DefaultLabelStyle}" Content="Off:">
+                <Label.ToolTip>
+                    <ToolTip Style="{StaticResource DefaultToolTipLeftStyle}">
+                        <TextBlock Text="The offense of your Digimon." />
+                    </ToolTip>
+                </Label.ToolTip>
+            </Label>
+            <TextBox Grid.Column="2"
+                     Name="Off"
+                     Style="{StaticResource DefaultTextBoxStyle}"
+                     Margin="{StaticResource RowMargin}"
+                     Text="{Binding Offense}">
+                <TextBox.ToolTip>
+                    <ToolTip Style="{StaticResource DefaultToolTipRightStyle}">
+                        <TextBlock Text="The offense of your Digimon." />
+                    </ToolTip>
+                </TextBox.ToolTip>
+            </TextBox>
+        </Grid>
+        <Grid Grid.Row="4">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" SharedSizeGroup="CombatStatsCareStatsLabelColumn" />
+                <ColumnDefinition Width="{StaticResource LabelTextboxSpacing}" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Label Grid.Column="0" Grid.Row="0" Style="{StaticResource DefaultLabelStyle}" Content="Def:">
+                <Label.ToolTip>
+                    <ToolTip Style="{StaticResource DefaultToolTipLeftStyle}">
+                        <TextBlock Text="The defence of your Digimon." />
+                    </ToolTip>
+                </Label.ToolTip>
+            </Label>
+            <TextBox Grid.Column="2"
+                     Name="Def"
+                     Style="{StaticResource DefaultTextBoxStyle}"
+                     Margin="{StaticResource RowMargin}"
+                     Text="{Binding Defence}">
+                <TextBox.ToolTip>
+                    <ToolTip Style="{StaticResource DefaultToolTipRightStyle}">
+                        <TextBlock Text="The defence of your Digimon." />
+                    </ToolTip>
+                </TextBox.ToolTip>
+            </TextBox>
+        </Grid>
+        <Grid Grid.Row="5">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" SharedSizeGroup="CombatStatsCombatStatsCareStatsLabelColumn" />
+                <ColumnDefinition Width="{StaticResource LabelTextboxSpacing}" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Label Grid.Column="0" Grid.Row="0" Style="{StaticResource DefaultLabelStyle}" Content="Speed:">
+                <Label.ToolTip>
+                    <ToolTip Style="{StaticResource DefaultToolTipLeftStyle}">
+                        <TextBlock Text="The speed of your Digimon." />
+                    </ToolTip>
+                </Label.ToolTip>
+            </Label>
+            <TextBox Grid.Column="2"
+                     Name="Speed"
+                     Style="{StaticResource DefaultTextBoxStyle}"
+                     Margin="{StaticResource RowMargin}"
+                     Text="{Binding Speed}">
+                <TextBox.ToolTip>
+                    <ToolTip Style="{StaticResource DefaultToolTipRightStyle}">
+                        <TextBlock Text="The speed of your Digimon." />
+                    </ToolTip>
+                </TextBox.ToolTip>
+            </TextBox>
+        </Grid>
+        <Grid Grid.Row="6">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" SharedSizeGroup="CombatStatsCareStatsLabelColumn" />
+                <ColumnDefinition Width="{StaticResource LabelTextboxSpacing}" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Label Grid.Column="0" Grid.Row="0" Style="{StaticResource DefaultLabelStyle}" Content="Brains:">
+                <Label.ToolTip>
+                    <ToolTip Style="{StaticResource DefaultToolTipLeftStyle}">
+                        <TextBlock Text="The brains of your Digimon." />
+                    </ToolTip>
+                </Label.ToolTip>
+            </Label>
+            <TextBox Grid.Column="2"
+                     Name="Brains"
+                     Style="{StaticResource DefaultTextBoxStyle}"
+                     Margin="{StaticResource RowMargin}"
+                     Text="{Binding Brains}">
+                <TextBox.ToolTip>
+                    <ToolTip Style="{StaticResource DefaultToolTipRightStyle}">
+                        <TextBlock Text="The brains of your Digimon." />
+                    </ToolTip>
+                </TextBox.ToolTip>
+            </TextBox>
+        </Grid>
+    </Grid>
+</UserControl>

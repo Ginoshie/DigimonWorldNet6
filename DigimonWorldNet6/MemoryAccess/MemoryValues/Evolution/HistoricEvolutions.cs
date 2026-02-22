@@ -1,0 +1,227 @@
+using MemoryAccess.Core;
+using Shared.Enums;
+using Shared.Services.Events;
+
+namespace MemoryAccess.MemoryValues.Evolution;
+
+public class HistoricEvolutions(ProcessMemory mem, PsxRam ram) : MemoryValueSyncBase
+{
+    private const int ADDR_225_OFFSET = 0x001BE00D;
+    private const int ADDR_226_OFFSET = 0x001BE00E;
+    private const int ADDR_227_OFFSET = 0x001BE00F;
+    private const int ADDR_228_OFFSET = 0x001BE010;
+    private const int ADDR_229_OFFSET = 0x001BE011;
+    private const int ADDR_230_OFFSET = 0x001BE012;
+    private const int ADDR_231_OFFSET = 0x001BE013;
+    private const int ADDR_232_OFFSET = 0x001BE014;
+    private const int ADDR_233_OFFSET = 0x001BE015;
+
+    private byte _flags225;
+    private byte _flags226;
+    private byte _flags227;
+    private byte _flags228;
+    private byte _flags229;
+    private byte _flags230;
+    private byte _flags231;
+    private byte _flags232;
+    private byte _flags233;
+
+    private HistoricEvolutions() : this(ProcessMemory.Empty, PsxRam.Empty)
+    {
+    }
+
+    public static HistoricEvolutions Empty { get; } = new();
+
+    public bool IsHistoricEvolution(DigimonName name) =>
+        _map.TryGetValue(name, out (int addr, int bit) entry)
+        && HasBit(entry.addr, entry.bit);
+
+    // ===== Fresh stage =====
+    public bool Botamon => HasBit(ADDR_225_OFFSET, 1);
+    public bool Poyomon => HasBit(ADDR_228_OFFSET, 5);
+    public bool Punimon => HasBit(ADDR_226_OFFSET, 7);
+    public bool Yuramon => HasBit(ADDR_230_OFFSET, 3);
+
+    // ===== In-training stage =====
+    public bool Koromon => HasBit(ADDR_225_OFFSET, 2);
+    public bool Tanemon => HasBit(ADDR_230_OFFSET, 4);
+    public bool Tokomon => HasBit(ADDR_228_OFFSET, 6);
+    public bool Tsunomon => HasBit(ADDR_227_OFFSET, 0);
+
+    // ===== Rookie stage =====
+    public bool Agumon => HasBit(ADDR_225_OFFSET, 3);
+    public bool Betamon => HasBit(ADDR_225_OFFSET, 4);
+    public bool Biyomon => HasBit(ADDR_230_OFFSET, 5);
+    public bool Elecmon => HasBit(ADDR_227_OFFSET, 2);
+    public bool Gabumon => HasBit(ADDR_227_OFFSET, 1);
+    public bool Kunemon => HasBit(ADDR_229_OFFSET, 0);
+    public bool Palmon => HasBit(ADDR_230_OFFSET, 6);
+    public bool Patamon => HasBit(ADDR_228_OFFSET, 7);
+    public bool Penguinmon => HasBit(ADDR_232_OFFSET, 1);
+
+    // ===== Champion stage =====
+    public bool Airdramon => HasBit(ADDR_225_OFFSET, 7);
+    public bool Angemon => HasBit(ADDR_227_OFFSET, 4);
+    public bool Bakemon => HasBit(ADDR_229_OFFSET, 5);
+    public bool Birdramon => HasBit(ADDR_227_OFFSET, 5);
+    public bool Centarumon => HasBit(ADDR_229_OFFSET, 4);
+    public bool Coelamon => HasBit(ADDR_231_OFFSET, 1);
+    public bool Devimon => HasBit(ADDR_225_OFFSET, 6);
+    public bool Drimogemon => HasBit(ADDR_229_OFFSET, 6);
+    public bool Frigimon => HasBit(ADDR_227_OFFSET, 7);
+    public bool Garurumon => HasBit(ADDR_227_OFFSET, 6);
+    public bool Greymon => HasBit(ADDR_225_OFFSET, 5);
+    public bool Kabuterimon => HasBit(ADDR_227_OFFSET, 3);
+    public bool Kokatorimon => HasBit(ADDR_231_OFFSET, 2);
+    public bool Kuwagamon => HasBit(ADDR_231_OFFSET, 3);
+    public bool Leomon => HasBit(ADDR_231_OFFSET, 0);
+    public bool Meramon => HasBit(ADDR_226_OFFSET, 1);
+    public bool Mojyamon => HasBit(ADDR_231_OFFSET, 4);
+    public bool Monochromon => HasBit(ADDR_230_OFFSET, 7);
+    public bool Nanimon => HasBit(ADDR_231_OFFSET, 5);
+    public bool Numemon => HasBit(ADDR_226_OFFSET, 3);
+    public bool Ogremon => HasBit(ADDR_229_OFFSET, 2);
+    public bool Seadramon => HasBit(ADDR_226_OFFSET, 2);
+    public bool Shellmon => HasBit(ADDR_229_OFFSET, 3);
+    public bool Sukamon => HasBit(ADDR_229_OFFSET, 7);
+    public bool Tyrannomon => HasBit(ADDR_226_OFFSET, 0);
+    public bool Unimon => HasBit(ADDR_229_OFFSET, 1);
+    public bool Vegiemon => HasBit(ADDR_228_OFFSET, 1);
+    public bool Whamon => HasBit(ADDR_228_OFFSET, 0);
+
+    // ===== Ultimate stage =====
+    public bool Andromon => HasBit(ADDR_230_OFFSET, 0);
+    public bool Digitamamon => HasBit(ADDR_232_OFFSET, 0);
+    public bool Etemon => HasBit(ADDR_230_OFFSET, 2);
+    public bool Giromon => HasBit(ADDR_230_OFFSET, 1);
+    public bool HKabuterimon => HasBit(ADDR_232_OFFSET, 4);
+    public bool Mamemon => HasBit(ADDR_226_OFFSET, 5);
+    public bool MegaSeadramon => HasBit(ADDR_232_OFFSET, 5);
+    public bool Megadramon => HasBit(ADDR_231_OFFSET, 6);
+    public bool MetalEtemon => HasBit(ADDR_233_OFFSET, 1);
+    public bool MetalGreymon => HasBit(ADDR_226_OFFSET, 4);
+    public bool MetalMamemon => HasBit(ADDR_228_OFFSET, 3);
+    public bool Monzaemon => HasBit(ADDR_226_OFFSET, 6);
+    public bool Myotismon => HasBit(ADDR_232_OFFSET, 6);
+    public bool Panjyamon => HasBit(ADDR_232_OFFSET, 7);
+    public bool Phoenixmon => HasBit(ADDR_232_OFFSET, 3);
+    public bool Piximon => HasBit(ADDR_231_OFFSET, 7);
+    public bool SkullGreymon => HasBit(ADDR_228_OFFSET, 2);
+    public bool Vademon => HasBit(ADDR_228_OFFSET, 4);
+    public bool Machinedramon => HasBit(ADDR_232_OFFSET, 6);
+    public bool Weregarurumon => HasBit(ADDR_232_OFFSET, 7);
+    public bool Gigadramon => HasBit(ADDR_233_OFFSET, 0);
+
+    private static readonly Dictionary<DigimonName, (int addr, int bit)> _map = new()
+    {
+        { DigimonName.Botamon, (ADDR_225_OFFSET, 1) },
+        { DigimonName.Koromon, (ADDR_225_OFFSET, 2) },
+        { DigimonName.Agumon, (ADDR_225_OFFSET, 3) },
+        { DigimonName.Betamon, (ADDR_225_OFFSET, 4) },
+        { DigimonName.Greymon, (ADDR_225_OFFSET, 5) },
+        { DigimonName.Devimon, (ADDR_225_OFFSET, 6) },
+        { DigimonName.Airdramon, (ADDR_225_OFFSET, 7) },
+
+        { DigimonName.Tyrannomon, (ADDR_226_OFFSET, 0) },
+        { DigimonName.Meramon, (ADDR_226_OFFSET, 1) },
+        { DigimonName.Seadramon, (ADDR_226_OFFSET, 2) },
+        { DigimonName.Numemon, (ADDR_226_OFFSET, 3) },
+        { DigimonName.MetalGreymon, (ADDR_226_OFFSET, 4) },
+        { DigimonName.Mamemon, (ADDR_226_OFFSET, 5) },
+        { DigimonName.Monzaemon, (ADDR_226_OFFSET, 6) },
+        { DigimonName.Punimon, (ADDR_226_OFFSET, 7) },
+
+        { DigimonName.Tsunomon, (ADDR_227_OFFSET, 0) },
+        { DigimonName.Gabumon, (ADDR_227_OFFSET, 1) },
+        { DigimonName.Elecmon, (ADDR_227_OFFSET, 2) },
+        { DigimonName.Kabuterimon, (ADDR_227_OFFSET, 3) },
+        { DigimonName.Angemon, (ADDR_227_OFFSET, 4) },
+        { DigimonName.Birdramon, (ADDR_227_OFFSET, 5) },
+        { DigimonName.Garurumon, (ADDR_227_OFFSET, 6) },
+        { DigimonName.Frigimon, (ADDR_227_OFFSET, 7) },
+
+        { DigimonName.Whamon, (ADDR_228_OFFSET, 0) },
+        { DigimonName.Vegiemon, (ADDR_228_OFFSET, 1) },
+        { DigimonName.SkullGreymon, (ADDR_228_OFFSET, 2) },
+        { DigimonName.MetalMamemon, (ADDR_228_OFFSET, 3) },
+        { DigimonName.Vademon, (ADDR_228_OFFSET, 4) },
+        { DigimonName.Poyomon, (ADDR_228_OFFSET, 5) },
+        { DigimonName.Tokomon, (ADDR_228_OFFSET, 6) },
+        { DigimonName.Patamon, (ADDR_228_OFFSET, 7) },
+
+        { DigimonName.Kunemon, (ADDR_229_OFFSET, 0) },
+        { DigimonName.Unimon, (ADDR_229_OFFSET, 1) },
+        { DigimonName.Ogremon, (ADDR_229_OFFSET, 2) },
+        { DigimonName.Shellmon, (ADDR_229_OFFSET, 3) },
+        { DigimonName.Centarumon, (ADDR_229_OFFSET, 4) },
+        { DigimonName.Bakemon, (ADDR_229_OFFSET, 5) },
+        { DigimonName.Drimogemon, (ADDR_229_OFFSET, 6) },
+        { DigimonName.Sukamon, (ADDR_229_OFFSET, 7) },
+
+        { DigimonName.Andromon, (ADDR_230_OFFSET, 0) },
+        { DigimonName.Giromon, (ADDR_230_OFFSET, 1) },
+        { DigimonName.Etemon, (ADDR_230_OFFSET, 2) },
+        { DigimonName.Yuramon, (ADDR_230_OFFSET, 3) },
+        { DigimonName.Tanemon, (ADDR_230_OFFSET, 4) },
+        { DigimonName.Biyomon, (ADDR_230_OFFSET, 5) },
+        { DigimonName.Palmon, (ADDR_230_OFFSET, 6) },
+        { DigimonName.Monochromon, (ADDR_230_OFFSET, 7) },
+
+        { DigimonName.Leomon, (ADDR_231_OFFSET, 0) },
+        { DigimonName.Coelamon, (ADDR_231_OFFSET, 1) },
+        { DigimonName.Kokatorimon, (ADDR_231_OFFSET, 2) },
+        { DigimonName.Kuwagamon, (ADDR_231_OFFSET, 3) },
+        { DigimonName.Mojyamon, (ADDR_231_OFFSET, 4) },
+        { DigimonName.Nanimon, (ADDR_231_OFFSET, 5) },
+        { DigimonName.Megadramon, (ADDR_231_OFFSET, 6) },
+        { DigimonName.Piximon, (ADDR_231_OFFSET, 7) },
+
+        { DigimonName.Digitamamon, (ADDR_232_OFFSET, 0) },
+        { DigimonName.Penguinmon, (ADDR_232_OFFSET, 1) },
+        { DigimonName.Ninjamon, (ADDR_232_OFFSET, 2) },
+        { DigimonName.Phoenixmon, (ADDR_232_OFFSET, 3) },
+        { DigimonName.HerculesKabuterimon, (ADDR_232_OFFSET, 4) },
+        { DigimonName.MegaSeadramon, (ADDR_232_OFFSET, 5) },
+        { DigimonName.Machinedramon, (ADDR_232_OFFSET, 6) },
+        { DigimonName.Myotismon, (ADDR_232_OFFSET, 6) },
+        { DigimonName.Panjyamon, (ADDR_232_OFFSET, 7) },
+        { DigimonName.Weregarurumon, (ADDR_232_OFFSET, 7) },
+
+        { DigimonName.Gigadramon, (ADDR_233_OFFSET, 0) },
+        { DigimonName.MetalEtemon, (ADDR_233_OFFSET, 1) }
+    };
+
+    protected override void UpdateData()
+    {
+        _flags225 = mem.ReadByte(ram.A(ADDR_225_OFFSET));
+        _flags226 = mem.ReadByte(ram.A(ADDR_226_OFFSET));
+        _flags227 = mem.ReadByte(ram.A(ADDR_227_OFFSET));
+        _flags228 = mem.ReadByte(ram.A(ADDR_228_OFFSET));
+        _flags229 = mem.ReadByte(ram.A(ADDR_229_OFFSET));
+        _flags230 = mem.ReadByte(ram.A(ADDR_230_OFFSET));
+        _flags231 = mem.ReadByte(ram.A(ADDR_231_OFFSET));
+        _flags232 = mem.ReadByte(ram.A(ADDR_232_OFFSET));
+        _flags233 = mem.ReadByte(ram.A(ADDR_233_OFFSET));
+        
+        EmulatorLinkEventHub.SignalHistoricEvolutionsSynchronized();
+    }
+
+    private bool HasBit(int address, int bit)
+    {
+        byte value = address switch
+        {
+            ADDR_225_OFFSET => _flags225,
+            ADDR_226_OFFSET => _flags226,
+            ADDR_227_OFFSET => _flags227,
+            ADDR_228_OFFSET => _flags228,
+            ADDR_229_OFFSET => _flags229,
+            ADDR_230_OFFSET => _flags230,
+            ADDR_231_OFFSET => _flags231,
+            ADDR_232_OFFSET => _flags232,
+            ADDR_233_OFFSET => _flags233,
+            _ => 0
+        };
+
+        return (value & (1 << bit)) != 0;
+    }
+}

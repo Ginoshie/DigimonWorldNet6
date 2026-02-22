@@ -3,6 +3,8 @@ using System.Diagnostics;
 using System.Reactive.Disposables;
 using MemoryAccess.Core;
 using MemoryAccess.MemoryValues;
+using MemoryAccess.MemoryValues.Digimon;
+using MemoryAccess.MemoryValues.Evolution;
 using Shared.Services.Events;
 
 namespace MemoryAccess;
@@ -74,7 +76,7 @@ public sealed class LiveMemoryReader : INotifyPropertyChanged, IDisposable
         {
             return;
         }
-        
+
         Stop();
 
         _emulatorProcessName = emulatorProcessName;
@@ -135,17 +137,19 @@ public sealed class LiveMemoryReader : INotifyPropertyChanged, IDisposable
         ProcessMemory mem = new(proc);
         PsxRam ram = new(mem);
 
-        DigimonParameterStats = new DigimonParameterStats(mem, ram);
-        DigimonConditionStats = new DigimonConditionStats(mem, ram);
-        DigimonProfileStats = new DigimonProfileStats(mem, ram);
-        DigimonTechniqueStats = new DigimonTechniqueStats(mem, ram);
+        ParameterStats = new ParameterStats(mem, ram);
+        ConditionStats = new ConditionStats(mem, ram);
+        ProfileStats = new ProfileStats(mem, ram);
+        CareStats = new CareStats(mem, ram);
+        TechniqueStats = new TechniqueStats(mem, ram);
         HistoricEvolutions = new HistoricEvolutions(mem, ram);
     }
 
-    public DigimonParameterStats DigimonParameterStats { get; private set; } = DigimonParameterStats.Empty;
-    public DigimonConditionStats DigimonConditionStats { get; private set; } = DigimonConditionStats.Empty;
-    public DigimonProfileStats DigimonProfileStats { get; private set; } = DigimonProfileStats.Empty;
-    public DigimonTechniqueStats DigimonTechniqueStats { get; private set; } = DigimonTechniqueStats.Empty;
+    public ParameterStats ParameterStats { get; private set; } = ParameterStats.Empty;
+    public ConditionStats ConditionStats { get; private set; } = ConditionStats.Empty;
+    public ProfileStats ProfileStats { get; private set; } = ProfileStats.Empty;
+    public CareStats CareStats { get; private set; } = CareStats.Empty;
+    public TechniqueStats TechniqueStats { get; private set; } = TechniqueStats.Empty;
     public HistoricEvolutions HistoricEvolutions { get; private set; } = HistoricEvolutions.Empty;
 
     public event PropertyChangedEventHandler? PropertyChanged;

@@ -1,6 +1,7 @@
 using NUnit.Framework;
 using Shared.Constants;
 using Shared.Enums;
+using GameVariant = Shared.Enums.GameVariant;
 
 namespace Shared.Tests.Constants;
 

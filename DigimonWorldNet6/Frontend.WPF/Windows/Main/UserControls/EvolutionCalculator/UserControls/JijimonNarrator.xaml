@@ -9,7 +9,7 @@
            Source="/Images/Digimon/jijimon-narrator-left.png"
            HorizontalAlignment="Center"
            VerticalAlignment="Center"
-           Margin="10,15,10,15">
+           Margin="10,15">
         <Image.RenderTransform>
             <ScaleTransform CenterX="0.5" CenterY="0.5" />
         </Image.RenderTransform>

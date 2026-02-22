@@ -1,0 +1,223 @@
+<UserControl x:Class="DigimonWorld.Frontend.WPF.Windows.Main.UserControls.TamerVision.TamerVisionUserControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:tamerVision="clr-namespace:DigimonWorld.Frontend.WPF.Windows.Main.UserControls.TamerVision"
+             xmlns:userControls="clr-namespace:DigimonWorld.Frontend.WPF.Windows.Main.UserControls.TamerVision.UserControls"
+             xmlns:system="clr-namespace:System;assembly=System.Runtime"
+             Height="565"
+             Width="1093"
+             UseLayoutRounding="True"
+             SnapsToDevicePixels="True"
+             mc:Ignorable="d"
+             d:DataContext="{d:DesignInstance Type=tamerVision:TamerVisionViewModel, IsDesignTimeCreatable=True}">
+
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/ResourceDictionaries/Styles/DefaultTextboxStyle.xaml" />
+                <ResourceDictionary Source="/ResourceDictionaries/Styles/DefaultComboboxStyle.xaml" />
+                <ResourceDictionary Source="/ResourceDictionaries/Styles/DefaultFocusStyle.xaml" />
+                <ResourceDictionary Source="/ResourceDictionaries/Styles/Labels/DefaultSheenLabelStyle.xaml" />
+                <ResourceDictionary Source="/ResourceDictionaries/Styles/Labels/DefaultLabelStyle.xaml" />
+                <ResourceDictionary Source="/ResourceDictionaries/Styles/ToolTips/DefaultTooltipRightStyle.xaml" />
+                <ResourceDictionary Source="/ResourceDictionaries/Styles/ToolTips/DefaultTooltipLeftStyle.xaml" />
+                <ResourceDictionary Source="/ResourceDictionaries/Styles/Buttons/DefaultButtonStyle.xaml" />
+                <ResourceDictionary Source="../../../../../ResourceDictionaries/Styles/Buttons/StretchContentButtonStyle.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+
+            <system:Double x:Key="SpecialImageDimension">30</system:Double>
+            <system:Double x:Key="LabelHeight">30</system:Double>
+
+            <Thickness x:Key="RowMargin">0, 2</Thickness>
+        </ResourceDictionary>
+    </UserControl.Resources>
+
+    <Border CornerRadius="8" BorderBrush="#90D9FA" BorderThickness="0" Background="#90D9FA">
+        <Grid KeyboardNavigation.TabNavigation="Cycle" Background="Transparent">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Border Grid.Row="0" Grid.Column="0" CornerRadius="5" BorderBrush="#90D9FA" BorderThickness="1.5, 1.5, 1.5, 1.5" Background="#90D9FA">
+                <Grid Background="Transparent">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Border Grid.Column="0" CornerRadius="5" BorderBrush="#90D9FA" BorderThickness="1.5, 1.5, 1.5, 1.5" Background="#90D9FA">
+                        <Border CornerRadius="3" BorderBrush="Black" BorderThickness="3">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+                                <Border Grid.Column="0" Grid.Row="0" BorderBrush="#060100" BorderThickness="3,3,0,0" Margin="15, 25, 15, 25" HorizontalAlignment="Right" VerticalAlignment="Top">
+                                    <Border BorderBrush="#6789A5" BorderThickness="0,0,3,3" Background="#354A5B">
+                                        <Image
+                                            Source="/Images/Misc/analogman.png" />
+                                    </Border>
+                                </Border>
+
+                                <userControls:AnalogmanNaratorTextDisplay Grid.Column="1" Grid.Row="0" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0, 0, 10, 0" />
+                            </Grid>
+                        </Border>
+                    </Border>
+
+                    <Border Grid.Row="0" Grid.Column="1" CornerRadius="5" BorderBrush="#90D9FA" BorderThickness="1.5, 1.5, 1.5, 1.5" Background="#90D9FA">
+                        <Border CornerRadius="3" BorderBrush="Black" BorderThickness="3">
+                            <Grid Grid.IsSharedSizeScope="True">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"></RowDefinition>
+                                    <RowDefinition Height="Auto"></RowDefinition>
+                                </Grid.RowDefinitions>
+                                <Label Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Top" Height="40" Width="120"
+                                       Style="{StaticResource DefaultSheenLabelStyle}"
+                                       IsTabStop="False" Content="PROFILE" />
+                                <Grid Grid.Row="1" Margin="10" SnapsToDevicePixels="True">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"></RowDefinition>
+                                        <RowDefinition Height="Auto"></RowDefinition>
+                                        <RowDefinition Height="Auto"></RowDefinition>
+                                        <RowDefinition Height="Auto"></RowDefinition>
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="345" />
+                                    </Grid.ColumnDefinitions>
+                                    <Image Grid.Row="0" Grid.Column="0"
+                                           HorizontalAlignment="Right"
+                                           Source="/Images/Icons/Labels/NAME label-grid.jpg"
+                                           Height="{StaticResource LabelHeight}"
+                                           Margin="0, 0 , 5,0" />
+                                    <TextBox Grid.Row="0" Grid.Column="1"
+                                             Name="Name"
+                                             Style="{StaticResource DefaultTextBoxStyle}"
+                                             Margin="{StaticResource RowMargin}"
+                                             Text="{Binding DigimonName}">
+                                        <TextBox.ToolTip>
+                                            <ToolTip Style="{StaticResource DefaultToolTipRightStyle}">
+                                                <TextBlock Text="The name of your digimon." />
+                                            </ToolTip>
+                                        </TextBox.ToolTip>
+                                    </TextBox>
+                                    <Image Grid.Row="1" Grid.Column="0"
+                                           HorizontalAlignment="Right"
+                                           Source="/Images/Icons/Labels/DIGI label-grid.jpg"
+                                           Height="{StaticResource LabelHeight}"
+                                           Margin="0, 0 , 5,0" />
+                                    <TextBox Grid.Row="1" Grid.Column="1"
+                                             Name="Digi"
+                                             Style="{StaticResource DefaultTextBoxStyle}"
+                                             Margin="{StaticResource RowMargin}"
+                                             Text="{Binding DigimonType}">
+                                        <TextBox.ToolTip>
+                                            <ToolTip Style="{StaticResource DefaultToolTipRightStyle}">
+                                                <TextBlock Text="The digimon type of your digimon." />
+                                            </ToolTip>
+                                        </TextBox.ToolTip>
+                                    </TextBox>
+                                    <Image Grid.Row="2" Grid.Column="0"
+                                           HorizontalAlignment="Right"
+                                           Source="/Images/Icons/Labels/special-label-grid.jpg"
+                                           Width="60"
+                                           Height="{StaticResource LabelHeight}"
+                                           Margin="0, 0 , 5,0" />
+                                    <Grid Grid.Row="2" Grid.Column="1">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto" />
+                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="Auto" />
+                                            <ColumnDefinition Width="Auto" />
+                                            <ColumnDefinition Width="Auto" />
+                                        </Grid.ColumnDefinitions>
+                                        <userControls:SpecialUserControl Grid.Column="0" Width="110" Tag="{Binding SpecialIcons}" Margin="0" />
+                                        <Image Grid.Column="1"
+                                               HorizontalAlignment="Right"
+                                               Source="/Images/Icons/Labels/type-label-grid.jpg"
+                                               Width="60"
+                                               Height="{StaticResource LabelHeight}"
+                                               Margin="0,0, 5, 0" />
+                                        <Button Grid.Column="2" ToolTipService.InitialShowDelay="{StaticResource DefaultTooltipDelay}" Style="{StaticResource DefaultButtonStyle}"
+                                                Width="{StaticResource SpecialImageDimension}"
+                                                Height="{StaticResource SpecialImageDimension}"
+                                                Margin="0,2, 10,2">
+                                            <Button.ToolTip>
+                                                <ToolTip Style="{StaticResource DefaultToolTipRightStyle}">
+                                                    <TextBlock Text="{Binding Type.Type}" />
+                                                </ToolTip>
+                                            </Button.ToolTip>
+                                            <Image Source="{Binding Type.IconPath}" Stretch="Fill">
+                                            </Image>
+                                        </Button>
+                                        <Image Grid.Column="3"
+                                               HorizontalAlignment="Right"
+                                               Source="/Images/Icons/Labels/AGE label-grid.jpg"
+                                               Height="{StaticResource LabelHeight}"
+                                               Margin="10, 0, 5, 0" />
+                                        <TextBox Grid.Column="4"
+                                                 Name="Age"
+                                                 Style="{StaticResource DefaultTextBoxStyle}"
+                                                 HorizontalContentAlignment="Center"
+                                                 Width="40"
+                                                 Margin="{StaticResource RowMargin}"
+                                                 Text="{Binding Age}">
+                                            <TextBox.ToolTip>
+                                                <ToolTip Style="{StaticResource DefaultToolTipRightStyle}">
+                                                    <TextBlock Text="The age of your Digimon in passed days since hatching." />
+                                                </ToolTip>
+                                            </TextBox.ToolTip>
+                                        </TextBox>
+                                    </Grid>
+                                    <Image Grid.Row="3" Grid.Column="0"
+                                           HorizontalAlignment="Right"
+                                           Source="/Images/Icons/Labels/active-label-grid.jpg"
+                                           Width="60"
+                                           Height="{StaticResource LabelHeight}"
+                                           Margin="0, 0 , 5,0" />
+                                    <TextBox Grid.Row="3" Grid.Column="1"
+                                             Name="Active"
+                                             Style="{StaticResource DefaultTextBoxStyle}"
+                                             Margin="{StaticResource RowMargin}"
+                                             Text="{Binding Active}">
+                                        <TextBox.ToolTip>
+                                            <ToolTip Style="{StaticResource DefaultToolTipRightStyle}">
+                                                <TextBlock Text="The time period(s) your digimon is active. It wants to sleep during the remaining hours." />
+                                            </ToolTip>
+                                        </TextBox.ToolTip>
+                                    </TextBox>
+                                </Grid>
+                            </Grid>
+                        </Border>
+                    </Border>
+                </Grid>
+            </Border>
+            <Border Grid.Row="1" Grid.Column="0" CornerRadius="5" BorderBrush="#90D9FA" BorderThickness="3, 1.5, 3, 3" Background="#90D9FA">
+                <Border CornerRadius="3" BorderBrush="Black" BorderThickness="3">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Top" Height="40" Width="120"
+                               Style="{StaticResource DefaultSheenLabelStyle}"
+                               IsTabStop="False" Content="STATS" />
+                        <userControls:CareStatsUserControl Grid.Row="1" Grid.Column="0" Margin="10, 0, 10,10"/>
+                        <userControls:CombatStatsUserControl Grid.Row="1" Grid.Column="1" Margin="0, 0, 10,10"/>
+                        <Label Grid.Row="0" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Top" Height="40" Width="120"
+                               Style="{StaticResource DefaultSheenLabelStyle}"
+                               IsTabStop="False" Content="EVOLUTION" />
+                        <userControls:EvolutionStatsUserControl Grid.Row="1" Grid.Column="2" />
+                    </Grid>
+                </Border>
+            </Border>
+        </Grid>
+    </Border>
+</UserControl>

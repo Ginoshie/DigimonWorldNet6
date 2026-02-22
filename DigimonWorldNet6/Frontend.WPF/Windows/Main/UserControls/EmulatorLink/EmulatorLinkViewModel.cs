@@ -106,8 +106,8 @@ public class EmulatorLinkViewModel : BaseViewModel, IDisposable
 
     private void SyncFromEmulator()
     {
-        IsHappy = LiveMemoryReader.Instance.DigimonConditionStats.Happiness >= 0;
-        IsDisciplined = LiveMemoryReader.Instance.DigimonConditionStats.Discipline >= 50;
+        IsHappy = LiveMemoryReader.Instance.ConditionStats.Happiness >= 0;
+        IsDisciplined = LiveMemoryReader.Instance.ConditionStats.Discipline >= 50;
     }
 
     public void Dispose()

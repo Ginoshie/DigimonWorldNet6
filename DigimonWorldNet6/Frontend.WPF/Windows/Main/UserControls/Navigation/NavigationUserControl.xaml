@@ -10,6 +10,7 @@
         <StackPanel Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center">
             <userControls:EvolutionCalculatorNavigationButton />
             <userControls:DigiWikiNavigationButton />
+            <userControls:TamerVisionNavigationButton />
         </StackPanel>
     </Grid>
 </UserControl>

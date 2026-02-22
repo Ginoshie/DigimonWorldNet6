@@ -16,6 +16,7 @@ using Shared.Enums;
 using Shared.Extensions;
 using Shared.Services;
 using Shared.Services.Events;
+using GameVariant = Shared.Enums.GameVariant;
 
 namespace DigimonWorld.Frontend.WPF.Windows.Main.UserControls.EvolutionCalculator;
 
@@ -257,8 +258,8 @@ public sealed class EvolutionCalculatorViewModel : BaseViewModel, IDisposable
         SetEmulatorDigimonType();
     }
 
-    private void SetEmulatorWeight() => Weight = ServiceRelay.LiveMemoryReader.DigimonProfileStats.Weight.ToString();
-    private void SetEmulatorDigimonType() => PlayerDigimonType = DigimonTypes.Get(ServiceRelay.LiveMemoryReader.DigimonProfileStats.DigimonType, _gameVariant).Digimon;
+    private void SetEmulatorWeight() => Weight = ServiceRelay.LiveMemoryReader.ProfileStats.Weight.ToString();
+    private void SetEmulatorDigimonType() => PlayerDigimonType = DigimonTypes.Get(ServiceRelay.LiveMemoryReader.ProfileStats.DigimonType, _gameVariant).DigimonName;
 
     // Parameter
     private void SyncAllEmulatorCombatStats()
@@ -271,12 +272,12 @@ public sealed class EvolutionCalculatorViewModel : BaseViewModel, IDisposable
         SyncEmulatorBrains();
     }
 
-    private void SyncEmulatorHP() => HP = ServiceRelay.LiveMemoryReader.DigimonParameterStats.HP.ToString();
-    private void SyncEmulatorMP() => MP = ServiceRelay.LiveMemoryReader.DigimonParameterStats.MP.ToString();
-    private void SyncEmulatorOff() => Off = ServiceRelay.LiveMemoryReader.DigimonParameterStats.Offense.ToString();
-    private void SyncEmulatorDef() => Def = ServiceRelay.LiveMemoryReader.DigimonParameterStats.Defense.ToString();
-    private void SyncEmulatorSpeed() => Speed = ServiceRelay.LiveMemoryReader.DigimonParameterStats.Speed.ToString();
-    private void SyncEmulatorBrains() => Brains = ServiceRelay.LiveMemoryReader.DigimonParameterStats.Brains.ToString();
+    private void SyncEmulatorHP() => HP = ServiceRelay.LiveMemoryReader.ParameterStats.HP.ToString();
+    private void SyncEmulatorMP() => MP = ServiceRelay.LiveMemoryReader.ParameterStats.MP.ToString();
+    private void SyncEmulatorOff() => Off = ServiceRelay.LiveMemoryReader.ParameterStats.Offense.ToString();
+    private void SyncEmulatorDef() => Def = ServiceRelay.LiveMemoryReader.ParameterStats.Defense.ToString();
+    private void SyncEmulatorSpeed() => Speed = ServiceRelay.LiveMemoryReader.ParameterStats.Speed.ToString();
+    private void SyncEmulatorBrains() => Brains = ServiceRelay.LiveMemoryReader.ParameterStats.Brains.ToString();
 
     // Condition
     private void SyncAllEmulatorConditionStats()
@@ -288,11 +289,11 @@ public sealed class EvolutionCalculatorViewModel : BaseViewModel, IDisposable
         SyncEmulatorBattlesCount();
     }
 
-    private void SyncEmulatorHappiness() => Discipline = ServiceRelay.LiveMemoryReader.DigimonConditionStats.Happiness.ToString();
-    private void SyncEmulatorDiscipline() => Happiness = ServiceRelay.LiveMemoryReader.DigimonConditionStats.Discipline.ToString();
-    private void SyncEmulatorCareMistakes() => CareMistakes = ServiceRelay.LiveMemoryReader.DigimonConditionStats.CareMistakes.ToString();
-    private void SyncEmulatorTechniqueCount() => Techniques = ServiceRelay.LiveMemoryReader.DigimonTechniqueStats.LearnedTechniqueCount().ToString();
-    private void SyncEmulatorBattlesCount() => Battles = ServiceRelay.LiveMemoryReader.DigimonConditionStats.Battles.ToString();
+    private void SyncEmulatorHappiness() => Discipline = ServiceRelay.LiveMemoryReader.ConditionStats.Happiness.ToString();
+    private void SyncEmulatorDiscipline() => Happiness = ServiceRelay.LiveMemoryReader.ConditionStats.Discipline.ToString();
+    private void SyncEmulatorCareMistakes() => CareMistakes = ServiceRelay.LiveMemoryReader.ConditionStats.CareMistakes.ToString();
+    private void SyncEmulatorTechniqueCount() => Techniques = ServiceRelay.LiveMemoryReader.TechniqueStats.LearnedTechniqueCount().ToString();
+    private void SyncEmulatorBattlesCount() => Battles = ServiceRelay.LiveMemoryReader.ConditionStats.Battles.ToString();
 
     private void UpdateEmulatorLinkSyncMode(EmulatorLinkSyncMode mode)
     {
@@ -322,7 +323,7 @@ public sealed class EvolutionCalculatorViewModel : BaseViewModel, IDisposable
     private void StartMemorySync()
     {
         _memorySyncDisposable.Disposable = Observable
-            .Interval(TimeSpan.FromSeconds(2))
+            .Interval(TimeSpan.FromSeconds(1))
             .TakeUntil(EmulatorLinkEventHub.EmulatorDisconnectedObservable)
             .Subscribe(_ =>
             {

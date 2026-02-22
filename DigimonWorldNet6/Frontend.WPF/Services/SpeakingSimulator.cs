@@ -67,7 +67,7 @@ public sealed class SpeakingSimulator : IDisposable
     {
         SpeechDelay.None => 0,
         SpeechDelay.Short => 600,
-        SpeechDelay.Long => 1500,
+        SpeechDelay.Long => 1200,
         _ => 0
     };
 
