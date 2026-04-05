@@ -2,7 +2,6 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.Reactive.Disposables;
 using MemoryAccess.Core;
-using MemoryAccess.MemoryValues;
 using MemoryAccess.MemoryValues.Digimon;
 using MemoryAccess.MemoryValues.Evolution;
 using Shared.Services.Events;

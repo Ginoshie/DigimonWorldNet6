@@ -1,6 +1,5 @@
 using System.Numerics;
 using MemoryAccess.Core;
-using MemoryAccess.MemoryValues.Evolution;
 using Shared.Services.Events;
 
 namespace MemoryAccess.MemoryValues.Digimon;
