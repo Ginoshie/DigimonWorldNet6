@@ -77,7 +77,7 @@ public static class EvolutionStageMapper
 
     public static EvolutionStage Get(string digimonName)
     {
-        if(!Enum.TryParse(digimonName, out DigimonName digimonNameEnum))
+        if (!Enum.TryParse(digimonName, out DigimonName digimonNameEnum))
         {
             throw new KeyNotFoundException($"{digimonName} was not parsable to enum '{typeof(DigimonName)}'");
         }

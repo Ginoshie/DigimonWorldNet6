@@ -161,4 +161,85 @@ public class DigimonTypesTests
         // Assert
         Assert.That(result, Is.EquivalentTo(_allMyotismonAndPanjyamonPatchDigimonNames));
     }
+
+    [TestCase(GameVariant.Original)]
+    [TestCase(GameVariant.Vice)]
+    [TestCase(GameVariant.Vice | GameVariant.MyotismonPatch)]
+    [TestCase(GameVariant.Vice | GameVariant.PanjyamonPatch)]
+    [TestCase(GameVariant.Vice | GameVariant.MyotismonPatch | GameVariant.PanjyamonPatch)]
+    public void Get_ShouldNeverContainDuplicates(GameVariant variant)
+    {
+        // Act
+        DigimonName[] result = DigimonTypes.Get(variant).ToArray();
+
+        // Assert
+        Assert.That(result, Is.Unique);
+    }
+
+    [Test]
+    public void Get_Original_ShouldNotContainViceExclusiveDigimon()
+    {
+        // Arrange
+        DigimonName[] viceExclusives =
+        [
+            DigimonName.Weregarurumon,
+            DigimonName.Gigadramon,
+            DigimonName.MetalEtemon,
+            DigimonName.Machinedramon,
+            DigimonName.Myotismon,
+            DigimonName.Panjyamon
+        ];
+
+        // Act
+        DigimonName[] result = DigimonTypes.Get(GameVariant.Original).ToArray();
+
+        // Assert
+        Assert.That(result, Has.None.AnyOf(viceExclusives));
+    }
+
+    [Test]
+    public void Get_Vice_ShouldNotContainMyotismonOrPanjyamon()
+    {
+        // Act
+        DigimonName[] result = DigimonTypes.Get(GameVariant.Vice).ToArray();
+
+        // Assert
+        Assert.That(result, Has.None.EqualTo(DigimonName.Myotismon));
+        Assert.That(result, Has.None.EqualTo(DigimonName.Panjyamon));
+    }
+
+    [Test]
+    public void Get_ViceWithMyotismonPatch_ShouldContainMyotismonButNotMachinedramon()
+    {
+        // Act
+        DigimonName[] result = DigimonTypes.Get(GameVariant.Vice | GameVariant.MyotismonPatch).ToArray();
+
+        // Assert
+        Assert.That(result, Has.Member(DigimonName.Myotismon));
+        Assert.That(result, Has.None.EqualTo(DigimonName.Machinedramon));
+    }
+
+    [Test]
+    public void Get_ViceWithPanjyamonPatch_ShouldContainPanjyamonButNotWeregarurumon()
+    {
+        // Act
+        DigimonName[] result = DigimonTypes.Get(GameVariant.Vice | GameVariant.PanjyamonPatch).ToArray();
+
+        // Assert
+        Assert.That(result, Has.Member(DigimonName.Panjyamon));
+        Assert.That(result, Has.None.EqualTo(DigimonName.Weregarurumon));
+    }
+
+    [Test]
+    public void Get_ViceWithBothPatches_ShouldContainMyotismonAndPanjyamonButNotMachinedramonOrWeregarurumon()
+    {
+        // Act
+        DigimonName[] result = DigimonTypes.Get(GameVariant.Vice | GameVariant.MyotismonPatch | GameVariant.PanjyamonPatch).ToArray();
+
+        // Assert
+        Assert.That(result, Has.Member(DigimonName.Myotismon));
+        Assert.That(result, Has.Member(DigimonName.Panjyamon));
+        Assert.That(result, Has.None.EqualTo(DigimonName.Machinedramon));
+        Assert.That(result, Has.None.EqualTo(DigimonName.Weregarurumon));
+    }
 }

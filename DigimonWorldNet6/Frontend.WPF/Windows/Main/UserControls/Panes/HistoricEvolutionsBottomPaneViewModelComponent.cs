@@ -1,4 +1,5 @@
 using System;
+using System.Diagnostics;
 using System.Reactive.Disposables;
 using System.Reactive.Disposables.Fluent;
 using System.Reactive.Linq;
@@ -135,17 +136,17 @@ public class HistoricEvolutionsBottomPaneViewModelComponent : PaneBaseViewModel,
 
     private void ToggleBottomPane() => PaneIsOpen = !PaneIsOpen;
 
-    private void SignalSyncFreshStageHistoricEvolutions() => HistoricEvolutionEventhub.SignalSyncFreshStageHistoricEvolutions();
+    private void SignalSyncFreshStageHistoricEvolutions() => HistoricEvolutionEventHub.SignalSyncFreshStageHistoricEvolutions();
 
-    private void SignalSyncInTrainingStageHistoricEvolutions() => HistoricEvolutionEventhub.SignalSyncInTrainingStageHistoricEvolutions();
+    private void SignalSyncInTrainingStageHistoricEvolutions() => HistoricEvolutionEventHub.SignalSyncInTrainingStageHistoricEvolutions();
 
-    private void SignalSyncRookieStageHistoricEvolutions() => HistoricEvolutionEventhub.SignalSyncRookieStageHistoricEvolutions();
+    private void SignalSyncRookieStageHistoricEvolutions() => HistoricEvolutionEventHub.SignalSyncRookieStageHistoricEvolutions();
 
-    private void SignalSyncChampionStageHistoricEvolutions() => HistoricEvolutionEventhub.SignalSyncChampionStageHistoricEvolutions();
+    private void SignalSyncChampionStageHistoricEvolutions() => HistoricEvolutionEventHub.SignalSyncChampionStageHistoricEvolutions();
 
-    private void SignalSyncUltimateStageHistoricEvolutions() => HistoricEvolutionEventhub.SignalSyncUltimateStageHistoricEvolutions();
+    private void SignalSyncUltimateStageHistoricEvolutions() => HistoricEvolutionEventHub.SignalSyncUltimateStageHistoricEvolutions();
 
-    private void SignalSyncAllStagesHistoricEvolutions() => HistoricEvolutionEventhub.SignalSyncAllStagesHistoricEvolutions();
+    private void SignalSyncAllStagesHistoricEvolutions() => HistoricEvolutionEventHub.SignalSyncAllStagesHistoricEvolutions();
 
     private void OnEmulatorConnectedChanged(bool isConnected)
     {
@@ -212,7 +213,7 @@ public class HistoricEvolutionsBottomPaneViewModelComponent : PaneBaseViewModel,
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine($"Error syncing historic evolutions: {ex}");
+                    Debug.WriteLine($"Error syncing historic evolutions: {ex}");
                 }
             });
     }

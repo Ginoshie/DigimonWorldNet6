@@ -12,8 +12,8 @@ namespace DigimonWorld.Evolution.Calculator.Core.EvolutionCalculation;
 public sealed class EvolutionCalculator
 {
     private static readonly Lazy<EvolutionCalculator> _instance = new(() => new EvolutionCalculator());
-    
-    public static EvolutionCalculator Instance { get; } = _instance.Value;
+
+    public static EvolutionCalculator Instance => _instance.Value;
     
     private EvolutionCalculator() { }
     

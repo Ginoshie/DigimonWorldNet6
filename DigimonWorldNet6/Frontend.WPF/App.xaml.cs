@@ -8,7 +8,6 @@ in other projects is strictly prohibited.
 
 using System.Text;
 using System.Windows;
-using DigimonWorld.Evolution.Calculator.Core.Modules;
 using DigimonWorld.Frontend.WPF.Windows.Main;
 using MemoryAccess;
 using Microsoft.Extensions.DependencyInjection;
@@ -26,9 +25,6 @@ public partial class App
             .ConfigureServices((_, services) =>
             {
                 services.AddSingleton<MainWindow>();
-
-                EvolutionCalculatorModule evolutionCalculatorModule = new();
-                evolutionCalculatorModule.RegisterServices(services);
             })
             .Build();
     }

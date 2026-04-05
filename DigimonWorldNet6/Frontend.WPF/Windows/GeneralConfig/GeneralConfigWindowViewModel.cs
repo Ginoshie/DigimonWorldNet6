@@ -180,23 +180,6 @@ public class GeneralConfigWindowViewModel : BaseViewModel, IDisposable
 
     #endregion
 
-    #region Emulator Link Properties
-
-    public bool EmulatorModeIsAuto
-    {
-        get;
-        private set
-        {
-            SetField(ref field, value);
-
-            OnPropertyChanged(nameof(EmulatorModeIsManual));
-        }
-    }
-
-    public bool EmulatorModeIsManual => !EmulatorModeIsAuto;
-
-    #endregion
-
     #region Tamer Vision Properties
 
     public bool TamerVisionShowEvo
@@ -448,14 +431,6 @@ public class GeneralConfigWindowViewModel : BaseViewModel, IDisposable
         UserConfigurationManager.SaveConfiguration();
     }
 
-    #endregion
-
-    public string SelectedEmulatorProcessName
-    {
-        get;
-        private set => SetField(ref field, value);
-    } = null!;
-
     private void OpenEmulatorSelector()
     {
         EmulatorProcessPickerDialog dialog = new()
@@ -483,6 +458,31 @@ public class GeneralConfigWindowViewModel : BaseViewModel, IDisposable
 
         UserConfigurationManager.SetEmulatorLinkSyncMode(EmulatorLinkSyncMode.Manual);
     }
+
+    #endregion
+
+    #region Emulator Link Properties
+
+    public bool EmulatorModeIsAuto
+    {
+        get;
+        private set
+        {
+            SetField(ref field, value);
+
+            OnPropertyChanged(nameof(EmulatorModeIsManual));
+        }
+    }
+
+    public bool EmulatorModeIsManual => !EmulatorModeIsAuto;
+
+    public string SelectedEmulatorProcessName
+    {
+        get;
+        private set => SetField(ref field, value);
+    } = null!;
+
+    #endregion
 
     public void Dispose() => _disposables.Dispose();
 }

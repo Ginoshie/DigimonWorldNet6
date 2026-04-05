@@ -110,8 +110,7 @@ public sealed class LiveMemoryReader : INotifyPropertyChanged, IDisposable
             }
             catch (TaskCanceledException)
             {
-                Connected = false;
-                await Task.Delay(1000, token);
+                break;
             }
             catch (Exception ex)
             {

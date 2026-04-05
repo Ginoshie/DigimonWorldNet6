@@ -26,12 +26,12 @@ public class HistoricEvolutionPickerViewModel : BaseViewModel, IDisposable
         _disposables = new CompositeDisposable
         {
             UserConfigurationManager.CurrentEvolutionCalculatorConfig.Subscribe(OnCurrentEvolutionCalculatorConfigChanged),
-            HistoricEvolutionEventhub.SyncFreshStageHistoricEvolutionsObservable.Subscribe(_ => SyncHistoricEvolutions(AllActiveFreshDigimonNames)),
-            HistoricEvolutionEventhub.SyncInTrainingStageHistoricEvolutionsObservable.Subscribe(_ => SyncHistoricEvolutions(AllActiveInTrainingDigimonNames)),
-            HistoricEvolutionEventhub.SyncRookieStageHistoricEvolutionsObservable.Subscribe(_ => SyncHistoricEvolutions(AllActiveRookieDigimonNames)),
-            HistoricEvolutionEventhub.SyncChampionStageHistoricEvolutionsObservable.Subscribe(_ => SyncHistoricEvolutions(AllActiveChampionDigimonNames)),
-            HistoricEvolutionEventhub.SyncUltimateStageHistoricEvolutionsObservable.Subscribe(_ => SyncHistoricEvolutions(AllActiveUltimateDigimonNames)),
-            HistoricEvolutionEventhub.SyncAllStagesHistoricEvolutionsObservable.Subscribe(_ => SyncHistoricEvolutions(AllActiveDigimonNames()))
+            HistoricEvolutionEventHub.SyncFreshStageHistoricEvolutionsObservable.Subscribe(_ => SyncHistoricEvolutions(AllActiveFreshDigimonNames)),
+            HistoricEvolutionEventHub.SyncInTrainingStageHistoricEvolutionsObservable.Subscribe(_ => SyncHistoricEvolutions(AllActiveInTrainingDigimonNames)),
+            HistoricEvolutionEventHub.SyncRookieStageHistoricEvolutionsObservable.Subscribe(_ => SyncHistoricEvolutions(AllActiveRookieDigimonNames)),
+            HistoricEvolutionEventHub.SyncChampionStageHistoricEvolutionsObservable.Subscribe(_ => SyncHistoricEvolutions(AllActiveChampionDigimonNames)),
+            HistoricEvolutionEventHub.SyncUltimateStageHistoricEvolutionsObservable.Subscribe(_ => SyncHistoricEvolutions(AllActiveUltimateDigimonNames)),
+            HistoricEvolutionEventHub.SyncAllStagesHistoricEvolutionsObservable.Subscribe(_ => SyncHistoricEvolutions(AllActiveDigimonNames()))
         };
     }
 

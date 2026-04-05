@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using System.Runtime.InteropServices;
 
 namespace MemoryAccess.Core
@@ -27,7 +28,7 @@ namespace MemoryAccess.Core
             }
 
             Base -= 0x90800;
-            Console.WriteLine($"PSX RAM base dynamically calculated: 0x{Base.ToInt64():X}");
+            Debug.WriteLine($"PSX RAM base dynamically calculated: 0x{Base.ToInt64():X}");
         }
         
         public static PsxRam Empty { get; } = new EmptyPsxRam();

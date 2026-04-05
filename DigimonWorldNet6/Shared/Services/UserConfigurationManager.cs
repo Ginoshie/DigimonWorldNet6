@@ -1,7 +1,7 @@
+using System.Diagnostics;
 using System.Reactive.Linq;
 using System.Reactive.Subjects;
 using System.Text.Json;
-using Microsoft.VisualBasic.FileIO;
 using Shared.Configuration;
 using Shared.Enums;
 using Shared.Services.Events;
@@ -11,10 +11,11 @@ namespace Shared.Services;
 public static class UserConfigurationManager
 {
     private static readonly UserConfiguration _userConfiguration;
-    private static readonly string _userConfigFullPath = FileSystem.CombinePath(AppDomain.CurrentDomain.BaseDirectory, "userconfig.json");
+    private static readonly string _userConfigFullPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "userconfig.json");
     private static readonly JsonSerializerOptions _jsonSerializerOptions = new() { WriteIndented = true };
 
     private static readonly BehaviorSubject<SpeakingSimulatorConfig> _currentSpeakingSimulatorConfigSubject;
+    private static readonly BehaviorSubject<MusicPlayerConfig> _currentMusicPlayerConfigSubject;
     private static readonly BehaviorSubject<EvolutionCalculatorConfig> _currentEvolutionCalculatorConfigSubject;
     private static readonly BehaviorSubject<TamerVisionConfig> _currentTamerVisionConfigSubject;
 
@@ -31,8 +32,8 @@ public static class UserConfigurationManager
         _currentSpeakingSimulatorConfigSubject = new BehaviorSubject<SpeakingSimulatorConfig>(SpeakingSimulatorConfig);
         CurrentSpeakingSimulatorConfig = _currentSpeakingSimulatorConfigSubject.AsObservable();
 
-        BehaviorSubject<MusicPlayerConfig> currentMusicPlayerConfigSubject = new(MusicPlayerConfig);
-        CurrentMusicPlayerConfig = currentMusicPlayerConfigSubject.AsObservable();
+        _currentMusicPlayerConfigSubject = new BehaviorSubject<MusicPlayerConfig>(MusicPlayerConfig);
+        CurrentMusicPlayerConfig = _currentMusicPlayerConfigSubject.AsObservable();
 
         _currentEvolutionCalculatorConfigSubject = new BehaviorSubject<EvolutionCalculatorConfig>(EvolutionCalculatorConfig);
         CurrentEvolutionCalculatorConfig = _currentEvolutionCalculatorConfigSubject.AsObservable();
@@ -63,14 +64,40 @@ public static class UserConfigurationManager
         _currentSpeakingSimulatorConfigSubject.OnNext(SpeakingSimulatorConfig);
     }
 
-    public static void SetVolume(int volume) => MusicPlayerConfig.Volume = volume;
+    public static void SetVolume(int volume)
+    {
+        MusicPlayerConfig.Volume = volume;
 
-    public static void SetMuteIsOn(MuteMode muteMode) => MusicPlayerConfig.MuteMode = muteMode;
+        _currentMusicPlayerConfigSubject.OnNext(MusicPlayerConfig);
+    }
 
-    public static void SetShuffleModeIsOn(ShuffleMode shuffleMode) => MusicPlayerConfig.ShuffleMode = shuffleMode;
+    public static void SetMuteIsOn(MuteMode muteMode)
+    {
+        MusicPlayerConfig.MuteMode = muteMode;
 
-    public static void SetRepeatModeIsSingle(RepeatMode repeatMode) => MusicPlayerConfig.RepeatMode = repeatMode;
-    public static void SetOnCloseAction(MusicPlayerOnCloseAction onCloseAction) => MusicPlayerConfig.OnCloseAction = onCloseAction;
+        _currentMusicPlayerConfigSubject.OnNext(MusicPlayerConfig);
+    }
+
+    public static void SetShuffleModeIsOn(ShuffleMode shuffleMode)
+    {
+        MusicPlayerConfig.ShuffleMode = shuffleMode;
+
+        _currentMusicPlayerConfigSubject.OnNext(MusicPlayerConfig);
+    }
+
+    public static void SetRepeatModeIsSingle(RepeatMode repeatMode)
+    {
+        MusicPlayerConfig.RepeatMode = repeatMode;
+
+        _currentMusicPlayerConfigSubject.OnNext(MusicPlayerConfig);
+    }
+
+    public static void SetOnCloseAction(MusicPlayerOnCloseAction onCloseAction)
+    {
+        MusicPlayerConfig.OnCloseAction = onCloseAction;
+
+        _currentMusicPlayerConfigSubject.OnNext(MusicPlayerConfig);
+    }
 
     public static void SetEvolutionCalculatorMode(GameVariant mode)
     {
@@ -121,7 +148,7 @@ public static class UserConfigurationManager
         }
         catch (Exception ex)
         {
-            Console.WriteLine($"Failed to save configuration: {ex.Message}");
+            Debug.WriteLine($"Failed to save configuration: {ex.Message}");
         }
     }
 
@@ -139,7 +166,7 @@ public static class UserConfigurationManager
         }
         catch (Exception ex)
         {
-            Console.WriteLine($"Error loading configuration: {ex.Message}");
+            Debug.WriteLine($"Error loading configuration: {ex.Message}");
 
             return new UserConfiguration();
         }

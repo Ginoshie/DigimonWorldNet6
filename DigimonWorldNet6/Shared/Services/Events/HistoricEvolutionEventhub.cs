@@ -4,7 +4,7 @@ using System.Reactive.Subjects;
 
 namespace Shared.Services.Events;
 
-public class HistoricEvolutionEventhub
+public static class HistoricEvolutionEventHub
 {
     private static readonly Subject<Unit> _syncFreshStageHistoricEvolutions = new();
     private static readonly Subject<Unit> _syncInTrainingStageHistoricEvolutions = new();
