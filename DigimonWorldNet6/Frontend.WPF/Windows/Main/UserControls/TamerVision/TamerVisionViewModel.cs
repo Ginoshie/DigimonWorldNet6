@@ -37,13 +37,14 @@ public class TamerVisionViewModel : BaseViewModel, IDisposable
     private const string ANONYMOUS_VARIANT_SUFFIX = "-anon.png";
 
     private readonly CompositeDisposable _disposables;
-    private readonly SerialDisposable _serialDisposable = new();
+    private readonly SerialDisposable _memorySyncDisposable = new();
     private readonly SpeakingSimulator _speakingSimulator = new();
     private readonly Brush _defaultEvolutionResultBackground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#354A5B"));
 
     private GameVariant _gameVariant = GameVariant.Original;
     private Digimon _syncedDigimon;
     private EvoResultMask _currentEvoResultMask = EvoResultMask.None;
+    private bool _emulatorIsConnected;
 
     public TamerVisionViewModel()
     {
@@ -67,14 +68,8 @@ public class TamerVisionViewModel : BaseViewModel, IDisposable
         _disposables = new CompositeDisposable(
             _speakingSimulator,
             UserConfigurationManager.CurrentEvolutionCalculatorConfig.Subscribe(evolutionCalculatorConfig => _gameVariant = evolutionCalculatorConfig.GameVariant),
-            EmulatorLinkEventHub.DigimonConditionStatsSynchronizedObservable.Subscribe(_ => OnDigimonConditionStatsSynchronized()),
-            EmulatorLinkEventHub.DigimonParameterStatsSynchronizedObservable.Subscribe(_ => OnDigimonParameterStatsSynchronized()),
-            EmulatorLinkEventHub.DigimonProfileStatsSynchronizedObservable.Subscribe(_ => OnDigimonProfileStatsSynchronized()),
-            EmulatorLinkEventHub.DigimonCareStatsSynchronizedObservable.Subscribe(_ => OnCareStatsSynchronized()),
-            EmulatorLinkEventHub.DigimonTechniqueStatsSynchronizedObservable.Subscribe(_ => OnDigimonTechniqueStatsSynchronized()),
-            EmulatorLinkEventHub.HistoricEvolutionsSynchronizedObservable.Subscribe(_ => OnHistoricEvolutionsSynchronized()),
             EmulatorLinkEventHub.EmulatorConnectedObservable.Subscribe(OnEmulatorConnectedChanged),
-            _serialDisposable
+            _memorySyncDisposable
         );
 
         UpdateEvoResult();
@@ -84,12 +79,48 @@ public class TamerVisionViewModel : BaseViewModel, IDisposable
     {
         if (isConnected)
         {
-            _serialDisposable.Disposable = Observable.Interval(TimeSpan.FromSeconds(1)).ObserveOn(SynchronizationContext.Current!).Subscribe(_ => CalculateEvolutionResult());
+            _emulatorIsConnected = true;
+            StartMemorySync();
         }
         else
         {
-            _serialDisposable.Dispose();
+            _emulatorIsConnected = false;
+            StopMemorySync();
         }
+    }
+
+    private void StartMemorySync()
+    {
+        _memorySyncDisposable.Disposable = Observable
+            .Interval(TimeSpan.FromSeconds(1))
+            .ObserveOn(SynchronizationContext.Current!)
+            .TakeUntil(_ => !_emulatorIsConnected)
+            .Subscribe(_ =>
+            {
+                if (!_emulatorIsConnected)
+                {
+                    return;
+                }
+
+                try
+                {
+                    SyncAllProfileStats();
+                    SyncAllParameterStats();
+                    SyncAllConditionStats();
+                    SyncAllCareStats();
+                    SyncTechniqueStats();
+                    CalculateEvolutionResult();
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"Error syncing stats: {ex}");
+                }
+            });
+    }
+
+    private void StopMemorySync()
+    {
+        _memorySyncDisposable.Disposable = null;
     }
 
     public string AnalogmanText
@@ -372,31 +403,8 @@ public class TamerVisionViewModel : BaseViewModel, IDisposable
         };
     }
 
-    public void OnDigimonConditionStatsSynchronized()
-    {
-        ConditionStats conditionStats = ServiceRelay.LiveMemoryReader.ConditionStats;
-
-        CareMistakes = conditionStats.CareMistakes;
-        Happiness = conditionStats.Happiness;
-        Discipline = conditionStats.Discipline;
-        Battles = conditionStats.Battles;
-    }
-
-    public void OnDigimonParameterStatsSynchronized()
-    {
-        ParameterStats parameterStats = ServiceRelay.LiveMemoryReader.ParameterStats;
-
-        HP = parameterStats.HP;
-        CurrentHP = parameterStats.CurrentHP;
-        MP = parameterStats.MP;
-        CurrentMP = parameterStats.CurrentMP;
-        Offense = parameterStats.Offense;
-        Defence = parameterStats.Defense;
-        Speed = parameterStats.Speed;
-        Brains = parameterStats.Brains;
-    }
-
-    public void OnDigimonProfileStatsSynchronized()
+    // Profile
+    private void SyncAllProfileStats()
     {
         ProfileStats profileStats = ServiceRelay.LiveMemoryReader.ProfileStats;
         _syncedDigimon = DigimonTypes.Get(profileStats.DigimonType, _gameVariant);
@@ -419,7 +427,34 @@ public class TamerVisionViewModel : BaseViewModel, IDisposable
             : $"Active from {awakeFromHour} o'clock till {awakeTillHour} o'clock ({activeType})";
     }
 
-    private void OnCareStatsSynchronized()
+    // Parameter
+    private void SyncAllParameterStats()
+    {
+        ParameterStats parameterStats = ServiceRelay.LiveMemoryReader.ParameterStats;
+
+        HP = parameterStats.HP;
+        CurrentHP = parameterStats.CurrentHP;
+        MP = parameterStats.MP;
+        CurrentMP = parameterStats.CurrentMP;
+        Offense = parameterStats.Offense;
+        Defence = parameterStats.Defense;
+        Speed = parameterStats.Speed;
+        Brains = parameterStats.Brains;
+    }
+
+    // Condition
+    private void SyncAllConditionStats()
+    {
+        ConditionStats conditionStats = ServiceRelay.LiveMemoryReader.ConditionStats;
+
+        CareMistakes = conditionStats.CareMistakes;
+        Happiness = conditionStats.Happiness;
+        Discipline = conditionStats.Discipline;
+        Battles = conditionStats.Battles;
+    }
+
+    // Care
+    private void SyncAllCareStats()
     {
         CareStats careStats = ServiceRelay.LiveMemoryReader.CareStats;
 
@@ -431,16 +466,14 @@ public class TamerVisionViewModel : BaseViewModel, IDisposable
         StarvationTimer = careStats.StarvationTimer;
     }
 
-    private void OnDigimonTechniqueStatsSynchronized()
+    // Technique
+    private void SyncTechniqueStats()
     {
         TechniqueStats techniqueStats = ServiceRelay.LiveMemoryReader.TechniqueStats;
 
         TechniqueCount = techniqueStats.LearnedTechniqueCount();
     }
 
-    private void OnHistoricEvolutionsSynchronized()
-    {
-    }
 
     private void InstantDisplay() => _speakingSimulator.RequestInstantDisplay();
 
