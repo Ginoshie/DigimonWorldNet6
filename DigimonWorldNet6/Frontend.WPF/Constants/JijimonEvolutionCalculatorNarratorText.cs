@@ -52,10 +52,10 @@ public static class JijimonEvolutionCalculatorNarratorText
 
     private static string RookieResponses(DigimonName evolutionDigimonName)
     {
-        if (evolutionDigimonName.EvolutionStage() != EvolutionStage.Champion)
+        if (evolutionDigimonName.EvolutionStage() != EvolutionStage.Rookie)
         {
             throw new ArgumentOutOfRangeException(nameof(evolutionDigimonName), evolutionDigimonName,
-                $"{evolutionDigimonName} is not a champion evolution target. These responses are only meant for champion evolutions.");
+                $"{evolutionDigimonName} is not a rookie evolution target. These responses are only meant for rookie evolutions.");
         }
 
         return evolutionDigimonName switch
@@ -72,7 +72,7 @@ public static class JijimonEvolutionCalculatorNarratorText
                                   "I'm chuffed!  *smiles widely*",
             DigimonName.Gabumon => "Oh yet another evolution, I am chuffed!\n" +
                                    "\n" +
-                                   "Oh look at that, it's a {evolutionDigimonType}!\n" +
+                                   $"Oh look at that, it's a {evolutionDigimonName}!\n" +
                                    "\n" +
                                    "A long time ago a player enjoyed this little guys presence a lot." +
                                    "\n" +
@@ -157,9 +157,12 @@ public static class JijimonEvolutionCalculatorNarratorText
                                    "\n" +
                                    "Speak of the devil . . . \n" +
                                    $"\n It's going to become a {evolutionDigimonName}.",
-            DigimonName.Coelamon => "Is it a plain?\n" +
+            DigimonName.Coelamon => "Is it a plane?\n" +
+                                    "\n" +
                                     "Is it a fish?\n" +
+                                    "\n" +
                                     "Is it a floater?\n" +
+                                    "\n" +
                                     $"\n {ShowEvolutionResultKeyWord} " +
                                     $"No! It's a {evolutionDigimonName}",
             DigimonName.Centarumon => $"Here we go, another evolution.\n {ShowEvolutionResultKeyWord} " +
@@ -198,7 +201,7 @@ public static class JijimonEvolutionCalculatorNarratorText
         if (evolutionDigimonName.EvolutionStage() != EvolutionStage.Ultimate)
         {
             throw new ArgumentOutOfRangeException(nameof(evolutionDigimonName), evolutionDigimonName,
-                $"{evolutionDigimonName} is not a champion evolution target. These responses are only meant for champion evolutions.");
+                $"{evolutionDigimonName} is not an ultimate evolution target. These responses are only meant for ultimate evolutions.");
         }
 
         return evolutionDigimonName switch
@@ -240,7 +243,7 @@ public static class JijimonEvolutionCalculatorNarratorText
                                        $"Great, it's a {evolutionDigimonName}.\n" +
                                        "\n" +
                                        "He broke his egg so now he can make us omelettes.  *chuckles*",
-            DigimonName.Etemon => "Ohh this is going to be a cheeky evolution . . . \n" +
+            DigimonName.Etemon => $"Ohh this is going to be a cheeky evolution . . . \n {ShowEvolutionResultKeyWord} " +
                                   "\n" +
                                   $"Oh yes, it's an {evolutionDigimonName}." +
                                   "\n" +

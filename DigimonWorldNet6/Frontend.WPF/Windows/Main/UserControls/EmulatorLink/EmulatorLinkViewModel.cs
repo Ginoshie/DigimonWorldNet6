@@ -4,6 +4,8 @@ using System.Reactive.Linq;
 using System.Windows.Input;
 using DigimonWorld.Frontend.WPF.ViewModelComponents;
 using MemoryAccess;
+using Shared.Enums;
+using Shared.Services;
 using Shared.Services.Events;
 
 namespace DigimonWorld.Frontend.WPF.Windows.Main.UserControls.EmulatorLink;
@@ -13,6 +15,7 @@ public class EmulatorLinkViewModel : BaseViewModel, IDisposable
     private readonly CompositeDisposable _disposable;
 
     private IDisposable? _memorySyncSubscription;
+    private EmulatorLinkSyncMode _emulatorSyncMode;
 
     public EmulatorLinkViewModel()
     {
@@ -38,8 +41,11 @@ public class EmulatorLinkViewModel : BaseViewModel, IDisposable
         SetDigimonTechniquesCountFromEmulator = new CommandHandler(DigimonStatsEventHub.SignalSyncEmulatorTechniqueCount);
         SetDigimonBattlesCountFromEmulator = new CommandHandler(DigimonStatsEventHub.SignalSyncEmulatorBattlesCount);
 
+        _emulatorSyncMode = UserConfigurationManager.EmulatorLinkConfig.EmulatorLinkSyncMode;
+
         _disposable = new CompositeDisposable(
-            EmulatorLinkEventHub.EmulatorConnectedObservable.Subscribe(OnEmulatorConnectedChanged)
+            EmulatorLinkEventHub.EmulatorConnectedObservable.Subscribe(OnEmulatorConnectedChanged),
+            EmulatorLinkEventHub.EmulatorLinkSyncModeChangedObservable.Subscribe(OnEmulatorSyncModeChanged)
         );
     }
 
@@ -53,7 +59,6 @@ public class EmulatorLinkViewModel : BaseViewModel, IDisposable
     public ICommand SignalSetAllEmulatorProfileStatsCommand { get; }
     public ICommand SetDigimonTypeFromEmulator { get; }
     public ICommand SetDigimonWeightFromEmulator { get; }
-
 
     // Parameter stats
     public ICommand SignalSetAllEmulatorParameterStatsCommand { get; }
@@ -93,16 +98,54 @@ public class EmulatorLinkViewModel : BaseViewModel, IDisposable
     {
         if (isConnected)
         {
-            _memorySyncSubscription = Observable.Interval(TimeSpan.FromMilliseconds(500)).Subscribe(_ => SyncFromEmulator());
-
             EmulatorConnected = true;
+
+            if (_emulatorSyncMode == EmulatorLinkSyncMode.Auto)
+            {
+                StartSyncTimer();
+            }
         }
         else
         {
-            _memorySyncSubscription?.Dispose();
-        
+            StopSyncTimer();
+
             EmulatorConnected = false;
         }
+    }
+
+    private void OnEmulatorSyncModeChanged(EmulatorLinkSyncMode mode)
+    {
+        _emulatorSyncMode = mode;
+
+        switch (mode)
+        {
+            case EmulatorLinkSyncMode.Auto:
+            {
+                if (EmulatorConnected)
+                {
+                    StartSyncTimer();
+                }
+
+                break;
+            }
+            case EmulatorLinkSyncMode.Manual:
+                StopSyncTimer();
+                break;
+            default:
+                throw new ArgumentOutOfRangeException();
+        }
+    }
+
+    private void StartSyncTimer()
+    {
+        _memorySyncSubscription?.Dispose();
+        _memorySyncSubscription = Observable.Interval(TimeSpan.FromMilliseconds(500)).Subscribe(_ => SyncFromEmulator());
+    }
+
+    private void StopSyncTimer()
+    {
+        _memorySyncSubscription?.Dispose();
+        _memorySyncSubscription = null;
     }
 
     private void SyncFromEmulator()
@@ -114,7 +157,7 @@ public class EmulatorLinkViewModel : BaseViewModel, IDisposable
     public void Dispose()
     {
         _disposable.Dispose();
-        
-        _memorySyncSubscription?.Dispose();
+
+        StopSyncTimer();
     }
 }

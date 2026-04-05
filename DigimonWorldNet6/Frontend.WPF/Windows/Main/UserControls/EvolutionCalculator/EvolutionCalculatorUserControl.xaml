@@ -162,7 +162,7 @@
                                     <TextBox.Text>
                                         <Binding Path="Off" UpdateSourceTrigger="PropertyChanged" Mode="TwoWay">
                                             <Binding.ValidationRules>
-                                                <combatStatValidation:DefenseStringValidationRule ValidationStep="CommittedValue" />
+                                                <combatStatValidation:OffenseStringValidationRule ValidationStep="CommittedValue" />
                                             </Binding.ValidationRules>
                                         </Binding>
                                     </TextBox.Text>
@@ -187,7 +187,7 @@
                                     <TextBox.Text>
                                         <Binding Path="Def" UpdateSourceTrigger="PropertyChanged" Mode="TwoWay">
                                             <Binding.ValidationRules>
-                                                <combatStatValidation:BrainsStringValidationRule ValidationStep="CommittedValue" />
+                                                <combatStatValidation:DefenseStringValidationRule ValidationStep="CommittedValue" />
                                             </Binding.ValidationRules>
                                         </Binding>
                                     </TextBox.Text>
@@ -237,7 +237,7 @@
                                     <TextBox.Text>
                                         <Binding Path="Brains" UpdateSourceTrigger="PropertyChanged" Mode="TwoWay">
                                             <Binding.ValidationRules>
-                                                <combatStatValidation:OffenseStringValidationRule ValidationStep="CommittedValue" />
+                                                <combatStatValidation:BrainsStringValidationRule ValidationStep="CommittedValue" />
                                             </Binding.ValidationRules>
                                         </Binding>
                                     </TextBox.Text>

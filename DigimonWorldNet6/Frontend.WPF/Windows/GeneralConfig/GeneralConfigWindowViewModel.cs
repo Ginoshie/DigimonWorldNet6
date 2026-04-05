@@ -228,7 +228,6 @@ public class GeneralConfigWindowViewModel : BaseViewModel, IDisposable
         get => _currentSelectedSettingCategoryUserControl;
         private set
         {
-            LoadConfig();
 
             SetField(ref _currentSelectedSettingCategoryUserControl, value);
 
@@ -354,13 +353,6 @@ public class GeneralConfigWindowViewModel : BaseViewModel, IDisposable
         ApplyEvolutionCalculatorMode();
     }
 
-    private void SetEmulatorLinkSyncMode(EmulatorLinkSyncMode mode)
-    {
-        EmulatorModeIsAuto = mode == EmulatorLinkSyncMode.Auto;
-
-        UserConfigurationManager.SetEmulatorLinkSyncMode(mode);
-    }
-
     private void SetTamerVisionShowEvo(bool show)
     {
         TamerVisionShowEvo = show;
@@ -400,17 +392,21 @@ public class GeneralConfigWindowViewModel : BaseViewModel, IDisposable
         SetRepeatMode(musicPlayerConfig.RepeatMode);
         SetOnCloseAction(musicPlayerConfig.OnCloseAction);
 
-        SetNarratorMode(UserConfigurationManager.SpeakingSimulatorConfig.NarratorMode);
+        IsNarratorModeSpeech = UserConfigurationManager.SpeakingSimulatorConfig.NarratorMode == NarratorMode.Speech;
+        IsNarratorModeInstant = UserConfigurationManager.SpeakingSimulatorConfig.NarratorMode == NarratorMode.Instant;
 
         _gameVariant = UserConfigurationManager.EvolutionCalculatorConfig.GameVariant;
         RaiseEvolutionCalculatorProperties();
 
-        SetEmulatorLinkSyncMode(UserConfigurationManager.EmulatorLinkConfig.EmulatorLinkSyncMode);
+        EmulatorModeIsAuto = UserConfigurationManager.EmulatorLinkConfig.EmulatorLinkSyncMode == EmulatorLinkSyncMode.Auto;
         SelectedEmulatorProcessName = UserConfigurationManager.EmulatorLinkConfig.SelectedProcessName;
 
         TamerVisionConfig tamerVisionConfig = UserConfigurationManager.TamerVisionConfig;
-        SetTamerVisionShowEvo(tamerVisionConfig.ShowEvo);
-        SetTamerVisionEvoResultMask(tamerVisionConfig.EvoResultMask);
+        TamerVisionShowEvo = tamerVisionConfig.ShowEvo;
+        TamerVisionEvoResultMaskIsNone = tamerVisionConfig.EvoResultMask == EvoResultMask.None;
+        TamerVisionEvoResultMaskIsBlurred = tamerVisionConfig.EvoResultMask == EvoResultMask.Blurred;
+        TamerVisionEvoResultMaskIsDigiGuess = tamerVisionConfig.EvoResultMask == EvoResultMask.DigiGuess;
+        TamerVisionEvoResultMaskIsAnonymous = tamerVisionConfig.EvoResultMask == EvoResultMask.Anonymous;
     }
 
     private void SaveConfiguration()

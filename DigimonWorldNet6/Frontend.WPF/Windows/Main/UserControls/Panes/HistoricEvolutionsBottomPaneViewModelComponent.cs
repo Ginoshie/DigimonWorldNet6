@@ -22,9 +22,12 @@ public class HistoricEvolutionsBottomPaneViewModelComponent : PaneBaseViewModel,
     private const double EMULATOR_SYNC_BUTTON_SECTION_CLOSED_X_OFFSET = -65;
 
     private readonly CompositeDisposable _disposable;
+    private readonly SynchronizationContext _uiSynchronizationContext;
 
     public HistoricEvolutionsBottomPaneViewModelComponent()
     {
+        _uiSynchronizationContext = SynchronizationContext.Current!;
+
         ToggleBottomPaneCommand = new CommandHandler(ToggleBottomPane);
 
         SignalSyncFreshStageHistoricEvolutionsCommand = new CommandHandler(SignalSyncFreshStageHistoricEvolutions);
@@ -36,7 +39,8 @@ public class HistoricEvolutionsBottomPaneViewModelComponent : PaneBaseViewModel,
 
         _disposable = new CompositeDisposable(
             EmulatorLinkEventHub.EmulatorConnectedObservable.Subscribe(OnEmulatorConnectedChanged),
-            EmulatorLinkEventHub.EmulatorLinkSyncModeChangedObservable.Subscribe(UpdateEmulatorLinkSyncMode)
+            EmulatorLinkEventHub.EmulatorLinkSyncModeChangedObservable.Subscribe(UpdateEmulatorLinkSyncMode),
+            _memorySyncDisposable
         );
 
         PaneOffset = PaneIsOpen ? PANEL_OPENED_X_OFFSET : PANEL_CLOSED_X_OFFSET;
@@ -45,7 +49,7 @@ public class HistoricEvolutionsBottomPaneViewModelComponent : PaneBaseViewModel,
             .Select(paneIsOpen => paneIsOpen ? PANEL_OPENED_X_OFFSET : PANEL_CLOSED_X_OFFSET)
             .DistinctUntilChanged()
             .SelectMany(targetOffset => AnimateOffset(PaneOffset, targetOffset))
-            .ObserveOn(SynchronizationContext.Current!)
+            .ObserveOn(_uiSynchronizationContext)
             .Subscribe(v => PaneOffset = v)
             .DisposeWith(_disposable);
 
@@ -55,7 +59,7 @@ public class HistoricEvolutionsBottomPaneViewModelComponent : PaneBaseViewModel,
             .Select(emulatorSyncButtonSectionIsOpen => emulatorSyncButtonSectionIsOpen ? EMULATOR_SYNC_BUTTON_SECTION_OPENED_X_OFFSET : EMULATOR_SYNC_BUTTON_SECTION_CLOSED_X_OFFSET)
             .DistinctUntilChanged()
             .SelectMany(targetOffset => AnimateOffset(EmulatorButtonSectionOffset, targetOffset))
-            .ObserveOn(SynchronizationContext.Current!)
+            .ObserveOn(_uiSynchronizationContext)
             .Subscribe(v => EmulatorButtonSectionOffset = v)
             .DisposeWith(_disposable);
 
@@ -160,7 +164,6 @@ public class HistoricEvolutionsBottomPaneViewModelComponent : PaneBaseViewModel,
             }
         }
         else
-
         {
             EmulatorConnected = false;
 
@@ -199,6 +202,7 @@ public class HistoricEvolutionsBottomPaneViewModelComponent : PaneBaseViewModel,
     {
         _memorySyncDisposable.Disposable = Observable
             .Interval(TimeSpan.FromSeconds(2))
+            .ObserveOn(_uiSynchronizationContext)
             .TakeUntil(_ => !EmulatorConnected)
             .Subscribe(_ =>
             {

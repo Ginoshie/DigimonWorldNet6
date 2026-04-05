@@ -42,6 +42,7 @@ public class TamerVisionViewModel : BaseViewModel, IDisposable
     private readonly SerialDisposable _memorySyncDisposable = new();
     private readonly SpeakingSimulator _speakingSimulator = new();
     private readonly Brush _defaultEvolutionResultBackground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#354A5B"));
+    private readonly SynchronizationContext _uiSynchronizationContext;
 
     private GameVariant _gameVariant = GameVariant.Original;
     private Digimon _syncedDigimon;
@@ -50,6 +51,8 @@ public class TamerVisionViewModel : BaseViewModel, IDisposable
 
     public TamerVisionViewModel()
     {
+        _uiSynchronizationContext = SynchronizationContext.Current!;
+
         InstantDisplayCommand = new CommandHandler(InstantDisplay);
         SetShowEvoCommand = new CommandHandler(SetShowEvo);
         SetHideEvoCommand = new CommandHandler(SetHideEvo);
@@ -90,6 +93,9 @@ public class TamerVisionViewModel : BaseViewModel, IDisposable
             return;
         }
 
+        _emulatorIsConnected = true;
+
+
         try
         {
             SyncAllProfileStats();
@@ -103,6 +109,8 @@ public class TamerVisionViewModel : BaseViewModel, IDisposable
         {
             // Memory data may not be available yet — that's fine, the sync timer will pick it up
         }
+
+        StartMemorySync();
     }
 
     private void OnEmulatorConnectedChanged(bool isConnected)
@@ -118,6 +126,7 @@ public class TamerVisionViewModel : BaseViewModel, IDisposable
             StopMemorySync();
         }
     }
+
 
     private void OnTamerVisionConfigChanged(TamerVisionConfig config)
     {
@@ -138,7 +147,7 @@ public class TamerVisionViewModel : BaseViewModel, IDisposable
     {
         _memorySyncDisposable.Disposable = Observable
             .Interval(TimeSpan.FromSeconds(1))
-            .ObserveOn(SynchronizationContext.Current!)
+            .ObserveOn(_uiSynchronizationContext)
             .TakeUntil(_ => !_emulatorIsConnected)
             .Subscribe(_ =>
             {

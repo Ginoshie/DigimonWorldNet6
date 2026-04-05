@@ -27,7 +27,7 @@ using DigimonWorld.Frontend.WPF.Windows.Main.UserControls.DigiWiki.UserControls.
 
 namespace DigimonWorld.Frontend.WPF.Windows.Main.UserControls.DigiWiki;
 
-public class DigiWikiViewModel : BaseViewModel
+public class DigiWikiViewModel : BaseViewModel, IDisposable
 {
     private readonly SpeakingSimulator _speakingSimulator = new();
 
@@ -150,4 +150,6 @@ public class DigiWikiViewModel : BaseViewModel
     {
         _speakingSimulator.RequestInstantDisplay();
     }
+
+    public void Dispose() => _speakingSimulator.Dispose();
 }

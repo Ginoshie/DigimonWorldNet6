@@ -75,6 +75,8 @@ public class MainWindowViewModel : BaseWindowViewModel, IDisposable
         configWindow.DataContext = configViewModel;
 
         configWindow.ShowDialog();
+
+        configViewModel.Dispose();
     }
 
     private void OpenAboutAndCreditsWindow()

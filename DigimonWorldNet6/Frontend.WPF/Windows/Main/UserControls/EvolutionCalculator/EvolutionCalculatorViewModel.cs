@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Reactive.Disposables;
 using System.Reactive.Linq;
+using System.Threading;
 using System.Windows.Input;
 using DigimonWorld.Evolution.Calculator.Core;
 using DigimonWorld.Evolution.Calculator.Core.DataObjects;
@@ -25,6 +26,7 @@ public sealed class EvolutionCalculatorViewModel : BaseViewModel, IDisposable
 {
     private readonly SpeakingSimulator _speakingSimulator;
     private readonly CompositeDisposable _compositeDisposable;
+    private readonly SynchronizationContext _uiSynchronizationContext;
 
     private EvolutionResult _evolutionResult = EvolutionResult.Unknown;
     private GameVariant _gameVariant = GameVariant.Original;
@@ -33,6 +35,7 @@ public sealed class EvolutionCalculatorViewModel : BaseViewModel, IDisposable
 
     public EvolutionCalculatorViewModel()
     {
+        _uiSynchronizationContext = SynchronizationContext.Current!;
         _speakingSimulator = new SpeakingSimulator();
 
         _compositeDisposable = new CompositeDisposable(
@@ -65,7 +68,10 @@ public sealed class EvolutionCalculatorViewModel : BaseViewModel, IDisposable
             EmulatorLinkEventHub.EmulatorConnectedObservable.Subscribe(OnEmulatorConnectedChanged),
 
             // UserConfig
-            UserConfigurationManager.CurrentEvolutionCalculatorConfig.Subscribe(UpdateAvailableDigimon)
+            UserConfigurationManager.CurrentEvolutionCalculatorConfig.Subscribe(UpdateAvailableDigimon),
+
+            // Memory sync
+            _memorySyncDisposable
         );
 
         SetEvolutionResult = new CommandHandler(CalculateEvolutionResult);
@@ -228,7 +234,7 @@ public sealed class EvolutionCalculatorViewModel : BaseViewModel, IDisposable
 
             _evolutionResult = value;
 
-            _ = _speakingSimulator.SpeakAsync(JijimonEvolutionCalculatorNarratorText.EvolutionResultCalculated(value), textOutput => JijimonText = textOutput, 0, () => OnPropertyChanged());
+            _ = _speakingSimulator.SpeakAsync(JijimonEvolutionCalculatorNarratorText.EvolutionResultCalculated(value), textOutput => JijimonText = textOutput, SpeechDelay.None, () => OnPropertyChanged());
         }
     }
 
@@ -354,6 +360,7 @@ public sealed class EvolutionCalculatorViewModel : BaseViewModel, IDisposable
     {
         _memorySyncDisposable.Disposable = Observable
             .Interval(TimeSpan.FromSeconds(1))
+            .ObserveOn(_uiSynchronizationContext)
             .TakeUntil(_ => !_emulatorIsConnected)
             .Subscribe(_ =>
             {
