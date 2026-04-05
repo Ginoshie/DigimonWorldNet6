@@ -43,7 +43,7 @@ public class TamerVisionViewModel : BaseViewModel, IDisposable
 
     private GameVariant _gameVariant = GameVariant.Original;
     private Digimon _syncedDigimon;
-    private EvoResultMask _currentEvoResultMask = EvoResultMask.None;
+    private EvoResultMask _currentEvoResultMask;
     private bool _emulatorIsConnected;
 
     public TamerVisionViewModel()
@@ -57,6 +57,11 @@ public class TamerVisionViewModel : BaseViewModel, IDisposable
         SetEvoResultMaskAnonymousCommand = new CommandHandler(() => SetEvoResultMaskCommand(EvoResultMask.Anonymous));
 
         EvoResultBackground = _defaultEvolutionResultBackground;
+
+        ShowEvo = TamerVisionSettings.ShowEvo;
+        _currentEvoResultMask = TamerVisionSettings.EvoResultMask;
+
+        SyncAllFromCurrentMemoryState();
 
         SpeechDelay initialDelay = UserConfigurationManager.SpeakingSimulatorConfig.NarratorMode == NarratorMode.Instant ? SpeechDelay.None : SpeechDelay.Long;
 
@@ -73,6 +78,28 @@ public class TamerVisionViewModel : BaseViewModel, IDisposable
         );
 
         UpdateEvoResult();
+    }
+
+    private void SyncAllFromCurrentMemoryState()
+    {
+        if (!ServiceRelay.LiveMemoryReader.Connected)
+        {
+            return;
+        }
+
+        try
+        {
+            SyncAllProfileStats();
+            SyncAllParameterStats();
+            SyncAllConditionStats();
+            SyncAllCareStats();
+            SyncTechniqueStats();
+            CalculateEvolutionResult();
+        }
+        catch (Exception)
+        {
+            // Memory data may not be available yet — that's fine, the sync timer will pick it up
+        }
     }
 
     private void OnEmulatorConnectedChanged(bool isConnected)
@@ -480,6 +507,7 @@ public class TamerVisionViewModel : BaseViewModel, IDisposable
     private void SetShowEvo()
     {
         ShowEvo = true;
+        TamerVisionSettings.ShowEvo = true;
 
         UpdateEvoResult();
     }
@@ -487,6 +515,7 @@ public class TamerVisionViewModel : BaseViewModel, IDisposable
     private void SetHideEvo()
     {
         ShowEvo = false;
+        TamerVisionSettings.ShowEvo = false;
 
         UpdateEvoResult();
     }
@@ -494,6 +523,7 @@ public class TamerVisionViewModel : BaseViewModel, IDisposable
     private void SetEvoResultMaskCommand(EvoResultMask evoResultMask)
     {
         _currentEvoResultMask = evoResultMask;
+        TamerVisionSettings.EvoResultMask = evoResultMask;
 
         OnPropertyChanged(nameof(EvoResultMaskNoneIsSelected));
         OnPropertyChanged(nameof(EvoResultMaskBlurredIsSelected));

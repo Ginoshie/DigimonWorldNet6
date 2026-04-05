@@ -75,10 +75,38 @@ public sealed class EvolutionCalculatorViewModel : BaseViewModel, IDisposable
 
         _emulatorSyncMode = UserConfigurationManager.EmulatorLinkConfig.EmulatorLinkSyncMode;
 
+        SyncAllFromCurrentMemoryState();
+
         _ = _speakingSimulator.SpeakAsync(
             JijimonEvolutionCalculatorNarratorText.IntroText,
             textOutput => JijimonText = textOutput,
             initialDelay);
+    }
+
+    private void SyncAllFromCurrentMemoryState()
+    {
+        if (!ServiceRelay.LiveMemoryReader.Connected)
+        {
+            return;
+        }
+
+        _emulatorIsConnected = true;
+
+        try
+        {
+            SyncAllProfileStats();
+            SyncAllEmulatorCombatStats();
+            SyncAllEmulatorConditionStats();
+        }
+        catch (Exception)
+        {
+            // Memory data may not be available yet — that's fine, the sync timer will pick it up
+        }
+
+        if (_emulatorSyncMode == EmulatorLinkSyncMode.Auto)
+        {
+            StartMemorySync();
+        }
     }
 
     public ICommand SetEvolutionResult { get; }
