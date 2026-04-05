@@ -102,7 +102,10 @@ public sealed class UserDigimonTests
     public void Constructor_ShouldNotThrow_ForAnyDigimonName([Values] DigimonName digimonName)
     {
         // Act
-        Action act = () => new UserDigimon(digimonName, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+        Action act = () =>
+        {
+            UserDigimon _ = new(digimonName, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+        };
 
         // Assert
         act.ShouldNotThrow();

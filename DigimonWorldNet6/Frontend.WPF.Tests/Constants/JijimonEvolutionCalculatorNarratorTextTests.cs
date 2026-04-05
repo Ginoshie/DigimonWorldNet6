@@ -1,4 +1,3 @@
-using System;
 using DigimonWorld.Frontend.WPF.Constants;
 using NUnit.Framework;
 using Shared.Enums;
