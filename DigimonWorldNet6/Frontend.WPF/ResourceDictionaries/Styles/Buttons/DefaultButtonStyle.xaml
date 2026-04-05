@@ -40,4 +40,30 @@
         </Setter>
     </Style>
 
+    <Style x:Key="DisplayOnlyButtonStyle" TargetType="Button">
+        <Setter Property="Focusable" Value="False"/>
+        <Setter Property="IsTabStop" Value="False"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Grid>
+                        <Border x:Name="OuterBorder"
+                                BorderBrush="#B0B0B0"
+                                BorderThickness="3,3,0,0"
+                                Background="#575C60">
+                            <Border x:Name="InnerBorder"
+                                    BorderBrush="#060100"
+                                    BorderThickness="0,0,3,3"
+                                    Padding="{TemplateBinding Padding}">
+                                <ContentPresenter
+                                    VerticalAlignment="Center"
+                                    HorizontalAlignment="Center"/>
+                            </Border>
+                        </Border>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
 </ResourceDictionary>

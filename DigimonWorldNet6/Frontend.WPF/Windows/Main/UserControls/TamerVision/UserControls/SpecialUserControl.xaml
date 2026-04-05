@@ -30,10 +30,11 @@
         
         <ItemsControl.ItemTemplate>
             <DataTemplate>
-                <Button ToolTipService.InitialShowDelay="{StaticResource DefaultTooltipDelay}" Style="{StaticResource StretchContentButtonStyle}"
+                <Button ToolTipService.InitialShowDelay="{StaticResource DefaultTooltipDelay}" ToolTipService.ShowOnDisabled="True" Style="{StaticResource DisplayOnlyStretchContentButtonStyle}"
                         Width="{StaticResource SpecialImageDimension}"
                         Height="{StaticResource SpecialImageDimension}"
                         Margin="{StaticResource Margin}"
+                        IsEnabled="False"
                         Padding="1">
                     <Button.ToolTip>
                         <ToolTip Style="{StaticResource DefaultToolTipRightStyle}">
