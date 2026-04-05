@@ -288,8 +288,8 @@ public sealed class EvolutionCalculatorViewModel : BaseViewModel, IDisposable
         SyncEmulatorBattlesCount();
     }
 
-    private void SyncEmulatorHappiness() => Discipline = ServiceRelay.LiveMemoryReader.ConditionStats.Happiness.ToString();
-    private void SyncEmulatorDiscipline() => Happiness = ServiceRelay.LiveMemoryReader.ConditionStats.Discipline.ToString();
+    private void SyncEmulatorHappiness() => Happiness = ServiceRelay.LiveMemoryReader.ConditionStats.Happiness.ToString();
+    private void SyncEmulatorDiscipline() => Discipline = ServiceRelay.LiveMemoryReader.ConditionStats.Discipline.ToString();
     private void SyncEmulatorCareMistakes() => CareMistakes = ServiceRelay.LiveMemoryReader.ConditionStats.CareMistakes.ToString();
     private void SyncEmulatorTechniqueCount() => Techniques = ServiceRelay.LiveMemoryReader.TechniqueStats.LearnedTechniqueCount().ToString();
     private void SyncEmulatorBattlesCount() => Battles = ServiceRelay.LiveMemoryReader.ConditionStats.Battles.ToString();
