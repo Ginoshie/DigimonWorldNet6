@@ -20,6 +20,10 @@ public class NavigationLeftPaneViewModelComponent : PaneBaseViewModel, IDisposab
     private readonly Action<UserControl> _setCurrentSelectedMainWindowContent;
     private readonly CompositeDisposable _disposable;
 
+    private readonly Lazy<EvolutionCalculatorUserControl> _evolutionCalculatorUserControl = new();
+    private readonly Lazy<DigiWikiUserControl> _digiWikiUserControl = new();
+    private readonly Lazy<TamerVisionUserControl> _tamerVisionUserControl = new();
+
     public NavigationLeftPaneViewModelComponent(Action<UserControl> setCurrentSelectedMainWindowContent)
     {
         _setCurrentSelectedMainWindowContent = setCurrentSelectedMainWindowContent;
@@ -50,11 +54,13 @@ public class NavigationLeftPaneViewModelComponent : PaneBaseViewModel, IDisposab
 
     public ICommand ShowTamerVisionCommand { get; }
 
-    private void ShowEvolutionCalculator() => _setCurrentSelectedMainWindowContent(new EvolutionCalculatorUserControl());
+    public UserControl InitialContent => _evolutionCalculatorUserControl.Value;
 
-    private void ShowDigiWiki() => _setCurrentSelectedMainWindowContent(new DigiWikiUserControl());
+    private void ShowEvolutionCalculator() => _setCurrentSelectedMainWindowContent(_evolutionCalculatorUserControl.Value);
 
-    private void ShowTamerWiki() => _setCurrentSelectedMainWindowContent(new TamerVisionUserControl());
+    private void ShowDigiWiki() => _setCurrentSelectedMainWindowContent(_digiWikiUserControl.Value);
+
+    private void ShowTamerWiki() => _setCurrentSelectedMainWindowContent(_tamerVisionUserControl.Value);
 
     public bool PaneIsOpen
     {

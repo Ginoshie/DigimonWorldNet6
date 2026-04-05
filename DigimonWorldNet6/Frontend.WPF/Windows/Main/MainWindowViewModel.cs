@@ -7,7 +7,6 @@ using DigimonWorld.Frontend.WPF.ViewModelComponents;
 using DigimonWorld.Frontend.WPF.Windows.AboutAndCredits;
 using DigimonWorld.Frontend.WPF.Windows.BaseClasses;
 using DigimonWorld.Frontend.WPF.Windows.GeneralConfig;
-using DigimonWorld.Frontend.WPF.Windows.Main.UserControls.EvolutionCalculator;
 using DigimonWorld.Frontend.WPF.Windows.Main.UserControls.Panes;
 using DigimonWorld.Frontend.WPF.Windows.MusicPlayer;
 using Shared.Services.Events;
@@ -32,9 +31,9 @@ public class MainWindowViewModel : BaseWindowViewModel, IDisposable
             MusicPlayerEventHub.MusicPlayerClosedObservable.Subscribe(_ => _musicPlayerIsOpen = false)
         );
 
-        CurrentSelectedMainWindowContent = new EvolutionCalculatorUserControl();
-
         LeftPaneViewModelComponent = new NavigationLeftPaneViewModelComponent(uc => CurrentSelectedMainWindowContent = uc);
+
+        CurrentSelectedMainWindowContent = LeftPaneViewModelComponent.InitialContent;
 
         BottomPaneViewModelComponent = new HistoricEvolutionsBottomPaneViewModelComponent();
 

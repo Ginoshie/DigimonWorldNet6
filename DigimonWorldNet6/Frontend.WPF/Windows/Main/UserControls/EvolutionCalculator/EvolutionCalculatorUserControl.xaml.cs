@@ -12,7 +12,7 @@ public partial class EvolutionCalculatorUserControl : IDisposable
 
         _viewModel = new EvolutionCalculatorViewModel();
 
-        DataContext = new EvolutionCalculatorViewModel();
+        DataContext = _viewModel;
     }
 
     public void Dispose() => _viewModel.Dispose();

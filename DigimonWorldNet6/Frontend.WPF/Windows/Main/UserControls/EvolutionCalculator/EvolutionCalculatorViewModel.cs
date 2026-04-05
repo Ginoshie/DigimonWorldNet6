@@ -93,6 +93,11 @@ public sealed class EvolutionCalculatorViewModel : BaseViewModel, IDisposable
 
         _emulatorIsConnected = true;
 
+        if (_emulatorSyncMode != EmulatorLinkSyncMode.Auto)
+        {
+            return;
+        }
+
         try
         {
             SyncAllProfileStats();
@@ -104,10 +109,7 @@ public sealed class EvolutionCalculatorViewModel : BaseViewModel, IDisposable
             // Memory data may not be available yet — that's fine, the sync timer will pick it up
         }
 
-        if (_emulatorSyncMode == EmulatorLinkSyncMode.Auto)
-        {
-            StartMemorySync();
-        }
+        StartMemorySync();
     }
 
     public ICommand SetEvolutionResult { get; }
