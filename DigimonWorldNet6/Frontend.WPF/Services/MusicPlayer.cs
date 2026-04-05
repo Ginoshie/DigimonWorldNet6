@@ -1,6 +1,4 @@
-using CSCore;
-using CSCore.Codecs;
-using CSCore.SoundOut;
+using NAudio.Wave;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -19,7 +17,7 @@ public static class MusicPlayer
 {
     private const string LEOMON_SONG_TITLE = "19) Leomon";
 
-    private static readonly WasapiOut _soundOut;
+    private static readonly WaveOutEvent _soundOut;
     private static readonly CompositeDisposable _compositeDisposable;
 
     private static readonly BehaviorSubject<string> _currentSongTitleSubject = new(string.Empty);
@@ -32,7 +30,7 @@ public static class MusicPlayer
 
     private static IDisposable? _currentPositionSubscription;
 
-    private static IWaveSource? _currentWaveSource;
+    private static WaveStream? _currentWaveSource;
 
     private static MusicPlayerConfig _musicPlayerConfig = null!;
 
@@ -43,11 +41,10 @@ public static class MusicPlayer
     public static readonly IObservable<string> CurrentSongTitleObservable = _currentSongTitleSubject.AsObservable();
     public static readonly IObservable<double> CurrentPositionObservable = _currentPositionSubject.AsObservable();
     public static readonly IObservable<double> SongLengthObservable = _songLengthSubject.AsObservable();
-    private static PlayMode _playMode = PlayMode.Stopped;
 
     static MusicPlayer()
     {
-        _soundOut = new WasapiOut();
+        _soundOut = new WaveOutEvent();
 
         _compositeDisposable = new CompositeDisposable(_soundOut,
             _currentSongTitleSubject,
@@ -62,16 +59,12 @@ public static class MusicPlayer
 
         LoadConfig(UserConfigurationManager.CurrentMusicPlayerConfig.FirstAsync().Wait());
         
-        _soundOut.Stopped += OnPlaybackStopped;
+        _soundOut.PlaybackStopped += OnPlaybackStopped;
 
-        CurrentSongTitleObservable.Subscribe(OnLeomonsSongStarted);
+        CurrentSongTitleObservable.Subscribe(OnLeomonSongStarted);
     }
 
-    public static PlayMode PlayMode
-    {
-        get => _playMode;
-        private set => _playMode = value;
-    }
+    public static PlayMode PlayMode { get; private set; } = PlayMode.Stopped;
 
     public static float Volume
     {
@@ -271,17 +264,31 @@ public static class MusicPlayer
             throw new FileNotFoundException($"Could not find track at path {filePath}");
         }
 
-        _currentWaveSource = CodecFactory.Instance.GetCodec(filePath);
+        _currentWaveSource = new AudioFileReader(filePath);
 
-        _songLengthSubject.OnNext(_currentWaveSource.GetLength().TotalSeconds);
+        _songLengthSubject.OnNext(_currentWaveSource.TotalTime.TotalSeconds);
 
         float currentVolume = _soundOut.Volume;
 
-        _soundOut.Initialize(_currentWaveSource);
+        _soundOut.Init(_currentWaveSource);
 
         Volume = currentVolume;
 
-        _currentPositionSubscription = _intervalObservable.Subscribe(_ => _currentPositionSubject.OnNext(_currentWaveSource.GetPosition().TotalSeconds));
+        WaveStream localWaveSource = _currentWaveSource;
+        _currentPositionSubscription = _intervalObservable.Subscribe(_ =>
+        {
+            try
+            {
+                if (localWaveSource.CanRead)
+                {
+                    _currentPositionSubject.OnNext(localWaveSource.CurrentTime.TotalSeconds);
+                }
+            }
+            catch (ObjectDisposedException)
+            {
+                // Stream was disposed between check and access during rapid track change — safe to ignore
+            }
+        });
 
         _compositeDisposable.Add(_currentPositionSubscription);
 
@@ -316,10 +323,6 @@ public static class MusicPlayer
         LoadCurrentTrack();
 
         _soundOut.Play();
-
-        _currentPositionSubscription = _intervalObservable.Subscribe(_ => _currentPositionSubject.OnNext(_currentWaveSource.GetPosition().TotalSeconds));
-
-        _compositeDisposable.Add(_currentPositionSubscription);
     }
 
     private static void StartPlaying()
@@ -331,7 +334,7 @@ public static class MusicPlayer
 
     private static void Unpause()
     {
-        _soundOut.Resume();
+        _soundOut.Play();
 
         PlayMode = PlayMode.Playing;
     }
@@ -343,7 +346,7 @@ public static class MusicPlayer
         PlayMode = PlayMode.Paused;
     }
 
-    private static void OnPlaybackStopped(object? sender, PlaybackStoppedEventArgs e)
+    private static void OnPlaybackStopped(object? sender, StoppedEventArgs e)
     {
         if (_soundOut.PlaybackState != PlaybackState.Stopped || PlayMode == PlayMode.Paused)
         {
@@ -360,7 +363,7 @@ public static class MusicPlayer
         PlayCurrentTrack();
     }
 
-    private static void OnLeomonsSongStarted(string songTitle)
+    private static void OnLeomonSongStarted(string songTitle)
     {
         if (songTitle == LEOMON_SONG_TITLE)
         {
@@ -370,7 +373,7 @@ public static class MusicPlayer
 
     public static void Dispose()
     {
-        _soundOut.Stopped -= OnPlaybackStopped;
+        _soundOut.PlaybackStopped -= OnPlaybackStopped;
 
         _compositeDisposable.Dispose();
     }
