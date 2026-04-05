@@ -4,7 +4,7 @@ public static class AnalogmanTamerVisionNarratorText
 {
     private const string USER_REFERENCE = "player";
 
-    public const string IntroText = $"Hello {USER_REFERENCE}. . . I will be providing you with information from deep within the digital word.\n" +
+    public const string IntroText = $"Hello {USER_REFERENCE}. . . I will be providing you with information from deep within the digital world.\n" +
                                     $"\n" +
                                     $"All the forbidden and hidden information lie at your feet with my help. . .\n" +
                                     $"\n" +
