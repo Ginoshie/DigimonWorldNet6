@@ -9,4 +9,6 @@ public class UserConfiguration
     public EvolutionCalculatorConfig EvolutionCalculatorConfig { get; init; } = new();
 
     public EmulatorLinkConfig EmulatorLinkConfiguration { get; init; } = new();
+
+    public TamerVisionConfig TamerVisionConfig { get; init; } = new();
 }

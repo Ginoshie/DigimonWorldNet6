@@ -17,6 +17,7 @@ using DigimonWorld.Frontend.WPF.Services;
 using DigimonWorld.Frontend.WPF.ViewModelComponents;
 using MemoryAccess.MemoryValues.Digimon;
 using Shared;
+using Shared.Configuration;
 using Shared.Constants;
 using Shared.Enums;
 using Shared.Extensions;
@@ -58,8 +59,8 @@ public class TamerVisionViewModel : BaseViewModel, IDisposable
 
         EvoResultBackground = _defaultEvolutionResultBackground;
 
-        ShowEvo = TamerVisionSettings.ShowEvo;
-        _currentEvoResultMask = TamerVisionSettings.EvoResultMask;
+        ShowEvo = UserConfigurationManager.TamerVisionConfig.ShowEvo;
+        _currentEvoResultMask = UserConfigurationManager.TamerVisionConfig.EvoResultMask;
 
         SyncAllFromCurrentMemoryState();
 
@@ -73,6 +74,7 @@ public class TamerVisionViewModel : BaseViewModel, IDisposable
         _disposables = new CompositeDisposable(
             _speakingSimulator,
             UserConfigurationManager.CurrentEvolutionCalculatorConfig.Subscribe(evolutionCalculatorConfig => _gameVariant = evolutionCalculatorConfig.GameVariant),
+            UserConfigurationManager.CurrentTamerVisionConfig.Subscribe(OnTamerVisionConfigChanged),
             EmulatorLinkEventHub.EmulatorConnectedObservable.Subscribe(OnEmulatorConnectedChanged),
             _memorySyncDisposable
         );
@@ -114,6 +116,21 @@ public class TamerVisionViewModel : BaseViewModel, IDisposable
             _emulatorIsConnected = false;
             StopMemorySync();
         }
+    }
+
+    private void OnTamerVisionConfigChanged(TamerVisionConfig config)
+    {
+        ShowEvo = config.ShowEvo;
+        _currentEvoResultMask = config.EvoResultMask;
+
+        OnPropertyChanged(nameof(EvoResultMaskNoneIsSelected));
+        OnPropertyChanged(nameof(EvoResultMaskBlurredIsSelected));
+        OnPropertyChanged(nameof(EvoResultMaskDigiGuessIsSelected));
+        OnPropertyChanged(nameof(EvoResultMaskAnonymousIsSelected));
+        OnPropertyChanged(nameof(EvoResultDigiGuessIsShown));
+        OnPropertyChanged(nameof(EvoResultBlurredIsShown));
+
+        UpdateEvoResult();
     }
 
     private void StartMemorySync()
@@ -507,7 +524,7 @@ public class TamerVisionViewModel : BaseViewModel, IDisposable
     private void SetShowEvo()
     {
         ShowEvo = true;
-        TamerVisionSettings.ShowEvo = true;
+        UserConfigurationManager.SetTamerVisionShowEvo(true);
 
         UpdateEvoResult();
     }
@@ -515,7 +532,7 @@ public class TamerVisionViewModel : BaseViewModel, IDisposable
     private void SetHideEvo()
     {
         ShowEvo = false;
-        TamerVisionSettings.ShowEvo = false;
+        UserConfigurationManager.SetTamerVisionShowEvo(false);
 
         UpdateEvoResult();
     }
@@ -523,7 +540,7 @@ public class TamerVisionViewModel : BaseViewModel, IDisposable
     private void SetEvoResultMaskCommand(EvoResultMask evoResultMask)
     {
         _currentEvoResultMask = evoResultMask;
-        TamerVisionSettings.EvoResultMask = evoResultMask;
+        UserConfigurationManager.SetTamerVisionEvoResultMask(evoResultMask);
 
         OnPropertyChanged(nameof(EvoResultMaskNoneIsSelected));
         OnPropertyChanged(nameof(EvoResultMaskBlurredIsSelected));

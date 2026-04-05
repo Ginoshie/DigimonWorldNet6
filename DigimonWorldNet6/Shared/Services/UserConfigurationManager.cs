@@ -16,6 +16,7 @@ public static class UserConfigurationManager
 
     private static readonly BehaviorSubject<SpeakingSimulatorConfig> _currentSpeakingSimulatorConfigSubject;
     private static readonly BehaviorSubject<EvolutionCalculatorConfig> _currentEvolutionCalculatorConfigSubject;
+    private static readonly BehaviorSubject<TamerVisionConfig> _currentTamerVisionConfigSubject;
 
     static UserConfigurationManager()
     {
@@ -25,6 +26,7 @@ public static class UserConfigurationManager
         SpeakingSimulatorConfig = _userConfiguration.SpeakingSimulatorConfig;
         EvolutionCalculatorConfig = _userConfiguration.EvolutionCalculatorConfig;
         EmulatorLinkConfig = _userConfiguration.EmulatorLinkConfiguration;
+        TamerVisionConfig = _userConfiguration.TamerVisionConfig;
 
         _currentSpeakingSimulatorConfigSubject = new BehaviorSubject<SpeakingSimulatorConfig>(SpeakingSimulatorConfig);
         CurrentSpeakingSimulatorConfig = _currentSpeakingSimulatorConfigSubject.AsObservable();
@@ -34,11 +36,15 @@ public static class UserConfigurationManager
 
         _currentEvolutionCalculatorConfigSubject = new BehaviorSubject<EvolutionCalculatorConfig>(EvolutionCalculatorConfig);
         CurrentEvolutionCalculatorConfig = _currentEvolutionCalculatorConfigSubject.AsObservable();
+
+        _currentTamerVisionConfigSubject = new BehaviorSubject<TamerVisionConfig>(TamerVisionConfig);
+        CurrentTamerVisionConfig = _currentTamerVisionConfigSubject.AsObservable();
     }
 
     public static IObservable<SpeakingSimulatorConfig> CurrentSpeakingSimulatorConfig { get; }
     public static IObservable<MusicPlayerConfig> CurrentMusicPlayerConfig { get; }
     public static IObservable<EvolutionCalculatorConfig> CurrentEvolutionCalculatorConfig { get; }
+    public static IObservable<TamerVisionConfig> CurrentTamerVisionConfig { get; }
 
     public static MusicPlayerConfig MusicPlayerConfig { get; }
 
@@ -47,6 +53,8 @@ public static class UserConfigurationManager
     public static EvolutionCalculatorConfig EvolutionCalculatorConfig { get; }
 
     public static EmulatorLinkConfig EmulatorLinkConfig { get; }
+
+    public static TamerVisionConfig TamerVisionConfig { get; }
 
     public static void SetNarratorMode(NarratorMode mode)
     {
@@ -88,6 +96,20 @@ public static class UserConfigurationManager
         EmulatorLinkConfig.EmulatorLinkSyncMode = mode;
 
         EmulatorLinkEventHub.SignalEmulatorLinkSyncModeChanged(EmulatorLinkConfig.EmulatorLinkSyncMode);
+    }
+
+    public static void SetTamerVisionShowEvo(bool showEvo)
+    {
+        TamerVisionConfig.ShowEvo = showEvo;
+
+        _currentTamerVisionConfigSubject.OnNext(TamerVisionConfig);
+    }
+
+    public static void SetTamerVisionEvoResultMask(EvoResultMask evoResultMask)
+    {
+        TamerVisionConfig.EvoResultMask = evoResultMask;
+
+        _currentTamerVisionConfigSubject.OnNext(TamerVisionConfig);
     }
 
     public static void SaveConfiguration()

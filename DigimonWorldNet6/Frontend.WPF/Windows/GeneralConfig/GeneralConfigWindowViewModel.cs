@@ -22,6 +22,7 @@ public class GeneralConfigWindowViewModel : BaseViewModel, IDisposable
     private readonly NarrationConfigurationSection _narrationConfigurationSection = new();
     private readonly EvolutionConfigurationSection _evolutionConfigurationSection = new();
     private readonly EmulatorLinkConfigurationSection _emulatorLinkConfigurationSection = new();
+    private readonly TamerVisionConfigurationSection _tamerVisionConfigurationSection = new();
 
     private GameVariant _gameVariant;
     private UserControl _currentSelectedSettingCategoryUserControl;
@@ -38,6 +39,7 @@ public class GeneralConfigWindowViewModel : BaseViewModel, IDisposable
         ShowNarrationConfigurationSectionCommand = new CommandHandler(() => CurrentSelectedSettingCategoryUserControl = _narrationConfigurationSection);
         ShowEvolutionConfigurationSectionCommand = new CommandHandler(() => CurrentSelectedSettingCategoryUserControl = _evolutionConfigurationSection);
         ShowEmulatorLinkConfigurationSectionCommand = new CommandHandler(() => CurrentSelectedSettingCategoryUserControl = _emulatorLinkConfigurationSection);
+        ShowTamerVisionConfigurationSectionCommand = new CommandHandler(() => CurrentSelectedSettingCategoryUserControl = _tamerVisionConfigurationSection);
 
         SetNarratorModeSpeechCommand = new CommandHandler(() => SetNarratorMode(NarratorMode.Speech));
         SetNarratorModeInstantCommand = new CommandHandler(() => SetNarratorMode(NarratorMode.Instant));
@@ -65,6 +67,13 @@ public class GeneralConfigWindowViewModel : BaseViewModel, IDisposable
         SetEmulatorSyncModeAutoCommand = new CommandHandler(SetEmulatorSyncModeAuto);
         SetEmulatorSyncModeManualCommand = new CommandHandler(SetEmulatorSyncModeManual);
 
+        SetTamerVisionShowEvoCommand = new CommandHandler(() => SetTamerVisionShowEvo(true));
+        SetTamerVisionHideEvoCommand = new CommandHandler(() => SetTamerVisionShowEvo(false));
+        SetTamerVisionEvoResultMaskNoneCommand = new CommandHandler(() => SetTamerVisionEvoResultMask(EvoResultMask.None));
+        SetTamerVisionEvoResultMaskBlurredCommand = new CommandHandler(() => SetTamerVisionEvoResultMask(EvoResultMask.Blurred));
+        SetTamerVisionEvoResultMaskDigiGuessCommand = new CommandHandler(() => SetTamerVisionEvoResultMask(EvoResultMask.DigiGuess));
+        SetTamerVisionEvoResultMaskAnonymousCommand = new CommandHandler(() => SetTamerVisionEvoResultMask(EvoResultMask.Anonymous));
+
         _currentSelectedSettingCategoryUserControl = _homeConfigurationSection;
 
         _disposables = new CompositeDisposable(
@@ -81,6 +90,7 @@ public class GeneralConfigWindowViewModel : BaseViewModel, IDisposable
     public bool NarrationConfigurationSectionIsSelected => CurrentSelectedSettingCategoryUserControl.GetType() == typeof(NarrationConfigurationSection);
     public bool EvolutionConfigurationSectionIsSelected => CurrentSelectedSettingCategoryUserControl.GetType() == typeof(EvolutionConfigurationSection);
     public bool EmulatorLinkConfigurationSectionIsSelected => CurrentSelectedSettingCategoryUserControl.GetType() == typeof(EmulatorLinkConfigurationSection);
+    public bool TamerVisionConfigurationSectionIsSelected => CurrentSelectedSettingCategoryUserControl.GetType() == typeof(TamerVisionConfigurationSection);
 
     #endregion
 
@@ -187,6 +197,47 @@ public class GeneralConfigWindowViewModel : BaseViewModel, IDisposable
 
     #endregion
 
+    #region Tamer Vision Properties
+
+    public bool TamerVisionShowEvo
+    {
+        get;
+        private set
+        {
+            SetField(ref field, value);
+
+            OnPropertyChanged(nameof(TamerVisionHideEvo));
+        }
+    }
+
+    public bool TamerVisionHideEvo => !TamerVisionShowEvo;
+
+    public bool TamerVisionEvoResultMaskIsNone
+    {
+        get;
+        private set => SetField(ref field, value);
+    }
+
+    public bool TamerVisionEvoResultMaskIsBlurred
+    {
+        get;
+        private set => SetField(ref field, value);
+    }
+
+    public bool TamerVisionEvoResultMaskIsDigiGuess
+    {
+        get;
+        private set => SetField(ref field, value);
+    }
+
+    public bool TamerVisionEvoResultMaskIsAnonymous
+    {
+        get;
+        private set => SetField(ref field, value);
+    }
+
+    #endregion
+
     #region Current UserControl
 
     public UserControl CurrentSelectedSettingCategoryUserControl
@@ -203,6 +254,7 @@ public class GeneralConfigWindowViewModel : BaseViewModel, IDisposable
             OnPropertyChanged(nameof(NarrationConfigurationSectionIsSelected));
             OnPropertyChanged(nameof(EvolutionConfigurationSectionIsSelected));
             OnPropertyChanged(nameof(EmulatorLinkConfigurationSectionIsSelected));
+            OnPropertyChanged(nameof(TamerVisionConfigurationSectionIsSelected));
         }
     }
 
@@ -217,6 +269,7 @@ public class GeneralConfigWindowViewModel : BaseViewModel, IDisposable
     public ICommand ShowNarrationConfigurationSectionCommand { get; }
     public ICommand ShowEvolutionConfigurationSectionCommand { get; }
     public ICommand ShowEmulatorLinkConfigurationSectionCommand { get; }
+    public ICommand ShowTamerVisionConfigurationSectionCommand { get; }
     public ICommand SetNarratorModeSpeechCommand { get; }
     public ICommand SetNarratorModeInstantCommand { get; }
     public ICommand SetMuteOnCommand { get; }
@@ -236,6 +289,12 @@ public class GeneralConfigWindowViewModel : BaseViewModel, IDisposable
     public ICommand OpenEmulatorSelectorCommand { get; }
     public ICommand SetEmulatorSyncModeAutoCommand { get; }
     public ICommand SetEmulatorSyncModeManualCommand { get; }
+    public ICommand SetTamerVisionShowEvoCommand { get; }
+    public ICommand SetTamerVisionHideEvoCommand { get; }
+    public ICommand SetTamerVisionEvoResultMaskNoneCommand { get; }
+    public ICommand SetTamerVisionEvoResultMaskBlurredCommand { get; }
+    public ICommand SetTamerVisionEvoResultMaskDigiGuessCommand { get; }
+    public ICommand SetTamerVisionEvoResultMaskAnonymousCommand { get; }
 
     #endregion
 
@@ -319,6 +378,23 @@ public class GeneralConfigWindowViewModel : BaseViewModel, IDisposable
         UserConfigurationManager.SetEmulatorLinkSyncMode(mode);
     }
 
+    private void SetTamerVisionShowEvo(bool show)
+    {
+        TamerVisionShowEvo = show;
+
+        UserConfigurationManager.SetTamerVisionShowEvo(show);
+    }
+
+    private void SetTamerVisionEvoResultMask(EvoResultMask mask)
+    {
+        TamerVisionEvoResultMaskIsNone = mask == EvoResultMask.None;
+        TamerVisionEvoResultMaskIsBlurred = mask == EvoResultMask.Blurred;
+        TamerVisionEvoResultMaskIsDigiGuess = mask == EvoResultMask.DigiGuess;
+        TamerVisionEvoResultMaskIsAnonymous = mask == EvoResultMask.Anonymous;
+
+        UserConfigurationManager.SetTamerVisionEvoResultMask(mask);
+    }
+
     private void ApplyEvolutionCalculatorMode() => UserConfigurationManager.SetEvolutionCalculatorMode(_gameVariant);
 
     private void RaiseEvolutionCalculatorProperties()
@@ -348,6 +424,10 @@ public class GeneralConfigWindowViewModel : BaseViewModel, IDisposable
 
         SetEmulatorLinkSyncMode(UserConfigurationManager.EmulatorLinkConfig.EmulatorLinkSyncMode);
         SelectedEmulatorProcessName = UserConfigurationManager.EmulatorLinkConfig.SelectedProcessName;
+
+        TamerVisionConfig tamerVisionConfig = UserConfigurationManager.TamerVisionConfig;
+        SetTamerVisionShowEvo(tamerVisionConfig.ShowEvo);
+        SetTamerVisionEvoResultMask(tamerVisionConfig.EvoResultMask);
     }
 
     private void SaveConfiguration()
@@ -359,6 +439,12 @@ public class GeneralConfigWindowViewModel : BaseViewModel, IDisposable
         UserConfigurationManager.SetOnCloseAction(PauseOnCloseWindow ? MusicPlayerOnCloseAction.Pause : MusicPlayerOnCloseAction.Nothing);
         UserConfigurationManager.SetEvolutionCalculatorMode(_gameVariant);
         UserConfigurationManager.SetEmulatorLinkSyncMode(EmulatorModeIsAuto ? EmulatorLinkSyncMode.Auto : EmulatorLinkSyncMode.Manual);
+        UserConfigurationManager.SetTamerVisionShowEvo(TamerVisionShowEvo);
+        UserConfigurationManager.SetTamerVisionEvoResultMask(
+            TamerVisionEvoResultMaskIsBlurred ? EvoResultMask.Blurred :
+            TamerVisionEvoResultMaskIsDigiGuess ? EvoResultMask.DigiGuess :
+            TamerVisionEvoResultMaskIsAnonymous ? EvoResultMask.Anonymous :
+            EvoResultMask.None);
         UserConfigurationManager.SaveConfiguration();
     }
 

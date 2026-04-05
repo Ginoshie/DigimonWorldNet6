@@ -1,0 +1,105 @@
+<UserControl x:Class="DigimonWorld.Frontend.WPF.Windows.GeneralConfig.UserControls.TamerVisionConfigurationSection"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:system="clr-namespace:System;assembly=System.Runtime"
+             xmlns:generalConfig="clr-namespace:DigimonWorld.Frontend.WPF.Windows.GeneralConfig"
+             mc:Ignorable="d"
+             Height="{StaticResource ConfigurationSectionHeight}"
+             Width="{StaticResource ConfigurationSectionWidth}"
+             d:DataContext="{d:DesignInstance Type=generalConfig:GeneralConfigWindowViewModel, IsDesignTimeCreatable=True}">
+
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../../../ResourceDictionaries/Styles/Buttons/DefaultButtonStyle.xaml" />
+                <ResourceDictionary Source="../../../ResourceDictionaries/Styles/Buttons/DefaultOptionPickerButtonStyle.xaml" />
+                <ResourceDictionary Source="../../../ResourceDictionaries/Styles/Labels/DefaultSheenLabelStyle.xaml" />
+                <ResourceDictionary Source="../../../ResourceDictionaries/Styles/Labels/DefaultLabelStyle.xaml" />
+                <ResourceDictionary Source="../../../ResourceDictionaries/Styles/ToolTips/DefaultTooltipRightStyle.xaml" />
+                <ResourceDictionary Source="../../../ResourceDictionaries/Styles/DefaultTextboxStyle.xaml" />
+                <ResourceDictionary Source="../Styles/SaveButtonStyle.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+
+            <system:Double x:Key="OptionWidth">85</system:Double>
+            <system:Double x:Key="OptionHeight">35</system:Double>
+            <system:Double x:Key="ToggleOptionWidth">75</system:Double>
+            <system:Double x:Key="ToggleOptionHeight">24</system:Double>
+        </ResourceDictionary>
+    </UserControl.Resources>
+
+    <Grid HorizontalAlignment="Center">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Center" Style="{StaticResource DefaultLabelStyle}" Content="* Evolution result" Margin="0, 0, 5, 5" />
+            <WrapPanel Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0, 0, 0, 10">
+                <Button Style="{StaticResource DefaultOptionPickerButtonStyle}"
+                        Height="{StaticResource ToggleOptionHeight}"
+                        Width="{StaticResource ToggleOptionWidth}"
+                        Content="Show"
+                        Command="{Binding SetTamerVisionShowEvoCommand}"
+                        Tag="{Binding TamerVisionShowEvo}" />
+                <Button Style="{StaticResource DefaultOptionPickerButtonStyle}"
+                        Height="{StaticResource ToggleOptionHeight}"
+                        Width="{StaticResource ToggleOptionWidth}"
+                        Content="Hide"
+                        Command="{Binding SetTamerVisionHideEvoCommand}"
+                        Tag="{Binding TamerVisionHideEvo}" />
+            </WrapPanel>
+
+            <Label Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Center" Style="{StaticResource DefaultLabelStyle}" Content="* Result display mode"
+                   Margin="0, 10, 0, 5" />
+            <Grid Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Center" Margin="0, 0, 0, 5">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <Button Grid.Row="0" Grid.Column="0" Style="{StaticResource DefaultOptionPickerButtonStyle}"
+                        Height="{StaticResource OptionHeight}"
+                        Width="{StaticResource OptionWidth}"
+                        Content="None"
+                        Command="{Binding SetTamerVisionEvoResultMaskNoneCommand}"
+                        Tag="{Binding TamerVisionEvoResultMaskIsNone}" />
+                <Button Grid.Row="0" Grid.Column="1" Style="{StaticResource DefaultOptionPickerButtonStyle}"
+                        Height="{StaticResource OptionHeight}"
+                        Width="{StaticResource OptionWidth}"
+                        Content="Blurred"
+                        Command="{Binding SetTamerVisionEvoResultMaskBlurredCommand}"
+                        Tag="{Binding TamerVisionEvoResultMaskIsBlurred}" />
+                <Button Grid.Row="1" Grid.Column="0" Style="{StaticResource DefaultOptionPickerButtonStyle}"
+                        Height="{StaticResource OptionHeight}"
+                        Width="{StaticResource OptionWidth}"
+                        Content="DigiGuess"
+                        Command="{Binding SetTamerVisionEvoResultMaskDigiGuessCommand}"
+                        Tag="{Binding TamerVisionEvoResultMaskIsDigiGuess}" />
+                <Button Grid.Row="1" Grid.Column="1" Style="{StaticResource DefaultOptionPickerButtonStyle}"
+                        Height="{StaticResource OptionHeight}"
+                        Width="{StaticResource OptionWidth}"
+                        Content="Anonymous"
+                        Command="{Binding SetTamerVisionEvoResultMaskAnonymousCommand}"
+                        Tag="{Binding TamerVisionEvoResultMaskIsAnonymous}" />
+            </Grid>
+        </Grid>
+    </Grid>
+</UserControl>
+

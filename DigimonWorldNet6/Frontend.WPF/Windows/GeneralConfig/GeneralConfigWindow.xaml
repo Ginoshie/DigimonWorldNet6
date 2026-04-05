@@ -65,6 +65,7 @@
                                             <RowDefinition Height="Auto" />
                                             <RowDefinition Height="Auto" />
                                             <RowDefinition Height="Auto" />
+                                            <RowDefinition Height="Auto" />
                                         </Grid.RowDefinitions>
 
                                         <Button Grid.Row="0"
@@ -101,6 +102,13 @@
                                                 Content="EMULATOR LINK"
                                                 Command="{Binding ShowEmulatorLinkConfigurationSectionCommand}"
                                                 Tag="{Binding EmulatorLinkConfigurationSectionIsSelected}" />
+
+                                        <Button Grid.Row="5"
+                                                Style="{StaticResource DefaultOptionPickerButtonStyle}"
+                                                Padding="10"
+                                                Content="TAMER VISION"
+                                                Command="{Binding ShowTamerVisionConfigurationSectionCommand}"
+                                                Tag="{Binding TamerVisionConfigurationSectionIsSelected}" />
                                     </Grid>
                                 </Border>
                             </Border>
