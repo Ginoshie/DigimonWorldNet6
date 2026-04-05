@@ -84,7 +84,18 @@ This project intentionally keeps things **simple and direct**. Dependency Inject
    public static EvolutionResult CalculateEvolutionResult(UserDigimon userDigimon) => _evolutionCalculator.CalculateEvolutionResult(userDigimon);
    ```
 9. **Explicit `using` statements** — `Frontend.WPF` and `Evolution.Calculator.Core` do NOT use `ImplicitUsings`; always write explicit imports. `Shared` and `MemoryAccess` DO use `ImplicitUsings`.
-10. **`LangVersion` is `default`** — leverages latest C# features available with the SDK
+10. **`if` statements must always use braces** — never use single-line `if` statements without `{}`:
+    ```csharp
+    // WRONG
+    if (!isConnected) return;
+
+    // CORRECT
+    if (!isConnected)
+    {
+        return;
+    }
+    ```
+11. **`LangVersion` is `default`** — leverages latest C# features available with the SDK
 
 ### Naming Conventions
 

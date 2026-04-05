@@ -198,6 +198,7 @@ When reviewing code changes, verify:
 - [ ] File-scoped namespace used
 - [ ] Constants in `UPPER_SNAKE_CASE`
 - [ ] Private fields prefixed with `_`
+- [ ] `if` statements always use braces (`{}`), even for single-line bodies
 - [ ] `field` keyword used for semi-auto properties (not explicit backing fields)
 - [ ] Rx subscriptions collected in `CompositeDisposable`
 - [ ] `IDisposable` implemented when `CompositeDisposable` is used
