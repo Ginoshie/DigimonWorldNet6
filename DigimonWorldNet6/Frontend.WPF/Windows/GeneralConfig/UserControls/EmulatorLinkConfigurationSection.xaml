@@ -27,6 +27,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
         <Grid Grid.Row="0">
             <Grid.RowDefinitions>
@@ -39,23 +40,9 @@
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
 
-            <Label Grid.Row="1" Grid.Column="0" Style="{StaticResource DefaultLabelStyle}" Content="* Emulator:" Margin="0, 0, 5, 0" />
-            <TextBlock Grid.Row="1" Grid.Column="1"
-                       Text="{Binding SelectedEmulatorProcessName}"
-                       TextTrimming="CharacterEllipsis"
-                       TextWrapping="Wrap"
-                       MaxWidth="205"
-                       VerticalAlignment="Center"
-                       Margin="0,0,5,0" />
-            <Button Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Style="{StaticResource DefaultButtonStyle}"
-                    Command="{Binding OpenEmulatorSelectorCommand}"
-                    Content="Select emulator"
-                    Margin="0,10,0,0"
-                    Padding="10"
-                    HorizontalAlignment="Center" />
+            <Label Grid.Row="0" Grid.Column="0" Style="{StaticResource DefaultLabelStyle}" Margin="0, 0, 5, 5" Content="* Sync mode:"/>
+            <StackPanel Grid.Row="0" Grid.Column="1" Orientation="Horizontal" Margin="0, 0, 5, 10" VerticalAlignment="Center">
 
-            <Label Grid.Row="0" Grid.Column="0" Style="{StaticResource DefaultLabelStyle}" Margin="0, 0, 5, 0" Content="* Sync mode:"/>
-            <StackPanel Grid.Row="0" Grid.Column="1" Orientation="Horizontal" Margin="0, 10" VerticalAlignment="Center">
                 <Button Style="{StaticResource DefaultOptionPickerButtonStyle}"
                         Height="{StaticResource ToggleOptionHeight}"
                         Width="{StaticResource ToggleOptionWidth}"
@@ -69,6 +56,20 @@
                         Command="{Binding SetEmulatorSyncModeManualCommand}"
                         Tag="{Binding EmulatorModeIsManual}" />
             </StackPanel>
+
+            <Label Grid.Row="1" Grid.Column="0" Style="{StaticResource DefaultLabelStyle}" Content="* Emulator:" Margin="0, 10, 5, 0" />
+            <TextBlock Grid.Row="1" Grid.Column="1"
+                       Text="{Binding SelectedEmulatorProcessName}"
+                       TextWrapping="Wrap"
+                       MaxWidth="205"
+                       VerticalAlignment="Center"
+                       Margin="0,10,5,0" />
+            <Button Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Style="{StaticResource DefaultButtonStyle}"
+                    Command="{Binding OpenEmulatorSelectorCommand}"
+                    Content="Select emulator"
+                    Margin="0,10,0,0"
+                    Padding="10"
+                    HorizontalAlignment="Center" />
         </Grid>
     </Grid>
 </UserControl>
