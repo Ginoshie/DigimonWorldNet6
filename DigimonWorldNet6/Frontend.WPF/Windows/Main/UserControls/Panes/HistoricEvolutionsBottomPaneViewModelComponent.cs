@@ -128,8 +128,8 @@ public class HistoricEvolutionsBottomPaneViewModelComponent : PaneBaseViewModel,
     public EmulatorLinkSyncMode EmulatorLinkSyncMode
     {
         get;
-        set { SetField(ref field, value); }
-    } = UserConfigurationManager.EmulatorLinkConfig.EmulatorLinkSyncMode;
+        set => SetField(ref field, value);
+    }
 
     public bool EmulatorSyncButtonSectionIsOpen => PaneIsOpen && EmulatorConnected && EmulatorLinkSyncMode == EmulatorLinkSyncMode.Manual;
 
@@ -201,7 +201,10 @@ public class HistoricEvolutionsBottomPaneViewModelComponent : PaneBaseViewModel,
             .TakeUntil(_ => !EmulatorConnected)
             .Subscribe(_ =>
             {
-                if (!EmulatorConnected) return;
+                if (!EmulatorConnected)
+                {
+                    return;
+                }
 
                 try
                 {

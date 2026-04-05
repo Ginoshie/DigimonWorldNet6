@@ -326,7 +326,10 @@ public sealed class EvolutionCalculatorViewModel : BaseViewModel, IDisposable
             .TakeUntil(_ => !_emulatorIsConnected)
             .Subscribe(_ =>
             {
-                if (!_emulatorIsConnected) return;
+                if (!_emulatorIsConnected)
+                {
+                    return;
+                }
 
                 try
                 {
