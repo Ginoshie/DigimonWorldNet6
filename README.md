@@ -15,9 +15,15 @@
 <br/>
 <br/>
 
+## :pushpin: Notes
+- The emulator synchronization only works for the US version of the rom.
+- The emulator synchronization supports the Vice mod, enable the settings accordingly:
+  <img width="702" height="581" alt="image" src="https://github.com/user-attachments/assets/129458f9-0ed4-47f0-aad9-986994cd4e6d" />
+
+
 ## :copyright: License
 
-© 2026 Your Name. All rights reserved.
+© 2026 Ginoshie. All rights reserved.
 
 This project is licensed for **non-commercial use only**.
 You may use the application, but you may not:
