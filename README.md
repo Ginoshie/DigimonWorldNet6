@@ -9,10 +9,11 @@
 
 5. Enjoy the app! 🥳
 
+<br/>
+
 ## :repeat: Subsequent usage
 1. Run the .exe 🥳
-<br/>
-<br/>
+
 <br/>
 
 ## :pushpin: Notes
@@ -20,6 +21,7 @@
 - The emulator synchronization supports the Vice mod, enable the settings accordingly:
   <img width="702" height="581" alt="image" src="https://github.com/user-attachments/assets/129458f9-0ed4-47f0-aad9-986994cd4e6d" />
 
+<br/>
 
 ## :copyright: License
 
