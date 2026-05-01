@@ -16,6 +16,8 @@ public static class EmulatorLinkEventHub
     private static readonly Subject<Unit> _digimonCareStatsSynchronizedSubject = new();
     private static readonly Subject<Unit> _digimonTechniqueStatsSynchronizedSubject = new();
     private static readonly Subject<Unit> _historicEvolutionsSynchronizedSubject = new();
+    private static readonly Subject<Unit> _emulatorInvalidRomDetectedSubject = new();
+    private static readonly Subject<Unit> _emulatorReconnectRequestedSubject = new();
 
     public static IObservable<bool> EmulatorConnectedObservable => _emulatorConnectedSubject.AsObservable();
     public static IObservable<EmulatorLinkSyncMode> EmulatorLinkSyncModeChangedObservable => _emulatorSyncModeChangedSubject.AsObservable();
@@ -26,6 +28,8 @@ public static class EmulatorLinkEventHub
     public static IObservable<Unit> DigimonCareStatsSynchronizedObservable => _digimonCareStatsSynchronizedSubject.AsObservable();
     public static IObservable<Unit> DigimonTechniqueStatsSynchronizedObservable => _digimonTechniqueStatsSynchronizedSubject.AsObservable();
     public static IObservable<Unit> HistoricEvolutionsSynchronizedObservable => _historicEvolutionsSynchronizedSubject.AsObservable();
+    public static IObservable<Unit> EmulatorInvalidRomDetectedObservable => _emulatorInvalidRomDetectedSubject.AsObservable();
+    public static IObservable<Unit> EmulatorReconnectRequestedObservable => _emulatorReconnectRequestedSubject.AsObservable();
 
     public static void SignalEmulatorConnected(bool isConnected) => _emulatorConnectedSubject.OnNext(isConnected);
     public static void SignalEmulatorLinkSyncModeChanged(EmulatorLinkSyncMode mode) => _emulatorSyncModeChangedSubject.OnNext(mode);
@@ -36,4 +40,6 @@ public static class EmulatorLinkEventHub
     public static void SignalDigimonCareStatsSynchronized() => _digimonCareStatsSynchronizedSubject.OnNext(Unit.Default);
     public static void SignalDigimonTechniqueStatsSynchronized() => _digimonTechniqueStatsSynchronizedSubject.OnNext(Unit.Default);
     public static void SignalHistoricEvolutionsSynchronized() => _historicEvolutionsSynchronizedSubject.OnNext(Unit.Default);
+    public static void SignalEmulatorInvalidRomDetected() => _emulatorInvalidRomDetectedSubject.OnNext(Unit.Default);
+    public static void SignalEmulatorReconnectRequested() => _emulatorReconnectRequestedSubject.OnNext(Unit.Default);
 }

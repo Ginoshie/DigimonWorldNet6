@@ -22,7 +22,8 @@ public sealed class LiveMemoryReader : INotifyPropertyChanged, IDisposable
     private LiveMemoryReader()
     {
         _disposables = new CompositeDisposable(
-            EmulatorLinkEventHub.EmulatorProcessNameChangedObservable.Subscribe(OnEmulatorProcessNameChanged)
+            EmulatorLinkEventHub.EmulatorProcessNameChangedObservable.Subscribe(OnEmulatorProcessNameChanged),
+            EmulatorLinkEventHub.EmulatorReconnectRequestedObservable.Subscribe(_ => Reconnect())
         );
     }
 
@@ -76,6 +77,12 @@ public sealed class LiveMemoryReader : INotifyPropertyChanged, IDisposable
         Start();
     }
 
+    private void Reconnect()
+    {
+        Stop();
+        Start();
+    }
+
     private async Task MonitorEmulatorAsync(CancellationToken token)
     {
         Process? attachedProcess = null;
@@ -102,6 +109,14 @@ public sealed class LiveMemoryReader : INotifyPropertyChanged, IDisposable
                 if (attachedProcess == null || attachedProcess.HasExited)
                 {
                     Attach(proc);
+
+                    if (!AreParameterStatsWithinExpectedRanges())
+                    {
+                        ResetStats();
+                        EmulatorLinkEventHub.SignalEmulatorInvalidRomDetected();
+                        break;
+                    }
+
                     Connected = true;
                     attachedProcess = proc;
                 }
@@ -153,6 +168,33 @@ public sealed class LiveMemoryReader : INotifyPropertyChanged, IDisposable
 
     private void OnPropertyChanged(string name) =>
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+
+    private bool AreParameterStatsWithinExpectedRanges()
+    {
+        short hp = ParameterStats.HP;
+        short mp = ParameterStats.MP;
+        short off = ParameterStats.Offense;
+        short def = ParameterStats.Defense;
+        short spd = ParameterStats.Speed;
+        short brn = ParameterStats.Brains;
+
+        return hp is >= 1 and <= 9999
+            && mp is >= 1 and <= 9999
+            && off is >= 1 and <= 999
+            && def is >= 1 and <= 999
+            && spd is >= 1 and <= 999
+            && brn is >= 1 and <= 999;
+    }
+
+    private void ResetStats()
+    {
+        ParameterStats = ParameterStats.Empty;
+        ConditionStats = ConditionStats.Empty;
+        ProfileStats = ProfileStats.Empty;
+        CareStats = CareStats.Empty;
+        TechniqueStats = TechniqueStats.Empty;
+        HistoricEvolutions = HistoricEvolutions.Empty;
+    }
 
     public void Dispose()
     {

@@ -64,12 +64,20 @@
                        MaxWidth="205"
                        VerticalAlignment="Center"
                        Margin="0,10,5,0" />
-            <Button Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Style="{StaticResource DefaultButtonStyle}"
-                    Command="{Binding OpenEmulatorSelectorCommand}"
-                    Content="Select emulator"
-                    Margin="0,10,0,0"
-                    Padding="10"
-                    HorizontalAlignment="Center" />
+            <StackPanel Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Orientation="Horizontal"
+                        Margin="0,10,0,0" HorizontalAlignment="Center">
+                <Button Style="{StaticResource DefaultButtonStyle}"
+                        Command="{Binding OpenEmulatorSelectorCommand}"
+                        Content="Select emulator"
+                        Padding="10" />
+                <Button Style="{StaticResource DefaultButtonStyle}"
+                        Command="{Binding ReconnectEmulatorCommand}"
+                        Content="↻"
+                        Width="45"
+                        Height="45"
+                        Margin="10,0,0,0"
+                        FontSize="26" />
+            </StackPanel>
         </Grid>
     </Grid>
 </UserControl>

@@ -64,6 +64,7 @@ public class GeneralConfigWindowViewModel : BaseViewModel, IDisposable
         SetEvolutionCalculatorModeVicePanjyamonDisabledCommand = new CommandHandler(() => SetVicePatch(GameVariant.PanjyamonPatch, false));
 
         OpenEmulatorSelectorCommand = new CommandHandler(OpenEmulatorSelector);
+        ReconnectEmulatorCommand = new CommandHandler(EmulatorLinkEventHub.SignalEmulatorReconnectRequested);
         SetEmulatorSyncModeAutoCommand = new CommandHandler(SetEmulatorSyncModeAuto);
         SetEmulatorSyncModeManualCommand = new CommandHandler(SetEmulatorSyncModeManual);
 
@@ -269,6 +270,7 @@ public class GeneralConfigWindowViewModel : BaseViewModel, IDisposable
     public ICommand SetEvolutionCalculatorModeVicePanjyamonEnabledCommand { get; }
     public ICommand SetEvolutionCalculatorModeVicePanjyamonDisabledCommand { get; }
     public ICommand OpenEmulatorSelectorCommand { get; }
+    public ICommand ReconnectEmulatorCommand { get; }
     public ICommand SetEmulatorSyncModeAutoCommand { get; }
     public ICommand SetEmulatorSyncModeManualCommand { get; }
     public ICommand SetTamerVisionShowEvoCommand { get; }

@@ -1,8 +1,10 @@
 using System;
 using System.Reactive.Disposables;
 using System.Reactive.Linq;
+using System.Windows;
 using System.Windows.Input;
 using DigimonWorld.Frontend.WPF.ViewModelComponents;
+using DigimonWorld.Frontend.WPF.Windows.GeneralConfig.Dialogs;
 using MemoryAccess;
 using Shared.Enums;
 using Shared.Services;
@@ -45,7 +47,8 @@ public class EmulatorLinkViewModel : BaseViewModel, IDisposable
 
         _disposable = new CompositeDisposable(
             EmulatorLinkEventHub.EmulatorConnectedObservable.Subscribe(OnEmulatorConnectedChanged),
-            EmulatorLinkEventHub.EmulatorLinkSyncModeChangedObservable.Subscribe(OnEmulatorSyncModeChanged)
+            EmulatorLinkEventHub.EmulatorLinkSyncModeChangedObservable.Subscribe(OnEmulatorSyncModeChanged),
+            EmulatorLinkEventHub.EmulatorInvalidRomDetectedObservable.Subscribe(_ => OnInvalidRomDetected())
         );
     }
 
@@ -152,6 +155,19 @@ public class EmulatorLinkViewModel : BaseViewModel, IDisposable
     {
         IsHappy = LiveMemoryReader.Instance.ConditionStats.Happiness >= 0;
         IsDisciplined = LiveMemoryReader.Instance.ConditionStats.Discipline >= 50;
+    }
+
+    private static void OnInvalidRomDetected()
+    {
+        Application.Current.Dispatcher.Invoke(() =>
+        {
+            InvalidRomDialog dialog = new()
+            {
+                Owner = Application.Current.MainWindow
+            };
+
+            dialog.ShowDialog();
+        });
     }
 
     public void Dispose()

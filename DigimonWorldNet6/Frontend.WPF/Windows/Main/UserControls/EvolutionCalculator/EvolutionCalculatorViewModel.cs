@@ -405,6 +405,7 @@ public sealed class EvolutionCalculatorViewModel : BaseViewModel, IDisposable
         }
     }
 
+
     private void UpdateAvailableDigimon(EvolutionCalculatorConfig evolutionCalculatorConfig)
     {
         _gameVariant = evolutionCalculatorConfig.GameVariant;
