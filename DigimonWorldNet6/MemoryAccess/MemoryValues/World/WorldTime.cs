@@ -4,10 +4,10 @@ namespace MemoryAccess.MemoryValues.World;
 
 public class WorldTime(ProcessMemory mem, PsxRam ram) : MemoryValueSyncBase
 {
-    private const int YEAR_OFFSET = 0x001BE00D;
-    private const int DAY_OFFSET = 0x001BE00D;
-    private const int HOUR_OFFSET = 0x001BE00D;
-    private const int MINUTE_OFFSET = 0x001BE00D;
+    private const int YEAR_OFFSET = 0x00134F02;
+    private const int DAY_OFFSET = 0x00134F04;
+    private const int HOUR_OFFSET = 0x00134EBC;
+    private const int MINUTE_OFFSET = 0x00134EBE;
 
     private WorldTime() : this(ProcessMemory.Empty, PsxRam.Empty)
     {

@@ -35,24 +35,7 @@ public class ProcessMemory
 
         byte[] buffer = new byte[length];
 
-        bool success = ReadProcessMemory(
-            Handle,
-            addr,
-            buffer,
-            length,
-            out int bytesRead);
-
-        if (!success)
-        {
-            int error = Marshal.GetLastWin32Error();
-
-            throw new System.ComponentModel.Win32Exception(error, $"ReadProcessMemory failed at address 0x{addr.ToInt64():X}");
-        }
-
-        if (bytesRead != length)
-        {
-            throw new IOException($"Partial memory read at 0x{addr.ToInt64():X}. Requested {length} bytes, received {bytesRead}.");
-        }
+        ReadProcessMemory(Handle, addr, buffer, length, out _);
 
         return buffer;
     }

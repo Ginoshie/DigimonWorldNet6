@@ -21,10 +21,9 @@ public abstract class MemoryValueSyncBase : IDisposable
         if (isConnected)
         {
             _updateDataSubscription.Disposable = Observable.Interval(TimeSpan.FromSeconds(1)).Subscribe(_ => OnUpdateData());
-        }
-        else
+        } else
         {
-            _updateDataSubscription.Dispose();
+            _updateDataSubscription.Disposable = null;
         }
     }
 

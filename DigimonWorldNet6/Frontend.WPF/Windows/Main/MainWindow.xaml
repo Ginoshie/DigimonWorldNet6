@@ -23,7 +23,9 @@
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="../../ResourceDictionaries/Styles/ToolTips/DefaultTooltipRightStyle.xaml" />
+                <ResourceDictionary Source="../../ResourceDictionaries/Styles/DefaultTextboxStyle.xaml" />
             </ResourceDictionary.MergedDictionaries>
+            <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
         </ResourceDictionary>
     </Window.Resources>
 
@@ -34,6 +36,7 @@
             </b:EventTrigger>
         </b:Interaction.Triggers>
         <Grid.RowDefinitions>
+            <RowDefinition Height="53" />
             <RowDefinition Height="37" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
@@ -45,7 +48,7 @@
             <ColumnDefinition Width="Auto" />
         </Grid.ColumnDefinitions>
 
-        <Border Grid.Column="1" Grid.Row="0" Background="Transparent" Grid.ColumnSpan="2" Height="50">
+        <Border Grid.Column="1" Grid.Row="1" Background="Transparent" Grid.ColumnSpan="2" Height="50">
             <Grid Background="Transparent">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="15" />
@@ -329,7 +332,35 @@
             </Grid>
         </Border>
 
-        <Border x:Name="OuterBorderWindow" Grid.Row="1" Grid.Column="1" Background="Transparent" Panel.ZIndex="1">
+        <Grid Grid.Row="0" Grid.RowSpan="3" Grid.Column="1" Grid.ColumnSpan="2" Panel.ZIndex="0"
+              HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,-12,195,0" Background="Transparent">
+            <Grid.RenderTransform>
+                <TranslateTransform Y="{Binding ClockOffset}" />
+            </Grid.RenderTransform>
+            <Image Source="pack://application:,,,/Frontend.WPF;component/Images/Misc/full-clock.png"
+                   Width="210" Stretch="Uniform"
+                   RenderTransformOrigin="0.5,0.5"
+                   RenderOptions.BitmapScalingMode="HighQuality">
+                <Image.RenderTransform>
+                    <RotateTransform Angle="{Binding ClockRotationAngle}" />
+                </Image.RenderTransform>
+            </Image>
+            <Image Source="pack://application:,,,/Frontend.WPF;component/Images/Misc/clock-dot.png"
+                   Width="65" Stretch="Uniform"
+                   HorizontalAlignment="Center" VerticalAlignment="Top"
+                   RenderOptions.BitmapScalingMode="HighQuality" />
+        </Grid>
+
+        <TextBox Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Text="{Binding ClockTime, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource DefaultTextBoxStyle}"
+                 HorizontalAlignment="Right" VerticalAlignment="Bottom"
+                 HorizontalContentAlignment="Center" Width="55" Height="Auto"
+                 FontSize="12" Margin="0,0,273,5" Padding="0,-1,0,-2" Panel.ZIndex="1">
+            <TextBox.RenderTransform>
+                <TranslateTransform Y="{Binding ClockOffset}" />
+            </TextBox.RenderTransform>
+        </TextBox>
+
+        <Border x:Name="OuterBorderWindow" Grid.Row="2" Grid.Column="1" Background="Transparent" Panel.ZIndex="2">
             <Border CornerRadius="12" BorderBrush="Black" BorderThickness="3" Padding="0" >
                 <Border CornerRadius="9" BorderBrush="#4A9FC5" BorderThickness="3" Padding="0" >
                     <ContentControl Content="{Binding CurrentSelectedMainWindowContent}" x:Name="CurrentSelectedMainWindowContent" />
@@ -337,10 +368,10 @@
             </Border>
         </Border>
 
-        <panes:NavigationLeftPane Grid.Row="1" Grid.Column="0" />
+        <panes:NavigationLeftPane Grid.Row="2" Grid.Column="0" />
 
-        <panes:HistoricEvolutionsBottomPane Grid.Row="2" Grid.Column="1" />
+        <panes:HistoricEvolutionsBottomPane Grid.Row="3" Grid.Column="1" />
 
-        <panes:EmulatorLinkRightPane Grid.Row="1" Grid.Column="3" />
+        <panes:EmulatorLinkRightPane Grid.Row="2" Grid.Column="3" />
     </Grid>
 </Window>

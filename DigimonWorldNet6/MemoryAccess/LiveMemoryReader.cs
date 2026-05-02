@@ -4,6 +4,7 @@ using System.Reactive.Disposables;
 using MemoryAccess.Core;
 using MemoryAccess.MemoryValues.Digimon;
 using MemoryAccess.MemoryValues.Evolution;
+using MemoryAccess.MemoryValues.World;
 using Shared.Services.Events;
 
 namespace MemoryAccess;
@@ -155,6 +156,15 @@ public sealed class LiveMemoryReader : INotifyPropertyChanged, IDisposable
         TechniqueStats.UpdateData();
         HistoricEvolutions = new HistoricEvolutions(mem, ram);
         HistoricEvolutions.UpdateData();
+
+        try
+        {
+            WorldTime = new MemoryValues.World.WorldTime(mem, ram);
+            WorldTime.UpdateData();
+        } catch
+        {
+            WorldTime = MemoryValues.World.WorldTime.Empty;
+        }
     }
 
     public ParameterStats ParameterStats { get; private set; } = ParameterStats.Empty;
@@ -163,6 +173,7 @@ public sealed class LiveMemoryReader : INotifyPropertyChanged, IDisposable
     public CareStats CareStats { get; private set; } = CareStats.Empty;
     public TechniqueStats TechniqueStats { get; private set; } = TechniqueStats.Empty;
     public HistoricEvolutions HistoricEvolutions { get; private set; } = HistoricEvolutions.Empty;
+    public WorldTime WorldTime { get; private set; } = WorldTime.Empty;
 
     public event PropertyChangedEventHandler? PropertyChanged;
 
@@ -194,6 +205,7 @@ public sealed class LiveMemoryReader : INotifyPropertyChanged, IDisposable
         CareStats = CareStats.Empty;
         TechniqueStats = TechniqueStats.Empty;
         HistoricEvolutions = HistoricEvolutions.Empty;
+        WorldTime = WorldTime.Empty;
     }
 
     public void Dispose()
