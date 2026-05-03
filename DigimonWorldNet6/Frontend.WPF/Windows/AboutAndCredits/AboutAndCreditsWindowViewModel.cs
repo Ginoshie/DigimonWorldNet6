@@ -3,6 +3,7 @@ using System.Windows;
 using System.Windows.Input;
 using DigimonWorld.Frontend.WPF.Constants;
 using DigimonWorld.Frontend.WPF.ViewModelComponents;
+using Shared;
 
 namespace DigimonWorld.Frontend.WPF.Windows.AboutAndCredits;
 
@@ -23,6 +24,8 @@ public class AboutAndCreditsWindowViewModel : BaseViewModel
     public string ContactEmailAddress { get; set; } = UiText.ContactEmailAddress;
 
     public string YoutubeAddress { get; set; } = Url.YoutubeAddress;
+
+    public string VersionText { get; } = AppVersion.Current;
 
     public ICommand CopyContactEmailCommand { get; }
 

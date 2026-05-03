@@ -2,15 +2,15 @@ using System;
 using System.IO;
 using NAudio.Wave;
 
-namespace DigimonWorld.Frontend.WPF.Windows.GeneralConfig.Dialogs;
+namespace DigimonWorld.Frontend.WPF.Services;
 
-public class InvalidRomDialogViewModel
+public static class SoundService
 {
-    public InvalidRomDialogViewModel()
+    public static void PlaySfx(string fileName, float volume = 1.0f)
     {
         try
         {
-            string sfxPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "SFX", "nani.mp3");
+            string sfxPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "SFX", fileName);
 
             if (!File.Exists(sfxPath))
             {
@@ -20,17 +20,16 @@ public class InvalidRomDialogViewModel
             AudioFileReader audioFile = new(sfxPath);
             WaveOutEvent soundOut = new();
             soundOut.Init(audioFile);
-            soundOut.Volume = 1.0f;
+            soundOut.Volume = volume;
             soundOut.PlaybackStopped += (_, _) =>
             {
                 soundOut.Dispose();
                 audioFile.Dispose();
             };
             soundOut.Play();
-        } catch (Exception)
+        } catch
         {
             // Sound playback is non-critical
         }
     }
 }
-

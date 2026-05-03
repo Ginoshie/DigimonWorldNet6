@@ -10,10 +10,13 @@ using DigimonWorld.Frontend.WPF.ViewModelComponents;
 using DigimonWorld.Frontend.WPF.Windows.AboutAndCredits;
 using DigimonWorld.Frontend.WPF.Windows.BaseClasses;
 using DigimonWorld.Frontend.WPF.Windows.GeneralConfig;
+using DigimonWorld.Frontend.WPF.Windows.Dialogs;
 using DigimonWorld.Frontend.WPF.Windows.Main.UserControls.Panes;
 using DigimonWorld.Frontend.WPF.Windows.MusicPlayer;
 using MemoryAccess;
 using MemoryAccess.MemoryValues.World;
+using Shared;
+using Shared.Services;
 using Shared.Services.Events;
 
 namespace DigimonWorld.Frontend.WPF.Windows.Main;
@@ -29,6 +32,7 @@ public class MainWindowViewModel : BaseWindowViewModel, IDisposable
     private readonly SynchronizationContextScheduler _uiScheduler;
 
     private bool _musicPlayerIsOpen;
+    private UpdateCheckResult? _cachedUpdateResult;
 
     public MainWindowViewModel(Window window) : base(window)
     {
@@ -39,6 +43,8 @@ public class MainWindowViewModel : BaseWindowViewModel, IDisposable
         OpenAboutAndCreditsWindowCommand = new CommandHandler(OpenAboutAndCreditsWindow);
 
         OpenMusicPlayerWindowCommand = new CommandHandler(OpenMusicPlayerWindow);
+
+        CheckForUpdateCommand = new CommandHandler(CheckForUpdate);
 
         _compositeDisposable = new CompositeDisposable(
             MusicPlayerEventHub.MusicPlayerClosedObservable.Subscribe(_ => _musicPlayerIsOpen = false),
@@ -54,6 +60,8 @@ public class MainWindowViewModel : BaseWindowViewModel, IDisposable
         BottomPaneViewModelComponent = new HistoricEvolutionsBottomPaneViewModelComponent();
 
         RightPaneViewModelComponent = new EmulatorLinkRightPaneViewModelComponent();
+
+        CheckForUpdateOnStartup();
     }
 
     public NavigationLeftPaneViewModelComponent LeftPaneViewModelComponent { get; private set; }
@@ -85,6 +93,12 @@ public class MainWindowViewModel : BaseWindowViewModel, IDisposable
     }
 
     public bool ClockIsVisible
+    {
+        get;
+        private set => SetField(ref field, value);
+    }
+
+    public bool UpdateIsAvailable
     {
         get;
         private set => SetField(ref field, value);
@@ -152,6 +166,8 @@ public class MainWindowViewModel : BaseWindowViewModel, IDisposable
 
     public CommandHandler OpenMusicPlayerWindowCommand { get; }
 
+    public ICommand CheckForUpdateCommand { get; }
+
     protected override void CloseApplication()
     {
         Services.MusicPlayer.Dispose();
@@ -216,6 +232,55 @@ public class MainWindowViewModel : BaseWindowViewModel, IDisposable
         MusicPlayerEventHub.SignalMusicPlayerOpened();
 
         _musicPlayerIsOpen = true;
+    }
+
+    private async void CheckForUpdateOnStartup()
+    {
+        try
+        {
+            _cachedUpdateResult = await UpdateService.CheckForUpdateAsync();
+            UpdateIsAvailable = _cachedUpdateResult.HasUpdate;
+        } catch
+        {
+            // Silently ignore update check failures on startup
+        }
+    }
+
+    private async void CheckForUpdate()
+    {
+        try
+        {
+            UpdateCheckResult result = _cachedUpdateResult ?? await UpdateService.CheckForUpdateAsync();
+            _cachedUpdateResult = null;
+
+            if (string.IsNullOrEmpty(result.DownloadUrl))
+            {
+                NanimonErrorDialog noDownloadDialog = new("Nanimon", "Naniiii?! There's a new version out but I can't find the download!\n\nSmash that button below and grab it yourself!", "https://github.com/Ginoshie/DigimonWorldNet6/releases")
+                {
+                    Owner = Application.Current.MainWindow
+                };
+                noDownloadDialog.ShowDialog();
+                return;
+            }
+
+            JijimonYesNoDialog updateDialog = new($"Well well, what do we have here! A shiny new version {result.NewVersion} has arrived!\n\nYou're currently on {AppVersion.Current}. Shall this old Digimon go fetch it for you? It'll only take a moment, ho ho!")
+            {
+                Owner = Application.Current.MainWindow
+            };
+            updateDialog.ShowDialog();
+
+            if (updateDialog.Result)
+            {
+                await UpdateService.DownloadAndApplyUpdateAsync(result.DownloadUrl, result.NewVersion);
+            }
+        } catch (Exception)
+        {
+            NanimonErrorDialog dialog = new("Nanimon", "Naniiii?! The update broke!\n\nEven I couldn't punch through whatever went wrong there. Try again later or smash that button below to grab it yourself!", "https://github.com/Ginoshie/DigimonWorldNet6/releases")
+            {
+                Owner = Application.Current.MainWindow
+            };
+            dialog.ShowDialog();
+        }
     }
 
     public void Dispose() => _compositeDisposable.Dispose();

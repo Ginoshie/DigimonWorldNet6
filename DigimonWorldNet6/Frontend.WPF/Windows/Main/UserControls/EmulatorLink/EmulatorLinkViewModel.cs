@@ -4,7 +4,7 @@ using System.Reactive.Linq;
 using System.Windows;
 using System.Windows.Input;
 using DigimonWorld.Frontend.WPF.ViewModelComponents;
-using DigimonWorld.Frontend.WPF.Windows.GeneralConfig.Dialogs;
+using DigimonWorld.Frontend.WPF.Windows.Dialogs;
 using MemoryAccess;
 using Shared.Enums;
 using Shared.Services;
@@ -161,7 +161,7 @@ public class EmulatorLinkViewModel : BaseViewModel, IDisposable
     {
         Application.Current.Dispatcher.Invoke(() =>
         {
-            InvalidRomDialog dialog = new()
+            NanimonErrorDialog dialog = new("Nanimon", "Naniiii?! That's not a US ROM!\n\nEmulator synchronization only works with the US version. Load up the right ROM and reconnect!")
             {
                 Owner = Application.Current.MainWindow
             };

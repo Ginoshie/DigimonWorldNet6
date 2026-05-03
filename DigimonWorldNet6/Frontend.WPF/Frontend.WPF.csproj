@@ -1,5 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
+    <Import Project="..\Version.props" />
+
     <PropertyGroup>
         <OutputType>WinExe</OutputType>
         <TargetFramework>net10.0-windows</TargetFramework>
@@ -7,10 +9,16 @@
         <UseWPF>true</UseWPF>
         <RootNamespace>DigimonWorld.Frontend.WPF</RootNamespace>
         <LangVersion>default</LangVersion>
+        <AssemblyName>Frontend.WPF</AssemblyName>
     </PropertyGroup>
+
+    <Target Name="RenameOutput" AfterTargets="Publish">
+        <Move SourceFiles="$(PublishDir)Frontend.WPF.exe" DestinationFiles="$(PublishDir)DW 1 Tool $(AppVersion).exe" Condition="Exists('$(PublishDir)Frontend.WPF.exe')" />
+    </Target>
 
     <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
         <DebugType>none</DebugType>
+        <EnableCompressionInSingleFile>true</EnableCompressionInSingleFile>
     </PropertyGroup>
 
     <ItemGroup>

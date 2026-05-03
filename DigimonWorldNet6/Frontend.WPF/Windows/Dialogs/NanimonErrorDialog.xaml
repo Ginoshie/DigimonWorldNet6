@@ -1,11 +1,13 @@
-<baseClasses:BaseDialogWindow x:Class="DigimonWorld.Frontend.WPF.Windows.GeneralConfig.Dialogs.InvalidRomDialog"
+<baseClasses:BaseDialogWindow x:Class="DigimonWorld.Frontend.WPF.Windows.Dialogs.NanimonErrorDialog"
                               xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                               xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                               xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                               xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
                               xmlns:baseClasses="clr-namespace:DigimonWorld.Frontend.WPF.Windows.BaseClasses"
+                              xmlns:dialogs="clr-namespace:DigimonWorld.Frontend.WPF.Windows.Dialogs"
                               mc:Ignorable="d"
-                              Title="Unsupported ROM Version"
+                              d:DataContext="{d:DesignInstance Type=dialogs:NanimonErrorDialogViewModel}"
+                              Title="Error"
                               ResizeMode="NoResize"
                               SizeToContent="WidthAndHeight"
                               WindowStyle="None"
@@ -43,7 +45,7 @@
                                         <Border CornerRadius="5" BorderBrush="#90D9FA" BorderThickness="3" Background="#2E3841">
                                             <Border CornerRadius="5" BorderBrush="Transparent" BorderThickness="0" Background="#77000000">
                                                 <StackPanel Margin="5">
-                                                    <TextBlock Text="Nanimon"
+                                                    <TextBlock Text="{Binding NarratorName}"
                                                                Foreground="#D4D604"
                                                                FontSize="15"
                                                                HorizontalAlignment="Left"
@@ -59,7 +61,7 @@
                                                                Margin="0,5"
                                                                Width="300"
                                                                TextWrapping="Wrap"
-                                                               Text="Naniiii?! That's not a US ROM!&#x0a;&#x0a;Emulator synchronization only works with the US version. Load up the right ROM and reconnect!" />
+                                                               Text="{Binding Message}" />
                                                 </StackPanel>
                                             </Border>
                                         </Border>
@@ -67,12 +69,19 @@
                                 </Border>
                             </StackPanel>
 
-                            <Button Height="45"
-                                    Style="{StaticResource DefaultButtonStyle}"
-                                    Content="Close"
-                                    Padding="15,5"
-                                    HorizontalAlignment="Center"
-                                    IsCancel="True" />
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                <Button Height="45"
+                                        Style="{StaticResource DefaultButtonStyle}"
+                                        Content="GitHub"
+                                        Padding="15,5"
+                                        Margin="0,0,10,0"
+                                        Command="{Binding OpenLinkCommand}" />
+                                <Button Height="45"
+                                        Style="{StaticResource DefaultButtonStyle}"
+                                        Content="Close"
+                                        Padding="15,5"
+                                        IsCancel="True" />
+                            </StackPanel>
                         </StackPanel>
                     </Border>
                 </Border>
@@ -80,6 +89,4 @@
         </Border>
     </Border>
 </baseClasses:BaseDialogWindow>
-
-
 

@@ -1,5 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
+    <Import Project="..\Version.props" />
+
     <PropertyGroup>
         <TargetFramework>net10.0-windows</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
@@ -16,5 +18,24 @@
       <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="10.0.2" />
       <PackageReference Include="System.Reactive" Version="6.1.0" />
     </ItemGroup>
+
+    <ItemGroup>
+      <Compile Remove="AppVersion.cs" />
+    </ItemGroup>
+
+    <Target Name="GenerateAppVersion" BeforeTargets="CoreCompile">
+      <PropertyGroup>
+        <AppVersionCode>namespace Shared%3B
+
+public static class AppVersion
+{
+    public const string Current = "$(AppVersion)"%3B
+}</AppVersionCode>
+      </PropertyGroup>
+      <WriteLinesToFile File="$(IntermediateOutputPath)AppVersion.g.cs" Overwrite="true" Lines="$(AppVersionCode)" />
+      <ItemGroup>
+        <Compile Include="$(IntermediateOutputPath)AppVersion.g.cs" />
+      </ItemGroup>
+    </Target>
 
 </Project>
