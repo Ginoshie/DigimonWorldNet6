@@ -573,7 +573,11 @@ public class TamerVisionViewModel : BaseViewModel, IDisposable
             return;
         }
 
-        EvoResultImage = new BitmapImage(new Uri(string.Format(DIGIMON_IMAGE, EvolutionResult, CurrentEvoResultMaskSuffix())));
+        string evoImageName = EvolutionResult is EvolutionResult.NotApplicable
+            ? nameof(EvolutionResult.None)
+            : EvolutionResult.ToString();
+
+        EvoResultImage = new BitmapImage(new Uri(string.Format(DIGIMON_IMAGE, evoImageName, CurrentEvoResultMaskSuffix())));
 
         if (_currentEvoResultMask == EvoResultMask.DigiGuess)
         {
