@@ -12,6 +12,7 @@ using DigimonWorld.Frontend.WPF.Windows.Main;
 using MemoryAccess;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Velopack;
 
 namespace DigimonWorld.Frontend.WPF;
 
@@ -21,6 +22,8 @@ public partial class App
 
     public App()
     {
+        VelopackApp.Build().Run();
+
         AppHost = Host.CreateDefaultBuilder()
             .ConfigureServices((_, services) =>
             {

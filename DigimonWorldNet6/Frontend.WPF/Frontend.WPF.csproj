@@ -10,34 +10,31 @@
         <RootNamespace>DigimonWorld.Frontend.WPF</RootNamespace>
         <LangVersion>default</LangVersion>
         <AssemblyName>Frontend.WPF</AssemblyName>
+        <ApplicationIcon>Images\Misc\app-icon.ico</ApplicationIcon>
     </PropertyGroup>
-
-    <Target Name="RenameOutput" AfterTargets="Publish">
-        <Move SourceFiles="$(PublishDir)Frontend.WPF.exe" DestinationFiles="$(PublishDir)DW 1 Tool $(AppVersion).exe" Condition="Exists('$(PublishDir)Frontend.WPF.exe')" />
-    </Target>
 
     <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
         <DebugType>none</DebugType>
-        <EnableCompressionInSingleFile>true</EnableCompressionInSingleFile>
     </PropertyGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\Evolution.Calculator.Core\Evolution.Calculator.Core.csproj"/>
+        <ProjectReference Include="..\Evolution.Calculator.Core\Evolution.Calculator.Core.csproj" />
     </ItemGroup>
 
     <ItemGroup>
         <PackageReference Include="NAudio" Version="2.2.1" />
         <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="10.0.2" />
         <PackageReference Include="Microsoft.Extensions.Hosting" Version="10.0.2" />
-        <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.135"/>
+        <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.135" />
         <PackageReference Include="ReactiveUI" Version="22.3.1" />
         <PackageReference Include="System.Reactive" Version="6.1.0" />
+        <PackageReference Include="Velopack" Version="0.0.1298" />
     </ItemGroup>
 
     <ItemGroup>
-        <Resource Include="Images\**\*"/>
-        <Resource Include="Fonts\DW1_US_Regular.ttf"/>
-        <Resource Include="Windows\Main\UserControls\DigiWiki\UserControls\**\*.jpg"/>
+        <Resource Include="Images\**\*" />
+        <Resource Include="Fonts\DW1_US_Regular.ttf" />
+        <Resource Include="Windows\Main\UserControls\DigiWiki\UserControls\**\*.jpg" />
     </ItemGroup>
 
     <ItemGroup>
@@ -54,6 +51,7 @@
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
     </ItemGroup>
+
 
     <ItemGroup>
       <Page Update="Windows\Main\UserControls\TamerVision\UserControls\EvolutionStatsUserControl.xaml">

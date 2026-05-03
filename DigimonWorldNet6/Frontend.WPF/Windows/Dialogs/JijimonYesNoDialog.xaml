@@ -20,6 +20,7 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="/ResourceDictionaries/Styles/Buttons/DefaultButtonStyle.xaml" />
             </ResourceDictionary.MergedDictionaries>
+            <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
         </ResourceDictionary>
     </baseClasses:BaseDialogWindow.Resources>
 
@@ -64,7 +65,8 @@
                                 </Border>
                             </StackPanel>
 
-                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center"
+                                        Visibility="{Binding ButtonsVisible, Converter={StaticResource BooleanToVisibilityConverter}}">
                                 <Button Height="45"
                                         Style="{StaticResource DefaultButtonStyle}"
                                         Content="Yes"

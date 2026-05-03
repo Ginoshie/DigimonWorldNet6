@@ -159,11 +159,11 @@ public sealed class LiveMemoryReader : INotifyPropertyChanged, IDisposable
 
         try
         {
-            WorldTime = new MemoryValues.World.WorldTime(mem, ram);
+            WorldTime = new WorldTime(mem, ram);
             WorldTime.UpdateData();
         } catch
         {
-            WorldTime = MemoryValues.World.WorldTime.Empty;
+            WorldTime = WorldTime.Empty;
         }
     }
 

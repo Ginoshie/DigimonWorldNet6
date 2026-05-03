@@ -253,26 +253,34 @@ public class MainWindowViewModel : BaseWindowViewModel, IDisposable
             UpdateCheckResult result = _cachedUpdateResult ?? await UpdateService.CheckForUpdateAsync();
             _cachedUpdateResult = null;
 
-            if (string.IsNullOrEmpty(result.DownloadUrl))
+            if (!result.HasUpdate || result.UpdateInfo == null)
             {
-                NanimonErrorDialog noDownloadDialog = new("Nanimon", "Naniiii?! There's a new version out but I can't find the download!\n\nSmash that button below and grab it yourself!", "https://github.com/Ginoshie/DigimonWorldNet6/releases")
-                {
-                    Owner = Application.Current.MainWindow
-                };
-                noDownloadDialog.ShowDialog();
                 return;
             }
 
-            JijimonYesNoDialog updateDialog = new($"Well well, what do we have here! A shiny new version {result.NewVersion} has arrived!\n\nYou're currently on {AppVersion.Current}. Shall this old Digimon go fetch it for you? It'll only take a moment, ho ho!")
+            JijimonYesNoDialog updateDialog = new($"Well well. . . what do we have here! A shiny new version {result.NewVersion} has arrived!\n\nYou're currently on {AppVersion.Current}. Shall we fetch this update?")
             {
                 Owner = Application.Current.MainWindow
             };
             updateDialog.ShowDialog();
 
-            if (updateDialog.Result)
+            if (!updateDialog.Result)
             {
-                await UpdateService.DownloadAndApplyUpdateAsync(result.DownloadUrl, result.NewVersion);
+                return;
             }
+
+            JijimonYesNoDialog progressDialog = new("Hold on now, let me fetch that for you...")
+            {
+                Owner = Application.Current.MainWindow
+            };
+            ((JijimonYesNoDialogViewModel)progressDialog.DataContext).HideButtons();
+
+            _ = System.Threading.Tasks.Task.Run(async () =>
+            {
+                await UpdateService.DownloadAndApplyUpdateAsync(result.UpdateInfo);
+            });
+
+            progressDialog.ShowDialog();
         } catch (Exception)
         {
             NanimonErrorDialog dialog = new("Nanimon", "Naniiii?! The update broke!\n\nEven I couldn't punch through whatever went wrong there. Try again later or smash that button below to grab it yourself!", "https://github.com/Ginoshie/DigimonWorldNet6/releases")
