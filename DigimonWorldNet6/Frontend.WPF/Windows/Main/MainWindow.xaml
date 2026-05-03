@@ -24,6 +24,7 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="../../ResourceDictionaries/Styles/ToolTips/DefaultTooltipRightStyle.xaml" />
                 <ResourceDictionary Source="../../ResourceDictionaries/Styles/DefaultTextboxStyle.xaml" />
+                <ResourceDictionary Source="../../ResourceDictionaries/Styles/DefaultReadonlyTextboxStyle.xaml" />
             </ResourceDictionary.MergedDictionaries>
             <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
         </ResourceDictionary>
@@ -351,7 +352,7 @@
                    RenderOptions.BitmapScalingMode="HighQuality" />
         </Grid>
 
-        <TextBox Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Text="{Binding ClockTime, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource DefaultTextBoxStyle}"
+        <TextBox Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Text="{Binding ClockTime, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource DefaultReadonlyTextBoxStyle}"
                  HorizontalAlignment="Right" VerticalAlignment="Bottom"
                  HorizontalContentAlignment="Center" Width="55" Height="Auto"
                  FontSize="12" Margin="0,0,273,5" Padding="0,-1,0,-2" Panel.ZIndex="1">

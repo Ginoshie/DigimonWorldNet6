@@ -9,6 +9,7 @@
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="/ResourceDictionaries/Styles/DefaultTextboxStyle.xaml" />
+                <ResourceDictionary Source="/ResourceDictionaries/Styles/DefaultReadonlyTextboxStyle.xaml" />
                 <ResourceDictionary Source="/ResourceDictionaries/Styles/DefaultComboboxStyle.xaml" />
                 <ResourceDictionary Source="/ResourceDictionaries/Styles/DefaultFocusStyle.xaml" />
                 <ResourceDictionary Source="/ResourceDictionaries/Styles/Labels/DefaultSheenLabelStyle.xaml" />
@@ -52,27 +53,27 @@
                 </Label.ToolTip>
             </Label>
             <TextBox Grid.Column="2"
-                     Name="Hp"
-                     HorizontalContentAlignment="Center"
-                     Style="{StaticResource DefaultTextBoxStyle}"
-                     Margin="{StaticResource RowMargin}"
-                     Text="{Binding HP}">
-                <TextBox.ToolTip>
-                    <ToolTip Style="{StaticResource DefaultToolTipRightStyle}">
-                        <TextBlock Text="The max HP of your digimon." />
-                    </ToolTip>
-                </TextBox.ToolTip>
-            </TextBox>
-            <Label Grid.Column="3" Grid.Row="0" Style="{StaticResource DefaultLabelStyle}" Margin="3,0" Content="/" />
-            <TextBox Grid.Column="4"
                      Name="CurrentHp"
                      HorizontalContentAlignment="Center"
-                     Style="{StaticResource DefaultTextBoxStyle}"
+                     Style="{StaticResource DefaultReadonlyTextBoxStyle}"
                      Margin="{StaticResource RowMargin}"
                      Text="{Binding CurrentHP}">
                 <TextBox.ToolTip>
                     <ToolTip Style="{StaticResource DefaultToolTipRightStyle}">
                         <TextBlock Text="The current HP of your digimon." />
+                    </ToolTip>
+                </TextBox.ToolTip>
+            </TextBox>
+            <Label Grid.Column="3" Grid.Row="0" Style="{StaticResource DefaultLabelStyle}" Margin="3,0" Content="/" />
+            <TextBox Grid.Column="4"
+                     Name="Hp"
+                     HorizontalContentAlignment="Center"
+                     Style="{StaticResource DefaultReadonlyTextBoxStyle}"
+                     Margin="{StaticResource RowMargin}"
+                     Text="{Binding HP}">
+                <TextBox.ToolTip>
+                    <ToolTip Style="{StaticResource DefaultToolTipRightStyle}">
+                        <TextBlock Text="The max HP of your digimon." />
                     </ToolTip>
                 </TextBox.ToolTip>
             </TextBox>
@@ -93,38 +94,27 @@
                 </Label.ToolTip>
             </Label>
             <TextBox Grid.Column="2"
-                     Name="Mp"
-                     Style="{StaticResource DefaultTextBoxStyle}"
-                     Margin="{StaticResource RowMargin}"
-                     Text="{Binding MP}">
-                <TextBox.ToolTip>
-                    <ToolTip Style="{StaticResource DefaultToolTipRightStyle}">
-                        <TextBlock Text="The max MP of your digimon." />
-                    </ToolTip>
-                </TextBox.ToolTip>
-            </TextBox>
-            <TextBox Grid.Column="2"
-                     Name="MaxMp"
-                     HorizontalContentAlignment="Center"
-                     Style="{StaticResource DefaultTextBoxStyle}"
-                     Margin="{StaticResource RowMargin}"
-                     Text="{Binding MP}">
-                <TextBox.ToolTip>
-                    <ToolTip Style="{StaticResource DefaultToolTipRightStyle}">
-                        <TextBlock Text="The max MP of your digimon." />
-                    </ToolTip>
-                </TextBox.ToolTip>
-            </TextBox>
-            <Label Grid.Column="3" Grid.Row="0" Style="{StaticResource DefaultLabelStyle}" Margin="3,0" Content="/" />
-            <TextBox Grid.Column="4"
                      Name="CurrentMp"
                      HorizontalContentAlignment="Center"
-                     Style="{StaticResource DefaultTextBoxStyle}"
+                     Style="{StaticResource DefaultReadonlyTextBoxStyle}"
                      Margin="{StaticResource RowMargin}"
                      Text="{Binding CurrentMP}">
                 <TextBox.ToolTip>
                     <ToolTip Style="{StaticResource DefaultToolTipRightStyle}">
                         <TextBlock Text="The current MP of your digimon." />
+                    </ToolTip>
+                </TextBox.ToolTip>
+            </TextBox>
+            <Label Grid.Column="3" Grid.Row="0" Style="{StaticResource DefaultLabelStyle}" Margin="3,0" Content="/" />
+            <TextBox Grid.Column="4"
+                     Name="MaxMp"
+                     HorizontalContentAlignment="Center"
+                     Style="{StaticResource DefaultReadonlyTextBoxStyle}"
+                     Margin="{StaticResource RowMargin}"
+                     Text="{Binding MP}">
+                <TextBox.ToolTip>
+                    <ToolTip Style="{StaticResource DefaultToolTipRightStyle}">
+                        <TextBlock Text="The max MP of your digimon." />
                     </ToolTip>
                 </TextBox.ToolTip>
             </TextBox>
@@ -144,7 +134,7 @@
             </Label>
             <TextBox Grid.Column="2"
                      Name="Off"
-                     Style="{StaticResource DefaultTextBoxStyle}"
+                     Style="{StaticResource DefaultReadonlyTextBoxStyle}"
                      Margin="{StaticResource RowMargin}"
                      Text="{Binding Offense}">
                 <TextBox.ToolTip>
@@ -169,7 +159,7 @@
             </Label>
             <TextBox Grid.Column="2"
                      Name="Def"
-                     Style="{StaticResource DefaultTextBoxStyle}"
+                     Style="{StaticResource DefaultReadonlyTextBoxStyle}"
                      Margin="{StaticResource RowMargin}"
                      Text="{Binding Defence}">
                 <TextBox.ToolTip>
@@ -194,7 +184,7 @@
             </Label>
             <TextBox Grid.Column="2"
                      Name="Speed"
-                     Style="{StaticResource DefaultTextBoxStyle}"
+                     Style="{StaticResource DefaultReadonlyTextBoxStyle}"
                      Margin="{StaticResource RowMargin}"
                      Text="{Binding Speed}">
                 <TextBox.ToolTip>
@@ -219,7 +209,7 @@
             </Label>
             <TextBox Grid.Column="2"
                      Name="Brains"
-                     Style="{StaticResource DefaultTextBoxStyle}"
+                     Style="{StaticResource DefaultReadonlyTextBoxStyle}"
                      Margin="{StaticResource RowMargin}"
                      Text="{Binding Brains}">
                 <TextBox.ToolTip>

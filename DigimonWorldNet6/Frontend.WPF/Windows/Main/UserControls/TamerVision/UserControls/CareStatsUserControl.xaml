@@ -11,6 +11,7 @@
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="/ResourceDictionaries/Styles/DefaultTextboxStyle.xaml" />
+                <ResourceDictionary Source="/ResourceDictionaries/Styles/DefaultReadonlyTextboxStyle.xaml" />
                 <ResourceDictionary Source="/ResourceDictionaries/Styles/DefaultComboboxStyle.xaml" />
                 <ResourceDictionary Source="/ResourceDictionaries/Styles/DefaultFocusStyle.xaml" />
                 <ResourceDictionary Source="/ResourceDictionaries/Styles/Labels/DefaultSheenLabelStyle.xaml" />
@@ -60,7 +61,7 @@
                 <TextBox Grid.Column="2"
                          Name="Happiness"
                          HorizontalContentAlignment="Center"
-                         Style="{StaticResource DefaultTextBoxStyle}"
+                         Style="{StaticResource DefaultReadonlyTextBoxStyle}"
                          Width="{StaticResource DefaultTextBoxWidth}"
                          Margin="{StaticResource RowMargin}"
                          Text="{Binding Happiness}">
@@ -87,7 +88,7 @@
                 <TextBox Grid.Column="2"
                          Name="Discipline"
                          HorizontalContentAlignment="Center"
-                         Style="{StaticResource DefaultTextBoxStyle}"
+                         Style="{StaticResource DefaultReadonlyTextBoxStyle}"
                          Width="{StaticResource DefaultTextBoxWidth}"
                          Margin="{StaticResource RowMargin}"
                          Text="{Binding Discipline}">
@@ -114,7 +115,7 @@
                 <TextBox Grid.Column="2"
                          Name="Weight"
                          HorizontalContentAlignment="Center"
-                         Style="{StaticResource DefaultTextBoxStyle}"
+                         Style="{StaticResource DefaultReadonlyTextBoxStyle}"
                          Width="{StaticResource DefaultTextBoxWidth}"
                          Margin="{StaticResource RowMargin}"
                          Text="{Binding Weight}">
@@ -141,7 +142,7 @@
                 <TextBox Grid.Column="2"
                          Name="CareMistakes"
                          HorizontalContentAlignment="Center"
-                         Style="{StaticResource DefaultTextBoxStyle}"
+                         Style="{StaticResource DefaultReadonlyTextBoxStyle}"
                          Width="{StaticResource DefaultTextBoxWidth}"
                          Margin="{StaticResource RowMargin}"
                          Text="{Binding CareMistakes}">
@@ -168,7 +169,7 @@
                 <TextBox Grid.Column="2"
                          Name="Battles"
                          HorizontalContentAlignment="Center"
-                         Style="{StaticResource DefaultTextBoxStyle}"
+                         Style="{StaticResource DefaultReadonlyTextBoxStyle}"
                          Width="{StaticResource DefaultTextBoxWidth}"
                          Margin="{StaticResource RowMargin}"
                          Text="{Binding Battles}">
@@ -195,7 +196,7 @@
                 <TextBox Grid.Column="2"
                          Name="TechniqueCount"
                          HorizontalContentAlignment="Center"
-                         Style="{StaticResource DefaultTextBoxStyle}"
+                         Style="{StaticResource DefaultReadonlyTextBoxStyle}"
                          Width="{StaticResource DefaultTextBoxWidth}"
                          Margin="{StaticResource RowMargin}"
                          Text="{Binding TechniqueCount}">
@@ -233,7 +234,7 @@
                 <TextBox Grid.Column="2"
                          Name="PoopLevel"
                          HorizontalContentAlignment="Center"
-                         Style="{StaticResource DefaultTextBoxStyle}"
+                         Style="{StaticResource DefaultReadonlyTextBoxStyle}"
                          Width="{StaticResource DefaultTextBoxWidth}"
                          Margin="{StaticResource RowMargin}"
                          Text="{Binding PoopLevel}">
@@ -260,7 +261,7 @@
                 <TextBox Grid.Column="2"
                          Name="PoopingTimer"
                          HorizontalContentAlignment="Center"
-                         Style="{StaticResource DefaultTextBoxStyle}"
+                         Style="{StaticResource DefaultReadonlyTextBoxStyle}"
                          Width="{StaticResource DefaultTextBoxWidth}"
                          Margin="{StaticResource RowMargin}"
                          Text="{Binding PoopingTimer}">
@@ -287,7 +288,7 @@
                 <TextBox Grid.Column="2"
                          Name="Tiredness"
                          HorizontalContentAlignment="Center"
-                         Style="{StaticResource DefaultTextBoxStyle}"
+                         Style="{StaticResource DefaultReadonlyTextBoxStyle}"
                          Width="{StaticResource DefaultTextBoxWidth}"
                          Margin="{StaticResource RowMargin}"
                          Text="{Binding Tiredness}">
@@ -314,7 +315,7 @@
                 <TextBox Grid.Column="2"
                          Name="EnergyLevel"
                          HorizontalContentAlignment="Center"
-                         Style="{StaticResource DefaultTextBoxStyle}"
+                         Style="{StaticResource DefaultReadonlyTextBoxStyle}"
                          Width="{StaticResource DefaultTextBoxWidth}"
                          Margin="{StaticResource RowMargin}"
                          Text="{Binding EnergyLevel}">
@@ -341,7 +342,7 @@
                 <TextBox Grid.Column="2"
                          Name="HungryTimer"
                          HorizontalContentAlignment="Center"
-                         Style="{StaticResource DefaultTextBoxStyle}"
+                         Style="{StaticResource DefaultReadonlyTextBoxStyle}"
                          Width="{StaticResource DefaultTextBoxWidth}"
                          Margin="{StaticResource RowMargin}"
                          Text="{Binding HungryTimer}">
@@ -368,7 +369,7 @@
                 <TextBox Grid.Column="2"
                          Name="StarvationTimer"
                          HorizontalContentAlignment="Center"
-                         Style="{StaticResource DefaultTextBoxStyle}"
+                         Style="{StaticResource DefaultReadonlyTextBoxStyle}"
                          Width="{StaticResource DefaultTextBoxWidth}"
                          Margin="{StaticResource RowMargin}"
                          Text="{Binding StarvationTimer}">
@@ -407,7 +408,7 @@
                 <TextBox Grid.Column="2"
                          Name="Virus"
                          HorizontalContentAlignment="Center"
-                         Style="{StaticResource DefaultTextBoxStyle}"
+                         Style="{StaticResource DefaultReadonlyTextBoxStyle}"
                          Width="{StaticResource DefaultTextBoxWidth}"
                          Margin="{StaticResource RowMargin}"
                          Text="{Binding Virus}">

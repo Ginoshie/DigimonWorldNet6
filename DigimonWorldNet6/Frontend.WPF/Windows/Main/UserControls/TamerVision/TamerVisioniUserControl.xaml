@@ -17,6 +17,7 @@
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="/ResourceDictionaries/Styles/DefaultTextboxStyle.xaml" />
+                <ResourceDictionary Source="/ResourceDictionaries/Styles/DefaultReadonlyTextboxStyle.xaml" />
                 <ResourceDictionary Source="/ResourceDictionaries/Styles/DefaultComboboxStyle.xaml" />
                 <ResourceDictionary Source="/ResourceDictionaries/Styles/DefaultFocusStyle.xaml" />
                 <ResourceDictionary Source="/ResourceDictionaries/Styles/Labels/DefaultSheenLabelStyle.xaml" />
@@ -93,7 +94,7 @@
                                            Margin="0, 0 , 5,0" />
                                     <TextBox Grid.Row="0" Grid.Column="1"
                                              x:Name="DigimonNameTextBox"
-                                             Style="{StaticResource DefaultTextBoxStyle}"
+                                             Style="{StaticResource DefaultReadonlyTextBoxStyle}"
                                              Margin="{StaticResource RowMargin}"
                                              Text="{Binding DigimonName}">
                                         <TextBox.ToolTip>
@@ -109,7 +110,7 @@
                                            Margin="0, 0 , 5,0" />
                                     <TextBox Grid.Row="1" Grid.Column="1"
                                              Name="Digi"
-                                             Style="{StaticResource DefaultTextBoxStyle}"
+                                             Style="{StaticResource DefaultReadonlyTextBoxStyle}"
                                              Margin="{StaticResource RowMargin}"
                                              Text="{Binding DigimonType}">
                                         <TextBox.ToolTip>
@@ -159,7 +160,7 @@
                                                Margin="10, 0, 5, 0" />
                                         <TextBox Grid.Column="4"
                                                  Name="Age"
-                                                 Style="{StaticResource DefaultTextBoxStyle}"
+                                                 Style="{StaticResource DefaultReadonlyTextBoxStyle}"
                                                  HorizontalContentAlignment="Center"
                                                  Width="40"
                                                  Margin="{StaticResource RowMargin}"
@@ -179,7 +180,7 @@
                                            Margin="0, 0 , 5,0" />
                                     <TextBox Grid.Row="3" Grid.Column="1"
                                              Name="Active"
-                                             Style="{StaticResource DefaultTextBoxStyle}"
+                                             Style="{StaticResource DefaultReadonlyTextBoxStyle}"
                                              Margin="{StaticResource RowMargin}"
                                              Text="{Binding Active}">
                                         <TextBox.ToolTip>

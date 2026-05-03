@@ -9,6 +9,7 @@
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="/ResourceDictionaries/Styles/DefaultTextboxStyle.xaml" />
+                <ResourceDictionary Source="/ResourceDictionaries/Styles/DefaultReadonlyTextboxStyle.xaml" />
                 <ResourceDictionary Source="/ResourceDictionaries/Styles/DefaultComboboxStyle.xaml" />
                 <ResourceDictionary Source="/ResourceDictionaries/Styles/DefaultFocusStyle.xaml" />
                 <ResourceDictionary Source="/ResourceDictionaries/Styles/Labels/DefaultSheenLabelStyle.xaml" />
@@ -50,7 +51,7 @@
             <TextBox Grid.Row="0" Grid.Column="1"
                      Name="EvoAge"
                      HorizontalContentAlignment="Center"
-                     Style="{StaticResource DefaultTextBoxStyle}"
+                     Style="{StaticResource DefaultReadonlyTextBoxStyle}"
                      Margin="{StaticResource RowMargin}"
                      Width="40"
                      Text="{Binding EvoAge}">
@@ -70,7 +71,7 @@
             <TextBox Grid.Row="1" Grid.Column="1"
                      Name="EvoEligibleAge"
                      HorizontalContentAlignment="Center"
-                     Style="{StaticResource DefaultTextBoxStyle}"
+                     Style="{StaticResource DefaultReadonlyTextBoxStyle}"
                      Margin="{StaticResource RowMargin}"
                      Width="40"
                      Text="{Binding EvoReadyAge}">
