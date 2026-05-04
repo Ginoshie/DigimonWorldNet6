@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:navigationButtons="clr-namespace:DigimonWorld.Frontend.WPF.Windows.Main.UserControls.DigiWiki.UserControls.Navigation.NavigationButtons"
              xmlns:digiWiki="clr-namespace:DigimonWorld.Frontend.WPF.Windows.Main.UserControls.DigiWiki"
+             xmlns:conversion="clr-namespace:DigimonWorld.Frontend.WPF.Conversion"
              mc:Ignorable="d"
              d:DataContext="{d:DesignInstance Type=digiWiki:DigiWikiViewModel, IsDesignTimeCreatable=True}">
 
@@ -16,6 +17,7 @@
                 <ResourceDictionary Source="/ResourceDictionaries/Styles/ToolTips/DefaultTooltipRightStyle.xaml" />
                 <ResourceDictionary Source="/ResourceDictionaries/Styles/Buttons/DefaultButtonStyle.xaml" />
             </ResourceDictionary.MergedDictionaries>
+            <conversion:StringEqualsToBoolConverter x:Key="StringEqualsToBoolConverter" />
         </ResourceDictionary>
     </UserControl.Resources>
 
@@ -29,13 +31,20 @@
             TOPICS
         </Label>
         <WrapPanel Grid.Row="1" HorizontalAlignment="Center">
-            <navigationButtons:HungryTopicNavigationButton Command="{Binding OpenHungryTopicCommand}" />
-            <navigationButtons:PoopyTopicNavigationButton Command="{Binding OpenPoopyTopicCommand}" />
-            <navigationButtons:TiredTopicNavigationButton Command="{Binding OpenTiredTopicCommand}" />
-            <navigationButtons:SleepyTopicNavigationButton Command="{Binding OpenSleepyTopicCommand}" />
-            <navigationButtons:FlowerTopicNavigationButton Command="{Binding OpenFlowerTopicCommand}" />
-            <navigationButtons:InjuredTopicNavigationButton Command="{Binding OpenInjuryTopicCommand}" />
-            <navigationButtons:SickTopicNavigationButton Command="{Binding OpenSickTopicCommand}" />
+            <navigationButtons:HungryTopicNavigationButton Command="{Binding OpenHungryTopicCommand}"
+                IsActive="{Binding ActiveTopic, Converter={StaticResource StringEqualsToBoolConverter}, ConverterParameter=Hungry}" />
+            <navigationButtons:PoopyTopicNavigationButton Command="{Binding OpenPoopyTopicCommand}"
+                IsActive="{Binding ActiveTopic, Converter={StaticResource StringEqualsToBoolConverter}, ConverterParameter=Poopy}" />
+            <navigationButtons:TiredTopicNavigationButton Command="{Binding OpenTiredTopicCommand}"
+                IsActive="{Binding ActiveTopic, Converter={StaticResource StringEqualsToBoolConverter}, ConverterParameter=Tired}" />
+            <navigationButtons:SleepyTopicNavigationButton Command="{Binding OpenSleepyTopicCommand}"
+                IsActive="{Binding ActiveTopic, Converter={StaticResource StringEqualsToBoolConverter}, ConverterParameter=Sleepy}" />
+            <navigationButtons:FlowerTopicNavigationButton Command="{Binding OpenFlowerTopicCommand}"
+                IsActive="{Binding ActiveTopic, Converter={StaticResource StringEqualsToBoolConverter}, ConverterParameter=Flower}" />
+            <navigationButtons:InjuredTopicNavigationButton Command="{Binding OpenInjuryTopicCommand}"
+                IsActive="{Binding ActiveTopic, Converter={StaticResource StringEqualsToBoolConverter}, ConverterParameter=Injured}" />
+            <navigationButtons:SickTopicNavigationButton Command="{Binding OpenSickTopicCommand}"
+                IsActive="{Binding ActiveTopic, Converter={StaticResource StringEqualsToBoolConverter}, ConverterParameter=Sick}" />
         </WrapPanel>
         <Button Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Bottom" FocusVisualStyle="{StaticResource DefaultFocusStyle}"
                 Style="{StaticResource DefaultButtonStyle}"

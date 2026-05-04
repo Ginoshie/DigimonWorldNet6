@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:navigationButtons="clr-namespace:DigimonWorld.Frontend.WPF.Windows.Main.UserControls.DigiWiki.UserControls.Navigation.NavigationButtons"
              xmlns:digiWiki="clr-namespace:DigimonWorld.Frontend.WPF.Windows.Main.UserControls.DigiWiki"
+             xmlns:conversion="clr-namespace:DigimonWorld.Frontend.WPF.Conversion"
              mc:Ignorable="d"
              d:DataContext="{d:DesignInstance Type=digiWiki:DigiWikiViewModel, IsDesignTimeCreatable=True}">
 
@@ -16,6 +17,7 @@
                 <ResourceDictionary Source="/ResourceDictionaries/Styles/ToolTips/DefaultTooltipRightStyle.xaml" />
                 <ResourceDictionary Source="/ResourceDictionaries/Styles/Buttons/DefaultButtonStyle.xaml" />
             </ResourceDictionary.MergedDictionaries>
+            <conversion:StringEqualsToBoolConverter x:Key="StringEqualsToBoolConverter" />
         </ResourceDictionary>
     </UserControl.Resources>
 
@@ -29,15 +31,24 @@
             TOPICS
         </Label>
         <WrapPanel Grid.Row="1" HorizontalAlignment="Center">
-            <navigationButtons:PraisingTopicNavigationButton Command="{Binding OpenPraisingTopicCommand}" />
-            <navigationButtons:ScoldingTopicNavigationButton Command="{Binding OpenScoldingTopicCommand}" />
-            <navigationButtons:FoodTopicNavigationButton Command="{Binding OpenFoodTopicCommand}" />
-            <navigationButtons:WeightTopicNavigationButton Command="{Binding OpenWeightTopicCommand}" />
-            <navigationButtons:PoopTopicNavigationButton Command="{Binding OpenPoopTopicCommand}" />
-            <navigationButtons:LifespanTopicNavigationButton Command="{Binding OpenAgeTopicCommand}" />
-            <navigationButtons:TirednessTopicNavigationButton Command="{Binding OpenTirednessTopicCommand}" />
-            <navigationButtons:SleepTopicNavigationButton Command="{Binding OpenSleepTopicCommand}" />
-            <navigationButtons:AreaPreferenceTopicNavigationButton Command="{Binding OpenAreaPreferenceTopicCommand}" />
+            <navigationButtons:PraisingTopicNavigationButton Command="{Binding OpenPraisingTopicCommand}"
+                IsActive="{Binding ActiveTopic, Converter={StaticResource StringEqualsToBoolConverter}, ConverterParameter=Praising}" />
+            <navigationButtons:ScoldingTopicNavigationButton Command="{Binding OpenScoldingTopicCommand}"
+                IsActive="{Binding ActiveTopic, Converter={StaticResource StringEqualsToBoolConverter}, ConverterParameter=Scolding}" />
+            <navigationButtons:FoodTopicNavigationButton Command="{Binding OpenFoodTopicCommand}"
+                IsActive="{Binding ActiveTopic, Converter={StaticResource StringEqualsToBoolConverter}, ConverterParameter=Food}" />
+            <navigationButtons:WeightTopicNavigationButton Command="{Binding OpenWeightTopicCommand}"
+                IsActive="{Binding ActiveTopic, Converter={StaticResource StringEqualsToBoolConverter}, ConverterParameter=Weight}" />
+            <navigationButtons:PoopTopicNavigationButton Command="{Binding OpenPoopTopicCommand}"
+                IsActive="{Binding ActiveTopic, Converter={StaticResource StringEqualsToBoolConverter}, ConverterParameter=Poop}" />
+            <navigationButtons:LifespanTopicNavigationButton Command="{Binding OpenAgeTopicCommand}"
+                IsActive="{Binding ActiveTopic, Converter={StaticResource StringEqualsToBoolConverter}, ConverterParameter=Age}" />
+            <navigationButtons:TirednessTopicNavigationButton Command="{Binding OpenTirednessTopicCommand}"
+                IsActive="{Binding ActiveTopic, Converter={StaticResource StringEqualsToBoolConverter}, ConverterParameter=Tiredness}" />
+            <navigationButtons:SleepTopicNavigationButton Command="{Binding OpenSleepTopicCommand}"
+                IsActive="{Binding ActiveTopic, Converter={StaticResource StringEqualsToBoolConverter}, ConverterParameter=Sleep}" />
+            <navigationButtons:AreaPreferenceTopicNavigationButton Command="{Binding OpenAreaPreferenceTopicCommand}"
+                IsActive="{Binding ActiveTopic, Converter={StaticResource StringEqualsToBoolConverter}, ConverterParameter=AreaPreference}" />
         </WrapPanel>
         <Button Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Bottom" FocusVisualStyle="{StaticResource DefaultFocusStyle}"
                 Style="{StaticResource DefaultButtonStyle}"

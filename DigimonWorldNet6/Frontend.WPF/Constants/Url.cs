@@ -2,6 +2,10 @@ namespace DigimonWorld.Frontend.WPF.Constants;
 
 public static class Url
 {
+    public const string GuideNormalAttackChapter = "https://docs.google.com/document/d/1aHHXZXjZNDabFTWUdF055M0oshyC57kff5NVc2BTYGE/edit?pli=1&tab=t.0#heading=h.a4f0okg3fh5n";
+    public const string GuideFinisherChapter = "https://docs.google.com/document/d/1aHHXZXjZNDabFTWUdF055M0oshyC57kff5NVc2BTYGE/edit?pli=1&tab=t.0#heading=h.3sixx6aj0393";
+    public const string GuideFinisherFormulaChapter = "https://docs.google.com/document/d/1aHHXZXjZNDabFTWUdF055M0oshyC57kff5NVc2BTYGE/edit?pli=1&tab=t.0#heading=h.fht8v5zdol74";
+    public const string GuideSpecialtyFactorChapter = "https://docs.google.com/document/d/1aHHXZXjZNDabFTWUdF055M0oshyC57kff5NVc2BTYGE/edit?pli=1&tab=t.0#heading=h.rlok4nnuxrtb";
     public const string GuidePraisingChapter = "https://docs.google.com/document/d/1aHHXZXjZNDabFTWUdF055M0oshyC57kff5NVc2BTYGE/edit?pli=1&tab=t.0#heading=h.mhsfr459weyi";
     public const string GuideScoldingChapter = "https://docs.google.com/document/d/1aHHXZXjZNDabFTWUdF055M0oshyC57kff5NVc2BTYGE/edit?pli=1&tab=t.0#heading=h.jambtrxnh7gy";
     public const string GuideFoodChapter = "https://docs.google.com/document/d/1aHHXZXjZNDabFTWUdF055M0oshyC57kff5NVc2BTYGE/edit?pli=1&tab=t.0#heading=h.30r6zj8pihtm";

@@ -17,6 +17,114 @@ public static class ShellmonDigiWikiNarratorText
                                         "Happy browsing!";
     }
 
+    public static class NormalAttackWiki
+    {
+        public const string WikiText = "The normal attack is your bread and butter in battle. Here is how the damage is calculated!\n" +
+                                       "\n" +
+                                       "Damage is based on your offense minus the enemy's defense. The game applies some flooring along the way, so small differences may occur. The order of operations in the actual implementation may also differ slightly.\n" +
+                                       "\n" +
+                                       "The maximum damage, excluding RNG fluctuation, is reached once your offense exceeds the enemy's defense by 500 or more. Beyond that point, pumping more offense in wont help.\n" +
+                                       "\n" +
+                                       "The specialty factor is applied on top of this. More on that in the Specialty topic!";
+
+        public const string ShellFacts = "Shell Fact One\n" +
+                                         "The specialty factor is calculated separately and multiplied on top of the raw damage. Even a tiny offense advantage can hit hard with the right matchup!\n" +
+                                         "\n" +
+                                         "Shell Fact Two\n" +
+                                         "Defense matters a lot at low offense values. Past the 500 gap threshold though, stacking more offense gives you nothing extra.\n" +
+                                         "\n" +
+                                         "Shell Fact Three\n" +
+                                         "The chance to hit a move is: moveAccuracy - (moveAccuracy * (victimSpeed - (attackerSpeed / 10)) / 1998). Speed matters in more ways than one!";
+
+        public const string FormulaImage = "This is the normal attack damage formula.\n" +
+                                           "\n" +
+                                           "Offense minus defense forms the base, with some flooring applied. Once the offense exceeds the defense by 500, the maximum is reached.";
+    }
+
+    public static class FinisherFormulaWiki
+    {
+        public const string WikiText = "Once your finisher fires, how much damage it deals depends on how well you filled the bar!\n" +
+                                       "\n" +
+                                       "The finisher bar is a value between 0 and 80, displayed as 10 segments on screen — 80 always means full bars. Each press of L1 or R1 during the finisher adds 2 to the bar.\n" +
+                                       "\n" +
+                                       "The bar value feeds directly into the damage formula. A full bar gives the maximum hit. No matter how empty the bar is, the result can never go below 1.\n" +
+                                       "\n" +
+                                       "The specialty factor applies to finisher damage too, just like normal attacks!";
+
+        public const string ShellFacts = "Shell Fact One\n" +
+                                         "The specialty factor applies to finisher damage the same way it does to normal attacks. A great matchup makes your finisher hit even harder!\n" +
+                                         "\n" +
+                                         "Shell Fact Two\n" +
+                                         "The finisher bar resets to 0 after the finisher fires. Time to start mashing again!\n" +
+                                         "\n" +
+                                         "Shell Fact Three\n" +
+                                         "Finisher damage can never drop below 1. Even a completely empty bar still connects for 1.";
+
+        public const string FormulaImage = "This is the finisher damage formula.\n" +
+                                           "\n" +
+                                           "The bar value from 0 to 80 feeds directly into the calculation. A full bar gives the maximum result. The damage is never smaller than 1.";
+
+        public const string FinisherBarImage = "The finisher bar is displayed during your finisher attack.\n" +
+                                               "\n" +
+                                               "Mash L1 or R1 to fill it. Each press adds 2 to the internal value and the bar goes from 0 to 80.\n" +
+                                               "\n" +
+                                               "All 10 segments lit up means you hit 80. Get mashing!";
+    }
+
+    public static class FinisherWiki
+    {
+        public const string WikiText = "Every Digimon can perform a finisher by having a fitting move in slot 4. Once ready it will fire off automatically the next time it attacks!\n" +
+                                       "\n" +
+                                       "You can see the charge progress through the \"FINISH!!!\" text displayed below the HP and MP bars during battle. It needs to reach a target value that depends on your Digimon's speed.\n" +
+                                       "\n" +
+                                       "There are 4 ways to charge it up:\n" +
+                                       "- 1 per game tick (1/20th of a second) passively\n" +
+                                       "- 4% of the target for every attack you successfully cast\n" +
+                                       "- 6% of the target for every attack your Digimon blocks\n" +
+                                       "- 8% of the target when one of your attacks gets blocked by the enemy\n" +
+                                       "\n" +
+                                       "The last two can happen at the same time! When your attack gets blocked, you gain 8% and the enemy who blocked gains 6%.";
+
+        public const string ShellFacts = "Shell Fact One\n" +
+                                         "The finisher charge target is calculated as: 3000 - speed. Faster Digimon charge their finisher in fewer ticks!\n" +
+                                         "\n" +
+                                         "Shell Fact Two\n" +
+                                         "An attack counts as successfully cast once it reaches a certain point in its animation. It does not need to land or go uninterrupted.\n" +
+                                         "\n" +
+                                         "Shell Fact Three\n" +
+                                         "The finisher fires automatically on the next attack once the charge is full. You have no say in the matter — it just goes off!";
+
+        public const string FinisherProgressImage = "This shows the \"FINISH!!!\" text visible during battle below the HP and MP display.\n" +
+                                                    "\n" +
+                                                    "The text grows as the charge fills up. Once the charge reaches the target value the finisher will fire on the next attack.";
+    }
+
+    public static class SpecialtyFactorWiki
+    {
+        public const string WikiText = "Every attack has a specialty and every Digimon has three specialties of their own. How they match up determines a factor that multiplies your damage!\n" +
+                                       "\n" +
+                                       "The game looks up the relation between the attack specialty and each of the defender's three specialties using a table. The three lookup values are summed up and then divided by 30 to create the final factor.\n" +
+                                       "\n" +
+                                       "This factor applies to both normal attacks and finishers. A good matchup can make a huge difference!\n" +
+                                       "\n" +
+                                       "Check the specialty chart to see which types score high against which defenders.";
+
+        public const string ShellFacts = "Shell Fact One\n" +
+                                         "The None specialty exists as a catch-all type. It tends to have neutral values across the board, so it rarely gives huge bonuses or penalties.\n" +
+                                         "\n" +
+                                         "Shell Fact Two\n" +
+                                         "Some specialty matchups are very one-sided. Fire attacking Earth scores a 20, while Earth attacking Fire only scores a 5. Type choices matter!\n" +
+                                         "\n" +
+                                         "Shell Fact Three\n" +
+                                         "You can view which specialty a finisher uses in the finisher data spreadsheet linked in the guide.";
+
+        public const string SpecialtyChartImage = "This chart shows how each attacking specialty scores against defending specialties.\n" +
+                                                  "\n" +
+                                                  "Horizontal (→) is the attacking type, vertical (↓) is the defending type.\n" +
+                                                  "\n" +
+                                                  "Higher values mean more damage. Look up the attacker's type against each of the defender's 3 specialties, sum the three values, then divide by 30 to get the final factor.";
+    }
+
     public static class PraisingWiki
     {
         public const string WikiText = "If your Digimon is feeling a bit blue, or you just want it to be even happier. Then praise it!\n" +
@@ -494,7 +602,10 @@ public static class ShellmonDigiWikiNarratorText
                                          "Punimon will heal you for free if you dont have 300 bits.\n" +
                                          "\n" +
                                          "Shell Fact Three\n" +
-                                         "Numemon and Sukamon can heal by eating poop, the bigger the poop the higher the chance of healing!";
+                                         "Numemon and Sukamon can heal by eating poop, the bigger the poop the higher the chance of healing!\n" +
+                                         "\n" +
+                                         "Shell Fact Four\n" +
+                                         "The injury chance formula is: Tiredness - (CurrentHP / MaxHP). Keep your Digimon healthy and topped up to stay safe!";
 
         public const string InjuredScreen = "When your Digimon has the injured condition it will have a status modifier in the CONDITION section of the Status tab of the Digimon menu.\n" +
                                             "\n" +

@@ -5,20 +5,25 @@ using DigimonWorld.Frontend.WPF.Enums;
 using DigimonWorld.Frontend.WPF.Services;
 using DigimonWorld.Frontend.WPF.ViewModelComponents;
 using DigimonWorld.Frontend.WPF.Windows.Main.UserControls.DigiWiki.UserControls.Home;
+using DigimonWorld.Frontend.WPF.Windows.Main.UserControls.DigiWiki.UserControls.Navigation.Chapters.CombatChapter;
 using DigimonWorld.Frontend.WPF.Windows.Main.UserControls.DigiWiki.UserControls.Navigation.Chapters.ConditionsChapter;
 using DigimonWorld.Frontend.WPF.Windows.Main.UserControls.DigiWiki.UserControls.Navigation.Chapters.TamerMechanicsChapter;
 using DigimonWorld.Frontend.WPF.Windows.Main.UserControls.DigiWiki.UserControls.Navigation.MenuNavigation;
 using DigimonWorld.Frontend.WPF.Windows.Main.UserControls.DigiWiki.UserControls.Topics.AgeTopic;
 using DigimonWorld.Frontend.WPF.Windows.Main.UserControls.DigiWiki.UserControls.Topics.AreaPreferenceTopic;
+using DigimonWorld.Frontend.WPF.Windows.Main.UserControls.DigiWiki.UserControls.Topics.FinisherFormulaTopic;
+using DigimonWorld.Frontend.WPF.Windows.Main.UserControls.DigiWiki.UserControls.Topics.FinisherTopic;
 using DigimonWorld.Frontend.WPF.Windows.Main.UserControls.DigiWiki.UserControls.Topics.FlowerTopic;
 using DigimonWorld.Frontend.WPF.Windows.Main.UserControls.DigiWiki.UserControls.Topics.FoodTopic;
 using DigimonWorld.Frontend.WPF.Windows.Main.UserControls.DigiWiki.UserControls.Topics.HungryTopic;
 using DigimonWorld.Frontend.WPF.Windows.Main.UserControls.DigiWiki.UserControls.Topics.InjuredTopic;
+using DigimonWorld.Frontend.WPF.Windows.Main.UserControls.DigiWiki.UserControls.Topics.NormalAttackTopic;
 using DigimonWorld.Frontend.WPF.Windows.Main.UserControls.DigiWiki.UserControls.Topics.PoopTopic;
 using DigimonWorld.Frontend.WPF.Windows.Main.UserControls.DigiWiki.UserControls.Topics.PoopyTopic;
 using DigimonWorld.Frontend.WPF.Windows.Main.UserControls.DigiWiki.UserControls.Topics.PraisingTopic;
 using DigimonWorld.Frontend.WPF.Windows.Main.UserControls.DigiWiki.UserControls.Topics.ScoldingTopic;
 using DigimonWorld.Frontend.WPF.Windows.Main.UserControls.DigiWiki.UserControls.Topics.SickTopic;
+using DigimonWorld.Frontend.WPF.Windows.Main.UserControls.DigiWiki.UserControls.Topics.SpecialtyFactorTopic;
 using DigimonWorld.Frontend.WPF.Windows.Main.UserControls.DigiWiki.UserControls.Topics.SleepTopic;
 using DigimonWorld.Frontend.WPF.Windows.Main.UserControls.DigiWiki.UserControls.Topics.SleepyTopic;
 using DigimonWorld.Frontend.WPF.Windows.Main.UserControls.DigiWiki.UserControls.Topics.TirednessTopic;
@@ -51,6 +56,8 @@ public class DigiWikiViewModel : BaseViewModel, IDisposable
 
     public DigiWikiViewModel()
     {
+        OpenCombatChapterCommand = new CommandHandler(OpenCombatChapter);
+
         OpenTamerMechanicChapterCommand = new CommandHandler(OpenTamerMechanicsChapter);
 
         OpenConditionsChapterCommand = new CommandHandler(OpenConditionsChapter);
@@ -58,6 +65,14 @@ public class DigiWikiViewModel : BaseViewModel, IDisposable
         OpenChaptersCommand = new CommandHandler(OpenChapters);
 
         OpenPraisingTopicCommand = new CommandHandler(OpenPraisingTopic);
+
+        OpenNormalAttackTopicCommand = new CommandHandler(OpenNormalAttackTopic);
+
+        OpenFinisherTopicCommand = new CommandHandler(OpenFinisherTopic);
+
+        OpenFinisherFormulaTopicCommand = new CommandHandler(OpenFinisherFormulaTopic);
+
+        OpenSpecialtyFactorTopicCommand = new CommandHandler(OpenSpecialtyFactorTopic);
 
         OpenScoldingTopicCommand = new CommandHandler(OpenScoldingTopic);
 
@@ -94,10 +109,23 @@ public class DigiWikiViewModel : BaseViewModel, IDisposable
         _currentSelectedMenuNavigation = new ChapterMenuNavigation();
     }
 
+    public ICommand OpenCombatChapterCommand { get; }
     public ICommand OpenTamerMechanicChapterCommand { get; }
     public ICommand OpenConditionsChapterCommand { get; }
     public ICommand OpenChaptersCommand { get; }
     public ICommand OpenPraisingTopicCommand { get; }
+    public ICommand OpenNormalAttackTopicCommand { get; }
+    public ICommand OpenFinisherTopicCommand { get; }
+    public ICommand OpenFinisherFormulaTopicCommand { get; }
+    public ICommand OpenSpecialtyFactorTopicCommand { get; }
+
+    private string _activeTopic = string.Empty;
+    public string ActiveTopic
+    {
+        get => _activeTopic;
+        private set => SetField(ref _activeTopic, value);
+    }
+
     public ICommand OpenScoldingTopicCommand { get; }
     public ICommand OpenFoodTopicCommand { get; }
     public ICommand OpenWeightTopicCommand { get; }
@@ -126,25 +154,30 @@ public class DigiWikiViewModel : BaseViewModel, IDisposable
         private set => SetField(ref _currentSelectedMenuNavigation, value);
     }
 
-    private void OpenTamerMechanicsChapter() => CurrentSelectedMenuNavigation = new TamerMechanicTopicsMenuNavigation();
-    private void OpenConditionsChapter() => CurrentSelectedMenuNavigation = new ConditionTopicsMenuNavigation();
-    private void OpenChapters() => CurrentSelectedMenuNavigation = new ChapterMenuNavigation();
-    private void OpenPraisingTopic() => CurrentSelectedDigiWikiContent = new PraisingTopicUserControl(SpeakShellmonTextShortDelayAction, SpeakShellmonTextNoDelayAction, InstantDisplay);
-    private void OpenScoldingTopic() => CurrentSelectedDigiWikiContent = new ScoldingTopicUserControl(SpeakShellmonTextShortDelayAction, SpeakShellmonTextNoDelayAction, InstantDisplay);
-    private void OpenFoodTopic() => CurrentSelectedDigiWikiContent = new FoodTopicUserControl(SpeakShellmonTextShortDelayAction, SpeakShellmonTextNoDelayAction, InstantDisplay);
-    private void OpenWeightTopic() => CurrentSelectedDigiWikiContent = new WeightTopicUserControl(SpeakShellmonTextShortDelayAction, SpeakShellmonTextNoDelayAction, InstantDisplay);
-    private void OpenPoopTopic() => CurrentSelectedDigiWikiContent = new PoopTopicUserControl(SpeakShellmonTextShortDelayAction, SpeakShellmonTextNoDelayAction, InstantDisplay);
-    private void OpenAgeTopic() => CurrentSelectedDigiWikiContent = new AgeTopicUserControl(SpeakShellmonTextShortDelayAction, SpeakShellmonTextNoDelayAction, InstantDisplay);
-    private void OpenTirednessTopic() => CurrentSelectedDigiWikiContent = new TirednessTopicUserControl(SpeakShellmonTextShortDelayAction, SpeakShellmonTextNoDelayAction, InstantDisplay);
-    private void OpenSleepTopic() => CurrentSelectedDigiWikiContent = new SleepTopicUserControl(SpeakShellmonTextShortDelayAction, SpeakShellmonTextNoDelayAction, InstantDisplay);
-    private void OpenAreaPreferenceTopic() => CurrentSelectedDigiWikiContent = new AreaPreferenceTopicUserControl(SpeakShellmonTextShortDelayAction, SpeakShellmonTextNoDelayAction, InstantDisplay);
-    private void OpenHungryTopic() => CurrentSelectedDigiWikiContent = new HungryTopicUserControl(SpeakShellmonTextShortDelayAction, SpeakShellmonTextNoDelayAction, InstantDisplay);
-    private void OpenPoopyTopic() => CurrentSelectedDigiWikiContent = new PoopyTopicUserControl(SpeakShellmonTextShortDelayAction, SpeakShellmonTextNoDelayAction, InstantDisplay);
-    private void OpenTiredTopic() => CurrentSelectedDigiWikiContent = new TiredTopicUserControl(SpeakShellmonTextShortDelayAction, SpeakShellmonTextNoDelayAction, InstantDisplay);
-    private void OpenSleepyTopic() => CurrentSelectedDigiWikiContent = new SleepyTopicUserControl(SpeakShellmonTextShortDelayAction, SpeakShellmonTextNoDelayAction, InstantDisplay);
-    private void OpenFlowerTopic() => CurrentSelectedDigiWikiContent = new FlowerTopicUserControl(SpeakShellmonTextShortDelayAction, SpeakShellmonTextNoDelayAction, InstantDisplay);
-    private void OpenInjuryTopic() => CurrentSelectedDigiWikiContent = new InjuredTopicUserControl(SpeakShellmonTextShortDelayAction, SpeakShellmonTextNoDelayAction, InstantDisplay);
-    private void OpenSickTopic() => CurrentSelectedDigiWikiContent = new SickTopicUserControl(SpeakShellmonTextShortDelayAction, SpeakShellmonTextNoDelayAction, InstantDisplay);
+    private void OpenCombatChapter() => CurrentSelectedMenuNavigation = new CombatTopicsMenuNavigation();
+    private void OpenTamerMechanicsChapter() { ActiveTopic = string.Empty; CurrentSelectedMenuNavigation = new TamerMechanicTopicsMenuNavigation(); }
+    private void OpenConditionsChapter() { ActiveTopic = string.Empty; CurrentSelectedMenuNavigation = new ConditionTopicsMenuNavigation(); }
+    private void OpenChapters() { ActiveTopic = string.Empty; CurrentSelectedMenuNavigation = new ChapterMenuNavigation(); }
+    private void OpenPraisingTopic() { ActiveTopic = "Praising"; CurrentSelectedDigiWikiContent = new PraisingTopicUserControl(SpeakShellmonTextShortDelayAction, SpeakShellmonTextNoDelayAction, InstantDisplay); }
+    private void OpenNormalAttackTopic() { ActiveTopic = "NormalAttack"; CurrentSelectedDigiWikiContent = new NormalAttackTopicUserControl(SpeakShellmonTextShortDelayAction, SpeakShellmonTextNoDelayAction, InstantDisplay); }
+    private void OpenFinisherTopic() { ActiveTopic = "Finisher"; CurrentSelectedDigiWikiContent = new FinisherTopicUserControl(SpeakShellmonTextShortDelayAction, SpeakShellmonTextNoDelayAction, InstantDisplay); }
+    private void OpenFinisherFormulaTopic() { ActiveTopic = "FinisherFormula"; CurrentSelectedDigiWikiContent = new FinisherFormulaTopicUserControl(SpeakShellmonTextShortDelayAction, SpeakShellmonTextNoDelayAction, InstantDisplay); }
+    private void OpenSpecialtyFactorTopic() { ActiveTopic = "SpecialtyFactor"; CurrentSelectedDigiWikiContent = new SpecialtyFactorTopicUserControl(SpeakShellmonTextShortDelayAction, SpeakShellmonTextNoDelayAction, InstantDisplay); }
+    private void OpenScoldingTopic() { ActiveTopic = "Scolding"; CurrentSelectedDigiWikiContent = new ScoldingTopicUserControl(SpeakShellmonTextShortDelayAction, SpeakShellmonTextNoDelayAction, InstantDisplay); }
+    private void OpenFoodTopic() { ActiveTopic = "Food"; CurrentSelectedDigiWikiContent = new FoodTopicUserControl(SpeakShellmonTextShortDelayAction, SpeakShellmonTextNoDelayAction, InstantDisplay); }
+    private void OpenWeightTopic() { ActiveTopic = "Weight"; CurrentSelectedDigiWikiContent = new WeightTopicUserControl(SpeakShellmonTextShortDelayAction, SpeakShellmonTextNoDelayAction, InstantDisplay); }
+    private void OpenPoopTopic() { ActiveTopic = "Poop"; CurrentSelectedDigiWikiContent = new PoopTopicUserControl(SpeakShellmonTextShortDelayAction, SpeakShellmonTextNoDelayAction, InstantDisplay); }
+    private void OpenAgeTopic() { ActiveTopic = "Age"; CurrentSelectedDigiWikiContent = new AgeTopicUserControl(SpeakShellmonTextShortDelayAction, SpeakShellmonTextNoDelayAction, InstantDisplay); }
+    private void OpenTirednessTopic() { ActiveTopic = "Tiredness"; CurrentSelectedDigiWikiContent = new TirednessTopicUserControl(SpeakShellmonTextShortDelayAction, SpeakShellmonTextNoDelayAction, InstantDisplay); }
+    private void OpenSleepTopic() { ActiveTopic = "Sleep"; CurrentSelectedDigiWikiContent = new SleepTopicUserControl(SpeakShellmonTextShortDelayAction, SpeakShellmonTextNoDelayAction, InstantDisplay); }
+    private void OpenAreaPreferenceTopic() { ActiveTopic = "AreaPreference"; CurrentSelectedDigiWikiContent = new AreaPreferenceTopicUserControl(SpeakShellmonTextShortDelayAction, SpeakShellmonTextNoDelayAction, InstantDisplay); }
+    private void OpenHungryTopic() { ActiveTopic = "Hungry"; CurrentSelectedDigiWikiContent = new HungryTopicUserControl(SpeakShellmonTextShortDelayAction, SpeakShellmonTextNoDelayAction, InstantDisplay); }
+    private void OpenPoopyTopic() { ActiveTopic = "Poopy"; CurrentSelectedDigiWikiContent = new PoopyTopicUserControl(SpeakShellmonTextShortDelayAction, SpeakShellmonTextNoDelayAction, InstantDisplay); }
+    private void OpenTiredTopic() { ActiveTopic = "Tired"; CurrentSelectedDigiWikiContent = new TiredTopicUserControl(SpeakShellmonTextShortDelayAction, SpeakShellmonTextNoDelayAction, InstantDisplay); }
+    private void OpenSleepyTopic() { ActiveTopic = "Sleepy"; CurrentSelectedDigiWikiContent = new SleepyTopicUserControl(SpeakShellmonTextShortDelayAction, SpeakShellmonTextNoDelayAction, InstantDisplay); }
+    private void OpenFlowerTopic() { ActiveTopic = "Flower"; CurrentSelectedDigiWikiContent = new FlowerTopicUserControl(SpeakShellmonTextShortDelayAction, SpeakShellmonTextNoDelayAction, InstantDisplay); }
+    private void OpenInjuryTopic() { ActiveTopic = "Injured"; CurrentSelectedDigiWikiContent = new InjuredTopicUserControl(SpeakShellmonTextShortDelayAction, SpeakShellmonTextNoDelayAction, InstantDisplay); }
+    private void OpenSickTopic() { ActiveTopic = "Sick"; CurrentSelectedDigiWikiContent = new SickTopicUserControl(SpeakShellmonTextShortDelayAction, SpeakShellmonTextNoDelayAction, InstantDisplay); }
 
     private void InstantDisplay()
     {

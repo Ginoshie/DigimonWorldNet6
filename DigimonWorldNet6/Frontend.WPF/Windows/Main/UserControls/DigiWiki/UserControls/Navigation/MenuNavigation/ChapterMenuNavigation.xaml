@@ -27,6 +27,7 @@
         <WrapPanel Grid.Row="1" HorizontalAlignment="Center">
             <navigationButtons:TamerMechanicsChapterNavigationButton Command="{Binding OpenTamerMechanicChapterCommand}" />
             <navigationButtons:ConditionsChapterNavigationButton Command="{Binding OpenConditionsChapterCommand}" />
+            <navigationButtons:CombatChapterNavigationButton Command="{Binding OpenCombatChapterCommand}" />
         </WrapPanel>
     </Grid>
 </UserControl>
