@@ -40,7 +40,7 @@ This generates files in the `Releases` folder:
 **Option A: Create a new release and upload automatically**
 
 ```powershell
-vpk upload github --repoUrl https://github.com/Ginoshie/DigimonWorldNet6 --tag v1.4.0 --token YOUR_GITHUB_TOKEN
+vpk upload github --repoUrl https://github.com/Ginoshie/DigimonWorldNet6 --tag 1.4.0 --token YOUR_GITHUB_TOKEN --outputDir "C:\DW1 Tool\Releases"
 ```
 
 **Option B: Upload to an existing release**
@@ -48,7 +48,7 @@ vpk upload github --repoUrl https://github.com/Ginoshie/DigimonWorldNet6 --tag v
 Create your release manually on GitHub first (with your description and tag), then:
 
 ```powershell
-vpk upload github --repoUrl https://github.com/Ginoshie/DigimonWorldNet6 --tag v1.4.0 --token YOUR_GITHUB_TOKEN --merge
+vpk upload github --repoUrl https://github.com/Ginoshie/DigimonWorldNet6 --tag 1.4.0 --token YOUR_GITHUB_TOKEN --merge --outputDir "C:\DW1 Tool\Releases"
 ```
 
 > Generate a personal access token at https://github.com/settings/tokens with `repo` scope.
@@ -58,4 +58,3 @@ vpk upload github --repoUrl https://github.com/Ginoshie/DigimonWorldNet6 --tag v
 - Delta packages are generated automatically when previous `.nupkg` files exist in the `Releases` folder. Keep previous release files there for delta generation.
 - The app checks for updates on startup via the GitHub Releases API. Users with an older version will see the update button automatically.
 - First-time users download and run `DW1Tool-Setup.exe`. Existing users receive delta updates in-app.
-
