@@ -177,7 +177,7 @@
                                     <ToolTip Style="{StaticResource DefaultToolTipRightStyle}"
                                              Content="Sync ultimate stage  historic evolutions" />
                                 </Button.ToolTip>
-                                <Image Source="/Frontend.WPF;component/Images/Icons/Type/virus-type-icon-button-centered.jpg"
+                                <Image Source="/Frontend.WPF;component/Images/Icons/Emotions/Evolution/evo5.png"
                                        Stretch="Uniform"
                                        Margin="1"/>
                             </Button>
@@ -191,7 +191,7 @@
                                     <ToolTip Style="{StaticResource DefaultToolTipRightStyle}"
                                              Content="Sync all stages historic evolutions" />
                                 </Button.ToolTip>
-                                <Image Source="/Frontend.WPF;component/Images/Icons/Emotions/Evolution/all.jpg"
+                                <Image Source="/Frontend.WPF;component/Images/Icons/Emotions/Evolution/all.png"
                                        Stretch="Uniform" />
                             </Button>
                         </Grid>

@@ -27,17 +27,16 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
-        <Label Grid.Row="0"
-               Content="CONDITION"
-               HorizontalAlignment="Stretch"
+        <Image Grid.Row="1"
+               Source="/Images/Icons/Labels/condition-label.png"
                Height="35"
-               Margin="0,0,0,5"
-               Style="{StaticResource DefaultSheenLabelStyle}"
-               IsTabStop="False" />
+               Stretch="Fill"
+               Margin="0,0,0,5" />
 
-        <Button Grid.Row="1"
+        <Button Grid.Row="2"
                 Height="{Binding ButtonHeight}"
                 Width="{Binding RectangularButtonWidth}"
                 Margin="3"
@@ -49,10 +48,10 @@
                     <TextBlock Text="{Binding ., Converter={StaticResource TooltipTextConverter}, ConverterParameter=all Condition Stats}" />
                 </ToolTip>
             </Button.ToolTip>
-            <Image Source="/Images/Icons/Labels/CONDITION label.jpg"
+            <Image Source="/Images/Icons/Labels/condition-label.png"
                    Margin="2" />
         </Button>
-        <WrapPanel Grid.Row="2" Width="103" Orientation="Horizontal">
+        <WrapPanel Grid.Row="3" Width="103" Orientation="Horizontal">
             <Button ToolTipService.InitialShowDelay="{StaticResource DefaultTooltipDelay}" Style="{StaticResource StretchContentButtonStyle}"
                     Width="{Binding SquareButtonWidth}"
                     Height="{Binding ButtonHeight}"
@@ -67,11 +66,11 @@
                 <Image Stretch="Uniform">
                     <Image.Style>
                         <Style TargetType="Image">
-                            <Setter Property="Source" Value="/Images/Icons/Emotions/Happiness/happy-icon.jpg" />
+                            <Setter Property="Source" Value="/Images/Icons/Emotions/Happiness/happy-icon.png" />
                             <Style.Triggers>
                                 <DataTrigger Binding="{Binding IsHappy}" Value="False">
                                     <Setter Property="Source"
-                                            Value="/Images/Icons/Emotions/Happiness/angry-icon.jpg" />
+                                            Value="/Images/Icons/Emotions/Happiness/angry-icon.png" />
                                 </DataTrigger>
                             </Style.Triggers>
                         </Style>
@@ -93,12 +92,12 @@
                     <Image.Style>
                         <Style TargetType="Image">
                             <Setter Property="Source"
-                                    Value="/Images/Icons/Emotions/Discipline/high-discipline.jpg" />
+                                    Value="/Images/Icons/Emotions/Discipline/high-discipline.png" />
 
                             <Style.Triggers>
                                 <DataTrigger Binding="{Binding IsDisciplined}" Value="False">
                                     <Setter Property="Source"
-                                            Value="/Images/Icons/Emotions/Discipline/low-discipline.jpg" />
+                                            Value="/Images/Icons/Emotions/Discipline/low-discipline.png" />
                                 </DataTrigger>
                             </Style.Triggers>
                         </Style>
@@ -116,7 +115,7 @@
                         <TextBlock Text="{Binding ., Converter={StaticResource TooltipTextConverter}, ConverterParameter=Care Mistakes}" />
                     </ToolTip>
                 </Button.ToolTip>
-                <Image Source="/Images/Icons/Emotions/Monochromon shop/monochromon-sad.jpg" Stretch="Uniform" Margin="1" />
+                <Image Source="/Images/Icons/Emotions/Monochromon shop/monochromon-sad.png" Stretch="Uniform" Margin="1" />
             </Button>
             <Button ToolTipService.InitialShowDelay="{StaticResource DefaultTooltipDelay}" Style="{StaticResource StretchContentButtonStyle}"
                     Width="{Binding SquareButtonWidth}"
@@ -129,7 +128,7 @@
                         <TextBlock Text="{Binding ., Converter={StaticResource TooltipTextConverter}, ConverterParameter=Techniques}" />
                     </ToolTip>
                 </Button.ToolTip>
-                <Image Source="/Images/Icons/Techniques/battle-icon-1-button.jpg" Stretch="Uniform" Margin="1" />
+                <Image Source="/Images/Icons/Techniques/battle-icon-1.png" Stretch="Uniform" Margin="1" />
             </Button>
             <Button ToolTipService.InitialShowDelay="{StaticResource DefaultTooltipDelay}" Style="{StaticResource StretchContentButtonStyle}"
                     Width="{Binding SquareButtonWidth}"
@@ -142,7 +141,7 @@
                         <TextBlock Text="{Binding ., Converter={StaticResource TooltipTextConverter}, ConverterParameter=Battles}" />
                     </ToolTip>
                 </Button.ToolTip>
-                <Image Source="/Images/Icons/Combat/combat-emotion.jpg" Stretch="Uniform" Margin="1" />
+                <Image Source="/Images/Icons/Combat/combat-emotion.png" Stretch="Uniform" Margin="1" />
             </Button>
         </WrapPanel>
 

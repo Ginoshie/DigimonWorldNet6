@@ -1,0 +1,2304 @@
+﻿________________
+Digimon World Guide
+Table of Contents
+Table of Contents
+Introduction
+1 Tamer mechanics
+1.1 Damage Formula
+1.1.1 Normal Attack
+1.1.2 Finisher
+1.1.3 Specialty Factor
+1.2 Praising and Scolding
+1.2.1 Praising
+1.2.2 Scolding
+1.3 Food
+1.3.1 Food Effects
+1.3.2 Feeding and Energy
+1.3.3 Weight
+1.3.4 Eating Poop
+1.4 Pooping
+1.5 Lifespan
+1.5.1 Lifespan Penalty
+1.6 Tiredness
+1.6.1 Effects of Tiredness
+1.6.2 Gaining Tiredness
+1.6.3 Reducing Tiredness
+1.7 Sleeping
+1.7.1 Sleeping Schedules
+1.7.2 Fatigue through tiredness
+1.7.3 Sleep Regeneration
+1.8 Area Preference
+1.9 Conditions
+1.9.1 Hungry
+1.9.2 Poopy
+1.9.3 Tired
+1.9.4 Sleepy
+1.9.5 Butterfly / Flower
+1.9.6 Injured
+1.9.7 Sick
+1.9.8 All conditions
+2 Evolution-mechanics
+2.1 Natural Evolution mechanics
+2.1.1 Evolution terms
+2.1.2 Requirements
+2.1.3 Stats
+2.1.4 Weight
+2.1.5 Care Mistakes
+2.1.6 Bonus
+2.1.6.1 Happiness / Discipline
+2.1.6.2 Techniques
+2.1.6.3 Battles
+2.1.6.4 Digimon
+2.1.7 Priority
+2.2 Special Evolutions
+2.3 Irreproducible Evolutions
+3 Stats Gain
+3.1 Training
+3.1.1 Training Factors
+3.1.2 Training Stations
+3.1.3 Item Factors
+3.1.4 Bonus Try
+3.2 Base stats & Tamer level
+3.2.1 Base Stats
+3.2.2 Tamer Level
+3.3 Items
+3.4 Drimogemon Dirt Carrying
+3.5 Evolution
+3.6 Battle
+4 Combat
+4.1 Finisher
+5 Recruitment Guide
+6 Town Features
+6.1 Shops
+Small Shop
+Large Shop
+Secret Shop
+Piximon
+Etemon
+6.2 Transport
+6.3 Meat Farm
+6.4 Bank
+6.5 Punimon’s Chair / Clinic
+6.6 Curling
+6.7 Treasure Hunt
+6.8 Arena
+6.9 Restaurant
+7 Known Bugs
+8 Glossary
+9 Links
+10 Contact
+10.1 Ginoshie
+10.2 SydMontague
+11 Credits
+12 Todo List
+________________
+Introduction
+On the Internet there is a high quantity of information about Digimon World which unfortunately proves itself to be of low quality or just plain wrong quite often.
+This became the motivation for the project. See the Links section for related resources. 
+
+
+Our goal is to document the mechanics and inner workings of the game as well as to create a reliable source of information for people to use.
+
+
+The main technique used to acquire knowledge was to create controlled experiments with the help of save-states and Cheat Engine. This made it possible to not only control all variables but to also observe them, even those hidden from the player. 
+This went as far as reverse engineering parts of the game to extract raw (asset) data from it.
+
+
+Our theories are supported by various tests in the form of simulations, gameplay and coaching or observing unsuspecting Twitch streamers.
+This does not mean that all conclusions are flawless. Therefore, if you find any mistakes or inaccuracies, feel free to contact us.
+
+
+On an additional note, this document is a work in progress. Converting knowledge into a comprehensible format requires time. However links are available in the Todo-list. This may be used if the needed information has not been processed yet.
+________________
+1 Tamer mechanics
+1.1 Damage Formula
+This section explains the formula used for the damage calculation. 
+
+
+Values within the formula are occasionally floored and the order of operations might be different in the actual implementation. As a result minor differences may occur in comparison to ingame results.
+
+
+1.1.1 Normal Attack
+
+
+
+
+
+
+
+Note:        Max damage, RNG fluctuation excluded, is reached once you have at least 
+500 more offense than your enemies defense.
+
+
+1.1.2 Finisher
+
+
+
+
+     but never smaller than 1
+
+
+
+The finisher bar is, although displayed with 10 bars, a value between 0 and 80, whereas 80 is always 10 bars. Each press of L1 or R1 adds a value of 2 to the bar.
+________________
+
+
+1.1.3 Specialty Factor
+The specialty factor applies to both, normal attacks and finisher, in the same way.
+It is formed by looking up the relation between the attack’s speciality and the defender Digimon’s 3 specialities and creating a sum of it.
+Based on that sum the final factor is calculated by dividing it by 30.
+
+
+Note:        The nature of the finishers can be viewed in this spreadsheet.
+
+
+The following is a specialty factor comparison where horizontal(⇒) attacks vertical(⇓).
+
+
+
+
+	Fire
+	Combat
+	Air
+	Earth
+	Water
+	Mech
+	Filth
+	None
+	Fire
+	10
+	15
+	5
+	20
+	20
+	15
+	20
+	10
+	Combat
+	10
+	10
+	2
+	15
+	10
+	10
+	5
+	10
+	Air
+	15
+	15
+	15
+	5
+	15
+	15
+	5
+	10
+	Earth
+	5
+	15
+	20
+	10
+	10
+	5
+	15
+	10
+	Water
+	20
+	15
+	5
+	15
+	10
+	15
+	20
+	10
+	Mech
+	10
+	10
+	5
+	10
+	10
+	10
+	5
+	10
+	Filth
+	5
+	15
+	5
+	2
+	10
+	20
+	2
+	10
+	1.2 Praising and Scolding
+1.2.1 Praising
+By using the "praise" command in the menu you "praise" your Digimon and it will gain happiness according to the formula below and reduces discipline by 5 regardless of the situation.
+
+
+Happiness gain = floor(Discipline · 0.1) + 2
+
+
+
+
+1.2.2 Scolding
+By using the "scold" command in the menu you "punish" your Digimon for the action it just took. If this scolding was reasonable your digimon gains happiness and discipline.
+In case it did not do anything that required you to scold it then his happiness will go down while his discipline goes up.
+________________
+
+
+The following are legit reasons to scold your Digimon:
+
+
+* Refusing to consume an item.
+* Pooping on the floor.
+
+
+Note:         The act of moving, be it you or your Digimon, disables the opportunity of a 
+reasonable scold. 
+
+
+After a reasonable scold your Digimon will take any item you offer him, as long as you haven't moved up until the moment you feed him the item.
+Scolding after any other event as mentioned above is considered unreasonable and will not prevent a refusal.
+
+
+The following are the results of scolding on the US release. JP and PAL releases do not give a happiness gain.
+
+
+
+
+	Reasonable
+	Unreasonable
+	Happiness
+	+3
+	-10
+	Discipline
+	+8
+	+2
+	
+
+1.3 Food
+1.3.1 Food Effects
+Food gives your Digimon a set amount of energy and weight (reduction) and can also reduce Tiredness, increase Happiness and/or Discipline as well as certain stats.
+
+
+1.3.2 Feeding and Energy
+Each Digimon has a feeding schedule that defines when it gets hungry, as well as an energy value and a time and action based energy drain that effectively defines how much you have to feed. The capacity and reduction rate of energy varies between Digimon. The reduction frequency is once per ingame hour. This does not apply for time passed through battle, due to a bug.
+
+
+When your Digimon gets hungry you can feed it until the energy storage hits a certain threshold which will stop his hunger. It is optional to feed a Digimon that is hungry while the energy value is over threshold. Feeding your Digimon will satisfy its hunger immediately. 
+If not fed over time the starvation timer runs out and hunger ends. When the timeout happens while the energy value is above the threshold it will not result in a care mistake.
+Feeding while not being hungry also adds to this storage, meaning that you will have to feed less at the next schedule. 
+
+Other important things to note are:
+
+
+* Digimon have a favorite food, which gives them 40% more energy and +2 Happiness. 
+   * Digimon have a 20% chance of refusing their favorite food when they’re not hungry
+* When your energy level reaches 0 your Digimon loses 1 weight every 10 minutes.
+* Training increases the energy consumption by 1.
+
+
+1.3.3 Weight
+The weight of your digimon is a very dynamic parameter as it is influenced by many events.
+
+
+The following events influence the weight of your digimon:
+
+
+* feeding         -         Depending on the food it causes a reduction or increase.
+* sleeping         -         Reduction of 1/10th of the default weight.
+* pooping         -         Reduction 1/4th of the poop size + a random value between 0 and 3.
+* 0 energy         -         Reduction every 10 minutes while having 0 energy your digimon will lose 
+1 weight.
+
+
+Note1:        Default weight can be found here.
+Note2:        Time passed through training will not induce the weight reduction from 0 energy.
+
+
+1.3.4 Eating Poop
+Numemon and Sukamon have the ability to eat poop that has been “placed” by your Digimon throughout the game. The effects vary based on the size of the pile.
+
+
+
+
+	Size < 11
+	Size < 14
+	Size >= 14
+	HP healing
+	5%
+	10%
+	50%
+	MP healing
+	2%
+	5%
+	10%
+	Weight
+	+1
+	+3
+	+10
+	Sickness/Injury heal
+	2%
+	7%
+	20%
+	
+
+1.4 Pooping
+How often your Digimon has to poop varies between Digimon. As a rule of thumb it is every 3h for Fresh Digimon, 4h for Rookie Digimon and 6h for Champion and Ultimate Digimon.
+In the US version of the game this time is doubled after your Digimon has taken a poop in the toilet or the world.
+Once the need to poop arises you have a short period of time left to find a toilet or to feed a portable potty to your Digimon.
+If you fail to do so in time your Digimon will poop on the ground leaving a turd on the ground.  Your Digimon will lose 10 happiness, 5 discipline gain a care mistake and increase the virus bar by 1.
+
+The amount of time you have to find a toilet or feed a portable potty before your Digimon will poop on the ground is determined by discipline. 
+
+
+The formula used is as follows:
+
+
+
+
+
+Note 1:        The minimum time is when discipline is at its lowest (0) and results in 12 sec.
+Note 2:        The maximum time is when discipline is at its highest (100) and results in 72 sec.
+1.5 Lifespan
+Every Digimon has a base lifetime of 360 hours which gets affected by multiple different events.
+
+
+The following events increase lifespan:
+* ultimate evolution        ⇒        96h
+* eating a chain melon        ⇒        20h
+* eating a digiseabass        ⇒        3h
+
+The following events decrease lifespan:
+
+
+   * an hour passes        ⇒        1h, plus happiness penalty, see table below
+   * passing a day        ⇒         dependent of happiness, see table below
+   * feeding DV Chips        ⇒        24h
+
+
+The base lifespan of Digimon is 15 days. A naturally evolved ultimate Digimon is 19 days.
+
+
+Note: Ultimate evolutions through items do not increase the lifetime.
+
+
+1.5.1 Lifespan Penalty
+Normally your lifetime is reduced by 1h per hour. However, every 4th hour passed an additional reduction occurs when your Digimon’s happiness is 79 or less. If happiness is kept at 80 or higher then no penalty is incurred and your Digimon will live for 15 days or 19 for natural ultimate evolutions.
+
+The following is a summary of total lifespan reduction applied by lifespan penalty including the natural 1h reduction as the hour passes:
+
+
+   *    80         to          100         = 1h
+   *    31        to          79        = 2h
+   * -  19         to           30         = 3h
+   * -  69         to         - 20         = 4h
+   * - 100         to         - 70         = 5h
+
+The following image shows the corresponding happiness bar thresholds for the lifespan penalty. Happiness values shown are ranges.
+  
+
+
+
+⇐         Happiness         =  97  to 100
+        
+⇐         Happiness         =  80  to  83
+
+
+⇐         Happiness         =  28  to  31
+
+
+⇐         Happiness         = -20  to -17
+
+
+⇐         Happiness         = -72  to -69
+
+
+⇐         Happiness         = -100 to -97
+
+
+Note: The happiness bar changes per 4 happiness. This means that the bar overlaps past limits!
+1.6 Tiredness
+Tiredness is a value between 0 and 100. Once it reaches 80 or higher, the tired condition (“sweat bubble”) will appear. 
+
+
+1.6.1 Effects of Tiredness
+      * lose 2 happiness for every 5 minutes while being tired
+      * lose 4 happiness and 3 discipline per training while being tired
+      * only gain 1 stats point when training with 100 tiredness
+      * higher chance of getting injured after a battle
+      * It makes your Digimon sleepy faster
+      * it may make your Digimon hungry a bit faster
+      * Increases chance of getting sick when staying up too long
+
+
+1.6.2 Gaining Tiredness
+      * fighting (5 per battle, +10 when at exactly 0 MP, +2 when running away)
+      * This was intended to be +1 per 10% missing MP, but it’s bugged
+      * HP Training (10 per hour)
+      * MP Training (7 per hour)
+      * Offense Training (9 per hour)
+      * Defense Training (9 per hour)
+      * Speed Training (8 per hour)
+      * Brains Training (6 per hour)
+      * carry dirt for Drimogemon (10 per transport)
+      * pass an hour while being sick (5)
+      * stay in a region your Digimon dislikes (1 per hour)
+
+
+1.6.3 Reducing Tiredness
+      * resting in Centarumon's clinic (20 per hour)
+      * resting at Punimon's chair (10 per hour)
+      * resting at Kuwagamon in Beetle Island (5 per hour)
+      * healing sickness at Centarumon’s clinic (set to a fixed 50, unless already lower)
+      * eating at the Restaurant 
+      * 2 per meal from Frigimon
+      * 5 per meal from the other vendors
+      * eating Sirloin (5)
+      * eating Red Berry (20)
+      * eating Spiny Green (50)
+      * eating Happymushrm (30)
+      * eating Chain Melon (50)
+      * stay in a region your Digimon likes (2 per hour)
+      * sleeping 
+      * between 80 and 100, gets reduced linear to the time slept vs normal sleep time
+      * Rest Pillow and being in a region your Digimon likes boost it by 20%
+      * being in region your Digimon dislikes reduces it by 20%
+1.7 Sleeping
+Every Digimon has to sleep regularly. Each Digimon, except Fresh and In Training ones, have a fixed sleeping schedule with a defined sleep and wake up time.
+Besides passing time it also regenerates your Digimon’s HP and MP, reduces it’s tiredness and weight and prevents it from getting sick.
+
+
+Not sleeping an entire night (i.e. staying awake past the wakeup time) also constitutes a care mistake.
+
+
+Regardless of how long you actually sleep, your Digimon will gain the same amount of hours for the next evolution, effectively rewarding you for staying up late. This does not have any negative effects on your lifetime.
+
+
+1.7.1 Sleeping Schedules
+Name
+	Sleepy Time
+	Wakeup Time
+	sunup
+	16:00
+	1:00
+	day
+	19:00
+	4:00
+	groggy
+	22:00
+	7:00
+	sleepy
+	2:00
+	11:00
+	sunset
+	7:00
+	16:00
+	night
+	10:00
+	19:00
+	N/A (Fresh)
+	3h awake, 1h asleep
+	N/A (In-Training)
+	7h awake, 3h asleep
+	
+
+tired1.7.2 Fatigue through tiredness
+A tired Digimon will get sleepy earlier depending on its tiredness level. For that the game will increase a counter by 0.3 * Tiredness per minute passed.
+The counter is checked every 10 minutes for whether it is over 180 and if it is, it will cause your Digimon to get sleepy 10 minutes earlier.
+
+
+As such the maximum fatigue rate is reached at a tiredness level of 60.
+
+
+1.7.3 Sleep Regeneration
+RestFactor = (SleptHours / NormalSleepHours) * PillowFactor * AreaFactor
+PillowFactor = if hasRestPillow then 1.2 else 1
+AreaFactor = if likesArea then 1.2 else if dislikesArea then 0.8 else 1
+
+
+HP/MP Regen = (0.7 + random(0 to 0.1)) * RestFactor * maxHP
+Tiredness Reduction = (80 + random(0 to 20)) * RestFactor
+1.8 Area Preference
+Whether a Digimon likes or dislikes an area or not can be seen in the animation of the happiness icon. Most digimon-area combinations have no extra effects as the digimon neither likes or dislikes the area. In this case the happiness bar has no animation. Being in a liked or disliked zone has an effect on your digimon. 
+
+
+The following are the effects of being in a liked zone:
+
+
+      * every 60 minutes, happiness +1
+      * every 60 minutes, tiredness -2
+      * sleeping: +20% HP, MP and Tiredness regeneration
+
+
+The following are the effects of being in a disliked zone:
+
+
+      * every 60 minutes, happiness -1
+      * every 60 minutes, tiredness +1
+      * sleeping: -20% HP, MP and Tiredness regeneration
+      * after 600 minutes on the same screen sickness will occur
+
+
+The  images below show the different possible happiness bars
+  
+
+⇐        Disliked        -                Happiness        =         0        to        100
+
+
+  
+
+⇐        Disliked        -        Happiness        =        -1        to        -100
+  
+
+
+
+⇐        Liked        -        Happiness        =        0        to        100
+  
+
+
+
+⇐        Liked        -        Happiness        =        -1        to        -100
+
+
+
+
+________________
+1.9 Conditions
+1.9.1 Hungry
+As time passes your digimon will become hungry and the “meat” bubble will appear. The condition is cleared when your digimon is fed and the energy level has reached a certain threshold or when the starvation timer runs out. When the starvation timer runs out and energy is not over threshold then the hungry condition will disappear and the care mistake count is increased by 1.
+
+
+Hungry condition screen                         Hungry condition bubble
+  
+          
+
+
+For more information on the effects of hunger and feeding see chapter 1.3 Food.
+
+
+1.9.2 Poopy
+During regular intervals your digimon will have to poop. Only during the poopy condition will your digimon use a toilet or be able to accept a single “Port.potty”. The condition will end when your digimon has pooped, be it on the floor or in the toilet or by eating a port. potty. Pooping on the floor has a different, often considered negative effect. Whereas using a port. potty or the real potty will have a positive effect. Higher discipline results in a longer time window.
+
+
+Poop condition screen                          Poopy condition bubble
+  
+          
+
+
+For more information on pooping see chapter 1.4 Pooping.
+1.9.3 Tired
+When the tiredness of a Digimon reaches 80 or more the “sweat” bubble will appear. Tiredness is increased by various actions like training, fighting and other activities. It is reduced by sleeping, resting, eating and other activities. Among the effects are reduced happiness, discipline and reduced stat gain from training.
+
+
+Tired condition screen                          Tired condition bubble.            
+
+
+For a complete description of the effects of tiredness see chapter 1.6 Tiredness.
+
+
+1.9.4 Sleepy
+At certain intervals a digimon becomes sleepy and the “sleep” bubble will appear. When this status is in effect your digimon can sleep. Staying awake until after the wake up time will increase the care mistake count by 1. Sleeping will regenerate HP and MP, increase time to evolution and more. 
+
+
+Sleepy condition screen                          Sleepy condition bubble
+  
+          
+
+
+For a complete description of the effects of sleep see chapter 1.7 Sleeping.
+________________
+1.9.5 Butterfly / Flower
+The game performs a set of checks every 10 min. When all the following checks are true the butterfly condition will occur: 
+      * your Digimon has no other condition bubble
+      * your Digimon’s happiness is negative (blue face)
+      * a random value between 0 and 100 is smaller than the difference of inverted happiness minus discipline.
+
+
+E.g.: happiness -100; discipline 0; 100 - 0 = 100; Happiness inverted - discipline.
+
+
+While the butterfly condition is active it causes the following effects:
+      * Every 0.75 minutes: increases happiness 1
+      * Every 15 minutes: reduces Digimon stats by 2%
+
+
+Flower condition screen                         Butterfly condition
+  
+          
+
+
+For more information see chapters 2.1.6.1 happiness / discipline bonus and 1.5.1 lifespan penalty.
+
+
+1.9.6 Injured
+Injury can occur as a result of battle. If left untreated your digimon will fall ill.
+
+
+Injured condition screen                         Injured condition bubble
+  
+          
+
+
+For more information on injury after battle see chapter 4. Combat. For more info on illness see chapter 1.9.7 Illness.
+________________
+1.9.7 Sick
+Your digimon can fall ill from being injured for too long, eating moldy meat or being in the same screen in a dislike zone for too long. When sick for too long your digimon will lose a life. Sickness can be cured by using medicine or getting cured at the Centarumon Clinic or Punimon’s chair or even by eating poop (Sukamon/Numemon only).
+
+
+Sick condition screen                                  Sick condition bubble
+  
+          
+
+
+For more information on illness see the following chapters:
+      * 1.3.4 Eating Poop
+      * 1.8 Area Preference
+      * 6.5 Punimon’s Chair / Clinic
+
+
+1.9.8 All conditions
+All conditions screens
+  
+
+Note: This image is purely illustrative, the Butterfly/Flower condition is never active in conjunction with another condition as this is an exclusive condition. It will disappear as soon as any other condition takes effect.
+Note 2: The condition bubbles will alternate between all affected conditions.
+2 Evolution-mechanics 
+2.1 Natural Evolution mechanics
+The paths shown in the Digimon chart are referred to as “natural evolutions”. They will get triggered once your Digimon has reached a certain age and requirements dependent on stage and evolution.
+
+
+Based on the information provided below the following evolution tool has been created by us to help you achieve the evolution of your choice with relative ease. 
+
+
+2.1.1 Evolution terms
+Your Digimon can evolve after a certain amount of time, depending on the current form of your Digimon. Sleeping adds 1, 3 or 9 hours to the timer for fresh, In Training  and Rookie to Champion respectively, regardless of how long you have actually slept.
+
+The following are the minimum amount of hours on its current level for evolving:
+
+Fresh        ⇒          In Training         =         6h
+In Training         ⇒          Rookie                 =         24h
+Rookie         ⇒          Champion                 =         72h 
+Champion         ⇒          Ultimate                 =         144h
+
+
+Note 1:        Any Rookie will be forced to evolve into Numemon after 96 hours or more.
+Note 2:        Any Champion will evolve into Vademon at exactly 360 hours.
+Note3:        There are bugs related to the evolution timer. Please check to the Known bugs 
+section for further information. 
+
+
+2.1.2 Requirements
+Every Digimon has certain requirements that need to be fulfilled in order to evolve into them.
+They're grouped into 4 groups: 
+
+
+      * stats
+      * weight
+      * care mistakes
+      * bonus
+
+In order to enable a certain evolution you have to fulfill 3 out of these 4 requirements while your Digimon is old enough to digivolve.
+After evolution the care mistakes and battles will be reset to 0.
+
+
+The requirements for every standard evolution can be found here.
+
+
+During the evolution the game will check each possible Digimon whether it is enabled and in the progress store the "best" Digimon it found so far. If the "best" is at any point one you didn't have before (-> see Digimon Chart) it can only be replaced by another Digimon you did not have before. 
+Digimon disabled by this mechanic will be treated as if they did not fulfill any requirements.
+
+
+2.1.3 Stats
+In order to fulfill the stats requirement you have to match or exceed all of the required stats for that Digimon. Stats that are not given are not relevant for this evolution and get ignored altogether.
+
+
+For the evolution to Rookie Digimon this requirement will only count as fulfilled if any of the Digimon's required stats is currently the highest.
+
+2.1.4 Weight
+You get this point when your Digimon is within a +/-5 range of the target weight.
+
+
+2.1.5 Care Mistakes
+A Digimon either has a minimal or a maximal number of allowed care mistakes.
+Care mistakes get reset upon evolution.
+
+The following events are counted care mistakes:
+
+
+      * pooping on the ground
+      * not feeding, while energy level is below threshold, until the hunger timer runs out while not sleeping
+      * not sleeping until the sleeping timer runs out
+
+
+Note 1:        If the starvation timer drops to 0 during a training session or while resting at
+        Punimon, Centarumon or Kuwagamon, you will get an additional care mistake. 
+Note 2: Gaining 2 care mistakes instead of one during a training session helps a lot with high 
+care mistake requirements, especially if a high weight is required as well.
+Note 3: If you sleep while your Digimon has to poop or is hungry you will get no care 
+ mistakes. However, in case of pooping, your virus bar will still go up.
+
+2.1.6 Bonus
+There are several possible bonus requirements, which ones are possible differs from Digimon to Digimon.
+You only have to fulfill one of these requirements to get the point. Fulfilling more does nothing.
+
+
+2.1.6.1 Happiness / Discipline
+These are always minimal values, lower limits included. 
+
+
+The image below shows the happiness and discipline bars at different values ranging from -100 to 100 for happiness and 0 to 100 for discipline.
+  
+⇐         Happiness   =  -100
+Absolute minimum values
+⇐         Discipline  =     0
+
+
+⇐         Happiness   =   100
+Absolute maximum values
+⇐         Discipline  =   100
+
+
+⇐         Happiness   =     0
+Halfway values
+⇐         Discipline  =    50
+
+
+
+
+2.1.6.2 Techniques
+This is the minimum amount of learned techniques, lower limited included.
+The moves “Dynamite Kick” and “Horizontal Kick” count as twice for this requirement, due to them having two variations each.
+
+2.1.6.3 Battles
+This can either a minimal or a maximal amount of battles won, lower limit included.
+Arena Battles do not count towards this, this value gets reset to 0 on every evolution.
+
+2.1.6.4 Digimon
+Certain Digimon have a natural advantage of evolving into another Digimon, by always fulfilling the bonus requirement for it.
+
+2.1.7 Priority
+When the time comes for your Digimon to evolve and you're fulfilling the requirements for two or more possible evolutions the game has to decide which Digimon you'll get. Once the game decides which evolutions are enabled it proceeds to calculate the priority score for each enabled Digimon in the order they appear in the evolution chart, picking the Digimon with the highest resulting priority score.
+________________
+To Rookie
+For evolutions to Rookie Digimon the game will take the number of fulfilled requirements as the score, with the caveat that the stats requirement only counts if the currently highest stat is one the Digimon in question requires.
+Practically this means you'll get the Digimon that requires your current highest stat, unless it is second in the list and you didn't have the first one yet.
+Note: Tanemon can’t evolve as long as Offense is the highest stat with weight not between 10 and 20 since no evolution would be enabled, commonly known as the Tanemon bug.
+To Champion and Ultimate Digimon
+For the score it sums up all stats (HP and MP get divided by 10) that are required and counts how many stats that are.
+Additionally, if the previously calculated score is smaller or equal to the current highest score it will add this score (carried over stat) and its counted stats (carried over count) to the current calculation.
+
+
+Score =
+Example
+An  Agumon with 1600 HP, 900 MP, 160 Offense and 100 Defense/Speed/Brains with enough other requirements to enable the listed Digimon.
+
+
+      * Greymon:                 160 + 100 + 100 + 100 -> 460 / 4 = 115
+      * Centarumon:                 100 -> 100 / 1 = 100 / 1
+      * smaller than 115, carry over a score of 100 and a count of 1
+      * Monochromon:         160 + 100 + 100 + 100 -> 460 / (3+1) = 115
+      * equals 115, carry over a score of 115 and a count of 4
+      * Tyrannomon:                 160 + 100 + 115 -> 375 / (2+4) = 62
+      * smaller than 115, but the last entry in the list
+
+
+⇒ Agumon would evolve to Greymon.
+Natural Ordering of evolutions for Agumon
+ The natural ordering table for Agumon 
+2.2 Special Evolutions
+There are more evolution paths available than shown on the evolution chart which is why Digimon like Devimon and Vademon appear on it without showing a precursor. These special evolutions are available at different levels and circumstances, for example through dying with a specific Digimon or sleeping while fulfilling some conditions.
+A full list of known and confirmed special evolutions can be found here.
+
+
+Note:        We regard the gathered knowledge on this subject as extremely likely to be 
+incomplete. If you at any point come across a possible unlisted evolution contact us. 
+2.3 Irreproducible Evolutions
+There are certain evolution on the internet that we couldn’t reproduce. Reproduction was done to the best of our knowledge and effort. Due to being unable to reproduce the evolution we regard them as flawed or highly improbable. If you disagree with any of the special evolutions below then please contact us.
+
+(Starter) Agumon ⇒ Meramon (“Guaranteed”)
+Mechanism:        Let your (starter) Agumon sleep/poop in front of the toilet.
+Reproduction:        Follow directions of a(n) (ex) believer of this myth, which included sleep and 
+pooping in front of the toilet. Off down to Brn was around 125 while Brn was 
+the highest stat.
+Result:        Centarumon due to highest priority score through a slightly higher Brn.
+
+
+Expected origin        
+-        Most likely this myth got created because lots of people use Agumon as a starter as 
+it's the better option. 
+-        Agumon is one of the natural precursors of Meramon.
+-        All stats get trained equally, good choice when inexperienced with the game.
+-        Everyone likes to deal damage, so offense gets trained a little bit more than the rest. 
+100+ offense is the requirement for Meramon and its sole priority stat.
+-        No bits, no recruits. People go and fight Agumon and some Modokibetamon which 
+fulfills a bonus requirement for Meramon.
+-        Poop in front of the toilet is a care mistake. As expected from a beginner or from an 
+experienced player who still can’t get to the toilet in time. Multiple care mistakes is a 
+realistic outcome.  The care mistake requirement for Meramon is 5+.
+
+
+________________
+
+
+-        The general lack of food at the start makes it near impossible to get a high weight on 
+your digimon, also prone to care mistakes due to a lack of food. Weight limits for Meramon requirements are 15-25. 
+-        All of the above results in the enabling of the Meramon evolution and due to the 
+general preference, and value, of the offense stat the priority score for Meramon is almost always the highest.
+-        The toilet is a logical spot for your  to poop in front because you’ll be moving 
+towards it when it has to poop. Also you pass by that spot a lot because you have to pick up meat so there's a high likelihood that you’ll pass by it when Agumon has to sleep.
+-        There is a serious lack of variables compared to a scenario with a  half way 
+through the game and that's why this specific evolution has happened so often that people started believing it to be a guarantee for Meramon. It’s a very opportunistic myth where people started believing things that we’re not irrelevant, funny really, humans.
+
+
+Any Rookie ⇒ Numemon (normal evolution enabled)
+Mechanism:        1 Weight supposedly triggers Numemon evolution.
+Reproduction:        1 Weight Rookie Digimon but still meet 3 criteria for any normal evolution
+
+
+Expected origin
+Low weight means you need to fulfill a bonus criteria to meet enough requirements for a normal evolution. This can be tricky with little understanding of the game. 
+
+
+Birdramon ⇒ Phoenixmon
+Mechanism:         Death evolution
+Reproduction:        Fight a battle while having HP set to 0 with RNG seed fixed on 0. Repeat with 
+RNG seeds 1-8. Seed 0, 2, 4 and 6 have positive death evolution results.
+
+
+Expected origin
+Firebird dies, New Firebird arises? I guess, it would make sense and all but Birdramon already has a special evolution and it's unlikely that any  has more than 1 special evolution.
+
+
+Etemon ⇒ MetalEtemon
+Mechanism:         Buy 100 Gold bananas at Etemon and the last one will be a Metal Banana.
+Reproduction:        Bought 125 bananas at Etemon, all Gold bananas not a single Metal banana.
+
+MetalGreymon ⇒ Megadramon
+Mechanism:        Death evolution
+Reproduction:        Fight a battle while having HP set to 0 with RNG seed fixed on 0. Repeat with 
+RNG seeds 1-4, 6, 8 and 10. Seed 0, 2, 4 and 6 have positive death evolution 
+results.
+
+
+________________
+
+
+3 Stats Gain
+3.1 Training
+Training will result in stats gains of one or two stats. The result can be calculated using two formulas and a factor table. The formula’s are the following:
+
+Statsgains = (BaseValue * UpgradeFactor) * ItemFactor
+
+
+3.1.1 Training Factors
+The UpgradeFactor is the product of multiple possible factors that depend on your Digimon and the progression in the game. Not all factors apply to every training station, though.
+Before applying the ItemFactor the previous result gets rounded down to a whole number.
+
+
+Preference
+Digimon have a preference which stats they gain faster or slower.
+The values for each Digimon have been documented in this table.
+      * neutral, no effect on the result
+      * +10% for HP and Defense, -10% for Offense and Speed
+      * +10% for MP and Brains, -10% HP and Defense
+      * +10% for Offense and Speed, -10% MP and Brains
+      * -20% for everything (only Filth Digimon but not Etemon)
+
+
+Level
+The higher the level of your Digimon, the higher the stats gains from training.
+      * Fresh/In-Training: -10%
+      * Rookie: 0%
+      * Champion: +10%
+      * Ultimate: +20%
+
+
+Upgrades
+The training can also be improved by progressing the game.
+      * have the Training Manual in your inventory: +10%
+      * have Kuwagamon in your town: +20% for MP, Offense and Brains
+      * have Kabuterimon in your town: +20% for HP, Defense and Speed
+      * have trained 10 times at a Green Gym station with a Fresh/In-Training Digimon: +20%
+
+
+
+
+
+
+________________
+
+
+3.1.2 Training Stations 
+Green Gym
+Active Factors: Preference, Level, Fresh Upgrade, Bug Upgrade, Manual
+
+
+Offense:         8 Offense, 2 Speed, 0 HP
+Speed:         8 Speed, 10 HP
+HP:                 80 HP, 2 Offense
+Defense:         8 Defense, 2 Brains
+MP:                 80 MP, 2 Defense
+Brains:         8 Brains, 10 MP
+
+
+Beetle Island
+Active Factors: Preference, Level, Manual
+
+
+HP:                120 HP, 0 Defense
+Offense:        12 Offense
+Defense:        12 Defense, 0 Speed
+Speed:          12 Speed
+
+
+Ice Sanctuary
+Active Factors: Preference, Level, Manual
+
+
+Defense:        12 Defense, 2 Speed
+HP:                     120 HP, 2 Defense
+
+
+Leomon’s Gym
+Active Factors: Preference, Level, Manual
+
+
+Offense:         8 Offense, 10 HP, 0 Speed
+Speed:         8 Speed, 10 HP
+
+
+Trash Mountain
+Active Factors: Preference, Level, Manual
+
+
+MP:                 150 MP
+
+
+Cherrymon
+Active Factors: Preference, Level, Fresh Upgrade, Bug Upgrade, Manual
+
+
+Brains:         8 Brains, 10 MP
+________________
+3.1.3 Item Factors
+There are 3 consumables which increase the effect of training. Their effect ends when 6 hours have passed with the clock visible on the screen – time passed through sleeping, fighting, resting, training, etc. does not count – or when another food item gets fed.
+
+
+The following consumables increase training effects:
+
+
+SuperCarrot         ⇒        20% boost for Offense, Brains, MP
+Hawk Raddish         ⇒         20% boost for Defense, Speed and HP
+Digipine         ⇒         50% boost for everything
+
+
+3.1.4 Bonus Try
+The goal of the Bonus Try is to get 3 times the same image in a slot-machine mini game.
+At the beginning the game will randomly decide to what degree things will be rigged either against you or in your favor.
+      * 50% of the time winning is impossible, as the last wheel will always jump over the correct icon.
+      * 40% of the time you can win with anything but the Golden Poop. The timing for the correct icons on wheel 2 and 3 will be more lenient.
+      * 10% of the time you can win the Golden Poop, with the timing for those being more lenient. If you miss the Golden Poop, you can still win with regular icons, but without the more lenient timing.
+
+
+Once the training is finished the normal result gets multiplied by a factor depending on the result of the mini game.
+
+
+The following are the different possible factors as a result of a Bonus Try:
+
+Lose         ⇒         0.5
+Different to training logo        ⇒         2
+Same as training logo        ⇒         4
+Golden Poop         ⇒         10
+
+
+Note:        Results are always rounded down. Stats gain is capped at 999. 
+E.g.: A normal training with a 15 offense and 3 speed gain would result in 7 offense and 1 speed gain with a “lose” Bonus Try.
+3.2 Base stats & Tamer level
+3.2.1 Base Stats
+Every Fresh Digimon starts with its own set of base stats. Additionally stats are carried over from the previous Digimon.
+
+The following are the base stats of Fresh Digimon:
+
+
+
+
+	Botamon
+	Punimon
+	Poyomon
+	Yuramon
+	Hit Points
+	90
+	120
+	100
+	100
+	Mana Point
+	110
+	100
+	140
+	120
+	Offense
+	10
+	16
+	12
+	8
+	Defense
+	11
+	8
+	6
+	8
+	Speed
+	9
+	8
+	6
+	8
+	Brains
+	10
+	6
+	8
+	8
+	3.2.2 Tamer Level 
+Tamer level influences the percentage of stats that are carried over from the Digimon that passed away to the newborn Digimon. The current tamer level is the percentage of stats being carried over.
+
+
+It also determines how many moves won’t be carried over when your Digimon loses all 3 lives. The number of moves unlearned is calculated, with normal rounding and after losing a tamer level:
+unlearnedCount = ((10 - tamerLevel) * 2 * numMoves) / 100
+
+
+The following actions or events have a chance to increase your tamer level:
+
+
+      * for obtaining “Ending”, “Town Flourishing” or “Digimon Master” Medal
+      * when raising a Digimon to the Ultimate level
+      * 20% chance when raising a Digimon to the Champion level
+      * 10% chance when winning a B-Rank Tournament
+      * 20% chance when winning a A-Rank Tournament
+      * 30% chance when winning a S-Rank Tournament
+      * 5% chance when your Digimon has 100% happiness when the year rolls over
+
+
+Note:        “Raising” means natural evolution. Some special evolutions and evolutions to a filth 
+type Digimon do NOT result in a Tamer Level up.
+
+
+________________
+
+
+The following actions or events have a chance to decrease your tamer level:
+
+
+      * when your Digimon loses all 3 of it’s lives
+      * 10% chance when feeding DV Chips
+      * 30% chance when entering a “too low rank” tournament
+      * 1% chance when your Digimon poops on the ground
+      * 1% chance when skipping sleep
+      * 10% chance when your Digimon has negative happiness when the year rolls over
+3.3 Items
+There are items that boost your Digimon’s stats upon consumption. 
+      * Stat Chips (one stat +50)
+      * Found in the world or as drops from bosses
+      * Can be bought for Merit Points from ShogunGekomon
+      * Can be obtained through the Treasure Hunt
+      * DV Chips
+      * Can be bought from Devimon in the Secret Shop
+      * Stat Fruits (one stat +20)
+      * Rare random spawn
+      * Rare random drops
+      * Deluxmushrm (all stats +10)
+      * Random spawn
+      * Black Trout (all stats +1)
+      * Obtainable via fishing
+3.4 Drimogemon Dirt Carrying
+One of the Drimogemon in the Drill Tunnel lets you carry dirt for bits and stats gain. Every time you finish carrying dirt you gain 50 HP and 5 Offense + Defense as well as 500 Bits.
+________________
+3.5 Evolution
+Most evolutions have "reference stats", that are used for the evolution stats gain calculation when you evolve into them. These stats are not directly linked to requirements.
+
+When the current stat is lower than the target stat:
+Stats gain = (Reference - Current) / 2
+
+When the current stat is equal or greater than the reference stat:
+Stats gain = (Reference / 10)
+
+
+This does not apply to evolutions through items or to Numemon and Sukamon. The latter result in 20% and 50% stats loss respectively. Evolving from Sukamon will restore the stats at the time of the Sukamon evolution plus 50% of everything gained as Sukamon.
+Note 1:        Evolving with an item disables evolution stats gains completely until the game has 
+been reloaded.
+Note 2:         Reference stats, in the formula referred to as “Reference”, can be found in 
+the “Statsgains” column in this table.
+
+
+3.6 Battle
+After winning a battle your Digimon will gain some stats. The amount depends on the stats of both your and the opposing Digimon('s) stats. In case of multiple enemies the stats of the Digimon with the highest stat will be used for calculation of the stats gain.
+
+
+If your Digimon’s stat is lower than the enemy's the following formula applies:
+Statsgain = 1 + (EnemyStat * EnemyNumberFactor - 1) / YourStat
+
+
+Otherwise you have a random chance of getting 1 stat point, with the chance being calculated by:
+Chance = EnemyStat * EnemyNumberFactor * 100 / YourStat
+
+
+The EnemyNumberFactor depends on the number of enemies you faces in the battle
+
+      * 1 Enemy -> 1.0
+      * 2 Enemies -> 1.2
+      * 3 Enemies -> 1.6
+
+
+If the statsgains for a certain stat is still 0 there is another chance of gaining one statpoint, depending on certain conditions during battle.
+
+HP:                 chance = 100 * (startHP - currentHP) / maxHP
+MP + Off:         chance = numAttacks * 10
+Defense:        chance = heavyHits * 10
+Speed:         chance = 50 * (startHP - currentHP) / maxHP + numBlocked * 10
+Brains:         chance = numAttacks * 5 + heavyHits * 5
+
+
+A “heavy hit” is an attack that deals 20% or more damage to your Digimon.
+________________
+4 Combat
+
+
+Chance for injury = Tiredness - (CurrentHP / MaxHP)
+
+
+Chance to hit = moveAccuracy - (moveAccuracy * (victimSpeed - (attackerSpeed / 10)) / 1998)
+4.1 Finisher
+Every Digimon can have a finisher by having a fitting move equipped in slot #4. It takes time to charge it up, with progress being visible through the “FINISH!!!” text below the HP/MP display. The value it has to get charged up to depends on the Digimon’s speed
+
+
+target = 3000 - speed
+
+
+There are 4 ways to charge it up:
+      1. By 1 every game Tick (1/20th second)
+      2. By 4% of the target for every successfully casted attack
+An attack counts as successful once its casting reaches a certain point. It doesn’t have to hit or be uninterrupted.
+      3. By 6% of the target for every attack a Digimon blocks
+      4. By 8% of the target for every attack that gets blocked
+
+
+Option 2. and 4. apply both at once, so for a blocked attack the attacking Digimon gets 12% progress, while the defending one gets 6%.
+
+
+
+
+
+
+________________
+5 Recruitment Guide
+Due to the size of this guide we’ve made the decision to create a separate file. The recruitment guide is located here.
+________________
+
+
+6 Town Features
+TODO:[j]
+      * Recycle Shop
+      * Card Vendors
+      * ShogunGekomon
+      * Arena
+
+
+      * Misc features
+      * Kunemon
+      * Coelamon (Bridge)
+      * Punimon
+      * MetalGreymon
+      * Airdramon
+      * useless Digimon
+      * Kokatorimon
+      * Elecmon
+      * Etemon
+
+
+6.1 Shops
+Small Shop
+The small shop gets unlocked once you recruit either Betamon or Coelamon. The inventory of the shop depends on whether you have one or both of them in town.
+It will be replaced by the large shop, giving Coelamon and Betamon new tasks in town.
+
+
+Base Inventory:                
+      * Sm. Recovery
+      * MP Floppy
+      * Meat
+Added Inventory (Both Shopkeepers):
+      * Med. recovery
+      * Various
+      * Autopilot
+
+
+Large Shop
+Recruiting either one of the shopkeepers opens up the large shop. Each shopkeeper has its own working hours and a unique item only they sell. With more shopkeepers you unlock more items. Once you have 3 or more shopkeepers recruited you gain access to a card vending machine.
+
+
+________________
+
+
+Within the large shop you can also find the Secret Shop and Piximon once they are recruited. 
+
+
+Base Inventory (1 Shopkeeper):
+      * Sm. Recovery
+      * Med. Recovery
+      * MP Floppy
+      * Various
+      * Off. Disk
+      * Def. Disk
+      * Hispeed Disk
+      * Autopilot
+      * Port. Potty
+      * Meat
+
+
+With 2 or 3 Shopkeeper:
+      * Lrg. recovery
+      * Medium MP
+      * Double flop
+
+
+With 4 Shopkeeper:
+      * Large MP
+      * Restore
+Monochromon (18:00 - 00:00):
+      * Protection
+
+
+Unimon (00:00 - 06:00):
+      * Sup. Restore
+
+
+Biyomon (06:00 - 12:00):
+      * Sup. recovery
+
+
+Patamon (12:00 - 18:00): 
+      * Omnipotent
+
+
+
+
+With 5 shopkeep all items regardless of the active Digimon are available.
+There is no 5th shopkeep, though.
+
+
+
+
+
+
+
+
+Secret Shop
+The secret shop is located in the basement of the Large Shop. The shopkeepers sell special items which often can’t be acquired anywhere else. They also have times they are active at.
+
+
+Numemon (00:00 - 06:00)
+      * Enemy repel
+      * Enemy bell
+
+
+
+
+Mojyamon (06:00 - 12:00)
+      * Rest Pillow
+      * Health Shoes
+
+
+
+
+Devimon (18:00 - 00:00)
+      * DV Chip A
+      * DV Chip D
+      * DV Chip E
+
+
+Mamemon (12:00 - 18:00)
+      * Omni Disk
+      * S. Off. Disk
+      * S. Def. Disk
+      * S. Speed. Dis
+
+
+________________
+Piximon
+Once Piximon has been recruited, it has a 10% spawn chance to appear in the large shop. You can buy a Training Manual for 50.000 bits from it.
+
+
+Talking to Piximon can trigger a bug. When you cancel the “Buy/Don’t Buy” dialogue with Triangle instead of picking the second option the game will write the current date into a certain part of the memory.
+Notably it overwrites your current Prosperity Points with the current Day-1 as well as the currently registered Tournament with the current minute.
+
+
+Etemon
+Once recruited Etemon is waiting on the Digimon Bridge screen for you and sells you a Golden Banana for 50.000 Bits, that allows you to evolve to Etemon directly.
+
+
+Although there are rumors there is absolutely no way of getting the Metal Banana, the evolution item for MetalEtemon, from Etemon.
+
+
+Note:         The Metal Banana was an exclusive item that could be won in a contest in Japan. 
+See here.
+6.2 Transport
+There are 2 Digimon who provide you with transport services, Birdramon and Whamon.
+
+
+After recruiting Whamon they ferry you between Industrial Town and the Secret Beach Cave.
+
+
+After recruiting Birdramon the Birdra Transport gets unlocked. Here Birdramon will fly you to area’s, of which you have visited a specific screen, for a fee. You will not be able to use Birdramon to get back to File City, though.
+
+
+Below are the areas you can reach using Birdra Transport:
+
+
+Internal Name
+	Target Area
+	Price
+	Unlocked by
+	GCAN03
+	Great Canyon
+	1000
+	Birdramon recruited
+	GIAS01
+	Gear Savanna
+	1000
+	Discovery Recycle Shop
+	KODA00
+	Ancient Dino Region
+	1500
+	Enter Speed Time Zone
+	FRZL06
+	Freezeland
+	2000
+	Enter crosssection map (north of toilet)
+	MIST05
+	Misty Trees
+	2500
+	Talked to Cherrymon
+	BETL01
+	Beetle Land
+	2500
+	Recruit Seadramon
+	
+
+Note:         The Internal Name can be referenced here. 
+6.3 Meat Farm
+The meat farm is the only town feature unlocked at the start of the game. Each day you can pick up 3 pieces of food from it, with a 10% chance of getting 5 instead.
+
+
+Maintainer
+	Provides
+	Sells
+	Tanemon
+	Meat
+	-
+	Palmon
+	Giant Meat
+	Giant Meat (500 Bits)
+	Vegimon
+	Sirloin
+	Super Carrot, Hawk Raddish (500 Bits each)
+	
+
+6.4 Bank
+Recruiting Agumon unlocks the Bank. It allows you to store up to 99 items of each item type.
+
+
+6.5 Punimon’s Chair / Clinic 
+Talking to Punimon’s chair in Jijimon’s house allows you to rest for one hour reducing Tiredness by 10.
+
+
+Recruiting Centarumon unlocks the Clinic, allowing you to:
+      * Buy Bandages (400 bits)
+      * Buy Medicine (1200 bits)
+      * Reduce Tiredness by 20, passing an hour
+      * Heal Injury/Sickness (300 bits or free too poor), sets Tiredness to 50 if currently higher
+
+
+
+
+6.6 Curling
+Recruiting Penguinmon unlocks the Digimon Curling, where you can play games of Curling for the cost of one fish. Once you recruit MetalMamemon they have a 12.5% chance of appearing instead of Penguinmon.
+When you win you’ll get a random reward depending on the opponent you played against.
+
+
+Penguinmon’s rewards:
+      * Rooster         -           2%
+      * Restore         -         10%
+      * Omni Disk         -         20%
+      * Giant Meat         -         14%
+      * Large Recovery        -         16%
+      * Medium MP         -         38%
+
+
+
+
+MetalMamemon’s rewards:
+      * Silver Ball         -           2%
+      * Metal Armor         -           2%
+      * Chainsaw         -           2%
+      * Small Spear         -           2%
+      * Super Recovery         -         16%
+      * Restore         -         20%
+      * Omnipotent         -         24%
+      * Sirloin         -         32%
+6.7 Treasure Hunt
+Recruiting Drimogemon unlocks the Treasure Hunt, where you can hire them to search for a “treasure”. The regular 3 days plan costs 1000 bits, the special 10 days plan costs 5000 bits.
+
+
+After the time has passed you can talk to Drimogemon to obtain the item they count, however make sure you have enough space in your inventory, otherwise it will be discarded.
+The item you get is determined the moment you pay Drimogemon, making it possible to reload the game and get a different item.
+Recruiting Gabumon increases the chances for good items significantly.
+
+
+3 days, without Gabumon
+      * Large MP        -        20%
+      * sup. recovery        -        20%
+      * Omnipotent        -        8%
+      * Protection        -        8%
+      * S. Off. Disk        -        8%
+      * S. Def. Disk        -        8%
+      * S. Speed. Disk        -        8%
+      * Omnidisk        -        8%
+      * restore        -        6%
+      * Flamingwing        -        2%
+      * Torn tatter        -        2%
+      * Koga laws        -        2%
+
+
+3 days, with Gabumon
+      * Large MP        -        20%
+      * sup. recovery        -        16%
+      * Omnipotent        -         8%
+      * Protection        -         8%
+      * S. Off. Disk        -         8%
+      * S. Def. Disk        -         8%
+      * S. Speed Disk        -         8%
+      * Omnidisk        -         8%
+      * restore        -         6%
+      * Flamingwing        -         4%
+      * Torn tatter        -         4%
+      * Koga laws        -         2%
+
+
+10 days, without Gabumon
+      * Omnipotent         -        40%
+      * sup. recovery        -         24%
+      * restore         -        18%
+      * Off. Chip        -         2%
+      * Def. Chip         -        2%
+      * HP Chip         -        2%
+      * MP Chip         -        2%
+      * Brains Chip         -        2%
+      * Quick Chip         -        2%
+      * Koga laws         -        2%
+      * Flamingwing         -        2%
+      * Torn tatter         -        2%
+10 days, with Gabumon
+      * Omnipotent         -        32%
+      * restore         -        24%
+      * sup. restore         -        8%
+      * Off. Chip         -        4%
+      * Def. Chip         -        4%
+      * HP Chip         -        4%
+      * MP Chip         -        4%
+      * Brains Chip         -        4%
+      * Quick Chip         -        4%
+      * Koga laws         -        4%
+      * Flamingwing         -        4%
+      * Torn tatter         -        4%
+6.8 Arena
+Once Greymon has been recruited the arena becomes available. The arena’s that are hosted within the arena are open to specific Digimon on specific days of the month. In the excel file, that can be found here, are two tabs. 
+
+
+The first tab is the tournament eligibility, here you can check which tournaments your Digimon can join. To make this easier a marking tool has been programmed, follow the instructions in the top right corner.
+
+
+The second tab is a day by day summary of the tournaments that are hosted.
+________________
+
+
+6.9 Restaurant
+Once any of the cooks have been recruited the Restaurant is unlocked. At the Restaurant you can buy meals for your Digimon. The available meals depend on the current cook. Below are the cooks and their dishes along with their corresponding stats gains and prices. 
+
+
+
+
+Garurumon - Appears between 0 - 6 o’clock
+	
+
+	HP
+	MP
+	Off
+	Def
+	Spd
+	Brn
+	Price
+	Energy
+	Weight
+	Tiredness
+	Happ.
+	Disc.
+	T-Bone Steak
+	10
+	
+
+	
+
+	
+
+	
+
+	1
+	1000
+	30
+	3
+	-5
+	0
+	1
+	Dx-Steak
+	30
+	
+
+	
+
+	
+
+	
+
+	2
+	2500
+	40
+	4
+	-5
+	1
+	2
+	Phantom Steak
+	50
+	
+
+	
+
+	
+
+	
+
+	3
+	5000
+	50
+	5
+	-5
+	2
+	3
+	
+
+Tyrannomon - Appears between 6 - 12 o’clock
+	
+
+	HP
+	MP
+	Off
+	Def
+	Spd
+	Brn
+	Price
+	Energy
+	Weight
+	Tiredness
+	Happ.
+	Disc.
+	Dragon Noodle
+	10
+	
+
+	
+
+	1
+	1
+	
+
+	400
+	18
+	2
+	-5
+	2
+	0
+	Zaurus Pizza
+	30
+	
+
+	
+
+	3
+	2
+	
+
+	1000
+	28
+	3
+	-5
+	4
+	0
+	J. Burger
+	50
+	
+
+	
+
+	5
+	3
+	
+
+	2500
+	35
+	4
+	-5
+	8
+	1
+	
+
+Meramon - Appears between 12 - 18 o’clock
+	
+
+	HP
+	MP
+	Off
+	Def
+	Spd
+	Brn
+	Price
+	Energy
+	Weight
+	Tiredness
+	Happ.
+	Disc.
+	Red Ramen
+	
+
+	
+
+	1
+	
+
+	
+
+	1
+	400
+	20
+	2
+	-5
+	2
+	0
+	Hot Curry
+	
+
+	
+
+	3
+	
+
+	
+
+	2
+	1200
+	26
+	3
+	-5
+	4
+	0
+	Hot Pot
+	
+
+	
+
+	5
+	
+
+	
+
+	3
+	3500
+	20
+	4
+	-5
+	6
+	1
+	
+
+Frigimon - Appears between 18 - 0 o’clock
+	
+
+	HP
+	MP
+	Off
+	Def
+	Spd
+	Brn
+	Price
+	Energy
+	Weight
+	Tiredness
+	Happ.
+	Disc.
+	Snow Shake
+	
+
+	10
+	
+
+	
+
+	1
+	
+
+	300
+	12
+	2
+	-2
+	3
+	0
+	Ice Cream
+	
+
+	30
+	
+
+	
+
+	2
+	
+
+	700
+	16
+	3
+	-2
+	5
+	0
+	Snow Cone
+	
+
+	50
+	
+
+	
+
+	2
+	
+
+	1600
+	20
+	4
+	-2
+	7
+	1
+	
+
+Vademon - 20% chance of appearance
+	
+
+	HP
+	MP
+	Off
+	Def
+	Spd
+	Brn
+	Price
+	Energy
+	Weight
+	Tiredness
+	Happ.
+	Disc.
+	Space Salad
+	10
+	10
+	1
+	1
+	1
+	1
+	1500
+	20
+	0
+	-5
+	1
+	1
+	UFO Soup
+	20
+	20
+	2
+	2
+	2
+	2
+	4000
+	30
+	1
+	-5
+	2
+	2
+	Galaxy Course
+	30
+	30
+	3
+	3
+	3
+	3
+	9000
+	45
+	5
+	-5
+	3
+	3
+	
+
+Digitamamon - 10% chance of appearance
+	The stat gains from these foods have three possible outcomes that are equally likely to happen. If hungry, the game generates a random number to determine the outcome. If not hungry, the game fails to recalculate this number and instead uses the last randomized number, potentially enabling infinite meals and stat gains. If the last number was outside the intended range of numbers and the Digimon is not hungry, eating food is refused and no money is charged.
+	33% chance (decided when buying)
+	
+
+	HP
+	MP
+	Off
+	Def
+	Spd
+	Brn
+	Price
+	Energy
+	Weight
+	Tiredness
+	Happ.
+	Disc.
+	Boiled Egg
+	
+
+	10
+	
+
+	1
+	
+
+	1
+	1000
+	18
+	1
+	-5
+	1
+	0
+	Omelet
+	
+
+	20
+	
+
+	2
+	
+
+	2
+	2500
+	24
+	2
+	-5
+	2
+	0
+	Egg Bowl
+	
+
+	30
+	
+
+	3
+	
+
+	3
+	6000
+	36
+	3
+	-5
+	3
+	1
+	33% chance (decided when buying)
+	
+
+	HP
+	MP
+	Off
+	Def
+	Spd
+	Brn
+	Price
+	Energy
+	Weight
+	Tiredness
+	Happ.
+	Disc.
+	Boiled Egg
+	10
+	
+
+	1
+	
+
+	1
+	
+
+	1000
+	18
+	1
+	-5
+	1
+	0
+	Omelet
+	20
+	
+
+	2
+	
+
+	2
+	
+
+	2500
+	24
+	2
+	-5
+	2
+	0
+	Egg Bowl
+	30
+	
+
+	3
+	
+
+	3
+	
+
+	6000
+	36
+	3
+	-5
+	3
+	1
+	33% chance (decided when buying)
+	
+
+	HP
+	MP
+	Off
+	Def
+	Spd
+	Brn
+	Price
+	Energy
+	Weight
+	Tiredness
+	Happ.
+	Disc.
+	Boiled Egg
+	20
+	20
+	2
+	2
+	2
+	2
+	1000
+	18
+	1
+	-5
+	2
+	1
+	Omelet
+	30
+	30
+	3
+	3
+	3
+	3
+	2500
+	24
+	2
+	-5
+	3
+	1
+	Egg Bowl
+	40
+	40
+	4
+	4
+	4
+	4
+	6000
+	36
+	3
+	-5
+	4
+	3
+	
+
+________________
+
+
+7 Known Bugs
+Many, sorry will add some eventually. :P
+________________
+
+
+8 Glossary
+Age
+Definition:        Every day after the day your digimon hatched from an egg.
+Example:        Botamon hatches from an egg on day 14 at 23.48 o’clock. Up until day 14 
+23.59 o’clock Botamon’s age will be 0. As soon as it’s day 15 00.00 o’clock 
+the age of Botamon will be 1.
+
+
+Frame
+Definition:        A single image displayed to the screen. The rate at which new frames get 
+generated is fixed to 60/s (NTSC) and 50/s (PAL).
+
+
+Tick
+Definition:        The smallest, quantifiable, amount of time for the game logic. There is one tick
+for every 3 frames, resulting in a tick-rate of 20/s (NTSC) bzw. 16.67/s (PAL).
+Example:        One Minute is 20 ticks.
+
+
+Bug
+Definition:        An error in a game. A small heavily undervalued organism. Without it most 
+life on earth would not be able to survive.
+Example:        Being stuck in a dialogue look with a Toy Agumon.
+Alternative:        §”!ç&é%[/; *Sigh*; *Crack* + broken PS1.
+
+
+Booster disk
+Definition:        A disk that can be used in combat to boost stat(s) of your Digimon for the 
+duration of the fight.
+Example:        High speed disk
+
+
+Day
+Definition:        If not specified otherwise, ingame time. 24 minutes real life time = 1 day 
+ingame.
+
+
+Evolution
+Definition:        The process of a  morphing into another;
+Example:        Agumon evolving into Greymon; Greymon evolving into Sukamon.
+Alternative:        Digivolution
+
+
+Finisher
+Definition:        Ultimate attack of a . 
+Location:        “DIGIMON” ⇒ “Tech” ⇒ “Final”.
+Example:        Hand of Fate is Angemon’s finisher.
+
+
+Floor
+Definition:        The act of “removing” all decimals from a number.
+Example:        floor(5/2) ⇒ 5/2 = 2.5 ⇒ floor ⇒ 2
+Alternative:        Stand up from your chair, yes you can...Now look down at your feet. That stuff 
+below your feet. Yes that stuff, that's floor. Achievement unlocked.
+
+
+Hour
+Definition:        If not specified otherwise, ingame time. 1 minute real life time = 1 hour 
+ingame.
+
+
+HP
+Definition:        Hit Points; A stat
+Alternative:        Hp; Health Points; Health; Life.
+
+
+Lives
+Definition:        A buffer that is expended upon dying, through battle or illness. Base count 3, 
+when reaching 0 Digimon's fades away and returns to an egg.
+Location:        “DIGIMON” ⇒ “CONDITION” ⇒ “Life”
+Example:        Three pink hearts means three lives. One pink heart means your current life is 
+the last life left on this , losing it results in the passing of the .
+.
+Minute
+Definition:        If not specified otherwise, ingame time. 1 second real life time = 1 minute 
+ingame.
+
+
+Normal attack
+Definition:        Attacks that can be used by , if compatible. 
+Location:        DIGIMON” ⇒ “Tech” ⇒ Press X.
+Example:        Counter; Ult Poop Hell; Bug.
+Alternative:        Tech; Technique, Move
+
+
+NTSC-J
+Definition:        Japanese release of the game.
+Example:        This cover is of a Japanese copy but it doesn't have the mark.
+
+
+NTSC
+Definition:        American release of the game.
+Example:        Can be seen on the top left corner of the cover as seen on this cover image. 
+
+
+PAL
+Definition:        European release of the game.
+Example:        Can be seen on the top left corner of the cover as seen on this cover image.
+________________
+PP
+Definition:        Prosperity Point, obtained by recruiting digimon. A measure of progress and a 
+criteria for certain recruitments. Jijimon will tell the player how many prosperity points are acquired when talking to it unless it has a dialogue related to a recruited digimon.
+Example:        15 pp
+
+
+Random encounter
+Definition:        Appearance is dependent on RNG. 
+Example:        Piximon, both in the Tropical Jungle and the shop.
+
+
+RNG
+Definition:        Abbreviation of Random Number Generator, is used to create “random” 
+events.
+Example:        Piximon rarely showing up at his spawn before recruitment.
+Alternative:        Random number generator, PRNG.
+
+
+RNG seed
+Definition:        A number used to initialize the RNG. In this game the RNG gets a new “Seed” 
+after every random call.
+Example:        1405279029 (seed for Giromon through Guardramon’s program)
+Alternative:        RNG value, Random number generator seed.
+
+
+Softlock
+Definition:        An error in the game that prevents you from continuing your gameplay without 
+loading your latest save.
+Example:        Devimon’s dialogue in the Back Dimension can softlock the game. Restart 
+and load your latest file and hope it doesn’t happen again.
+Alternative:        R.I.P. WR! -_-
+
+
+Specialty
+Definition:        Determines increased or reduced damage taken by attacks and the school 
+within which moves can be learned.
+Location:        DIGIMON” ⇒ “Status” ⇒ “PROFILE” ⇒ “SPECIAL”.
+Example:        Agumon has fire and combat as its specialty. Spit Fire is a fire technique as it is 
+found in the FIRE line of the Techs table.
+Alternative:        Nature
+
+
+Technique
+Definition:        Attacks that can be used by , if compatible. 
+Example:        Agumon can use Spit        Fire, however it is not compatible with meltdown.
+Location:        “DIGIMON” ⇒ “Tech” ⇒ Press X.
+Alternative:        Attack; Normal attack; Tech.
+
+
+________________
+
+
+Threshold
+Definition:        The limit of a value after which a process will change. Unless stated otherwise
+        limit is included.
+Example:        Bonus criteria max 10 battles fought is met when 0-10 battles have been 
+fought. Bonus criteria min 10 battles fought is met when 10 or more battles 
+have been fought.
+Alternative:        Limit; boundary; critical value.
+
+
+
+
+Turd
+Definition:        Trash data; Data that is considered redundant. When heaped it strangely 
+enough changes shape depending on the amount.
+Example:        Brown and curled up matter, up to twice a human in size. Turns upside down 
+if size passes a certain threshold. Yellow curled up matter with eyes and 
+teeth, human size. Sometimes it comes with a pink entity on top of it.
+Location:        Anywhere in the digital world; Trash Mountain; Any related 
+program/game.
+
+
+W.I.P.
+Definition:        Abbreviation of Work in Progress. 
+Location:        Here.
+Example:        This guide.
+________________
+9 Links
+Internal projects
+
+
+      * Website of the Digimon project
+      * Website Digimon project
+      * Spreadsheet containing data regarding Digimon Stats (player) (1), 
+Digimon Evolution (2), Digimon Raise (3), Digimon Enemies (4), 
+Item Spawns (NTSC-U) (5), Chests (NTSC-U) (6), Map ID and Names (7), Techniques (8), Items (9), Food Values (10), Story Enemies (11), Misc Notes (12-14)
+      * Data Sheet
+      * Summary of known special evolutions.
+      * Special evolutions summary
+      * Excel sheet containing data regarding Arena eligibility(1), easy visual comparison formula included, and schedule(2).
+      * Arena sheet
+      * A guide for describing how to recruit all digimon
+      * Recruitment Guide
+
+
+External projects
+
+
+      * evolution criteria guide by Harceru
+      *  “Complete Digivolution Guide.”
+________________
+10 Contact
+10.1 Ginoshie
+         * Twitch
+         * YouTube
+         * E-Mail
+
+
+10.2 SydMontague
+         * Twitch
+         * Reddit
+         * GameFAQs
+         * YouTube
+         * Digimon Discord Community (Username: SydMontague)
+________________
+11 Credits
+         * Romsstar 
+         * You can’t write a Digimon World guide without giving credit to him.
+         * His research and reverse engineering of this game is invaluable
+         * Azureflame4
+         * Requested and aided in the arena mapping process.
+         * Harceru
+         * “Complete Digivolution Guide.” has been the basis for the evolution tools; This project would most likely not have been started without his guide.
+         * Digimon Speedrun Community
+         * Keeping this game alive and for their own work in learning how this game works.
+         * Digimon Twitch Community
+         * Providing data and ideas, that helped unwrapping a lot of the mechanics.
+________________
+12 Todo List
+         * Old, Plain Text Guide
+         * Mostly unorganized and cryptic knowledge collection
+         * Recruitments
+         * Moves and move learning[k]
+         * A lot
+
+
+W.I.P. To Table of Contents IMPORTANT! Results may differ due to version differences W.I.P.
+[a]We might should add a myth/legend section, where we tackle common myths/legens like the Female Tamer or the Chain Melon spawn.
+
+
+So, basically stuff that would make sense if it's true but not neccessarily true.
+[b]And in case you didn't get the message on Twitch anymore:
+Chain Melon Seed: 2359694016
+[c]Yea got it and I already started a myth busting section but its only digivolutions. You were against it at first :P But I dont mind changing it to alround myths.
+[d]I'm not very consistent with myself :P
+[e]Haha but shall we create a general myth busting thing? We'll just reference and link to the chapter at the evolution section.
+[f]Got confirmation that a reasonable scold does NOT give happiness in the PAL version - we might need a "NTSC/PAL differences" section
+[g]there we go :) yea we def need that then..and make notes at the sections where this applies as well
+[h]Shall we just stick with this version applying to the NTSC version?
+[i]Probably the loot table for the "an item got stuck" fishing event:
+
+
+35% for sm. recovery
+28% for Various
+20% for Restore
+10% for Omni Disk
+5% for Autopilot
+2% for Coral Charm
+
+
+Still unclear when you actually have a chance, but it seems to be time based.
+[j]cleanup finished sections
+[k]we have nothing for this so far oO

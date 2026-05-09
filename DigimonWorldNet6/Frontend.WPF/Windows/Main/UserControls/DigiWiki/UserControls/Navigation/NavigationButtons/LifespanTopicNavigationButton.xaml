@@ -45,7 +45,7 @@
                 <ToolTip Style="{StaticResource DefaultToolTipRightStyle}" Content="Information about lifespan" />
             </Button.ToolTip>
             <Button.Content>
-                <ContentControl Content="/Frontend.WPF;component/Images/Icons/Labels/AGE label-button.png">
+                <ContentControl Content="/Frontend.WPF;component/Images/Icons/Labels/age-label.png">
                     <ContentControl.ContentTemplate>
                         <DataTemplate>
                             <Image Source="{Binding}" Stretch="Uniform" Margin="2"/>

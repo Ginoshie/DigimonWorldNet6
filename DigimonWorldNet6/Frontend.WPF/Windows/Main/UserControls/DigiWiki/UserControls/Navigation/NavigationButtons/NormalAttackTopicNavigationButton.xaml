@@ -32,7 +32,7 @@
                 Width="{StaticResource ButtonDimension}"
                 FontSize="{StaticResource ButtonFontSize}"
                 Margin="0, 0, 0, 5"
-                Content="👊">
+                Content="">
             <Button.Style>
                 <Style TargetType="Button" BasedOn="{StaticResource DefaultButtonStyle}">
                     <Style.Triggers>

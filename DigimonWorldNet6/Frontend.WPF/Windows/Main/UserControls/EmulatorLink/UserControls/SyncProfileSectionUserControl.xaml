@@ -26,17 +26,16 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
-        <Label Grid.Row="0"
-               Content="PROFILE"
-               HorizontalAlignment="Stretch"
+        <Image Grid.Row="1"
+               Source="/Images/Icons/Labels/profile-label.png"
                Height="35"
-               Margin="0,0,0,5"
-               Style="{StaticResource DefaultSheenLabelStyle}"
-               IsTabStop="False" />
+               Stretch="Fill"
+               Margin="0,0,0,5" />
 
-        <Button Grid.Row="1"
+        <Button Grid.Row="2"
                 Height="{Binding ButtonHeight}"
                 Width="{Binding RectangularButtonWidth}"
                 Margin="3"
@@ -48,10 +47,10 @@
                     <TextBlock Text="{Binding ., Converter={StaticResource TooltipTextConverter}, ConverterParameter=all Profile Stats}" />
                 </ToolTip>
             </Button.ToolTip>
-            <Image Source="/Images/Icons/Labels/PROFILE label.jpg"
+            <Image Source="/Images/Icons/Labels/profile-label.png"
                    Margin="2" />
         </Button>
-        <WrapPanel Grid.Row="2" Width="103" Orientation="Horizontal">
+        <WrapPanel Grid.Row="3" Width="103" Orientation="Horizontal">
             <Button ToolTipService.InitialShowDelay="{StaticResource DefaultTooltipDelay}" Style="{StaticResource StretchContentButtonStyle}"
                     Width="{Binding SquareButtonWidth}"
                     Height="{Binding ButtonHeight}"
@@ -63,7 +62,7 @@
                         <TextBlock Text="{Binding ., Converter={StaticResource TooltipTextConverter}, ConverterParameter=Digimon Type}" />
                     </ToolTip>
                 </Button.ToolTip>
-                <Image Source="/Images/Icons/Labels/DIGI label-button.jpg" Stretch="Uniform" Margin="2" />
+                <Image Source="/Images/Icons/Labels/digi-label.png" Stretch="Uniform" Margin="2" />
             </Button>
             <Button ToolTipService.InitialShowDelay="{StaticResource DefaultTooltipDelay}" Style="{StaticResource StretchContentButtonStyle}"
                     Width="{Binding SquareButtonWidth}"
@@ -76,7 +75,7 @@
                         <TextBlock Text="{Binding ., Converter={StaticResource TooltipTextConverter}, ConverterParameter=WEIGHT}" />
                     </ToolTip>
                 </Button.ToolTip>
-                <Image Source="/Images/Icons/Labels/WEIGHT label-button.jpg" Stretch="Uniform" Margin="2" />
+                <Image Source="/Images/Icons/Labels/weight-label.png" Stretch="Uniform" Margin="2" />
             </Button>
         </WrapPanel>
 

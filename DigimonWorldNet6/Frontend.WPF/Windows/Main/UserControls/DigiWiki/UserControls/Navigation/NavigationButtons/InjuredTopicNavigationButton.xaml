@@ -45,7 +45,7 @@
                 <ToolTip Style="{StaticResource DefaultToolTipRightStyle}" Content="Information about injury" />
             </Button.ToolTip>
             <Button.Content>
-                <ContentControl Content="/Frontend.WPF;component/Images/Icons/Emotions/Injury/injury-condition.jpg">
+                <ContentControl Content="/Frontend.WPF;component/Images/Icons/Emotions/Injury/injury-condition.png">
                     <ContentControl.ContentTemplate>
                         <DataTemplate>
                             <Image Source="{Binding}" Stretch="Uniform" Margin="2"/>

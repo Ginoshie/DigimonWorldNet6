@@ -45,7 +45,7 @@
                 <ToolTip Style="{StaticResource DefaultToolTipRightStyle}" Content="Information about tiredness" />
             </Button.ToolTip>
             <Button.Content>
-                <ContentControl Content="/Frontend.WPF;component/Images/Icons/Emotions/Tiredness/tired3.jpg">
+                <ContentControl Content="/Frontend.WPF;component/Images/Icons/Emotions/Tiredness/tired.png">
                     <ContentControl.ContentTemplate>
                         <DataTemplate>
                             <Image Source="{Binding}" Stretch="Uniform" Margin="2"/>

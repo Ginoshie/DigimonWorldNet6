@@ -29,7 +29,8 @@
             </ResourceDictionary.MergedDictionaries>
 
             <system:Double x:Key="SpecialImageDimension">30</system:Double>
-            <system:Double x:Key="LabelHeight">30</system:Double>
+            <system:Double x:Key="LabelHeight">23</system:Double>
+            <system:Double x:Key="LabelWidth">50</system:Double>
 
             <Thickness x:Key="RowMargin">0, 2</Thickness>
         </ResourceDictionary>
@@ -73,9 +74,10 @@
                                     <RowDefinition Height="Auto"></RowDefinition>
                                     <RowDefinition Height="Auto"></RowDefinition>
                                 </Grid.RowDefinitions>
-                                <Label Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Top" Height="40" Width="120"
-                                       Style="{StaticResource DefaultSheenLabelStyle}"
-                                       IsTabStop="False" Content="PROFILE" />
+                                <Image Grid.Column="0" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Top" 
+                                       Source="/Images/Icons/Labels/PROFILE label.png"
+                                       Height="40" Width="120"
+                                       Margin="0,5,0,0" />
                                 <Grid Grid.Row="1" Margin="10" SnapsToDevicePixels="True">
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="Auto"></RowDefinition>
@@ -89,7 +91,8 @@
                                     </Grid.ColumnDefinitions>
                                     <Image Grid.Row="0" Grid.Column="0"
                                            HorizontalAlignment="Right"
-                                           Source="/Images/Icons/Labels/NAME label-grid.jpg"
+                                           Source="/Images/Icons/Labels/name-label.png"
+                                           Width="{StaticResource LabelWidth}"
                                            Height="{StaticResource LabelHeight}"
                                            Margin="0, 0 , 5,0" />
                                     <TextBox Grid.Row="0" Grid.Column="1"
@@ -105,7 +108,8 @@
                                     </TextBox>
                                     <Image Grid.Row="1" Grid.Column="0"
                                            HorizontalAlignment="Right"
-                                           Source="/Images/Icons/Labels/DIGI label-grid.jpg"
+                                           Source="/Images/Icons/Labels/digi-label.png"
+                                           Width="{StaticResource LabelWidth}"
                                            Height="{StaticResource LabelHeight}"
                                            Margin="0, 0 , 5,0" />
                                     <TextBox Grid.Row="1" Grid.Column="1"
@@ -121,9 +125,10 @@
                                     </TextBox>
                                     <Image Grid.Row="2" Grid.Column="0"
                                            HorizontalAlignment="Right"
-                                           Source="/Images/Icons/Labels/special-label-grid.jpg"
-                                           Width="60"
+                                           Source="/Images/Icons/Labels/special-label.png"
+                                           Width="{StaticResource LabelWidth}"
                                            Height="{StaticResource LabelHeight}"
+                                           Stretch="Uniform"
                                            Margin="0, 0 , 5,0" />
                                     <Grid Grid.Row="2" Grid.Column="1">
                                         <Grid.ColumnDefinitions>
@@ -136,8 +141,8 @@
                                         <userControls:SpecialUserControl Grid.Column="0" Width="110" Tag="{Binding SpecialIcons}" Margin="0" />
                                         <Image Grid.Column="1"
                                                HorizontalAlignment="Right"
-                                               Source="/Images/Icons/Labels/type-label-grid.jpg"
-                                               Width="60"
+                                               Source="/Images/Icons/Labels/type-label.png"
+                                               Width="{StaticResource LabelWidth}"
                                                Height="{StaticResource LabelHeight}"
                                                Margin="0,0, 5, 0" />
                                         <Button Grid.Column="2" ToolTipService.InitialShowDelay="{StaticResource DefaultTooltipDelay}" ToolTipService.ShowOnDisabled="True" Style="{StaticResource DisplayOnlyButtonStyle}"
@@ -155,7 +160,7 @@
                                         </Button>
                                         <Image Grid.Column="3"
                                                HorizontalAlignment="Right"
-                                               Source="/Images/Icons/Labels/AGE label-grid.jpg"
+                                               Source="/Images/Icons/Labels/age-label.png"
                                                Height="{StaticResource LabelHeight}"
                                                Margin="10, 0, 5, 0" />
                                         <TextBox Grid.Column="4"
@@ -174,9 +179,10 @@
                                     </Grid>
                                     <Image Grid.Row="3" Grid.Column="0"
                                            HorizontalAlignment="Right"
-                                           Source="/Images/Icons/Labels/active-label-grid.jpg"
-                                           Width="60"
+                                           Source="/Images/Icons/Labels/active-label.png"
+                                           Width="{StaticResource LabelWidth}"
                                            Height="{StaticResource LabelHeight}"
+                                           Stretch="Uniform"
                                            Margin="0, 0 , 5,0" />
                                     <TextBox Grid.Row="3" Grid.Column="1"
                                              Name="Active"

@@ -11,5 +11,5 @@ public static class SpecialIconFactory
         new(specialIcon, IconPath(specialIcon));
 
     private static string IconPath(Special special) =>
-        $"{BASE_PATH}{special.ToString().ToLower()}-icon-1-button.jpg";
+        $"{BASE_PATH}{special.ToString().ToLower()}-icon-1.png";
 }

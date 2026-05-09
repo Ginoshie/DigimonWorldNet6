@@ -19,5 +19,5 @@ public static class DigimonIconFactory
         new(digimon, IconPath(digimon));
 
     private static string IconPath(DigimonName name) =>
-        $"{BASE_PATH}{name.ToString().ToLower()}-icon.jpg";
+        $"{BASE_PATH}{name.ToString().ToLower()}-icon.png";
 }

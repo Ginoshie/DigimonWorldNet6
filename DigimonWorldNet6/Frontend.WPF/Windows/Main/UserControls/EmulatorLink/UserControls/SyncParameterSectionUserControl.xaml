@@ -29,13 +29,11 @@
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
-        <Label Grid.Row="1"
-               Content="PARAMETERS"
-               HorizontalAlignment="Stretch"
+        <Image Grid.Row="1"
+               Source="/Images/Icons/Labels/PARAMETER label.png"
                Height="35"
-               Margin="0,0,0,5"
-               Style="{StaticResource DefaultSheenLabelStyle}"
-               IsTabStop="False" />
+               Stretch="Fill"
+               Margin="0,0,0,5" />
 
         <Button Grid.Row="2"
                 Height="{Binding ButtonHeight}"
@@ -49,7 +47,7 @@
                     <TextBlock Text="{Binding ., Converter={StaticResource TooltipTextConverter}, ConverterParameter=all Parameter Stats}" />
                 </ToolTip>
             </Button.ToolTip>
-            <Image Source="/Images/Icons/Labels/PARAMETER label.jpg"
+            <Image Source="/Images/Icons/Labels/PARAMETER label.png"
                    Margin="2" />
         </Button>
 
@@ -65,7 +63,7 @@
                         <TextBlock Text="{Binding ., Converter={StaticResource TooltipTextConverter}, ConverterParameter=HP}" />
                     </ToolTip>
                 </Button.ToolTip>
-                <Image Source="/Images/Icons/Stats/hp-icon.jpg" Stretch="Uniform" Margin="1" />
+                <Image Source="/Images/Icons/Stats/hp-icon.png" Stretch="Uniform" Margin="1" />
             </Button>
             <Button ToolTipService.InitialShowDelay="{StaticResource DefaultTooltipDelay}" Style="{StaticResource StretchContentButtonStyle}"
                     Width="{Binding SquareButtonWidth}"
@@ -78,7 +76,7 @@
                         <TextBlock Text="{Binding ., Converter={StaticResource TooltipTextConverter}, ConverterParameter=MP}" />
                     </ToolTip>
                 </Button.ToolTip>
-                <Image Source="/Images/Icons/Stats/mp-icon.jpg" Stretch="Uniform" Margin="1" />
+                <Image Source="/Images/Icons/Stats/mp-icon.png" Stretch="Uniform" Margin="1" />
             </Button>
             <Button ToolTipService.InitialShowDelay="{StaticResource DefaultTooltipDelay}" Style="{StaticResource StretchContentButtonStyle}"
                     Width="{Binding SquareButtonWidth}"
@@ -91,7 +89,7 @@
                         <TextBlock Text="{Binding ., Converter={StaticResource TooltipTextConverter}, ConverterParameter=Off}" />
                     </ToolTip>
                 </Button.ToolTip>
-                <Image Source="/Images/Icons/Stats/Off-icon.jpg" Stretch="Uniform" Margin="1" />
+                <Image Source="/Images/Icons/Stats/Off-icon.png" Stretch="Uniform" Margin="1" />
             </Button>
             <Button ToolTipService.InitialShowDelay="{StaticResource DefaultTooltipDelay}" Style="{StaticResource StretchContentButtonStyle}"
                     Width="{Binding SquareButtonWidth}"
@@ -104,7 +102,7 @@
                         <TextBlock Text="{Binding ., Converter={StaticResource TooltipTextConverter}, ConverterParameter=Def}" />
                     </ToolTip>
                 </Button.ToolTip>
-                <Image Source="/Images/Icons/Stats/Def-icon.jpg" Stretch="Uniform" Margin="1" />
+                <Image Source="/Images/Icons/Stats/Def-icon.png" Stretch="Uniform" Margin="1" />
             </Button>
             <Button ToolTipService.InitialShowDelay="{StaticResource DefaultTooltipDelay}" Style="{StaticResource StretchContentButtonStyle}"
                     Width="{Binding SquareButtonWidth}"
@@ -117,7 +115,7 @@
                         <TextBlock Text="{Binding ., Converter={StaticResource TooltipTextConverter}, ConverterParameter=SPEED}" />
                     </ToolTip>
                 </Button.ToolTip>
-                <Image Source="/Images/Icons/Stats/SPEED-icon.jpg" Stretch="Uniform" Margin="1" />
+                <Image Source="/Images/Icons/Stats/SPEED-icon.png" Stretch="Uniform" Margin="1" />
             </Button>
             <Button ToolTipService.InitialShowDelay="{StaticResource DefaultTooltipDelay}" Style="{StaticResource StretchContentButtonStyle}"
                     Width="{Binding SquareButtonWidth}"
@@ -130,7 +128,7 @@
                         <TextBlock Text="{Binding ., Converter={StaticResource TooltipTextConverter}, ConverterParameter=BRAINS}" />
                     </ToolTip>
                 </Button.ToolTip>
-                <Image Source="/Images/Icons/Stats/BRAINS-icon.jpg" Stretch="Uniform" Margin="1" />
+                <Image Source="/Images/Icons/Stats/BRAINS-icon.png" Stretch="Uniform" Margin="1" />
             </Button>
         </WrapPanel>
     </Grid>
