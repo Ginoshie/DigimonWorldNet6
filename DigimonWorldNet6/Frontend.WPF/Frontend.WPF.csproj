@@ -52,13 +52,4 @@
         </Content>
     </ItemGroup>
 
-
-    <ItemGroup>
-      <Page Update="Windows\Main\UserControls\TamerVision\UserControls\EvolutionStatsUserControl.xaml">
-        <Generator>MSBuild:Compile</Generator>
-        <XamlRuntime>Wpf</XamlRuntime>
-        <SubType>Designer</SubType>
-      </Page>
-    </ItemGroup>
-
 </Project>

@@ -1,0 +1,16 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="/Frontend.WPF;component/ResourceDictionaries/Styles/DefaultReadonlyTextboxStyle.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+
+    <Style x:Key="CriteriaMetTextBoxStyle" TargetType="TextBox" BasedOn="{StaticResource DefaultReadonlyTextBoxStyle}">
+        <Style.Triggers>
+            <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self}, Path=Tag}" Value="True">
+                <Setter Property="Background" Value="#2A4A2A" />
+            </DataTrigger>
+        </Style.Triggers>
+    </Style>
+
+</ResourceDictionary>

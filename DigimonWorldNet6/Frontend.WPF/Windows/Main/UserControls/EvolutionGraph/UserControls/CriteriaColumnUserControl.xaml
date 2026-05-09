@@ -1,0 +1,86 @@
+<UserControl x:Class="DigimonWorld.Frontend.WPF.Windows.Main.UserControls.EvolutionGraph.UserControls.CriteriaColumnUserControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:sys="clr-namespace:System;assembly=mscorlib"
+             xmlns:models="clr-namespace:DigimonWorld.Frontend.WPF.Windows.Main.UserControls.EvolutionGraph.Models"
+             mc:Ignorable="d"
+             d:DataContext="{d:DesignInstance Type=models:EvolutionCriteriaDisplay, IsDesignTimeCreatable=False}">
+
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Frontend.WPF;component/Windows/Main/UserControls/EvolutionGraph/Styles/SelectableStretchContentButtonStyle.xaml" />
+                <ResourceDictionary Source="/Frontend.WPF;component/ResourceDictionaries/Styles/ToolTips/DefaultTooltipRightStyle.xaml" />
+                <ResourceDictionary Source="/Frontend.WPF;component/ResourceDictionaries/Styles/DefaultReadonlyTextboxStyle.xaml" />
+                <ResourceDictionary Source="/Frontend.WPF;component/Windows/Main/UserControls/EvolutionGraph/Styles/CriteriaMetTextBoxStyle.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+            <sys:Double x:Key="HeaderIconSize">40</sys:Double>
+        </ResourceDictionary>
+    </UserControl.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="44" SharedSizeGroup="Row0" />
+            <RowDefinition Height="32" SharedSizeGroup="Row1" />
+            <RowDefinition Height="32" SharedSizeGroup="Row2" />
+            <RowDefinition Height="32" SharedSizeGroup="Row3" />
+            <RowDefinition Height="32" SharedSizeGroup="Row4" />
+            <RowDefinition Height="32" SharedSizeGroup="Row5" />
+            <RowDefinition Height="32" SharedSizeGroup="Row6" />
+            <RowDefinition Height="32" SharedSizeGroup="Row7" />
+            <RowDefinition Height="32" SharedSizeGroup="Row8" />
+            <RowDefinition Height="32" SharedSizeGroup="Row9" />
+            <RowDefinition Height="32" SharedSizeGroup="Row10" />
+            <RowDefinition Height="32" SharedSizeGroup="Row11" />
+            <RowDefinition Height="32" SharedSizeGroup="Row12" />
+            <RowDefinition Height="32" SharedSizeGroup="Row13" />
+        </Grid.RowDefinitions>
+
+
+        <Button Grid.Row="0" Width="{StaticResource HeaderIconSize}" Height="{StaticResource HeaderIconSize}" HorizontalAlignment="Center"
+                Style="{StaticResource SelectableStretchContentButtonStyle}" Focusable="False"
+                IsEnabled="{Binding IsEnabled, FallbackValue=False}"
+                ToolTipService.InitialShowDelay="{StaticResource DefaultTooltipDelay}"
+                ToolTipService.ShowOnDisabled="True"
+                RenderOptions.BitmapScalingMode="HighQuality" Margin="2,0,2,4">
+            <Button.ToolTip>
+                <ToolTip Style="{StaticResource DefaultToolTipRightStyle}">
+                    <StackPanel>
+                        <TextBlock Text="{Binding Name, FallbackValue='', TargetNullValue=''}" FontWeight="Bold" />
+                        <TextBlock>
+                            <TextBlock.Style>
+                                <Style TargetType="TextBlock">
+                                    <Setter Property="Text" Value="Evolution: disabled" />
+                                    <Setter Property="Foreground" Value="#FF6666" />
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding IsEnabled}" Value="True">
+                                            <Setter Property="Text" Value="Evolution: enabled" />
+                                            <Setter Property="Foreground" Value="#66FF66" />
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </TextBlock.Style>
+                        </TextBlock>
+                        <TextBlock Text="{Binding EvolutionScore, StringFormat='Score: {0}', FallbackValue=''}" />
+                    </StackPanel>
+                </ToolTip>
+            </Button.ToolTip>
+            <Image Source="{Binding IconPath, FallbackValue={x:Null}, TargetNullValue={x:Null}}" Stretch="Fill" />
+        </Button>
+        <TextBox Grid.Row="1" Style="{StaticResource CriteriaMetTextBoxStyle}" Tag="{Binding IsWinningEvolution, FallbackValue=False}" Text="{Binding EvolutionScore, Mode=OneWay, FallbackValue=''}" HorizontalContentAlignment="Center" Margin="2,1" />
+        <TextBox Grid.Row="2" Style="{StaticResource CriteriaMetTextBoxStyle}" Tag="{Binding IsHPMet, FallbackValue=False}" Text="{Binding HP, Mode=OneWay, FallbackValue='', TargetNullValue=''}" HorizontalContentAlignment="Center" Margin="2,1" />
+        <TextBox Grid.Row="3" Style="{StaticResource CriteriaMetTextBoxStyle}" Tag="{Binding IsMPMet, FallbackValue=False}" Text="{Binding MP, Mode=OneWay, FallbackValue='', TargetNullValue=''}" HorizontalContentAlignment="Center" Margin="2,1" />
+        <TextBox Grid.Row="4" Style="{StaticResource CriteriaMetTextBoxStyle}" Tag="{Binding IsOffMet, FallbackValue=False}" Text="{Binding Off, Mode=OneWay, FallbackValue='', TargetNullValue=''}" HorizontalContentAlignment="Center" Margin="2,1" />
+        <TextBox Grid.Row="5" Style="{StaticResource CriteriaMetTextBoxStyle}" Tag="{Binding IsDefMet, FallbackValue=False}" Text="{Binding Def, Mode=OneWay, FallbackValue='', TargetNullValue=''}" HorizontalContentAlignment="Center" Margin="2,1" />
+        <TextBox Grid.Row="6" Style="{StaticResource CriteriaMetTextBoxStyle}" Tag="{Binding IsSpeedMet, FallbackValue=False}" Text="{Binding Speed, Mode=OneWay, FallbackValue='', TargetNullValue=''}" HorizontalContentAlignment="Center" Margin="2,1" />
+        <TextBox Grid.Row="7" Style="{StaticResource CriteriaMetTextBoxStyle}" Tag="{Binding IsBrainsMet, FallbackValue=False}" Text="{Binding Brains, Mode=OneWay, FallbackValue='', TargetNullValue=''}" HorizontalContentAlignment="Center" Margin="2,1" />
+        <TextBox Grid.Row="8" Style="{StaticResource CriteriaMetTextBoxStyle}" Tag="{Binding IsWeightMet, FallbackValue=False}" Text="{Binding Weight, Mode=OneWay, FallbackValue='', TargetNullValue=''}" HorizontalContentAlignment="Center" Margin="2,1" />
+        <TextBox Grid.Row="9" Style="{StaticResource CriteriaMetTextBoxStyle}" Tag="{Binding IsCareMistakesMet, FallbackValue=False}" Text="{Binding CareMistakes, Mode=OneWay, FallbackValue='', TargetNullValue=''}" HorizontalContentAlignment="Center" Margin="2,1" />
+        <TextBox Grid.Row="10" Style="{StaticResource CriteriaMetTextBoxStyle}" Tag="{Binding IsHappinessMet, FallbackValue=False}" Text="{Binding Happiness, Mode=OneWay, FallbackValue='', TargetNullValue=''}" HorizontalContentAlignment="Center" Margin="2,1" />
+        <TextBox Grid.Row="11" Style="{StaticResource CriteriaMetTextBoxStyle}" Tag="{Binding IsDisciplineMet, FallbackValue=False}" Text="{Binding Discipline, Mode=OneWay, FallbackValue='', TargetNullValue=''}" HorizontalContentAlignment="Center" Margin="2,1" />
+        <TextBox Grid.Row="12" Style="{StaticResource CriteriaMetTextBoxStyle}" Tag="{Binding IsBattlesMet, FallbackValue=False}" Text="{Binding Battles, Mode=OneWay, FallbackValue='', TargetNullValue=''}" HorizontalContentAlignment="Center" Margin="2,1" />
+        <TextBox Grid.Row="13" Style="{StaticResource CriteriaMetTextBoxStyle}" Tag="{Binding IsTechniqueCountMet, FallbackValue=False}" Text="{Binding TechniqueCount, Mode=OneWay, FallbackValue='', TargetNullValue=''}" HorizontalContentAlignment="Center" Margin="2,1" />
+    </Grid>
+</UserControl>

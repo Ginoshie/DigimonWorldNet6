@@ -30,7 +30,7 @@
         </Grid.RowDefinitions>
 
         <Image Grid.Row="1"
-               Source="/Images/Icons/Labels/PARAMETER label.png"
+               Source="/Images/Icons/Labels/parameter-label.png"
                Height="35"
                Stretch="Fill"
                Margin="0,0,0,5" />
@@ -47,7 +47,7 @@
                     <TextBlock Text="{Binding ., Converter={StaticResource TooltipTextConverter}, ConverterParameter=all Parameter Stats}" />
                 </ToolTip>
             </Button.ToolTip>
-            <Image Source="/Images/Icons/Labels/PARAMETER label.png"
+            <Image Source="/Images/Icons/Labels/parameter-label.png"
                    Margin="2" />
         </Button>
 

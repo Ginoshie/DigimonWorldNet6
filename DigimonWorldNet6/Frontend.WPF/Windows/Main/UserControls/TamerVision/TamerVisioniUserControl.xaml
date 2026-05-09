@@ -75,9 +75,9 @@
                                     <RowDefinition Height="Auto"></RowDefinition>
                                 </Grid.RowDefinitions>
                                 <Image Grid.Column="0" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Top" 
-                                       Source="/Images/Icons/Labels/PROFILE label.png"
-                                       Height="40" Width="120"
-                                       Margin="0,5,0,0" />
+                                       Source="/Images/Icons/Labels/profile-label.png"
+                                       Height="40"
+                                       Margin="0,10,0,0" />
                                 <Grid Grid.Row="1" Margin="10" SnapsToDevicePixels="True">
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="Auto"></RowDefinition>
@@ -214,14 +214,16 @@
                             <ColumnDefinition Width="Auto" />
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
-                        <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Top" Height="40" Width="120"
-                               Style="{StaticResource DefaultSheenLabelStyle}"
-                               IsTabStop="False" Content="STATS" />
+                        <Image Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Top"
+                               Source="/Images/Icons/Labels/stats-label.png"
+                               Height="40"
+                               Margin="0,10,0,10" />
                         <userControls:CareStatsUserControl Grid.Row="1" Grid.Column="0" Margin="10, 0, 10,10"/>
                         <userControls:CombatStatsUserControl Grid.Row="1" Grid.Column="1" Margin="0, 0, 10,10"/>
-                        <Label Grid.Row="0" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Top" Height="40" Width="120"
-                               Style="{StaticResource DefaultSheenLabelStyle}"
-                               IsTabStop="False" Content="EVOLUTION" />
+                        <Image Grid.Row="0" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Top"
+                               Source="/Images/Icons/Labels/evolution-label.png"
+                               Height="40"
+                               Margin="0,10,0,10" />
                         <userControls:EvolutionStatsUserControl Grid.Row="1" Grid.Column="2" />
                     </Grid>
                 </Border>
