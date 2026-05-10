@@ -1,10 +1,10 @@
 using System.Windows.Media;
 
-namespace DigimonWorld.Frontend.WPF.Windows.Main.UserControls.EvolutionGraph.Models;
+namespace DigimonWorld.Frontend.WPF.Windows.Main.UserControls.EvoTreeHelper.Models;
 
-public class EvolutionGraphConnection
+public class EvoTreeConnection
 {
-    public EvolutionGraphConnection(string fromId, string toId, Brush stroke)
+    public EvoTreeConnection(string fromId, string toId, Brush stroke)
     {
         FromId = fromId;
         ToId = toId;

@@ -11,7 +11,7 @@
             <userControls:EvolutionCalculatorNavigationButton />
             <userControls:DigiWikiNavigationButton />
             <userControls:TamerVisionNavigationButton />
-            <userControls:EvolutionGraphNavigationButton />
+            <userControls:EvoTreeHelperNavigationButton />
         </StackPanel>
     </Grid>
 </UserControl>

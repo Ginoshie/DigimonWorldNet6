@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using Shared.Enums;
 
-namespace DigimonWorld.Frontend.WPF.Windows.Main.UserControls.EvolutionGraph;
+namespace DigimonWorld.Frontend.WPF.Windows.Main.UserControls.EvoTreeHelper;
 
 /// <summary>
 /// Provides evolution path data: for a given DigimonName, returns which Digimon it can evolve into.

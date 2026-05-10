@@ -10,7 +10,7 @@ using DigimonWorld.Evolution.Calculator.Core.EvolutionCriteriaCalculation.FromRo
 using DigimonWorld.Evolution.Calculator.Core.Interfaces.EvolutionCriteria;
 using DigimonWorld.Frontend.WPF.Services;
 using DigimonWorld.Frontend.WPF.ViewModelComponents;
-using DigimonWorld.Frontend.WPF.Windows.Main.UserControls.EvolutionGraph.Models;
+using DigimonWorld.Frontend.WPF.Windows.Main.UserControls.EvoTreeHelper.Models;
 using Domain;
 using Shared.Constants;
 using Shared.Enums;
@@ -18,9 +18,9 @@ using Shared.Extensions;
 using Shared.Services;
 using Shared.Services.Events;
 
-namespace DigimonWorld.Frontend.WPF.Windows.Main.UserControls.EvolutionGraph;
+namespace DigimonWorld.Frontend.WPF.Windows.Main.UserControls.EvoTreeHelper;
 
-public class EvolutionGraphViewModel : BaseViewModel, IDisposable
+public class EvoTreeHelperViewModel : BaseViewModel, IDisposable
 {
     private const double NODE_SIZE = 58;
     private const double CANVAS_WIDTH = 400;
@@ -52,9 +52,8 @@ public class EvolutionGraphViewModel : BaseViewModel, IDisposable
     private Dictionary<DigimonName, IEvolutionCriteria> _criteriaMap = new();
     private List<DigimonName> _forwardEvolutions = [];
 
-    public EvolutionGraphViewModel()
+    public EvoTreeHelperViewModel()
     {
-
         _disposables = new CompositeDisposable(
             EmulatorLinkEventHub.DigimonProfileStatsSynchronizedObservable.Subscribe(_ => OnProfileStatsSynced()),
             EmulatorLinkEventHub.DigimonParameterStatsSynchronizedObservable.Subscribe(_ => RefreshUserStats()),
@@ -70,7 +69,7 @@ public class EvolutionGraphViewModel : BaseViewModel, IDisposable
         BuildGraph();
     }
 
-    public ObservableCollection<EvolutionGraphNode> Nodes
+    public ObservableCollection<EvoTreeNode> Nodes
     {
         get;
         private set => SetField(ref field, value);
@@ -157,14 +156,12 @@ public class EvolutionGraphViewModel : BaseViewModel, IDisposable
 
     private void RefreshCriteria()
     {
-        // Get current user stats from the shared session
         UserDigimon d = Session.UserDigimon;
         int userHp = d.HP, userMp = d.MP, userOff = d.Off, userDef = d.Def;
         int userSpeed = d.Speed, userBrains = d.Brains, userWeight = d.Weight;
         int userCareMistakes = d.CareMistakes, userHappiness = d.Happiness;
         int userDiscipline = d.Discipline, userBattles = d.Battles, userTechniqueCount = d.TechniqueCount;
 
-        // Build the list of existing criteria displays, reusing instances where possible
         EvolutionCriteriaDisplay?[] existing = [Criteria0, Criteria1, Criteria2, Criteria3, Criteria4, Criteria5];
         List<EvolutionCriteriaDisplay> criteriaList = [];
         int index = 0;
@@ -186,7 +183,6 @@ public class EvolutionGraphViewModel : BaseViewModel, IDisposable
             }
         }
 
-        // Determine the winning evolution using the shared score calculator.
         List<(bool IsEnabled, int ScoreTotal, int StatCount)> evolutionData = criteriaList.Select(c => (c.IsEnabled, c.ScoreTotal, c.StatCount)).ToList();
         bool useCarriedOverStats = _gameVariant == GameVariant.Original;
         int winnerIndex = FromRookieOrChampionEvolutionScoreCalculator.DetermineWinningEvolutionIndex(evolutionData, useCarriedOverStats);
@@ -203,7 +199,6 @@ public class EvolutionGraphViewModel : BaseViewModel, IDisposable
         Criteria4 = criteriaList.Count > 4 ? criteriaList[4] : null;
         Criteria5 = criteriaList.Count > 5 ? criteriaList[5] : null;
     }
-
 
     private void OnProfileStatsSynced()
     {
@@ -252,47 +247,38 @@ public class EvolutionGraphViewModel : BaseViewModel, IDisposable
     {
         DigimonName center = _currentDigimon;
 
-        ObservableCollection<EvolutionGraphNode> newNodes = [];
+        ObservableCollection<EvoTreeNode> newNodes = [];
         ObservableCollection<ResolvedConnection> newConnections = [];
         HashSet<DigimonName> visited = [center];
 
-        // Set current digimon icon
         CurrentIconPath = DigimonIconFactory.Create(center).IconPath;
         CurrentDigimonName = center.ToString();
 
-        // Build forward evolution column (direct evolutions only)
         List<List<DigimonName>> forwardColumns = ExpandColumns(
             [center], visited, EvolutionPathProvider.GetEvolutions, maxDepth: 1);
 
-        // Calculate horizontal centering within the canvas
         int totalColumns = 1 + forwardColumns.Count;
         double treeWidth = (totalColumns - 1) * COLUMN_SPACING + NODE_SIZE;
         double centerColumnX = (CANVAS_WIDTH - treeWidth) / 2.0;
 
-        // Create a lookup from DigimonName to node for connection building
-        Dictionary<DigimonName, EvolutionGraphNode> nodeMap = new();
+        Dictionary<DigimonName, EvoTreeNode> nodeMap = new();
 
-        // Place center node (vertically centered with the tallest forward column)
         const double centerY = DATA_ROWS_CENTER - NODE_SIZE / 2.0;
-        EvolutionGraphNode centerNode = CreateNode(center, centerColumnX, centerY, true);
+        EvoTreeNode centerNode = CreateNode(center, centerColumnX, centerY, true);
         newNodes.Add(centerNode);
         nodeMap[center] = centerNode;
 
-        // Look up evolution criteria for the center digimon
         _criteriaMap = GetEvolutionCriteriaMap(center);
 
-        // Place forward columns (to the right) with criteria
         for (int col = 0; col < forwardColumns.Count; col++)
         {
             double x = centerColumnX + (col + 1) * COLUMN_SPACING;
             PlaceColumn(forwardColumns[col], x, newNodes, nodeMap, _criteriaMap);
         }
 
-        // Populate fixed criteria slots for forward evolutions
         _forwardEvolutions = forwardColumns.SelectMany(c => c).ToList();
         RefreshCriteria();
 
-        // Build connections with color assigned per source node's evolution count
         AddConnections(
             [center], forwardColumns, nodeMap, newConnections, EvolutionPathProvider.GetEvolutions);
 
@@ -338,8 +324,8 @@ public class EvolutionGraphViewModel : BaseViewModel, IDisposable
     private void PlaceColumn(
         List<DigimonName> column,
         double x,
-        ObservableCollection<EvolutionGraphNode> nodes,
-        Dictionary<DigimonName, EvolutionGraphNode> nodeMap,
+        ObservableCollection<EvoTreeNode> nodes,
+        Dictionary<DigimonName, EvoTreeNode> nodeMap,
         Dictionary<DigimonName, IEvolutionCriteria>? criteriaMap = null)
     {
         double totalHeight = (column.Count - 1) * (NODE_SIZE + ROW_SPACING) + NODE_SIZE;
@@ -353,7 +339,7 @@ public class EvolutionGraphViewModel : BaseViewModel, IDisposable
             {
                 criteriaDisplay = CreateCriteriaDisplay(column[i], criteria);
             }
-            EvolutionGraphNode node = CreateNode(column[i], x, y, false, criteriaDisplay);
+            EvoTreeNode node = CreateNode(column[i], x, y, false, criteriaDisplay);
             nodes.Add(node);
             nodeMap[column[i]] = node;
         }
@@ -362,18 +348,16 @@ public class EvolutionGraphViewModel : BaseViewModel, IDisposable
     private void AddConnections(
         List<DigimonName> startColumn,
         List<List<DigimonName>> columns,
-        Dictionary<DigimonName, EvolutionGraphNode> nodeMap,
+        Dictionary<DigimonName, EvoTreeNode> nodeMap,
         ObservableCollection<ResolvedConnection> connections,
         Func<DigimonName, DigimonName[]> getRelated,
         bool reverse = false)
     {
-        // Connect startColumn to columns[0], columns[0] to columns[1], etc.
         List<List<DigimonName>> allColumns = [startColumn, .. columns];
         for (int col = 0; col < allColumns.Count - 1; col++)
         {
             foreach (DigimonName digimon in allColumns[col])
             {
-                // Gather related nodes that exist in the graph
                 List<DigimonName> relatedInGraph = [];
                 foreach (DigimonName related in getRelated(digimon))
                 {
@@ -383,7 +367,6 @@ public class EvolutionGraphViewModel : BaseViewModel, IDisposable
                     }
                 }
 
-                // Sort by Y position (top to bottom) for consistent color assignment
                 relatedInGraph.Sort((a, b) => nodeMap[a].Y.CompareTo(nodeMap[b].Y));
 
                 Brush[] colors = GetConnectionColors(relatedInGraph.Count);
@@ -396,8 +379,6 @@ public class EvolutionGraphViewModel : BaseViewModel, IDisposable
                     double sourceYOffset = startOffset + i * lineSpacing;
                     Brush color = colors[i % colors.Length];
 
-                    // Stub tier based on color: light blue/blue = tier 1 (longest),
-                    // green/pink = tier 2 (medium), yellow/red = tier 3 (shortest)
                     int stubTier;
                     if (color == _lightBlue || color == _blue)
                     {
@@ -405,22 +386,23 @@ public class EvolutionGraphViewModel : BaseViewModel, IDisposable
                     } else if (color == _green || color == _pink)
                     {
                         stubTier = 2;
-                    } else {
+                    } else
+                    {
                         stubTier = 3;
                     }
 
-                    EvolutionGraphNode sourceNode = reverse ? nodeMap[relatedInGraph[i]] : nodeMap[digimon];
-                    EvolutionGraphNode targetNode = reverse ? nodeMap[digimon] : nodeMap[relatedInGraph[i]];
+                    EvoTreeNode sourceNode = reverse ? nodeMap[relatedInGraph[i]] : nodeMap[digimon];
+                    EvoTreeNode targetNode = reverse ? nodeMap[digimon] : nodeMap[relatedInGraph[i]];
                     connections.Add(new ResolvedConnection(sourceNode, targetNode, color, sourceYOffset, stubTier));
                 }
             }
         }
     }
 
-    private static EvolutionGraphNode CreateNode(DigimonName digimon, double x, double y, bool isCenter, EvolutionCriteriaDisplay? criteria = null)
+    private static EvoTreeNode CreateNode(DigimonName digimon, double x, double y, bool isCenter, EvolutionCriteriaDisplay? criteria = null)
     {
         string iconPath = DigimonIconFactory.Create(digimon).IconPath;
-        return new EvolutionGraphNode(digimon.ToString(), x, y, iconPath, digimon, isCenter, criteria);
+        return new EvoTreeNode(digimon.ToString(), x, y, iconPath, digimon, isCenter, criteria);
     }
 
     private Dictionary<DigimonName, IEvolutionCriteria> GetEvolutionCriteriaMap(DigimonName center)
@@ -458,10 +440,10 @@ public class EvolutionGraphViewModel : BaseViewModel, IDisposable
 /// A resolved connection that holds direct references to source and target nodes,
 /// enabling data binding to their X/Y properties for dynamic connector updates.
 /// </summary>
-public class ResolvedConnection(EvolutionGraphNode source, EvolutionGraphNode target, Brush stroke, double sourceYOffset = 0, int stubTier = 1)
+public class ResolvedConnection(EvoTreeNode source, EvoTreeNode target, Brush stroke, double sourceYOffset = 0, int stubTier = 1)
 {
-    public EvolutionGraphNode Source { get; } = source;
-    public EvolutionGraphNode Target { get; } = target;
+    public EvoTreeNode Source { get; } = source;
+    public EvoTreeNode Target { get; } = target;
     public Brush Stroke { get; } = stroke;
     public Brush DarkStroke { get; } = CreateDarkVariant(stroke);
     public double SourceYOffset { get; } = sourceYOffset;
@@ -480,34 +462,3 @@ public class ResolvedConnection(EvolutionGraphNode source, EvolutionGraphNode ta
         return brush;
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

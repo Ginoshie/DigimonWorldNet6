@@ -4,7 +4,7 @@ using DigimonWorld.Evolution.Calculator.Core.EvolutionCriteriaCalculation.FromRo
 using DigimonWorld.Evolution.Calculator.Core.Interfaces.EvolutionCriteria;
 using DigimonWorld.Frontend.WPF.ViewModelComponents;
 
-namespace DigimonWorld.Frontend.WPF.Windows.Main.UserControls.EvolutionGraph.Models;
+namespace DigimonWorld.Frontend.WPF.Windows.Main.UserControls.EvoTreeHelper.Models;
 
 public class EvolutionCriteriaDisplay : BaseViewModel
 {
@@ -23,7 +23,7 @@ public class EvolutionCriteriaDisplay : BaseViewModel
         Brains = criteria.Stats.Brains > 0 ? criteria.Stats.Brains.ToString() : "";
         Weight = $"{criteria.Weight.LowerWeightLimit} - {criteria.Weight.UpperWeightLimit}";
 
-        string cmOp = criteria.CareMistakes.IsCareMistakesCriteriaAMaximum ? "≤ " : "≥ ";
+        string cmOp = criteria.CareMistakes.IsCareMistakesCriteriaAMaximum ? "‰ " : "‰ ";
         CareMistakes = criteria.CareMistakes.CareMistakes >= 0
             ? $"{cmOp}{criteria.CareMistakes.CareMistakes}"
             : "";
@@ -31,7 +31,7 @@ public class EvolutionCriteriaDisplay : BaseViewModel
         BonusCriteria b = criteria.BonusCriteria;
         Happiness = b.Happiness >= 0 ? b.Happiness.ToString() : "";
         Discipline = b.Discipline >= 0 ? b.Discipline.ToString() : "";
-        string batOp = b.IsBattlesCriteriaAMaximum ? "≤ " : "≥ ";
+        string batOp = b.IsBattlesCriteriaAMaximum ? "‰ " : "‰ ";
         Battles = b.Battles >= 0 ? $"{batOp}{b.Battles}" : "";
         TechniqueCount = b.TechniqueCount > 0 ? b.TechniqueCount.ToString() : "";
 

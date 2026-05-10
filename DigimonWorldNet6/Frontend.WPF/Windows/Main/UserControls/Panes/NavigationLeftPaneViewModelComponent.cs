@@ -7,7 +7,7 @@ using System.Windows.Input;
 using DigimonWorld.Frontend.WPF.ViewModelComponents;
 using DigimonWorld.Frontend.WPF.Windows.Main.UserControls.DigiWiki;
 using DigimonWorld.Frontend.WPF.Windows.Main.UserControls.EvolutionCalculator;
-using DigimonWorld.Frontend.WPF.Windows.Main.UserControls.EvolutionGraph;
+using DigimonWorld.Frontend.WPF.Windows.Main.UserControls.EvoTreeHelper;
 using DigimonWorld.Frontend.WPF.Windows.Main.UserControls.TamerVision;
 using ReactiveUI;
 
@@ -24,7 +24,7 @@ public class NavigationLeftPaneViewModelComponent : PaneBaseViewModel, IDisposab
     private readonly Lazy<EvolutionCalculatorUserControl> _evolutionCalculatorUserControl = new();
     private readonly Lazy<DigiWikiUserControl> _digiWikiUserControl = new();
     private readonly Lazy<TamerVisionUserControl> _tamerVisionUserControl = new();
-    private readonly Lazy<EvolutionGraphUserControl> _evolutionGraphUserControl = new();
+    private readonly Lazy<EvoTreeHelperUserControl> _evoTreeHelperUserControl = new();
 
     public NavigationLeftPaneViewModelComponent(Action<UserControl> setCurrentSelectedMainWindowContent)
     {
@@ -37,7 +37,7 @@ public class NavigationLeftPaneViewModelComponent : PaneBaseViewModel, IDisposab
 
         ShowTamerVisionCommand = new CommandHandler(ShowTamerWiki);
 
-        ShowEvolutionGraphCommand = new CommandHandler(ShowEvolutionGraph);
+        ShowEvoTreeHelperCommand = new CommandHandler(ShowEvoTreeHelper);
 
         PaneOffset = PaneIsOpen ? PANEL_OPENED_X_OFFSET : PANEL_CLOSED_X_OFFSET;
 
@@ -58,7 +58,7 @@ public class NavigationLeftPaneViewModelComponent : PaneBaseViewModel, IDisposab
 
     public ICommand ShowTamerVisionCommand { get; }
 
-    public ICommand ShowEvolutionGraphCommand { get; }
+    public ICommand ShowEvoTreeHelperCommand { get; }
 
     public UserControl InitialContent => _evolutionCalculatorUserControl.Value;
 
@@ -68,7 +68,7 @@ public class NavigationLeftPaneViewModelComponent : PaneBaseViewModel, IDisposab
 
     private void ShowTamerWiki() => _setCurrentSelectedMainWindowContent(_tamerVisionUserControl.Value);
 
-    private void ShowEvolutionGraph() => _setCurrentSelectedMainWindowContent(_evolutionGraphUserControl.Value);
+    private void ShowEvoTreeHelper() => _setCurrentSelectedMainWindowContent(_evoTreeHelperUserControl.Value);
 
 
     public bool PaneIsOpen

@@ -1,4 +1,4 @@
-<UserControl x:Class="DigimonWorld.Frontend.WPF.Windows.Main.UserControls.Navigation.UserControls.EvolutionGraphNavigationButton"
+<UserControl x:Class="DigimonWorld.Frontend.WPF.Windows.Main.UserControls.Navigation.UserControls.EvoTreeHelperNavigationButton"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -8,7 +8,7 @@
              d:DataContext="{d:DesignInstance Type=main:MainWindowViewModel, IsDesignTimeCreatable=True}">
 
     <Button Background="Transparent" BorderThickness="0" Focusable="False"
-            Command="{Binding LeftPaneViewModelComponent.ShowEvolutionGraphCommand}">
+            Command="{Binding LeftPaneViewModelComponent.ShowEvoTreeHelperCommand}">
         <Button.Template>
             <ControlTemplate TargetType="Button">
                 <Grid Background="Transparent" Margin="7">
@@ -34,7 +34,7 @@
                     </Border>
                     <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5">
                         <Image x:Name="AnimatedImage" Source="/Images/Icons/Digimon/agumon-icon.png" Width="{StaticResource ButtonWidth}" Height="{StaticResource ButtonWidth}" Stretch="UniformToFill" />
-                        <TextBlock Width="{StaticResource TextBlockWidth}" TextAlignment="Center" TextWrapping="Wrap">Evo Graph</TextBlock>
+                        <TextBlock Width="{StaticResource TextBlockWidth}" TextAlignment="Center" TextWrapping="Wrap">Evo Tree Helper</TextBlock>
                     </StackPanel>
                 </Grid>
                 <ControlTemplate.Triggers>
@@ -109,5 +109,3 @@
         </Button.Template>
     </Button>
 </UserControl>
-
-

@@ -1,20 +1,20 @@
 using System.Windows;
 using Shared.Enums;
 
-namespace DigimonWorld.Frontend.WPF.Windows.Main.UserControls.EvolutionGraph.Models;
+namespace DigimonWorld.Frontend.WPF.Windows.Main.UserControls.EvoTreeHelper.Models;
 
-public class EvolutionGraphNode : DependencyObject
+public class EvoTreeNode : DependencyObject
 {
     public static readonly DependencyProperty XProperty =
-        DependencyProperty.Register(nameof(X), typeof(double), typeof(EvolutionGraphNode), new PropertyMetadata(0.0));
+        DependencyProperty.Register(nameof(X), typeof(double), typeof(EvoTreeNode), new PropertyMetadata(0.0));
 
     public static readonly DependencyProperty YProperty =
-        DependencyProperty.Register(nameof(Y), typeof(double), typeof(EvolutionGraphNode), new PropertyMetadata(0.0));
+        DependencyProperty.Register(nameof(Y), typeof(double), typeof(EvoTreeNode), new PropertyMetadata(0.0));
 
     public static readonly DependencyProperty IsSelectedProperty =
-        DependencyProperty.Register(nameof(IsSelected), typeof(bool), typeof(EvolutionGraphNode), new PropertyMetadata(false));
+        DependencyProperty.Register(nameof(IsSelected), typeof(bool), typeof(EvoTreeNode), new PropertyMetadata(false));
 
-    public EvolutionGraphNode(string id, double x, double y, string iconPath, DigimonName digimonName, bool isCenter, EvolutionCriteriaDisplay? criteria = null)
+    public EvoTreeNode(string id, double x, double y, string iconPath, DigimonName digimonName, bool isCenter, EvolutionCriteriaDisplay? criteria = null)
     {
         Id = id;
         X = x;

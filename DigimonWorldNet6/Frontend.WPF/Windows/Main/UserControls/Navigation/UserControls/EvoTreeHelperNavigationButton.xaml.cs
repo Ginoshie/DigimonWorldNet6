@@ -1,8 +1,8 @@
 namespace DigimonWorld.Frontend.WPF.Windows.Main.UserControls.Navigation.UserControls;
 
-public partial class EvolutionGraphNavigationButton
+public partial class EvoTreeHelperNavigationButton
 {
-    public EvolutionGraphNavigationButton()
+    public EvoTreeHelperNavigationButton()
     {
         InitializeComponent();
     }

@@ -4,7 +4,7 @@ using System.Windows;
 using System.Windows.Data;
 using System.Windows.Media;
 
-namespace DigimonWorld.Frontend.WPF.Windows.Main.UserControls.EvolutionGraph.Converters;
+namespace DigimonWorld.Frontend.WPF.Windows.Main.UserControls.EvoTreeHelper.Converters;
 
 /// <summary>
 /// Converts source (X,Y) and target (X,Y) node positions into a path with
@@ -106,16 +106,3 @@ public class DiagonalPathConverter : IMultiValueConverter
     public object[] ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture) =>
         throw new NotSupportedException();
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
