@@ -1,7 +1,7 @@
 using System;
 using DigimonWorld.Evolution.Calculator.Core.EvolutionCriteriaCalculation.FromFresh;
-using Shared.Enums;
 using NUnit.Framework;
+using Shared.Enums;
 using Shouldly;
 
 namespace Evolution.Calculator.Tests.EvolutionCriteriaCalculation.FromFresh;

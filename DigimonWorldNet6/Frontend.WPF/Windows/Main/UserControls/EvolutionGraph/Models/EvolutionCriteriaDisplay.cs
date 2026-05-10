@@ -1,3 +1,6 @@
+using DigimonWorld.Evolution.Calculator.Core.DataObjects.EvolutionCriteria;
+using DigimonWorld.Evolution.Calculator.Core.EvolutionCriteriaCalculation;
+using DigimonWorld.Evolution.Calculator.Core.EvolutionCriteriaCalculation.FromRookieOrChampion;
 using DigimonWorld.Evolution.Calculator.Core.Interfaces.EvolutionCriteria;
 using DigimonWorld.Frontend.WPF.ViewModelComponents;
 
@@ -25,7 +28,7 @@ public class EvolutionCriteriaDisplay : BaseViewModel
             ? $"{cmOp}{criteria.CareMistakes.CareMistakes}"
             : "";
 
-        var b = criteria.BonusCriteria;
+        BonusCriteria b = criteria.BonusCriteria;
         Happiness = b.Happiness >= 0 ? b.Happiness.ToString() : "";
         Discipline = b.Discipline >= 0 ? b.Discipline.ToString() : "";
         string batOp = b.IsBattlesCriteriaAMaximum ? "≤ " : "≥ ";
@@ -37,8 +40,8 @@ public class EvolutionCriteriaDisplay : BaseViewModel
 
     public void UpdateUserStats(int userHp, int userMp, int userOff, int userDef, int userSpeed, int userBrains, int userWeight, int userCareMistakes, int userHappiness, int userDiscipline, int userBattles, int userTechniqueCount)
     {
-        var criteria = _criteria;
-        var b = criteria.BonusCriteria;
+        IEvolutionCriteria criteria = _criteria;
+        BonusCriteria b = criteria.BonusCriteria;
 
         UserHP = userHp.ToString();
         UserMP = userMp.ToString();
@@ -112,17 +115,12 @@ public class EvolutionCriteriaDisplay : BaseViewModel
                                + (weightMet ? 1 : 0) + (bonusMet ? 1 : 0);
         IsEnabled = criteriaMetCount >= 3;
 
-        int scoreTotal = 0;
-        int scoreCount = 0;
-        if (criteria.Stats.HP > 0) { scoreTotal += userHp / 10; scoreCount++; }
-        if (criteria.Stats.MP > 0) { scoreTotal += userMp / 10; scoreCount++; }
-        if (criteria.Stats.Off > 0) { scoreTotal += userOff; scoreCount++; }
-        if (criteria.Stats.Def > 0) { scoreTotal += userDef; scoreCount++; }
-        if (criteria.Stats.Speed > 0) { scoreTotal += userSpeed; scoreCount++; }
-        if (criteria.Stats.Brains > 0) { scoreTotal += userBrains; scoreCount++; }
-        ScoreTotal = scoreTotal;
-        StatCount = scoreCount;
-        EvolutionScore = scoreCount > 0 ? scoreTotal / scoreCount : 0;
+        EvolutionScoreCalculationResult scoreResult = FromRookieOrChampionEvolutionScoreCalculator.CalculateEvolutionScore(
+            userHp, userMp, userOff, userDef, userSpeed, userBrains,
+            criteria.Stats, 0, 0, false);
+        ScoreTotal = scoreResult.CarriedOverStatTotal;
+        StatCount = scoreResult.CarriedOverCount;
+        EvolutionScore = scoreResult.EvolutionScore;
     }
 
     public string Name { get; }

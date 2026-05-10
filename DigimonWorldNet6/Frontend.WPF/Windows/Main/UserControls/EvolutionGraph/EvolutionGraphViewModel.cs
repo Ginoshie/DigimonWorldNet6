@@ -11,6 +11,7 @@ using DigimonWorld.Evolution.Calculator.Core.Interfaces.EvolutionCriteria;
 using DigimonWorld.Frontend.WPF.Services;
 using DigimonWorld.Frontend.WPF.ViewModelComponents;
 using DigimonWorld.Frontend.WPF.Windows.Main.UserControls.EvolutionGraph.Models;
+using Domain;
 using Shared.Constants;
 using Shared.Enums;
 using Shared.Extensions;
@@ -132,21 +133,19 @@ public class EvolutionGraphViewModel : BaseViewModel, IDisposable
     {
         try
         {
-            var p = ServiceRelay.LiveMemoryReader.ParameterStats;
-            var c = ServiceRelay.LiveMemoryReader.ConditionStats;
-            var pr = ServiceRelay.LiveMemoryReader.ProfileStats;
-            CurrentHP = p.HP.ToString();
-            CurrentMP = p.MP.ToString();
-            CurrentOff = p.Offense.ToString();
-            CurrentDef = p.Defense.ToString();
-            CurrentSpeed = p.Speed.ToString();
-            CurrentBrains = p.Brains.ToString();
-            CurrentWeight = pr.Weight.ToString();
-            CurrentCareMistakes = c.CareMistakes.ToString();
-            CurrentHappiness = c.Happiness.ToString();
-            CurrentDiscipline = c.Discipline.ToString();
-            CurrentBattles = c.Battles.ToString();
-            CurrentTechniqueCount = "0";
+            UserDigimon d = Session.UserDigimon;
+            CurrentHP = d.HP.ToString();
+            CurrentMP = d.MP.ToString();
+            CurrentOff = d.Off.ToString();
+            CurrentDef = d.Def.ToString();
+            CurrentSpeed = d.Speed.ToString();
+            CurrentBrains = d.Brains.ToString();
+            CurrentWeight = d.Weight.ToString();
+            CurrentCareMistakes = d.CareMistakes.ToString();
+            CurrentHappiness = d.Happiness.ToString();
+            CurrentDiscipline = d.Discipline.ToString();
+            CurrentBattles = d.Battles.ToString();
+            CurrentTechniqueCount = d.TechniqueCount.ToString();
         }
         catch
         {
@@ -158,22 +157,12 @@ public class EvolutionGraphViewModel : BaseViewModel, IDisposable
 
     private void RefreshCriteria()
     {
-        // Get current user stats
-        int userHp = 0, userMp = 0, userOff = 0, userDef = 0, userSpeed = 0, userBrains = 0;
-        int userWeight = 0, userCareMistakes = 0, userHappiness = 0, userDiscipline = 0, userBattles = 0, userTechniqueCount = 0;
-        try
-        {
-            var p = ServiceRelay.LiveMemoryReader.ParameterStats;
-            var c = ServiceRelay.LiveMemoryReader.ConditionStats;
-            var pr = ServiceRelay.LiveMemoryReader.ProfileStats;
-            userHp = p.HP; userMp = p.MP; userOff = p.Offense; userDef = p.Defense;
-            userSpeed = p.Speed; userBrains = p.Brains; userWeight = pr.Weight;
-            userCareMistakes = c.CareMistakes; userHappiness = c.Happiness;
-            userDiscipline = c.Discipline; userBattles = c.Battles;
-        } catch
-        {
-            // Emulator may not be connected
-        }
+        // Get current user stats from the shared session
+        UserDigimon d = Session.UserDigimon;
+        int userHp = d.HP, userMp = d.MP, userOff = d.Off, userDef = d.Def;
+        int userSpeed = d.Speed, userBrains = d.Brains, userWeight = d.Weight;
+        int userCareMistakes = d.CareMistakes, userHappiness = d.Happiness;
+        int userDiscipline = d.Discipline, userBattles = d.Battles, userTechniqueCount = d.TechniqueCount;
 
         // Build the list of existing criteria displays, reusing instances where possible
         EvolutionCriteriaDisplay?[] existing = [Criteria0, Criteria1, Criteria2, Criteria3, Criteria4, Criteria5];
@@ -197,37 +186,14 @@ public class EvolutionGraphViewModel : BaseViewModel, IDisposable
             }
         }
 
-        // Determine the winning evolution using the same logic as the game:
-        // iterate in order, track cumulative score, highest score wins
-        int highestScore = 0;
-        EvolutionCriteriaDisplay? winner = null;
-        int carriedOverTotal = 0;
-        int carriedOverCount = 0;
-        foreach (EvolutionCriteriaDisplay c in criteriaList)
+        // Determine the winning evolution using the shared score calculator.
+        List<(bool IsEnabled, int ScoreTotal, int StatCount)> evolutionData = criteriaList.Select(c => (c.IsEnabled, c.ScoreTotal, c.StatCount)).ToList();
+        bool useCarriedOverStats = _gameVariant == GameVariant.Original;
+        int winnerIndex = FromRookieOrChampionEvolutionScoreCalculator.DetermineWinningEvolutionIndex(evolutionData, useCarriedOverStats);
+
+        if (winnerIndex >= 0)
         {
-            if (!c.IsEnabled)
-            {
-                continue;
-            }
-
-            int cumulativeScore = carriedOverCount + c.StatCount > 0
-                ? (carriedOverTotal + c.ScoreTotal) / (carriedOverCount + c.StatCount)
-                : 0;
-
-            if (cumulativeScore <= highestScore && winner != null)
-            {
-                break;
-            }
-
-            highestScore = cumulativeScore;
-            carriedOverTotal += c.ScoreTotal;
-            carriedOverCount += c.StatCount;
-            winner = c;
-        }
-
-        if (winner != null)
-        {
-            winner.IsWinningEvolution = true;
+            criteriaList[winnerIndex].IsWinningEvolution = true;
         }
 
         Criteria0 = criteriaList.Count > 0 ? criteriaList[0] : null;
@@ -481,16 +447,8 @@ public class EvolutionGraphViewModel : BaseViewModel, IDisposable
     {
         string name = digimonName.ToString();
         string iconPath = DigimonIconFactory.Create(digimonName).IconPath;
-        try
-        {
-            var p = ServiceRelay.LiveMemoryReader.ParameterStats;
-            var c = ServiceRelay.LiveMemoryReader.ConditionStats;
-            var pr = ServiceRelay.LiveMemoryReader.ProfileStats;
-            return new EvolutionCriteriaDisplay(name, iconPath, criteria, p.HP, p.MP, p.Offense, p.Defense, p.Speed, p.Brains, pr.Weight, c.CareMistakes, c.Happiness, c.Discipline, c.Battles, 0);
-        } catch
-        {
-            return new EvolutionCriteriaDisplay(name, iconPath, criteria, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
-        }
+        UserDigimon d = Session.UserDigimon;
+        return new EvolutionCriteriaDisplay(name, iconPath, criteria, d.HP, d.MP, d.Off, d.Def, d.Speed, d.Brains, d.Weight, d.CareMistakes, d.Happiness, d.Discipline, d.Battles, d.TechniqueCount);
     }
 
     public void Dispose() => _disposables.Dispose();

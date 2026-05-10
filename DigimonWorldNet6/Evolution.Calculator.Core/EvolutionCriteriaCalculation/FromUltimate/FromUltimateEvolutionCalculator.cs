@@ -1,5 +1,4 @@
 using System;
-using DigimonWorld.Evolution.Calculator.Core.DataObjects;
 using DigimonWorld.Evolution.Calculator.Core.Interfaces.EvolutionCriteria;
 using Shared.Enums;
 
@@ -7,11 +6,11 @@ namespace DigimonWorld.Evolution.Calculator.Core.EvolutionCriteriaCalculation.Fr
 
 public sealed class FromUltimateEvolutionCalculator : IEvolutionCalculator
 {
-    public EvolutionResult DetermineEvolutionResult(UserDigimon userDigimon)
+    public EvolutionResult DetermineEvolutionResult(EvolutionCalculationInput evolutionCalculationInput)
     {
-        if (userDigimon.EvolutionStage != EvolutionStage.Ultimate)
+        if (evolutionCalculationInput.EvolutionStage != EvolutionStage.Ultimate)
         {
-            throw new ArgumentException($"{userDigimon.DigimonName} is not an {nameof(EvolutionStage.Ultimate)} stage digimon.");
+            throw new ArgumentException($"{evolutionCalculationInput.DigimonName} is not an {nameof(EvolutionStage.Ultimate)} stage digimon.");
         }
 
         return EvolutionResult.None;

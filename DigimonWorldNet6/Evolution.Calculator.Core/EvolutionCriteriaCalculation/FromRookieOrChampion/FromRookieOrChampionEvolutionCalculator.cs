@@ -1,8 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using DigimonWorld.Evolution.Calculator.Core.DataObjects;
 using DigimonWorld.Evolution.Calculator.Core.Interfaces.EvolutionCriteria;
+using Domain;
 using Shared.Enums;
 using Shared.Extensions;
 
@@ -17,14 +17,14 @@ public sealed class FromRookieOrChampionEvolutionCalculator : IEvolutionCalculat
     private readonly WeightCriteriaCalculator _weightMainCriteriaCalculator = new();
     private readonly BonusCriteriaCalculator _bonusCriteriaCalculator = new();
 
-    public EvolutionResult DetermineEvolutionResult(UserDigimon userDigimon)
+    public EvolutionResult DetermineEvolutionResult(EvolutionCalculationInput input)
     {
-        if (userDigimon.EvolutionStage is not (EvolutionStage.Rookie or EvolutionStage.Champion))
+        if (input.EvolutionStage is not (EvolutionStage.Rookie or EvolutionStage.Champion))
         {
-            throw new ArgumentException($"{userDigimon.DigimonName} is not a {nameof(EvolutionStage.Rookie)} or {nameof(EvolutionStage.Champion)} stage digimon.");
+            throw new ArgumentException($"{input.DigimonName} is not a {nameof(EvolutionStage.Rookie)} or {nameof(EvolutionStage.Champion)} stage digimon.");
         }
 
-        List<IEvolutionCriteria> evolutionCriteriaOfPossibleEvolutions = _fromRookieOrChampionEvolutionMapper.GetEvolutionCriteria(userDigimon.DigimonName);
+        List<IEvolutionCriteria> evolutionCriteriaOfPossibleEvolutions = _fromRookieOrChampionEvolutionMapper.GetEvolutionCriteria(input.DigimonName);
 
         GuardAgainstCorruptEvolutionCriteria(evolutionCriteriaOfPossibleEvolutions);
 
@@ -35,12 +35,12 @@ public sealed class FromRookieOrChampionEvolutionCalculator : IEvolutionCalculat
 
         foreach (IEvolutionCriteria evolutionCriteria in evolutionCriteriaOfPossibleEvolutions)
         {
-            if (!EvolutionEnabled(userDigimon, evolutionCriteria))
+            if (!EvolutionEnabled(input, evolutionCriteria))
             {
                 continue;
             }
 
-            EvolutionScoreCalculationResult evolutionScoreCalculationResult = _fromRookieOrChampionEvolutionScoreCalculator.CalculateEvolutionScore(userDigimon, evolutionCriteria.Stats, carriedOverStatTotal, carriedOverStatCount);
+            EvolutionScoreCalculationResult evolutionScoreCalculationResult = _fromRookieOrChampionEvolutionScoreCalculator.CalculateEvolutionScore(input, evolutionCriteria.Stats, carriedOverStatTotal, carriedOverStatCount);
 
             if ((ValidEvolutionResult(evolutionResult) &&
                  CurrentBestEnabledEvolutionIsNewEvolution(evolutionResult.ToDigimonType()) &&
@@ -78,26 +78,26 @@ public sealed class FromRookieOrChampionEvolutionCalculator : IEvolutionCalculat
         throw new ArgumentException($"Evolution options are corrupt, all options should be either {EvolutionStage.Champion} or {EvolutionStage.Ultimate}; Corrupt evolution options: {formattedCorruptEvolutionOptions}");
     }
 
-    private bool EvolutionEnabled(UserDigimon userDigimon, IEvolutionCriteria evolutionCriteria)
+    private bool EvolutionEnabled(EvolutionCalculationInput input, IEvolutionCriteria evolutionCriteria)
     {
         int criteriaMetCount = 0;
 
-        if (_statsMainCriteriaCalculator.CriteriaIsMet(userDigimon, evolutionCriteria.Stats))
+        if (_statsMainCriteriaCalculator.CriteriaIsMet(input, evolutionCriteria.Stats))
         {
             criteriaMetCount++;
         }
 
-        if (_careMistakesMainCriteriaCalculator.CriteriaIsMet(userDigimon, evolutionCriteria.CareMistakes))
+        if (_careMistakesMainCriteriaCalculator.CriteriaIsMet(input, evolutionCriteria.CareMistakes))
         {
             criteriaMetCount++;
         }
 
-        if (_weightMainCriteriaCalculator.CriteriaIsMet(userDigimon, evolutionCriteria.Weight))
+        if (_weightMainCriteriaCalculator.CriteriaIsMet(input, evolutionCriteria.Weight))
         {
             criteriaMetCount++;
         }
 
-        if (_bonusCriteriaCalculator.CriteriaIsMet(userDigimon, evolutionCriteria.BonusCriteria))
+        if (_bonusCriteriaCalculator.CriteriaIsMet(input, evolutionCriteria.BonusCriteria))
         {
             criteriaMetCount++;
         }

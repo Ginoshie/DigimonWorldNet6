@@ -1,5 +1,4 @@
 using System;
-using DigimonWorld.Evolution.Calculator.Core.DataObjects;
 using DigimonWorld.Evolution.Calculator.Core.Interfaces.EvolutionCriteria;
 using Shared.Enums;
 
@@ -9,13 +8,13 @@ public sealed class FromFreshEvolutionCalculator : IEvolutionCalculator
 {
     private readonly FromFreshEvolutionMapper _fromFreshEvolutionMapper = new();
     
-    public EvolutionResult DetermineEvolutionResult(UserDigimon userDigimon)
+    public EvolutionResult DetermineEvolutionResult(EvolutionCalculationInput evolutionCalculationInput)
     {
-        if (userDigimon.EvolutionStage != EvolutionStage.Fresh)
+        if (evolutionCalculationInput.EvolutionStage != EvolutionStage.Fresh)
         {
-            throw new ArgumentException($"{userDigimon.DigimonName} is not a {nameof(EvolutionStage.Fresh)} stage digimon.");
+            throw new ArgumentException($"{evolutionCalculationInput.DigimonName} is not a {nameof(EvolutionStage.Fresh)} stage digimon.");
         }
 
-        return _fromFreshEvolutionMapper[userDigimon.DigimonName];
+        return _fromFreshEvolutionMapper[evolutionCalculationInput.DigimonName];
     }
 }

@@ -10,12 +10,12 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using DigimonWorld.Evolution.Calculator.Core;
-using DigimonWorld.Evolution.Calculator.Core.DataObjects;
 using DigimonWorld.Frontend.WPF.Constants;
 using DigimonWorld.Frontend.WPF.Enums;
 using DigimonWorld.Frontend.WPF.Models;
 using DigimonWorld.Frontend.WPF.Services;
 using DigimonWorld.Frontend.WPF.ViewModelComponents;
+using Domain;
 using MemoryAccess.MemoryValues.Digimon;
 using Shared;
 using Shared.Configuration;
@@ -422,11 +422,11 @@ public class TamerVisionViewModel : BaseViewModel, IDisposable
 
     private void CalculateEvolutionResult()
     {
-        UserDigimon currentUserDigimon = new(_syncedDigimon.DigimonName, HP, MP, Offense, Defence, Speed, Brains, CareMistakes, Weight, Happiness, Discipline, Battles, TechniqueCount);
+        UserDigimon currentUserDigimon = Session.UserDigimon;
 
         EvolutionResult evolutionResult = currentUserDigimon.DigimonName.EvolutionStage() == EvolutionStage.Ultimate
             ? EvolutionResult.NotApplicable
-            : ServiceRelay.CalculateEvolutionResult(currentUserDigimon);
+            : ServiceRelay.CalculateEvolutionResult(new EvolutionCalculationInput(currentUserDigimon));
 
         EvolutionResult = evolutionResult;
     }

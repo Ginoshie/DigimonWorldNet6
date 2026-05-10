@@ -1,15 +1,14 @@
-using DigimonWorld.Evolution.Calculator.Core.DataObjects;
 using DigimonWorld.Evolution.Calculator.Core.DataObjects.EvolutionCriteria;
 
 namespace DigimonWorld.Evolution.Calculator.Core.EvolutionCriteriaCalculation.FromInTraining;
 
 public sealed class FromInTrainingEvolutionScoreCalculator
 {
-    public int CalculateEvolutionScore(UserDigimon userDigimon, MainCriteriaStats statsCriteria)
+    public int CalculateEvolutionScore(EvolutionCalculationInput evolutionCalculationInput, MainCriteriaStats statsCriteria)
     {
         int highestEvolutionStat = 0;
-        int hpScore = userDigimon.HP / 10;
-        int mpScore = userDigimon.MP / 10;
+        int hpScore = evolutionCalculationInput.HP / 10;
+        int mpScore = evolutionCalculationInput.MP / 10;
 
         if (statsCriteria.HP > 0 && hpScore > highestEvolutionStat)
         {
@@ -21,24 +20,24 @@ public sealed class FromInTrainingEvolutionScoreCalculator
             highestEvolutionStat = mpScore;
         }
 
-        if (statsCriteria.Off > 0 && userDigimon.Off > highestEvolutionStat)
+        if (statsCriteria.Off > 0 && evolutionCalculationInput.Off > highestEvolutionStat)
         {
-            highestEvolutionStat = userDigimon.Off;
+            highestEvolutionStat = evolutionCalculationInput.Off;
         }
 
-        if (statsCriteria.Def > 0 && userDigimon.Def > highestEvolutionStat)
+        if (statsCriteria.Def > 0 && evolutionCalculationInput.Def > highestEvolutionStat)
         {
-            highestEvolutionStat = userDigimon.Def;
+            highestEvolutionStat = evolutionCalculationInput.Def;
         }
 
-        if (statsCriteria.Speed > 0 && userDigimon.Speed > highestEvolutionStat)
+        if (statsCriteria.Speed > 0 && evolutionCalculationInput.Speed > highestEvolutionStat)
         {
-            highestEvolutionStat = userDigimon.Speed;
+            highestEvolutionStat = evolutionCalculationInput.Speed;
         }
 
-        if (statsCriteria.Brains > 0 && userDigimon.Brains > highestEvolutionStat)
+        if (statsCriteria.Brains > 0 && evolutionCalculationInput.Brains > highestEvolutionStat)
         {
-            highestEvolutionStat = userDigimon.Brains;
+            highestEvolutionStat = evolutionCalculationInput.Brains;
         }
 
         return highestEvolutionStat;

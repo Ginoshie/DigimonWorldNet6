@@ -1,33 +1,32 @@
-using DigimonWorld.Evolution.Calculator.Core.DataObjects;
 using DigimonWorld.Evolution.Calculator.Core.DataObjects.EvolutionCriteria;
 
 namespace DigimonWorld.Evolution.Calculator.Core.EvolutionCriteriaCalculation.FromRookieOrChampion;
 
 public sealed class BonusCriteriaCalculator
 {
-    public bool CriteriaIsMet(UserDigimon userDigimon, BonusCriteria bonusCriteria)
+    public bool CriteriaIsMet(EvolutionCalculationInput evolutionCalculationInput, BonusCriteria bonusCriteria)
     {
-        if (HappinessCriteriaEnabled(bonusCriteria) && HappinessCriteriaIsMet(userDigimon, bonusCriteria))
+        if (HappinessCriteriaEnabled(bonusCriteria) && HappinessCriteriaIsMet(evolutionCalculationInput, bonusCriteria))
         {
             return true;
         }
 
-        if (DisciplineCriteriaEnabled(bonusCriteria) && DisciplineCriteriaIsMet(userDigimon, bonusCriteria))
+        if (DisciplineCriteriaEnabled(bonusCriteria) && DisciplineCriteriaIsMet(evolutionCalculationInput, bonusCriteria))
         {
             return true;
         }
 
-        if (BattleCriteriaEnabled(bonusCriteria) && BattleCriteriaIsMet(userDigimon, bonusCriteria))
+        if (BattleCriteriaEnabled(bonusCriteria) && BattleCriteriaIsMet(evolutionCalculationInput, bonusCriteria))
         {
             return true;
         }
 
-        if (TechniqueCriteriaIsMet(userDigimon, bonusCriteria))
+        if (TechniqueCriteriaIsMet(evolutionCalculationInput, bonusCriteria))
         {
             return true;
         }
 
-        if (PrecursorDigimonCriteriaIsEnabled(bonusCriteria) && PrecursorDigimonCriteriaIsMet(userDigimon, bonusCriteria))
+        if (PrecursorDigimonCriteriaIsEnabled(bonusCriteria) && PrecursorDigimonCriteriaIsMet(evolutionCalculationInput, bonusCriteria))
         {
             return true;
         }
@@ -40,9 +39,9 @@ public sealed class BonusCriteriaCalculator
         return bonusCriteria.Happiness >= 0;
     }
 
-    private bool HappinessCriteriaIsMet(UserDigimon userDigimon, BonusCriteria bonusCriteria)
+    private bool HappinessCriteriaIsMet(EvolutionCalculationInput evolutionCalculationInput, BonusCriteria bonusCriteria)
     {
-        return userDigimon.Happiness >= bonusCriteria.Happiness;
+        return evolutionCalculationInput.Happiness >= bonusCriteria.Happiness;
     }
 
     private bool DisciplineCriteriaEnabled(BonusCriteria bonusCriteria)
@@ -50,9 +49,9 @@ public sealed class BonusCriteriaCalculator
         return bonusCriteria.Discipline >= 0;
     }
 
-    private bool DisciplineCriteriaIsMet(UserDigimon userDigimon, BonusCriteria bonusCriteria)
+    private bool DisciplineCriteriaIsMet(EvolutionCalculationInput evolutionCalculationInput, BonusCriteria bonusCriteria)
     {
-        return userDigimon.Discipline >= bonusCriteria.Discipline;
+        return evolutionCalculationInput.Discipline >= bonusCriteria.Discipline;
     }
 
     private bool BattleCriteriaEnabled(BonusCriteria bonusCriteria)
@@ -60,15 +59,15 @@ public sealed class BonusCriteriaCalculator
         return bonusCriteria.Battles >= 0;
     }
 
-    private bool BattleCriteriaIsMet(UserDigimon userDigimon, BonusCriteria bonusCriteria)
+    private bool BattleCriteriaIsMet(EvolutionCalculationInput evolutionCalculationInput, BonusCriteria bonusCriteria)
     {
-        return (userDigimon.Battles <= bonusCriteria.Battles && bonusCriteria.IsBattlesCriteriaAMaximum) ||
-               (userDigimon.Battles >= bonusCriteria.Battles && !bonusCriteria.IsBattlesCriteriaAMaximum);
+        return (evolutionCalculationInput.Battles <= bonusCriteria.Battles && bonusCriteria.IsBattlesCriteriaAMaximum) ||
+               (evolutionCalculationInput.Battles >= bonusCriteria.Battles && !bonusCriteria.IsBattlesCriteriaAMaximum);
     }
 
-    private bool TechniqueCriteriaIsMet(UserDigimon userDigimon, BonusCriteria bonusCriteria)
+    private bool TechniqueCriteriaIsMet(EvolutionCalculationInput evolutionCalculationInput, BonusCriteria bonusCriteria)
     {
-        return userDigimon.TechniqueCount >= bonusCriteria.TechniqueCount;
+        return evolutionCalculationInput.TechniqueCount >= bonusCriteria.TechniqueCount;
     }
 
     private bool PrecursorDigimonCriteriaIsEnabled(BonusCriteria bonusCriteria)
@@ -76,8 +75,8 @@ public sealed class BonusCriteriaCalculator
         return bonusCriteria.PrecursorDigimon != null;
     }
 
-    private bool PrecursorDigimonCriteriaIsMet(UserDigimon userDigimon, BonusCriteria bonusCriteria)
+    private bool PrecursorDigimonCriteriaIsMet(EvolutionCalculationInput evolutionCalculationInput, BonusCriteria bonusCriteria)
     {
-        return userDigimon.DigimonName == bonusCriteria.PrecursorDigimon;
+        return evolutionCalculationInput.DigimonName == bonusCriteria.PrecursorDigimon;
     }
 }

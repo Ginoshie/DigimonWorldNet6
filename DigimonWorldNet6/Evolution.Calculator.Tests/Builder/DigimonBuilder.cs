@@ -1,4 +1,5 @@
-using DigimonWorld.Evolution.Calculator.Core.DataObjects;
+using DigimonWorld.Evolution.Calculator.Core;
+using Domain;
 using Shared.Enums;
 
 namespace Evolution.Calculator.Tests.Builder;
@@ -99,8 +100,9 @@ public sealed class DigimonBuilder
     }
 
 
-    public UserDigimon Build()
+    public EvolutionCalculationInput Build()
     {
-        return new UserDigimon(_digimonName, _hp, _mp, _off, _def, _speed, _brains, _careMistakes, _weight, _happiness, _discipline, _battles, _techniqueCount);
+        UserDigimon.Instance.Set(_digimonName, _hp, _mp, _off, _def, _speed, _brains, _careMistakes, _weight, _happiness, _discipline, _battles, _techniqueCount);
+        return new EvolutionCalculationInput(_digimonName, _hp, _mp, _off, _def, _speed, _brains, _careMistakes, _weight, _happiness, _discipline, _battles, _techniqueCount);
     }
 }

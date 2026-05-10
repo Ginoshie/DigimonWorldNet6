@@ -2,8 +2,8 @@ using System;
 using System.Collections.Generic;
 using DigimonWorld.Evolution.Calculator.Core.EvolutionCriteriaCalculation.FromInTraining;
 using DigimonWorld.Evolution.Calculator.Core.Interfaces.EvolutionCriteria;
-using Shared.Enums;
 using NUnit.Framework;
+using Shared.Enums;
 using Shouldly;
 
 namespace Evolution.Calculator.Tests.EvolutionCriteriaCalculation.FromInTraining;

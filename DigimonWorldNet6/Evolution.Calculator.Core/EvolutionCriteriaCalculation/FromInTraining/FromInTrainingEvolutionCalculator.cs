@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using DigimonWorld.Evolution.Calculator.Core.DataObjects;
 using DigimonWorld.Evolution.Calculator.Core.Interfaces.EvolutionCriteria;
 using Shared.Enums;
 
@@ -12,14 +11,14 @@ public sealed class FromInTrainingEvolutionCalculator : IEvolutionCalculator
     private readonly FromInTrainingEvolutionMapper _fromInTrainingEvolutionMapper = new();
     private readonly FromInTrainingEvolutionScoreCalculator _fromInTrainingEvolutionScoreCalculator = new();
 
-    public EvolutionResult DetermineEvolutionResult(UserDigimon userDigimon)
+    public EvolutionResult DetermineEvolutionResult(EvolutionCalculationInput evolutionCalculationInput)
     {
-        if (userDigimon.EvolutionStage != EvolutionStage.InTraining)
+        if (evolutionCalculationInput.EvolutionStage != EvolutionStage.InTraining)
         {
-            throw new ArgumentException($"{userDigimon.DigimonName} is not a {nameof(EvolutionStage.InTraining)} stage digimon.");
+            throw new ArgumentException($"{evolutionCalculationInput.DigimonName} is not a {nameof(EvolutionStage.InTraining)} stage digimon.");
         }
 
-        List<IEvolutionCriteria> evolutionCriteriaOfPossibleEvolutions = _fromInTrainingEvolutionMapper[userDigimon.DigimonName].ToList();
+        List<IEvolutionCriteria> evolutionCriteriaOfPossibleEvolutions = _fromInTrainingEvolutionMapper[evolutionCalculationInput.DigimonName].ToList();
 
         GuardAgainstCorruptEvolutionCriteria(evolutionCriteriaOfPossibleEvolutions);
 
@@ -28,7 +27,7 @@ public sealed class FromInTrainingEvolutionCalculator : IEvolutionCalculator
 
         foreach (IEvolutionCriteria evolutionCriteria in evolutionCriteriaOfPossibleEvolutions)
         {
-            int evolutionScore = _fromInTrainingEvolutionScoreCalculator.CalculateEvolutionScore(userDigimon, evolutionCriteria.Stats);
+            int evolutionScore = _fromInTrainingEvolutionScoreCalculator.CalculateEvolutionScore(evolutionCalculationInput, evolutionCriteria.Stats);
 
             if (evolutionScore <= highestEvolutionScore)
             {

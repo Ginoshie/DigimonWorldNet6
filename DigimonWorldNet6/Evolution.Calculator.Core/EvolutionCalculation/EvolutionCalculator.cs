@@ -1,5 +1,4 @@
 using System;
-using DigimonWorld.Evolution.Calculator.Core.DataObjects;
 using DigimonWorld.Evolution.Calculator.Core.EvolutionCriteriaCalculation.FromFresh;
 using DigimonWorld.Evolution.Calculator.Core.EvolutionCriteriaCalculation.FromInTraining;
 using DigimonWorld.Evolution.Calculator.Core.EvolutionCriteriaCalculation.FromRookieOrChampion;
@@ -17,18 +16,18 @@ public sealed class EvolutionCalculator
     
     private EvolutionCalculator() { }
     
-    public EvolutionResult CalculateEvolutionResult(UserDigimon userDigimon)
+    public EvolutionResult CalculateEvolutionResult(EvolutionCalculationInput evolutionCalculationInput)
     {
-        IEvolutionCalculator evolutionCalculator = userDigimon.EvolutionStage switch
+        IEvolutionCalculator evolutionCalculator = evolutionCalculationInput.EvolutionStage switch
         {
             EvolutionStage.Fresh => new FromFreshEvolutionCalculator(),
             EvolutionStage.InTraining => new FromInTrainingEvolutionCalculator(),
             EvolutionStage.Rookie or EvolutionStage.Champion => new FromRookieOrChampionEvolutionCalculator(),
             EvolutionStage.Ultimate => new FromUltimateEvolutionCalculator(),
-            _ => throw new ArgumentOutOfRangeException(nameof(userDigimon.EvolutionStage), $"{userDigimon.EvolutionStage} not supported by {nameof(EvolutionCalculator)}")
+            _ => throw new ArgumentOutOfRangeException(nameof(evolutionCalculationInput.EvolutionStage), $"{evolutionCalculationInput.EvolutionStage} not supported by {nameof(EvolutionCalculator)}")
         };
 
-        EvolutionResult evolutionResult = evolutionCalculator.DetermineEvolutionResult(userDigimon);
+        EvolutionResult evolutionResult = evolutionCalculator.DetermineEvolutionResult(evolutionCalculationInput);
 
         return evolutionResult;
     }

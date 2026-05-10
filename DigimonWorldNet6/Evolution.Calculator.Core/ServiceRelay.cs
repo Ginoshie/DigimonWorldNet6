@@ -1,4 +1,3 @@
-using DigimonWorld.Evolution.Calculator.Core.DataObjects;
 using DigimonWorld.Evolution.Calculator.Core.EvolutionCalculation;
 using MemoryAccess;
 using Shared.Enums;
@@ -16,7 +15,7 @@ public static class ServiceRelay
         LiveMemoryReader = LiveMemoryReader.Instance;
     }
 
-    public static EvolutionResult CalculateEvolutionResult(UserDigimon userDigimon) => _evolutionCalculator.CalculateEvolutionResult(userDigimon);
+    public static EvolutionResult CalculateEvolutionResult(EvolutionCalculationInput evolutionCalculationInput) => _evolutionCalculator.CalculateEvolutionResult(evolutionCalculationInput);
 
     public static LiveMemoryReader LiveMemoryReader { get; }
 }

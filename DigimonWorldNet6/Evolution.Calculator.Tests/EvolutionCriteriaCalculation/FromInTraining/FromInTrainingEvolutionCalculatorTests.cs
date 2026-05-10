@@ -1,9 +1,9 @@
 using System;
-using DigimonWorld.Evolution.Calculator.Core.DataObjects;
+using DigimonWorld.Evolution.Calculator.Core;
 using DigimonWorld.Evolution.Calculator.Core.EvolutionCriteriaCalculation.FromInTraining;
 using Evolution.Calculator.Tests.Builder;
-using Shared.Enums;
 using NUnit.Framework;
+using Shared.Enums;
 using Shouldly;
 
 namespace Evolution.Calculator.Tests.EvolutionCriteriaCalculation.FromInTraining;
@@ -24,7 +24,7 @@ public sealed class FromInTrainingEvolutionCalculatorTests
         // Arrange
         FromInTrainingEvolutionCalculator sut = new SetupBuilder()
             .Build();
-        UserDigimon userDigimon = new DigimonBuilder()
+        EvolutionCalculationInput userDigimon = new DigimonBuilder()
             .WithDigimonType(digimonName)
             .WithHP(hp)
             .WithMP(mp)
@@ -58,7 +58,7 @@ public sealed class FromInTrainingEvolutionCalculatorTests
         // Arrange
         FromInTrainingEvolutionCalculator sut = new SetupBuilder()
             .Build();
-        UserDigimon userDigimon = new DigimonBuilder()
+        EvolutionCalculationInput userDigimon = new DigimonBuilder()
             .WithDigimonType(digimonName)
             .WithHP(hp)
             .WithMP(mp)

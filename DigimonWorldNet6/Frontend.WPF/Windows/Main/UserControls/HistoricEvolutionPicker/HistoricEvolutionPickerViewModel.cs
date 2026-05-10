@@ -8,6 +8,7 @@ using DigimonWorld.Evolution.Calculator.Core;
 using DigimonWorld.Frontend.WPF.Models;
 using DigimonWorld.Frontend.WPF.Services;
 using DigimonWorld.Frontend.WPF.ViewModelComponents;
+using Domain;
 using Shared.Configuration;
 using Shared.Enums;
 using Shared.Services;

@@ -1,5 +1,5 @@
-using Shared.Extensions;
 using Shared.Enums;
+using Shared.Extensions;
 
 namespace Shared.Constants;
 

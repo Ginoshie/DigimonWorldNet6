@@ -1,5 +1,5 @@
 using System;
-using DigimonWorld.Evolution.Calculator.Core.DataObjects;
+using Domain;
 using NUnit.Framework;
 using Shared.Enums;
 using Shouldly;
@@ -9,13 +9,20 @@ namespace Evolution.Calculator.Tests.DataObjects;
 [TestFixture]
 public sealed class UserDigimonTests
 {
-    // --- Constructor tests ---
+    [Test]
+    public void Instance_ShouldReturnSameReference()
+    {
+        UserDigimon first = UserDigimon.Instance;
+        UserDigimon second = UserDigimon.Instance;
+
+        first.ShouldBeSameAs(second);
+    }
 
     [Test]
-    public void Constructor_ShouldSetAllProperties_WhenCalledWithValidArguments()
+    public void Set_ShouldSetAllProperties()
     {
-        // Arrange & Act
-        UserDigimon sut = new(
+        // Act
+        UserDigimon.Instance.Set(
             DigimonName.Agumon,
             hp: 1000, mp: 2000, off: 100, def: 200,
             speed: 300, brains: 400, careMistakes: 5,
@@ -23,6 +30,7 @@ public sealed class UserDigimonTests
             battles: 10, techniqueCount: 28);
 
         // Assert
+        UserDigimon sut = UserDigimon.Instance;
         sut.DigimonName.ShouldBe(DigimonName.Agumon);
         sut.HP.ShouldBe(1000);
         sut.MP.ShouldBe(2000);
@@ -45,67 +53,22 @@ public sealed class UserDigimonTests
     [TestCase(DigimonName.Agumon, EvolutionStage.Rookie)]
     [TestCase(DigimonName.Greymon, EvolutionStage.Champion)]
     [TestCase(DigimonName.MetalGreymon, EvolutionStage.Ultimate)]
-    public void Constructor_ShouldDeriveCorrectEvolutionStage_FromDigimonName(DigimonName digimonName, EvolutionStage expectedStage)
+    public void Set_ShouldDeriveCorrectEvolutionStage_FromDigimonName(DigimonName digimonName, EvolutionStage expectedStage)
     {
         // Act
-        UserDigimon sut = new(digimonName, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+        UserDigimon.Instance.Set(digimonName, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
 
         // Assert
-        sut.EvolutionStage.ShouldBe(expectedStage);
+        UserDigimon.Instance.EvolutionStage.ShouldBe(expectedStage);
     }
 
-    // --- Default constructor ---
+    // --- Set with all evolution stages ---
 
     [Test]
-    public void DefaultConstructor_ShouldCreateValidInstance()
+    public void Set_ShouldNotThrow_ForAnyDigimonName([Values] DigimonName digimonName)
     {
         // Act
-        UserDigimon sut = new();
-
-        // Assert
-        sut.ShouldNotBeNull();
-    }
-
-    [Test]
-    public void DefaultConstructor_ShouldSetIntPropertiesToZero()
-    {
-        // Act
-        UserDigimon sut = new();
-
-        // Assert
-        sut.HP.ShouldBe(0);
-        sut.MP.ShouldBe(0);
-        sut.Off.ShouldBe(0);
-        sut.Def.ShouldBe(0);
-        sut.Speed.ShouldBe(0);
-        sut.Brains.ShouldBe(0);
-        sut.CareMistakes.ShouldBe(0);
-        sut.Weight.ShouldBe(0);
-        sut.Happiness.ShouldBe(0);
-        sut.Discipline.ShouldBe(0);
-        sut.Battles.ShouldBe(0);
-        sut.TechniqueCount.ShouldBe(0);
-    }
-
-    [Test]
-    public void DefaultConstructor_ShouldSetDigimonNameToDefaultEnumValue()
-    {
-        // The default value of DigimonName enum is Agumon (value 0)
-        UserDigimon sut = new();
-
-        sut.DigimonName.ShouldBe(DigimonName.Agumon);
-    }
-
-    // --- Constructor with all evolution stages ---
-
-    [Test]
-    public void Constructor_ShouldNotThrow_ForAnyDigimonName([Values] DigimonName digimonName)
-    {
-        // Act
-        Action act = () =>
-        {
-            UserDigimon _ = new(digimonName, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
-        };
+        Action act = () => UserDigimon.Instance.Set(digimonName, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
 
         // Assert
         act.ShouldNotThrow();
@@ -114,10 +77,10 @@ public sealed class UserDigimonTests
     // --- Edge case: extreme stat values ---
 
     [Test]
-    public void Constructor_ShouldAcceptMaxStats()
+    public void Set_ShouldAcceptMaxStats()
     {
         // Act
-        UserDigimon sut = new(
+        UserDigimon.Instance.Set(
             DigimonName.MetalGreymon,
             hp: 9999, mp: 9999, off: 999, def: 999,
             speed: 999, brains: 999, careMistakes: 99,
@@ -125,6 +88,7 @@ public sealed class UserDigimonTests
             battles: 999, techniqueCount: 49);
 
         // Assert
+        UserDigimon sut = UserDigimon.Instance;
         sut.HP.ShouldBe(9999);
         sut.MP.ShouldBe(9999);
         sut.Off.ShouldBe(999);
@@ -132,12 +96,13 @@ public sealed class UserDigimonTests
     }
 
     [Test]
-    public void Constructor_ShouldAcceptZeroForAllStats()
+    public void Set_ShouldAcceptZeroForAllStats()
     {
         // Act
-        UserDigimon sut = new(DigimonName.Agumon, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+        UserDigimon.Instance.Set(DigimonName.Agumon, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
 
         // Assert
+        UserDigimon sut = UserDigimon.Instance;
         sut.HP.ShouldBe(0);
         sut.MP.ShouldBe(0);
         sut.Off.ShouldBe(0);
@@ -146,41 +111,14 @@ public sealed class UserDigimonTests
         sut.Brains.ShouldBe(0);
     }
 
-    // --- Edge case: negative stats (no validation in UserDigimon, so they're accepted) ---
+    // --- Edge case: negative stats ---
 
     [Test]
-    public void Constructor_ShouldAcceptNegativeStats()
+    public void Set_ShouldAcceptNegativeStats()
     {
-        // UserDigimon has no validation — negative values are accepted
-        UserDigimon sut = new(DigimonName.Agumon, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1);
+        UserDigimon.Instance.Set(DigimonName.Agumon, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1);
 
-        sut.HP.ShouldBe(-1);
-        sut.CareMistakes.ShouldBe(-1);
-    }
-
-    // --- Properties are independently settable ---
-
-    [Test]
-    public void Properties_ShouldBeIndependentlySettable()
-    {
-        // Arrange
-        UserDigimon sut = new();
-
-        // Act
-        sut.HP = 500;
-        sut.MP = 600;
-        sut.Off = 70;
-        sut.Def = 80;
-        sut.Speed = 90;
-        sut.Brains = 100;
-
-        // Assert
-        sut.HP.ShouldBe(500);
-        sut.MP.ShouldBe(600);
-        sut.Off.ShouldBe(70);
-        sut.Def.ShouldBe(80);
-        sut.Speed.ShouldBe(90);
-        sut.Brains.ShouldBe(100);
+        UserDigimon.Instance.HP.ShouldBe(-1);
+        UserDigimon.Instance.CareMistakes.ShouldBe(-1);
     }
 }
-

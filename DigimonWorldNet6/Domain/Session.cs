@@ -1,9 +1,11 @@
 using System.Collections.Generic;
 using Shared.Enums;
 
-namespace DigimonWorld.Evolution.Calculator.Core;
+namespace Domain;
 
 public static class Session
 {
     public static IList<DigimonName> HistoricEvolutions { get; } = [];
+
+    public static UserDigimon UserDigimon => UserDigimon.Instance;
 }

@@ -7,7 +7,6 @@ using System.Reactive.Linq;
 using System.Threading;
 using System.Windows.Input;
 using DigimonWorld.Evolution.Calculator.Core;
-using DigimonWorld.Evolution.Calculator.Core.DataObjects;
 using DigimonWorld.Frontend.WPF.Constants;
 using DigimonWorld.Frontend.WPF.Enums;
 using DigimonWorld.Frontend.WPF.Services;
@@ -15,7 +14,6 @@ using DigimonWorld.Frontend.WPF.ViewModelComponents;
 using Shared.Configuration;
 using Shared.Constants;
 using Shared.Enums;
-using Shared.Extensions;
 using Shared.Services;
 using Shared.Services.Events;
 using GameVariant = Shared.Enums.GameVariant;
@@ -274,13 +272,13 @@ public sealed class EvolutionCalculatorViewModel : BaseViewModel, IDisposable
 
         OnPropertyChanged(nameof(EvolutionResult));
 
-        UserDigimon currentUserDigimon = new(PlayerDigimonType, int.Parse(HP), int.Parse(MP), int.Parse(Off), int.Parse(Def), int.Parse(Speed), int.Parse(Brains), int.Parse(CareMistakes), int.Parse(Weight), int.Parse(Happiness),
+        EvolutionCalculationInput input = new(PlayerDigimonType, int.Parse(HP), int.Parse(MP), int.Parse(Off), int.Parse(Def), int.Parse(Speed), int.Parse(Brains), int.Parse(CareMistakes), int.Parse(Weight), int.Parse(Happiness),
             int.Parse(Discipline),
             int.Parse(Battles), int.Parse(Techniques));
 
-        EvolutionResult = currentUserDigimon.DigimonName.EvolutionStage() == EvolutionStage.Ultimate
+        EvolutionResult = input.EvolutionStage == EvolutionStage.Ultimate
             ? EvolutionResult.NotApplicable
-            : ServiceRelay.CalculateEvolutionResult(currentUserDigimon);
+            : ServiceRelay.CalculateEvolutionResult(input);
 
         FlipToRight = true;
     }
