@@ -1,0 +1,155 @@
+﻿Special evolution Digimon World 1 summary
+
+
+This document contains all the special evolutions known to us. Choose a digimon or stage from the “from” column in the navigation table and click on the link to jump to the relevant information.
+
+If you know or have heard about any special evolution not listed here please contact Ginoshie or SydMontague.
+Navigation table
+From
+	Into
+	Any digimon
+	Sukamon
+	Any In training
+	Kunemon
+	Any rookie (nr. 1)
+	Numemon
+	Any rookie (nr. 2)
+	Nanimon
+	Any rookie (nr. 3)
+	Bakemon
+	Any Champion
+	Vademon
+	Angemon
+	Devimon
+	Seadramon
+	Airdramon (nr. 1)
+	Birdramon
+	Airdramon (nr. 2)
+	Whamon
+	Coelamon (+ Megaseadramon nr. 1)
+	Shellmon
+	Coelamon (+ Megaseadramon nr. 2)
+	Vegimon
+	Ninjamon
+	Drimogemon
+	Monochromon
+	Kokatorimon
+	Phoenixmon
+	Metalgreymon
+	Skullgreymon (nr. 1)
+	Megadramon
+	Skullgreymon (nr. 2)
+	Mamemon (nr. 1)
+	Metalmamemon
+	Mamemon (nr. 2)
+	Giromon
+	Sukamon
+	Pre Sukamon
+	Summary
+In training ⇒ Rookie
+Evolution:        Any In training ⇒ Kunemon
+Condition:        Sleep in the area called Kunemon’s Bed.
+Comment:        Save before sleeping, don’t sleep and save in order to retry on failure.
+        50% chance of success.
+Any digimon ⇒ Champion
+
+
+Evolution:        Any digimon ⇒ Sukamon
+Condition:        Full virus bar.
+Comment:        The virus bar is full at 16 poops and carries over.
+Rookie ⇒ Champion
+
+
+Evolution:         Any rookie ⇒ Numemon
+Condition:        Not eligible for evolution between 72h and 96h in rookie form.
+Comment:        -20% current stats.
+
+Evolution:        Any Rookie ⇒ Nanimon
+Condition:        Scold while happiness = -100; discipline = 0.
+Comment:        No evolution stats gain.
+
+
+Evolution:        Any rookie(but Penguinmon) ⇒ Bakemon
+Condition:        Lose a life (battle or illness)
+Comment:        Store all items in the bank in order to prevent theft; Save before losing a life in order                 to retry on failure.
+10% chance of success.
+Champion ⇒ Champion
+Evolution:        Angemon ⇒ Devimon
+Condition:        Losing a life (battle or illness) while discipline ≤ 50.
+Comment:        Store all items in the bank in order to prevent theft; Save before losing a life in order                 to retry on failure.
+50% chance of success.
+
+
+Evolution:        Seadramon ⇒ Airdramon
+Condition:        Sleep while discipline = 100; happiness = 100;  tiredness = 0. 
+        30% chance of success.
+
+
+Evolution:        Birdramon ⇒ Airdramon
+Condition:        Sleep while discipline = 100; happiness = 100;  tiredness = 0. 
+        30% chance of success.
+
+
+Evolution:        Whamon ⇒ Coelamon (⇒ Megaseadramon)
+Condition:        Scold or praise during the 200th hour as Whamon.
+Comment:        30% chance of success. Coelamon will digivolve to Megaseadramon instantly.
+
+
+Evolution:        Shellmon ⇒ Coelamon (⇒ Megaseadramon) 
+Condition:        Scold or praise during the 200th hour as Shellmon.
+Comment:        Coelamon will digivolve to Megaseadramon as a result of battles, care mistakes 
+reset, Coelamons target weight and a lack of evolution age reset.
+
+
+Evolution:        Vegimon ⇒ Ninjamon
+Condition:        Sleep while discipline = 100; battles fought = 50+.
+30% chance of success.
+
+
+Evolution:        Drimogemon ⇒ Monochromon
+Condition:        Sleep while discipline = 100; defense = 500+.
+Comment:        Evolution age does not get reset upon digivolution.
+30% chance of success.
+Champion ⇒ Ultimate
+
+Evolution:        Any Champion ⇒ Vademon
+Condition:        Praise after 240h in champion form. Reaching 360h in champion.
+Comment: 50% chance of success.
+
+
+Evolution:        Kokatorimon ⇒ Phoenixmon
+Condition:        Lose a life (battle or illness).
+Comment:        Store all items in the bank in order to prevent theft; Save before losing a life in order                 to retry on failure.
+10% chance of success.
+Ultimate ⇒ Ultimate
+
+
+Evolution:        MetalGreymon ⇒ SkullGreymon
+Condition:        Lose a life (battle or illness).
+Comment:        Store all items in the bank in order to prevent theft; Save before losing a life in order                 to retry on failure.
+10% chance of success.
+
+
+Evolution:        Megadramon ⇒ SkullGreymon
+Condition:        Lose a life (battle or illness).
+Comment:        Store all items in the bank in order to prevent theft; Save before losing a life in order                 to retry on failure.
+10% chance of success.
+
+
+Evolution:        Mamemon -> MetalMamemon
+Condition:        Talk to the single Guardromon located in the top room, near the left wall, of Factorial 
+Town and he'll offer you to "remodel" your Digimon for 2000 bits. 
+Comment:        Save beforehand in order to retry on failure or Giromon.
+5/11th chance of success; 1/11th chance of Giromon; 5/11th chance of a fail.
+
+Evolution:        Mamemon -> Giromon
+Condition:        Talk to the single Guardromon located in the top room, near the left wall, of Factorial 
+Town and he'll offer you to "remodel" your Digimon for 2000 bits. 
+Comment:        Save beforehand in order to retry on failure or Metalmamemon..
+1/11th chance of success; 5/11th chance of MetalMamemon; 5/11th chance of a fail.
+Champion ⇒ Any digimon
+
+Evolution:        Sukamon ⇒ pre Sukamon digimon
+Condition:        Talk to King Sukamon at Trash Mountain.
+Comment:        After the first time he will be angry with you and instantly revert you back without                 asking. The stats will be reverted back to the moment he became Sukamon and you                 will gain 50% of the stats gained while being a Sukamon.
+Back to the navigation table.

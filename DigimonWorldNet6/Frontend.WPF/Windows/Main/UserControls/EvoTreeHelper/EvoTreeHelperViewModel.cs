@@ -1,4 +1,4 @@
-using System;
+ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -76,6 +76,12 @@ public class EvoTreeHelperViewModel : BaseViewModel, IDisposable
     } = [];
 
     public ObservableCollection<ResolvedConnection> Connections
+    {
+        get;
+        private set => SetField(ref field, value);
+    } = [];
+
+    public ObservableCollection<SpecialEvolutionInfo> SpecialEvolutions
     {
         get;
         private set => SetField(ref field, value);
@@ -264,7 +270,7 @@ public class EvoTreeHelperViewModel : BaseViewModel, IDisposable
         Dictionary<DigimonName, EvoTreeNode> nodeMap = new();
 
         const double centerY = DATA_ROWS_CENTER - NODE_SIZE / 2.0;
-        EvoTreeNode centerNode = CreateNode(center, centerColumnX, centerY, true);
+        EvoTreeNode centerNode = CreateNode(center, centerColumnX, centerY);
         newNodes.Add(centerNode);
         nodeMap[center] = centerNode;
 
@@ -273,7 +279,7 @@ public class EvoTreeHelperViewModel : BaseViewModel, IDisposable
         for (int col = 0; col < forwardColumns.Count; col++)
         {
             double x = centerColumnX + (col + 1) * COLUMN_SPACING;
-            PlaceColumn(forwardColumns[col], x, newNodes, nodeMap, _criteriaMap);
+            PlaceColumn(forwardColumns[col], x, newNodes, nodeMap);
         }
 
         _forwardEvolutions = forwardColumns.SelectMany(c => c).ToList();
@@ -284,6 +290,8 @@ public class EvoTreeHelperViewModel : BaseViewModel, IDisposable
 
         Nodes = newNodes;
         Connections = newConnections;
+        SpecialEvolutions = new ObservableCollection<SpecialEvolutionInfo>(
+            SpecialEvolutionProvider.GetAvailableSpecialEvolutions(center));
     }
 
     private static List<List<DigimonName>> ExpandColumns(
@@ -325,8 +333,7 @@ public class EvoTreeHelperViewModel : BaseViewModel, IDisposable
         List<DigimonName> column,
         double x,
         ObservableCollection<EvoTreeNode> nodes,
-        Dictionary<DigimonName, EvoTreeNode> nodeMap,
-        Dictionary<DigimonName, IEvolutionCriteria>? criteriaMap = null)
+        Dictionary<DigimonName, EvoTreeNode> nodeMap)
     {
         double totalHeight = (column.Count - 1) * (NODE_SIZE + ROW_SPACING) + NODE_SIZE;
         double startY = DATA_ROWS_CENTER - totalHeight / 2.0;
@@ -334,12 +341,7 @@ public class EvoTreeHelperViewModel : BaseViewModel, IDisposable
         for (int i = 0; i < column.Count; i++)
         {
             double y = startY + i * (NODE_SIZE + ROW_SPACING);
-            EvolutionCriteriaDisplay? criteriaDisplay = null;
-            if (criteriaMap != null && criteriaMap.TryGetValue(column[i], out IEvolutionCriteria? criteria))
-            {
-                criteriaDisplay = CreateCriteriaDisplay(column[i], criteria);
-            }
-            EvoTreeNode node = CreateNode(column[i], x, y, false, criteriaDisplay);
+            EvoTreeNode node = CreateNode(column[i], x, y);
             nodes.Add(node);
             nodeMap[column[i]] = node;
         }
@@ -399,10 +401,10 @@ public class EvoTreeHelperViewModel : BaseViewModel, IDisposable
         }
     }
 
-    private static EvoTreeNode CreateNode(DigimonName digimon, double x, double y, bool isCenter, EvolutionCriteriaDisplay? criteria = null)
+    private static EvoTreeNode CreateNode(DigimonName digimon, double x, double y)
     {
         string iconPath = DigimonIconFactory.Create(digimon).IconPath;
-        return new EvoTreeNode(digimon.ToString(), x, y, iconPath, digimon, isCenter, criteria);
+        return new EvoTreeNode(x, y, iconPath, digimon);
     }
 
     private Dictionary<DigimonName, IEvolutionCriteria> GetEvolutionCriteriaMap(DigimonName center)
@@ -423,14 +425,6 @@ public class EvoTreeHelperViewModel : BaseViewModel, IDisposable
             // Criteria may not be available for this digimon stage
         }
         return map;
-    }
-
-    private EvolutionCriteriaDisplay CreateCriteriaDisplay(DigimonName digimonName, IEvolutionCriteria criteria)
-    {
-        string name = digimonName.ToString();
-        string iconPath = DigimonIconFactory.Create(digimonName).IconPath;
-        UserDigimon d = Session.UserDigimon;
-        return new EvolutionCriteriaDisplay(name, iconPath, criteria, d.HP, d.MP, d.Off, d.Def, d.Speed, d.Brains, d.Weight, d.CareMistakes, d.Happiness, d.Discipline, d.Battles, d.TechniqueCount);
     }
 
     public void Dispose() => _disposables.Dispose();

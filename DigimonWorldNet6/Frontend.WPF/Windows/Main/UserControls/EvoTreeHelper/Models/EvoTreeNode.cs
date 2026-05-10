@@ -14,18 +14,13 @@ public class EvoTreeNode : DependencyObject
     public static readonly DependencyProperty IsSelectedProperty =
         DependencyProperty.Register(nameof(IsSelected), typeof(bool), typeof(EvoTreeNode), new PropertyMetadata(false));
 
-    public EvoTreeNode(string id, double x, double y, string iconPath, DigimonName digimonName, bool isCenter, EvolutionCriteriaDisplay? criteria = null)
+    public EvoTreeNode(double x, double y, string iconPath, DigimonName digimonName)
     {
-        Id = id;
         X = x;
         Y = y;
         IconPath = iconPath;
         DigimonName = digimonName;
-        IsCenter = isCenter;
-        Criteria = criteria;
     }
-
-    public string Id { get; }
 
     public double X
     {
@@ -47,6 +42,4 @@ public class EvoTreeNode : DependencyObject
 
     public string IconPath { get; }
     public DigimonName DigimonName { get; }
-    public bool IsCenter { get; }
-    public EvolutionCriteriaDisplay? Criteria { get; }
 }
