@@ -32,5 +32,3 @@ public static class UpdateService
         manager.ApplyUpdatesAndRestart(updateInfo);
     }
 }
-
-public record UpdateCheckResult(bool HasUpdate, UpdateInfo? UpdateInfo, string NewVersion);
