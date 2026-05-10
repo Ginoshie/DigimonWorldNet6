@@ -4,42 +4,88 @@ namespace DigimonWorld.Evolution.Calculator.Core.EvolutionCriteriaCalculation.Fr
 
 public sealed class FromInTrainingEvolutionScoreCalculator
 {
+    /// <summary>
+    /// Calculates the evolution score for an InTraining → Rookie evolution.
+    /// Per the game guide, the stats requirement for InTraining evolutions only counts as fulfilled
+    /// if the Digimon's currently highest stat is one the target evolution requires.
+    /// Returns the value of the highest stat if it is required by this evolution (enabling it),
+    /// or 0 if the highest stat is not among this evolution's required stats (disabling it).
+    /// HP and MP are divided by 10 for comparison purposes.
+    /// </summary>
     public int CalculateEvolutionScore(EvolutionCalculationInput evolutionCalculationInput, MainCriteriaStats statsCriteria)
     {
-        int highestEvolutionStat = 0;
         int hpScore = evolutionCalculationInput.HP / 10;
         int mpScore = evolutionCalculationInput.MP / 10;
+        int offScore = evolutionCalculationInput.Off;
+        int defScore = evolutionCalculationInput.Def;
+        int speedScore = evolutionCalculationInput.Speed;
+        int brainsScore = evolutionCalculationInput.Brains;
 
-        if (statsCriteria.HP > 0 && hpScore > highestEvolutionStat)
+        int overallHighestStat = Max6(hpScore, mpScore, offScore, defScore, speedScore, brainsScore);
+
+        // The stats requirement only counts if the current overall highest stat is one this evolution requires.
+        // If so, the score is that stat's value (for priority ordering among enabled evolutions).
+        if (statsCriteria.HP > 0 && hpScore == overallHighestStat)
         {
-            highestEvolutionStat = hpScore;
+            return hpScore;
         }
 
-        if (statsCriteria.MP > 0 && mpScore > highestEvolutionStat)
+        if (statsCriteria.MP > 0 && mpScore == overallHighestStat)
         {
-            highestEvolutionStat = mpScore;
+            return mpScore;
         }
 
-        if (statsCriteria.Off > 0 && evolutionCalculationInput.Off > highestEvolutionStat)
+        if (statsCriteria.Off > 0 && offScore == overallHighestStat)
         {
-            highestEvolutionStat = evolutionCalculationInput.Off;
+            return offScore;
         }
 
-        if (statsCriteria.Def > 0 && evolutionCalculationInput.Def > highestEvolutionStat)
+        if (statsCriteria.Def > 0 && defScore == overallHighestStat)
         {
-            highestEvolutionStat = evolutionCalculationInput.Def;
+            return defScore;
         }
 
-        if (statsCriteria.Speed > 0 && evolutionCalculationInput.Speed > highestEvolutionStat)
+        if (statsCriteria.Speed > 0 && speedScore == overallHighestStat)
         {
-            highestEvolutionStat = evolutionCalculationInput.Speed;
+            return speedScore;
         }
 
-        if (statsCriteria.Brains > 0 && evolutionCalculationInput.Brains > highestEvolutionStat)
+        if (statsCriteria.Brains > 0 && brainsScore == overallHighestStat)
         {
-            highestEvolutionStat = evolutionCalculationInput.Brains;
+            return brainsScore;
         }
 
-        return highestEvolutionStat;
+        return 0;
+    }
+
+    private static int Max6(int a, int b, int c, int d, int e, int f)
+    {
+        int max = a;
+        if (b > max)
+        {
+            max = b;
+        }
+
+        if (c > max)
+        {
+            max = c;
+        }
+
+        if (d > max)
+        {
+            max = d;
+        }
+
+        if (e > max)
+        {
+            max = e;
+        }
+
+        if (f > max)
+        {
+            max = f;
+        }
+
+        return max;
     }
 }

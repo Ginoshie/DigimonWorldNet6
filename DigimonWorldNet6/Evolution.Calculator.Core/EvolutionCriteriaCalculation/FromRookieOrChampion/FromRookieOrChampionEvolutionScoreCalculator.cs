@@ -77,9 +77,10 @@ public sealed class FromRookieOrChampionEvolutionScoreCalculator
             evolutionStatCountTotal++;
         }
 
+        int totalCount = evolutionStatCountTotal + carriedOverStatCount;
         return new EvolutionScoreCalculationResult
         {
-            EvolutionScore = (evolutionStatsTotal + carriedOverStatTotal) / (evolutionStatCountTotal + carriedOverStatCount),
+            EvolutionScore = totalCount > 0 ? (evolutionStatsTotal + carriedOverStatTotal) / totalCount : 0,
             CarriedOverStatTotal = carriedOverStatTotal + evolutionStatsTotal,
             CarriedOverCount = carriedOverStatCount + evolutionStatCountTotal
         };
