@@ -36,6 +36,7 @@
         <Resource Include="Images\**\*" />
         <Resource Include="Fonts\DW1_US_Regular.ttf" />
         <Resource Include="Windows\Main\UserControls\DigiWiki\UserControls\**\*.jpg" />
+        <Resource Include="Windows\Main\UserControls\DigiWiki\UserControls\**\*.png" />
     </ItemGroup>
 
     <ItemGroup>

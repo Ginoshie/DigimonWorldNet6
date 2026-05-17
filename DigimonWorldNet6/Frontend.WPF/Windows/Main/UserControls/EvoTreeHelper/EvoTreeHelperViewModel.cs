@@ -1,13 +1,19 @@
- using System;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Reactive.Disposables;
+using System.Reactive.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Input;
 using System.Windows.Media;
 using DigimonWorld.Evolution.Calculator.Core;
 using DigimonWorld.Evolution.Calculator.Core.EvolutionCriteriaCalculation.FromRookieOrChampion;
 using DigimonWorld.Evolution.Calculator.Core.Interfaces.EvolutionCriteria;
+using DigimonWorld.Frontend.WPF.Constants;
+using DigimonWorld.Frontend.WPF.Enums;
 using DigimonWorld.Frontend.WPF.Services;
 using DigimonWorld.Frontend.WPF.ViewModelComponents;
 using DigimonWorld.Frontend.WPF.Windows.Main.UserControls.EvoTreeHelper.Models;
@@ -28,6 +34,7 @@ public class EvoTreeHelperViewModel : BaseViewModel, IDisposable
     private const double DATA_ROWS_CENTER = CANVAS_HEIGHT / 2.0 + 6;
     private const double COLUMN_SPACING = 160;
     private const double ROW_SPACING = -7;
+    private const DigimonName DEFAULT_CURRENT_DIGIMON = DigimonName.Gabumon;
 
     private static readonly Brush _lightBlue = new SolidColorBrush(Color.FromRgb(0x5E, 0xD6, 0xD6));
     private static readonly Brush _yellow = new SolidColorBrush(Color.FromRgb(0xE8, 0xA8, 0x35));
@@ -36,38 +43,53 @@ public class EvoTreeHelperViewModel : BaseViewModel, IDisposable
     private static readonly Brush _pink = new SolidColorBrush(Color.FromRgb(0xBB, 0x7A, 0xD6));
     private static readonly Brush _red = new SolidColorBrush(Color.FromRgb(0xC5, 0x4A, 0x4A));
 
-    private static Brush[] GetConnectionColors(int count) => count switch
-    {
-        1 => [_lightBlue],
-        2 => [_lightBlue, _blue],
-        3 => [_green, _lightBlue, _blue],
-        4 => [_yellow, _green, _lightBlue, _blue],
-        5 => [_yellow, _green, _lightBlue, _blue, _pink],
-        _ => [_yellow, _green, _lightBlue, _blue, _pink, _red],
-    };
-
-    private readonly CompositeDisposable _disposables;
-    private DigimonName _currentDigimon = DigimonName.Agumon;
-    private GameVariant _gameVariant = GameVariant.Original;
-    private Dictionary<DigimonName, IEvolutionCriteria> _criteriaMap = new();
-    private List<DigimonName> _forwardEvolutions = [];
+    private readonly SpeakingSimulator _speakingSimulator;
 
     public EvoTreeHelperViewModel()
     {
+        SynchronizationContext uiSynchronizationContext = SynchronizationContext.Current!;
+
+        _speakingSimulator = new SpeakingSimulator();
+
+        InstantDisplayCommand = new CommandHandler(InstantDisplay);
+
+        SpeechDelay delay = UserConfigurationManager.SpeakingSimulatorConfig.NarratorMode == NarratorMode.Instant ? SpeechDelay.None : SpeechDelay.Short;
+
         _disposables = new CompositeDisposable(
+            _speakingSimulator,
             EmulatorLinkEventHub.DigimonProfileStatsSynchronizedObservable.Subscribe(_ => OnProfileStatsSynced()),
             EmulatorLinkEventHub.DigimonParameterStatsSynchronizedObservable.Subscribe(_ => RefreshUserStats()),
-            UserConfigurationManager.CurrentEvolutionCalculatorConfig.Subscribe(config =>
-            {
-                _gameVariant = config.GameVariant;
-                TryReadCurrentDigimon();
-            })
-        );
+            UserConfigurationManager.CurrentEvolutionCalculatorConfig
+                .ObserveOn(uiSynchronizationContext)
+                .Subscribe(config =>
+                {
+                    _gameVariant = config.GameVariant;
+                    TryReadCurrentDigimon();
+                }),
+            EmulatorLinkEventHub.EmulatorConnectedObservable
+                .ObserveOn(uiSynchronizationContext)
+                .Subscribe(isConnected =>
+                {
+                    if (isConnected)
+                    {
+                        TryReadCurrentDigimon();
 
-        TryReadCurrentDigimon();
-        RefreshUserStats();
-        BuildGraph();
+                        SpeakGabumonTextAsync(GabumonEvoTreeHelperNarratorText.EmulatorConnectedText, delay).ConfigureAwait(false);
+                    }
+                    else
+                    {
+                        CurrentDigimon = DEFAULT_CURRENT_DIGIMON;
+
+                        SpeakGabumonTextAsync(GabumonEvoTreeHelperNarratorText.EmulatorNotConnectedText, delay).ConfigureAwait(false);
+                    }
+                })
+        );
     }
+
+    public double CanvasWidth => CANVAS_WIDTH;
+    public double CanvasHeight => CANVAS_HEIGHT;
+
+    public ICommand InstantDisplayCommand { get; }
 
     public ObservableCollection<EvoTreeNode> Nodes
     {
@@ -87,52 +109,163 @@ public class EvoTreeHelperViewModel : BaseViewModel, IDisposable
         private set => SetField(ref field, value);
     } = [];
 
-    public double NodeSize => NODE_SIZE;
-    public double CanvasWidth => CANVAS_WIDTH;
-    public double CanvasHeight => CANVAS_HEIGHT;
+    public string GabumonText
+    {
+        get;
+        set => SetField(ref field, value);
+    } = string.Empty;
 
-    private EvolutionCriteriaDisplay? _criteria0;
-    public EvolutionCriteriaDisplay? Criteria0 { get => _criteria0; private set => SetField(ref _criteria0, value); }
-    private EvolutionCriteriaDisplay? _criteria1;
-    public EvolutionCriteriaDisplay? Criteria1 { get => _criteria1; private set => SetField(ref _criteria1, value); }
-    private EvolutionCriteriaDisplay? _criteria2;
-    public EvolutionCriteriaDisplay? Criteria2 { get => _criteria2; private set => SetField(ref _criteria2, value); }
-    private EvolutionCriteriaDisplay? _criteria3;
-    public EvolutionCriteriaDisplay? Criteria3 { get => _criteria3; private set => SetField(ref _criteria3, value); }
-    private EvolutionCriteriaDisplay? _criteria4;
-    public EvolutionCriteriaDisplay? Criteria4 { get => _criteria4; private set => SetField(ref _criteria4, value); }
-    private EvolutionCriteriaDisplay? _criteria5;
-    public EvolutionCriteriaDisplay? Criteria5 { get => _criteria5; private set => SetField(ref _criteria5, value); }
 
-    private string _currentIconPath = "";
-    public string CurrentIconPath { get => _currentIconPath; private set => SetField(ref _currentIconPath, value); }
-    private string _currentDigimonDisplayName = "";
-    public string CurrentDigimonName { get => _currentDigimonDisplayName; private set => SetField(ref _currentDigimonDisplayName, value); }
+    private void InstantDisplay() => _speakingSimulator.RequestInstantDisplay();
+    private Task SpeakGabumonTextAsync(string text, SpeechDelay delayMs = SpeechDelay.None) => _speakingSimulator.SpeakAsync(text, output => GabumonText = output, delayMs);
 
-    private string _currentHP = "0";
-    public string CurrentHP { get => _currentHP; private set => SetField(ref _currentHP, value); }
-    private string _currentMP = "0";
-    public string CurrentMP { get => _currentMP; private set => SetField(ref _currentMP, value); }
-    private string _currentOff = "0";
-    public string CurrentOff { get => _currentOff; private set => SetField(ref _currentOff, value); }
-    private string _currentDef = "0";
-    public string CurrentDef { get => _currentDef; private set => SetField(ref _currentDef, value); }
-    private string _currentSpeed = "0";
-    public string CurrentSpeed { get => _currentSpeed; private set => SetField(ref _currentSpeed, value); }
-    private string _currentBrains = "0";
-    public string CurrentBrains { get => _currentBrains; private set => SetField(ref _currentBrains, value); }
-    private string _currentWeight = "0";
-    public string CurrentWeight { get => _currentWeight; private set => SetField(ref _currentWeight, value); }
-    private string _currentCareMistakes = "0";
-    public string CurrentCareMistakes { get => _currentCareMistakes; private set => SetField(ref _currentCareMistakes, value); }
-    private string _currentHappiness = "0";
-    public string CurrentHappiness { get => _currentHappiness; private set => SetField(ref _currentHappiness, value); }
-    private string _currentDiscipline = "0";
-    public string CurrentDiscipline { get => _currentDiscipline; private set => SetField(ref _currentDiscipline, value); }
-    private string _currentBattles = "0";
-    public string CurrentBattles { get => _currentBattles; private set => SetField(ref _currentBattles, value); }
-    private string _currentTechniqueCount = "0";
-    public string CurrentTechniqueCount { get => _currentTechniqueCount; private set => SetField(ref _currentTechniqueCount, value); }
+    private static Brush[] GetConnectionColors(int count) => count switch
+    {
+        1 => [_lightBlue],
+        2 => [_lightBlue, _blue],
+        3 => [_green, _lightBlue, _blue],
+        4 => [_yellow, _green, _lightBlue, _blue],
+        5 => [_yellow, _green, _lightBlue, _blue, _pink],
+        _ => [_yellow, _green, _lightBlue, _blue, _pink, _red],
+    };
+
+    private readonly CompositeDisposable _disposables;
+    private GameVariant _gameVariant = GameVariant.Original;
+    private Dictionary<DigimonName, IEvolutionCriteria> _criteriaMap = new();
+    private List<DigimonName> _forwardEvolutions = [];
+
+    public DigimonName CurrentDigimon
+    {
+        get;
+        private set
+        {
+            if (SetField(ref field, value))
+            {
+                BuildGraph();
+            }
+        }
+    }
+
+    public EvolutionCriteriaDisplay? Criteria0
+    {
+        get;
+        private set => SetField(ref field, value);
+    }
+
+    public EvolutionCriteriaDisplay? Criteria1
+    {
+        get;
+        private set => SetField(ref field, value);
+    }
+
+    public EvolutionCriteriaDisplay? Criteria2
+    {
+        get;
+        private set => SetField(ref field, value);
+    }
+
+    public EvolutionCriteriaDisplay? Criteria3
+    {
+        get;
+        private set => SetField(ref field, value);
+    }
+
+    public EvolutionCriteriaDisplay? Criteria4
+    {
+        get;
+        private set => SetField(ref field, value);
+    }
+
+    public EvolutionCriteriaDisplay? Criteria5
+    {
+        get;
+        private set => SetField(ref field, value);
+    }
+
+    public string CurrentIconPath
+    {
+        get;
+        private set => SetField(ref field, value);
+    } = "";
+
+    public string CurrentDigimonName
+    {
+        get;
+        private set => SetField(ref field, value);
+    } = "";
+
+    public string CurrentHP
+    {
+        get;
+        private set => SetField(ref field, value);
+    } = "0";
+
+    public string CurrentMP
+    {
+        get;
+        private set => SetField(ref field, value);
+    } = "0";
+
+    public string CurrentOff
+    {
+        get;
+        private set => SetField(ref field, value);
+    } = "0";
+
+    public string CurrentDef
+    {
+        get;
+        private set => SetField(ref field, value);
+    } = "0";
+
+    public string CurrentSpeed
+    {
+        get;
+        private set => SetField(ref field, value);
+    } = "0";
+
+    public string CurrentBrains
+    {
+        get;
+        private set => SetField(ref field, value);
+    } = "0";
+
+    public string CurrentWeight
+    {
+        get;
+        private set => SetField(ref field, value);
+    } = "0";
+
+    public string CurrentCareMistakes
+    {
+        get;
+        private set => SetField(ref field, value);
+    } = "0";
+
+    public string CurrentHappiness
+    {
+        get;
+        private set => SetField(ref field, value);
+    } = "0";
+
+    public string CurrentDiscipline
+    {
+        get;
+        private set => SetField(ref field, value);
+    } = "0";
+
+    public string CurrentBattles
+    {
+        get;
+        private set => SetField(ref field, value);
+    } = "0";
+
+    public string CurrentTechniqueCount
+    {
+        get;
+        private set => SetField(ref field, value);
+    } = "0";
+
 
     private void RefreshUserStats()
     {
@@ -181,10 +314,13 @@ public class EvoTreeHelperViewModel : BaseViewModel, IDisposable
                     current.IsWinningEvolution = false;
                     current.UpdateUserStats(userHp, userMp, userOff, userDef, userSpeed, userBrains, userWeight, userCareMistakes, userHappiness, userDiscipline, userBattles, userTechniqueCount);
                     criteriaList.Add(current);
-                } else
-                {
-                    criteriaList.Add(new EvolutionCriteriaDisplay(evo.ToString(), DigimonIconFactory.Create(evo).IconPath, criteria, userHp, userMp, userOff, userDef, userSpeed, userBrains, userWeight, userCareMistakes, userHappiness, userDiscipline, userBattles, userTechniqueCount));
                 }
+                else
+                {
+                    criteriaList.Add(new EvolutionCriteriaDisplay(evo.ToString(), DigimonIconFactory.Create(evo).IconPath, criteria, userHp, userMp, userOff, userDef, userSpeed, userBrains, userWeight, userCareMistakes, userHappiness, userDiscipline,
+                        userBattles, userTechniqueCount));
+                }
+
                 index++;
             }
         }
@@ -218,9 +354,9 @@ public class EvoTreeHelperViewModel : BaseViewModel, IDisposable
 
             Digimon digimon = DigimonTypes.Get(digimonType, _gameVariant);
 
-            if (digimon.DigimonName != _currentDigimon)
+            if (digimon.DigimonName != CurrentDigimon)
             {
-                _currentDigimon = digimon.DigimonName;
+                CurrentDigimon = digimon.DigimonName;
                 Application.Current.Dispatcher.Invoke(BuildGraph);
             }
         }
@@ -241,7 +377,7 @@ public class EvoTreeHelperViewModel : BaseViewModel, IDisposable
             }
 
             Digimon digimon = DigimonTypes.Get(digimonType, _gameVariant);
-            _currentDigimon = digimon.DigimonName;
+            CurrentDigimon = digimon.DigimonName;
         }
         catch
         {
@@ -251,7 +387,7 @@ public class EvoTreeHelperViewModel : BaseViewModel, IDisposable
 
     private void BuildGraph()
     {
-        DigimonName center = _currentDigimon;
+        DigimonName center = CurrentDigimon;
 
         ObservableCollection<EvoTreeNode> newNodes = [];
         ObservableCollection<ResolvedConnection> newConnections = [];
@@ -260,8 +396,7 @@ public class EvoTreeHelperViewModel : BaseViewModel, IDisposable
         CurrentIconPath = DigimonIconFactory.Create(center).IconPath;
         CurrentDigimonName = center.ToString();
 
-        List<List<DigimonName>> forwardColumns = ExpandColumns(
-            [center], visited, EvolutionPathProvider.GetEvolutions, maxDepth: 1);
+        List<List<DigimonName>> forwardColumns = ExpandColumns([center], visited, EvolutionPathProvider.GetEvolutions, maxDepth: 1);
 
         int totalColumns = 1 + forwardColumns.Count;
         double treeWidth = (totalColumns - 1) * COLUMN_SPACING + NODE_SIZE;
@@ -322,6 +457,7 @@ public class EvoTreeHelperViewModel : BaseViewModel, IDisposable
             {
                 columns.Add(nextColumn);
             }
+
             currentColumn = nextColumn;
             depth++;
         }
@@ -385,10 +521,12 @@ public class EvoTreeHelperViewModel : BaseViewModel, IDisposable
                     if (color == _lightBlue || color == _blue)
                     {
                         stubTier = 1;
-                    } else if (color == _green || color == _pink)
+                    }
+                    else if (color == _green || color == _pink)
                     {
                         stubTier = 2;
-                    } else
+                    }
+                    else
                     {
                         stubTier = 3;
                     }
@@ -424,6 +562,7 @@ public class EvoTreeHelperViewModel : BaseViewModel, IDisposable
         {
             // Criteria may not be available for this digimon stage
         }
+
         return map;
     }
 

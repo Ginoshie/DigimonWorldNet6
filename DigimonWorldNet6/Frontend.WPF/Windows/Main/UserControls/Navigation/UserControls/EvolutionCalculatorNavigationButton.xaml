@@ -32,7 +32,11 @@
                         </Border.BorderBrush>
                     </Border>
                     <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5">
-                        <Image x:Name="AnimatedImage" Source="/Images/Icons/Menu/gauge-menu1.png" Width="{StaticResource ButtonWidth}" Stretch="UniformToFill" />
+                        <Image x:Name="AnimatedImage" Source="/Images/Icons/Menu/gauge-menu1.png" 
+                               Width="{StaticResource ButtonWidth}" 
+                               Margin="5" 
+                               Stretch="Uniform"
+                               RenderOptions.BitmapScalingMode="Fant" />
                         <TextBlock Width="{StaticResource TextBlockWidth}" TextAlignment="Center" TextWrapping="Wrap">Evolution Calculator</TextBlock>
                     </StackPanel>
                 </Grid>

@@ -33,7 +33,16 @@
                         </Border.BorderBrush>
                     </Border>
                     <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5">
-                        <Image x:Name="AnimatedImage" Source="/Images/Icons/Digimon/agumon-icon.png" Width="{StaticResource ButtonWidth}" Height="{StaticResource ButtonWidth}" Stretch="UniformToFill" />
+                        <Image x:Name="AnimatedImage" Source="/Images/Icons/Menu/evo-tree-helper-menu.png" 
+                               Width="{StaticResource ButtonWidth}" 
+                               Height="{StaticResource ButtonWidth}" 
+                               Margin="5"
+                               Stretch="Uniform"
+                               RenderOptions.BitmapScalingMode="Fant">
+                            <Image.RenderTransform>
+                                <TranslateTransform x:Name="ImageTranslate" Y="0" />
+                            </Image.RenderTransform>
+                        </Image>
                         <TextBlock Width="{StaticResource TextBlockWidth}" TextAlignment="Center" TextWrapping="Wrap">Evo Tree Helper</TextBlock>
                     </StackPanel>
                 </Grid>
@@ -42,59 +51,47 @@
                         <Trigger.EnterActions>
                             <BeginStoryboard x:Name="ImageHoverStoryboard">
                                 <Storyboard RepeatBehavior="Forever">
-                                    <ObjectAnimationUsingKeyFrames Storyboard.TargetName="AnimatedImage"
-                                                                   Storyboard.TargetProperty="Source">
-                                        <DiscreteObjectKeyFrame KeyTime="0:0:0">
-                                            <DiscreteObjectKeyFrame.Value>
-                                                <BitmapImage UriSource="/Images/Icons/Digimon/agumon-icon.png" />
-                                            </DiscreteObjectKeyFrame.Value>
-                                        </DiscreteObjectKeyFrame>
-                                        <DiscreteObjectKeyFrame KeyTime="0:0:0.4">
-                                            <DiscreteObjectKeyFrame.Value>
-                                                <BitmapImage UriSource="/Images/Icons/Digimon/greymon-icon.png" />
-                                            </DiscreteObjectKeyFrame.Value>
-                                        </DiscreteObjectKeyFrame>
-                                        <DiscreteObjectKeyFrame KeyTime="0:0:0.8">
-                                            <DiscreteObjectKeyFrame.Value>
-                                                <BitmapImage UriSource="/Images/Icons/Digimon/metalgreymon-icon.png" />
-                                            </DiscreteObjectKeyFrame.Value>
-                                        </DiscreteObjectKeyFrame>
-                                    </ObjectAnimationUsingKeyFrames>
+                                    <DoubleAnimationUsingKeyFrames Storyboard.TargetName="ImageTranslate"
+                                                                   Storyboard.TargetProperty="Y">
+                                        <DiscreteDoubleKeyFrame KeyTime="0:0:0" Value="0" />
+                                        <DiscreteDoubleKeyFrame KeyTime="0:0:0.4" Value="-3" />
+                                        <DiscreteDoubleKeyFrame KeyTime="0:0:0.8" Value="0" />
+                                    </DoubleAnimationUsingKeyFrames>
                                 </Storyboard>
                             </BeginStoryboard>
                             <BeginStoryboard x:Name="BorderHoverStoryboard">
                                 <Storyboard RepeatBehavior="Forever">
                                     <ColorAnimationUsingKeyFrames Storyboard.TargetName="outerBrush"
                                                                   Storyboard.TargetProperty="Color">
-                                        <DiscreteColorKeyFrame KeyTime="0:0:0" Value="#4A9FC5" />
-                                        <DiscreteColorKeyFrame KeyTime="0:0:0.3" Value="#6DB8D6" />
-                                        <DiscreteColorKeyFrame KeyTime="0:0:0.6" Value="#90D9FA" />
-                                        <DiscreteColorKeyFrame KeyTime="0:0:0.9" Value="#6DB8D6" />
-                                        <DiscreteColorKeyFrame KeyTime="0:0:1.2" Value="#4A9FC5" />
+                                        <DiscreteColorKeyFrame KeyTime="0:0:0" Value="#AD7B00" />
+                                        <DiscreteColorKeyFrame KeyTime="0:0:0.3" Value="#DEB500" />
+                                        <DiscreteColorKeyFrame KeyTime="0:0:0.6" Value="#F7D600" />
+                                        <DiscreteColorKeyFrame KeyTime="0:0:0.9" Value="#E8C31B" />
+                                        <DiscreteColorKeyFrame KeyTime="0:0:1.2" Value="#E8C31B" />
                                     </ColorAnimationUsingKeyFrames>
                                     <ColorAnimationUsingKeyFrames Storyboard.TargetName="secondBrush"
                                                                   Storyboard.TargetProperty="Color">
-                                        <DiscreteColorKeyFrame KeyTime="0:0:0" Value="#6DB8D6" />
-                                        <DiscreteColorKeyFrame KeyTime="0:0:0.3" Value="#4A9FC5" />
-                                        <DiscreteColorKeyFrame KeyTime="0:0:0.6" Value="#6DB8D6" />
-                                        <DiscreteColorKeyFrame KeyTime="0:0:0.9" Value="#90D9FA" />
-                                        <DiscreteColorKeyFrame KeyTime="0:0:1.2" Value="#6DB8D6" />
+                                        <DiscreteColorKeyFrame KeyTime="0:0:0" Value="#E8C31B" />
+                                        <DiscreteColorKeyFrame KeyTime="0:0:0.3" Value="#AD7B00" />
+                                        <DiscreteColorKeyFrame KeyTime="0:0:0.6" Value="#DEB500" />
+                                        <DiscreteColorKeyFrame KeyTime="0:0:0.9" Value="#F7D600" />
+                                        <DiscreteColorKeyFrame KeyTime="0:0:1.2" Value="#F7D600" />
                                     </ColorAnimationUsingKeyFrames>
                                     <ColorAnimationUsingKeyFrames Storyboard.TargetName="thirdBrush"
                                                                   Storyboard.TargetProperty="Color">
-                                        <DiscreteColorKeyFrame KeyTime="0:0:0" Value="#90D9FA" />
-                                        <DiscreteColorKeyFrame KeyTime="0:0:0.3" Value="#6DB8D6" />
-                                        <DiscreteColorKeyFrame KeyTime="0:0:0.6" Value="#4A9FC5" />
-                                        <DiscreteColorKeyFrame KeyTime="0:0:0.9" Value="#6DB8D6" />
-                                        <DiscreteColorKeyFrame KeyTime="0:0:1.2" Value="#90D9FA" />
+                                        <DiscreteColorKeyFrame KeyTime="0:0:0" Value="#F7D600" />
+                                        <DiscreteColorKeyFrame KeyTime="0:0:0.3" Value="#E8C31B" />
+                                        <DiscreteColorKeyFrame KeyTime="0:0:0.6" Value="#AD7B00" />
+                                        <DiscreteColorKeyFrame KeyTime="0:0:0.9" Value="#DEB500" />
+                                        <DiscreteColorKeyFrame KeyTime="0:0:1.2" Value="#DEB500" />
                                     </ColorAnimationUsingKeyFrames>
                                     <ColorAnimationUsingKeyFrames Storyboard.TargetName="innerBrush"
                                                                   Storyboard.TargetProperty="Color">
-                                        <DiscreteColorKeyFrame KeyTime="0:0:0" Value="#6DB8D6" />
-                                        <DiscreteColorKeyFrame KeyTime="0:0:0.3" Value="#90D9FA" />
-                                        <DiscreteColorKeyFrame KeyTime="0:0:0.6" Value="#6DB8D6" />
-                                        <DiscreteColorKeyFrame KeyTime="0:0:0.9" Value="#4A9FC5" />
-                                        <DiscreteColorKeyFrame KeyTime="0:0:1.2" Value="#6DB8D6" />
+                                        <DiscreteColorKeyFrame KeyTime="0:0:0" Value="#DEB500" />
+                                        <DiscreteColorKeyFrame KeyTime="0:0:0.3" Value="#F7D600" />
+                                        <DiscreteColorKeyFrame KeyTime="0:0:0.6" Value="#E8C31B" />
+                                        <DiscreteColorKeyFrame KeyTime="0:0:0.9" Value="#AD7B00" />
+                                        <DiscreteColorKeyFrame KeyTime="0:0:1.2" Value="#AD7B00" />
                                     </ColorAnimationUsingKeyFrames>
                                 </Storyboard>
                             </BeginStoryboard>

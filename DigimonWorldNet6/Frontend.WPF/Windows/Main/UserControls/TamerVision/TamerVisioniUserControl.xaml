@@ -77,7 +77,7 @@
                                 <Image Grid.Column="0" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Top" 
                                        Source="/Images/Icons/Labels/profile-label.png"
                                        Height="40"
-                                       Margin="0,10,0,0" />
+                                       Margin="10" />
                                 <Grid Grid.Row="1" Margin="10" SnapsToDevicePixels="True">
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="Auto"></RowDefinition>
@@ -217,13 +217,13 @@
                         <Image Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Top"
                                Source="/Images/Icons/Labels/stats-label.png"
                                Height="40"
-                               Margin="0,10,0,10" />
+                               Margin="10" />
                         <userControls:CareStatsUserControl Grid.Row="1" Grid.Column="0" Margin="10, 0, 10,10"/>
                         <userControls:CombatStatsUserControl Grid.Row="1" Grid.Column="1" Margin="0, 0, 10,10"/>
                         <Image Grid.Row="0" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Top"
                                Source="/Images/Icons/Labels/evolution-label.png"
                                Height="40"
-                               Margin="0,10,0,10" />
+                               Margin="10" />
                         <userControls:EvolutionStatsUserControl Grid.Row="1" Grid.Column="2" />
                     </Grid>
                 </Border>

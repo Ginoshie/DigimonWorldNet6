@@ -32,8 +32,13 @@
                             <SolidColorBrush x:Name="innerBrush" Color="Transparent" />
                         </Border.BorderBrush>
                     </Border>
-                    <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5" ClipToBounds="False">
-                        <Image x:Name="AnimatedImage" Source="/Images/Icons/Items/Misc/AS Decoder.png" Width="{StaticResource ButtonWidth}" Height="{StaticResource ButtonWidth}" Stretch="Uniform" ClipToBounds="False">
+                    <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5" >
+                        <Image x:Name="AnimatedImage" Source="/Images/Icons/Items/Misc/AS Decoder.png" 
+                               Width="{StaticResource ButtonWidth}" 
+                               Height="{StaticResource ButtonWidth}"
+                               Margin="5" 
+                               Stretch="Uniform"
+                               RenderOptions.BitmapScalingMode="Fant" >
                             <Image.RenderTransform>
                                 <TranslateTransform x:Name="ImageTranslate" Y="0" />
                             </Image.RenderTransform>

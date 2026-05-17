@@ -54,7 +54,7 @@
             <TextBox Name="Volume" Grid.Row="0" Grid.Column="1" Style="{StaticResource DefaultTextBoxStyle}"
                      HorizontalAlignment="Left"
                      Width="73"
-                     Height="23"
+                     Height="26"
                      Margin="0,0,5,0">
                 <TextBox.Text>
                     <Binding Path="Volume" UpdateSourceTrigger="PropertyChanged" Mode="TwoWay">

@@ -15,7 +15,7 @@ namespace DigimonWorld.Frontend.WPF.Windows.Main.UserControls.Panes;
 
 public class NavigationLeftPaneViewModelComponent : PaneBaseViewModel, IDisposable
 {
-    private const double PANEL_OPENED_X_OFFSET = 10;
+    private const double PANEL_OPENED_X_OFFSET = 12;
     private const double PANEL_CLOSED_X_OFFSET = 120;
 
     private readonly Action<UserControl> _setCurrentSelectedMainWindowContent;

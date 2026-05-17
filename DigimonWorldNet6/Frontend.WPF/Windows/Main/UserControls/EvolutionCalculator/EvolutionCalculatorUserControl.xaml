@@ -44,7 +44,9 @@
                             <RowDefinition Height="*" />
                             <RowDefinition Height="*" />
                         </Grid.RowDefinitions>
-                        <Label Grid.Row="0" Grid.Column="0" Height="40" Width="150" Style="{StaticResource DefaultSheenLabelStyle}" IsTabStop="False" Content="YOUR DIGIMON"/>
+                        <Image Grid.Row="0" Grid.Column="0" Height="40"
+                               Source="/Images/Icons/Labels/your-digimon-label.png"
+                               Margin="10" />
                         <GroupBox Grid.Column="0" Grid.Row="1" Header="Your Digimon">
                             <GroupBox.Template>
                                 <ControlTemplate TargetType="GroupBox">

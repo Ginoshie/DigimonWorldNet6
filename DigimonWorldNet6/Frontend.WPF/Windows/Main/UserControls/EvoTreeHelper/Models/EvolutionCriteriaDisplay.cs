@@ -134,69 +134,182 @@ public class EvolutionCriteriaDisplay : BaseViewModel
     public string Weight { get; }
     public string CareMistakes { get; }
 
-    private string _userHP = "";
-    public string UserHP { get => _userHP; private set => SetField(ref _userHP, value); }
-    private string _userMP = "";
-    public string UserMP { get => _userMP; private set => SetField(ref _userMP, value); }
-    private string _userOff = "";
-    public string UserOff { get => _userOff; private set => SetField(ref _userOff, value); }
-    private string _userDef = "";
-    public string UserDef { get => _userDef; private set => SetField(ref _userDef, value); }
-    private string _userSpeed = "";
-    public string UserSpeed { get => _userSpeed; private set => SetField(ref _userSpeed, value); }
-    private string _userBrains = "";
-    public string UserBrains { get => _userBrains; private set => SetField(ref _userBrains, value); }
-    private string _userWeight = "";
-    public string UserWeight { get => _userWeight; private set => SetField(ref _userWeight, value); }
-    private string _userCareMistakes = "";
-    public string UserCareMistakes { get => _userCareMistakes; private set => SetField(ref _userCareMistakes, value); }
+    public string UserHP
+    {
+        get;
+        private set => SetField(ref field, value);
+    } = "";
+
+    public string UserMP
+    {
+        get;
+        private set => SetField(ref field, value);
+    } = "";
+
+    public string UserOff
+    {
+        get;
+        private set => SetField(ref field, value);
+    } = "";
+
+    public string UserDef
+    {
+        get;
+        private set => SetField(ref field, value);
+    } = "";
+
+    public string UserSpeed
+    {
+        get;
+        private set => SetField(ref field, value);
+    } = "";
+
+    public string UserBrains
+    {
+        get;
+        private set => SetField(ref field, value);
+    } = "";
+
+    public string UserWeight
+    {
+        get;
+        private set => SetField(ref field, value);
+    } = "";
+
+    public string UserCareMistakes
+    {
+        get;
+        private set => SetField(ref field, value);
+    } = "";
 
     public string Happiness { get; }
     public string Discipline { get; }
     public string Battles { get; }
     public string TechniqueCount { get; }
 
-    private string _userHappiness = "";
-    public string UserHappiness { get => _userHappiness; private set => SetField(ref _userHappiness, value); }
-    private string _userDiscipline = "";
-    public string UserDiscipline { get => _userDiscipline; private set => SetField(ref _userDiscipline, value); }
-    private string _userBattles = "";
-    public string UserBattles { get => _userBattles; private set => SetField(ref _userBattles, value); }
-    private string _userTechniqueCount = "";
-    public string UserTechniqueCount { get => _userTechniqueCount; private set => SetField(ref _userTechniqueCount, value); }
+    public string UserHappiness
+    {
+        get;
+        private set => SetField(ref field, value);
+    } = "";
 
-    private bool? _isHPMet;
-    public bool? IsHPMet { get => _isHPMet; private set => SetField(ref _isHPMet, value); }
-    private bool? _isMPMet;
-    public bool? IsMPMet { get => _isMPMet; private set => SetField(ref _isMPMet, value); }
-    private bool? _isOffMet;
-    public bool? IsOffMet { get => _isOffMet; private set => SetField(ref _isOffMet, value); }
-    private bool? _isDefMet;
-    public bool? IsDefMet { get => _isDefMet; private set => SetField(ref _isDefMet, value); }
-    private bool? _isSpeedMet;
-    public bool? IsSpeedMet { get => _isSpeedMet; private set => SetField(ref _isSpeedMet, value); }
-    private bool? _isBrainsMet;
-    public bool? IsBrainsMet { get => _isBrainsMet; private set => SetField(ref _isBrainsMet, value); }
-    private bool _isWeightMet;
-    public bool IsWeightMet { get => _isWeightMet; private set => SetField(ref _isWeightMet, value); }
-    private bool? _isCareMistakesMet;
-    public bool? IsCareMistakesMet { get => _isCareMistakesMet; private set => SetField(ref _isCareMistakesMet, value); }
-    private bool? _isHappinessMet;
-    public bool? IsHappinessMet { get => _isHappinessMet; private set => SetField(ref _isHappinessMet, value); }
-    private bool? _isDisciplineMet;
-    public bool? IsDisciplineMet { get => _isDisciplineMet; private set => SetField(ref _isDisciplineMet, value); }
-    private bool? _isBattlesMet;
-    public bool? IsBattlesMet { get => _isBattlesMet; private set => SetField(ref _isBattlesMet, value); }
-    private bool? _isTechniqueCountMet;
-    public bool? IsTechniqueCountMet { get => _isTechniqueCountMet; private set => SetField(ref _isTechniqueCountMet, value); }
-    private bool _isEnabled;
-    public bool IsEnabled { get => _isEnabled; private set => SetField(ref _isEnabled, value); }
-    private int _evolutionScore;
-    public int EvolutionScore { get => _evolutionScore; private set => SetField(ref _evolutionScore, value); }
-    private int _scoreTotal;
-    public int ScoreTotal { get => _scoreTotal; private set => SetField(ref _scoreTotal, value); }
-    private int _statCount;
-    public int StatCount { get => _statCount; private set => SetField(ref _statCount, value); }
-    private bool _isWinningEvolution;
-    public bool IsWinningEvolution { get => _isWinningEvolution; set => SetField(ref _isWinningEvolution, value); }
+    public string UserDiscipline
+    {
+        get;
+        private set => SetField(ref field, value);
+    } = "";
+
+    public string UserBattles
+    {
+        get;
+        private set => SetField(ref field, value);
+    } = "";
+
+    public string UserTechniqueCount
+    {
+        get;
+        private set => SetField(ref field, value);
+    } = "";
+
+    public bool? IsHPMet
+    {
+        get;
+        private set => SetField(ref field, value);
+    }
+
+    public bool? IsMPMet
+    {
+        get;
+        private set => SetField(ref field, value);
+    }
+
+    public bool? IsOffMet
+    {
+        get;
+        private set => SetField(ref field, value);
+    }
+
+    public bool? IsDefMet
+    {
+        get;
+        private set => SetField(ref field, value);
+    }
+
+    public bool? IsSpeedMet
+    {
+        get;
+        private set => SetField(ref field, value);
+    }
+
+    public bool? IsBrainsMet
+    {
+        get;
+        private set => SetField(ref field, value);
+    }
+
+    public bool IsWeightMet
+    {
+        get;
+        private set => SetField(ref field, value);
+    }
+
+    public bool? IsCareMistakesMet
+    {
+        get;
+        private set => SetField(ref field, value);
+    }
+
+    public bool? IsHappinessMet
+    {
+        get;
+        private set => SetField(ref field, value);
+    }
+
+    public bool? IsDisciplineMet
+    {
+        get;
+        private set => SetField(ref field, value);
+    }
+
+    public bool? IsBattlesMet
+    {
+        get;
+        private set => SetField(ref field, value);
+    }
+
+    public bool? IsTechniqueCountMet
+    {
+        get;
+        private set => SetField(ref field, value);
+    }
+
+    public bool IsEnabled
+    {
+        get;
+        private set => SetField(ref field, value);
+    }
+
+    public int EvolutionScore
+    {
+        get;
+        private set => SetField(ref field, value);
+    }
+
+    public int ScoreTotal
+    {
+        get;
+        private set => SetField(ref field, value);
+    }
+
+    public int StatCount
+    {
+        get;
+        private set => SetField(ref field, value);
+    }
+
+    public bool IsWinningEvolution
+    {
+        get;
+        set => SetField(ref field, value);
+    }
 }

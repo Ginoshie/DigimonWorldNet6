@@ -21,9 +21,9 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        <Label Grid.Row="0" Grid.Column="0" Height="40" Width="100" Margin="0,25, 0, 15" Style="{StaticResource DefaultSheenLabelStyle}" IsTabStop="False">
-            CHAPTERS
-        </Label>
+        <Image Grid.Row="0" Grid.Column="0" Height="40"
+               Source="/Images/Icons/Labels/chapters-label.png"
+               Margin="0,25, 0, 15" />
         <WrapPanel Grid.Row="1" HorizontalAlignment="Center">
             <navigationButtons:TamerMechanicsChapterNavigationButton Command="{Binding OpenTamerMechanicChapterCommand}" />
             <navigationButtons:ConditionsChapterNavigationButton Command="{Binding OpenConditionsChapterCommand}" />

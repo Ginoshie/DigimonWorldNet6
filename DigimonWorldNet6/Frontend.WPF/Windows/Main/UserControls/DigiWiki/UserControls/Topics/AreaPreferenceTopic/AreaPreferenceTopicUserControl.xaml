@@ -101,9 +101,9 @@
                     <Border CornerRadius="5" BorderBrush="#90D9FA" BorderThickness="3" Padding="0" Background="#90D9FA">
                         <Border CornerRadius="5" BorderBrush="Black" BorderThickness="3" Padding="5,0" Background="{StaticResource DefaultBackGroundColor}">
                             <StackPanel>
-                                <Label VerticalAlignment="Top" Height="40" Width="120" Style="{StaticResource DefaultSheenLabelStyle}" IsTabStop="False">
-                                    MORE INFO
-                                </Label>
+                                <Image Height="40"
+                                       Source="/Images/Icons/Labels/more-info-label.png"
+                                       Margin="10" />
 
                                 <Button FocusVisualStyle="{StaticResource DefaultFocusStyle}"
                                         Style="{StaticResource DefaultButtonStyle}"

@@ -31,8 +31,8 @@
 
         <Image Grid.Row="1"
                Source="/Images/Icons/Labels/parameter-label.png"
-               Height="35"
-               Stretch="Fill"
+               Height="40"
+               Stretch="Uniform"
                Margin="0,0,0,5" />
 
         <Button Grid.Row="2"

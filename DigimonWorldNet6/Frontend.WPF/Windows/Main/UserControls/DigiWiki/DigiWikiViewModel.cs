@@ -119,12 +119,11 @@ public class DigiWikiViewModel : BaseViewModel, IDisposable
     public ICommand OpenFinisherFormulaTopicCommand { get; }
     public ICommand OpenSpecialtyFactorTopicCommand { get; }
 
-    private string _activeTopic = string.Empty;
     public string ActiveTopic
     {
-        get => _activeTopic;
-        private set => SetField(ref _activeTopic, value);
-    }
+        get;
+        private set => SetField(ref field, value);
+    } = string.Empty;
 
     public ICommand OpenScoldingTopicCommand { get; }
     public ICommand OpenFoodTopicCommand { get; }
