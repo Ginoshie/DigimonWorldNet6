@@ -63,12 +63,6 @@ public static class ShellmonDigiWikiNarratorText
         public const string FormulaImage = "This is the finisher damage formula.\n" +
                                            "\n" +
                                            "The bar value from 0 to 80 feeds directly into the calculation. A full bar gives the maximum result. The damage is never smaller than 1.";
-
-        public const string FinisherBarImage = "The finisher bar is displayed during your finisher attack.\n" +
-                                               "\n" +
-                                               "Mash L1 or R1 to fill it. Each press adds 2 to the internal value and the bar goes from 0 to 80.\n" +
-                                               "\n" +
-                                               "All 10 segments lit up means you hit 80. Get mashing!";
     }
 
     public static class FinisherWiki
@@ -94,9 +88,19 @@ public static class ShellmonDigiWikiNarratorText
                                          "Shell Fact Three\n" +
                                          "The finisher fires automatically on the next attack once the charge is full. You have no say in the matter — it just goes off!";
 
-        public const string FinisherProgressImage = "This shows the \"FINISH!!!\" text visible during battle below the HP and MP display.\n" +
+        public const string FinisherProgressImage = "This shows the \"FINISH!!\" text visible during battle below the HP and MP display.\n" +
                                                     "\n" +
-                                                    "The text grows as the charge fills up. Once the charge reaches the target value the finisher will fire on the next attack.";
+                                                    "The text grows as the charge fills up. Once it fully spells FINISH!! press square to instruct your Digimon to do the finisher\n" +
+                                                    "\n" +
+                                                    "Be carefull not to get interrupted!";
+
+        public const string FinisherBarImage = "The finisher bar is displayed during your finisher attack.\n" +
+                                               "\n" +
+                                               "Mash L1 or R1 to fill it. Each press adds 2 to the internal value and the bar goes from 0 to 80.\n" +
+                                               "\n" +
+                                               "All 10 segments lit up means you hit 80.\n" +
+                                               "\n" +
+                                               "Get mashing!";
     }
 
     public static class SpecialtyFactorWiki

@@ -121,7 +121,7 @@
                 <!-- Normal attack formula image placeholder -->
                 <Border BorderBrush="#060100" BorderThickness="3,3,0,0">
                     <Border BorderBrush="#6789A5" BorderThickness="0,0,3,3" Background="#354A5B">
-                        <Image Width="590" Height="202" Stretch="UniformToFill">
+                        <Image Source="Media/normal-attack-formula.jpg" Height="202" Stretch="Fill">
                             <b:Interaction.Triggers>
                                 <b:EventTrigger EventName="MouseLeftButtonDown">
                                     <b:InvokeCommandAction Command="{Binding SpeakFormulaImageCommand}" />

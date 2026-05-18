@@ -118,25 +118,12 @@
             </Border>
 
             <WrapPanel Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0, 15, 15, 15">
-                <!-- Finisher formula image placeholder -->
                 <Border BorderBrush="#060100" BorderThickness="3,3,0,0">
                     <Border BorderBrush="#6789A5" BorderThickness="0,0,3,3" Background="#354A5B">
-                        <Image Width="280" Height="202" Stretch="UniformToFill">
+                        <Image Source="Media/finisher-formula.png" Height="202" Stretch="Fill" RenderOptions.BitmapScalingMode="HighQuality">
                             <b:Interaction.Triggers>
                                 <b:EventTrigger EventName="MouseLeftButtonDown">
                                     <b:InvokeCommandAction Command="{Binding SpeakFormulaImageCommand}" />
-                                </b:EventTrigger>
-                            </b:Interaction.Triggers>
-                        </Image>
-                    </Border>
-                </Border>
-                <!-- Finisher bar image placeholder -->
-                <Border BorderBrush="#060100" BorderThickness="3,3,0,0" Margin="15, 0, 0, 0">
-                    <Border BorderBrush="#6789A5" BorderThickness="0,0,3,3" Background="#354A5B">
-                        <Image Width="280" Height="202" Stretch="UniformToFill">
-                            <b:Interaction.Triggers>
-                                <b:EventTrigger EventName="MouseLeftButtonDown">
-                                    <b:InvokeCommandAction Command="{Binding SpeakFinisherBarImageCommand}" />
                                 </b:EventTrigger>
                             </b:Interaction.Triggers>
                         </Image>

@@ -1,11 +1,11 @@
 ﻿<local:TopicNavigationButtonBase x:Class="DigimonWorld.Frontend.WPF.Windows.Main.UserControls.DigiWiki.UserControls.Navigation.NavigationButtons.FinisherFormulaTopicNavigationButton"
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:system="clr-namespace:System;assembly=System.Runtime"
-             mc:Ignorable="d"
-             xmlns:local="clr-namespace:DigimonWorld.Frontend.WPF.Windows.Main.UserControls.DigiWiki.UserControls.Navigation.NavigationButtons">
+                                 xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                                 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                                 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                                 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                                 xmlns:system="clr-namespace:System;assembly=System.Runtime"
+                                 mc:Ignorable="d"
+                                 xmlns:local="clr-namespace:DigimonWorld.Frontend.WPF.Windows.Main.UserControls.DigiWiki.UserControls.Navigation.NavigationButtons">
 
     <UserControl.Resources>
         <ResourceDictionary>
@@ -31,8 +31,7 @@
                 Height="{StaticResource ButtonDimension}"
                 Width="{StaticResource ButtonDimension}"
                 FontSize="{StaticResource ButtonFontSize}"
-                Margin="0, 0, 0, 5"
-                Content="">
+                Margin="0, 0, 0, 5">
             <Button.Style>
                 <Style TargetType="Button" BasedOn="{StaticResource DefaultButtonStyle}">
                     <Style.Triggers>
@@ -45,6 +44,15 @@
             <Button.ToolTip>
                 <ToolTip Style="{StaticResource DefaultToolTipRightStyle}" Content="Information about the finisher and finisher bar" />
             </Button.ToolTip>
+            <Button.Content>
+                <ContentControl Content="/Frontend.WPF;component/Images/Icons/Combat/finisher-bar.png">
+                    <ContentControl.ContentTemplate>
+                        <DataTemplate>
+                            <Image Source="{Binding}" Stretch="Uniform" Margin="2" RenderOptions.BitmapScalingMode="HighQuality" />
+                        </DataTemplate>
+                    </ContentControl.ContentTemplate>
+                </ContentControl>
+            </Button.Content>
         </Button>
         <TextBlock Text="Finisher (formula)"
                    HorizontalAlignment="Center"
@@ -55,4 +63,3 @@
                    Width="{StaticResource TextBlockWidth}" />
     </StackPanel>
 </local:TopicNavigationButtonBase>
-

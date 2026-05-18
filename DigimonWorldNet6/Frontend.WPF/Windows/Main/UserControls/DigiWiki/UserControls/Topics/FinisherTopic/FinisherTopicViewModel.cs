@@ -21,9 +21,11 @@ public class FinisherTopicViewModel : TopicViewModelBase
         speakShellmonTextShortDelayAction(ShellmonDigiWikiNarratorText.FinisherWiki.WikiText, SpeakShellmonTextAction);
 
         SpeakFinisherProgressImageCommand = new CommandHandler(() => speakShellmonTextNoDelayAction(ShellmonDigiWikiNarratorText.FinisherWiki.FinisherProgressImage, SpeakShellmonTextAction));
+        SpeakFinisherBarImageCommand = new CommandHandler(() => speakShellmonTextNoDelayAction(ShellmonDigiWikiNarratorText.FinisherWiki.FinisherBarImage, SpeakShellmonTextAction));
         OpenGuideFinisherChapterCommand = new CommandHandler(() => Process.Start(new ProcessStartInfo { FileName = Url.GuideFinisherChapter, UseShellExecute = true }));
     }
 
     public ICommand SpeakFinisherProgressImageCommand { get; }
+    public ICommand SpeakFinisherBarImageCommand { get; }
     public ICommand OpenGuideFinisherChapterCommand { get; }
 }

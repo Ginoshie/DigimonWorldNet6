@@ -31,8 +31,7 @@
                 Height="{StaticResource ButtonDimension}"
                 Width="{StaticResource ButtonDimension}"
                 FontSize="{StaticResource ButtonFontSize}"
-                Margin="0, 0, 0, 5"
-                Content="">
+                Margin="0, 0, 0, 5">
             <Button.Style>
                 <Style TargetType="Button" BasedOn="{StaticResource DefaultButtonStyle}">
                     <Style.Triggers>
@@ -45,6 +44,15 @@
             <Button.ToolTip>
                 <ToolTip Style="{StaticResource DefaultToolTipRightStyle}" Content="Information about the normal attack formula" />
             </Button.ToolTip>
+            <Button.Content>
+                <ContentControl Content="/Frontend.WPF;component/Images/Icons/Combat/attack-icon2.png">
+                    <ContentControl.ContentTemplate>
+                        <DataTemplate>
+                            <Image Source="{Binding}" Stretch="Uniform" Margin="2"/>
+                        </DataTemplate>
+                    </ContentControl.ContentTemplate>
+                </ContentControl>
+            </Button.Content>
         </Button>
         <TextBlock Text="Normal Attack"
                    HorizontalAlignment="Center"

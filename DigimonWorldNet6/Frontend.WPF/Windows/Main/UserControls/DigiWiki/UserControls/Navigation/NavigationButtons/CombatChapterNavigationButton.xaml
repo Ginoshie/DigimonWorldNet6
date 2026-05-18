@@ -31,11 +31,19 @@
                 Height="{StaticResource ButtonDimension}"
                 Width="{StaticResource ButtonDimension}"
                 FontSize="{StaticResource ButtonFontSize}"
-                Content="⚔️"
                 Margin="0, 0, 0, 5">
             <Button.ToolTip>
                 <ToolTip Style="{StaticResource DefaultToolTipRightStyle}" Content="Navigate to the wiki topics related to combat" />
             </Button.ToolTip>
+            <Button.Content>
+                <ContentControl Content="/Frontend.WPF;component/Images/Icons/Combat/combat-emotion.png">
+                    <ContentControl.ContentTemplate>
+                        <DataTemplate>
+                            <Image Source="{Binding}" Stretch="Uniform" Margin="2"/>
+                        </DataTemplate>
+                    </ContentControl.ContentTemplate>
+                </ContentControl>
+            </Button.Content>
         </Button>
         <TextBlock Text="Combat"
                    HorizontalAlignment="Center"
