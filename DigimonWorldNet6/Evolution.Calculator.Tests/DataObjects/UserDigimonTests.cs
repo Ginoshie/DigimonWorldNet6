@@ -67,6 +67,9 @@ public sealed class UserDigimonTests
     [Test]
     public void Set_ShouldNotThrow_ForAnyDigimonName([Values] DigimonName digimonName)
     {
+        // Arrange
+        if (digimonName == DigimonName.None) return;
+        
         // Act
         Action act = () => UserDigimon.Instance.Set(digimonName, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
 

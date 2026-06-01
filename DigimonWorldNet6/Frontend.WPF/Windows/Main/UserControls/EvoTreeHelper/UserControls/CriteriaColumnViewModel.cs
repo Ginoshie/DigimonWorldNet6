@@ -11,9 +11,8 @@ namespace DigimonWorld.Frontend.WPF.Windows.Main.UserControls.EvoTreeHelper.User
 
 public class CriteriaColumnViewModel : BaseViewModel
 {
-    public CriteriaColumnViewModel(DigimonName userDigimonDigimonName, string name, string iconPath, IEvolutionCriteria criteria, int userHp, int userMp, int userOff, int userDef, int userSpeed, int userBrains, int userWeight,
-        int userCareMistakes, int userHappiness,
-        int userDiscipline, int userBattles, int userTechniqueCount)
+    public CriteriaColumnViewModel(DigimonName userDigimonDigimonName, string name, string iconPath, IEvolutionCriteria criteria, int userHp, int userMp, int userOff, int userDef, int userSpeed, int userBrains, int userWeight, int userCareMistakes,
+        int userHappiness, int userDiscipline, int userBattles, int userTechniqueCount)
     {
         UserDigimonDigimonName = userDigimonDigimonName;
         Criteria = criteria;
@@ -61,30 +60,6 @@ public class CriteriaColumnViewModel : BaseViewModel
     public string Battles { get; }
     public string TechniqueCount { get; }
     public string? Precursor { get; }
-
-    public string UserHappiness
-    {
-        get;
-        private set => SetField(ref field, value);
-    } = "";
-
-    public string UserDiscipline
-    {
-        get;
-        private set => SetField(ref field, value);
-    } = "";
-
-    public string UserBattles
-    {
-        get;
-        private set => SetField(ref field, value);
-    } = "";
-
-    public string UserTechniqueCount
-    {
-        get;
-        private set => SetField(ref field, value);
-    } = "";
 
     public bool? IsHPMet
     {
@@ -236,7 +211,7 @@ public class CriteriaColumnViewModel : BaseViewModel
         IsDefMet = Criteria.Stats.Def > 0 ? highestEvoStat.statName == def : null;
         IsSpeedMet = Criteria.Stats.Speed > 0 ? highestEvoStat.statName == speed : null;
         IsBrainsMet = Criteria.Stats.Brains > 0 ? highestEvoStat.statName == brains : null;
-        
+
         if (IsHPMet == true || IsMPMet == true)
         {
             EvolutionScore = highestEvoStat.statValue / 10;

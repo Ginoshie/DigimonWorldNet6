@@ -10,13 +10,16 @@ public sealed class EvolutionStageMapperTests
     [Test]
     public void Get_ByEnum_ShouldNotThrowException_WhenValidIndexIsUsed([Values] DigimonName digimonName)
     {
+        // Arrange
+        if (digimonName == DigimonName.None) return;
+
         // Act
         Func<EvolutionStage> applyValidIndex = () => EvolutionStageMapper.Get(digimonName);
 
         // Assert
         applyValidIndex.ShouldNotThrow();
     }
-    
+
     [Test]
     public void Get_ByEnum_ShouldThrowException_WhenInvalidIndexIsUsed()
     {
@@ -132,6 +135,9 @@ public sealed class EvolutionStageMapperTests
     [Test]
     public void Get_ShouldReturnValidEvolutionStage_ForEveryDigimonName([Values] DigimonName digimonName)
     {
+        // Arrange
+        if (digimonName == DigimonName.None) return;
+        
         // Act
         EvolutionStage result = EvolutionStageMapper.Get(digimonName);
 

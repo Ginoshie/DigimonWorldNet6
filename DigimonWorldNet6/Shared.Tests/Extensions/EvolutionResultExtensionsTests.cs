@@ -64,11 +64,9 @@ public sealed class EvolutionResultExtensionsTests
     }
 
     [Test]
-    public void ToDigimonType_ShouldThrowArgumentException_WhenEvolutionResultIsNone()
+    public void ToDigimonType_ShouldReturnDigimonTypeNone_WhenEvolutionResultIsNone()
     {
-        Action act = () => EvolutionResult.None.ToDigimonType();
-
-        act.ShouldThrow<ArgumentException>();
+        EvolutionResult.None.ToDigimonType().ShouldBe(DigimonName.None);
     }
 
     [Test]

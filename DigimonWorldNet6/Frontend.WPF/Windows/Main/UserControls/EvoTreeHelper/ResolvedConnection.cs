@@ -7,7 +7,7 @@ namespace DigimonWorld.Frontend.WPF.Windows.Main.UserControls.EvoTreeHelper;
 /// A resolved connection that holds direct references to source and target nodes,
 /// enabling data binding to their X/Y properties for dynamic connector updates.
 /// </summary>
-public class ResolvedConnection(EvoTreeNode source, EvoTreeNode target, Brush stroke, double sourceYOffset = 0, int stubTier = 1)
+public class ResolvedConnection(EvoTreeNode source, EvoTreeNode target, Brush stroke, double sourceYOffset, int stubTier)
 {
     public EvoTreeNode Source { get; } = source;
     public EvoTreeNode Target { get; } = target;

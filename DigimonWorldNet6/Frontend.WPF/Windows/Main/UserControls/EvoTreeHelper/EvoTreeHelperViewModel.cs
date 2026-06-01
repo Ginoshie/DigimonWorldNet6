@@ -137,7 +137,7 @@ public class EvoTreeHelperViewModel : BaseViewModel, IDisposable
         3 => [_green, _lightBlue, _blue],
         4 => [_yellow, _green, _lightBlue, _blue],
         5 => [_yellow, _green, _lightBlue, _blue, _pink],
-        _ => [_yellow, _green, _lightBlue, _blue, _pink, _red],
+        _ => [_yellow, _green, _lightBlue, _blue, _pink, _red]
     };
 
     public DigimonName CurrentDigimon
@@ -150,7 +150,7 @@ public class EvoTreeHelperViewModel : BaseViewModel, IDisposable
                 BuildGraph();
             }
         }
-    }
+    } = DigimonName.None;
 
     public CriteriaColumnViewModel? Evolution1
     {
@@ -464,7 +464,7 @@ public class EvoTreeHelperViewModel : BaseViewModel, IDisposable
 
         for (int index = 0; index < _evolutions.Count; index++)
         {
-            Brush color = colors[index % colors.Length];
+            Brush color = colors[index];
 
             newConnections.Add(
                 new ResolvedConnection(
@@ -472,19 +472,52 @@ public class EvoTreeHelperViewModel : BaseViewModel, IDisposable
                     nodeMap[_evolutions[index]],
                     color,
                     startOffset + index * CONNECTION_LINE_SPACING,
-                    GetStubTier(color)));
+                    GetStubTier(color, evolutions.Count)));
         }
 
         Connections = newConnections;
     }
 
-    private int GetStubTier(Brush color) =>
+    private int GetStubTier(Brush color, int evolutionCount) =>
         color switch
         {
-            _ when color == _lightBlue || color == _blue => 1,
-            _ when color == _green || color == _pink => 2,
-            _ => 3
+            _ when color == _lightBlue && evolutionCount == 1 => 1, 
+            
+            _ when color == _lightBlue && evolutionCount == 2 => 1, 
+            _ when color == _blue && evolutionCount == 2 => 1,
+            
+            _ when color == _green && evolutionCount == 3 => 2, 
+            _ when color == _lightBlue && evolutionCount == 3 => 1, 
+            _ when color == _blue && evolutionCount == 3 => 2, 
+            
+            _ when color == _yellow && evolutionCount == 4 => 2, 
+            _ when color == _green && evolutionCount == 4 => 1, 
+            _ when color == _lightBlue && evolutionCount == 4 => 1, 
+            _ when color == _blue && evolutionCount == 4 => 2, 
+            
+            _ when color == _yellow && evolutionCount == 5 => 3, 
+            _ when color == _green && evolutionCount == 5 => 1, 
+            _ when color == _lightBlue && evolutionCount == 5 => 1, 
+            _ when color == _blue && evolutionCount == 5 => 1, 
+            _ when color == _pink && evolutionCount == 5 => 3, 
+            
+            _ when color == _yellow && evolutionCount == 6 => 3, 
+            _ when color == _green && evolutionCount == 6 => 2, 
+            _ when color == _lightBlue && evolutionCount == 6 => 1, 
+            _ when color == _blue && evolutionCount == 6 => 1, 
+            _ when color == _pink && evolutionCount == 6 => 2, 
+            _ when color == _red && evolutionCount == 6 => 3, 
+            
+            _ when color != _yellow && color != _green && color != _lightBlue && color != _blue && color != _pink && color != _red => throw new ArgumentOutOfRangeException(nameof(color), color, "Color is not supported as a subtier"),
+            _ when evolutionCount is > 6 or < 1 => throw new ArgumentOutOfRangeException(nameof(evolutionCount), evolutionCount, "Evolution count must be between 1 and 6"),
+            _ => throw new ArgumentOutOfRangeException(nameof(color), color, "Unexpected error while determining stub tier")
         };
+    // 1 => [_lightBlue],
+    // 2 => [_lightBlue, _blue],
+    // 3 => [_green, _lightBlue, _blue],
+    // 4 => [_yellow, _green, _lightBlue, _blue],
+    // 5 => [_yellow, _green, _lightBlue, _blue, _pink],
+    // _ => [_yellow, _green, _lightBlue, _blue, _pink, _red],
 
     private EvoTreeNode CreateNode(DigimonName digimon, double x, double y)
     {

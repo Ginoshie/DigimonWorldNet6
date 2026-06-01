@@ -44,50 +44,27 @@ public class DiagonalPathConverter : IMultiValueConverter
             ? System.Convert.ToInt32(values[5])
             : 1;
 
-        bool targetIsRight = targetX >= sourceX;
-
-        double startX;
         double startY = sourceY + halfNode + sourceYOffset;
-        double endX;
         double endY = targetY + halfNode;
 
-        if (targetIsRight)
-        {
-            startX = sourceX + nodeSize;
-            endX = targetX;
-        }
-        else
-        {
-            startX = sourceX;
-            endX = targetX + nodeSize;
-        }
+        double startX = sourceX + nodeSize;
 
-        double totalHorizontal = Math.Abs(endX - startX);
+        double totalHorizontal = Math.Abs(targetX - startX);
 
         // Tier 1 (innermost): longest stub (52%), Tier 2: medium (26%), Tier 3 (outermost): immediate diagonal
         double sourceStubFraction = stubTier switch
         {
             1 => 0.52,
             2 => 0.26,
-            _ => 0.0,
+            _ => 0.0
         };
+        
         // All target stubs at 16%
         double sourceStub = totalHorizontal * sourceStubFraction;
         double targetStub = totalHorizontal * 0.16;
 
-        double diagonalStartX;
-        double diagonalEndX;
-
-        if (targetIsRight)
-        {
-            diagonalStartX = startX + sourceStub;
-            diagonalEndX = endX - targetStub;
-        }
-        else
-        {
-            diagonalStartX = startX - sourceStub;
-            diagonalEndX = endX + targetStub;
-        }
+        double diagonalStartX = startX + sourceStub;
+        double diagonalEndX = targetX - targetStub;
 
         // Path: start from center of source button → horizontal stub → diagonal → horizontal stub
         // Starting from center ensures lines are hidden behind the button
@@ -95,7 +72,7 @@ public class DiagonalPathConverter : IMultiValueConverter
         PathFigure figure = new() { StartPoint = new Point(centerX, startY) };
         figure.Segments.Add(new LineSegment(new Point(diagonalStartX, startY), true));
         figure.Segments.Add(new LineSegment(new Point(diagonalEndX, endY), true));
-        figure.Segments.Add(new LineSegment(new Point(endX, endY), true));
+        figure.Segments.Add(new LineSegment(new Point(targetX, endY), true));
 
         PathGeometry geometry = new();
         geometry.Figures.Add(figure);

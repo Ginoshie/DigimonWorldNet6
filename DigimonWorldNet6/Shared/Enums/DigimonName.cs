@@ -2,6 +2,7 @@ namespace Shared.Enums;
 
 public enum DigimonName
 {
+    None = -1,
     Agumon,
     Airdramon,
     Andromon,
