@@ -21,7 +21,7 @@ public class FromFreshEvolutionMapperTests
             .Build();
 
         // Act
-        EvolutionResult result = sut[digimonName];
+        EvolutionResult result = sut[digimonName].EvolutionResult;
 
         // Assert
         result.ShouldBe(expectedEvolutionResult);

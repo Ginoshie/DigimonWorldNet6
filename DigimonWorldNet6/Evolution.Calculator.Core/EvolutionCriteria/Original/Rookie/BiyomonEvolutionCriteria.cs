@@ -12,7 +12,7 @@ public sealed class BiyomonEvolutionCriteria : IEvolutionCriteria
 
     public MainCriteriaStats Stats => new(mp: 10, def: 1, speed: 1);
 
-    public MainCriteriaCareMistakes CareMistakes => new();
+    public MainCriteriaCareMistakes CareMistakes => new(0);
 
     public MainCriteriaWeight Weight => new(15);
 

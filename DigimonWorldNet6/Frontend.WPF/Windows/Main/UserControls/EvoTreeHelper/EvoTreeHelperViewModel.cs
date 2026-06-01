@@ -10,6 +10,8 @@ using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
 using DigimonWorld.Evolution.Calculator.Core;
+using DigimonWorld.Evolution.Calculator.Core.EvolutionCriteriaCalculation.FromFresh;
+using DigimonWorld.Evolution.Calculator.Core.EvolutionCriteriaCalculation.FromInTraining;
 using DigimonWorld.Evolution.Calculator.Core.EvolutionCriteriaCalculation.FromRookieOrChampion;
 using DigimonWorld.Evolution.Calculator.Core.Interfaces.EvolutionCriteria;
 using DigimonWorld.Frontend.WPF.Constants;
@@ -17,6 +19,7 @@ using DigimonWorld.Frontend.WPF.Enums;
 using DigimonWorld.Frontend.WPF.Services;
 using DigimonWorld.Frontend.WPF.ViewModelComponents;
 using DigimonWorld.Frontend.WPF.Windows.Main.UserControls.EvoTreeHelper.Models;
+using DigimonWorld.Frontend.WPF.Windows.Main.UserControls.EvoTreeHelper.UserControls;
 using Domain;
 using Shared.Constants;
 using Shared.Enums;
@@ -32,18 +35,26 @@ public class EvoTreeHelperViewModel : BaseViewModel, IDisposable
     private const double CANVAS_WIDTH = 400;
     private const double CANVAS_HEIGHT = 340;
     private const double DATA_ROWS_CENTER = CANVAS_HEIGHT / 2.0 + 6;
-    private const double COLUMN_SPACING = 160;
     private const double ROW_SPACING = -7;
+    private const double CONNECTION_LINE_SPACING = 6.0;
+    private const double EVOLUTION_NODES_X_POSITION = 251;
+    private const double CURRENT_DIGIMON_NODE_X_POSITION = 91;
+    private const double CURRENT_DIGIMON_NODE_Y_POSITION = 147;
     private const DigimonName DEFAULT_CURRENT_DIGIMON = DigimonName.Gabumon;
 
-    private static readonly Brush _lightBlue = new SolidColorBrush(Color.FromRgb(0x5E, 0xD6, 0xD6));
-    private static readonly Brush _yellow = new SolidColorBrush(Color.FromRgb(0xE8, 0xA8, 0x35));
-    private static readonly Brush _green = new SolidColorBrush(Color.FromRgb(0x6D, 0xC5, 0x6D));
-    private static readonly Brush _blue = new SolidColorBrush(Color.FromRgb(0x4A, 0x9F, 0xC5));
-    private static readonly Brush _pink = new SolidColorBrush(Color.FromRgb(0xBB, 0x7A, 0xD6));
-    private static readonly Brush _red = new SolidColorBrush(Color.FromRgb(0xC5, 0x4A, 0x4A));
+    private readonly Brush _lightBlue = new SolidColorBrush(Color.FromRgb(0x5E, 0xD6, 0xD6));
+    private readonly Brush _yellow = new SolidColorBrush(Color.FromRgb(0xE8, 0xA8, 0x35));
+    private readonly Brush _green = new SolidColorBrush(Color.FromRgb(0x6D, 0xC5, 0x6D));
+    private readonly Brush _blue = new SolidColorBrush(Color.FromRgb(0x4A, 0x9F, 0xC5));
+    private readonly Brush _pink = new SolidColorBrush(Color.FromRgb(0xBB, 0x7A, 0xD6));
+    private readonly Brush _red = new SolidColorBrush(Color.FromRgb(0xC5, 0x4A, 0x4A));
 
+    private readonly CompositeDisposable _disposables;
     private readonly SpeakingSimulator _speakingSimulator;
+
+    private GameVariant _gameVariant = GameVariant.Original;
+    private Dictionary<DigimonName, IEvolutionCriteria> _criteriaMap = new();
+    private List<DigimonName> _evolutions = [];
 
     public EvoTreeHelperViewModel()
     {
@@ -57,8 +68,12 @@ public class EvoTreeHelperViewModel : BaseViewModel, IDisposable
 
         _disposables = new CompositeDisposable(
             _speakingSimulator,
-            EmulatorLinkEventHub.DigimonProfileStatsSynchronizedObservable.Subscribe(_ => OnProfileStatsSynced()),
-            EmulatorLinkEventHub.DigimonParameterStatsSynchronizedObservable.Subscribe(_ => RefreshUserStats()),
+            EmulatorLinkEventHub.DigimonProfileStatsSynchronizedObservable
+                .ObserveOn(uiSynchronizationContext)
+                .Subscribe(_ => OnProfileStatsSynced()),
+            EmulatorLinkEventHub.DigimonParameterStatsSynchronizedObservable
+                .ObserveOn(uiSynchronizationContext)
+                .Subscribe(_ => RefreshUserStats()),
             UserConfigurationManager.CurrentEvolutionCalculatorConfig
                 .ObserveOn(uiSynchronizationContext)
                 .Subscribe(config =>
@@ -115,11 +130,7 @@ public class EvoTreeHelperViewModel : BaseViewModel, IDisposable
         set => SetField(ref field, value);
     } = string.Empty;
 
-
-    private void InstantDisplay() => _speakingSimulator.RequestInstantDisplay();
-    private Task SpeakGabumonTextAsync(string text, SpeechDelay delayMs = SpeechDelay.None) => _speakingSimulator.SpeakAsync(text, output => GabumonText = output, delayMs);
-
-    private static Brush[] GetConnectionColors(int count) => count switch
+    private Brush[] GetConnectionColors(int count) => count switch
     {
         1 => [_lightBlue],
         2 => [_lightBlue, _blue],
@@ -128,11 +139,6 @@ public class EvoTreeHelperViewModel : BaseViewModel, IDisposable
         5 => [_yellow, _green, _lightBlue, _blue, _pink],
         _ => [_yellow, _green, _lightBlue, _blue, _pink, _red],
     };
-
-    private readonly CompositeDisposable _disposables;
-    private GameVariant _gameVariant = GameVariant.Original;
-    private Dictionary<DigimonName, IEvolutionCriteria> _criteriaMap = new();
-    private List<DigimonName> _forwardEvolutions = [];
 
     public DigimonName CurrentDigimon
     {
@@ -146,37 +152,37 @@ public class EvoTreeHelperViewModel : BaseViewModel, IDisposable
         }
     }
 
-    public EvolutionCriteriaDisplay? Criteria0
+    public CriteriaColumnViewModel? Evolution1
     {
         get;
         private set => SetField(ref field, value);
     }
 
-    public EvolutionCriteriaDisplay? Criteria1
+    public CriteriaColumnViewModel? Evolution2
     {
         get;
         private set => SetField(ref field, value);
     }
 
-    public EvolutionCriteriaDisplay? Criteria2
+    public CriteriaColumnViewModel? Evolution3
     {
         get;
         private set => SetField(ref field, value);
     }
 
-    public EvolutionCriteriaDisplay? Criteria3
+    public CriteriaColumnViewModel? Evolution4
     {
         get;
         private set => SetField(ref field, value);
     }
 
-    public EvolutionCriteriaDisplay? Criteria4
+    public CriteriaColumnViewModel? Evolution5
     {
         get;
         private set => SetField(ref field, value);
     }
 
-    public EvolutionCriteriaDisplay? Criteria5
+    public CriteriaColumnViewModel? Evolution6
     {
         get;
         private set => SetField(ref field, value);
@@ -267,6 +273,9 @@ public class EvoTreeHelperViewModel : BaseViewModel, IDisposable
     } = "0";
 
 
+    private void InstantDisplay() => _speakingSimulator.RequestInstantDisplay();
+    private Task SpeakGabumonTextAsync(string text, SpeechDelay delayMs = SpeechDelay.None) => _speakingSimulator.SpeakAsync(text, output => GabumonText = output, delayMs);
+
     private void RefreshUserStats()
     {
         try
@@ -295,51 +304,63 @@ public class EvoTreeHelperViewModel : BaseViewModel, IDisposable
 
     private void RefreshCriteria()
     {
-        UserDigimon d = Session.UserDigimon;
-        int userHp = d.HP, userMp = d.MP, userOff = d.Off, userDef = d.Def;
-        int userSpeed = d.Speed, userBrains = d.Brains, userWeight = d.Weight;
-        int userCareMistakes = d.CareMistakes, userHappiness = d.Happiness;
-        int userDiscipline = d.Discipline, userBattles = d.Battles, userTechniqueCount = d.TechniqueCount;
+        UserDigimon userDigimon = Session.UserDigimon;
+        int userHp = userDigimon.HP, userMp = userDigimon.MP, userOff = userDigimon.Off, userDef = userDigimon.Def;
+        int userSpeed = userDigimon.Speed, userBrains = userDigimon.Brains, userWeight = userDigimon.Weight;
+        int userCareMistakes = userDigimon.CareMistakes, userHappiness = userDigimon.Happiness;
+        int userDiscipline = userDigimon.Discipline, userBattles = userDigimon.Battles, userTechniqueCount = userDigimon.TechniqueCount;
 
-        EvolutionCriteriaDisplay?[] existing = [Criteria0, Criteria1, Criteria2, Criteria3, Criteria4, Criteria5];
-        List<EvolutionCriteriaDisplay> criteriaList = [];
-        int index = 0;
-        foreach (DigimonName evo in _forwardEvolutions)
+        List<CriteriaColumnViewModel> evolutionCriteriaDisplayViewModels = [];
+        foreach (DigimonName evolutionCandidate in _evolutions)
         {
-            if (_criteriaMap.TryGetValue(evo, out IEvolutionCriteria? criteria))
+            if (!_criteriaMap.TryGetValue(evolutionCandidate, out IEvolutionCriteria? criteria))
             {
-                EvolutionCriteriaDisplay? current = index < existing.Length ? existing[index] : null;
-                if (current != null && current.Name == evo.ToString())
-                {
-                    current.IsWinningEvolution = false;
-                    current.UpdateUserStats(userHp, userMp, userOff, userDef, userSpeed, userBrains, userWeight, userCareMistakes, userHappiness, userDiscipline, userBattles, userTechniqueCount);
-                    criteriaList.Add(current);
-                }
-                else
-                {
-                    criteriaList.Add(new EvolutionCriteriaDisplay(evo.ToString(), DigimonIconFactory.Create(evo).IconPath, criteria, userHp, userMp, userOff, userDef, userSpeed, userBrains, userWeight, userCareMistakes, userHappiness, userDiscipline,
-                        userBattles, userTechniqueCount));
-                }
+                continue;
+            }
 
-                index++;
+            CriteriaColumnViewModel criteriaColumnViewModel = new(userDigimon.DigimonName, evolutionCandidate.ToString(), DigimonIconFactory.Create(evolutionCandidate).IconPath, criteria, userHp, userMp, userOff, userDef,
+                userSpeed, userBrains, userWeight, userCareMistakes, userHappiness, userDiscipline, userBattles, userTechniqueCount);
+
+            evolutionCriteriaDisplayViewModels.Add(criteriaColumnViewModel);
+        }
+
+        int winnerIndex = -1;
+
+        switch (userDigimon.EvolutionStage)
+        {
+            case EvolutionStage.Fresh:
+                winnerIndex = 0;
+                break;
+            case EvolutionStage.InTraining:
+                winnerIndex = evolutionCriteriaDisplayViewModels.FindIndex(x =>
+                    x.IsHPMet == true ||
+                    x.IsMPMet == true ||
+                    x.IsOffMet == true ||
+                    x.IsDefMet == true ||
+                    x.IsSpeedMet == true ||
+                    x.IsBrainsMet == true
+                );
+                break;
+            case EvolutionStage.Rookie or EvolutionStage.Champion:
+            {
+                List<(bool IsEnabled, int ScoreTotal, int StatCount)> evolutionData = evolutionCriteriaDisplayViewModels.Select(c => (c.IsEnabled, c.ScoreTotal, c.StatCount)).ToList();
+                bool useCarriedOverStats = _gameVariant == GameVariant.Original;
+                winnerIndex = FromRookieOrChampionEvolutionScoreCalculator.DetermineWinningEvolutionIndex(evolutionData, useCarriedOverStats);
+                break;
             }
         }
 
-        List<(bool IsEnabled, int ScoreTotal, int StatCount)> evolutionData = criteriaList.Select(c => (c.IsEnabled, c.ScoreTotal, c.StatCount)).ToList();
-        bool useCarriedOverStats = _gameVariant == GameVariant.Original;
-        int winnerIndex = FromRookieOrChampionEvolutionScoreCalculator.DetermineWinningEvolutionIndex(evolutionData, useCarriedOverStats);
-
         if (winnerIndex >= 0)
         {
-            criteriaList[winnerIndex].IsWinningEvolution = true;
+            evolutionCriteriaDisplayViewModels[winnerIndex].IsWinningEvolution = true;
         }
 
-        Criteria0 = criteriaList.Count > 0 ? criteriaList[0] : null;
-        Criteria1 = criteriaList.Count > 1 ? criteriaList[1] : null;
-        Criteria2 = criteriaList.Count > 2 ? criteriaList[2] : null;
-        Criteria3 = criteriaList.Count > 3 ? criteriaList[3] : null;
-        Criteria4 = criteriaList.Count > 4 ? criteriaList[4] : null;
-        Criteria5 = criteriaList.Count > 5 ? criteriaList[5] : null;
+        Evolution1 = evolutionCriteriaDisplayViewModels.Count > 0 ? evolutionCriteriaDisplayViewModels[0] : null;
+        Evolution2 = evolutionCriteriaDisplayViewModels.Count > 1 ? evolutionCriteriaDisplayViewModels[1] : null;
+        Evolution3 = evolutionCriteriaDisplayViewModels.Count > 2 ? evolutionCriteriaDisplayViewModels[2] : null;
+        Evolution4 = evolutionCriteriaDisplayViewModels.Count > 3 ? evolutionCriteriaDisplayViewModels[3] : null;
+        Evolution5 = evolutionCriteriaDisplayViewModels.Count > 4 ? evolutionCriteriaDisplayViewModels[4] : null;
+        Evolution6 = evolutionCriteriaDisplayViewModels.Count > 5 ? evolutionCriteriaDisplayViewModels[5] : null;
     }
 
     private void OnProfileStatsSynced()
@@ -357,7 +378,7 @@ public class EvoTreeHelperViewModel : BaseViewModel, IDisposable
             if (digimon.DigimonName != CurrentDigimon)
             {
                 CurrentDigimon = digimon.DigimonName;
-                Application.Current.Dispatcher.Invoke(BuildGraph);
+                Application.Current.Dispatcher.Invoke(RefreshCriteria);
             }
         }
         catch
@@ -387,87 +408,35 @@ public class EvoTreeHelperViewModel : BaseViewModel, IDisposable
 
     private void BuildGraph()
     {
-        DigimonName center = CurrentDigimon;
+        DigimonName currentDigimon = CurrentDigimon;
 
         ObservableCollection<EvoTreeNode> newNodes = [];
-        ObservableCollection<ResolvedConnection> newConnections = [];
-        HashSet<DigimonName> visited = [center];
 
-        CurrentIconPath = DigimonIconFactory.Create(center).IconPath;
-        CurrentDigimonName = center.ToString();
+        CurrentIconPath = DigimonIconFactory.Create(currentDigimon).IconPath;
+        CurrentDigimonName = currentDigimon.ToString();
 
-        List<List<DigimonName>> forwardColumns = ExpandColumns([center], visited, EvolutionPathProvider.GetEvolutions, maxDepth: 1);
-
-        int totalColumns = 1 + forwardColumns.Count;
-        double treeWidth = (totalColumns - 1) * COLUMN_SPACING + NODE_SIZE;
-        double centerColumnX = (CANVAS_WIDTH - treeWidth) / 2.0;
+        _evolutions = EvolutionPathProvider.GetEvolutions(currentDigimon).ToList();
 
         Dictionary<DigimonName, EvoTreeNode> nodeMap = new();
 
-        const double centerY = DATA_ROWS_CENTER - NODE_SIZE / 2.0;
-        EvoTreeNode centerNode = CreateNode(center, centerColumnX, centerY);
+        EvoTreeNode centerNode = CreateNode(currentDigimon, CURRENT_DIGIMON_NODE_X_POSITION, CURRENT_DIGIMON_NODE_Y_POSITION);
         newNodes.Add(centerNode);
-        nodeMap[center] = centerNode;
+        nodeMap[currentDigimon] = centerNode;
 
-        _criteriaMap = GetEvolutionCriteriaMap(center);
+        _criteriaMap = GetEvolutionCriteriaMap(currentDigimon);
 
-        for (int col = 0; col < forwardColumns.Count; col++)
-        {
-            double x = centerColumnX + (col + 1) * COLUMN_SPACING;
-            PlaceColumn(forwardColumns[col], x, newNodes, nodeMap);
-        }
+        PlaceColumn(_evolutions, newNodes, nodeMap);
 
-        _forwardEvolutions = forwardColumns.SelectMany(c => c).ToList();
         RefreshCriteria();
 
-        AddConnections(
-            [center], forwardColumns, nodeMap, newConnections, EvolutionPathProvider.GetEvolutions);
+        AddConnections(_evolutions, nodeMap);
 
         Nodes = newNodes;
-        Connections = newConnections;
-        SpecialEvolutions = new ObservableCollection<SpecialEvolutionInfo>(
-            SpecialEvolutionProvider.GetAvailableSpecialEvolutions(center));
-    }
-
-    private static List<List<DigimonName>> ExpandColumns(
-        List<DigimonName> startColumn,
-        HashSet<DigimonName> visited,
-        Func<DigimonName, DigimonName[]> getRelated,
-        int maxDepth = int.MaxValue)
-    {
-        List<List<DigimonName>> columns = [];
-        List<DigimonName> currentColumn = startColumn;
-        int depth = 0;
-
-        while (currentColumn.Count > 0 && depth < maxDepth)
-        {
-            List<DigimonName> nextColumn = [];
-            foreach (DigimonName digimon in currentColumn)
-            {
-                foreach (DigimonName related in getRelated(digimon))
-                {
-                    if (visited.Add(related))
-                    {
-                        nextColumn.Add(related);
-                    }
-                }
-            }
-
-            if (nextColumn.Count > 0)
-            {
-                columns.Add(nextColumn);
-            }
-
-            currentColumn = nextColumn;
-            depth++;
-        }
-
-        return columns;
+        SpecialEvolutions = new ObservableCollection<SpecialEvolutionInfo>(SpecialEvolutionProvider.GetAvailableSpecialEvolutions(currentDigimon));
     }
 
     private void PlaceColumn(
         List<DigimonName> column,
-        double x,
         ObservableCollection<EvoTreeNode> nodes,
         Dictionary<DigimonName, EvoTreeNode> nodeMap)
     {
@@ -477,69 +446,47 @@ public class EvoTreeHelperViewModel : BaseViewModel, IDisposable
         for (int i = 0; i < column.Count; i++)
         {
             double y = startY + i * (NODE_SIZE + ROW_SPACING);
-            EvoTreeNode node = CreateNode(column[i], x, y);
+            EvoTreeNode node = CreateNode(column[i], EVOLUTION_NODES_X_POSITION, y);
             nodes.Add(node);
             nodeMap[column[i]] = node;
         }
     }
 
     private void AddConnections(
-        List<DigimonName> startColumn,
-        List<List<DigimonName>> columns,
-        Dictionary<DigimonName, EvoTreeNode> nodeMap,
-        ObservableCollection<ResolvedConnection> connections,
-        Func<DigimonName, DigimonName[]> getRelated,
-        bool reverse = false)
+        List<DigimonName> evolutions,
+        Dictionary<DigimonName, EvoTreeNode> nodeMap)
     {
-        List<List<DigimonName>> allColumns = [startColumn, .. columns];
-        for (int col = 0; col < allColumns.Count - 1; col++)
+        ObservableCollection<ResolvedConnection> newConnections = [];
+
+        Brush[] colors = GetConnectionColors(evolutions.Count);
+
+        double startOffset = -((_evolutions.Count - 1) * CONNECTION_LINE_SPACING) / 2.0;
+
+        for (int index = 0; index < _evolutions.Count; index++)
         {
-            foreach (DigimonName digimon in allColumns[col])
-            {
-                List<DigimonName> relatedInGraph = [];
-                foreach (DigimonName related in getRelated(digimon))
-                {
-                    if (nodeMap.ContainsKey(related))
-                    {
-                        relatedInGraph.Add(related);
-                    }
-                }
+            Brush color = colors[index % colors.Length];
 
-                relatedInGraph.Sort((a, b) => nodeMap[a].Y.CompareTo(nodeMap[b].Y));
-
-                Brush[] colors = GetConnectionColors(relatedInGraph.Count);
-                double lineSpacing = 6.0;
-                double totalOffset = (relatedInGraph.Count - 1) * lineSpacing;
-                double startOffset = -totalOffset / 2.0;
-
-                for (int i = 0; i < relatedInGraph.Count; i++)
-                {
-                    double sourceYOffset = startOffset + i * lineSpacing;
-                    Brush color = colors[i % colors.Length];
-
-                    int stubTier;
-                    if (color == _lightBlue || color == _blue)
-                    {
-                        stubTier = 1;
-                    }
-                    else if (color == _green || color == _pink)
-                    {
-                        stubTier = 2;
-                    }
-                    else
-                    {
-                        stubTier = 3;
-                    }
-
-                    EvoTreeNode sourceNode = reverse ? nodeMap[relatedInGraph[i]] : nodeMap[digimon];
-                    EvoTreeNode targetNode = reverse ? nodeMap[digimon] : nodeMap[relatedInGraph[i]];
-                    connections.Add(new ResolvedConnection(sourceNode, targetNode, color, sourceYOffset, stubTier));
-                }
-            }
+            newConnections.Add(
+                new ResolvedConnection(
+                    nodeMap[CurrentDigimon],
+                    nodeMap[_evolutions[index]],
+                    color,
+                    startOffset + index * CONNECTION_LINE_SPACING,
+                    GetStubTier(color)));
         }
+
+        Connections = newConnections;
     }
 
-    private static EvoTreeNode CreateNode(DigimonName digimon, double x, double y)
+    private int GetStubTier(Brush color) =>
+        color switch
+        {
+            _ when color == _lightBlue || color == _blue => 1,
+            _ when color == _green || color == _pink => 2,
+            _ => 3
+        };
+
+    private EvoTreeNode CreateNode(DigimonName digimon, double x, double y)
     {
         string iconPath = DigimonIconFactory.Create(digimon).IconPath;
         return new EvoTreeNode(x, y, iconPath, digimon);
@@ -550,8 +497,29 @@ public class EvoTreeHelperViewModel : BaseViewModel, IDisposable
         Dictionary<DigimonName, IEvolutionCriteria> map = new();
         try
         {
-            FromRookieOrChampionEvolutionMapper mapper = new();
-            List<IEvolutionCriteria> criteriaList = mapper.GetEvolutionCriteria(center);
+            List<IEvolutionCriteria> criteriaList = [];
+
+            switch (center.EvolutionStage())
+            {
+                case EvolutionStage.Fresh:
+                    FromFreshEvolutionMapper fromFreshEvolutionMapper = new();
+                    criteriaList = [fromFreshEvolutionMapper[center]];
+                    break;
+                case EvolutionStage.InTraining:
+                    FromInTrainingEvolutionMapper fromInTrainingEvolutionMapper = new();
+                    criteriaList = fromInTrainingEvolutionMapper[center].ToList();
+                    break;
+                case EvolutionStage.Rookie:
+                case EvolutionStage.Champion:
+                    FromRookieOrChampionEvolutionMapper fromRookieOrChampionEvolutionMapper = new();
+                    criteriaList = fromRookieOrChampionEvolutionMapper.GetEvolutionCriteria(center);
+                    break;
+                case EvolutionStage.Ultimate:
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
+
             foreach (IEvolutionCriteria criteria in criteriaList)
             {
                 DigimonName evoName = criteria.EvolutionResult.ToDigimonType();

@@ -4,9 +4,9 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:sys="clr-namespace:System;assembly=mscorlib"
-             xmlns:models="clr-namespace:DigimonWorld.Frontend.WPF.Windows.Main.UserControls.EvoTreeHelper.Models"
+             xmlns:userControls="clr-namespace:DigimonWorld.Frontend.WPF.Windows.Main.UserControls.EvoTreeHelper.UserControls"
              mc:Ignorable="d"
-             d:DataContext="{d:DesignInstance Type=models:EvolutionCriteriaDisplay, IsDesignTimeCreatable=False}">
+             d:DataContext="{d:DesignInstance Type=userControls:CriteriaColumnViewModel, IsDesignTimeCreatable=False}">
 
     <UserControl.Resources>
         <ResourceDictionary>
@@ -16,26 +16,30 @@
                 <ResourceDictionary Source="/Frontend.WPF;component/ResourceDictionaries/Styles/DefaultReadonlyTextboxStyle.xaml" />
                 <ResourceDictionary Source="/Frontend.WPF;component/Windows/Main/UserControls/EvoTreeHelper/Styles/CriteriaMetTextBoxStyle.xaml" />
             </ResourceDictionary.MergedDictionaries>
+            
             <sys:Double x:Key="HeaderIconSize">40</sys:Double>
+            <GridLength x:Key="RowHeight">31</GridLength>
+            
         </ResourceDictionary>
     </UserControl.Resources>
 
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="44" SharedSizeGroup="Row0" />
-            <RowDefinition Height="32" SharedSizeGroup="Row1" />
-            <RowDefinition Height="32" SharedSizeGroup="Row2" />
-            <RowDefinition Height="32" SharedSizeGroup="Row3" />
-            <RowDefinition Height="32" SharedSizeGroup="Row4" />
-            <RowDefinition Height="32" SharedSizeGroup="Row5" />
-            <RowDefinition Height="32" SharedSizeGroup="Row6" />
-            <RowDefinition Height="32" SharedSizeGroup="Row7" />
-            <RowDefinition Height="32" SharedSizeGroup="Row8" />
-            <RowDefinition Height="32" SharedSizeGroup="Row9" />
-            <RowDefinition Height="32" SharedSizeGroup="Row10" />
-            <RowDefinition Height="32" SharedSizeGroup="Row11" />
-            <RowDefinition Height="32" SharedSizeGroup="Row12" />
-            <RowDefinition Height="32" SharedSizeGroup="Row13" />
+            <RowDefinition Height="{StaticResource RowHeight}" SharedSizeGroup="Row1" />
+            <RowDefinition Height="{StaticResource RowHeight}" SharedSizeGroup="Row2" />
+            <RowDefinition Height="{StaticResource RowHeight}" SharedSizeGroup="Row3" />
+            <RowDefinition Height="{StaticResource RowHeight}" SharedSizeGroup="Row4" />
+            <RowDefinition Height="{StaticResource RowHeight}" SharedSizeGroup="Row5" />
+            <RowDefinition Height="{StaticResource RowHeight}" SharedSizeGroup="Row6" />
+            <RowDefinition Height="{StaticResource RowHeight}" SharedSizeGroup="Row7" />
+            <RowDefinition Height="{StaticResource RowHeight}" SharedSizeGroup="Row8" />
+            <RowDefinition Height="{StaticResource RowHeight}" SharedSizeGroup="Row9" />
+            <RowDefinition Height="{StaticResource RowHeight}" SharedSizeGroup="Row10" />
+            <RowDefinition Height="{StaticResource RowHeight}" SharedSizeGroup="Row11" />
+            <RowDefinition Height="{StaticResource RowHeight}" SharedSizeGroup="Row12" />
+            <RowDefinition Height="{StaticResource RowHeight}" SharedSizeGroup="Row13" />
+            <RowDefinition Height="{StaticResource RowHeight}" SharedSizeGroup="Row14" />
         </Grid.RowDefinitions>
 
         <Button Grid.Row="0" Width="{StaticResource HeaderIconSize}" Height="{StaticResource HeaderIconSize}" HorizontalAlignment="Center"
@@ -62,7 +66,19 @@
                                 </Style>
                             </TextBlock.Style>
                         </TextBlock>
-                        <TextBlock Text="{Binding EvolutionScore, StringFormat='Score: {0}', FallbackValue=''}" />
+                        <TextBlock Text="{Binding EvolutionScore, StringFormat='Score: {0}'}">
+                            <TextBlock.Style>
+                                <Style TargetType="TextBlock">
+                                    <Setter Property="Visibility" Value="Visible"/>
+
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding EvolutionScore}" Value="{x:Null}">
+                                            <Setter Property="Visibility" Value="Collapsed"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </TextBlock.Style>
+                        </TextBlock>
                     </StackPanel>
                 </ToolTip>
             </Button.ToolTip>
@@ -81,5 +97,6 @@
         <TextBox Grid.Row="11" Style="{StaticResource CriteriaMetTextBoxStyle}" Tag="{Binding IsDisciplineMet, FallbackValue=False}" Text="{Binding Discipline, Mode=OneWay, FallbackValue='', TargetNullValue=''}" HorizontalContentAlignment="Center" Margin="2,1" />
         <TextBox Grid.Row="12" Style="{StaticResource CriteriaMetTextBoxStyle}" Tag="{Binding IsBattlesMet, FallbackValue=False}" Text="{Binding Battles, Mode=OneWay, FallbackValue='', TargetNullValue=''}" HorizontalContentAlignment="Center" Margin="2,1" />
         <TextBox Grid.Row="13" Style="{StaticResource CriteriaMetTextBoxStyle}" Tag="{Binding IsTechniqueCountMet, FallbackValue=False}" Text="{Binding TechniqueCount, Mode=OneWay, FallbackValue='', TargetNullValue=''}" HorizontalContentAlignment="Center" Margin="2,1" />
+        <TextBox Grid.Row="14" Style="{StaticResource CriteriaMetTextBoxStyle}" Tag="{Binding IsPrecursorMet, FallbackValue=False}" Text="{Binding Precursor, Mode=OneWay, FallbackValue='', TargetNullValue=''}" HorizontalContentAlignment="Center" Margin="2,1" />
     </Grid>
 </UserControl>

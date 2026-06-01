@@ -12,7 +12,7 @@ public sealed class ElecmonEvolutionCriteria : IEvolutionCriteria
 
     public MainCriteriaStats Stats => new(hp: 10, off: 10, speed: 1);
 
-    public MainCriteriaCareMistakes CareMistakes => new();
+    public MainCriteriaCareMistakes CareMistakes => new(0);
 
     public MainCriteriaWeight Weight => new(15);
 

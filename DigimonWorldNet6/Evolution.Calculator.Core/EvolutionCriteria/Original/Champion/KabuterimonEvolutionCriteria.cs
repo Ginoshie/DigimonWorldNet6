@@ -16,5 +16,5 @@ public sealed class KabuterimonEvolutionCriteria : IEvolutionCriteria
 
     public MainCriteriaWeight Weight => new(30);
 
-    public BonusCriteria BonusCriteria => new(techniqueCount: 35, precursorDigimon: DigimonName.Kuwagamon);
+    public BonusCriteria BonusCriteria => new(techniqueCount: 35, precursorDigimon: DigimonName.Kunemon);
 }

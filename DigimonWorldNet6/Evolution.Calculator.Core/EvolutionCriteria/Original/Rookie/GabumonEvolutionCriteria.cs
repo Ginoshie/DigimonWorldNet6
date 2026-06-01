@@ -12,7 +12,7 @@ public sealed class GabumonEvolutionCriteria : IEvolutionCriteria
 
     public MainCriteriaStats Stats => new(def: 1, speed: 1, brains: 1);
 
-    public MainCriteriaCareMistakes CareMistakes => new();
+    public MainCriteriaCareMistakes CareMistakes => new(0);
 
     public MainCriteriaWeight Weight => new(15);
 

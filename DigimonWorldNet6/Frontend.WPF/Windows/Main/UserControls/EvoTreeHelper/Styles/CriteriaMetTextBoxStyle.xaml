@@ -6,6 +6,7 @@
     </ResourceDictionary.MergedDictionaries>
 
     <Style x:Key="CriteriaMetTextBoxStyle" TargetType="TextBox" BasedOn="{StaticResource DefaultReadonlyTextBoxStyle}">
+        <Setter Property="FontSize" Value="11"/>
         <Style.Triggers>
             <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self}, Path=Tag}" Value="True">
                 <Setter Property="Background" Value="#2A4A2A" />

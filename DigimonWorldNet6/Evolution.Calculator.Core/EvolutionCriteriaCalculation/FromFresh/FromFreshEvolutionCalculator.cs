@@ -15,6 +15,6 @@ public sealed class FromFreshEvolutionCalculator : IEvolutionCalculator
             throw new ArgumentException($"{evolutionCalculationInput.DigimonName} is not a {nameof(EvolutionStage.Fresh)} stage digimon.");
         }
 
-        return _fromFreshEvolutionMapper[evolutionCalculationInput.DigimonName];
+        return _fromFreshEvolutionMapper[evolutionCalculationInput.DigimonName].EvolutionResult;
     }
 }

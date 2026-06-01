@@ -24,8 +24,8 @@ public sealed class FromRookieOrChampionEvolutionScoreCalculatorTests
 
         // HP/10 = 100, Off = 150 → total 250, count 2 → score 125
         result.EvolutionScore.ShouldBe(125);
-        result.CarriedOverStatTotal.ShouldBe(250);
-        result.CarriedOverCount.ShouldBe(2);
+        result.StatTotal.ShouldBe(250);
+        result.StatCount.ShouldBe(2);
     }
 
     [Test]
@@ -39,8 +39,8 @@ public sealed class FromRookieOrChampionEvolutionScoreCalculatorTests
 
         // HP/10=100, MP/10=200 → total 300, count 2 → score 150
         result.EvolutionScore.ShouldBe(150);
-        result.CarriedOverStatTotal.ShouldBe(300);
-        result.CarriedOverCount.ShouldBe(2);
+        result.StatTotal.ShouldBe(300);
+        result.StatCount.ShouldBe(2);
     }
 
     [Test]
@@ -54,8 +54,8 @@ public sealed class FromRookieOrChampionEvolutionScoreCalculatorTests
 
         // HP/10=100, MP/10=100, Off=100, Def=100, Speed=100, Brains=100 → total 600, count 6 → score 100
         result.EvolutionScore.ShouldBe(100);
-        result.CarriedOverStatTotal.ShouldBe(600);
-        result.CarriedOverCount.ShouldBe(6);
+        result.StatTotal.ShouldBe(600);
+        result.StatCount.ShouldBe(6);
     }
 
     [Test]
@@ -69,8 +69,8 @@ public sealed class FromRookieOrChampionEvolutionScoreCalculatorTests
 
         // Off=200, carried total=100, carried count=1 → (200+100)/(1+1) = 150
         result.EvolutionScore.ShouldBe(150);
-        result.CarriedOverStatTotal.ShouldBe(300);
-        result.CarriedOverCount.ShouldBe(2);
+        result.StatTotal.ShouldBe(300);
+        result.StatCount.ShouldBe(2);
     }
 
     [Test]
@@ -84,8 +84,8 @@ public sealed class FromRookieOrChampionEvolutionScoreCalculatorTests
 
         // carriedOver ignored → Off=200/1 = 200
         result.EvolutionScore.ShouldBe(200);
-        result.CarriedOverStatTotal.ShouldBe(200);
-        result.CarriedOverCount.ShouldBe(1);
+        result.StatTotal.ShouldBe(200);
+        result.StatCount.ShouldBe(1);
     }
 
     [Test]
@@ -98,8 +98,8 @@ public sealed class FromRookieOrChampionEvolutionScoreCalculatorTests
             criteria, 0, 0, false);
 
         result.EvolutionScore.ShouldBe(0);
-        result.CarriedOverStatTotal.ShouldBe(0);
-        result.CarriedOverCount.ShouldBe(0);
+        result.StatTotal.ShouldBe(0);
+        result.StatCount.ShouldBe(0);
     }
 
     // ─── DetermineWinningEvolutionIndex ──────────────────────────────────────

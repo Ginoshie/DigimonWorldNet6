@@ -7,6 +7,7 @@
              xmlns:converters="clr-namespace:DigimonWorld.Frontend.WPF.Windows.Main.UserControls.EvoTreeHelper.Converters"
              xmlns:uc="clr-namespace:DigimonWorld.Frontend.WPF.Windows.Main.UserControls.EvoTreeHelper.UserControls"
              xmlns:sys="clr-namespace:System;assembly=mscorlib"
+             xmlns:system="clr-namespace:System;assembly=System.Runtime"
              Height="565"
              Width="1093"
              UseLayoutRounding="True"
@@ -23,9 +24,12 @@
                 <ResourceDictionary Source="../../../../ResourceDictionaries/Styles/DefaultReadonlyTextboxStyle.xaml" />
                 <ResourceDictionary Source="/ResourceDictionaries/Styles/Labels/DefaultLabelStyle.xaml" />
             </ResourceDictionary.MergedDictionaries>
+            
             <converters:DiagonalPathConverter x:Key="DiagonalPathConverter" />
+            
             <sys:Double x:Key="NodeSize">46</sys:Double>
             <sys:Double x:Key="HeaderIconSize">40</sys:Double>
+            <system:Double x:Key="FontSizeUserStats">11</system:Double>
         </ResourceDictionary>
     </UserControl.Resources>
 
@@ -209,7 +213,7 @@
                     </Grid.RowDefinitions>
                     <Image Grid.Row="0" Height="40" HorizontalAlignment="Center"
                            Source="/Images/Icons/Labels/evolutions-label.png"
-                           Margin="60,10, 0, 15" />
+                           Margin="60,0, 0, 10" />
 
                     <!-- Evolution criteria panel (right side) -->
                     <Grid x:Name="CriteriaGrid" Grid.Row="1" Grid.IsSharedSizeScope="True" VerticalAlignment="Bottom">
@@ -225,19 +229,20 @@
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="44" SharedSizeGroup="Row0" />
-                            <RowDefinition Height="32" SharedSizeGroup="Row1" />
-                            <RowDefinition Height="32" SharedSizeGroup="Row2" />
-                            <RowDefinition Height="32" SharedSizeGroup="Row3" />
-                            <RowDefinition Height="32" SharedSizeGroup="Row4" />
-                            <RowDefinition Height="32" SharedSizeGroup="Row5" />
-                            <RowDefinition Height="32" SharedSizeGroup="Row6" />
-                            <RowDefinition Height="32" SharedSizeGroup="Row7" />
-                            <RowDefinition Height="32" SharedSizeGroup="Row8" />
-                            <RowDefinition Height="32" SharedSizeGroup="Row9" />
-                            <RowDefinition Height="32" SharedSizeGroup="Row10" />
-                            <RowDefinition Height="32" SharedSizeGroup="Row11" />
-                            <RowDefinition Height="32" SharedSizeGroup="Row12" />
-                            <RowDefinition Height="32" SharedSizeGroup="Row13" />
+                            <RowDefinition SharedSizeGroup="Row1" />
+                            <RowDefinition SharedSizeGroup="Row2" />
+                            <RowDefinition SharedSizeGroup="Row3" />
+                            <RowDefinition SharedSizeGroup="Row4" />
+                            <RowDefinition SharedSizeGroup="Row5" />
+                            <RowDefinition SharedSizeGroup="Row6" />
+                            <RowDefinition SharedSizeGroup="Row7" />
+                            <RowDefinition SharedSizeGroup="Row8" />
+                            <RowDefinition SharedSizeGroup="Row9" />
+                            <RowDefinition SharedSizeGroup="Row10" />
+                            <RowDefinition SharedSizeGroup="Row11" />
+                            <RowDefinition SharedSizeGroup="Row12" />
+                            <RowDefinition SharedSizeGroup="Row13" />
+                            <RowDefinition SharedSizeGroup="Row14" />
                         </Grid.RowDefinitions>
 
                         <!-- Row labels -->
@@ -255,6 +260,7 @@
                         <Label Grid.Row="11" Grid.Column="0" Style="{StaticResource DefaultLabelStyle}" Content="Disc:" Padding="2" Margin="0,1" />
                         <Label Grid.Row="12" Grid.Column="0" Style="{StaticResource DefaultLabelStyle}" Content="Battles:" Padding="2" Margin="0,1" />
                         <Label Grid.Row="13" Grid.Column="0" Style="{StaticResource DefaultLabelStyle}" Content="Techs:" Padding="2" Margin="0,1" />
+                        <Label Grid.Row="14" Grid.Column="0" Style="{StaticResource DefaultLabelStyle}" Content="Digimon:" Padding="2" Margin="0,1" />
 
                         <!-- Current stats column -->
                         <Button Grid.Row="0" Grid.Column="1" Width="{StaticResource HeaderIconSize}" Height="{StaticResource HeaderIconSize}" HorizontalAlignment="Center"
@@ -268,40 +274,40 @@
                             </Button.ToolTip>
                             <Image Source="{Binding CurrentIconPath}" Stretch="Fill" />
                         </Button>
-                        <TextBox Grid.Row="2" Grid.Column="1" Style="{StaticResource DefaultReadonlyTextBoxStyle}" Text="{Binding CurrentHP, Mode=OneWay}" HorizontalContentAlignment="Center"
+                        <TextBox Grid.Row="2" Grid.Column="1" Style="{StaticResource DefaultReadonlyTextBoxStyle}" FontSize="{StaticResource FontSizeUserStats}" Text="{Binding CurrentHP, Mode=OneWay}" HorizontalContentAlignment="Center"
                                  Margin="2,1" />
-                        <TextBox Grid.Row="3" Grid.Column="1" Style="{StaticResource DefaultReadonlyTextBoxStyle}" Text="{Binding CurrentMP, Mode=OneWay}" HorizontalContentAlignment="Center"
+                        <TextBox Grid.Row="3" Grid.Column="1" Style="{StaticResource DefaultReadonlyTextBoxStyle}" FontSize="{StaticResource FontSizeUserStats}" Text="{Binding CurrentMP, Mode=OneWay}" HorizontalContentAlignment="Center"
                                  Margin="2,1" />
-                        <TextBox Grid.Row="4" Grid.Column="1" Style="{StaticResource DefaultReadonlyTextBoxStyle}" Text="{Binding CurrentOff, Mode=OneWay}" HorizontalContentAlignment="Center"
+                        <TextBox Grid.Row="4" Grid.Column="1" Style="{StaticResource DefaultReadonlyTextBoxStyle}" FontSize="{StaticResource FontSizeUserStats}" Text="{Binding CurrentOff, Mode=OneWay}" HorizontalContentAlignment="Center"
                                  Margin="2,1" />
-                        <TextBox Grid.Row="5" Grid.Column="1" Style="{StaticResource DefaultReadonlyTextBoxStyle}" Text="{Binding CurrentDef, Mode=OneWay}" HorizontalContentAlignment="Center"
+                        <TextBox Grid.Row="5" Grid.Column="1" Style="{StaticResource DefaultReadonlyTextBoxStyle}" FontSize="{StaticResource FontSizeUserStats}" Text="{Binding CurrentDef, Mode=OneWay}" HorizontalContentAlignment="Center"
                                  Margin="2,1" />
-                        <TextBox Grid.Row="6" Grid.Column="1" Style="{StaticResource DefaultReadonlyTextBoxStyle}" Text="{Binding CurrentSpeed, Mode=OneWay}" HorizontalContentAlignment="Center"
+                        <TextBox Grid.Row="6" Grid.Column="1" Style="{StaticResource DefaultReadonlyTextBoxStyle}" FontSize="{StaticResource FontSizeUserStats}" Text="{Binding CurrentSpeed, Mode=OneWay}" HorizontalContentAlignment="Center"
                                  Margin="2,1" />
-                        <TextBox Grid.Row="7" Grid.Column="1" Style="{StaticResource DefaultReadonlyTextBoxStyle}" Text="{Binding CurrentBrains, Mode=OneWay}" HorizontalContentAlignment="Center"
+                        <TextBox Grid.Row="7" Grid.Column="1" Style="{StaticResource DefaultReadonlyTextBoxStyle}" FontSize="{StaticResource FontSizeUserStats}" Text="{Binding CurrentBrains, Mode=OneWay}" HorizontalContentAlignment="Center"
                                  Margin="2,1" />
-                        <TextBox Grid.Row="8" Grid.Column="1" Style="{StaticResource DefaultReadonlyTextBoxStyle}" Text="{Binding CurrentWeight, Mode=OneWay}" HorizontalContentAlignment="Center"
+                        <TextBox Grid.Row="8" Grid.Column="1" Style="{StaticResource DefaultReadonlyTextBoxStyle}" FontSize="{StaticResource FontSizeUserStats}" Text="{Binding CurrentWeight, Mode=OneWay}" HorizontalContentAlignment="Center"
                                  Margin="2,1" />
-                        <TextBox Grid.Row="9" Grid.Column="1" Style="{StaticResource DefaultReadonlyTextBoxStyle}" Text="{Binding CurrentCareMistakes, Mode=OneWay}"
+                        <TextBox Grid.Row="9" Grid.Column="1" Style="{StaticResource DefaultReadonlyTextBoxStyle}" FontSize="{StaticResource FontSizeUserStats}" Text="{Binding CurrentCareMistakes, Mode=OneWay}"
                                  HorizontalContentAlignment="Center"
                                  Margin="2,1" />
-                        <TextBox Grid.Row="10" Grid.Column="1" Style="{StaticResource DefaultReadonlyTextBoxStyle}" Text="{Binding CurrentHappiness, Mode=OneWay}" HorizontalContentAlignment="Center"
+                        <TextBox Grid.Row="10" Grid.Column="1" Style="{StaticResource DefaultReadonlyTextBoxStyle}" FontSize="{StaticResource FontSizeUserStats}" Text="{Binding CurrentHappiness, Mode=OneWay}" HorizontalContentAlignment="Center"
                                  Margin="2,1" />
-                        <TextBox Grid.Row="11" Grid.Column="1" Style="{StaticResource DefaultReadonlyTextBoxStyle}" Text="{Binding CurrentDiscipline, Mode=OneWay}" HorizontalContentAlignment="Center"
+                        <TextBox Grid.Row="11" Grid.Column="1" Style="{StaticResource DefaultReadonlyTextBoxStyle}" FontSize="{StaticResource FontSizeUserStats}" Text="{Binding CurrentDiscipline, Mode=OneWay}" HorizontalContentAlignment="Center"
                                  Margin="2,1" />
-                        <TextBox Grid.Row="12" Grid.Column="1" Style="{StaticResource DefaultReadonlyTextBoxStyle}" Text="{Binding CurrentBattles, Mode=OneWay}" HorizontalContentAlignment="Center"
+                        <TextBox Grid.Row="12" Grid.Column="1" Style="{StaticResource DefaultReadonlyTextBoxStyle}" FontSize="{StaticResource FontSizeUserStats}" Text="{Binding CurrentBattles, Mode=OneWay}" HorizontalContentAlignment="Center"
                                  Margin="2,1" />
-                        <TextBox Grid.Row="13" Grid.Column="1" Style="{StaticResource DefaultReadonlyTextBoxStyle}" Text="{Binding CurrentTechniqueCount, Mode=OneWay}"
+                        <TextBox Grid.Row="13" Grid.Column="1" Style="{StaticResource DefaultReadonlyTextBoxStyle}" FontSize="{StaticResource FontSizeUserStats}" Text="{Binding CurrentTechniqueCount, Mode=OneWay}"
                                  HorizontalContentAlignment="Center"
                                  Margin="2,1" />
 
                         <!-- Criteria columns -->
-                        <uc:CriteriaColumnUserControl Grid.Row="0" Grid.RowSpan="14" Grid.Column="2" DataContext="{Binding Criteria0}" Width="80" />
-                        <uc:CriteriaColumnUserControl Grid.Row="0" Grid.RowSpan="14" Grid.Column="3" DataContext="{Binding Criteria1}" Width="80" />
-                        <uc:CriteriaColumnUserControl Grid.Row="0" Grid.RowSpan="14" Grid.Column="4" DataContext="{Binding Criteria2}" Width="80" />
-                        <uc:CriteriaColumnUserControl Grid.Row="0" Grid.RowSpan="14" Grid.Column="5" DataContext="{Binding Criteria3}" Width="80" />
-                        <uc:CriteriaColumnUserControl Grid.Row="0" Grid.RowSpan="14" Grid.Column="6" DataContext="{Binding Criteria4}" Width="80" />
-                        <uc:CriteriaColumnUserControl Grid.Row="0" Grid.RowSpan="14" Grid.Column="7" DataContext="{Binding Criteria5}" Width="80" />
+                        <uc:CriteriaColumnUserControl Grid.Row="0" Grid.RowSpan="15" Grid.Column="2" DataContext="{Binding Evolution1}" Width="80" />
+                        <uc:CriteriaColumnUserControl Grid.Row="0" Grid.RowSpan="15" Grid.Column="3" DataContext="{Binding Evolution2}" Width="80" />
+                        <uc:CriteriaColumnUserControl Grid.Row="0" Grid.RowSpan="15" Grid.Column="4" DataContext="{Binding Evolution3}" Width="80" />
+                        <uc:CriteriaColumnUserControl Grid.Row="0" Grid.RowSpan="15" Grid.Column="5" DataContext="{Binding Evolution4}" Width="80" />
+                        <uc:CriteriaColumnUserControl Grid.Row="0" Grid.RowSpan="15" Grid.Column="6" DataContext="{Binding Evolution5}" Width="80" />
+                        <uc:CriteriaColumnUserControl Grid.Row="0" Grid.RowSpan="15" Grid.Column="7" DataContext="{Binding Evolution6}" Width="80" />
                     </Grid>
                 </Grid>
             </Grid>

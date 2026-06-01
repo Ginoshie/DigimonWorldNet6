@@ -12,7 +12,7 @@ public sealed class BetamonEvolutionCriteria : IEvolutionCriteria
 
     public MainCriteriaStats Stats => new(hp: 10, mp: 10, def: 1);
 
-    public MainCriteriaCareMistakes CareMistakes => new();
+    public MainCriteriaCareMistakes CareMistakes => new(0);
 
     public MainCriteriaWeight Weight => new(15);
 

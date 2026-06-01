@@ -81,8 +81,8 @@ public sealed class FromRookieOrChampionEvolutionScoreCalculator
         return new EvolutionScoreCalculationResult
         {
             EvolutionScore = totalCount > 0 ? (evolutionStatsTotal + carriedOverStatTotal) / totalCount : 0,
-            CarriedOverStatTotal = carriedOverStatTotal + evolutionStatsTotal,
-            CarriedOverCount = carriedOverStatCount + evolutionStatCountTotal
+            StatTotal = carriedOverStatTotal + evolutionStatsTotal,
+            StatCount = carriedOverStatCount + evolutionStatCountTotal
         };
     }
 

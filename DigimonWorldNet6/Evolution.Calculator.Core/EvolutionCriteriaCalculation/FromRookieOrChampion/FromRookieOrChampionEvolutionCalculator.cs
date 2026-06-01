@@ -51,8 +51,8 @@ public sealed class FromRookieOrChampionEvolutionCalculator : IEvolutionCalculat
             }
 
             highestEvolutionScore = evolutionScoreCalculationResult.EvolutionScore;
-            carriedOverStatTotal = evolutionScoreCalculationResult.CarriedOverStatTotal;
-            carriedOverStatCount = evolutionScoreCalculationResult.CarriedOverCount;
+            carriedOverStatTotal = evolutionScoreCalculationResult.StatTotal;
+            carriedOverStatCount = evolutionScoreCalculationResult.StatCount;
             evolutionResult = evolutionCriteria.EvolutionResult;
         }
 

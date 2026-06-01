@@ -14,7 +14,7 @@ public sealed class TokomonEvolutionCriteria : IEvolutionCriteria
 
     public MainCriteriaCareMistakes CareMistakes => new();
 
-    public MainCriteriaWeight Weight => new(0);
+    public MainCriteriaWeight Weight => new(0, 0);
 
     public BonusCriteria BonusCriteria => new();
 }
