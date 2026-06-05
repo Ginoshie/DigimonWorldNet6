@@ -294,7 +294,8 @@ public class CriteriaColumnViewModel : BaseViewModel
                         || (bonusCriteria.Battles >= 0 && (bonusCriteria.IsBattlesCriteriaAMaximum
                             ? userBattles <= bonusCriteria.Battles
                             : userBattles >= bonusCriteria.Battles))
-                        || userTechniqueCount >= bonusCriteria.TechniqueCount;
+                        || userTechniqueCount >= bonusCriteria.TechniqueCount
+                        || !string.IsNullOrWhiteSpace(bonusCriteria.PrecursorDigimon.ToString()) && bonusCriteria.PrecursorDigimon.ToString() == Precursor;
 
         int criteriaMetCount = (statsMet ? 1 : 0) + (careMistakesMet ? 1 : 0)
                                                   + (weightMet ? 1 : 0) + (bonusMet ? 1 : 0);

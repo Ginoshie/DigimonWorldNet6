@@ -1,12 +1,13 @@
-using System.Diagnostics;
 using System.Runtime.InteropServices;
 
 namespace MemoryAccess.Core
 {
     public class PsxRam
     {
-        private PsxRam() { }
-        
+        private PsxRam()
+        {
+        }
+
         public PsxRam(ProcessMemory mem)
         {
             byte[] sig =
@@ -28,11 +29,10 @@ namespace MemoryAccess.Core
             }
 
             Base -= 0x90800;
-            Debug.WriteLine($"PSX RAM base dynamically calculated: 0x{Base.ToInt64():X}");
         }
-        
+
         public static PsxRam Empty { get; } = new EmptyPsxRam();
-        
+
         public IntPtr Base { get; }
 
         public virtual IntPtr A(int offset) => Base + offset;

@@ -30,6 +30,8 @@
             <conversion:EnumToImageConverter x:Key="DigimonStatToImageConverter" />
             
             <conversion:TrueToVisibilityConverter x:Key="TrueToVisibility" />
+
+            <conversion:IsNullOrWhitespaceToVisibilityConverter x:Key="IsNullOrWhitespaceToVisibilityConverter" />
             
             <conversion:TrueToHiddenConverter x:Key="TrueToHidden" />
 

@@ -15,9 +15,25 @@ public sealed class UserDigimon
 
     private UserDigimon()
     {
-        EmulatorLinkEventHub.DigimonParameterStatsSynchronizedObservable.Subscribe(_ => SyncParameterStats());
-        EmulatorLinkEventHub.DigimonConditionStatsSynchronizedObservable.Subscribe(_ => SyncConditionStats());
-        EmulatorLinkEventHub.DigimonProfileStatsSynchronizedObservable.Subscribe(_ => SyncProfileStats());
+        EmulatorLinkEventHub.DigimonParameterStatsSynchronizedObservable.Subscribe(_ =>
+        {
+            SyncParameterStats();
+            
+            UserDigimonEventHub.SignalParameterStatsSynchronized();
+        });
+        EmulatorLinkEventHub.DigimonConditionStatsSynchronizedObservable.Subscribe(_ =>
+        {
+            SyncConditionStats();
+            
+            UserDigimonEventHub.SignalConditionStatsSynchronized();
+        });
+        EmulatorLinkEventHub.DigimonProfileStatsSynchronizedObservable.Subscribe(_ =>
+        {
+            SyncProfileStats();
+            
+            UserDigimonEventHub.SignalProfileStatsSynchronized();
+        });
+        EmulatorLinkEventHub.DigimonTechniqueStatsSynchronizedObservable.Subscribe(_ => TechniqueCount = LiveMemoryReader.Instance.TechniqueStats.LearnedTechniqueCount());
         UserConfigurationManager.CurrentEvolutionCalculatorConfig.Subscribe(config => _gameVariant = config.GameVariant);
     }
 
@@ -48,7 +64,7 @@ public sealed class UserDigimon
             EvolutionStage = EvolutionStageMapper.Get(value);
             field = value;
         }
-    }
+    } = DigimonName.None;
 
     public EvolutionStage EvolutionStage { get; private set; }
 
@@ -125,15 +141,14 @@ public sealed class UserDigimon
         try
         {
             LiveMemoryReader reader = LiveMemoryReader.Instance;
-            if (!reader.Connected)
-            {
-                return;
-            }
-
+            
             ProfileStats pr = reader.ProfileStats;
             byte digimonType = pr.DigimonType;
-            if (digimonType == 0)
+            if (!reader.Connected ||
+                digimonType == 0)
             {
+                Weight = pr.Weight;
+                
                 return;
             }
 

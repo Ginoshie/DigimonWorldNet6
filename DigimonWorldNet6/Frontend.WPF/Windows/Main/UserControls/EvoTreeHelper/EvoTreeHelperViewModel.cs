@@ -9,7 +9,6 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
-using DigimonWorld.Evolution.Calculator.Core;
 using DigimonWorld.Evolution.Calculator.Core.EvolutionCriteriaCalculation.FromFresh;
 using DigimonWorld.Evolution.Calculator.Core.EvolutionCriteriaCalculation.FromInTraining;
 using DigimonWorld.Evolution.Calculator.Core.EvolutionCriteriaCalculation.FromRookieOrChampion;
@@ -21,7 +20,6 @@ using DigimonWorld.Frontend.WPF.ViewModelComponents;
 using DigimonWorld.Frontend.WPF.Windows.Main.UserControls.EvoTreeHelper.Models;
 using DigimonWorld.Frontend.WPF.Windows.Main.UserControls.EvoTreeHelper.UserControls;
 using Domain;
-using Shared.Constants;
 using Shared.Enums;
 using Shared.Extensions;
 using Shared.Services;
@@ -40,7 +38,7 @@ public class EvoTreeHelperViewModel : BaseViewModel, IDisposable
     private const double EVOLUTION_NODES_X_POSITION = 251;
     private const double CURRENT_DIGIMON_NODE_X_POSITION = 91;
     private const double CURRENT_DIGIMON_NODE_Y_POSITION = 147;
-    private const DigimonName DEFAULT_CURRENT_DIGIMON = DigimonName.Gabumon;
+
 
     private readonly Brush _lightBlue = new SolidColorBrush(Color.FromRgb(0x5E, 0xD6, 0xD6));
     private readonly Brush _yellow = new SolidColorBrush(Color.FromRgb(0xE8, 0xA8, 0x35));
@@ -53,6 +51,7 @@ public class EvoTreeHelperViewModel : BaseViewModel, IDisposable
     private readonly SpeakingSimulator _speakingSimulator;
 
     private GameVariant _gameVariant = GameVariant.Original;
+    private SpeechDelay _speechDelay;
     private Dictionary<DigimonName, IEvolutionCriteria> _criteriaMap = new();
     private List<DigimonName> _evolutions = [];
 
@@ -64,41 +63,45 @@ public class EvoTreeHelperViewModel : BaseViewModel, IDisposable
 
         InstantDisplayCommand = new CommandHandler(InstantDisplay);
 
-        SpeechDelay delay = UserConfigurationManager.SpeakingSimulatorConfig.NarratorMode == NarratorMode.Instant ? SpeechDelay.None : SpeechDelay.Short;
-
         _disposables = new CompositeDisposable(
             _speakingSimulator,
-            EmulatorLinkEventHub.DigimonProfileStatsSynchronizedObservable
+            UserDigimonEventHub.ProfileStatsSynchronizedObservable
                 .ObserveOn(uiSynchronizationContext)
                 .Subscribe(_ => OnProfileStatsSynced()),
-            EmulatorLinkEventHub.DigimonParameterStatsSynchronizedObservable
+            UserDigimonEventHub.ParameterStatsSynchronizedObservable
                 .ObserveOn(uiSynchronizationContext)
-                .Subscribe(_ => RefreshUserStats()),
+                .Subscribe(_ => OnParameterStatsSynchronized()),
+            UserDigimonEventHub.ConditionStatsSynchronizedObservable
+                .ObserveOn(uiSynchronizationContext)
+                .Subscribe(_ => OnConditionStatsSynchronized()),
             UserConfigurationManager.CurrentEvolutionCalculatorConfig
                 .ObserveOn(uiSynchronizationContext)
-                .Subscribe(config =>
-                {
-                    _gameVariant = config.GameVariant;
-                    TryReadCurrentDigimon();
-                }),
+                .Subscribe(config => _gameVariant = config.GameVariant),
+            UserConfigurationManager.CurrentSpeakingSimulatorConfig
+                .ObserveOn(uiSynchronizationContext)
+                .Subscribe(config => _speechDelay = config.NarratorMode == NarratorMode.Instant ? SpeechDelay.None : SpeechDelay.Short),
             EmulatorLinkEventHub.EmulatorConnectedObservable
                 .ObserveOn(uiSynchronizationContext)
-                .Subscribe(isConnected =>
-                {
-                    if (isConnected)
-                    {
-                        TryReadCurrentDigimon();
+                .Subscribe(OnEmulatorConnectedChanged));
 
-                        SpeakGabumonTextAsync(GabumonEvoTreeHelperNarratorText.EmulatorConnectedText, delay).ConfigureAwait(false);
-                    }
-                    else
-                    {
-                        CurrentDigimon = DEFAULT_CURRENT_DIGIMON;
+        _speechDelay = UserConfigurationManager.SpeakingSimulatorConfig.NarratorMode == NarratorMode.Instant ? SpeechDelay.None : SpeechDelay.Short;
 
-                        SpeakGabumonTextAsync(GabumonEvoTreeHelperNarratorText.EmulatorNotConnectedText, delay).ConfigureAwait(false);
-                    }
-                })
-        );
+        SpeakGabumonTextAsync(GabumonEvoTreeHelperNarratorText.EmulatorNotConnectedText, _speechDelay).ConfigureAwait(false);
+
+        CurrentDigimon = DigimonName.Gabumon;
+
+        CurrentHP = "0";
+        CurrentMP = "0";
+        CurrentOff = "0";
+        CurrentDef = "0";
+        CurrentSpeed = "0";
+        CurrentBrains = "0";
+        CurrentWeight = "0";
+        CurrentCareMistakes = "0";
+        CurrentHappiness = "0";
+        CurrentDiscipline = "0";
+        CurrentBattles = "0";
+        CurrentTechniqueCount = "0";
     }
 
     public double CanvasWidth => CANVAS_WIDTH;
@@ -272,11 +275,26 @@ public class EvoTreeHelperViewModel : BaseViewModel, IDisposable
         private set => SetField(ref field, value);
     } = "0";
 
-
     private void InstantDisplay() => _speakingSimulator.RequestInstantDisplay();
-    private Task SpeakGabumonTextAsync(string text, SpeechDelay delayMs = SpeechDelay.None) => _speakingSimulator.SpeakAsync(text, output => GabumonText = output, delayMs);
 
-    private void RefreshUserStats()
+    private void OnProfileStatsSynced()
+    {
+        try
+        {
+            UserDigimon userDigimon = UserDigimon.Instance;
+
+            CurrentDigimon = userDigimon.DigimonName;
+            CurrentWeight = userDigimon.Weight.ToString();
+
+            Application.Current.Dispatcher.Invoke(RefreshCriteria);
+        }
+        catch
+        {
+            // Emulator may not be connected or data not available yet
+        }
+    }
+
+    private void OnParameterStatsSynchronized()
     {
         try
         {
@@ -287,7 +305,20 @@ public class EvoTreeHelperViewModel : BaseViewModel, IDisposable
             CurrentDef = d.Def.ToString();
             CurrentSpeed = d.Speed.ToString();
             CurrentBrains = d.Brains.ToString();
-            CurrentWeight = d.Weight.ToString();
+        }
+        catch
+        {
+            // Emulator may not be connected
+        }
+
+        RefreshCriteria();
+    }
+
+    private void OnConditionStatsSynchronized()
+    {
+        try
+        {
+            UserDigimon d = Session.UserDigimon;
             CurrentCareMistakes = d.CareMistakes.ToString();
             CurrentHappiness = d.Happiness.ToString();
             CurrentDiscipline = d.Discipline.ToString();
@@ -300,6 +331,33 @@ public class EvoTreeHelperViewModel : BaseViewModel, IDisposable
         }
 
         RefreshCriteria();
+    }
+
+    private void OnEmulatorConnectedChanged(bool isConnected)
+    {
+        if (isConnected)
+        {
+            SpeakGabumonTextAsync(GabumonEvoTreeHelperNarratorText.EmulatorConnectedText, _speechDelay).ConfigureAwait(false);
+        }
+        else
+        {
+            SpeakGabumonTextAsync(GabumonEvoTreeHelperNarratorText.EmulatorNotConnectedText, _speechDelay).ConfigureAwait(false);
+
+            CurrentDigimon = DigimonName.Gabumon;
+
+            CurrentHP = "0";
+            CurrentMP = "0";
+            CurrentOff = "0";
+            CurrentDef = "0";
+            CurrentSpeed = "0";
+            CurrentBrains = "0";
+            CurrentWeight = "0";
+            CurrentCareMistakes = "0";
+            CurrentHappiness = "0";
+            CurrentDiscipline = "0";
+            CurrentBattles = "0";
+            CurrentTechniqueCount = "0";
+        }
     }
 
     private void RefreshCriteria()
@@ -350,7 +408,7 @@ public class EvoTreeHelperViewModel : BaseViewModel, IDisposable
             }
         }
 
-        if (winnerIndex >= 0)
+        if (winnerIndex >= 0 && winnerIndex < evolutionCriteriaDisplayViewModels.Count)
         {
             evolutionCriteriaDisplayViewModels[winnerIndex].IsWinningEvolution = true;
         }
@@ -363,48 +421,7 @@ public class EvoTreeHelperViewModel : BaseViewModel, IDisposable
         Evolution6 = evolutionCriteriaDisplayViewModels.Count > 5 ? evolutionCriteriaDisplayViewModels[5] : null;
     }
 
-    private void OnProfileStatsSynced()
-    {
-        try
-        {
-            byte digimonType = ServiceRelay.LiveMemoryReader.ProfileStats.DigimonType;
-            if (digimonType == 0)
-            {
-                return;
-            }
-
-            Digimon digimon = DigimonTypes.Get(digimonType, _gameVariant);
-
-            if (digimon.DigimonName != CurrentDigimon)
-            {
-                CurrentDigimon = digimon.DigimonName;
-                Application.Current.Dispatcher.Invoke(RefreshCriteria);
-            }
-        }
-        catch
-        {
-            // Emulator may not be connected or data not available yet
-        }
-    }
-
-    private void TryReadCurrentDigimon()
-    {
-        try
-        {
-            byte digimonType = ServiceRelay.LiveMemoryReader.ProfileStats.DigimonType;
-            if (digimonType == 0)
-            {
-                return;
-            }
-
-            Digimon digimon = DigimonTypes.Get(digimonType, _gameVariant);
-            CurrentDigimon = digimon.DigimonName;
-        }
-        catch
-        {
-            // Emulator may not be connected or data not available yet
-        }
-    }
+    private Task SpeakGabumonTextAsync(string text, SpeechDelay delayMs = SpeechDelay.None) => _speakingSimulator.SpeakAsync(text, output => GabumonText = output, delayMs);
 
     private void BuildGraph()
     {
@@ -481,33 +498,33 @@ public class EvoTreeHelperViewModel : BaseViewModel, IDisposable
     private int GetStubTier(Brush color, int evolutionCount) =>
         color switch
         {
-            _ when color == _lightBlue && evolutionCount == 1 => 1, 
-            
-            _ when color == _lightBlue && evolutionCount == 2 => 1, 
+            _ when color == _lightBlue && evolutionCount == 1 => 1,
+
+            _ when color == _lightBlue && evolutionCount == 2 => 1,
             _ when color == _blue && evolutionCount == 2 => 1,
-            
-            _ when color == _green && evolutionCount == 3 => 2, 
-            _ when color == _lightBlue && evolutionCount == 3 => 1, 
-            _ when color == _blue && evolutionCount == 3 => 2, 
-            
-            _ when color == _yellow && evolutionCount == 4 => 2, 
-            _ when color == _green && evolutionCount == 4 => 1, 
-            _ when color == _lightBlue && evolutionCount == 4 => 1, 
-            _ when color == _blue && evolutionCount == 4 => 2, 
-            
-            _ when color == _yellow && evolutionCount == 5 => 3, 
-            _ when color == _green && evolutionCount == 5 => 1, 
-            _ when color == _lightBlue && evolutionCount == 5 => 1, 
-            _ when color == _blue && evolutionCount == 5 => 1, 
-            _ when color == _pink && evolutionCount == 5 => 3, 
-            
-            _ when color == _yellow && evolutionCount == 6 => 3, 
-            _ when color == _green && evolutionCount == 6 => 2, 
-            _ when color == _lightBlue && evolutionCount == 6 => 1, 
-            _ when color == _blue && evolutionCount == 6 => 1, 
-            _ when color == _pink && evolutionCount == 6 => 2, 
-            _ when color == _red && evolutionCount == 6 => 3, 
-            
+
+            _ when color == _green && evolutionCount == 3 => 2,
+            _ when color == _lightBlue && evolutionCount == 3 => 1,
+            _ when color == _blue && evolutionCount == 3 => 2,
+
+            _ when color == _yellow && evolutionCount == 4 => 2,
+            _ when color == _green && evolutionCount == 4 => 1,
+            _ when color == _lightBlue && evolutionCount == 4 => 1,
+            _ when color == _blue && evolutionCount == 4 => 2,
+
+            _ when color == _yellow && evolutionCount == 5 => 3,
+            _ when color == _green && evolutionCount == 5 => 1,
+            _ when color == _lightBlue && evolutionCount == 5 => 1,
+            _ when color == _blue && evolutionCount == 5 => 1,
+            _ when color == _pink && evolutionCount == 5 => 3,
+
+            _ when color == _yellow && evolutionCount == 6 => 3,
+            _ when color == _green && evolutionCount == 6 => 2,
+            _ when color == _lightBlue && evolutionCount == 6 => 1,
+            _ when color == _blue && evolutionCount == 6 => 1,
+            _ when color == _pink && evolutionCount == 6 => 2,
+            _ when color == _red && evolutionCount == 6 => 3,
+
             _ when color != _yellow && color != _green && color != _lightBlue && color != _blue && color != _pink && color != _red => throw new ArgumentOutOfRangeException(nameof(color), color, "Color is not supported as a subtier"),
             _ when evolutionCount is > 6 or < 1 => throw new ArgumentOutOfRangeException(nameof(evolutionCount), evolutionCount, "Evolution count must be between 1 and 6"),
             _ => throw new ArgumentOutOfRangeException(nameof(color), color, "Unexpected error while determining stub tier")

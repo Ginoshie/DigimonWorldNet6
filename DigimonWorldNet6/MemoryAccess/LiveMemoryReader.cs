@@ -18,15 +18,75 @@ public sealed class LiveMemoryReader : INotifyPropertyChanged, IDisposable
     private CancellationTokenSource? _cts;
     private string _emulatorProcessName = "duckstation-qt-x64-ReleaseLTCG";
 
+    private readonly SerialDisposable _parameterStats = new();
+    private readonly SerialDisposable _conditionStats = new();
+    private readonly SerialDisposable _profileStats = new();
+    private readonly SerialDisposable _careStats = new();
+    private readonly SerialDisposable _techniqueStats = new();
+    private readonly SerialDisposable _historicEvolutions = new();
+    private readonly SerialDisposable _worldTime = new();
+
     public static LiveMemoryReader Instance => _instance.Value;
 
     private LiveMemoryReader()
     {
         _disposables = new CompositeDisposable(
             EmulatorLinkEventHub.EmulatorProcessNameChangedObservable.Subscribe(OnEmulatorProcessNameChanged),
-            EmulatorLinkEventHub.EmulatorReconnectRequestedObservable.Subscribe(_ => Reconnect())
+            EmulatorLinkEventHub.EmulatorReconnectRequestedObservable.Subscribe(_ => Start())
         );
+
+        _parameterStats.Disposable = ParameterStats.Empty;
+        _conditionStats.Disposable = ConditionStats.Empty;
+        _profileStats.Disposable = ProfileStats.Empty;
+        _careStats.Disposable = CareStats.Empty;
+        _techniqueStats.Disposable = TechniqueStats.Empty;
+        _historicEvolutions.Disposable = HistoricEvolutions.Empty;
+        _worldTime.Disposable = WorldTime.Empty;
     }
+
+    public ParameterStats ParameterStats
+    {
+        get => (ParameterStats)_parameterStats.Disposable!;
+        private set => _parameterStats.Disposable = value;
+    }
+
+    public ConditionStats ConditionStats
+    {
+        get => (ConditionStats)_conditionStats.Disposable!;
+        private set => _conditionStats.Disposable = value;
+    }
+
+    public ProfileStats ProfileStats
+    {
+        get => (ProfileStats)_profileStats.Disposable!;
+        private set => _profileStats.Disposable = value;
+    }
+
+    public CareStats CareStats
+    {
+        get => (CareStats)_careStats.Disposable!;
+        private set => _careStats.Disposable = value;
+    }
+
+    public TechniqueStats TechniqueStats
+    {
+        get => (TechniqueStats)_techniqueStats.Disposable!;
+        private set => _techniqueStats.Disposable = value;
+    }
+
+    public HistoricEvolutions HistoricEvolutions
+    {
+        get => (HistoricEvolutions)_historicEvolutions.Disposable!;
+        private set => _historicEvolutions.Disposable = value;
+    }
+
+    public WorldTime WorldTime
+    {
+        get => (WorldTime)_worldTime.Disposable!;
+        private set => _worldTime.Disposable = value;
+    }
+
+    public event PropertyChangedEventHandler? PropertyChanged;
 
     public bool Connected
     {
@@ -55,15 +115,6 @@ public sealed class LiveMemoryReader : INotifyPropertyChanged, IDisposable
         Task.Run(() => MonitorEmulatorAsync(_cts.Token));
     }
 
-    public void Stop()
-    {
-        _cts?.Cancel();
-
-        _cts?.Dispose();
-
-        _cts = null;
-    }
-
     private void OnEmulatorProcessNameChanged(string emulatorProcessName)
     {
         if (_emulatorProcessName == emulatorProcessName)
@@ -71,16 +122,8 @@ public sealed class LiveMemoryReader : INotifyPropertyChanged, IDisposable
             return;
         }
 
-        Stop();
-
         _emulatorProcessName = emulatorProcessName;
 
-        Start();
-    }
-
-    private void Reconnect()
-    {
-        Stop();
         Start();
     }
 
@@ -100,6 +143,7 @@ public sealed class LiveMemoryReader : INotifyPropertyChanged, IDisposable
                     if (Connected)
                     {
                         Connected = false;
+                        ResetMemorySyncs();
                         attachedProcess = null;
                     }
 
@@ -107,13 +151,15 @@ public sealed class LiveMemoryReader : INotifyPropertyChanged, IDisposable
                     continue;
                 }
 
-                if (attachedProcess == null || attachedProcess.HasExited)
+                if (attachedProcess == null ||
+                    attachedProcess.HasExited ||
+                    attachedProcess.Id != proc.Id)
                 {
                     Attach(proc);
 
                     if (!AreParameterStatsWithinExpectedRanges())
                     {
-                        ResetStats();
+                        ResetMemorySyncs();
                         EmulatorLinkEventHub.SignalEmulatorInvalidRomDetected();
                         break;
                     }
@@ -122,15 +168,19 @@ public sealed class LiveMemoryReader : INotifyPropertyChanged, IDisposable
                     attachedProcess = proc;
                 }
 
+                if (!AreParameterStatsWithinExpectedRanges())
+                {
+                    Start();
+                }
+                
                 await Task.Delay(1000, token);
             }
             catch (TaskCanceledException)
             {
                 break;
             }
-            catch (Exception ex)
+            catch (Exception _)
             {
-                Debug.WriteLine($"LiveMemoryReader exception: {ex}");
                 Connected = false;
                 await Task.Delay(1000, token);
             }
@@ -161,21 +211,12 @@ public sealed class LiveMemoryReader : INotifyPropertyChanged, IDisposable
         {
             WorldTime = new WorldTime(mem, ram);
             WorldTime.UpdateData();
-        } catch
+        }
+        catch
         {
             WorldTime = WorldTime.Empty;
         }
     }
-
-    public ParameterStats ParameterStats { get; private set; } = ParameterStats.Empty;
-    public ConditionStats ConditionStats { get; private set; } = ConditionStats.Empty;
-    public ProfileStats ProfileStats { get; private set; } = ProfileStats.Empty;
-    public CareStats CareStats { get; private set; } = CareStats.Empty;
-    public TechniqueStats TechniqueStats { get; private set; } = TechniqueStats.Empty;
-    public HistoricEvolutions HistoricEvolutions { get; private set; } = HistoricEvolutions.Empty;
-    public WorldTime WorldTime { get; private set; } = WorldTime.Empty;
-
-    public event PropertyChangedEventHandler? PropertyChanged;
 
     private void OnPropertyChanged(string name) =>
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
@@ -190,14 +231,14 @@ public sealed class LiveMemoryReader : INotifyPropertyChanged, IDisposable
         short brn = ParameterStats.Brains;
 
         return hp is >= 1 and <= 9999
-            && mp is >= 1 and <= 9999
-            && off is >= 1 and <= 999
-            && def is >= 1 and <= 999
-            && spd is >= 1 and <= 999
-            && brn is >= 1 and <= 999;
+               && mp is >= 1 and <= 9999
+               && off is >= 1 and <= 999
+               && def is >= 1 and <= 999
+               && spd is >= 1 and <= 999
+               && brn is >= 1 and <= 999;
     }
 
-    private void ResetStats()
+    private void ResetMemorySyncs()
     {
         ParameterStats = ParameterStats.Empty;
         ConditionStats = ConditionStats.Empty;

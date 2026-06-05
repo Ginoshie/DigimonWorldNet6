@@ -9,6 +9,7 @@ in other projects is strictly prohibited.
 using System.Text;
 using System.Windows;
 using DigimonWorld.Frontend.WPF.Windows.Main;
+using Domain;
 using MemoryAccess;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -42,6 +43,8 @@ public partial class App
         base.OnStartup(e);
 
         LiveMemoryReader.Instance.Start();
+
+        UserDigimon _ = UserDigimon.Instance;
         
         Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
     }

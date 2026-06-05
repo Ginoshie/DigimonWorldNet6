@@ -16,25 +16,14 @@ public abstract class MemoryValueSyncBase : IDisposable
         );
     }
 
-    private void OnEmulatorConnected(bool isConnected)
-    {
-        if (isConnected)
-        {
-            _updateDataSubscription.Disposable = Observable.Interval(TimeSpan.FromSeconds(1)).Subscribe(_ => OnUpdateData());
-        } else
-        {
-            _updateDataSubscription.Disposable = null;
-        }
-    }
+    private void OnEmulatorConnected(bool isConnected) =>
+        _updateDataSubscription.Disposable = isConnected ? Observable.Interval(TimeSpan.FromSeconds(1)).Subscribe(_ => OnUpdateData()) : null;
 
     protected virtual void OnUpdateData()
     {
     }
 
-    public void UpdateData()
-    {
-        OnUpdateData();
-    }
+    public void UpdateData() => OnUpdateData();
 
     public void Dispose()
     {

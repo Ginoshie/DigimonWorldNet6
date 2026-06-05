@@ -293,7 +293,13 @@ public sealed class EvolutionCalculatorViewModel : BaseViewModel, IDisposable
     }
 
     private void SetEmulatorWeight() => Weight = ServiceRelay.LiveMemoryReader.ProfileStats.Weight.ToString();
-    private void SetEmulatorDigimonType() => PlayerDigimonType = DigimonTypes.Get(ServiceRelay.LiveMemoryReader.ProfileStats.DigimonType, _gameVariant).DigimonName;
+    private void SetEmulatorDigimonType()
+    {
+        if (ServiceRelay.LiveMemoryReader.ProfileStats.DigimonType != 0)
+        {
+            PlayerDigimonType = DigimonTypes.Get(ServiceRelay.LiveMemoryReader.ProfileStats.DigimonType, _gameVariant).DigimonName;
+        }
+    }
 
     // Parameter
     private void SyncAllEmulatorCombatStats()

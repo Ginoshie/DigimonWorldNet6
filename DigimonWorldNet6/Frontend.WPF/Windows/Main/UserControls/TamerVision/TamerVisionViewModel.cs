@@ -461,7 +461,11 @@ public class TamerVisionViewModel : BaseViewModel, IDisposable
     private void SyncAllProfileStats()
     {
         ProfileStats profileStats = ServiceRelay.LiveMemoryReader.ProfileStats;
-        _syncedDigimon = DigimonTypes.Get(profileStats.DigimonType, _gameVariant);
+
+        if (profileStats.DigimonType != 0)
+        {
+            _syncedDigimon = DigimonTypes.Get(profileStats.DigimonType, _gameVariant);
+        }
 
         Virus = profileStats.VirusBar;
         Weight = profileStats.Weight;

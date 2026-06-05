@@ -75,7 +75,8 @@
                                         Content="GitHub"
                                         Padding="15,5"
                                         Margin="0,0,10,0"
-                                        Command="{Binding OpenLinkCommand}" />
+                                        Command="{Binding OpenLinkCommand}"
+                                        Visibility="{Binding LinkUrl, Converter={StaticResource IsNullOrWhitespaceToVisibilityConverter}}"/>
                                 <Button Height="45"
                                         Style="{StaticResource DefaultButtonStyle}"
                                         Content="Close"
