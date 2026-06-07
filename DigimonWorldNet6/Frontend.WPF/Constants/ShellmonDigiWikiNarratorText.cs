@@ -45,7 +45,7 @@ public static class ShellmonDigiWikiNarratorText
     {
         public const string WikiText = "Once your finisher fires, how much damage it deals depends on how well you filled the bar!\n" +
                                        "\n" +
-                                       "The finisher bar is a value between 0 and 80, displayed as 10 segments on screen — 80 always means full bars. Each press of L1 or R1 during the finisher adds 2 to the bar.\n" +
+                                       "The finisher bar is a value between 0 and 80, displayed as 10 segments on screen. Each press of L1 or R1 during the finisher adds 2 to the bar.\n" +
                                        "\n" +
                                        "The bar value feeds directly into the damage formula. A full bar gives the maximum hit. No matter how empty the bar is, the result can never go below 1.\n" +
                                        "\n" +
