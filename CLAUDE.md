@@ -77,11 +77,11 @@ Consumers collect subscriptions in a `CompositeDisposable` and dispose them in `
 
 ### Memory access (MemoryAccess)
 
-`LiveMemoryReader.Instance` monitors for the emulator process, then `PsxRam` locates the PSX RAM base by byte-signature scan and `ProcessMemory` wraps `ReadProcessMemory`. Each stat reader extends `MemoryValueSyncBase` (auto-polls every 1s while connected) and signals an EventHub on read. Every reader exposes a **Null Object `Empty`** instance used while disconnected.
+`LiveMemoryReader.Instance` monitors for the emulator process, then `PsxRam` locates the PSX RAM base by byte-signature scan and `ProcessMemory` wraps `ReadProcessMemory`/`WriteProcessMemory` (reads on the 1s poll; writes when a stat property setter is assigned — e.g. cheat-sheet checkbox toggles persist into game RAM). Each stat reader extends `MemoryValueSyncBase` (auto-polls every 1s while connected) and signals an EventHub on read. Every reader exposes a **Null Object `Empty`** instance used while disconnected.
 
 ### WPF frontend
 
-MVVM with no framework magic. `BaseViewModel` (`INotifyPropertyChanged` + `SetField<T>`) → `BaseWindowViewModel` / `PaneBaseViewModel`. Commands are `CommandHandler` (parameterless) and `RelayCommand<T>`. Windows are opened by the caller: `new Window`, `new ViewModel(window)`, set `DataContext`, then `Show()`/`ShowDialog()`. Music/SFX use **NAudio** (`WaveOutEvent`).
+MVVM with no framework magic. `BaseViewModel` (`INotifyPropertyChanged` + `SetField<T>`) → `BaseWindowViewModel` / `PaneBaseViewModel`. Commands are `CommandHandler` (parameterless) and `RelayCommand<T>`. Windows are opened by the caller: `new Window`, `new ViewModel(window)`, set `DataContext`, then `Show()`/`ShowDialog()`. Music/SFX use **NAudio** (`WaveOutEvent`). **WPF style convention (must follow):** every `Style` lives in **its own file** under `ResourceDictionaries/Styles/` — never inline, never lumped together with an unrelated style. The first/primary style for a given control type is *the default*, keyed `DefaultXxxStyle` (e.g. `DefaultButtonStyle`, `DefaultComboboxStyle`, `DefaultCheckboxStyle`); there is **at most one default per element + style-type**. Styles are merged into each consumer's `MergedDictionaries` and applied explicitly via `Style="{StaticResource DefaultXxxStyle}"`. **Gotcha:** `App.xaml` defines *implicit* (keyless) styles for `TextBlock` (DW1 font, bold), `Control` (DW1 font), and **`Grid` (background `#2E3841`)** — so every `Grid` paints that dark background. When laying out content over a different-colored surface (e.g. a list/panel), use a `StackPanel`/`Border` or set `Background="Transparent"`, or the `Grid` will show a dark box.
 
 ## Conventions that must not be violated
 
