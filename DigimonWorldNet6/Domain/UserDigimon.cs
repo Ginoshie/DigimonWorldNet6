@@ -40,8 +40,8 @@ public sealed class UserDigimon
     internal void Set(DigimonName digimonName, int hp, int mp, int off, int def, int speed, int brains, int careMistakes, int weight, int happiness, int discipline, int battles, int techniqueCount)
     {
         DigimonName = digimonName;
-        HP = hp;
-        MP = mp;
+        Hp = hp;
+        Mp = mp;
         Off = off;
         Def = def;
         Speed = speed;
@@ -68,9 +68,9 @@ public sealed class UserDigimon
 
     public EvolutionStage EvolutionStage { get; private set; }
 
-    public int HP { get; private set; }
+    public int Hp { get; private set; }
 
-    public int MP { get; private set; }
+    public int Mp { get; private set; }
 
     public int Off { get; private set; }
 
@@ -103,8 +103,8 @@ public sealed class UserDigimon
             }
 
             ParameterStats p = reader.ParameterStats;
-            HP = p.HP;
-            MP = p.MP;
+            Hp = p.Hp;
+            Mp = p.Mp;
             Off = p.Offense;
             Def = p.Defense;
             Speed = p.Speed;

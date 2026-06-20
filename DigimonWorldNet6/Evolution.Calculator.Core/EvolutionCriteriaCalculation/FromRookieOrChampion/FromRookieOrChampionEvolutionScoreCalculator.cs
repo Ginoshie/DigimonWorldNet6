@@ -21,7 +21,7 @@ public sealed class FromRookieOrChampionEvolutionScoreCalculator
     public EvolutionScoreCalculationResult CalculateEvolutionScore(EvolutionCalculationInput evolutionCalculationInput, MainCriteriaStats statsCriteria, int carriedOverStatTotal, int carriedOverStatCount)
     {
         return CalculateEvolutionScore(
-            evolutionCalculationInput.HP, evolutionCalculationInput.MP, evolutionCalculationInput.Off, evolutionCalculationInput.Def, evolutionCalculationInput.Speed, evolutionCalculationInput.Brains,
+            evolutionCalculationInput.Hp, evolutionCalculationInput.Mp, evolutionCalculationInput.Off, evolutionCalculationInput.Def, evolutionCalculationInput.Speed, evolutionCalculationInput.Brains,
             statsCriteria, carriedOverStatTotal, carriedOverStatCount, !_dontUseCarriedOverStats);
     }
 

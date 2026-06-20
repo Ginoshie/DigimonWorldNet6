@@ -20,8 +20,8 @@ public sealed class EvolutionCalculationInputTests
             happiness: 80, discipline: 90, battles: 10, techniqueCount: 28);
 
         input.DigimonName.ShouldBe(DigimonName.Agumon);
-        input.HP.ShouldBe(1000);
-        input.MP.ShouldBe(2000);
+        input.Hp.ShouldBe(1000);
+        input.Mp.ShouldBe(2000);
         input.Off.ShouldBe(100);
         input.Def.ShouldBe(200);
         input.Speed.ShouldBe(300);
@@ -59,8 +59,8 @@ public sealed class EvolutionCalculationInputTests
         EvolutionCalculationInput input = new(UserDigimon.Instance);
 
         input.DigimonName.ShouldBe(DigimonName.Gabumon);
-        input.HP.ShouldBe(500);
-        input.MP.ShouldBe(600);
+        input.Hp.ShouldBe(500);
+        input.Mp.ShouldBe(600);
         input.Off.ShouldBe(70);
         input.Def.ShouldBe(80);
         input.Speed.ShouldBe(90);
@@ -92,7 +92,7 @@ public sealed class EvolutionCalculationInputTests
         UserDigimon.Instance.Set(DigimonName.Greymon, 9999, 0, 0, 0, 0, 0, 0, 20, 0, 0, 0, 0);
 
         // input should still hold the original snapshot
-        input.HP.ShouldBe(1000);
+        input.Hp.ShouldBe(1000);
         input.DigimonName.ShouldBe(DigimonName.Agumon);
     }
 }

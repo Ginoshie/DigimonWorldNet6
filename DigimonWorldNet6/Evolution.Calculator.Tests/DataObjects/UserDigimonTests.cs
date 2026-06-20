@@ -32,8 +32,8 @@ public sealed class UserDigimonTests
         // Assert
         UserDigimon sut = UserDigimon.Instance;
         sut.DigimonName.ShouldBe(DigimonName.Agumon);
-        sut.HP.ShouldBe(1000);
-        sut.MP.ShouldBe(2000);
+        sut.Hp.ShouldBe(1000);
+        sut.Mp.ShouldBe(2000);
         sut.Off.ShouldBe(100);
         sut.Def.ShouldBe(200);
         sut.Speed.ShouldBe(300);
@@ -92,8 +92,8 @@ public sealed class UserDigimonTests
 
         // Assert
         UserDigimon sut = UserDigimon.Instance;
-        sut.HP.ShouldBe(9999);
-        sut.MP.ShouldBe(9999);
+        sut.Hp.ShouldBe(9999);
+        sut.Mp.ShouldBe(9999);
         sut.Off.ShouldBe(999);
         sut.TechniqueCount.ShouldBe(49);
     }
@@ -106,8 +106,8 @@ public sealed class UserDigimonTests
 
         // Assert
         UserDigimon sut = UserDigimon.Instance;
-        sut.HP.ShouldBe(0);
-        sut.MP.ShouldBe(0);
+        sut.Hp.ShouldBe(0);
+        sut.Mp.ShouldBe(0);
         sut.Off.ShouldBe(0);
         sut.Def.ShouldBe(0);
         sut.Speed.ShouldBe(0);
@@ -121,7 +121,7 @@ public sealed class UserDigimonTests
     {
         UserDigimon.Instance.Set(DigimonName.Agumon, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1);
 
-        UserDigimon.Instance.HP.ShouldBe(-1);
+        UserDigimon.Instance.Hp.ShouldBe(-1);
         UserDigimon.Instance.CareMistakes.ShouldBe(-1);
     }
 }

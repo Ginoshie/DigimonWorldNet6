@@ -14,8 +14,8 @@ public sealed class FromInTrainingEvolutionScoreCalculator
     /// </summary>
     public int CalculateEvolutionScore(EvolutionCalculationInput evolutionCalculationInput, MainCriteriaStats statsCriteria)
     {
-        int hpScore = evolutionCalculationInput.HP / 10;
-        int mpScore = evolutionCalculationInput.MP / 10;
+        int hpScore = evolutionCalculationInput.Hp / 10;
+        int mpScore = evolutionCalculationInput.Mp / 10;
         int offScore = evolutionCalculationInput.Off;
         int defScore = evolutionCalculationInput.Def;
         int speedScore = evolutionCalculationInput.Speed;

@@ -6,8 +6,8 @@ public sealed class StatsCriteriaCalculator
 {
     public bool CriteriaIsMet(EvolutionCalculationInput evolutionCalculationInput, MainCriteriaStats statsCriteria)
     {
-        return evolutionCalculationInput.HP >= statsCriteria.HP &&
-               evolutionCalculationInput.MP >= statsCriteria.MP &&
+        return evolutionCalculationInput.Hp >= statsCriteria.HP &&
+               evolutionCalculationInput.Mp >= statsCriteria.MP &&
                evolutionCalculationInput.Off >= statsCriteria.Off &&
                evolutionCalculationInput.Speed >= statsCriteria.Speed &&
                evolutionCalculationInput.Def >= statsCriteria.Def &&

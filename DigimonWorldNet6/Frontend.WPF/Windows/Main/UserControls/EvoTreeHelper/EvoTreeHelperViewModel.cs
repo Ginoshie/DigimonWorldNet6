@@ -90,8 +90,8 @@ public class EvoTreeHelperViewModel : BaseViewModel, IDisposable
 
         CurrentDigimon = DigimonName.Gabumon;
 
-        CurrentHP = "0";
-        CurrentMP = "0";
+        CurrentHp = "0";
+        CurrentMp = "0";
         CurrentOff = "0";
         CurrentDef = "0";
         CurrentSpeed = "0";
@@ -203,13 +203,13 @@ public class EvoTreeHelperViewModel : BaseViewModel, IDisposable
         private set => SetField(ref field, value);
     } = "";
 
-    public string CurrentHP
+    public string CurrentHp
     {
         get;
         private set => SetField(ref field, value);
     } = "0";
 
-    public string CurrentMP
+    public string CurrentMp
     {
         get;
         private set => SetField(ref field, value);
@@ -299,8 +299,8 @@ public class EvoTreeHelperViewModel : BaseViewModel, IDisposable
         try
         {
             UserDigimon d = Session.UserDigimon;
-            CurrentHP = d.HP.ToString();
-            CurrentMP = d.MP.ToString();
+            CurrentHp = d.Hp.ToString();
+            CurrentMp = d.Mp.ToString();
             CurrentOff = d.Off.ToString();
             CurrentDef = d.Def.ToString();
             CurrentSpeed = d.Speed.ToString();
@@ -345,8 +345,8 @@ public class EvoTreeHelperViewModel : BaseViewModel, IDisposable
 
             CurrentDigimon = DigimonName.Gabumon;
 
-            CurrentHP = "0";
-            CurrentMP = "0";
+            CurrentHp = "0";
+            CurrentMp = "0";
             CurrentOff = "0";
             CurrentDef = "0";
             CurrentSpeed = "0";
@@ -363,7 +363,7 @@ public class EvoTreeHelperViewModel : BaseViewModel, IDisposable
     private void RefreshCriteria()
     {
         UserDigimon userDigimon = Session.UserDigimon;
-        int userHp = userDigimon.HP, userMp = userDigimon.MP, userOff = userDigimon.Off, userDef = userDigimon.Def;
+        int userHp = userDigimon.Hp, userMp = userDigimon.Mp, userOff = userDigimon.Off, userDef = userDigimon.Def;
         int userSpeed = userDigimon.Speed, userBrains = userDigimon.Brains, userWeight = userDigimon.Weight;
         int userCareMistakes = userDigimon.CareMistakes, userHappiness = userDigimon.Happiness;
         int userDiscipline = userDigimon.Discipline, userBattles = userDigimon.Battles, userTechniqueCount = userDigimon.TechniqueCount;

@@ -112,7 +112,7 @@
                                         <behaviors:DefaultValueZeroTextBoxBehavior />
                                     </b:Interaction.Behaviors>
                                     <TextBox.Text>
-                                        <Binding Path="HP" UpdateSourceTrigger="PropertyChanged" Mode="TwoWay">
+                                        <Binding Path="Hp" UpdateSourceTrigger="PropertyChanged" Mode="TwoWay">
                                             <Binding.ValidationRules>
                                                 <combatStatValidation:HpStringValidationRule ValidationStep="CommittedValue" />
                                             </Binding.ValidationRules>
@@ -137,7 +137,7 @@
                                         <behaviors:DefaultValueZeroTextBoxBehavior />
                                     </b:Interaction.Behaviors>
                                     <TextBox.Text>
-                                        <Binding Path="MP" UpdateSourceTrigger="PropertyChanged" Mode="TwoWay">
+                                        <Binding Path="Mp" UpdateSourceTrigger="PropertyChanged" Mode="TwoWay">
                                             <Binding.ValidationRules>
                                                 <combatStatValidation:MpStringValidationRule ValidationStep="CommittedValue" />
                                             </Binding.ValidationRules>

@@ -46,8 +46,8 @@ public sealed class EvolutionCalculatorViewModel : BaseViewModel, IDisposable
 
             // Parameter
             DigimonStatsEventHub.SyncAllEmulatorParameterStatsObservable.Subscribe(_ => SyncAllEmulatorCombatStats()),
-            DigimonStatsEventHub.SyncEmulatorHPObservable.Subscribe(_ => SyncEmulatorHP()),
-            DigimonStatsEventHub.SyncEmulatorMPObservable.Subscribe(_ => SyncEmulatorMP()),
+            DigimonStatsEventHub.SyncEmulatorHPObservable.Subscribe(_ => SyncEmulatorHp()),
+            DigimonStatsEventHub.SyncEmulatorMPObservable.Subscribe(_ => SyncEmulatorMp()),
             DigimonStatsEventHub.SyncEmulatorOffObservable.Subscribe(_ => SyncEmulatorOff()),
             DigimonStatsEventHub.SyncEmulatorDefObservable.Subscribe(_ => SyncEmulatorDef()),
             DigimonStatsEventHub.SyncEmulatorSpdObservable.Subscribe(_ => SyncEmulatorSpeed()),
@@ -148,13 +148,13 @@ public sealed class EvolutionCalculatorViewModel : BaseViewModel, IDisposable
         }
     }
 
-    public string HP
+    public string Hp
     {
         get;
         set => SetField(ref field, value);
     } = "0";
 
-    public string MP
+    public string Mp
     {
         get;
         set => SetField(ref field, value);
@@ -272,7 +272,7 @@ public sealed class EvolutionCalculatorViewModel : BaseViewModel, IDisposable
 
         OnPropertyChanged(nameof(EvolutionResult));
 
-        EvolutionCalculationInput input = new(PlayerDigimonType, int.Parse(HP), int.Parse(MP), int.Parse(Off), int.Parse(Def), int.Parse(Speed), int.Parse(Brains), int.Parse(CareMistakes), int.Parse(Weight), int.Parse(Happiness),
+        EvolutionCalculationInput input = new(PlayerDigimonType, int.Parse(Hp), int.Parse(Mp), int.Parse(Off), int.Parse(Def), int.Parse(Speed), int.Parse(Brains), int.Parse(CareMistakes), int.Parse(Weight), int.Parse(Happiness),
             int.Parse(Discipline),
             int.Parse(Battles), int.Parse(Techniques));
 
@@ -304,16 +304,16 @@ public sealed class EvolutionCalculatorViewModel : BaseViewModel, IDisposable
     // Parameter
     private void SyncAllEmulatorCombatStats()
     {
-        SyncEmulatorHP();
-        SyncEmulatorMP();
+        SyncEmulatorHp();
+        SyncEmulatorMp();
         SyncEmulatorOff();
         SyncEmulatorDef();
         SyncEmulatorSpeed();
         SyncEmulatorBrains();
     }
 
-    private void SyncEmulatorHP() => HP = ServiceRelay.LiveMemoryReader.ParameterStats.HP.ToString();
-    private void SyncEmulatorMP() => MP = ServiceRelay.LiveMemoryReader.ParameterStats.MP.ToString();
+    private void SyncEmulatorHp() => Hp = ServiceRelay.LiveMemoryReader.ParameterStats.Hp.ToString();
+    private void SyncEmulatorMp() => Mp = ServiceRelay.LiveMemoryReader.ParameterStats.Mp.ToString();
     private void SyncEmulatorOff() => Off = ServiceRelay.LiveMemoryReader.ParameterStats.Offense.ToString();
     private void SyncEmulatorDef() => Def = ServiceRelay.LiveMemoryReader.ParameterStats.Defense.ToString();
     private void SyncEmulatorSpeed() => Speed = ServiceRelay.LiveMemoryReader.ParameterStats.Speed.ToString();

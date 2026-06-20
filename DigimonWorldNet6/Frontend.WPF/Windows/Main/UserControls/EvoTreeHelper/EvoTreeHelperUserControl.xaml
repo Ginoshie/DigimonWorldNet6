@@ -274,9 +274,9 @@
                             </Button.ToolTip>
                             <Image Source="{Binding CurrentIconPath}" Stretch="Fill" />
                         </Button>
-                        <TextBox Grid.Row="2" Grid.Column="1" Style="{StaticResource DefaultReadonlyTextBoxStyle}" FontSize="{StaticResource FontSizeUserStats}" Text="{Binding CurrentHP, Mode=OneWay}" HorizontalContentAlignment="Center"
+                        <TextBox Grid.Row="2" Grid.Column="1" Style="{StaticResource DefaultReadonlyTextBoxStyle}" FontSize="{StaticResource FontSizeUserStats}" Text="{Binding CurrentHp, Mode=OneWay}" HorizontalContentAlignment="Center"
                                  Margin="2,1" />
-                        <TextBox Grid.Row="3" Grid.Column="1" Style="{StaticResource DefaultReadonlyTextBoxStyle}" FontSize="{StaticResource FontSizeUserStats}" Text="{Binding CurrentMP, Mode=OneWay}" HorizontalContentAlignment="Center"
+                        <TextBox Grid.Row="3" Grid.Column="1" Style="{StaticResource DefaultReadonlyTextBoxStyle}" FontSize="{StaticResource FontSizeUserStats}" Text="{Binding CurrentMp, Mode=OneWay}" HorizontalContentAlignment="Center"
                                  Margin="2,1" />
                         <TextBox Grid.Row="4" Grid.Column="1" Style="{StaticResource DefaultReadonlyTextBoxStyle}" FontSize="{StaticResource FontSizeUserStats}" Text="{Binding CurrentOff, Mode=OneWay}" HorizontalContentAlignment="Center"
                                  Margin="2,1" />
