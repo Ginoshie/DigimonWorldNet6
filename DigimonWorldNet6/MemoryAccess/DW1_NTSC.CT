@@ -1579,7 +1579,7 @@ end
 22:Garurumon
 23:Frigimon
 24:Whamon
-25:Vegimon
+25:Vegiemon
 26:SkullGreymon
 27:MetalMamemon
 28:Vademon
@@ -1621,7 +1621,7 @@ end
 65:MetalEtemon
 65288:Brachiomon
 65304:Tekkamon
-65391:RedVegimon
+65391:RedVegiemon
 65396:Gotsumon
 65420:IceDevimon
 65535:No Evolution
@@ -7269,7 +7269,7 @@ end
                 </CheatEntry>
                 <CheatEntry>
                   <ID>642</ID>
-                  <Description>"Vegimon"</Description>
+                  <Description>"Vegiemon"</Description>
                   <VariableType>Binary</VariableType>
                   <BitStart>1</BitStart>
                   <BitLength>1</BitLength>
@@ -12576,7 +12576,7 @@ end
 22:Garurumon
 23:Frigimon
 24:Whamon
-25:Vegimon
+25:Vegiemon
 26:SkullGreymon
 27:MetalMamemon
 28:Vademon
@@ -12618,7 +12618,7 @@ end
 65:MetalEtemon
 65288:Brachiomon
 65304:Tekkamon
-65391:RedVegimon
+65391:RedVegiemon
 65396:Gotsumon
 65420:IceDevimon
 65535:No Evolution

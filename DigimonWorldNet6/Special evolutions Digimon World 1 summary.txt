@@ -29,7 +29,7 @@ From
 	Coelamon (+ Megaseadramon nr. 1)
 	Shellmon
 	Coelamon (+ Megaseadramon nr. 2)
-	Vegimon
+	Vegiemon
 	Ninjamon
 	Drimogemon
 	Monochromon
@@ -101,7 +101,7 @@ Comment:        Coelamon will digivolve to Megaseadramon as a result of battles,
 reset, Coelamons target weight and a lack of evolution age reset.
 
 
-Evolution:        Vegimon ⇒ Ninjamon
+Evolution:        Vegiemon ⇒ Ninjamon
 Condition:        Sleep while discipline = 100; battles fought = 50+.
 30% chance of success.
 

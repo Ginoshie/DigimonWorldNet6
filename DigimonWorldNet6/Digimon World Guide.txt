@@ -1393,7 +1393,7 @@ Maintainer
 	Palmon
 	Giant Meat
 	Giant Meat (500 Bits)
-	Vegimon
+	Vegiemon
 	Sirloin
 	Super Carrot, Hawk Raddish (500 Bits each)
 	
