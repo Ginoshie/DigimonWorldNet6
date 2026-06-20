@@ -1,0 +1,153 @@
+<UserControl x:Class="DigimonWorld.Frontend.WPF.Windows.Main.UserControls.CheatSheet.CheatSheetUserControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:models="clr-namespace:DigimonWorld.Frontend.WPF.Windows.Main.UserControls.CheatSheet.Models"
+             xmlns:userControls="clr-namespace:DigimonWorld.Frontend.WPF.Windows.Main.UserControls.CheatSheet.UserControls"
+             xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
+             xmlns:behaviors="clr-namespace:DigimonWorld.Frontend.WPF.Behaviors"
+             mc:Ignorable="d"
+             Height="565"
+             Width="1093"
+             d:DataContext="{d:DesignInstance models:CheatSheetViewModel}">
+
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/ResourceDictionaries/Styles/Buttons/DefaultButtonStyle.xaml" />
+                <ResourceDictionary Source="/ResourceDictionaries/Styles/DefaultFocusStyle.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+
+            <BooleanToVisibilityConverter x:Key="BoolToVis" />
+        </ResourceDictionary>
+    </UserControl.Resources>
+
+    <Border CornerRadius="8" BorderBrush="#90D9FA" BorderThickness="3" Background="#2E3841">
+        <b:Interaction.Behaviors>
+            <behaviors:SuspendRefreshWhileEditingBehavior />
+        </b:Interaction.Behaviors>
+        <Border CornerRadius="5" BorderBrush="Black" BorderThickness="3" Background="#2E3841" Padding="10">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <Grid Grid.Column="0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+
+                    <userControls:PiximonNaratorTextDisplay Grid.Row="0" HorizontalAlignment="Center"
+                                                            Width="{Binding ActualWidth, ElementName=SectionButtons}" />
+
+                    <userControls:PiximonNarrator Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" />
+
+                    <Border Grid.Row="2" x:Name="SectionButtons" CornerRadius="8" BorderBrush="Black" BorderThickness="3" Padding="0"
+                            Background="Black" HorizontalAlignment="Center">
+                        <Border CornerRadius="8" BorderBrush="#4A9FC5" BorderThickness="3" Padding="0" Background="#4A9FC5">
+                            <Border CornerRadius="5" BorderBrush="#90D9FA" BorderThickness="3" Padding="0" Background="#90D9FA">
+                                <Border CornerRadius="5" BorderBrush="Black" BorderThickness="3" Padding="1"
+                                        Background="{StaticResource DefaultBackGroundColor}">
+                                    <UniformGrid Rows="2">
+                                        <Button Content="Recruitment" Command="{Binding SelectSectionCommand}" CommandParameter="Recruitment"
+                                                FocusVisualStyle="{StaticResource DefaultFocusStyle}"
+                                                Padding="10,10" Margin="2">
+                                            <Button.Style>
+                                                <Style TargetType="Button" BasedOn="{StaticResource DefaultButtonStyle}">
+                                                    <Style.Triggers>
+                                                        <DataTrigger Binding="{Binding IsRecruitmentSelected}" Value="True">
+                                                            <Setter Property="Template" Value="{StaticResource DefaultButtonActiveTemplate}" />
+                                                        </DataTrigger>
+                                                    </Style.Triggers>
+                                                </Style>
+                                            </Button.Style>
+                                        </Button>
+
+                                        <Button Content="Techniques" Command="{Binding SelectSectionCommand}" CommandParameter="Techniques"
+                                                FocusVisualStyle="{StaticResource DefaultFocusStyle}"
+                                                Padding="10,6" Margin="2">
+                                            <Button.Style>
+                                                <Style TargetType="Button" BasedOn="{StaticResource DefaultButtonStyle}">
+                                                    <Style.Triggers>
+                                                        <DataTrigger Binding="{Binding IsTechniquesSelected}" Value="True">
+                                                            <Setter Property="Template" Value="{StaticResource DefaultButtonActiveTemplate}" />
+                                                        </DataTrigger>
+                                                    </Style.Triggers>
+                                                </Style>
+                                            </Button.Style>
+                                        </Button>
+
+                                        <Button Content="Digimon" Command="{Binding SelectSectionCommand}" CommandParameter="Digimon"
+                                                FocusVisualStyle="{StaticResource DefaultFocusStyle}"
+                                                Padding="10,6" Margin="2">
+                                            <Button.Style>
+                                                <Style TargetType="Button" BasedOn="{StaticResource DefaultButtonStyle}">
+                                                    <Style.Triggers>
+                                                        <DataTrigger Binding="{Binding IsDigimonSelected}" Value="True">
+                                                            <Setter Property="Template" Value="{StaticResource DefaultButtonActiveTemplate}" />
+                                                        </DataTrigger>
+                                                    </Style.Triggers>
+                                                </Style>
+                                            </Button.Style>
+                                        </Button>
+
+                                        <Button Content="Technical" Command="{Binding SelectSectionCommand}" CommandParameter="Technical"
+                                                FocusVisualStyle="{StaticResource DefaultFocusStyle}"
+                                                Padding="10,6" Margin="2">
+                                            <Button.Style>
+                                                <Style TargetType="Button" BasedOn="{StaticResource DefaultButtonStyle}">
+                                                    <Style.Triggers>
+                                                        <DataTrigger Binding="{Binding IsTechnicalSelected}" Value="True">
+                                                            <Setter Property="Template" Value="{StaticResource DefaultButtonActiveTemplate}" />
+                                                        </DataTrigger>
+                                                    </Style.Triggers>
+                                                </Style>
+                                            </Button.Style>
+                                        </Button>
+
+                                        <Button Content="Tamer" Command="{Binding SelectSectionCommand}" CommandParameter="Tamer"
+                                                FocusVisualStyle="{StaticResource DefaultFocusStyle}"
+                                                Padding="10,6" Margin="2">
+                                            <Button.Style>
+                                                <Style TargetType="Button" BasedOn="{StaticResource DefaultButtonStyle}">
+                                                    <Style.Triggers>
+                                                        <DataTrigger Binding="{Binding IsTamerSelected}" Value="True">
+                                                            <Setter Property="Template" Value="{StaticResource DefaultButtonActiveTemplate}" />
+                                                        </DataTrigger>
+                                                    </Style.Triggers>
+                                                </Style>
+                                            </Button.Style>
+                                        </Button>
+                                    </UniformGrid>
+                                </Border>
+                            </Border>
+                        </Border>
+                    </Border>
+                </Grid>
+
+                <Grid Grid.Column="1" Margin="10,0,0,0">
+                    <userControls:RecruitmentSectionUserControl Grid.Column="0"
+                        Visibility="{Binding IsRecruitmentSelected, Converter={StaticResource BoolToVis}}" />
+
+                    <userControls:TechniquesSectionUserControl Grid.Column="0"
+                        Visibility="{Binding IsTechniquesSelected, Converter={StaticResource BoolToVis}}" />
+
+                    <userControls:DigimonSectionUserControl Grid.Column="0"
+                        Visibility="{Binding IsDigimonSelected, Converter={StaticResource BoolToVis}}" />
+
+                    <userControls:TechnicalSectionUserControl Grid.Column="0"
+                        Visibility="{Binding IsTechnicalSelected, Converter={StaticResource BoolToVis}}" />
+
+                    <userControls:TamerSectionUserControl Grid.Column="0"
+                        Visibility="{Binding IsTamerSelected, Converter={StaticResource BoolToVis}}" />
+                </Grid>
+
+            </Grid>
+        </Border>
+    </Border>
+
+</UserControl>

@@ -12,6 +12,7 @@
             <userControls:DigiWikiNavigationButton />
             <userControls:TamerVisionNavigationButton />
             <userControls:EvoTreeHelperNavigationButton />
+            <userControls:CheatSheetNavigationButton />
         </StackPanel>
     </Grid>
 </UserControl>

@@ -1,0 +1,25 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:models="clr-namespace:DigimonWorld.Frontend.WPF.Windows.Main.UserControls.CheatSheet.Models">
+
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="/ResourceDictionaries/Styles/DefaultCheckboxStyle.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+
+    <DataTemplate x:Key="ConditionFlagTemplate" DataType="{x:Type models:MemoryValueViewModel}">
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,5,0,5">
+            <TextBlock Text="{Binding Label}" VerticalAlignment="Center" Margin="0,0,5,0">
+                <TextBlock.RenderTransform>
+                    <TranslateTransform Y="1.5" />
+                </TextBlock.RenderTransform>
+            </TextBlock>
+            <CheckBox IsChecked="{Binding Value}" Style="{StaticResource DefaultCheckboxStyle}"
+                      VerticalAlignment="Center">
+                <CheckBox.LayoutTransform>
+                    <ScaleTransform ScaleX="1.5" ScaleY="1.5" />
+                </CheckBox.LayoutTransform>
+            </CheckBox>
+        </StackPanel>
+    </DataTemplate>
+
+</ResourceDictionary>

@@ -1,0 +1,175 @@
+<UserControl
+    x:Class="DigimonWorld.Frontend.WPF.Windows.Main.UserControls.CheatSheet.UserControls.TechnicalSectionUserControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:models="clr-namespace:DigimonWorld.Frontend.WPF.Windows.Main.UserControls.CheatSheet.Models"
+    xmlns:validation="clr-namespace:DigimonWorld.Frontend.WPF.Validation"
+    xmlns:c="clr-namespace:DigimonWorld.Frontend.WPF.Constants"
+    mc:Ignorable="d"
+    d:DataContext="{d:DesignInstance models:CheatSheetViewModel}">
+
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/ResourceDictionaries/Styles/DefaultTextboxStyle.xaml" />
+                <ResourceDictionary Source="/ResourceDictionaries/Styles/DefaultFocusStyle.xaml" />
+                <ResourceDictionary Source="/ResourceDictionaries/Styles/DefaultComboboxStyle.xaml" />
+                <ResourceDictionary Source="/ResourceDictionaries/Styles/Labels/DefaultLabelStyle.xaml" />
+                <ResourceDictionary Source="/ResourceDictionaries/Styles/ToolTips/DefaultTooltipRightStyle.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+
+            <Style x:Key="GroupHeaderStyle" TargetType="TextBlock" BasedOn="{StaticResource {x:Type TextBlock}}">
+                <Setter Property="Foreground" Value="#D4D604" />
+                <Setter Property="FontSize" Value="15" />
+                <Setter Property="HorizontalAlignment" Value="Center" />
+                <Setter Property="Grid.ColumnSpan" Value="2" />
+                <Setter Property="Margin" Value="0,0,0,6" />
+            </Style>
+        </ResourceDictionary>
+    </UserControl.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <Image Grid.Row="0" Height="40" HorizontalAlignment="Center"
+               Source="/Images/Icons/Labels/technical-label.png"
+               Margin="0,0,0,10" />
+
+        <Grid Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Top">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+
+            <Grid Grid.Column="1" VerticalAlignment="Top" Background="Transparent">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="220" />
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Grid.Row="0" Grid.Column="0" Text="RNG" Style="{StaticResource GroupHeaderStyle}" />
+
+                <Label Grid.Row="1" Grid.Column="0" Content="Value:" Style="{StaticResource DefaultLabelStyle}" />
+                <TextBox Grid.Row="1" Grid.Column="1" FocusVisualStyle="{StaticResource DefaultFocusStyle}"
+                         Style="{StaticResource DefaultTextBoxStyle}">
+                    <TextBox.ToolTip>
+                        <ToolTip Style="{StaticResource DefaultToolTipRightStyle}">
+                            <TextBlock Text="{x:Static c:CheatSheetInputInfo.RngTooltip}" />
+                        </ToolTip>
+                    </TextBox.ToolTip>
+                    <TextBox.Text>
+                        <Binding Path="TechnicalRng.Value" UpdateSourceTrigger="LostFocus">
+                            <Binding.ValidationRules>
+                                <validation:NumericRangeValidationRule Minimum="{x:Static c:CheatSheetInputInfo.RNG_MIN}" Maximum="{x:Static c:CheatSheetInputInfo.RNG_MAX}" ValidationStep="RawProposedValue" />
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox>
+
+                <TextBlock Grid.Row="2" Grid.Column="0" Text="Evolution" Style="{StaticResource GroupHeaderStyle}" Margin="0,18,0,6" />
+
+                <Label Grid.Row="3" Grid.Column="0" Content="Evolve To:" Style="{StaticResource DefaultLabelStyle}" />
+                <ComboBox Grid.Row="3" Grid.Column="1" VerticalAlignment="Center"
+                          Style="{StaticResource DefaultComboboxStyle}"
+                          ItemsSource="{Binding EvolveTargets}"
+                          SelectedItem="{Binding SelectedEvolveTarget, Mode=TwoWay}" />
+            </Grid>
+
+            <Grid Grid.Column="0" Margin="0,0,30,0" VerticalAlignment="Top" Background="Transparent">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="90" />
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Grid.Row="0" Grid.Column="0" Text="Time" Style="{StaticResource GroupHeaderStyle}" />
+
+                <Label Grid.Row="1" Grid.Column="0" Content="Year:" Style="{StaticResource DefaultLabelStyle}" />
+                <TextBox Grid.Row="1" Grid.Column="1" FocusVisualStyle="{StaticResource DefaultFocusStyle}"
+                         Style="{StaticResource DefaultTextBoxStyle}">
+                    <TextBox.ToolTip>
+                        <ToolTip Style="{StaticResource DefaultToolTipRightStyle}">
+                            <TextBlock Text="{x:Static c:CheatSheetInputInfo.YearTooltip}" />
+                        </ToolTip>
+                    </TextBox.ToolTip>
+                    <TextBox.Text>
+                        <Binding Path="WorldYear.Value" UpdateSourceTrigger="LostFocus">
+                            <Binding.ValidationRules>
+                                <validation:NumericRangeValidationRule Minimum="{x:Static c:CheatSheetInputInfo.YEAR_MIN}" Maximum="{x:Static c:CheatSheetInputInfo.YEAR_MAX}" ValidationStep="RawProposedValue" />
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox>
+
+                <Label Grid.Row="2" Grid.Column="0" Content="Day:" Style="{StaticResource DefaultLabelStyle}" />
+                <TextBox Grid.Row="2" Grid.Column="1" FocusVisualStyle="{StaticResource DefaultFocusStyle}"
+                         Style="{StaticResource DefaultTextBoxStyle}">
+                    <TextBox.ToolTip>
+                        <ToolTip Style="{StaticResource DefaultToolTipRightStyle}">
+                            <TextBlock Text="{x:Static c:CheatSheetInputInfo.DayTooltip}" />
+                        </ToolTip>
+                    </TextBox.ToolTip>
+                    <TextBox.Text>
+                        <Binding Path="WorldDay.Value" UpdateSourceTrigger="LostFocus">
+                            <Binding.ValidationRules>
+                                <validation:NumericRangeValidationRule Minimum="{x:Static c:CheatSheetInputInfo.DAY_MIN}" Maximum="{x:Static c:CheatSheetInputInfo.DAY_MAX}" ValidationStep="RawProposedValue" />
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox>
+
+                <Label Grid.Row="3" Grid.Column="0" Content="Hour:" Style="{StaticResource DefaultLabelStyle}" />
+                <TextBox Grid.Row="3" Grid.Column="1" FocusVisualStyle="{StaticResource DefaultFocusStyle}"
+                         Style="{StaticResource DefaultTextBoxStyle}">
+                    <TextBox.ToolTip>
+                        <ToolTip Style="{StaticResource DefaultToolTipRightStyle}">
+                            <TextBlock Text="{x:Static c:CheatSheetInputInfo.HourTooltip}" />
+                        </ToolTip>
+                    </TextBox.ToolTip>
+                    <TextBox.Text>
+                        <Binding Path="WorldHour.Value" UpdateSourceTrigger="LostFocus">
+                            <Binding.ValidationRules>
+                                <validation:NumericRangeValidationRule Minimum="{x:Static c:CheatSheetInputInfo.HOUR_MIN}" Maximum="{x:Static c:CheatSheetInputInfo.HOUR_MAX}" ValidationStep="RawProposedValue" />
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox>
+
+                <Label Grid.Row="4" Grid.Column="0" Content="Minute:" Style="{StaticResource DefaultLabelStyle}" />
+                <TextBox Grid.Row="4" Grid.Column="1" FocusVisualStyle="{StaticResource DefaultFocusStyle}"
+                         Style="{StaticResource DefaultTextBoxStyle}">
+                    <TextBox.ToolTip>
+                        <ToolTip Style="{StaticResource DefaultToolTipRightStyle}">
+                            <TextBlock Text="{x:Static c:CheatSheetInputInfo.MinuteTooltip}" />
+                        </ToolTip>
+                    </TextBox.ToolTip>
+                    <TextBox.Text>
+                        <Binding Path="WorldMinute.Value" UpdateSourceTrigger="LostFocus">
+                            <Binding.ValidationRules>
+                                <validation:NumericRangeValidationRule Minimum="{x:Static c:CheatSheetInputInfo.MINUTE_MIN}" Maximum="{x:Static c:CheatSheetInputInfo.MINUTE_MAX}" ValidationStep="RawProposedValue" />
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox>
+            </Grid>
+        </Grid>
+    </Grid>
+
+</UserControl>

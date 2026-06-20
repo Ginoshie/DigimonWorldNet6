@@ -371,26 +371,26 @@ public class TamerVisionViewModel : BaseViewModel, IDisposable
         set => SetField(ref field, value);
     }
 
-    public int HP
+    public int Hp
     {
         get;
         set => SetField(ref field, value);
     }
 
-    public int CurrentHP
+    public int CurrentHp
     {
         get;
         set => SetField(ref field, value);
     }
 
-    public int MP
+    public int Mp
     {
         get;
         set => SetField(ref field, value);
     }
 
 
-    public int CurrentMP
+    public int CurrentMp
     {
         get;
         set => SetField(ref field, value);
@@ -490,10 +490,10 @@ public class TamerVisionViewModel : BaseViewModel, IDisposable
     {
         ParameterStats parameterStats = ServiceRelay.LiveMemoryReader.ParameterStats;
 
-        HP = parameterStats.HP;
-        CurrentHP = parameterStats.CurrentHP;
-        MP = parameterStats.MP;
-        CurrentMP = parameterStats.CurrentMP;
+        Hp = parameterStats.Hp;
+        CurrentHp = parameterStats.CurrentHp;
+        Mp = parameterStats.Mp;
+        CurrentMp = parameterStats.CurrentMp;
         Offense = parameterStats.Offense;
         Defence = parameterStats.Defense;
         Speed = parameterStats.Speed;
@@ -509,6 +509,7 @@ public class TamerVisionViewModel : BaseViewModel, IDisposable
         Happiness = conditionStats.Happiness;
         Discipline = conditionStats.Discipline;
         Battles = conditionStats.Battles;
+        Tiredness = conditionStats.Tiredness;
     }
 
     // Care
@@ -518,7 +519,6 @@ public class TamerVisionViewModel : BaseViewModel, IDisposable
 
         PoopLevel = careStats.PoopLevel;
         PoopingTimer = careStats.PoopingTimer;
-        Tiredness = careStats.Tiredness;
         EnergyLevel = careStats.EnergyLevel;
         HungryTimer = careStats.HungryTimer;
         StarvationTimer = careStats.StarvationTimer;

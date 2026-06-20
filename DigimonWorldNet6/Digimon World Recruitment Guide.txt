@@ -1,0 +1,583 @@
+﻿Recruitment Guide
+Native Forest
+Agumon
+Level:         Rookie
+Location:        Screen below the Green Gym.
+How:         Enter the screen and win the inevitable fight.
+Unlocks:        The Item Bank for storage of your inventory items.
+
+Kunemon
+Level:        Rookie
+Location:        Screen left of the Forest toilet.
+How:        Give it food and it will challenge you to a fight. Win the fight.
+Unlocks:        Eat away the shrubbery between File City and the Digimon bridge.
+Comment:        Makes the Knights who say nii very sad.
+
+Palmon
+Level:        Rookie
+Location:        Screen below the Forest toilet.
+How:        Talk to it 3 times to start a fight. Win the fight.
+Unlocks:        Upgrades meat farm to yield giant meat, sells you giant meat for 500 bits each.
+
+Coelamon
+Level:        Champion
+Location:        Second screen below Kunemon's bed when leaving the screen from the right.
+How:        Go to Coela Point at dusk (16:00-19:59) and it will swim there. Talk to it and it will 
+help you across the water. Now go up and across the newly repaired Digimon 
+Bridge and go back to where you found Coelamon the first time and talk to it 
+again.
+Unlocks:        Shop or upgrades shop inventory.
+
+
+________________
+
+
+Seadramon
+Level:        Champion
+Location:        Southern Dragon Lake Island. 
+How:        Go there between 08:00 and 08:59 or 17:00 and 17:59. Fish up the very long fish
+swimming in the back of the lake. He swims from one side to the other and is not visible from time to time. Once caught, choose the friend dialogue.
+Unlocks:        Ferries you between Beetle land and Dragon Eye Lake.
+Comment:         Choosing the item during the dialogue gives you a Seadramon evolution item. 
+The Technique dialogue gives you a new Ice technique. 
+
+Etemon
+Level:        Ultimate
+Location:         Screen below Kunemon's Bed.
+How:         At 50 pp or more you can interact with the door in the tree. Etemon does 
+a flying knee drop on your Digimon for 30% of your Digimon’s max HP.(Will never kill). After that he fights you, win the fight.
+Unlocks:        Sells Golden bananas, Etemon evolution item, for 50k bits, west of the Digimon
+bridge.
+
+Ninjamon
+Level:         Champion
+Location:         Path leading down at the File City side of the Digimon Bridge .
+How:         Accept the fight and win.
+Unlocks:         Provides general information on items when talking to him.
+Beetle Land
+Kuwagamon
+Level:         Champion
+Location:         Top Beetle Land screen, left training hall.
+How:        Talk to Kuwagamon and choose the 2nd dialogue option.
+Unlocks:        Improves MP, Offense and Brain training station at the Green Gym.
+
+
+
+________________
+
+
+Kabuterimon
+Level:         Champion
+Location:         Top Beetle Land screen, right training hall.
+How:        Talk to Kabuterimon and choose the 2nd option.
+Unlocks:        Improves HP, Defense and Speed training station at the Green Gym.
+File City
+Greymon
+Level:         Champion
+Location:         In front of Jijimon’s house.
+How:         Have 15 pp or more when leaving Jijimon’s house. Greymon will 
+challenge you, win the fight.
+Unlocks:         The Arena
+Comment:        You may use an Auto Pilot to skip walking out of Jijimon’s house and triggering 
+this encounter.
+
+
+Airdramon
+Level:         Champion
+Location:         In front of Jijimon’s house.
+How:         Have 50 pp or more when leaving Jijimon’s house. Airdramon will attack 
+you for 10% of your Digimon’s maximum health and start a fight. Win the fight. 
+After beating Machinedramon he’ll have recovered from the fight and work at File 
+City.
+Unlocks:         “Fortune telling” in the Arena.
+Comment:        You may use an auto pilot to skip walking out of Jijimon’s house and triggering 
+this encounter.
+Mt. Infinity
+Devimon
+Level:         Champion
+Location:         To the right of the teleporter on the 4th floor of Mt. Infinity.
+How:         Triggers upon moving east from the teleporter. He starts a fight, win the fight.
+Unlocks:         Secret shop, sells DV chips.
+
+
+Megadramon
+Level:         Ultimate
+Location:         Final floor of Mt. Infinity on a side-path.
+How:         Choose to fight him, win the fight.
+Unlocks:         Unknown.
+
+MetalGreymon
+Level:         Ultimate
+Location:         Final floor of Mt. Infinity, take path upwards. 
+How:         Win the fight.
+Unlocks:        Comes up with nicknames for your Digimon.
+
+
+Digitamamon
+Level:         Ultimate
+Location:         Final floor of Mt. Infinity after beating Machinedramon.
+How:         Win the fight.
+Unlocks:         Joins the restaurant. 
+Comment:        Can keep on feeding your Digimon after it had 1 dish while hungry. This allows for 
+payed stats gain. (Glitch)
+Random encounters
+Piximon
+Level:         Ultimate
+Location:         In the Tropical Jungle, 2nd screen right from the Digimon Bridge in front of the 
+palm tree.
+How:         Talk to him and accept his fight, win the fight.
+Unlocks:         Sells the training manual for 50.000 bits which increases training result while 
+present in your inventory.
+Comment:        Random encounter in the shop.
+
+
+Mamemon
+Level:         Ultimate
+Location:         Top of Mt. Panorama.
+How:         Win the fight against him.
+Unlocks:         Secret Shop, sells booster Disks.
+
+
+MetalMamemon
+Level:         Ultimate
+Location:         When entering Factorial Town from the pier in the back of the corner.
+How:         Win the fight.
+Unlocks:         Alternative curling opponent.
+Drill Tunnel
+Drimogemon
+Level:         Champion
+Location:         Residential Area, screen left of the Drill Tunnel 2nd Floor, Underground Pond
+How:         1. Talk to the Drimogemon in the Residential Area and win the fight
+        2. Talk to the Drimogemon in  the Underground Pond.It will  takes 5 ingame days 
+for him to dig the tunnel or until you have carried 10 carts of dirt to the entrance of 
+the Drill tunnel. 
+3. Once you’ve done the carrying leave the screen and come back again or 
+come back after ingame 5 days have passed. Drimogemon will now be stuck on 
+a big rock he can’t move. Any Champion or Ultimate Digimon is able to move the 
+rock, opening up the path to Meramon. 
+4. If you haven’t done so already recruit Meramon. You will find Drimogemon 3 
+screens below Meramon in the Lava Cave or when entering the Lava Cave 2 
+screens down in the Drill Tunnel. Talk Drimogemon and after 3 days he will have 
+finished digging and opened up a path to Foot of Mt. Panorama. Talk to him or 
+exit through to tunnel to trigger the recruitment dialogue.
+Unlocks:         Treasure Hunter shop, Meramon's Cave, Path through Drill Tunnel to Gear 
+Savanna
+Comment:        Each time you carried dirt you will gain: 10 tiredness, 500 bits, 50 HP, 5 Off, 5 
+Def
+
+
+Meramon
+Level:         Champion
+Location:         Upon entering the Lava Cave straight up first screen.
+How:         Win the fight against him.
+Unlocks:         Restaurant, clears the rocks that block the path to Path thru Mt. Panorama
+Comment:        To open up the Lava Cave complete the Drimogemon recruitment up until the 
+point of pushing the big rock.
+Gear Savanna
+Elecmon
+Level:         Rookie
+Location:         Top left screen of the Gear Savanna where the main entrance to Factorial Town 
+is.
+How:         Talk 3 times to him.
+Unlocks:         Powers the lights in the City.
+Comment:        Your Digimon will be zapped for 20% max HP each time you talk to him, can’t kill.
+
+Patamon
+Level:         Rookie
+Location:         Center top screen of the area, when exiting Factorial town from the main 
+entrance first screen to the right.
+How:         Win 3 times in a row against him.
+Unlocks:         Shop or upgrades shop inventory.
+Comment:        Stubborn little fellow.
+
+
+Biyomon
+Level:         Rookie
+Location:         Screen south from Patamon
+How:         Talk to Biyomon, she will run away, talk to her again. She will again run away. 
+Walk about in the until a dialogue pops up that tells your digimon to fetch 
+Biyomon. Depending on RNG Biyomon will run straight for you and be recruited. 
+If she runs the wrong way repeat the previous.
+Unlocks:         Shop or upgrades shop inventory.
+Comment:        Sometimes the dialogue doesn’t seem to pop up or is hard to find. Talk to 
+Biyomon to make her run away and try again. RNG reliant recruit, just keep
+trying.
+
+
+Sukamon
+Level:         Champion (adds 1 pp)
+Location:         Mt. Trash
+How:         Talk to the Sukamon in front of the MP training. 
+Unlocks:         A Sukamon that 
+Comment:        No message stating he joined the City.
+
+
+Leomon
+Level:         Champion
+Location:         1. Screen below Mt. Trash you'll find a Patamon chased by a Goburimon that 
+gets rescued by Leomon. 
+2. The screen left of that you find Leomon. Once you have the tablet talk to 
+Leomon and he will join the City.
+How:         Obtain the stone table from Leomon's Cave inside the Drill Tunnel (screen below 
+Drill Tunnel 2nd Floor). The cave opens up once you have Meramon recruited 
+and 45 pp.
+Unlocks:         Leomon standing inside Birdra Transport
+
+
+Tropical Jungle
+
+
+Vegiemon
+Level:         Champion
+Location:         Screen to the right of the toilet.
+How:         1. After recruiting Palmon a Rain Plant Fruit will be ready to be picked during the 
+15th day each month. You can find this fruit next to Tanemon. 
+2. After picking it talk to Tanemon, now you can find a small plant in the target 
+location. Interact with the plant and use the rain plant. Vegiemon will appear and 
+ask a question, answer yes and he'll join the town.
+Unlocks:         Upgrades the meat farm to yield Sirloin, sells you Supercarrot and Hawk Raddish
+
+Centarumon
+Level:         Champion
+Location:        From the Digimon Bridge follow the coastline to the right until you reach the last 
+screen, keep going up here until you reach  Amida Forest.
+How:         You have to find the exit to the maze. It's an Amida kuji, so you have to switch 
+lanes whenever possible. If you fail to switch the lane you'll get 50% of your max 
+HP as damage. If you end up at the wrong exit you'll get teleported back and have 
+to try again. Once you made it to the exit Centarumon will join the city and open a 
+path to the Ancient Dino Region.
+Comment:         You can find many valuable Items in the maze. What items you find seem to be 
+RNG, the maze and the position of the exit however not. See the Amida Forest 
+section for further explanation. (TL;DR move to the right instantly by holding right 
+during the initial dialogue and you will be able to reach the end)
+Unlocks:         The Clinic, here you may heal or rest your digimon (more effective than punimon) 
+and buy bandages and medicine.
+
+
+
+________________
+
+
+Tyrannomon
+Level:         Champion
+Location:         Ancient Dino Region, Ancient Glacial Region, next to the entrance to the Ancient 
+Speedy Region.
+How:         1. After recruiting Centarumon and entering the Ancient Dino Region you'll 
+encounter him and have to win the fight against him. 
+2.You will then meet him at the entrance to the Ancient Speedy Region, talk to 
+him and enter the Ancient Speedy Region. Continue to the screen opposite of 
+where you entered. You’ll end up in a screen which has a huge rib cage. There is 
+a semi hidden passage on the left at approximately the last rib on the left. Keep 
+hugging the left wall and you’ll enter the screen to the left. Here you’ll find 
+Meteormon and fight him. After beating him go back and talk to Tyrannomon who 
+will join the City.
+Unlocks:         Restaurant
+
+
+Betamon
+Level:         Rookie
+Location:         From the Digimon Bridge follow the coastline to the right until you cross a small 
+bridge, go up here. In this screen in the top right.
+How:         Talk to him and he'll join the town.
+Unlocks:         Shop or upgrades shop inventory.
+
+
+Bakemon
+Level:         Champion
+Location:         At the toilet head up to Overdell, from there keep going up and on the left side you 
+will find the Overdell Cemetery. Enter, keep right and head up until you meet 
+Bakemon on the grass.
+How:         Talk to Bakemon and answer Yes, Yes, No and he'll join the town.
+Unlocks:         Bakemon flying around in File City’s town center.
+Comment:         You can understand what he says when you have a Bakemon yourself.
+Mt. Panorama
+Unimon
+Level:         Champion
+Location:         Mt. Panorama Spore Area
+How:         Talk to Centarumon in the clinic after he has been recruited. Give him any healing 
+Item (e.g. sm. recovery Floppy/Medicine) and he'll join the town
+Unlocks:         Shop or upgrades shop inventory.
+
+Vademon
+Level:         Ultimate
+Location:         Right Mt. Panorama Spore Area
+How:        1. Go to his location, step on the marks on the floor, a textbox should appear. 
+                       2. Read Shellmon's bulletin board (Entry 2), go back to the location and step on 
+the marks on the floor, a textbox should appear.
+                       3. When 45+ pp, read Shellmon's bulletin board (Entry 8), go back to the location 
+and stand on the marks on the floor. Vademon will appear and talk to you.
+Unlocks:         Restaurant
+Misty Trees
+In order to be able to navigate properly through Misty Trees you need to have talked to ShogunGekomon. To do that you have to find and fight Otamamon at the 2nd Geko Swamp screen when coming from Gear Savanna. He will insult you over and over. Eventually you will get a dialogue option stating “That gets me mad” which will result in a fight. Win this fight and you’ll be taken to ShogunGekomon. Beware, Otamamon is a random encounter.
+
+
+Gabumon
+Level:         Rookie
+Location:         When you enter Misty Trees from Geko Swamp, exit the screen to the left and 
+up. You will find Gabumon hiding behind a tree. (Agumon would never do that)
+How:         Win the fight against him.
+Unlocks:         Improves Treasure Hunter shop, increases chance to get a valuable item 
+(evolution item/chip). More details in Treasure Hunter guide.
+
+
+Kokatorimon
+Level:         Champion
+Location:         When you enter Misty Trees from Geko Swamp, exit the screen 2 times on the 
+right. Kokatorimon will be there in the early morning between 4:00 and 6:59. 
+(Purple time zone on the clock)
+How:         Win the fight against him.
+Unlocks:         A statue near the toilet.
+________________
+Toy Town
+Entering Misty Trees coming from Freezeland exit the screen to the left. In the top left corner you will see Cherrymon blocking the road to Toy Town. Talk to him and he will move out of the way opening up the road to Toy Town.
+
+
+Monzaemon
+Level:         Ultimate
+How:         1. You need a Monzaemon as your partner Digimon. You can easily get one by 
+using the Monzaemon costume in Costume House (left) while having 
+a Numemon.
+                       2. Talk to the Tinmon in the Robot house (right), this will open up the Toy Mansion 
+in the middle.
+3. In the Toy Mansion keep entering the doors marked with “ ? “ until you reach a 
+floor with 2 boxes. Only 1 door will open and let you move up a floor, the other 
+doors will drop an item which deals 10% max HP damage to your digimon. 
+                       4. At the top floor you will fight WaruMonzaemon, win the fight and you’ll obtain a 
+gear item which you will need to bring back to Tinmon in the Robot House.
+Unlocks:         Monzaemon costume in the back of Jijimon's house. No known use.
+Factorial Town
+Andromon
+Level:         Ultimate
+Location:         Using Whamon to go to Factorial Town in the middle of the 2nd screen in the 
+building.
+How:         1. Beat Giromon
+        2. Talk to Andromon
+2. Recruit Numemon
+3. Talk to Andromon
+4.Now, once you have the large shop, restaurant, hospital and arena visited
+the screen once.
+5. Talk to Andromon
+Unlocks:         Stands outside Birdra Transport
+
+
+________________
+
+
+Giromon
+Level:         Ultimate
+Location:         When leaving the screen with Andromon's building to the right at 12 a.m. / p.m. 
+you can enter the factory. Pass through the first screen, at the second screen go 
+through the door on the left.
+How:         1. Win the fight against him. 
+2. Talk to Andromon
+3. Go back to Giromon’s room and talk to him.
+Unlocks:         Giromon's Jukebox in the restaurant. 
+Comment:        WARNING, in NTSC versions the Jukebox is bugged and causes your game to 
+crash!
+
+
+Numemon
+Level:         Champion (adds +1 pp)
+Location:         Using Whamon to go to Factorial Town in the 2nd screen on the left side down 
+the manhole
+How:         After you've beaten Giromon and talked to Andromon the fog in the sewers is 
+gone. Talk to Numemon and win the fight against him.
+Unlocks:         Secret shop, sells Enemy Bell and Enemy Repel.
+________________
+Greylord Mansion
+You need a Virus type Digimon to enter the Mansion.
+
+
+Myotismon[a]
+Level:         Ultimate
+How:         1. Use the door on the right side of the stairs (you'll enter a room with a toilet), 
+use the left door until you reach a large room with a fireplace. Interact with the 
+fireplace and you'll find the mansion key.
+                       2. Head back to the toilet room but chose the upper right door now. Walk along 
+the south border of the screen until you find a spot to fall down through. (Your 
+Digimon will receive 30% max HP damage)
+                       3. Use the right door and interact with the coffin in the room to enter the hidden 
+room where Myotismon is located. Talk to him and he will ask you to bring him 
+meat and hands you a Fridge Key.
+4. Go back to the screen with the 3 Soulmon and a fridge. (1 screen south from 
+the toilet) Interact with the fridge. 
+5. Leave the Villa and you'll find steak outside, pick it up.
+6. Go back to Myotismon and talk to him.
+7. When 35+ pp read Shellmon's bulletin board (Entry 6). 
+8. Head back to the mansion and go to the place where you found Myotismon the 
+first time and the dining room.
+9. Attempt to leave the mansion
+10. After Devimon disappears, use the first door on the right and use the 
+elevator to go down to the Underground Lab. Stick to the left and keep going up 
+until you go through a dark door opening. Keep going until you see a path to the 
+right where you find Myotismon and talk to him. 
+11. Go up to the next screen where you will find Skullgreymon. Win the fight 
+against him. Skullgreymon will join the City
+12. Go back to Myotismon and talk to him.
+Unlock:         Fights in Arena
+
+
+SkullGreymon
+Level:         Ultimate
+Where:        Underground Lab, final screen.
+How:        Integrated in Myotismon’s recruitment.
+Unlocks:        Fights in the Arena
+
+Great Canyon[b]
+You need to talk with Yuramon in File City after you unlocked the Digimon Bridge and he'll talk to you about an invisible bridge, after that you can head to the Great Canyon Entrance and use the invisible bridge. You can tell where it is from the odd 90 degree indentations into the ground.
+
+
+Monochromon
+Level:         Champion
+Location:         The Great Canyon Top Area, the Shop next to the Toilet.
+How:         When talking to him he'll let you work in his Shop to test if you're "worthy". If you 
+manage to obtain over 3072 Bits profit he'll join the City.
+Unlocks:         Shop
+Comment:         The Shop Minigame is very RNG intensive and hard. Goburimon and Gotsumon 
+are usually easy customers (you can often sell them expensive stuff, even if 
+they're unhappy) while Muchomon and Weedmon have to treated carefully. This 
+minigame costs you 8h of time and gives you a bit of money.
+
+Birdramon
+Level:         Champion
+Location:         Starting at the invisible bridge keep exit the screen to the right. At the Y 
+intersection follow the right path and exit the screen upwards. Keep going up until 
+you reach an elevator and press UP. 
+How:         Walk into the nest and Birdramon will appear. Win the fight against it
+Unlocks:         Birdra Transport, the quick travel System of this game
+Comment:         Once you've beaten Birdramon she'll take you back to File City
+
+Shellmon
+Level:         Champion
+Location:        Great Canyon Bridge, use the elevator in Ogremon’s Fortress and follow the path 
+leading to Freezeland.  
+How:         1. After you've beaten Ogremon in his Fortress, use the elevator from the last 
+room and follow the path until you hear someone calling for help. 
+                       2. Head back to Ogre Fortress using the elevator you used to get up here 
+3. Leave the Ogre Fortress through the Fortress Entrance screen.
+4. Head right at the Fortress Entrance towards Great Canyon Bot.Area. Move 
+upwards to the elevator, interact with it and hit Up.
+5. Head to the left when coming out of the elevator to Freezeland.
+6. Exit this screen to the left to reach the Great Canyon and talk to Shellmon.
+Unlocks:         Shellmon’s Bulletin Board, contains some information as well as hints and trigger 
+for certain recruitments.
+
+Freezeland
+Penguinmon
+Level:         Rookie
+Location:         Starting at the toilet screen exit to the top right and keep going right until you 
+eventually reach Penguinmon standing in a door opening at the 4th screen.
+How:         Talk with Penguinmon and he'll challenge you to a match of Curling. Win the 
+game.
+Unlocks:         Curling in the Arena, you need to pay a fish to play a game.
+Comment:        If you lose you can play again, but you have to bring him a fish.
+
+
+Moyjamon
+Level:         Champion
+Location:         Starting at the toilet screen exit to the top right and keep going right until you 
+reach the 3rd screen. (Go right once more to reach Penguinmon’s location) Go 
+down to the path that consists of ice chunks. There are 3 Mojyamon to be found 
+that can be reached from this default location.
+1. From the default location exit the screen to the right.
+2. From the default location exit the screen to the bottom and keep right.
+3. From the default location exit the screen to the bottom and keep left.
+How:        Each Mojyamon offers you to trade 3 types of items and the last Mojyamon you all 
+3 types of items with will join the City. 
+You need the following Items: Digimushroom, Supercarrot (buyable at Vegiemon), 
+Happymushroom (can be found in Native Forest sometimes) Giant Meat (can be 
+bought at the Secret Shop in Gear Savanna), black trout (fishing), Hispeed Disk, 
+Omnipotent, med. recovery and Digianchovy (fishing).
+Unlocks:         Secret shop - sells Rest pillow (more sleep regen) and health shoes (HP+MP 
+regen while walking)
+
+Whamon
+Level:         Champion
+Location:        Starting at the toilet screen exit to the top right and keep going right until you 
+reach the 3rd screen. (Go right once more to reach Penguinmon’s location) 
+Keep to the left and head down to reach the path made from ice chunks, exit to 
+the left. Stick to the right without exiting the screen and walk down the ice pier.
+How:         1. Talk to Whamon and help him. He will take you to the Secret Beach Cave.
+2. Exit to the right and fight Ogremon, WaruSeadramon and Gabumon. Win the 
+fight against them.
+Unlocks:         Fast travel to Factorial Town and the Secret Beach Cave. 
+Comment:         You can find an evolution item for Digitamamon in the Secret Beach Cave.
+
+Angemon
+Level:         Champion
+Location:        Ice Sanctuary. Starting at the toilet Screen exit to the top left, continue until you 
+reach the Ice Sanctuary.
+How:         1. Enter the Ice Sanctuary (only possible with a Vaccine type Digimon) and go to 
+the statue until a dialogue appears. 
+2. Move away from it and you Digimon will move it. A staircase appears from 
+underneath the statue.
+        3. Walk down the stairs.
+4. Down the stairs, walk against the right wall and you'll find a secret entrance in 
+the first small room.
+5. Walk into the upper teleporter crystal.
+6. At the 4 teleporter crystals walk into the upper right one
+7. Win the fight against the 3 Digimon and retrieve the blue light.
+8. Head all the way back to the statue at step 1.
+Unlocks:         He'll give you hints about the Digimon you haven't recruited yet.
+
+
+Frigimon
+Level:         Champion
+Location:        Starting at the toilet screen exit to the top right, walk here with your sick Digimon. 
+To find Frigimon’s house starting at previously described location exit the screen 
+up. Keep going left until you find Frigimon’s house.
+How:         Take a sick Digimon from the list below to Freezeland and walk around a bit, there                 are zones you have to walk over to advance the quest.        An easy way to get your                 Digimon sick is to feed a Moldy Meat that can be bought from the Vending Machine in         the Ancient Dino Region. 
+After you encountered Frigimon the first time evolve to a Digimon not on the list and                 talk to them again.
+Who:        You need one of these Digimon to get sick: 
+        Botamon, Koromon, Agumon, Greymon, Tyrannomon, Meramon, Punimon,                         Tsunomon, Kabuterimon, Birdramon, Poyomon, Tokomon, Kunemon, Yuramon,                 Tanemon, Monochromon, Kuwagamon
+Unlocks:         Restaurant
+
+Garurumon
+Level:         Champion
+Location:         Starting at the toilet screen exit to the top right. Exit to the top. Head left and exit 
+to the bottom.
+How:         Fight him and win the fight. He'll challenge you again for 4 p.m. the next day. If 
+you miss that time you can still fight him, but he'll have more HP then.
+        The 2nd fight has to be done without items or command, having a strong 
+Digimon is recommended!
+Unlocks:         Restaurant
+
+Moving Recruitments
+Nanimon
+Level:         Champion (adds 1 pp)
+Location:        1. Ogre Fortress, Ogremon’s location
+2. Toy Town, WaruMonzaemon’s location
+                       3. Speedy Dino Region - Meteormon’s location
+                       4. Leomon's Cave - left of the tablet
+                       5. Factorial Town Sewers - Numemon’s location
+How:         Nanimon appears at 5 locations after certain recruitments are done.
+                       1. After beating Ogremon in Ogremon’s Fortress as part of the Shellmon 
+recruitment.
+                       2. After Monzaemon’s recruitment.
+                       3. After Tyrannomon’s recruitment
+                       4. After Leomon’s recruitment
+                       5. After Andromon’s recruitment
+Unlocks:         1st time you find him he'll drop a keychain that increases your Inventory to 20 
+slots. The 5th time you find him he'll drop a Key Chain for 30 slots.
+Comment:         You can see him in the Item Bank, but there is no way to interact with him.
+
+
+Ogremon
+Level:         Champion
+How:         1. Once you've visited the Great Canyon talk to Yuramon and he'll tell you
+about bandits in the Great Canyon. Head back to the Great Canyon. After 
+crossing the invisible bridge exit to the right and keep a right while moving up. 
+You'll encounter and fight Ogremon and 2 Agumon here. Win the fight.
+2. Go to the elevator and press DOWN. Exit the screen at the bottom. 
+3. You'll find Ogre Fortress to the left. Enter it and in the last room you'll fight 
+against Ogremon and 2 Agumon. Win the fight (Check Shellmon’s recruitment)
+4. Go to Freezeland and find Whamon, see Whamon’s recruitment. At the 
+Secret Beach Cave you will fight Ogremon, WaruSeadramon and Gabumon. 
+Win the fight
+5. Go to the Drill Tunnel and at Drill Tunnel 2nd Floor you'll fight Ogremon and 2 
+Agumon again. Win the fight
+Unlocks:         “Patrols” the City.
+
+
+[a]Myotismon and SkullGreymon are technically the same recruitment and only give PP once.
+[b]Shellmon is missing

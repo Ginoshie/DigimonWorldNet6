@@ -5,6 +5,7 @@ using System.Threading;
 using System.Windows.Controls;
 using System.Windows.Input;
 using DigimonWorld.Frontend.WPF.ViewModelComponents;
+using DigimonWorld.Frontend.WPF.Windows.Main.UserControls.CheatSheet;
 using DigimonWorld.Frontend.WPF.Windows.Main.UserControls.DigiWiki;
 using DigimonWorld.Frontend.WPF.Windows.Main.UserControls.EvolutionCalculator;
 using DigimonWorld.Frontend.WPF.Windows.Main.UserControls.EvoTreeHelper;
@@ -25,6 +26,7 @@ public class NavigationLeftPaneViewModelComponent : PaneBaseViewModel, IDisposab
     private readonly Lazy<DigiWikiUserControl> _digiWikiUserControl = new();
     private readonly Lazy<TamerVisionUserControl> _tamerVisionUserControl = new();
     private readonly Lazy<EvoTreeHelperUserControl> _evoTreeHelperUserControl = new();
+    private readonly Lazy<CheatSheetUserControl> _cheatSheetUserControl = new();
 
     public NavigationLeftPaneViewModelComponent(Action<UserControl> setCurrentSelectedMainWindowContent)
     {
@@ -38,6 +40,8 @@ public class NavigationLeftPaneViewModelComponent : PaneBaseViewModel, IDisposab
         ShowTamerVisionCommand = new CommandHandler(ShowTamerWiki);
 
         ShowEvoTreeHelperCommand = new CommandHandler(ShowEvoTreeHelper);
+        
+        ShowCheatSheetCommand = new CommandHandler(ShowCheatSheet);
 
         PaneOffset = PaneIsOpen ? PANEL_OPENED_X_OFFSET : PANEL_CLOSED_X_OFFSET;
 
@@ -60,6 +64,8 @@ public class NavigationLeftPaneViewModelComponent : PaneBaseViewModel, IDisposab
 
     public ICommand ShowEvoTreeHelperCommand { get; }
 
+    public ICommand ShowCheatSheetCommand { get; }
+
     public UserControl InitialContent => _evolutionCalculatorUserControl.Value;
 
     private void ShowEvolutionCalculator() => _setCurrentSelectedMainWindowContent(_evolutionCalculatorUserControl.Value);
@@ -69,6 +75,8 @@ public class NavigationLeftPaneViewModelComponent : PaneBaseViewModel, IDisposab
     private void ShowTamerWiki() => _setCurrentSelectedMainWindowContent(_tamerVisionUserControl.Value);
 
     private void ShowEvoTreeHelper() => _setCurrentSelectedMainWindowContent(_evoTreeHelperUserControl.Value);
+
+    private void ShowCheatSheet() => _setCurrentSelectedMainWindowContent(_cheatSheetUserControl.Value);
 
 
     public bool PaneIsOpen

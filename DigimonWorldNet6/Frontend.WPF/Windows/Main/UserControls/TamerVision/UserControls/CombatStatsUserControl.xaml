@@ -57,7 +57,7 @@
                      HorizontalContentAlignment="Center"
                      Style="{StaticResource DefaultReadonlyTextBoxStyle}"
                      Margin="{StaticResource RowMargin}"
-                     Text="{Binding CurrentHP}">
+                     Text="{Binding CurrentHp}">
                 <TextBox.ToolTip>
                     <ToolTip Style="{StaticResource DefaultToolTipRightStyle}">
                         <TextBlock Text="The current HP of your digimon." />
@@ -70,7 +70,7 @@
                      HorizontalContentAlignment="Center"
                      Style="{StaticResource DefaultReadonlyTextBoxStyle}"
                      Margin="{StaticResource RowMargin}"
-                     Text="{Binding HP}">
+                     Text="{Binding Hp}">
                 <TextBox.ToolTip>
                     <ToolTip Style="{StaticResource DefaultToolTipRightStyle}">
                         <TextBlock Text="The max HP of your digimon." />
@@ -98,7 +98,7 @@
                      HorizontalContentAlignment="Center"
                      Style="{StaticResource DefaultReadonlyTextBoxStyle}"
                      Margin="{StaticResource RowMargin}"
-                     Text="{Binding CurrentMP}">
+                     Text="{Binding CurrentMp}">
                 <TextBox.ToolTip>
                     <ToolTip Style="{StaticResource DefaultToolTipRightStyle}">
                         <TextBlock Text="The current MP of your digimon." />
@@ -111,7 +111,7 @@
                      HorizontalContentAlignment="Center"
                      Style="{StaticResource DefaultReadonlyTextBoxStyle}"
                      Margin="{StaticResource RowMargin}"
-                     Text="{Binding MP}">
+                     Text="{Binding Mp}">
                 <TextBox.ToolTip>
                     <ToolTip Style="{StaticResource DefaultToolTipRightStyle}">
                         <TextBlock Text="The max MP of your digimon." />

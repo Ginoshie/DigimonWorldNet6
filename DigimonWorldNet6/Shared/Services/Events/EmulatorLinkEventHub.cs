@@ -10,6 +10,7 @@ public static class EmulatorLinkEventHub
     private static readonly BehaviorSubject<bool> _emulatorConnectedSubject = new(false);
     private static readonly Subject<EmulatorLinkSyncMode> _emulatorSyncModeChangedSubject = new();
     private static readonly Subject<string> _emulatorProcessNameChangedSubject = new();
+    private static readonly Subject<Unit> _recruitmentSynchronizedSubject = new();
     private static readonly Subject<Unit> _digimonConditionStatsSynchronizedSubject = new();
     private static readonly Subject<Unit> _digimonParameterStatsSynchronizedSubject = new();
     private static readonly Subject<Unit> _digimonProfileStatsSynchronizedSubject = new();
@@ -22,6 +23,7 @@ public static class EmulatorLinkEventHub
     public static IObservable<bool> EmulatorConnectedObservable => _emulatorConnectedSubject.AsObservable();
     public static IObservable<EmulatorLinkSyncMode> EmulatorLinkSyncModeChangedObservable => _emulatorSyncModeChangedSubject.AsObservable();
     public static IObservable<string> EmulatorProcessNameChangedObservable => _emulatorProcessNameChangedSubject.AsObservable();
+    public static IObservable<Unit> RecruitmentSynchronizedObservable => _recruitmentSynchronizedSubject.AsObservable();
     public static IObservable<Unit> DigimonConditionStatsSynchronizedObservable => _digimonConditionStatsSynchronizedSubject.AsObservable();
     public static IObservable<Unit> DigimonParameterStatsSynchronizedObservable => _digimonParameterStatsSynchronizedSubject.AsObservable();
     public static IObservable<Unit> DigimonProfileStatsSynchronizedObservable => _digimonProfileStatsSynchronizedSubject.AsObservable();
@@ -34,6 +36,7 @@ public static class EmulatorLinkEventHub
     public static void SignalEmulatorConnected(bool isConnected) => _emulatorConnectedSubject.OnNext(isConnected);
     public static void SignalEmulatorLinkSyncModeChanged(EmulatorLinkSyncMode mode) => _emulatorSyncModeChangedSubject.OnNext(mode);
     public static void SignalEmulatorProcessNameChanged(string processName) => _emulatorProcessNameChangedSubject.OnNext(processName);
+    public static void SignalRecruitmentSynchronized() => _recruitmentSynchronizedSubject.OnNext(Unit.Default);
     public static void SignalDigimonConditionStatsSynchronized() => _digimonConditionStatsSynchronizedSubject.OnNext(Unit.Default);
     public static void SignalDigimonParameterStatsSynchronized() => _digimonParameterStatsSynchronizedSubject.OnNext(Unit.Default);
     public static void SignalDigimonProfileStatsSynchronized() => _digimonProfileStatsSynchronizedSubject.OnNext(Unit.Default);

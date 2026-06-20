@@ -4,6 +4,8 @@ using System.Reactive.Disposables;
 using MemoryAccess.Core;
 using MemoryAccess.MemoryValues.Digimon;
 using MemoryAccess.MemoryValues.Evolution;
+using MemoryAccess.MemoryValues.Tamer;
+using MemoryAccess.MemoryValues.Technical;
 using MemoryAccess.MemoryValues.World;
 using Shared.Services.Events;
 
@@ -25,6 +27,9 @@ public sealed class LiveMemoryReader : INotifyPropertyChanged, IDisposable
     private readonly SerialDisposable _techniqueStats = new();
     private readonly SerialDisposable _historicEvolutions = new();
     private readonly SerialDisposable _worldTime = new();
+    private readonly SerialDisposable _recruitment = new();
+    private readonly SerialDisposable _tamer = new();
+    private readonly SerialDisposable _technical = new();
 
     public static LiveMemoryReader Instance => _instance.Value;
 
@@ -42,6 +47,9 @@ public sealed class LiveMemoryReader : INotifyPropertyChanged, IDisposable
         _techniqueStats.Disposable = TechniqueStats.Empty;
         _historicEvolutions.Disposable = HistoricEvolutions.Empty;
         _worldTime.Disposable = WorldTime.Empty;
+        _recruitment.Disposable = Recruitment.Empty;
+        _tamer.Disposable = Tamer.Empty;
+        _technical.Disposable = Technical.Empty;
     }
 
     public ParameterStats ParameterStats
@@ -84,6 +92,24 @@ public sealed class LiveMemoryReader : INotifyPropertyChanged, IDisposable
     {
         get => (WorldTime)_worldTime.Disposable!;
         private set => _worldTime.Disposable = value;
+    }
+
+    public Recruitment Recruitment
+    {
+        get => (Recruitment)_recruitment.Disposable!;
+        private set => _recruitment.Disposable = value;
+    }
+
+    public Tamer Tamer
+    {
+        get => (Tamer)_tamer.Disposable!;
+        private set => _tamer.Disposable = value;
+    }
+
+    public Technical Technical
+    {
+        get => (Technical)_technical.Disposable!;
+        private set => _technical.Disposable = value;
     }
 
     public event PropertyChangedEventHandler? PropertyChanged;
@@ -179,7 +205,7 @@ public sealed class LiveMemoryReader : INotifyPropertyChanged, IDisposable
             {
                 break;
             }
-            catch (Exception _)
+            catch (Exception)
             {
                 Connected = false;
                 await Task.Delay(1000, token);
@@ -206,6 +232,12 @@ public sealed class LiveMemoryReader : INotifyPropertyChanged, IDisposable
         TechniqueStats.UpdateData();
         HistoricEvolutions = new HistoricEvolutions(mem, ram);
         HistoricEvolutions.UpdateData();
+        Recruitment = new Recruitment(mem, ram);
+        Recruitment.UpdateData();
+        Tamer = new Tamer(mem, ram);
+        Tamer.UpdateData();
+        Technical = new Technical(mem, ram);
+        Technical.UpdateData();
 
         try
         {
@@ -223,8 +255,8 @@ public sealed class LiveMemoryReader : INotifyPropertyChanged, IDisposable
 
     private bool AreParameterStatsWithinExpectedRanges()
     {
-        short hp = ParameterStats.HP;
-        short mp = ParameterStats.MP;
+        short hp = ParameterStats.Hp;
+        short mp = ParameterStats.Mp;
         short off = ParameterStats.Offense;
         short def = ParameterStats.Defense;
         short spd = ParameterStats.Speed;
@@ -247,6 +279,8 @@ public sealed class LiveMemoryReader : INotifyPropertyChanged, IDisposable
         TechniqueStats = TechniqueStats.Empty;
         HistoricEvolutions = HistoricEvolutions.Empty;
         WorldTime = WorldTime.Empty;
+        Tamer = Tamer.Empty;
+        Technical = Technical.Empty;
     }
 
     public void Dispose()

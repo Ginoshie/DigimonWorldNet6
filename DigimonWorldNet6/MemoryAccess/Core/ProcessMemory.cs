@@ -54,6 +54,24 @@ public class ProcessMemory
         return BitConverter.ToInt32(buf);
     }
 
+    public virtual void WriteByte(IntPtr addr, byte value)
+    {
+        byte[] buf = [value];
+        WriteProcessMemory(Handle, addr, buf, buf.Length, out _);
+    }
+
+    public virtual void WriteInt16(IntPtr addr, short value)
+    {
+        byte[] buf = BitConverter.GetBytes(value);
+        WriteProcessMemory(Handle, addr, buf, buf.Length, out _);
+    }
+
+    public virtual void WriteInt32(IntPtr addr, long value)
+    {
+        byte[] buf = BitConverter.GetBytes(unchecked((int)value));
+        WriteProcessMemory(Handle, addr, buf, buf.Length, out _);
+    }
+
     [DllImport("kernel32.dll", SetLastError = true)]
     private static extern IntPtr OpenProcess(int dwDesiredAccess, bool bInheritHandle, int dwProcessId);
 
@@ -66,6 +84,15 @@ public class ProcessMemory
         out int lpNumberOfBytesRead
     );
 
+    [DllImport("kernel32.dll", SetLastError = true)]
+    private static extern bool WriteProcessMemory(
+        IntPtr hProcess,
+        IntPtr lpBaseAddress,
+        [In] byte[] lpBuffer,
+        int dwSize,
+        out int lpNumberOfBytesWritten
+    );
+
     private class EmptyProcessMemory : ProcessMemory
     {
         public override byte ReadByte(IntPtr addr) => 0;
@@ -73,5 +100,17 @@ public class ProcessMemory
         public override int ReadInt32(IntPtr addr) => 0;
 
         public override byte[] ReadBytes(IntPtr addr, int length) => new byte[length];
+
+        public override void WriteByte(IntPtr addr, byte value)
+        {
+        }
+
+        public override void WriteInt16(IntPtr addr, short value)
+        {
+        }
+
+        public override void WriteInt32(IntPtr addr, long value)
+        {
+        }
     }
 }

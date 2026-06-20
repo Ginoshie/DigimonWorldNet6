@@ -24,7 +24,6 @@ public sealed class ProfileStats(ProcessMemory mem, PsxRam ram) : MemoryValueSyn
     private const int ENERGY_LEVEL = 0x0013849C;
     private const int HUNGRY_TIMER = 0x0013849E;
     private const int STARVATION_TIMER = 0x001384A0;
-    private const int REMAINING_LIFESPAN_IN_HOURS = 0x001384A0;
     private const int AGE_IN_DAYS = 0x001384AA;
     private const int EVOLUTION_AGE_IN_HOURS = 0x001384B6;
     private const int FIRST_SPECIAL = 0x12ced2;
@@ -61,7 +60,6 @@ public sealed class ProfileStats(ProcessMemory mem, PsxRam ram) : MemoryValueSyn
 
     public int StandardSleepTime { get; private set; }
 
-    // 1 = 10 min ingame before needing to poop
     public int PoopLevel { get; private set; }
 
     public int VirusBar { get; private set; }
@@ -70,13 +68,11 @@ public sealed class ProfileStats(ProcessMemory mem, PsxRam ram) : MemoryValueSyn
 
     public int Tiredness { get; private set; }
 
-    public int EngergyLevel { get; private set; }
+    public int EnergyLevel { get; private set; }
 
     public int HungryTimer { get; private set; }
 
     public int StarvationTimer { get; private set; }
-
-    public int RemainingLifeSpanInHours { get; private set; }
 
     public int AgeInDays { get; private set; }
 
@@ -106,10 +102,9 @@ public sealed class ProfileStats(ProcessMemory mem, PsxRam ram) : MemoryValueSyn
         VirusBar = mem.ReadInt16(ram.A(VIRUS_BAR));
         PoopingTimer = mem.ReadInt16(ram.A(POOPING_TIMER));
         Tiredness = mem.ReadInt16(ram.A(TIREDNESS));
-        EngergyLevel = mem.ReadInt16(ram.A(ENERGY_LEVEL));
+        EnergyLevel = mem.ReadInt16(ram.A(ENERGY_LEVEL));
         HungryTimer = mem.ReadInt16(ram.A(HUNGRY_TIMER));
         StarvationTimer = mem.ReadInt16(ram.A(STARVATION_TIMER));
-        RemainingLifeSpanInHours = mem.ReadInt16(ram.A(REMAINING_LIFESPAN_IN_HOURS));
         AgeInDays = mem.ReadInt16(ram.A(AGE_IN_DAYS));
         EvolutionAgeInHours = mem.ReadInt16(ram.A(EVOLUTION_AGE_IN_HOURS));
 
