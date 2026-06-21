@@ -4,10 +4,16 @@
 
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="/ResourceDictionaries/Styles/DefaultCheckboxStyle.xaml" />
+        <ResourceDictionary Source="/ResourceDictionaries/Styles/ToolTips/DefaultTooltipRightStyle.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
     <DataTemplate x:Key="ConditionFlagTemplate" DataType="{x:Type models:MemoryValueViewModel}">
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,5,0,5">
+            <StackPanel.ToolTip>
+                <ToolTip Style="{StaticResource DefaultToolTipRightStyle}">
+                    <TextBlock Text="{Binding Label, StringFormat='Toggles the {0} condition.'}" />
+                </ToolTip>
+            </StackPanel.ToolTip>
             <TextBlock Text="{Binding Label}" VerticalAlignment="Center" Margin="0,0,5,0">
                 <TextBlock.RenderTransform>
                     <TranslateTransform Y="1.5" />

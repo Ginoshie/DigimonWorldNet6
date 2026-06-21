@@ -72,9 +72,9 @@ public static class CheatSheetInputInfo
     public const long TAMER_LEVEL_MIN = 0;
     public const long TAMER_LEVEL_MAX = 10;
     public const long BITS_MIN = 0;
-    public const long BITS_MAX = 9999;
+    public const long BITS_MAX = 9998;
     public const long MERIT_POINTS_MIN = 0;
-    public const long MERIT_POINTS_MAX = 9999;
+    public const long MERIT_POINTS_MAX = 9998;
 
     // Technical
     public const long RNG_MIN = 0;
