@@ -275,12 +275,31 @@ public class MainWindowViewModel : BaseWindowViewModel, IDisposable
             };
             ((JijimonYesNoDialogViewModel)progressDialog.DataContext).HideButtons();
 
+            Exception? downloadError = null;
             _ = System.Threading.Tasks.Task.Run(async () =>
             {
-                await UpdateService.DownloadAndApplyUpdateAsync(result.UpdateInfo);
+                try
+                {
+                    await UpdateService.DownloadUpdateAsync(result.UpdateInfo);
+                }
+                catch (Exception ex)
+                {
+                    downloadError = ex;
+                }
+                finally
+                {
+                    progressDialog.Dispatcher.Invoke(progressDialog.Close);
+                }
             });
 
             progressDialog.ShowDialog();
+
+            if (downloadError != null)
+            {
+                throw downloadError;
+            }
+
+            UpdateService.ApplyUpdateAndRestart(result.UpdateInfo);
         } catch (Exception)
         {
             NanimonErrorDialog dialog = new("Nanimon", "Naniiii?! The update broke!\n\nEven I couldn't punch through whatever went wrong there. Try again later or smash that button below to grab it yourself!", "https://github.com/Ginoshie/DigimonWorldNet6/releases")

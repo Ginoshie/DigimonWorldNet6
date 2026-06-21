@@ -7,11 +7,6 @@ public static class UpdateService
 {
     private const string GITHUB_REPO_URL = "https://github.com/Ginoshie/DigimonWorldNet6";
 
-    private static UpdateManager CreateUpdateManager()
-    {
-        return new UpdateManager(new GithubSource(GITHUB_REPO_URL, null, false));
-    }
-
     public static async Task<UpdateCheckResult> CheckForUpdateAsync()
     {
         UpdateManager manager = CreateUpdateManager();
@@ -25,10 +20,20 @@ public static class UpdateService
         return new UpdateCheckResult(true, updateInfo, updateInfo.TargetFullRelease.Version.ToString());
     }
 
-    public static async Task DownloadAndApplyUpdateAsync(UpdateInfo updateInfo)
+    public static async Task DownloadUpdateAsync(UpdateInfo updateInfo)
     {
         UpdateManager manager = CreateUpdateManager();
         await manager.DownloadUpdatesAsync(updateInfo);
+    }
+
+    public static void ApplyUpdateAndRestart(UpdateInfo updateInfo)
+    {
+        UpdateManager manager = CreateUpdateManager();
         manager.ApplyUpdatesAndRestart(updateInfo);
+    }
+
+    private static UpdateManager CreateUpdateManager()
+    {
+        return new UpdateManager(new GithubSource(GITHUB_REPO_URL, null, false));
     }
 }
