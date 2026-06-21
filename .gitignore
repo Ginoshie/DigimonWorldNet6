@@ -23,3 +23,6 @@
 /DigimonWorldNet6/.idea/.idea.DigimonWorldNet6.dir/.idea/vcs.xml
 /DigimonWorldNet6/.idea/.idea.DigimonWorldNet6/.idea/workspace.xml
 /DigimonWorldNet6/.idea/.idea.DigimonWorldNet6.dir/.idea/workspace.xml
+
+# Velopack pack output if accidentally run from the repo directory
+/DigimonWorldNet6/Releases/

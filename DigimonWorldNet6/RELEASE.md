@@ -26,8 +26,10 @@ dotnet publish Frontend.WPF/Frontend.WPF.csproj -c Release --self-contained fals
 ### 3. Pack with Velopack
 
 ```powershell
-vpk pack --packId DW1Tool --packTitle "DW 1 Tool" --packVersion 1.4.0 --packDir "C:\DW1 Tool" --mainExe Frontend.WPF.exe --icon "C:\git\DigimonWorldNet6\DigimonWorldNet6\Frontend.WPF\Images\Misc\app-icon.ico" --framework net10.0-x64-desktop
+vpk pack --packId DW1Tool --packTitle "DW 1 Tool" --packVersion 1.4.0 --packDir "C:\DW1 Tool" --mainExe Frontend.WPF.exe --icon "C:\git\DigimonWorldNet6\DigimonWorldNet6\Frontend.WPF\Images\Misc\app-icon.ico" --framework net10.0-x64-desktop --outputDir "C:\DW1 Tool\Releases"
 ```
+
+> **Always pass `--outputDir "C:\DW1 Tool\Releases"`.** Without it, `vpk pack` writes to a `Releases` folder relative to your current directory — so running it from the repo would put the package in the wrong place, miss the previous `.nupkg` (no delta generated), and leave the upload step pointing at stale files. `--outputDir` must match the `--outputDir` used in the upload step and contain the previous version's `.nupkg`.
 
 This generates files in the `Releases` folder:
 - `DW1Tool-Setup.exe` — Installer for new users
