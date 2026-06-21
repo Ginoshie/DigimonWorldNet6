@@ -24,10 +24,12 @@ namespace DigimonWorld.Frontend.WPF.Windows.Main.UserControls.CheatSheet.Models;
 public class CheatSheetViewModel : BaseViewModel, IDisposable
 {
     private const int NO_EVOLUTION_VALUE = 65535;
+    private const int UPGRADE_TRAINED_THRESHOLD = 10;
 
     private readonly SpeakingSimulator _speakingSimulator;
     private readonly List<IRefreshable> _refreshables = [];
     private readonly CompositeDisposable _subscriptions;
+    private int _visibleInventorySlotCount = -1;
 
     public CheatSheetViewModel()
     {
@@ -248,6 +250,13 @@ public class CheatSheetViewModel : BaseViewModel, IDisposable
         Func<Technical> technical = () => LiveMemoryReader.Instance.Technical;
 
         TechnicalRng = new LongMemoryValueViewModel("RNG", () => technical().CurrentRng, v => technical().CurrentRng = (uint)v);
+        TechnicalAgeInDays = new NumericMemoryValueViewModel("Age (days)", () => technical().AgeInDays, v => technical().AgeInDays = v);
+        TechnicalEvolutionAgeInHours = new NumericMemoryValueViewModel("Evolution Age (h)", () => technical().EvolutionAgeInHours, v => technical().EvolutionAgeInHours = v);
+        TechnicalUpgradeCounterHp = new MemoryValueViewModel("Upgrade HP", () => technical().UpgradeCounterHp >= UPGRADE_TRAINED_THRESHOLD, v => technical().UpgradeCounterHp = v ? UPGRADE_TRAINED_THRESHOLD : 0);
+        TechnicalUpgradeCounterMp = new MemoryValueViewModel("Upgrade MP", () => technical().UpgradeCounterMp >= UPGRADE_TRAINED_THRESHOLD, v => technical().UpgradeCounterMp = v ? UPGRADE_TRAINED_THRESHOLD : 0);
+        TechnicalUpgradeCounterOffense = new MemoryValueViewModel("Upgrade Offense", () => technical().UpgradeCounterOffense >= UPGRADE_TRAINED_THRESHOLD, v => technical().UpgradeCounterOffense = v ? UPGRADE_TRAINED_THRESHOLD : 0);
+        TechnicalUpgradeCounterDefense = new MemoryValueViewModel("Upgrade Defense", () => technical().UpgradeCounterDefense >= UPGRADE_TRAINED_THRESHOLD, v => technical().UpgradeCounterDefense = v ? UPGRADE_TRAINED_THRESHOLD : 0);
+        TechnicalUpgradeCounterSpeed = new MemoryValueViewModel("Upgrade Speed", () => technical().UpgradeCounterSpeed >= UPGRADE_TRAINED_THRESHOLD, v => technical().UpgradeCounterSpeed = v ? UPGRADE_TRAINED_THRESHOLD : 0);
 
         Func<WorldTime> worldTime = () => LiveMemoryReader.Instance.WorldTime;
 
@@ -351,6 +360,41 @@ public class CheatSheetViewModel : BaseViewModel, IDisposable
         StatCurrentHp = new NumericMemoryValueViewModel("Current HP", () => parameter().CurrentHp, v => parameter().CurrentHp = (short)v);
         StatCurrentMp = new NumericMemoryValueViewModel("Current MP", () => parameter().CurrentMp, v => parameter().CurrentMp = (short)v);
 
+        Func<ProfileStats> profile = () => LiveMemoryReader.Instance.ProfileStats;
+
+        ProfileWeight = new NumericMemoryValueViewModel("Weight", () => profile().Weight, v => profile().Weight = (short)v);
+        ProfileLives = new NumericMemoryValueViewModel("Lives", () => profile().Lives, v => profile().Lives = v);
+
+        Func<CombatStats> combat = () => LiveMemoryReader.Instance.CombatStats;
+
+        CombatFinisherGoal = new NumericMemoryValueViewModel("Finisher Goal", () => combat().FinisherGoal, v => combat().FinisherGoal = (short)v);
+        CombatFinisherProgress = new NumericMemoryValueViewModel("Finisher Progress", () => combat().FinisherProgress, v => combat().FinisherProgress = (short)v);
+        CombatPoisonTimer = new NumericMemoryValueViewModel("Poison Timer", () => combat().PoisonTimer, v => combat().PoisonTimer = (short)v);
+        CombatConfusedTimer = new NumericMemoryValueViewModel("Confused Timer", () => combat().ConfusedTimer, v => combat().ConfusedTimer = (short)v);
+        CombatStunTimer = new NumericMemoryValueViewModel("Stun Timer", () => combat().StunTimer, v => combat().StunTimer = (short)v);
+        CombatFlattenTimer = new NumericMemoryValueViewModel("Flatten Timer", () => combat().FlattenTimer, v => combat().FlattenTimer = (short)v);
+        CombatFlattenAttackTimer = new NumericMemoryValueViewModel("Flatten Attack Timer", () => combat().FlattenAttackTimer, v => combat().FlattenAttackTimer = (short)v);
+        CombatCooldown = new NumericMemoryValueViewModel("Cooldown", () => combat().Cooldown, v => combat().Cooldown = v);
+        CombatDumbTimer = new NumericMemoryValueViewModel("Dumb Timer", () => combat().DumbTimer, v => combat().DumbTimer = (short)v);
+        CombatStatusEffects = new NumericMemoryValueViewModel("Status Effects", () => combat().StatusEffects, v => combat().StatusEffects = v);
+
+        Func<InventoryStats> inventory = () => LiveMemoryReader.Instance.InventoryStats;
+
+        InventorySize = new NumericMemoryValueViewModel("Inventory Size", () => inventory().InventorySize, v => inventory().InventorySize = v);
+        InventorySize.PropertyChanged += (_, _) => UpdateVisibleInventorySlots();
+
+        List<InventorySlotViewModel> inventorySlots = [];
+        for (int i = 0; i < InventoryStats.SLOT_COUNT; i++)
+        {
+            int slot = i;
+            inventorySlots.Add(new InventorySlotViewModel(
+                slot + 1,
+                () => inventory().GetItemType(slot), v => inventory().SetItemType(slot, v),
+                () => inventory().GetItemAmount(slot), v => inventory().SetItemAmount(slot, v)));
+        }
+
+        InventorySlots = inventorySlots;
+
         Func<CareStats> careStats = () => LiveMemoryReader.Instance.CareStats;
 
         CarePoopLevel = new NumericMemoryValueViewModel("Poop Level", () => careStats().PoopLevel, v => careStats().PoopLevel = v);
@@ -394,9 +438,18 @@ public class CheatSheetViewModel : BaseViewModel, IDisposable
         _refreshables.AddRange(RecruitmentZonesLeft.Concat(RecruitmentZonesRight).SelectMany(zone => zone.Recruitments));
         _refreshables.AddRange(TechniqueGroups.SelectMany(group => group.Techniques));
         _refreshables.AddRange(ConditionFlags);
+        _refreshables.AddRange(InventorySlots.SelectMany(s => new[] { s.ItemType, s.ItemAmount }));
         _refreshables.AddRange(
         [
-            TamerLevel, TamerBits, TamerMeritPoints, TechnicalRng,
+            CombatFinisherGoal, CombatFinisherProgress, CombatPoisonTimer, CombatConfusedTimer, CombatStunTimer,
+            CombatFlattenTimer, CombatFlattenAttackTimer, CombatCooldown, CombatDumbTimer, CombatStatusEffects,
+            InventorySize
+        ]);
+        _refreshables.AddRange(
+        [
+            TamerLevel, TamerBits, TamerMeritPoints, TechnicalRng, TechnicalAgeInDays, TechnicalEvolutionAgeInHours,
+            TechnicalUpgradeCounterHp, TechnicalUpgradeCounterMp, TechnicalUpgradeCounterOffense, TechnicalUpgradeCounterDefense, TechnicalUpgradeCounterSpeed,
+            ProfileWeight, ProfileLives,
             WorldYear, WorldDay, WorldHour, WorldMinute,
             CarePoopLevel, CareVirusBar, CarePoopingTimer, CareEnergyLevel, CareHungryTimer, CareStarvationTimer, CareLifespan,
             ConditionTiredness, ConditionHappiness, ConditionDiscipline, ConditionCareMistakes, ConditionBattles,
@@ -409,9 +462,14 @@ public class CheatSheetViewModel : BaseViewModel, IDisposable
                     EmulatorLinkEventHub.DigimonTechniqueStatsSynchronizedObservable,
                     EmulatorLinkEventHub.DigimonConditionStatsSynchronizedObservable,
                     EmulatorLinkEventHub.DigimonCareStatsSynchronizedObservable,
-                    EmulatorLinkEventHub.DigimonParameterStatsSynchronizedObservable)
+                    EmulatorLinkEventHub.DigimonParameterStatsSynchronizedObservable,
+                    EmulatorLinkEventHub.DigimonProfileStatsSynchronizedObservable,
+                    EmulatorLinkEventHub.DigimonCombatStatsSynchronizedObservable,
+                    EmulatorLinkEventHub.InventorySynchronizedObservable)
                 .ObserveOn(SynchronizationContext.Current!)
                 .Subscribe(_ => RefreshValues()));
+
+        UpdateVisibleInventorySlots();
     }
 
     public IReadOnlyList<RecruitmentZoneViewModel> RecruitmentZonesLeft { get; }
@@ -453,9 +511,53 @@ public class CheatSheetViewModel : BaseViewModel, IDisposable
         }
     }
 
-    public int AgeInDays => LiveMemoryReader.Instance.Technical.AgeInDays;
+    public NumericMemoryValueViewModel TechnicalAgeInDays { get; }
 
-    public int EvolutionAgeInHours => LiveMemoryReader.Instance.Technical.EvolutionAgeInHours;
+    public NumericMemoryValueViewModel TechnicalEvolutionAgeInHours { get; }
+
+    public MemoryValueViewModel TechnicalUpgradeCounterHp { get; }
+
+    public MemoryValueViewModel TechnicalUpgradeCounterMp { get; }
+
+    public MemoryValueViewModel TechnicalUpgradeCounterOffense { get; }
+
+    public MemoryValueViewModel TechnicalUpgradeCounterDefense { get; }
+
+    public MemoryValueViewModel TechnicalUpgradeCounterSpeed { get; }
+
+    public NumericMemoryValueViewModel ProfileWeight { get; }
+
+    public NumericMemoryValueViewModel ProfileLives { get; }
+
+    public NumericMemoryValueViewModel CombatFinisherGoal { get; }
+
+    public NumericMemoryValueViewModel CombatFinisherProgress { get; }
+
+    public NumericMemoryValueViewModel CombatPoisonTimer { get; }
+
+    public NumericMemoryValueViewModel CombatConfusedTimer { get; }
+
+    public NumericMemoryValueViewModel CombatStunTimer { get; }
+
+    public NumericMemoryValueViewModel CombatFlattenTimer { get; }
+
+    public NumericMemoryValueViewModel CombatFlattenAttackTimer { get; }
+
+    public NumericMemoryValueViewModel CombatCooldown { get; }
+
+    public NumericMemoryValueViewModel CombatDumbTimer { get; }
+
+    public NumericMemoryValueViewModel CombatStatusEffects { get; }
+
+    public NumericMemoryValueViewModel InventorySize { get; }
+
+    public IReadOnlyList<InventorySlotViewModel> InventorySlots { get; }
+
+    public ObservableCollection<InventorySlotViewModel> InventorySlotsColumn1 { get; } = [];
+
+    public ObservableCollection<InventorySlotViewModel> InventorySlotsColumn2 { get; } = [];
+
+    public ObservableCollection<InventorySlotViewModel> InventorySlotsColumn3 { get; } = [];
 
     public ICommand InstantDisplayCommand { get; }
 
@@ -477,6 +579,7 @@ public class CheatSheetViewModel : BaseViewModel, IDisposable
             OnPropertyChanged(nameof(IsDigimonSelected));
             OnPropertyChanged(nameof(IsTechnicalSelected));
             OnPropertyChanged(nameof(IsTamerSelected));
+            OnPropertyChanged(nameof(IsCombatSelected));
         }
     } = "Recruitment";
 
@@ -489,6 +592,8 @@ public class CheatSheetViewModel : BaseViewModel, IDisposable
     public bool IsTechnicalSelected => SelectedSection == "Technical";
 
     public bool IsTamerSelected => SelectedSection == "Tamer";
+
+    public bool IsCombatSelected => SelectedSection == "Combat";
 
     public string PiximonText
     {
@@ -549,8 +654,32 @@ public class CheatSheetViewModel : BaseViewModel, IDisposable
             refreshable.Refresh();
         }
 
-        OnPropertyChanged(nameof(AgeInDays));
-        OnPropertyChanged(nameof(EvolutionAgeInHours));
+        UpdateVisibleInventorySlots();
+    }
+
+    private void UpdateVisibleInventorySlots()
+    {
+        int size = Math.Clamp(LiveMemoryReader.Instance.InventoryStats.InventorySize, 0, InventorySlots.Count);
+        if (size == _visibleInventorySlotCount)
+        {
+            return;
+        }
+
+        _visibleInventorySlotCount = size;
+
+        int perColumn = (size + 2) / 3;
+        SyncVisibleSlots(InventorySlotsColumn1, InventorySlots.Take(size).Take(perColumn));
+        SyncVisibleSlots(InventorySlotsColumn2, InventorySlots.Take(size).Skip(perColumn).Take(perColumn));
+        SyncVisibleSlots(InventorySlotsColumn3, InventorySlots.Take(size).Skip(perColumn * 2));
+    }
+
+    private static void SyncVisibleSlots(ObservableCollection<InventorySlotViewModel> target, IEnumerable<InventorySlotViewModel> slots)
+    {
+        target.Clear();
+        foreach (InventorySlotViewModel slot in slots)
+        {
+            target.Add(slot);
+        }
     }
 
     public void Dispose()

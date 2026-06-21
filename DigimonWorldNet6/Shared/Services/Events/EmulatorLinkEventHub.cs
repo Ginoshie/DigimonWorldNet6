@@ -14,6 +14,8 @@ public static class EmulatorLinkEventHub
     private static readonly Subject<Unit> _digimonConditionStatsSynchronizedSubject = new();
     private static readonly Subject<Unit> _digimonParameterStatsSynchronizedSubject = new();
     private static readonly Subject<Unit> _digimonProfileStatsSynchronizedSubject = new();
+    private static readonly Subject<Unit> _digimonCombatStatsSynchronizedSubject = new();
+    private static readonly Subject<Unit> _inventorySynchronizedSubject = new();
     private static readonly Subject<Unit> _digimonCareStatsSynchronizedSubject = new();
     private static readonly Subject<Unit> _digimonTechniqueStatsSynchronizedSubject = new();
     private static readonly Subject<Unit> _historicEvolutionsSynchronizedSubject = new();
@@ -27,6 +29,8 @@ public static class EmulatorLinkEventHub
     public static IObservable<Unit> DigimonConditionStatsSynchronizedObservable => _digimonConditionStatsSynchronizedSubject.AsObservable();
     public static IObservable<Unit> DigimonParameterStatsSynchronizedObservable => _digimonParameterStatsSynchronizedSubject.AsObservable();
     public static IObservable<Unit> DigimonProfileStatsSynchronizedObservable => _digimonProfileStatsSynchronizedSubject.AsObservable();
+    public static IObservable<Unit> DigimonCombatStatsSynchronizedObservable => _digimonCombatStatsSynchronizedSubject.AsObservable();
+    public static IObservable<Unit> InventorySynchronizedObservable => _inventorySynchronizedSubject.AsObservable();
     public static IObservable<Unit> DigimonCareStatsSynchronizedObservable => _digimonCareStatsSynchronizedSubject.AsObservable();
     public static IObservable<Unit> DigimonTechniqueStatsSynchronizedObservable => _digimonTechniqueStatsSynchronizedSubject.AsObservable();
     public static IObservable<Unit> HistoricEvolutionsSynchronizedObservable => _historicEvolutionsSynchronizedSubject.AsObservable();
@@ -40,6 +44,8 @@ public static class EmulatorLinkEventHub
     public static void SignalDigimonConditionStatsSynchronized() => _digimonConditionStatsSynchronizedSubject.OnNext(Unit.Default);
     public static void SignalDigimonParameterStatsSynchronized() => _digimonParameterStatsSynchronizedSubject.OnNext(Unit.Default);
     public static void SignalDigimonProfileStatsSynchronized() => _digimonProfileStatsSynchronizedSubject.OnNext(Unit.Default);
+    public static void SignalDigimonCombatStatsSynchronized() => _digimonCombatStatsSynchronizedSubject.OnNext(Unit.Default);
+    public static void SignalInventorySynchronized() => _inventorySynchronizedSubject.OnNext(Unit.Default);
     public static void SignalDigimonCareStatsSynchronized() => _digimonCareStatsSynchronizedSubject.OnNext(Unit.Default);
     public static void SignalDigimonTechniqueStatsSynchronized() => _digimonTechniqueStatsSynchronizedSubject.OnNext(Unit.Default);
     public static void SignalHistoricEvolutionsSynchronized() => _historicEvolutionsSynchronizedSubject.OnNext(Unit.Default);

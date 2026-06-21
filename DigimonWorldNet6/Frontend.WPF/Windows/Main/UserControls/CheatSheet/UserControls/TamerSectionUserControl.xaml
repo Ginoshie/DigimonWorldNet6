@@ -17,6 +17,7 @@
                 <ResourceDictionary Source="/ResourceDictionaries/Styles/DefaultFocusStyle.xaml" />
                 <ResourceDictionary Source="/ResourceDictionaries/Styles/Labels/DefaultLabelStyle.xaml" />
                 <ResourceDictionary Source="/ResourceDictionaries/Styles/ToolTips/DefaultTooltipRightStyle.xaml" />
+                <ResourceDictionary Source="../DataTemplates/InventorySlotTemplate.xaml" />
             </ResourceDictionary.MergedDictionaries>
 
             <Style x:Key="GroupHeaderStyle" TargetType="TextBlock" BasedOn="{StaticResource {x:Type TextBlock}}">
@@ -25,6 +26,12 @@
                 <Setter Property="HorizontalAlignment" Value="Center" />
                 <Setter Property="Grid.ColumnSpan" Value="2" />
                 <Setter Property="Margin" Value="0,0,0,6" />
+            </Style>
+
+            <Style x:Key="InventoryColumnHeaderStyle" TargetType="TextBlock" BasedOn="{StaticResource {x:Type TextBlock}}">
+                <Setter Property="Foreground" Value="#90D9FA" />
+                <Setter Property="HorizontalAlignment" Value="Center" />
+                <Setter Property="Margin" Value="0,0,0,3" />
             </Style>
         </ResourceDictionary>
     </UserControl.Resources>
@@ -39,90 +46,156 @@
                Source="/Images/Icons/Labels/tamer-label.png"
                Margin="0,0,0,10" />
 
-        <Grid Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Top">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto" />
-                <ColumnDefinition Width="Auto" />
-            </Grid.ColumnDefinitions>
-
-            <Grid Grid.Column="0" Margin="0,0,30,0" VerticalAlignment="Top" Background="Transparent">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                </Grid.RowDefinitions>
+        <StackPanel Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Top">
+            <Grid HorizontalAlignment="Center">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto" />
-                    <ColumnDefinition Width="90" />
-                </Grid.ColumnDefinitions>
-
-                <TextBlock Grid.Row="0" Grid.Column="0" Text="Currency" Style="{StaticResource GroupHeaderStyle}" />
-
-                <Label Grid.Row="1" Grid.Column="0" Content="Bits:" Style="{StaticResource DefaultLabelStyle}" />
-                <TextBox Grid.Row="1" Grid.Column="1" FocusVisualStyle="{StaticResource DefaultFocusStyle}"
-                         Style="{StaticResource DefaultTextBoxStyle}">
-                    <TextBox.ToolTip>
-                        <ToolTip Style="{StaticResource DefaultToolTipRightStyle}">
-                            <TextBlock Text="{x:Static c:CheatSheetInputInfo.BitsTooltip}" />
-                        </ToolTip>
-                    </TextBox.ToolTip>
-                    <TextBox.Text>
-                        <Binding Path="TamerBits.Value" UpdateSourceTrigger="LostFocus">
-                            <Binding.ValidationRules>
-                                <validation:NumericRangeValidationRule Minimum="{x:Static c:CheatSheetInputInfo.BITS_MIN}" Maximum="{x:Static c:CheatSheetInputInfo.BITS_MAX}" ValidationStep="RawProposedValue" />
-                            </Binding.ValidationRules>
-                        </Binding>
-                    </TextBox.Text>
-                </TextBox>
-
-                <Label Grid.Row="2" Grid.Column="0" Content="Merit Points:" Style="{StaticResource DefaultLabelStyle}" />
-                <TextBox Grid.Row="2" Grid.Column="1" FocusVisualStyle="{StaticResource DefaultFocusStyle}"
-                         Style="{StaticResource DefaultTextBoxStyle}">
-                    <TextBox.ToolTip>
-                        <ToolTip Style="{StaticResource DefaultToolTipRightStyle}">
-                            <TextBlock Text="{x:Static c:CheatSheetInputInfo.MeritPointsTooltip}" />
-                        </ToolTip>
-                    </TextBox.ToolTip>
-                    <TextBox.Text>
-                        <Binding Path="TamerMeritPoints.Value" UpdateSourceTrigger="LostFocus">
-                            <Binding.ValidationRules>
-                                <validation:NumericRangeValidationRule Minimum="{x:Static c:CheatSheetInputInfo.MERIT_POINTS_MIN}" Maximum="{x:Static c:CheatSheetInputInfo.MERIT_POINTS_MAX}" ValidationStep="RawProposedValue" />
-                            </Binding.ValidationRules>
-                        </Binding>
-                    </TextBox.Text>
-                </TextBox>
-            </Grid>
-
-            <Grid Grid.Column="1" VerticalAlignment="Top" Background="Transparent">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto" />
-                    <ColumnDefinition Width="90" />
                 </Grid.ColumnDefinitions>
 
-                <TextBlock Grid.Row="0" Grid.Column="0" Text="Tamer" Style="{StaticResource GroupHeaderStyle}" />
+                <Grid Grid.Column="0" Margin="0,0,30,0" VerticalAlignment="Top" Background="Transparent">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="90" />
+                    </Grid.ColumnDefinitions>
 
-                <Label Grid.Row="1" Grid.Column="0" Content="Level:" Style="{StaticResource DefaultLabelStyle}" />
-                <TextBox Grid.Row="1" Grid.Column="1" FocusVisualStyle="{StaticResource DefaultFocusStyle}"
-                         Style="{StaticResource DefaultTextBoxStyle}">
-                    <TextBox.ToolTip>
-                        <ToolTip Style="{StaticResource DefaultToolTipRightStyle}">
-                            <TextBlock Text="{x:Static c:CheatSheetInputInfo.TamerLevelTooltip}" />
-                        </ToolTip>
-                    </TextBox.ToolTip>
-                    <TextBox.Text>
-                        <Binding Path="TamerLevel.Value" UpdateSourceTrigger="LostFocus">
-                            <Binding.ValidationRules>
-                                <validation:NumericRangeValidationRule Minimum="{x:Static c:CheatSheetInputInfo.TAMER_LEVEL_MIN}" Maximum="{x:Static c:CheatSheetInputInfo.TAMER_LEVEL_MAX}" ValidationStep="RawProposedValue" />
-                            </Binding.ValidationRules>
-                        </Binding>
-                    </TextBox.Text>
-                </TextBox>
+                    <TextBlock Grid.Row="0" Grid.Column="0" Text="Currency" Style="{StaticResource GroupHeaderStyle}" />
+
+                    <Label Grid.Row="1" Grid.Column="0" Content="Bits:" Style="{StaticResource DefaultLabelStyle}" />
+                    <TextBox Grid.Row="1" Grid.Column="1" FocusVisualStyle="{StaticResource DefaultFocusStyle}"
+                             HorizontalContentAlignment="Center" Style="{StaticResource DefaultTextBoxStyle}">
+                        <TextBox.ToolTip>
+                            <ToolTip Style="{StaticResource DefaultToolTipRightStyle}">
+                                <TextBlock Text="{x:Static c:CheatSheetInputInfo.BitsTooltip}" />
+                            </ToolTip>
+                        </TextBox.ToolTip>
+                        <TextBox.Text>
+                            <Binding Path="TamerBits.Value" UpdateSourceTrigger="LostFocus">
+                                <Binding.ValidationRules>
+                                    <validation:NumericRangeValidationRule Minimum="{x:Static c:CheatSheetInputInfo.BITS_MIN}" Maximum="{x:Static c:CheatSheetInputInfo.BITS_MAX}" ValidationStep="RawProposedValue" />
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
+
+                    <Label Grid.Row="2" Grid.Column="0" Content="Merit Points:" Style="{StaticResource DefaultLabelStyle}" />
+                    <TextBox Grid.Row="2" Grid.Column="1" FocusVisualStyle="{StaticResource DefaultFocusStyle}"
+                             HorizontalContentAlignment="Center" Style="{StaticResource DefaultTextBoxStyle}">
+                        <TextBox.ToolTip>
+                            <ToolTip Style="{StaticResource DefaultToolTipRightStyle}">
+                                <TextBlock Text="{x:Static c:CheatSheetInputInfo.MeritPointsTooltip}" />
+                            </ToolTip>
+                        </TextBox.ToolTip>
+                        <TextBox.Text>
+                            <Binding Path="TamerMeritPoints.Value" UpdateSourceTrigger="LostFocus">
+                                <Binding.ValidationRules>
+                                    <validation:NumericRangeValidationRule Minimum="{x:Static c:CheatSheetInputInfo.MERIT_POINTS_MIN}" Maximum="{x:Static c:CheatSheetInputInfo.MERIT_POINTS_MAX}" ValidationStep="RawProposedValue" />
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
+                </Grid>
+
+                <Grid Grid.Column="1" VerticalAlignment="Top" Background="Transparent">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="90" />
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock Grid.Row="0" Grid.Column="0" Text="Tamer" Style="{StaticResource GroupHeaderStyle}" />
+
+                    <Label Grid.Row="1" Grid.Column="0" Content="Level:" Style="{StaticResource DefaultLabelStyle}" />
+                    <TextBox Grid.Row="1" Grid.Column="1" FocusVisualStyle="{StaticResource DefaultFocusStyle}"
+                             HorizontalContentAlignment="Center" Style="{StaticResource DefaultTextBoxStyle}">
+                        <TextBox.ToolTip>
+                            <ToolTip Style="{StaticResource DefaultToolTipRightStyle}">
+                                <TextBlock Text="{x:Static c:CheatSheetInputInfo.TamerLevelTooltip}" />
+                            </ToolTip>
+                        </TextBox.ToolTip>
+                        <TextBox.Text>
+                            <Binding Path="TamerLevel.Value" UpdateSourceTrigger="LostFocus">
+                                <Binding.ValidationRules>
+                                    <validation:NumericRangeValidationRule Minimum="{x:Static c:CheatSheetInputInfo.TAMER_LEVEL_MIN}" Maximum="{x:Static c:CheatSheetInputInfo.TAMER_LEVEL_MAX}" ValidationStep="RawProposedValue" />
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
+
+                    <Label Grid.Row="2" Grid.Column="0" Content="Inventory Size:" Style="{StaticResource DefaultLabelStyle}" />
+                    <TextBox Grid.Row="2" Grid.Column="1" FocusVisualStyle="{StaticResource DefaultFocusStyle}"
+                             HorizontalContentAlignment="Center" Style="{StaticResource DefaultTextBoxStyle}">
+                        <TextBox.ToolTip>
+                            <ToolTip Style="{StaticResource DefaultToolTipRightStyle}">
+                                <TextBlock Text="{x:Static c:CheatSheetInputInfo.InventorySizeTooltip}" />
+                            </ToolTip>
+                        </TextBox.ToolTip>
+                        <TextBox.Text>
+                            <Binding Path="InventorySize.Value" UpdateSourceTrigger="PropertyChanged">
+                                <Binding.ValidationRules>
+                                    <validation:NumericRangeValidationRule Minimum="{x:Static c:CheatSheetInputInfo.INVENTORY_SIZE_MIN}" Maximum="{x:Static c:CheatSheetInputInfo.INVENTORY_SIZE_MAX}" ValidationStep="RawProposedValue" />
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
+                </Grid>
             </Grid>
-        </Grid>
+
+            <TextBlock Text="Inventory" Style="{StaticResource GroupHeaderStyle}" Margin="0,18,0,6" />
+
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <StackPanel Margin="0,0,20,0">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="28" />
+                            <ColumnDefinition Width="50" />
+                            <ColumnDefinition Width="140" />
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Column="0" Text="Slot" Style="{StaticResource InventoryColumnHeaderStyle}" />
+                        <TextBlock Grid.Column="1" Text="Amt." Style="{StaticResource InventoryColumnHeaderStyle}" />
+                        <TextBlock Grid.Column="2" Text="Item" Style="{StaticResource InventoryColumnHeaderStyle}" />
+                    </Grid>
+                    <ItemsControl ItemsSource="{Binding InventorySlotsColumn1}" ItemTemplate="{StaticResource InventorySlotTemplate}" />
+                </StackPanel>
+
+                <StackPanel Margin="0,0,20,0">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="28" />
+                            <ColumnDefinition Width="50" />
+                            <ColumnDefinition Width="140" />
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Column="0" Text="Slot" Style="{StaticResource InventoryColumnHeaderStyle}" />
+                        <TextBlock Grid.Column="1" Text="Amt." Style="{StaticResource InventoryColumnHeaderStyle}" />
+                        <TextBlock Grid.Column="2" Text="Item" Style="{StaticResource InventoryColumnHeaderStyle}" />
+                    </Grid>
+                    <ItemsControl ItemsSource="{Binding InventorySlotsColumn2}" ItemTemplate="{StaticResource InventorySlotTemplate}" />
+                </StackPanel>
+
+                <StackPanel>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="28" />
+                            <ColumnDefinition Width="50" />
+                            <ColumnDefinition Width="140" />
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Column="0" Text="Slot" Style="{StaticResource InventoryColumnHeaderStyle}" />
+                        <TextBlock Grid.Column="1" Text="Amt." Style="{StaticResource InventoryColumnHeaderStyle}" />
+                        <TextBlock Grid.Column="2" Text="Item" Style="{StaticResource InventoryColumnHeaderStyle}" />
+                    </Grid>
+                    <ItemsControl ItemsSource="{Binding InventorySlotsColumn3}" ItemTemplate="{StaticResource InventorySlotTemplate}" />
+                </StackPanel>
+            </StackPanel>
+        </StackPanel>
     </Grid>
 
 </UserControl>

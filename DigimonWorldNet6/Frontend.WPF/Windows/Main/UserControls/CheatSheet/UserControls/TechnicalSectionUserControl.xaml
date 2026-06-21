@@ -16,6 +16,7 @@
                 <ResourceDictionary Source="/ResourceDictionaries/Styles/DefaultTextboxStyle.xaml" />
                 <ResourceDictionary Source="/ResourceDictionaries/Styles/DefaultFocusStyle.xaml" />
                 <ResourceDictionary Source="/ResourceDictionaries/Styles/DefaultComboboxStyle.xaml" />
+                <ResourceDictionary Source="/ResourceDictionaries/Styles/DefaultCheckboxStyle.xaml" />
                 <ResourceDictionary Source="/ResourceDictionaries/Styles/Labels/DefaultLabelStyle.xaml" />
                 <ResourceDictionary Source="/ResourceDictionaries/Styles/ToolTips/DefaultTooltipRightStyle.xaml" />
             </ResourceDictionary.MergedDictionaries>
@@ -27,6 +28,8 @@
                 <Setter Property="Grid.ColumnSpan" Value="2" />
                 <Setter Property="Margin" Value="0,0,0,6" />
             </Style>
+
+            <Thickness x:Key="UpgradeCheckboxMargin">0,5</Thickness>
         </ResourceDictionary>
     </UserControl.Resources>
 
@@ -42,6 +45,7 @@
 
         <Grid Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Top">
             <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
@@ -62,7 +66,7 @@
 
                 <Label Grid.Row="1" Grid.Column="0" Content="Value:" Style="{StaticResource DefaultLabelStyle}" />
                 <TextBox Grid.Row="1" Grid.Column="1" FocusVisualStyle="{StaticResource DefaultFocusStyle}"
-                         Style="{StaticResource DefaultTextBoxStyle}">
+                         HorizontalContentAlignment="Center" Style="{StaticResource DefaultTextBoxStyle}">
                     <TextBox.ToolTip>
                         <ToolTip Style="{StaticResource DefaultToolTipRightStyle}">
                             <TextBlock Text="{x:Static c:CheatSheetInputInfo.RngTooltip}" />
@@ -103,7 +107,7 @@
 
                 <Label Grid.Row="1" Grid.Column="0" Content="Year:" Style="{StaticResource DefaultLabelStyle}" />
                 <TextBox Grid.Row="1" Grid.Column="1" FocusVisualStyle="{StaticResource DefaultFocusStyle}"
-                         Style="{StaticResource DefaultTextBoxStyle}">
+                         HorizontalContentAlignment="Center" Style="{StaticResource DefaultTextBoxStyle}">
                     <TextBox.ToolTip>
                         <ToolTip Style="{StaticResource DefaultToolTipRightStyle}">
                             <TextBlock Text="{x:Static c:CheatSheetInputInfo.YearTooltip}" />
@@ -120,7 +124,7 @@
 
                 <Label Grid.Row="2" Grid.Column="0" Content="Day:" Style="{StaticResource DefaultLabelStyle}" />
                 <TextBox Grid.Row="2" Grid.Column="1" FocusVisualStyle="{StaticResource DefaultFocusStyle}"
-                         Style="{StaticResource DefaultTextBoxStyle}">
+                         HorizontalContentAlignment="Center" Style="{StaticResource DefaultTextBoxStyle}">
                     <TextBox.ToolTip>
                         <ToolTip Style="{StaticResource DefaultToolTipRightStyle}">
                             <TextBlock Text="{x:Static c:CheatSheetInputInfo.DayTooltip}" />
@@ -137,7 +141,7 @@
 
                 <Label Grid.Row="3" Grid.Column="0" Content="Hour:" Style="{StaticResource DefaultLabelStyle}" />
                 <TextBox Grid.Row="3" Grid.Column="1" FocusVisualStyle="{StaticResource DefaultFocusStyle}"
-                         Style="{StaticResource DefaultTextBoxStyle}">
+                         HorizontalContentAlignment="Center" Style="{StaticResource DefaultTextBoxStyle}">
                     <TextBox.ToolTip>
                         <ToolTip Style="{StaticResource DefaultToolTipRightStyle}">
                             <TextBlock Text="{x:Static c:CheatSheetInputInfo.HourTooltip}" />
@@ -154,7 +158,7 @@
 
                 <Label Grid.Row="4" Grid.Column="0" Content="Minute:" Style="{StaticResource DefaultLabelStyle}" />
                 <TextBox Grid.Row="4" Grid.Column="1" FocusVisualStyle="{StaticResource DefaultFocusStyle}"
-                         Style="{StaticResource DefaultTextBoxStyle}">
+                         HorizontalContentAlignment="Center" Style="{StaticResource DefaultTextBoxStyle}">
                     <TextBox.ToolTip>
                         <ToolTip Style="{StaticResource DefaultToolTipRightStyle}">
                             <TextBlock Text="{x:Static c:CheatSheetInputInfo.MinuteTooltip}" />
@@ -168,6 +172,98 @@
                         </Binding>
                     </TextBox.Text>
                 </TextBox>
+            </Grid>
+
+            <Grid Grid.Column="2" Margin="30,0,0,0" VerticalAlignment="Top" Background="Transparent">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Grid.Row="0" Text="Training upgrade" Style="{StaticResource GroupHeaderStyle}" />
+
+                <TextBlock Grid.Row="1" Grid.Column="0" Text="HP" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,5,0">
+                    <TextBlock.RenderTransform>
+                        <TranslateTransform Y="1.5" />
+                    </TextBlock.RenderTransform>
+                </TextBlock>
+                <CheckBox Grid.Row="1" Grid.Column="1" IsChecked="{Binding TechnicalUpgradeCounterHp.Value}"
+                          Style="{StaticResource DefaultCheckboxStyle}" HorizontalAlignment="Left" VerticalAlignment="Center"
+                          Margin="{StaticResource UpgradeCheckboxMargin}">
+                    <CheckBox.ToolTip>
+                        <ToolTip Style="{StaticResource DefaultToolTipRightStyle}">
+                            <TextBlock Text="{x:Static c:CheatSheetInputInfo.UpgradeCounterHpTooltip}" />
+                        </ToolTip>
+                    </CheckBox.ToolTip>
+                </CheckBox>
+
+                <TextBlock Grid.Row="2" Grid.Column="0" Text="MP" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,5,0">
+                    <TextBlock.RenderTransform>
+                        <TranslateTransform Y="1.5" />
+                    </TextBlock.RenderTransform>
+                </TextBlock>
+                <CheckBox Grid.Row="2" Grid.Column="1" IsChecked="{Binding TechnicalUpgradeCounterMp.Value}"
+                          Style="{StaticResource DefaultCheckboxStyle}" HorizontalAlignment="Left" VerticalAlignment="Center"
+                          Margin="{StaticResource UpgradeCheckboxMargin}">
+                    <CheckBox.ToolTip>
+                        <ToolTip Style="{StaticResource DefaultToolTipRightStyle}">
+                            <TextBlock Text="{x:Static c:CheatSheetInputInfo.UpgradeCounterMpTooltip}" />
+                        </ToolTip>
+                    </CheckBox.ToolTip>
+                </CheckBox>
+
+                <TextBlock Grid.Row="3" Grid.Column="0" Text="Offense" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,5,0">
+                    <TextBlock.RenderTransform>
+                        <TranslateTransform Y="1.5" />
+                    </TextBlock.RenderTransform>
+                </TextBlock>
+                <CheckBox Grid.Row="3" Grid.Column="1" IsChecked="{Binding TechnicalUpgradeCounterOffense.Value}"
+                          Style="{StaticResource DefaultCheckboxStyle}" HorizontalAlignment="Left" VerticalAlignment="Center"
+                          Margin="{StaticResource UpgradeCheckboxMargin}">
+                    <CheckBox.ToolTip>
+                        <ToolTip Style="{StaticResource DefaultToolTipRightStyle}">
+                            <TextBlock Text="{x:Static c:CheatSheetInputInfo.UpgradeCounterOffenseTooltip}" />
+                        </ToolTip>
+                    </CheckBox.ToolTip>
+                </CheckBox>
+
+                <TextBlock Grid.Row="4" Grid.Column="0" Text="Defense" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,5,0">
+                    <TextBlock.RenderTransform>
+                        <TranslateTransform Y="1.5" />
+                    </TextBlock.RenderTransform>
+                </TextBlock>
+                <CheckBox Grid.Row="4" Grid.Column="1" IsChecked="{Binding TechnicalUpgradeCounterDefense.Value}"
+                          Style="{StaticResource DefaultCheckboxStyle}" HorizontalAlignment="Left" VerticalAlignment="Center"
+                          Margin="{StaticResource UpgradeCheckboxMargin}">
+                    <CheckBox.ToolTip>
+                        <ToolTip Style="{StaticResource DefaultToolTipRightStyle}">
+                            <TextBlock Text="{x:Static c:CheatSheetInputInfo.UpgradeCounterDefenseTooltip}" />
+                        </ToolTip>
+                    </CheckBox.ToolTip>
+                </CheckBox>
+
+                <TextBlock Grid.Row="5" Grid.Column="0" Text="Speed" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,5,0">
+                    <TextBlock.RenderTransform>
+                        <TranslateTransform Y="1.5" />
+                    </TextBlock.RenderTransform>
+                </TextBlock>
+                <CheckBox Grid.Row="5" Grid.Column="1" IsChecked="{Binding TechnicalUpgradeCounterSpeed.Value}"
+                          Style="{StaticResource DefaultCheckboxStyle}" HorizontalAlignment="Left" VerticalAlignment="Center"
+                          Margin="{StaticResource UpgradeCheckboxMargin}">
+                    <CheckBox.ToolTip>
+                        <ToolTip Style="{StaticResource DefaultToolTipRightStyle}">
+                            <TextBlock Text="{x:Static c:CheatSheetInputInfo.UpgradeCounterSpeedTooltip}" />
+                        </ToolTip>
+                    </CheckBox.ToolTip>
+                </CheckBox>
             </Grid>
         </Grid>
     </Grid>

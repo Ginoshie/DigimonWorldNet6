@@ -48,6 +48,26 @@ public static class CheatSheetInputInfo
     public const long LIFESPAN_MIN = 0;
     public const long LIFESPAN_MAX = 32767;
 
+    // Profile
+    public const long WEIGHT_MIN = 0;
+    public const long WEIGHT_MAX = 99;
+    public const long LIVES_MIN = 0;
+    public const long LIVES_MAX = 255;
+
+    // Combat
+    public const long COMBAT_TIMER_MIN = 0;
+    public const long COMBAT_TIMER_MAX = 32767;
+    public const long COOLDOWN_MIN = 0;
+    public const long COOLDOWN_MAX = 255;
+    public const long STATUS_EFFECTS_MIN = 0;
+    public const long STATUS_EFFECTS_MAX = 255;
+
+    // Inventory
+    public const long ITEM_AMOUNT_MIN = 0;
+    public const long ITEM_AMOUNT_MAX = 99;
+    public const long INVENTORY_SIZE_MIN = 0;
+    public const long INVENTORY_SIZE_MAX = 30;
+
     // Tamer
     public const long TAMER_LEVEL_MIN = 0;
     public const long TAMER_LEVEL_MAX = 10;
@@ -58,15 +78,19 @@ public static class CheatSheetInputInfo
 
     // Technical
     public const long RNG_MIN = 0;
-    public const long RNG_MAX = uint.MaxValue;
+    public const long RNG_MAX = 4294967294;
     public const long YEAR_MIN = 0;
-    public const long YEAR_MAX = 9999;
-    public const long DAY_MIN = 0;
+    public const long YEAR_MAX = 255;
+    public const long DAY_MIN = 98;
     public const long DAY_MAX = 9999;
     public const long HOUR_MIN = 0;
     public const long HOUR_MAX = 23;
     public const long MINUTE_MIN = 0;
     public const long MINUTE_MAX = 59;
+    public const long AGE_IN_DAYS_MIN = 0;
+    public const long AGE_IN_DAYS_MAX = 99;
+    public const long EVOLUTION_AGE_MIN = 0;
+    public const long EVOLUTION_AGE_MAX = 999;
 
     public static readonly string HpTooltip = $"Maximum HP of your Digimon.\n\nAllowed range {HP_MIN}–{HP_MAX}.";
     public static readonly string MpTooltip = $"Maximum MP of your Digimon.\n\nAllowed range {MP_MIN}–{MP_MAX}.";
@@ -101,6 +125,32 @@ public static class CheatSheetInputInfo
     public static readonly string HourTooltip = $"In-game hour.\n\nAllowed range {HOUR_MIN}–{HOUR_MAX}.";
     public static readonly string MinuteTooltip = $"In-game minute.\n\nAllowed range {MINUTE_MIN}–{MINUTE_MAX}.";
 
-    public static readonly string AgeInDaysTooltip = "Age of your Digimon in days. Read-only.";
-    public static readonly string EvolutionAgeTooltip = "Hours spent in the current form, used for evolution. Read-only.";
+    public static readonly string AgeInDaysTooltip = $"Age of your Digimon in days.\n\nAllowed range {AGE_IN_DAYS_MIN}–{AGE_IN_DAYS_MAX}.";
+    public static readonly string EvolutionAgeTooltip = $"Hours spent in the current form, used for evolution.\n\nAllowed range {EVOLUTION_AGE_MIN}–{EVOLUTION_AGE_MAX}.";
+
+    private const string UPGRADE_COUNTER_EXPLANATION = "Training at least 10 times with a Fresh or In-Training Digimon upgrades the station, boosting that gym's gains by 20%.";
+
+    public static readonly string UpgradeCounterHpTooltip = $"Whether the HP training station is upgraded.\n\n{UPGRADE_COUNTER_EXPLANATION}";
+    public static readonly string UpgradeCounterMpTooltip = $"Whether the MP training station is upgraded (also affects Brains).\n\n{UPGRADE_COUNTER_EXPLANATION}";
+    public static readonly string UpgradeCounterOffenseTooltip = $"Whether the Offense training station is upgraded.\n\n{UPGRADE_COUNTER_EXPLANATION}";
+    public static readonly string UpgradeCounterDefenseTooltip = $"Whether the Defense training station is upgraded.\n\n{UPGRADE_COUNTER_EXPLANATION}";
+    public static readonly string UpgradeCounterSpeedTooltip = $"Whether the Speed training station is upgraded.\n\n{UPGRADE_COUNTER_EXPLANATION}";
+
+    public static readonly string FinisherGoalTooltip = $"Charge required before the finisher fires.\n\nAllowed range {COMBAT_TIMER_MIN}–{COMBAT_TIMER_MAX}.";
+    public static readonly string FinisherProgressTooltip = $"Current charge towards the finisher.\n\nAllowed range {COMBAT_TIMER_MIN}–{COMBAT_TIMER_MAX}.";
+    public static readonly string PoisonTimerTooltip = $"Time remaining poisoned.\n\nAllowed range {COMBAT_TIMER_MIN}–{COMBAT_TIMER_MAX}.";
+    public static readonly string ConfusedTimerTooltip = $"Time remaining confused.\n\nAllowed range {COMBAT_TIMER_MIN}–{COMBAT_TIMER_MAX}.";
+    public static readonly string StunTimerTooltip = $"Time remaining stunned.\n\nAllowed range {COMBAT_TIMER_MIN}–{COMBAT_TIMER_MAX}.";
+    public static readonly string FlattenTimerTooltip = $"Time remaining flattened.\n\nAllowed range {COMBAT_TIMER_MIN}–{COMBAT_TIMER_MAX}.";
+    public static readonly string FlattenAttackTimerTooltip = $"Time before the flatten attack lands.\n\nAllowed range {COMBAT_TIMER_MIN}–{COMBAT_TIMER_MAX}.";
+    public static readonly string CooldownTooltip = $"Attack cooldown.\n\nAllowed range {COOLDOWN_MIN}–{COOLDOWN_MAX}.";
+    public static readonly string DumbTimerTooltip = $"Time remaining stupefied.\n\nAllowed range {COMBAT_TIMER_MIN}–{COMBAT_TIMER_MAX}.";
+    public static readonly string StatusEffectsTooltip = $"Status-effect bit flags (poisoned, confused, stunned, etc.).\n\nAllowed range {STATUS_EFFECTS_MIN}–{STATUS_EFFECTS_MAX}.";
+
+    public static readonly string ItemTypeTooltip = "Item held in this slot.\n\nReopen the inventory to have the name update after changing this value.";
+    public static readonly string ItemAmountTooltip = $"Quantity held in this slot.\n\nAllowed range {ITEM_AMOUNT_MIN}–{ITEM_AMOUNT_MAX}.";
+    public static readonly string InventorySizeTooltip = $"Number of inventory slots in use.\n\n- No upgrade: 10\n\n-First upgrade: 20\n\n- Second Upgrade: 30\n\nValues lower than 10 causes the name of the items to become glitched.\n\nAllowed range {INVENTORY_SIZE_MIN}–{INVENTORY_SIZE_MAX}.";
+
+    public static readonly string WeightTooltip = $"Weight of your Digimon.\n\nAllowed range {WEIGHT_MIN}–{WEIGHT_MAX}.";
+    public static readonly string LivesTooltip = $"Number of lives your Digimon has had.\n\nAllowed range {LIVES_MIN}–{LIVES_MAX}.";
 }

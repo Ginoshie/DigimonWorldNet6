@@ -4,6 +4,11 @@
     <Style x:Key="DefaultCheckboxStyle" TargetType="CheckBox">
         <Setter Property="Background" Value="#2E3841" />
         <Setter Property="BorderBrush" Value="#90D9FA" />
+        <Setter Property="LayoutTransform">
+            <Setter.Value>
+                <ScaleTransform ScaleX="1.5" ScaleY="1.5" />
+            </Setter.Value>
+        </Setter>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="CheckBox">

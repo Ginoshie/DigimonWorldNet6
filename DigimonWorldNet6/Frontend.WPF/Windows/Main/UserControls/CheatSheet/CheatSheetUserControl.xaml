@@ -122,6 +122,20 @@
                                                 </Style>
                                             </Button.Style>
                                         </Button>
+
+                                        <Button Content="Combat" Command="{Binding SelectSectionCommand}" CommandParameter="Combat"
+                                                FocusVisualStyle="{StaticResource DefaultFocusStyle}"
+                                                Padding="10,6" Margin="2">
+                                            <Button.Style>
+                                                <Style TargetType="Button" BasedOn="{StaticResource DefaultButtonStyle}">
+                                                    <Style.Triggers>
+                                                        <DataTrigger Binding="{Binding IsCombatSelected}" Value="True">
+                                                            <Setter Property="Template" Value="{StaticResource DefaultButtonActiveTemplate}" />
+                                                        </DataTrigger>
+                                                    </Style.Triggers>
+                                                </Style>
+                                            </Button.Style>
+                                        </Button>
                                     </UniformGrid>
                                 </Border>
                             </Border>
@@ -144,6 +158,9 @@
 
                     <userControls:TamerSectionUserControl Grid.Column="0"
                         Visibility="{Binding IsTamerSelected, Converter={StaticResource BoolToVis}}" />
+
+                    <userControls:CombatSectionUserControl Grid.Column="0"
+                        Visibility="{Binding IsCombatSelected, Converter={StaticResource BoolToVis}}" />
                 </Grid>
 
             </Grid>

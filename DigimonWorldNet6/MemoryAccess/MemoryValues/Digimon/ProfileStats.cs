@@ -10,6 +10,7 @@ public sealed class ProfileStats(ProcessMemory mem, PsxRam ram) : MemoryValueSyn
     private const int WEIGHT_OFFSET = 0x001384A2;
     private const int NAME_OFFSET = 0x00155810;
     private const int NAME_LENGTH = 12;
+    private const int LIVES_OFFSET = 0x00155824;
     private const string DEFAULT_USER_DIGIMON_NAME = "Unknown";
     private const int SLEEPY_HOUR = 0x00138464;
     private const int SLEEPY_MINUTE = 0x00138466;
@@ -32,6 +33,9 @@ public sealed class ProfileStats(ProcessMemory mem, PsxRam ram) : MemoryValueSyn
     private const int THIRD_TECHNIQUE_OFFSET = 2;
     private const int TYPE_OFFSET = -2;
 
+    private short _weight;
+    private int _lives;
+
     private ProfileStats() : this(ProcessMemory.Empty, PsxRam.Empty)
     {
     }
@@ -44,9 +48,27 @@ public sealed class ProfileStats(ProcessMemory mem, PsxRam ram) : MemoryValueSyn
 
     public byte DigimonType { get; private set; }
 
-    public short Weight { get; private set; }
+    public short Weight
+    {
+        get => _weight;
+        set
+        {
+            _weight = value;
+            mem.WriteInt16(ram.A(WEIGHT_OFFSET), value);
+        }
+    }
 
     public string Name { get; private set; } = DEFAULT_USER_DIGIMON_NAME;
+
+    public int Lives
+    {
+        get => _lives;
+        set
+        {
+            _lives = value;
+            mem.WriteByte(ram.A(LIVES_OFFSET), (byte)value);
+        }
+    }
 
     public int SleepyHour { get; private set; }
 
@@ -89,9 +111,10 @@ public sealed class ProfileStats(ProcessMemory mem, PsxRam ram) : MemoryValueSyn
             Type = mem.ReadByte(ram.A(FIRST_SPECIAL+DigimonType*DIGIMON_TYPE_MULTIPLIER+TYPE_OFFSET));
         }
 
-        Weight = mem.ReadInt16(ram.A(WEIGHT_OFFSET));
+        _weight = mem.ReadInt16(ram.A(WEIGHT_OFFSET));
         byte[] buffer = mem.ReadBytes(ram.A(NAME_OFFSET), NAME_LENGTH);
         Name = DecodeName(buffer);
+        _lives = mem.ReadByte(ram.A(LIVES_OFFSET));
         SleepyHour = mem.ReadInt16(ram.A(SLEEPY_HOUR));
         SleepyMinute = mem.ReadInt16(ram.A(SLEEPY_MINUTE));
         WakeUpHour = mem.ReadInt16(ram.A(WAKEUP_HOUR));

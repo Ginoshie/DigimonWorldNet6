@@ -1,0 +1,262 @@
+<UserControl
+    x:Class="DigimonWorld.Frontend.WPF.Windows.Main.UserControls.CheatSheet.UserControls.CombatSectionUserControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:models="clr-namespace:DigimonWorld.Frontend.WPF.Windows.Main.UserControls.CheatSheet.Models"
+    xmlns:validation="clr-namespace:DigimonWorld.Frontend.WPF.Validation"
+    xmlns:c="clr-namespace:DigimonWorld.Frontend.WPF.Constants"
+    mc:Ignorable="d"
+    d:DataContext="{d:DesignInstance models:CheatSheetViewModel}">
+
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/ResourceDictionaries/Styles/DefaultTextboxStyle.xaml" />
+                <ResourceDictionary Source="/ResourceDictionaries/Styles/DefaultFocusStyle.xaml" />
+                <ResourceDictionary Source="/ResourceDictionaries/Styles/Labels/DefaultLabelStyle.xaml" />
+                <ResourceDictionary Source="/ResourceDictionaries/Styles/ToolTips/DefaultTooltipRightStyle.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+
+            <Style x:Key="GroupHeaderStyle" TargetType="TextBlock" BasedOn="{StaticResource {x:Type TextBlock}}">
+                <Setter Property="Foreground" Value="#D4D604" />
+                <Setter Property="FontSize" Value="15" />
+                <Setter Property="HorizontalAlignment" Value="Center" />
+                <Setter Property="Grid.ColumnSpan" Value="2" />
+                <Setter Property="Margin" Value="0,0,0,6" />
+            </Style>
+
+            <Style x:Key="SectionTitleStyle" TargetType="TextBlock" BasedOn="{StaticResource {x:Type TextBlock}}">
+                <Setter Property="Foreground" Value="#90D9FA" />
+                <Setter Property="FontSize" Value="22" />
+                <Setter Property="HorizontalAlignment" Value="Center" />
+                <Setter Property="Margin" Value="0,0,0,12" />
+            </Style>
+        </ResourceDictionary>
+    </UserControl.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <TextBlock Grid.Row="0" Text="Combat" Style="{StaticResource SectionTitleStyle}" />
+
+        <Grid Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Top">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+
+            <Grid Grid.Column="0" Margin="0,0,30,0" VerticalAlignment="Top" Background="Transparent">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="90" />
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Grid.Row="0" Grid.Column="0" Text="Effect Timers" Style="{StaticResource GroupHeaderStyle}" />
+
+                <Label Grid.Row="1" Grid.Column="0" Content="Poison:" Style="{StaticResource DefaultLabelStyle}" />
+                <TextBox Grid.Row="1" Grid.Column="1" FocusVisualStyle="{StaticResource DefaultFocusStyle}"
+                         HorizontalContentAlignment="Center" Style="{StaticResource DefaultTextBoxStyle}">
+                    <TextBox.ToolTip>
+                        <ToolTip Style="{StaticResource DefaultToolTipRightStyle}">
+                            <TextBlock Text="{x:Static c:CheatSheetInputInfo.PoisonTimerTooltip}" />
+                        </ToolTip>
+                    </TextBox.ToolTip>
+                    <TextBox.Text>
+                        <Binding Path="CombatPoisonTimer.Value" UpdateSourceTrigger="LostFocus">
+                            <Binding.ValidationRules>
+                                <validation:NumericRangeValidationRule Minimum="{x:Static c:CheatSheetInputInfo.COMBAT_TIMER_MIN}" Maximum="{x:Static c:CheatSheetInputInfo.COMBAT_TIMER_MAX}" ValidationStep="RawProposedValue" />
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox>
+
+                <Label Grid.Row="2" Grid.Column="0" Content="Confused:" Style="{StaticResource DefaultLabelStyle}" />
+                <TextBox Grid.Row="2" Grid.Column="1" FocusVisualStyle="{StaticResource DefaultFocusStyle}"
+                         HorizontalContentAlignment="Center" Style="{StaticResource DefaultTextBoxStyle}">
+                    <TextBox.ToolTip>
+                        <ToolTip Style="{StaticResource DefaultToolTipRightStyle}">
+                            <TextBlock Text="{x:Static c:CheatSheetInputInfo.ConfusedTimerTooltip}" />
+                        </ToolTip>
+                    </TextBox.ToolTip>
+                    <TextBox.Text>
+                        <Binding Path="CombatConfusedTimer.Value" UpdateSourceTrigger="LostFocus">
+                            <Binding.ValidationRules>
+                                <validation:NumericRangeValidationRule Minimum="{x:Static c:CheatSheetInputInfo.COMBAT_TIMER_MIN}" Maximum="{x:Static c:CheatSheetInputInfo.COMBAT_TIMER_MAX}" ValidationStep="RawProposedValue" />
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox>
+
+                <Label Grid.Row="3" Grid.Column="0" Content="Stun:" Style="{StaticResource DefaultLabelStyle}" />
+                <TextBox Grid.Row="3" Grid.Column="1" FocusVisualStyle="{StaticResource DefaultFocusStyle}"
+                         HorizontalContentAlignment="Center" Style="{StaticResource DefaultTextBoxStyle}">
+                    <TextBox.ToolTip>
+                        <ToolTip Style="{StaticResource DefaultToolTipRightStyle}">
+                            <TextBlock Text="{x:Static c:CheatSheetInputInfo.StunTimerTooltip}" />
+                        </ToolTip>
+                    </TextBox.ToolTip>
+                    <TextBox.Text>
+                        <Binding Path="CombatStunTimer.Value" UpdateSourceTrigger="LostFocus">
+                            <Binding.ValidationRules>
+                                <validation:NumericRangeValidationRule Minimum="{x:Static c:CheatSheetInputInfo.COMBAT_TIMER_MIN}" Maximum="{x:Static c:CheatSheetInputInfo.COMBAT_TIMER_MAX}" ValidationStep="RawProposedValue" />
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox>
+
+                <Label Grid.Row="4" Grid.Column="0" Content="Flatten:" Style="{StaticResource DefaultLabelStyle}" />
+                <TextBox Grid.Row="4" Grid.Column="1" FocusVisualStyle="{StaticResource DefaultFocusStyle}"
+                         HorizontalContentAlignment="Center" Style="{StaticResource DefaultTextBoxStyle}">
+                    <TextBox.ToolTip>
+                        <ToolTip Style="{StaticResource DefaultToolTipRightStyle}">
+                            <TextBlock Text="{x:Static c:CheatSheetInputInfo.FlattenTimerTooltip}" />
+                        </ToolTip>
+                    </TextBox.ToolTip>
+                    <TextBox.Text>
+                        <Binding Path="CombatFlattenTimer.Value" UpdateSourceTrigger="LostFocus">
+                            <Binding.ValidationRules>
+                                <validation:NumericRangeValidationRule Minimum="{x:Static c:CheatSheetInputInfo.COMBAT_TIMER_MIN}" Maximum="{x:Static c:CheatSheetInputInfo.COMBAT_TIMER_MAX}" ValidationStep="RawProposedValue" />
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox>
+
+                <Label Grid.Row="5" Grid.Column="0" Content="Flatten Attack:" Style="{StaticResource DefaultLabelStyle}" />
+                <TextBox Grid.Row="5" Grid.Column="1" FocusVisualStyle="{StaticResource DefaultFocusStyle}"
+                         HorizontalContentAlignment="Center" Style="{StaticResource DefaultTextBoxStyle}">
+                    <TextBox.ToolTip>
+                        <ToolTip Style="{StaticResource DefaultToolTipRightStyle}">
+                            <TextBlock Text="{x:Static c:CheatSheetInputInfo.FlattenAttackTimerTooltip}" />
+                        </ToolTip>
+                    </TextBox.ToolTip>
+                    <TextBox.Text>
+                        <Binding Path="CombatFlattenAttackTimer.Value" UpdateSourceTrigger="LostFocus">
+                            <Binding.ValidationRules>
+                                <validation:NumericRangeValidationRule Minimum="{x:Static c:CheatSheetInputInfo.COMBAT_TIMER_MIN}" Maximum="{x:Static c:CheatSheetInputInfo.COMBAT_TIMER_MAX}" ValidationStep="RawProposedValue" />
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox>
+
+                <Label Grid.Row="6" Grid.Column="0" Content="Dumb:" Style="{StaticResource DefaultLabelStyle}" />
+                <TextBox Grid.Row="6" Grid.Column="1" FocusVisualStyle="{StaticResource DefaultFocusStyle}"
+                         HorizontalContentAlignment="Center" Style="{StaticResource DefaultTextBoxStyle}">
+                    <TextBox.ToolTip>
+                        <ToolTip Style="{StaticResource DefaultToolTipRightStyle}">
+                            <TextBlock Text="{x:Static c:CheatSheetInputInfo.DumbTimerTooltip}" />
+                        </ToolTip>
+                    </TextBox.ToolTip>
+                    <TextBox.Text>
+                        <Binding Path="CombatDumbTimer.Value" UpdateSourceTrigger="LostFocus">
+                            <Binding.ValidationRules>
+                                <validation:NumericRangeValidationRule Minimum="{x:Static c:CheatSheetInputInfo.COMBAT_TIMER_MIN}" Maximum="{x:Static c:CheatSheetInputInfo.COMBAT_TIMER_MAX}" ValidationStep="RawProposedValue" />
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox>
+            </Grid>
+
+            <Grid Grid.Column="1" VerticalAlignment="Top" Background="Transparent">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="90" />
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Grid.Row="0" Grid.Column="0" Text="Finisher" Style="{StaticResource GroupHeaderStyle}" />
+
+                <Label Grid.Row="1" Grid.Column="0" Content="Goal:" Style="{StaticResource DefaultLabelStyle}" />
+                <TextBox Grid.Row="1" Grid.Column="1" FocusVisualStyle="{StaticResource DefaultFocusStyle}"
+                         HorizontalContentAlignment="Center" Style="{StaticResource DefaultTextBoxStyle}">
+                    <TextBox.ToolTip>
+                        <ToolTip Style="{StaticResource DefaultToolTipRightStyle}">
+                            <TextBlock Text="{x:Static c:CheatSheetInputInfo.FinisherGoalTooltip}" />
+                        </ToolTip>
+                    </TextBox.ToolTip>
+                    <TextBox.Text>
+                        <Binding Path="CombatFinisherGoal.Value" UpdateSourceTrigger="LostFocus">
+                            <Binding.ValidationRules>
+                                <validation:NumericRangeValidationRule Minimum="{x:Static c:CheatSheetInputInfo.COMBAT_TIMER_MIN}" Maximum="{x:Static c:CheatSheetInputInfo.COMBAT_TIMER_MAX}" ValidationStep="RawProposedValue" />
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox>
+
+                <Label Grid.Row="2" Grid.Column="0" Content="Progress:" Style="{StaticResource DefaultLabelStyle}" />
+                <TextBox Grid.Row="2" Grid.Column="1" FocusVisualStyle="{StaticResource DefaultFocusStyle}"
+                         HorizontalContentAlignment="Center" Style="{StaticResource DefaultTextBoxStyle}">
+                    <TextBox.ToolTip>
+                        <ToolTip Style="{StaticResource DefaultToolTipRightStyle}">
+                            <TextBlock Text="{x:Static c:CheatSheetInputInfo.FinisherProgressTooltip}" />
+                        </ToolTip>
+                    </TextBox.ToolTip>
+                    <TextBox.Text>
+                        <Binding Path="CombatFinisherProgress.Value" UpdateSourceTrigger="LostFocus">
+                            <Binding.ValidationRules>
+                                <validation:NumericRangeValidationRule Minimum="{x:Static c:CheatSheetInputInfo.COMBAT_TIMER_MIN}" Maximum="{x:Static c:CheatSheetInputInfo.COMBAT_TIMER_MAX}" ValidationStep="RawProposedValue" />
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox>
+
+                <TextBlock Grid.Row="3" Grid.Column="0" Text="State" Style="{StaticResource GroupHeaderStyle}" Margin="0,18,0,6" />
+
+                <Label Grid.Row="4" Grid.Column="0" Content="Cooldown:" Style="{StaticResource DefaultLabelStyle}" />
+                <TextBox Grid.Row="4" Grid.Column="1" FocusVisualStyle="{StaticResource DefaultFocusStyle}"
+                         HorizontalContentAlignment="Center" Style="{StaticResource DefaultTextBoxStyle}">
+                    <TextBox.ToolTip>
+                        <ToolTip Style="{StaticResource DefaultToolTipRightStyle}">
+                            <TextBlock Text="{x:Static c:CheatSheetInputInfo.CooldownTooltip}" />
+                        </ToolTip>
+                    </TextBox.ToolTip>
+                    <TextBox.Text>
+                        <Binding Path="CombatCooldown.Value" UpdateSourceTrigger="LostFocus">
+                            <Binding.ValidationRules>
+                                <validation:NumericRangeValidationRule Minimum="{x:Static c:CheatSheetInputInfo.COOLDOWN_MIN}" Maximum="{x:Static c:CheatSheetInputInfo.COOLDOWN_MAX}" ValidationStep="RawProposedValue" />
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox>
+
+                <Label Grid.Row="5" Grid.Column="0" Content="Status Effects:" Style="{StaticResource DefaultLabelStyle}" />
+                <TextBox Grid.Row="5" Grid.Column="1" FocusVisualStyle="{StaticResource DefaultFocusStyle}"
+                         HorizontalContentAlignment="Center" Style="{StaticResource DefaultTextBoxStyle}">
+                    <TextBox.ToolTip>
+                        <ToolTip Style="{StaticResource DefaultToolTipRightStyle}">
+                            <TextBlock Text="{x:Static c:CheatSheetInputInfo.StatusEffectsTooltip}" />
+                        </ToolTip>
+                    </TextBox.ToolTip>
+                    <TextBox.Text>
+                        <Binding Path="CombatStatusEffects.Value" UpdateSourceTrigger="LostFocus">
+                            <Binding.ValidationRules>
+                                <validation:NumericRangeValidationRule Minimum="{x:Static c:CheatSheetInputInfo.STATUS_EFFECTS_MIN}" Maximum="{x:Static c:CheatSheetInputInfo.STATUS_EFFECTS_MAX}" ValidationStep="RawProposedValue" />
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox>
+            </Grid>
+        </Grid>
+    </Grid>
+
+</UserControl>

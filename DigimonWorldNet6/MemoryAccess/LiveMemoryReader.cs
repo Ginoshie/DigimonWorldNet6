@@ -23,6 +23,8 @@ public sealed class LiveMemoryReader : INotifyPropertyChanged, IDisposable
     private readonly SerialDisposable _parameterStats = new();
     private readonly SerialDisposable _conditionStats = new();
     private readonly SerialDisposable _profileStats = new();
+    private readonly SerialDisposable _combatStats = new();
+    private readonly SerialDisposable _inventoryStats = new();
     private readonly SerialDisposable _careStats = new();
     private readonly SerialDisposable _techniqueStats = new();
     private readonly SerialDisposable _historicEvolutions = new();
@@ -43,6 +45,8 @@ public sealed class LiveMemoryReader : INotifyPropertyChanged, IDisposable
         _parameterStats.Disposable = ParameterStats.Empty;
         _conditionStats.Disposable = ConditionStats.Empty;
         _profileStats.Disposable = ProfileStats.Empty;
+        _combatStats.Disposable = CombatStats.Empty;
+        _inventoryStats.Disposable = InventoryStats.Empty;
         _careStats.Disposable = CareStats.Empty;
         _techniqueStats.Disposable = TechniqueStats.Empty;
         _historicEvolutions.Disposable = HistoricEvolutions.Empty;
@@ -68,6 +72,18 @@ public sealed class LiveMemoryReader : INotifyPropertyChanged, IDisposable
     {
         get => (ProfileStats)_profileStats.Disposable!;
         private set => _profileStats.Disposable = value;
+    }
+
+    public CombatStats CombatStats
+    {
+        get => (CombatStats)_combatStats.Disposable!;
+        private set => _combatStats.Disposable = value;
+    }
+
+    public InventoryStats InventoryStats
+    {
+        get => (InventoryStats)_inventoryStats.Disposable!;
+        private set => _inventoryStats.Disposable = value;
     }
 
     public CareStats CareStats
@@ -226,6 +242,10 @@ public sealed class LiveMemoryReader : INotifyPropertyChanged, IDisposable
         ConditionStats.UpdateData();
         ProfileStats = new ProfileStats(mem, ram);
         ProfileStats.UpdateData();
+        CombatStats = new CombatStats(mem, ram);
+        CombatStats.UpdateData();
+        InventoryStats = new InventoryStats(mem, ram);
+        InventoryStats.UpdateData();
         CareStats = new CareStats(mem, ram);
         CareStats.UpdateData();
         TechniqueStats = new TechniqueStats(mem, ram);
@@ -275,6 +295,8 @@ public sealed class LiveMemoryReader : INotifyPropertyChanged, IDisposable
         ParameterStats = ParameterStats.Empty;
         ConditionStats = ConditionStats.Empty;
         ProfileStats = ProfileStats.Empty;
+        CombatStats = CombatStats.Empty;
+        InventoryStats = InventoryStats.Empty;
         CareStats = CareStats.Empty;
         TechniqueStats = TechniqueStats.Empty;
         HistoricEvolutions = HistoricEvolutions.Empty;

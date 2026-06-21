@@ -22,7 +22,7 @@
                 <ResourceDictionary Source="../DataTemplates/ConditionFlagTemplate.xaml" />
             </ResourceDictionary.MergedDictionaries>
 
-            <system:Double x:Key="ColumnWidth">280</system:Double>
+            <system:Double x:Key="ColumnWidth">200</system:Double>
 
             <Style x:Key="GroupHeaderStyle" TargetType="TextBlock" BasedOn="{StaticResource {x:Type TextBlock}}">
                 <Setter Property="Foreground" Value="#D4D604" />
@@ -48,12 +48,12 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
 
-            <Grid Grid.Column="0" Width="{StaticResource ColumnWidth}" Margin="0,0,30,0" VerticalAlignment="Top" Background="Transparent">
+            <Grid Grid.Column="0" Width="{StaticResource ColumnWidth}" Margin="0,0,30,0" VerticalAlignment="Top"
+                  Background="Transparent" Grid.IsSharedSizeScope="True">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
@@ -65,83 +65,98 @@
                     <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto" />
-                    <ColumnDefinition Width="90" />
+                    <ColumnDefinition Width="Auto" SharedSizeGroup="StatsLabel" />
+                    <ColumnDefinition Width="58" />
+                    <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
 
-                <TextBlock Grid.Row="0" Grid.Column="0" Text="Stats" Style="{StaticResource GroupHeaderStyle}" />
+                <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" Text="Stats" Style="{StaticResource GroupHeaderStyle}" />
 
-                <Label Grid.Row="1" Grid.Column="0" Content="HP:" Style="{StaticResource DefaultLabelStyle}" />
-                <TextBox Grid.Row="1" Grid.Column="1" FocusVisualStyle="{StaticResource DefaultFocusStyle}"
-                         Style="{StaticResource DefaultTextBoxStyle}">
-                    <TextBox.ToolTip>
-                        <ToolTip Style="{StaticResource DefaultToolTipRightStyle}">
-                            <TextBlock Text="{x:Static c:CheatSheetInputInfo.HpTooltip}" />
-                        </ToolTip>
-                    </TextBox.ToolTip>
-                    <TextBox.Text>
-                        <Binding Path="StatHp.Value" UpdateSourceTrigger="LostFocus">
-                            <Binding.ValidationRules>
-                                <validation:NumericRangeValidationRule Minimum="{x:Static c:CheatSheetInputInfo.HP_MIN}" Maximum="{x:Static c:CheatSheetInputInfo.HP_MAX}" ValidationStep="RawProposedValue" />
-                            </Binding.ValidationRules>
-                        </Binding>
-                    </TextBox.Text>
-                </TextBox>
+                <Grid Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" Background="Transparent">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" SharedSizeGroup="StatsLabel" />
+                        <ColumnDefinition Width="58" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="58" />
+                    </Grid.ColumnDefinitions>
+                    <Label Grid.Column="0" Content="HP:" Style="{StaticResource DefaultLabelStyle}" />
+                    <TextBox Grid.Column="1" FocusVisualStyle="{StaticResource DefaultFocusStyle}"
+                             HorizontalContentAlignment="Center" Style="{StaticResource DefaultTextBoxStyle}">
+                        <TextBox.ToolTip>
+                            <ToolTip Style="{StaticResource DefaultToolTipRightStyle}">
+                                <TextBlock Text="{x:Static c:CheatSheetInputInfo.CurrentHpTooltip}" />
+                            </ToolTip>
+                        </TextBox.ToolTip>
+                        <TextBox.Text>
+                            <Binding Path="StatCurrentHp.Value" UpdateSourceTrigger="LostFocus">
+                                <Binding.ValidationRules>
+                                    <validation:NumericRangeValidationRule Minimum="{x:Static c:CheatSheetInputInfo.CURRENT_HP_MIN}" Maximum="{x:Static c:CheatSheetInputInfo.CURRENT_HP_MAX}" ValidationStep="RawProposedValue" />
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
+                    <Label Grid.Column="2" Content="/" Style="{StaticResource DefaultLabelStyle}" Margin="3,0" />
+                    <TextBox Grid.Column="3" FocusVisualStyle="{StaticResource DefaultFocusStyle}"
+                             HorizontalContentAlignment="Center" Style="{StaticResource DefaultTextBoxStyle}">
+                        <TextBox.ToolTip>
+                            <ToolTip Style="{StaticResource DefaultToolTipRightStyle}">
+                                <TextBlock Text="{x:Static c:CheatSheetInputInfo.HpTooltip}" />
+                            </ToolTip>
+                        </TextBox.ToolTip>
+                        <TextBox.Text>
+                            <Binding Path="StatHp.Value" UpdateSourceTrigger="LostFocus">
+                                <Binding.ValidationRules>
+                                    <validation:NumericRangeValidationRule Minimum="{x:Static c:CheatSheetInputInfo.HP_MIN}" Maximum="{x:Static c:CheatSheetInputInfo.HP_MAX}" ValidationStep="RawProposedValue" />
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
+                </Grid>
 
-                <Label Grid.Row="2" Grid.Column="0" Content="Current HP:" Style="{StaticResource DefaultLabelStyle}" />
-                <TextBox Grid.Row="2" Grid.Column="1" FocusVisualStyle="{StaticResource DefaultFocusStyle}"
-                         Style="{StaticResource DefaultTextBoxStyle}">
-                    <TextBox.ToolTip>
-                        <ToolTip Style="{StaticResource DefaultToolTipRightStyle}">
-                            <TextBlock Text="{x:Static c:CheatSheetInputInfo.CurrentHpTooltip}" />
-                        </ToolTip>
-                    </TextBox.ToolTip>
-                    <TextBox.Text>
-                        <Binding Path="StatCurrentHp.Value" UpdateSourceTrigger="LostFocus">
-                            <Binding.ValidationRules>
-                                <validation:NumericRangeValidationRule Minimum="{x:Static c:CheatSheetInputInfo.CURRENT_HP_MIN}" Maximum="{x:Static c:CheatSheetInputInfo.CURRENT_HP_MAX}" ValidationStep="RawProposedValue" />
-                            </Binding.ValidationRules>
-                        </Binding>
-                    </TextBox.Text>
-                </TextBox>
+                <Grid Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" Background="Transparent">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" SharedSizeGroup="StatsLabel" />
+                        <ColumnDefinition Width="58" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="58" />
+                    </Grid.ColumnDefinitions>
+                    <Label Grid.Column="0" Content="MP:" Style="{StaticResource DefaultLabelStyle}" />
+                    <TextBox Grid.Column="1" FocusVisualStyle="{StaticResource DefaultFocusStyle}"
+                             HorizontalContentAlignment="Center" Style="{StaticResource DefaultTextBoxStyle}">
+                        <TextBox.ToolTip>
+                            <ToolTip Style="{StaticResource DefaultToolTipRightStyle}">
+                                <TextBlock Text="{x:Static c:CheatSheetInputInfo.CurrentMpTooltip}" />
+                            </ToolTip>
+                        </TextBox.ToolTip>
+                        <TextBox.Text>
+                            <Binding Path="StatCurrentMp.Value" UpdateSourceTrigger="LostFocus">
+                                <Binding.ValidationRules>
+                                    <validation:NumericRangeValidationRule Minimum="{x:Static c:CheatSheetInputInfo.CURRENT_MP_MIN}" Maximum="{x:Static c:CheatSheetInputInfo.CURRENT_MP_MAX}" ValidationStep="RawProposedValue" />
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
+                    <Label Grid.Column="2" Content="/" Style="{StaticResource DefaultLabelStyle}" Margin="3,0" />
+                    <TextBox Grid.Column="3" FocusVisualStyle="{StaticResource DefaultFocusStyle}"
+                             HorizontalContentAlignment="Center" Style="{StaticResource DefaultTextBoxStyle}">
+                        <TextBox.ToolTip>
+                            <ToolTip Style="{StaticResource DefaultToolTipRightStyle}">
+                                <TextBlock Text="{x:Static c:CheatSheetInputInfo.MpTooltip}" />
+                            </ToolTip>
+                        </TextBox.ToolTip>
+                        <TextBox.Text>
+                            <Binding Path="StatMp.Value" UpdateSourceTrigger="LostFocus">
+                                <Binding.ValidationRules>
+                                    <validation:NumericRangeValidationRule Minimum="{x:Static c:CheatSheetInputInfo.MP_MIN}" Maximum="{x:Static c:CheatSheetInputInfo.MP_MAX}" ValidationStep="RawProposedValue" />
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
+                </Grid>
 
-                <Label Grid.Row="3" Grid.Column="0" Content="MP:" Style="{StaticResource DefaultLabelStyle}" />
+                <Label Grid.Row="3" Grid.Column="0" Content="Offense:" Style="{StaticResource DefaultLabelStyle}" />
                 <TextBox Grid.Row="3" Grid.Column="1" FocusVisualStyle="{StaticResource DefaultFocusStyle}"
-                         Style="{StaticResource DefaultTextBoxStyle}">
-                    <TextBox.ToolTip>
-                        <ToolTip Style="{StaticResource DefaultToolTipRightStyle}">
-                            <TextBlock Text="{x:Static c:CheatSheetInputInfo.MpTooltip}" />
-                        </ToolTip>
-                    </TextBox.ToolTip>
-                    <TextBox.Text>
-                        <Binding Path="StatMp.Value" UpdateSourceTrigger="LostFocus">
-                            <Binding.ValidationRules>
-                                <validation:NumericRangeValidationRule Minimum="{x:Static c:CheatSheetInputInfo.MP_MIN}" Maximum="{x:Static c:CheatSheetInputInfo.MP_MAX}" ValidationStep="RawProposedValue" />
-                            </Binding.ValidationRules>
-                        </Binding>
-                    </TextBox.Text>
-                </TextBox>
-
-                <Label Grid.Row="4" Grid.Column="0" Content="Current MP:" Style="{StaticResource DefaultLabelStyle}" />
-                <TextBox Grid.Row="4" Grid.Column="1" FocusVisualStyle="{StaticResource DefaultFocusStyle}"
-                         Style="{StaticResource DefaultTextBoxStyle}">
-                    <TextBox.ToolTip>
-                        <ToolTip Style="{StaticResource DefaultToolTipRightStyle}">
-                            <TextBlock Text="{x:Static c:CheatSheetInputInfo.CurrentMpTooltip}" />
-                        </ToolTip>
-                    </TextBox.ToolTip>
-                    <TextBox.Text>
-                        <Binding Path="StatCurrentMp.Value" UpdateSourceTrigger="LostFocus">
-                            <Binding.ValidationRules>
-                                <validation:NumericRangeValidationRule Minimum="{x:Static c:CheatSheetInputInfo.CURRENT_MP_MIN}" Maximum="{x:Static c:CheatSheetInputInfo.CURRENT_MP_MAX}" ValidationStep="RawProposedValue" />
-                            </Binding.ValidationRules>
-                        </Binding>
-                    </TextBox.Text>
-                </TextBox>
-
-                <Label Grid.Row="5" Grid.Column="0" Content="Offense:" Style="{StaticResource DefaultLabelStyle}" />
-                <TextBox Grid.Row="5" Grid.Column="1" FocusVisualStyle="{StaticResource DefaultFocusStyle}"
-                         Style="{StaticResource DefaultTextBoxStyle}">
+                         HorizontalContentAlignment="Center" Style="{StaticResource DefaultTextBoxStyle}">
                     <TextBox.ToolTip>
                         <ToolTip Style="{StaticResource DefaultToolTipRightStyle}">
                             <TextBlock Text="{x:Static c:CheatSheetInputInfo.OffenseTooltip}" />
@@ -156,9 +171,9 @@
                     </TextBox.Text>
                 </TextBox>
 
-                <Label Grid.Row="6" Grid.Column="0" Content="Defense:" Style="{StaticResource DefaultLabelStyle}" />
-                <TextBox Grid.Row="6" Grid.Column="1" FocusVisualStyle="{StaticResource DefaultFocusStyle}"
-                         Style="{StaticResource DefaultTextBoxStyle}">
+                <Label Grid.Row="4" Grid.Column="0" Content="Defense:" Style="{StaticResource DefaultLabelStyle}" />
+                <TextBox Grid.Row="4" Grid.Column="1" FocusVisualStyle="{StaticResource DefaultFocusStyle}"
+                         HorizontalContentAlignment="Center" Style="{StaticResource DefaultTextBoxStyle}">
                     <TextBox.ToolTip>
                         <ToolTip Style="{StaticResource DefaultToolTipRightStyle}">
                             <TextBlock Text="{x:Static c:CheatSheetInputInfo.DefenseTooltip}" />
@@ -173,9 +188,9 @@
                     </TextBox.Text>
                 </TextBox>
 
-                <Label Grid.Row="7" Grid.Column="0" Content="Speed:" Style="{StaticResource DefaultLabelStyle}" />
-                <TextBox Grid.Row="7" Grid.Column="1" FocusVisualStyle="{StaticResource DefaultFocusStyle}"
-                         Style="{StaticResource DefaultTextBoxStyle}">
+                <Label Grid.Row="5" Grid.Column="0" Content="Speed:" Style="{StaticResource DefaultLabelStyle}" />
+                <TextBox Grid.Row="5" Grid.Column="1" FocusVisualStyle="{StaticResource DefaultFocusStyle}"
+                         HorizontalContentAlignment="Center" Style="{StaticResource DefaultTextBoxStyle}">
                     <TextBox.ToolTip>
                         <ToolTip Style="{StaticResource DefaultToolTipRightStyle}">
                             <TextBlock Text="{x:Static c:CheatSheetInputInfo.SpeedTooltip}" />
@@ -190,9 +205,9 @@
                     </TextBox.Text>
                 </TextBox>
 
-                <Label Grid.Row="8" Grid.Column="0" Content="Brains:" Style="{StaticResource DefaultLabelStyle}" />
-                <TextBox Grid.Row="8" Grid.Column="1" FocusVisualStyle="{StaticResource DefaultFocusStyle}"
-                         Style="{StaticResource DefaultTextBoxStyle}">
+                <Label Grid.Row="6" Grid.Column="0" Content="Brains:" Style="{StaticResource DefaultLabelStyle}" />
+                <TextBox Grid.Row="6" Grid.Column="1" FocusVisualStyle="{StaticResource DefaultFocusStyle}"
+                         HorizontalContentAlignment="Center" Style="{StaticResource DefaultTextBoxStyle}">
                     <TextBox.ToolTip>
                         <ToolTip Style="{StaticResource DefaultToolTipRightStyle}">
                             <TextBlock Text="{x:Static c:CheatSheetInputInfo.BrainsTooltip}" />
@@ -207,9 +222,9 @@
                     </TextBox.Text>
                 </TextBox>
 
-                <TextBlock Grid.Row="9" Grid.Column="0" Text="Condition" Style="{StaticResource GroupHeaderStyle}" Margin="0,18,0,6" />
+                <TextBlock Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="3" Text="Condition" Style="{StaticResource GroupHeaderStyle}" Margin="0,18,0,6" />
 
-                <ItemsControl Grid.Row="10" Grid.Column="0" Grid.ColumnSpan="2"
+                <ItemsControl Grid.Row="8" Grid.Column="0" Grid.ColumnSpan="3"
                               ItemTemplate="{StaticResource ConditionFlagTemplate}"
                               ItemsSource="{Binding ConditionFlags}">
                     <ItemsControl.ItemsPanel>
@@ -235,19 +250,17 @@
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto" />
-                    <ColumnDefinition Width="90" />
+                    <ColumnDefinition Width="58" />
                 </Grid.ColumnDefinitions>
 
                 <TextBlock Grid.Row="0" Grid.Column="0" Text="Care" Style="{StaticResource GroupHeaderStyle}" />
 
                 <Label Grid.Row="1" Grid.Column="0" Content="Tiredness:" Style="{StaticResource DefaultLabelStyle}" />
                 <TextBox Grid.Row="1" Grid.Column="1" FocusVisualStyle="{StaticResource DefaultFocusStyle}"
-                         Style="{StaticResource DefaultTextBoxStyle}">
+                         HorizontalContentAlignment="Center" Style="{StaticResource DefaultTextBoxStyle}">
                     <TextBox.ToolTip>
                         <ToolTip Style="{StaticResource DefaultToolTipRightStyle}">
                             <TextBlock Text="{x:Static c:CheatSheetInputInfo.ConditionTirednessTooltip}" />
@@ -264,7 +277,7 @@
 
                 <Label Grid.Row="2" Grid.Column="0" Content="Happiness:" Style="{StaticResource DefaultLabelStyle}" />
                 <TextBox Grid.Row="2" Grid.Column="1" FocusVisualStyle="{StaticResource DefaultFocusStyle}"
-                         Style="{StaticResource DefaultTextBoxStyle}">
+                         HorizontalContentAlignment="Center" Style="{StaticResource DefaultTextBoxStyle}">
                     <TextBox.ToolTip>
                         <ToolTip Style="{StaticResource DefaultToolTipRightStyle}">
                             <TextBlock Text="{x:Static c:CheatSheetInputInfo.HappinessTooltip}" />
@@ -281,7 +294,7 @@
 
                 <Label Grid.Row="3" Grid.Column="0" Content="Discipline:" Style="{StaticResource DefaultLabelStyle}" />
                 <TextBox Grid.Row="3" Grid.Column="1" FocusVisualStyle="{StaticResource DefaultFocusStyle}"
-                         Style="{StaticResource DefaultTextBoxStyle}">
+                         HorizontalContentAlignment="Center" Style="{StaticResource DefaultTextBoxStyle}">
                     <TextBox.ToolTip>
                         <ToolTip Style="{StaticResource DefaultToolTipRightStyle}">
                             <TextBlock Text="{x:Static c:CheatSheetInputInfo.DisciplineTooltip}" />
@@ -298,7 +311,7 @@
 
                 <Label Grid.Row="4" Grid.Column="0" Content="Care Mistakes:" Style="{StaticResource DefaultLabelStyle}" />
                 <TextBox Grid.Row="4" Grid.Column="1" FocusVisualStyle="{StaticResource DefaultFocusStyle}"
-                         Style="{StaticResource DefaultTextBoxStyle}">
+                         HorizontalContentAlignment="Center" Style="{StaticResource DefaultTextBoxStyle}">
                     <TextBox.ToolTip>
                         <ToolTip Style="{StaticResource DefaultToolTipRightStyle}">
                             <TextBlock Text="{x:Static c:CheatSheetInputInfo.CareMistakesTooltip}" />
@@ -315,7 +328,7 @@
 
                 <Label Grid.Row="5" Grid.Column="0" Content="Battles:" Style="{StaticResource DefaultLabelStyle}" />
                 <TextBox Grid.Row="5" Grid.Column="1" FocusVisualStyle="{StaticResource DefaultFocusStyle}"
-                         Style="{StaticResource DefaultTextBoxStyle}">
+                         HorizontalContentAlignment="Center" Style="{StaticResource DefaultTextBoxStyle}">
                     <TextBox.ToolTip>
                         <ToolTip Style="{StaticResource DefaultToolTipRightStyle}">
                             <TextBlock Text="{x:Static c:CheatSheetInputInfo.BattlesTooltip}" />
@@ -332,7 +345,7 @@
 
                 <Label Grid.Row="6" Grid.Column="0" Content="Poop Level:" Style="{StaticResource DefaultLabelStyle}" />
                 <TextBox Grid.Row="6" Grid.Column="1" FocusVisualStyle="{StaticResource DefaultFocusStyle}"
-                         Style="{StaticResource DefaultTextBoxStyle}">
+                         HorizontalContentAlignment="Center" Style="{StaticResource DefaultTextBoxStyle}">
                     <TextBox.ToolTip>
                         <ToolTip Style="{StaticResource DefaultToolTipRightStyle}">
                             <TextBlock Text="{x:Static c:CheatSheetInputInfo.PoopLevelTooltip}" />
@@ -349,7 +362,7 @@
 
                 <Label Grid.Row="7" Grid.Column="0" Content="Pooping Timer:" Style="{StaticResource DefaultLabelStyle}" />
                 <TextBox Grid.Row="7" Grid.Column="1" FocusVisualStyle="{StaticResource DefaultFocusStyle}"
-                         Style="{StaticResource DefaultTextBoxStyle}">
+                         HorizontalContentAlignment="Center" Style="{StaticResource DefaultTextBoxStyle}">
                     <TextBox.ToolTip>
                         <ToolTip Style="{StaticResource DefaultToolTipRightStyle}">
                             <TextBlock Text="{x:Static c:CheatSheetInputInfo.PoopingTimerTooltip}" />
@@ -366,7 +379,7 @@
 
                 <Label Grid.Row="8" Grid.Column="0" Content="Energy Level:" Style="{StaticResource DefaultLabelStyle}" />
                 <TextBox Grid.Row="8" Grid.Column="1" FocusVisualStyle="{StaticResource DefaultFocusStyle}"
-                         Style="{StaticResource DefaultTextBoxStyle}">
+                         HorizontalContentAlignment="Center" Style="{StaticResource DefaultTextBoxStyle}">
                     <TextBox.ToolTip>
                         <ToolTip Style="{StaticResource DefaultToolTipRightStyle}">
                             <TextBlock Text="{x:Static c:CheatSheetInputInfo.EnergyLevelTooltip}" />
@@ -383,7 +396,7 @@
 
                 <Label Grid.Row="9" Grid.Column="0" Content="Hungry Timer:" Style="{StaticResource DefaultLabelStyle}" />
                 <TextBox Grid.Row="9" Grid.Column="1" FocusVisualStyle="{StaticResource DefaultFocusStyle}"
-                         Style="{StaticResource DefaultTextBoxStyle}">
+                         HorizontalContentAlignment="Center" Style="{StaticResource DefaultTextBoxStyle}">
                     <TextBox.ToolTip>
                         <ToolTip Style="{StaticResource DefaultToolTipRightStyle}">
                             <TextBlock Text="{x:Static c:CheatSheetInputInfo.HungryTimerTooltip}" />
@@ -400,7 +413,7 @@
 
                 <Label Grid.Row="10" Grid.Column="0" Content="Starvation Timer:" Style="{StaticResource DefaultLabelStyle}" />
                 <TextBox Grid.Row="10" Grid.Column="1" FocusVisualStyle="{StaticResource DefaultFocusStyle}"
-                         Style="{StaticResource DefaultTextBoxStyle}">
+                         HorizontalContentAlignment="Center" Style="{StaticResource DefaultTextBoxStyle}">
                     <TextBox.ToolTip>
                         <ToolTip Style="{StaticResource DefaultToolTipRightStyle}">
                             <TextBlock Text="{x:Static c:CheatSheetInputInfo.StarvationTimerTooltip}" />
@@ -417,7 +430,7 @@
 
                 <Label Grid.Row="11" Grid.Column="0" Content="Lifespan (h):" Style="{StaticResource DefaultLabelStyle}" />
                 <TextBox Grid.Row="11" Grid.Column="1" FocusVisualStyle="{StaticResource DefaultFocusStyle}"
-                         Style="{StaticResource DefaultTextBoxStyle}">
+                         HorizontalContentAlignment="Center" Style="{StaticResource DefaultTextBoxStyle}">
                     <TextBox.ToolTip>
                         <ToolTip Style="{StaticResource DefaultToolTipRightStyle}">
                             <TextBlock Text="{x:Static c:CheatSheetInputInfo.LifespanTooltip}" />
@@ -434,7 +447,7 @@
 
                 <Label Grid.Row="12" Grid.Column="0" Content="Virus Bar:" Style="{StaticResource DefaultLabelStyle}" />
                 <TextBox Grid.Row="12" Grid.Column="1" FocusVisualStyle="{StaticResource DefaultFocusStyle}"
-                         Style="{StaticResource DefaultTextBoxStyle}">
+                         HorizontalContentAlignment="Center" Style="{StaticResource DefaultTextBoxStyle}">
                     <TextBox.ToolTip>
                         <ToolTip Style="{StaticResource DefaultToolTipRightStyle}">
                             <TextBlock Text="{x:Static c:CheatSheetInputInfo.VirusBarTooltip}" />
@@ -449,27 +462,89 @@
                     </TextBox.Text>
                 </TextBox>
 
-                <Label Grid.Row="13" Grid.Column="0" Content="Age (days):" Style="{StaticResource DefaultLabelStyle}" />
-                <TextBox Grid.Row="13" Grid.Column="1" IsReadOnly="True"
-                         Style="{StaticResource DefaultTextBoxStyle}"
-                         Text="{Binding AgeInDays, Mode=OneWay}">
+            </Grid>
+
+            <Grid Grid.Column="2" Width="{StaticResource ColumnWidth}" Margin="30,0,0,0" VerticalAlignment="Top" Background="Transparent">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="58" />
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Grid.Row="0" Grid.Column="0" Text="Profile" Style="{StaticResource GroupHeaderStyle}" />
+
+                <Label Grid.Row="1" Grid.Column="0" Content="Weight:" Style="{StaticResource DefaultLabelStyle}" />
+                <TextBox Grid.Row="1" Grid.Column="1" FocusVisualStyle="{StaticResource DefaultFocusStyle}"
+                         HorizontalContentAlignment="Center" Style="{StaticResource DefaultTextBoxStyle}">
+                    <TextBox.ToolTip>
+                        <ToolTip Style="{StaticResource DefaultToolTipRightStyle}">
+                            <TextBlock Text="{x:Static c:CheatSheetInputInfo.WeightTooltip}" />
+                        </ToolTip>
+                    </TextBox.ToolTip>
+                    <TextBox.Text>
+                        <Binding Path="ProfileWeight.Value" UpdateSourceTrigger="LostFocus">
+                            <Binding.ValidationRules>
+                                <validation:NumericRangeValidationRule Minimum="{x:Static c:CheatSheetInputInfo.WEIGHT_MIN}" Maximum="{x:Static c:CheatSheetInputInfo.WEIGHT_MAX}" ValidationStep="RawProposedValue" />
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox>
+
+                <Label Grid.Row="2" Grid.Column="0" Content="Lives:" Style="{StaticResource DefaultLabelStyle}" />
+                <TextBox Grid.Row="2" Grid.Column="1" FocusVisualStyle="{StaticResource DefaultFocusStyle}"
+                         HorizontalContentAlignment="Center" Style="{StaticResource DefaultTextBoxStyle}">
+                    <TextBox.ToolTip>
+                        <ToolTip Style="{StaticResource DefaultToolTipRightStyle}">
+                            <TextBlock Text="{x:Static c:CheatSheetInputInfo.LivesTooltip}" />
+                        </ToolTip>
+                    </TextBox.ToolTip>
+                    <TextBox.Text>
+                        <Binding Path="ProfileLives.Value" UpdateSourceTrigger="LostFocus">
+                            <Binding.ValidationRules>
+                                <validation:NumericRangeValidationRule Minimum="{x:Static c:CheatSheetInputInfo.LIVES_MIN}" Maximum="{x:Static c:CheatSheetInputInfo.LIVES_MAX}" ValidationStep="RawProposedValue" />
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox>
+
+                <Label Grid.Row="3" Grid.Column="0" Content="Age (days):" Style="{StaticResource DefaultLabelStyle}" />
+                <TextBox Grid.Row="3" Grid.Column="1" FocusVisualStyle="{StaticResource DefaultFocusStyle}"
+                         HorizontalContentAlignment="Center" Style="{StaticResource DefaultTextBoxStyle}">
                     <TextBox.ToolTip>
                         <ToolTip Style="{StaticResource DefaultToolTipRightStyle}">
                             <TextBlock Text="{x:Static c:CheatSheetInputInfo.AgeInDaysTooltip}" />
                         </ToolTip>
                     </TextBox.ToolTip>
+                    <TextBox.Text>
+                        <Binding Path="TechnicalAgeInDays.Value" UpdateSourceTrigger="LostFocus">
+                            <Binding.ValidationRules>
+                                <validation:NumericRangeValidationRule Minimum="{x:Static c:CheatSheetInputInfo.AGE_IN_DAYS_MIN}" Maximum="{x:Static c:CheatSheetInputInfo.AGE_IN_DAYS_MAX}" ValidationStep="RawProposedValue" />
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
                 </TextBox>
 
-                <Label Grid.Row="14" Grid.Column="0" Content="Evolution Age (h):"
-                       Style="{StaticResource DefaultLabelStyle}" />
-                <TextBox Grid.Row="14" Grid.Column="1" IsReadOnly="True"
-                         Style="{StaticResource DefaultTextBoxStyle}"
-                         Text="{Binding EvolutionAgeInHours, Mode=OneWay}">
+                <Label Grid.Row="4" Grid.Column="0" Content="Evolution Age (h):" Style="{StaticResource DefaultLabelStyle}" />
+                <TextBox Grid.Row="4" Grid.Column="1" FocusVisualStyle="{StaticResource DefaultFocusStyle}"
+                         HorizontalContentAlignment="Center" Style="{StaticResource DefaultTextBoxStyle}">
                     <TextBox.ToolTip>
                         <ToolTip Style="{StaticResource DefaultToolTipRightStyle}">
                             <TextBlock Text="{x:Static c:CheatSheetInputInfo.EvolutionAgeTooltip}" />
                         </ToolTip>
                     </TextBox.ToolTip>
+                    <TextBox.Text>
+                        <Binding Path="TechnicalEvolutionAgeInHours.Value" UpdateSourceTrigger="LostFocus">
+                            <Binding.ValidationRules>
+                                <validation:NumericRangeValidationRule Minimum="{x:Static c:CheatSheetInputInfo.EVOLUTION_AGE_MIN}" Maximum="{x:Static c:CheatSheetInputInfo.EVOLUTION_AGE_MAX}" ValidationStep="RawProposedValue" />
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
                 </TextBox>
             </Grid>
         </Grid>

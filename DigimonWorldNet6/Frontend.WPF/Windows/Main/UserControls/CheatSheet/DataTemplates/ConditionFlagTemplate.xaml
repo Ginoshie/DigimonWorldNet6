@@ -14,11 +14,7 @@
                 </TextBlock.RenderTransform>
             </TextBlock>
             <CheckBox IsChecked="{Binding Value}" Style="{StaticResource DefaultCheckboxStyle}"
-                      VerticalAlignment="Center">
-                <CheckBox.LayoutTransform>
-                    <ScaleTransform ScaleX="1.5" ScaleY="1.5" />
-                </CheckBox.LayoutTransform>
-            </CheckBox>
+                      VerticalAlignment="Center" />
         </StackPanel>
     </DataTemplate>
 
