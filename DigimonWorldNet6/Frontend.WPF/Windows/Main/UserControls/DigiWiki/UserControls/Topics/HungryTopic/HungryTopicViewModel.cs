@@ -15,15 +15,15 @@ public class HungryTopicViewModel : TopicViewModelBase
         base(
             instantDisplay,
             speakShellmonTextNoDelayAction,
-            ShellmonDigiWikiNarratorText.HungryWiki.ShellFacts,
-            ShellmonDigiWikiNarratorText.HungryWiki.WikiText)
+            ShellmonDigiWikiNarratorText.HungryWiki.SHELL_FACTS,
+            ShellmonDigiWikiNarratorText.HungryWiki.WIKI_TEXT)
     {
-        speakShellmonTextShortDelayAction(ShellmonDigiWikiNarratorText.HungryWiki.WikiText, SpeakShellmonTextAction);
+        speakShellmonTextShortDelayAction(ShellmonDigiWikiNarratorText.HungryWiki.WIKI_TEXT, SpeakShellmonTextAction);
 
-        SpeakHungerConditionScreenCommand = new CommandHandler(() => speakShellmonTextNoDelayAction(ShellmonDigiWikiNarratorText.HungryWiki.HungerScreen, SpeakShellmonTextAction));
-        SpeakHungerConditionOverworldCommand = new CommandHandler(() => speakShellmonTextNoDelayAction(ShellmonDigiWikiNarratorText.HungryWiki.HungerOverworld, SpeakShellmonTextAction));
-        OpenGuideFoodChapterCommand = new CommandHandler(() => Process.Start(new ProcessStartInfo { FileName = Url.GuideFoodChapter, UseShellExecute = true }));
-        OpenGuideHungryChapterCommand = new CommandHandler(() => Process.Start(new ProcessStartInfo { FileName = Url.GuideHungryChapter, UseShellExecute = true }));
+        SpeakHungerConditionScreenCommand = new CommandHandler(() => speakShellmonTextNoDelayAction(ShellmonDigiWikiNarratorText.HungryWiki.HUNGER_SCREEN, SpeakShellmonTextAction));
+        SpeakHungerConditionOverworldCommand = new CommandHandler(() => speakShellmonTextNoDelayAction(ShellmonDigiWikiNarratorText.HungryWiki.HUNGER_OVERWORLD, SpeakShellmonTextAction));
+        OpenGuideFoodChapterCommand = new CommandHandler(() => Process.Start(new ProcessStartInfo { FileName = Url.GUIDE_FOOD_CHAPTER, UseShellExecute = true }));
+        OpenGuideHungryChapterCommand = new CommandHandler(() => Process.Start(new ProcessStartInfo { FileName = Url.GUIDE_HUNGRY_CHAPTER, UseShellExecute = true }));
     }
 
     public ICommand SpeakHungerConditionScreenCommand { get; }

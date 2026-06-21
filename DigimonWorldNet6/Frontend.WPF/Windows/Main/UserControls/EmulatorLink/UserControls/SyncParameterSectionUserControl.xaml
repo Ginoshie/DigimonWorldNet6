@@ -56,7 +56,7 @@
                     Width="{Binding SquareButtonWidth}"
                     Height="{Binding ButtonHeight}"
                     Margin="3"
-                    Command="{Binding SignalSetEmulatorHPCommand}"
+                    Command="{Binding SignalSetEmulatorHpCommand}"
                     CommandParameter="{Binding}">
                 <Button.ToolTip>
                     <ToolTip Style="{StaticResource DefaultToolTipRightStyle}">
@@ -69,7 +69,7 @@
                     Width="{Binding SquareButtonWidth}"
                     Height="{Binding ButtonHeight}"
                     Margin="3"
-                    Command="{Binding SignalSetEmulatorMPCommand}"
+                    Command="{Binding SignalSetEmulatorMpCommand}"
                     CommandParameter="{Binding}">
                 <Button.ToolTip>
                     <ToolTip Style="{StaticResource DefaultToolTipRightStyle}">

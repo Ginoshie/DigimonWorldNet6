@@ -15,16 +15,16 @@ public class AgeTopicViewModel : TopicViewModelBase
         base(
             instantDisplay,
             speakShellmonTextNoDelayAction,
-            ShellmonDigiWikiNarratorText.AgeWiki.ShellFacts,
-            ShellmonDigiWikiNarratorText.AgeWiki.WikiText)
+            ShellmonDigiWikiNarratorText.AgeWiki.SHELL_FACTS,
+            ShellmonDigiWikiNarratorText.AgeWiki.WIKI_TEXT)
     {
-        speakShellmonTextShortDelayAction(ShellmonDigiWikiNarratorText.AgeWiki.WikiText, SpeakShellmonTextAction);
+        speakShellmonTextShortDelayAction(ShellmonDigiWikiNarratorText.AgeWiki.WIKI_TEXT, SpeakShellmonTextAction);
 
-        SpeakAgeScreenCommand = new CommandHandler(() => speakShellmonTextNoDelayAction(ShellmonDigiWikiNarratorText.AgeWiki.AgeScreen, SpeakShellmonTextAction));
-        SpeakHappinessThresholdsCommand = new CommandHandler(() => speakShellmonTextNoDelayAction(ShellmonDigiWikiNarratorText.AgeWiki.HappinessThresholds, SpeakShellmonTextAction));
-        OpenGuideLifespanChapterCommand = new CommandHandler(() => Process.Start(new ProcessStartInfo { FileName = Url.GuideLifespanChapter, UseShellExecute = true }));
-        OpenYoutubeLifespanPartOneClipCommand = new CommandHandler(() => Process.Start(new ProcessStartInfo { FileName = Url.YoutubeLifespanPartOneClip, UseShellExecute = true }));
-        OpenYoutubeLifespanPartTwoClipCommand = new CommandHandler(() => Process.Start(new ProcessStartInfo { FileName = Url.YoutubeLifespanPartTwoClip, UseShellExecute = true }));
+        SpeakAgeScreenCommand = new CommandHandler(() => speakShellmonTextNoDelayAction(ShellmonDigiWikiNarratorText.AgeWiki.AGE_SCREEN, SpeakShellmonTextAction));
+        SpeakHappinessThresholdsCommand = new CommandHandler(() => speakShellmonTextNoDelayAction(ShellmonDigiWikiNarratorText.AgeWiki.HAPPINESS_THRESHOLDS, SpeakShellmonTextAction));
+        OpenGuideLifespanChapterCommand = new CommandHandler(() => Process.Start(new ProcessStartInfo { FileName = Url.GUIDE_LIFESPAN_CHAPTER, UseShellExecute = true }));
+        OpenYoutubeLifespanPartOneClipCommand = new CommandHandler(() => Process.Start(new ProcessStartInfo { FileName = Url.YOUTUBE_LIFESPAN_PART_ONE_CLIP, UseShellExecute = true }));
+        OpenYoutubeLifespanPartTwoClipCommand = new CommandHandler(() => Process.Start(new ProcessStartInfo { FileName = Url.YOUTUBE_LIFESPAN_PART_TWO_CLIP, UseShellExecute = true }));
     }
 
     public ICommand SpeakAgeScreenCommand { get; }

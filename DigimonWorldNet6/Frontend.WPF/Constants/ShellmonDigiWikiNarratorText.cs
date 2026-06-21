@@ -4,7 +4,7 @@ public static class ShellmonDigiWikiNarratorText
 {
     public static class HomeScreen
     {
-        public const string IntroText = "Hey! Hello! I am Shellmon, the Digimon famous for being a know-it-all!\n" +
+        public const string INTRO_TEXT = "Hey! Hello! I am Shellmon, the Digimon famous for being a know-it-all!\n" +
                                         "\n" +
                                         "This the Digi-Wiki, a place where I get to share my knowledge with you.\n" +
                                         "\n" +
@@ -19,7 +19,7 @@ public static class ShellmonDigiWikiNarratorText
 
     public static class NormalAttackWiki
     {
-        public const string WikiText = "The normal attack is your bread and butter in battle. Here is how the damage is calculated!\n" +
+        public const string WIKI_TEXT = "The normal attack is your bread and butter in battle. Here is how the damage is calculated!\n" +
                                        "\n" +
                                        "Damage is based on your offense minus the enemy's defense. The game applies some flooring along the way, so small differences may occur. The order of operations in the actual implementation may also differ slightly.\n" +
                                        "\n" +
@@ -27,7 +27,7 @@ public static class ShellmonDigiWikiNarratorText
                                        "\n" +
                                        "The specialty factor is applied on top of this. More on that in the Specialty topic!";
 
-        public const string ShellFacts = "Shell Fact One\n" +
+        public const string SHELL_FACTS = "Shell Fact One\n" +
                                          "The specialty factor is calculated separately and multiplied on top of the raw damage. Even a tiny offense advantage can hit hard with the right matchup!\n" +
                                          "\n" +
                                          "Shell Fact Two\n" +
@@ -36,14 +36,14 @@ public static class ShellmonDigiWikiNarratorText
                                          "Shell Fact Three\n" +
                                          "The chance to hit a move is: moveAccuracy - (moveAccuracy * (victimSpeed - (attackerSpeed / 10)) / 1998). Speed matters in more ways than one!";
 
-        public const string FormulaImage = "This is the normal attack damage formula.\n" +
+        public const string FORMULA_IMAGE = "This is the normal attack damage formula.\n" +
                                            "\n" +
                                            "Offense minus defense forms the base, with some flooring applied. Once the offense exceeds the defense by 500, the maximum is reached.";
     }
 
     public static class FinisherFormulaWiki
     {
-        public const string WikiText = "Once your finisher fires, how much damage it deals depends on how well you filled the bar!\n" +
+        public const string WIKI_TEXT = "Once your finisher fires, how much damage it deals depends on how well you filled the bar!\n" +
                                        "\n" +
                                        "The finisher bar is a value between 0 and 80, displayed as 10 segments on screen. Each press of L1 or R1 during the finisher adds 2 to the bar.\n" +
                                        "\n" +
@@ -51,7 +51,7 @@ public static class ShellmonDigiWikiNarratorText
                                        "\n" +
                                        "The specialty factor applies to finisher damage too, just like normal attacks!";
 
-        public const string ShellFacts = "Shell Fact One\n" +
+        public const string SHELL_FACTS = "Shell Fact One\n" +
                                          "The specialty factor applies to finisher damage the same way it does to normal attacks. A great matchup makes your finisher hit even harder!\n" +
                                          "\n" +
                                          "Shell Fact Two\n" +
@@ -60,14 +60,14 @@ public static class ShellmonDigiWikiNarratorText
                                          "Shell Fact Three\n" +
                                          "Finisher damage can never drop below 1. Even a completely empty bar still connects for 1.";
 
-        public const string FormulaImage = "This is the finisher damage formula.\n" +
+        public const string FORMULA_IMAGE = "This is the finisher damage formula.\n" +
                                            "\n" +
                                            "The bar value from 0 to 80 feeds directly into the calculation. A full bar gives the maximum result. The damage is never smaller than 1.";
     }
 
     public static class FinisherWiki
     {
-        public const string WikiText = "Every Digimon can perform a finisher by having a fitting move in slot 4. Once ready it will fire off automatically the next time it attacks!\n" +
+        public const string WIKI_TEXT = "Every Digimon can perform a finisher by having a fitting move in slot 4. Once ready it will fire off automatically the next time it attacks!\n" +
                                        "\n" +
                                        "You can see the charge progress through the \"FINISH!!!\" text displayed below the HP and MP bars during battle. It needs to reach a target value that depends on your Digimon's speed.\n" +
                                        "\n" +
@@ -79,7 +79,7 @@ public static class ShellmonDigiWikiNarratorText
                                        "\n" +
                                        "The last two can happen at the same time! When your attack gets blocked, you gain 8% and the enemy who blocked gains 6%.";
 
-        public const string ShellFacts = "Shell Fact One\n" +
+        public const string SHELL_FACTS = "Shell Fact One\n" +
                                          "The finisher charge target is calculated as: 3000 - speed. Faster Digimon charge their finisher in fewer ticks!\n" +
                                          "\n" +
                                          "Shell Fact Two\n" +
@@ -88,13 +88,13 @@ public static class ShellmonDigiWikiNarratorText
                                          "Shell Fact Three\n" +
                                          "The finisher fires automatically on the next attack once the charge is full. You have no say in the matter — it just goes off!";
 
-        public const string FinisherProgressImage = "This shows the \"FINISH!!\" text visible during battle below the HP and MP display.\n" +
+        public const string FINISHER_PROGRESS_IMAGE = "This shows the \"FINISH!!\" text visible during battle below the HP and MP display.\n" +
                                                     "\n" +
                                                     "The text grows as the charge fills up. Once it fully spells FINISH!! press square to instruct your Digimon to do the finisher\n" +
                                                     "\n" +
                                                     "Be carefull not to get interrupted!";
 
-        public const string FinisherBarImage = "The finisher bar is displayed during your finisher attack.\n" +
+        public const string FINISHER_BAR_IMAGE = "The finisher bar is displayed during your finisher attack.\n" +
                                                "\n" +
                                                "Mash L1 or R1 to fill it. Each press adds 2 to the internal value and the bar goes from 0 to 80.\n" +
                                                "\n" +
@@ -105,7 +105,7 @@ public static class ShellmonDigiWikiNarratorText
 
     public static class SpecialtyFactorWiki
     {
-        public const string WikiText = "Every attack has a specialty and every Digimon has three specialties of their own. How they match up determines a factor that multiplies your damage!\n" +
+        public const string WIKI_TEXT = "Every attack has a specialty and every Digimon has three specialties of their own. How they match up determines a factor that multiplies your damage!\n" +
                                        "\n" +
                                        "The game looks up the relation between the attack specialty and each of the defender's three specialties using a table. The three lookup values are summed up and then divided by 30 to create the final factor.\n" +
                                        "\n" +
@@ -113,7 +113,7 @@ public static class ShellmonDigiWikiNarratorText
                                        "\n" +
                                        "Check the specialty chart to see which types score high against which defenders.";
 
-        public const string ShellFacts = "Shell Fact One\n" +
+        public const string SHELL_FACTS = "Shell Fact One\n" +
                                          "The None specialty exists as a catch-all type. It tends to have neutral values across the board, so it rarely gives huge bonuses or penalties.\n" +
                                          "\n" +
                                          "Shell Fact Two\n" +
@@ -122,7 +122,7 @@ public static class ShellmonDigiWikiNarratorText
                                          "Shell Fact Three\n" +
                                          "You can view which specialty a finisher uses in the finisher data spreadsheet linked in the guide.";
 
-        public const string SpecialtyChartImage = "This chart shows how each attacking specialty scores against defending specialties.\n" +
+        public const string SPECIALTY_CHART_IMAGE = "This chart shows how each attacking specialty scores against defending specialties.\n" +
                                                   "\n" +
                                                   "Horizontal (→) is the attacking type, vertical (↓) is the defending type.\n" +
                                                   "\n" +
@@ -131,7 +131,7 @@ public static class ShellmonDigiWikiNarratorText
 
     public static class PraisingWiki
     {
-        public const string WikiText = "If your Digimon is feeling a bit blue, or you just want it to be even happier. Then praise it!\n" +
+        public const string WIKI_TEXT = "If your Digimon is feeling a bit blue, or you just want it to be even happier. Then praise it!\n" +
                                        "\n" +
                                        "By praising your Digimon you'll increase its happiness according to the following formula:\n" +
                                        "- floor(discipline * 0.1) + 2\n" +
@@ -142,7 +142,7 @@ public static class ShellmonDigiWikiNarratorText
                                        "\n" +
                                        "Each praise will lower discipline by 5.";
 
-        public const string ShellFacts = "Shell Fact One\n" +
+        public const string SHELL_FACTS = "Shell Fact One\n" +
                                          "Happiness is a bonus criteria for certain evolutions. Praising can help you reach high threshold values.\n" +
                                          "\n" +
                                          "Shell Fact Two\n" +
@@ -151,14 +151,14 @@ public static class ShellmonDigiWikiNarratorText
                                          "Shell Fact Three\n" +
                                          "Alternating praising and scolding will reduce both happiness and discipline.";
 
-        public const string PraisingMenuAction = "Open the menu by pressing triangle and you'll find the Praise command.\n" +
+        public const string PRAISING_MENU_ACTION = "Open the menu by pressing triangle and you'll find the Praise command.\n" +
                                                  "\n" +
                                                  "Issue it to pet on your Digimon and raise its happiness";
     }
 
     public static class ScoldingWiki
     {
-        public const string WikiText = "Are you looking to increase the discipline of your Digimon? Or do you want to get it to eat some of those devlish chips? Look no further!\n" +
+        public const string WIKI_TEXT = "Are you looking to increase the discipline of your Digimon? Or do you want to get it to eat some of those devlish chips? Look no further!\n" +
                                        "\n" +
                                        "You can punish your Digimon when it refuses to eat a Port.potty or even those horrible DV Chips.\n" +
                                        "\n" +
@@ -168,7 +168,7 @@ public static class ShellmonDigiWikiNarratorText
                                        "\n" +
                                        "Scolding in other siuations will always increase discipline by 2 and decrease happiness by 10.";
 
-        public const string ShellFacts = "Shell Fact One\n" +
+        public const string SHELL_FACTS = "Shell Fact One\n" +
                                          "Discipline is a bonus criteria for certain evolutions. Scolding can help you reach high threshold values.\n" +
                                          "\n" +
                                          "Shell Fact Two\n" +
@@ -177,7 +177,7 @@ public static class ShellmonDigiWikiNarratorText
                                          "Shell Fact Three\n" +
                                          "Alternating scolding and praising will reduce both discipline and happiness.";
 
-        public const string ScoldingMenuAction = "Open the menu by pressing triangle and you'll find the Scold command.\n" +
+        public const string SCOLDING_MENU_ACTION = "Open the menu by pressing triangle and you'll find the Scold command.\n" +
                                                  "\n" +
                                                  "Issue it to tell your Digimon who's the boss around here.\n" +
                                                  "\n";
@@ -185,14 +185,14 @@ public static class ShellmonDigiWikiNarratorText
 
     public static class FoodWiki
     {
-        public const string WikiText = "Food gives your Digimon a set amount of energy and increase or decrease in weight.  Some foods also reduce Tiredness, increase Happiness and/or Discipline as well as certain stats.\n" +
+        public const string WIKI_TEXT = "Food gives your Digimon a set amount of energy and increase or decrease in weight.  Some foods also reduce Tiredness, increase Happiness and/or Discipline as well as certain stats.\n" +
                                        "\n" +
                                        "Over time and when performing actions energy will go down.  A Digimon becomes hungry at fixed times, indepedent of it's energy level.  When your Digimon gets hungry the starvation timer starts." +
                                        "Either feed it until the energy storage hits a certain threshold or wait for the timer to run out to stop it's hunger.\n" +
                                        "\n" +
                                        "If the starvation timer runs out while the energy value is below threshold then it'll result in a care mistake.\n";
 
-        public const string ShellFacts = "Shell Fact One\n" +
+        public const string SHELL_FACTS = "Shell Fact One\n" +
                                          "Each Digimon has a favorite food which gives them 40% more energy and +2 Happiness!\n" +
                                          "\n" +
                                          "Shell Fact Two\n" +
@@ -201,13 +201,13 @@ public static class ShellmonDigiWikiNarratorText
                                          "Shell Fact Three\n" +
                                          "Training increases energy consumption by 1.";
 
-        public const string MushroomOverworld = "Mushrooms are one of the common food items you can find in the overworld.\n" +
+        public const string MUSHROOM_OVERWORLD = "Mushrooms are one of the common food items you can find in the overworld.\n" +
                                                 "\n" +
                                                 "Keep your eyes peeled for other items too!\n" +
                                                 "\n" +
                                                 "Who knows what you might find.";
 
-        public const string MeatFarmOverworld = "Every day you'll be able to get some meat from the meat farm. Yes, we grow meat on a farm.\n" +
+        public const string MEAT_FARM_OVERWORLD = "Every day you'll be able to get some meat from the meat farm. Yes, we grow meat on a farm.\n" +
                                                 "\n" +
                                                 "For free even!\n" +
                                                 "\n" +
@@ -216,7 +216,7 @@ public static class ShellmonDigiWikiNarratorText
 
     public static class WeightWiki
     {
-        public const string WikiText = "The weight of your Digimon is a very dynamic parameter as it is influenced by many events.\n" +
+        public const string WIKI_TEXT = "The weight of your Digimon is a very dynamic parameter as it is influenced by many events.\n" +
                                        "\n" +
                                        "The following events influence the weight of your Digimon:\n" +
                                        "\n" +
@@ -225,65 +225,65 @@ public static class ShellmonDigiWikiNarratorText
                                        "- Pooping: Reduction 1/4th of the poop size + a random value between 0 and 3.\n" +
                                        "- 0 Energy: Reduction every 10 minutes while having 0 energy your Digimon will lose 1 weight.";
 
-        public const string ShellFacts = "Shell Fact One\n" +
+        public const string SHELL_FACTS = "Shell Fact One\n" +
                                          "Default weight can be found in the datasheet \"Digimon Raise\".\n" +
                                          "\n" +
                                          "Shell Fact Two\n" +
                                          "Time passed through training will not induce the weight reduction from 0 energy.";
 
-        public const string WeightScreen = "You can view the weight of your Digimon in the PROFILE section of the Status tab of the Digimon menu.\n" +
+        public const string WEIGHT_SCREEN = "You can view the weight of your Digimon in the PROFILE section of the Status tab of the Digimon menu.\n" +
                                            "\n" +
                                            "To get to this screen, open the main menu by pressing triangle. Then open the Digimon menu. It opens up at the Status tab, at the top you'll find the PROFILE section.";
 
-        public const string BigBerry = "This is called the Big Berry.\n" +
+        public const string BIG_BERRY = "This is called the Big Berry.\n" +
                                        "\n" +
                                        "This chunker of a berry fills your Digimon right up and makes it put on a whopping 10 weight!\n" +
                                        "\n" +
                                        "You'll hardly recognize after feeding one.";
 
-        public const string PricklyPear = "Ouch! Thats a spikey one. It's the Pricklypear\n" +
+        public const string PRICKLY_PEAR = "Ouch! Thats a spikey one. It's the Pricklypear\n" +
                                           "\n" +
                                           "It's hard to digest and as a result your Digimon will lose 5 weight!\n" +
                                           "\n" +
                                           "It does get you nice and toned though.";
 
-        public const string Steak = "Ohhh thats bloody. . . Perhaps Myotismons favorite, a Steak.\n" +
+        public const string STEAK = "Ohhh thats bloody. . . Perhaps Myotismons favorite, a Steak.\n" +
                                     "\n" +
                                     "This risky piece of meat fills you up but wont increase your weight.\n" +
                                     "\n" +
                                     "Might make you sick though!";
 
-        public const string ChainMelon = "Aaahh so ripe. . . I like ripe melons. . . This beauty is a Chain Melon\n" +
+        public const string CHAIN_MELON = "Aaahh so ripe. . . I like ripe melons. . . This beauty is a Chain Melon\n" +
                                          "\n" +
                                          "This wonderous fruit does many things. Among them is increasing weight by 3.\n" +
                                          "\n" +
                                          "It'll also make you much less tired, much happier and increase lifespan. Some bad ones make you sick though.";
 
-        public const string MoldyMeat = "Pwaaaah. . . whats that smell. . . Oh I see, Moldy Meat.\n" +
+        public const string MOLDY_MEAT = "Pwaaaah. . . whats that smell. . . Oh I see, Moldy Meat.\n" +
                                         "\n" +
                                         "This yukkie piece of \"meat\" increases weight by 2 but it's a sure fire way to get sick.\n" +
                                         "\n" +
                                         "\n Hard to believe anyone likes it, let alone loves it. But yet some do. . . ";
 
-        public const string Digicatfish = "Great catch! The Digicatfish, very filling and a solid way to increase weight.\n" +
+        public const string DIGICATFISH = "Great catch! The Digicatfish, very filling and a solid way to increase weight.\n" +
                                           "\n" +
                                           "This hefty fish will increase your weight by 5.\n" +
                                           "\n" +
                                           "You can also use them to easily catch digiseabass, they also love them!";
 
-        public const string Digiseabass = "This is a rather peculiar fish, the Digiseabass.\n" +
+        public const string DIGISEABASS = "This is a rather peculiar fish, the Digiseabass.\n" +
                                           "\n" +
                                           "Consuming this big boy will result in a weight gain of 4 while also increasing your lifespan by a little.\n" +
                                           "\n" +
                                           "Invigorating!";
 
-        public const string BlackTrout = "Ah, the Black Trout. This is an odd one out.\n" +
+        public const string BLACK_TROUT = "Ah, the Black Trout. This is an odd one out.\n" +
                                          "\n" +
                                          "It's remarkable nutrional value will increase your stats but. . . lower your weight by 2!\n" +
                                          "\n" +
                                          "It remains a mystery to me still. . . ";
 
-        public const string GoldAcorn = "So shiny. . . It's very precious, this little Golden Acorn.\n" +
+        public const string GOLD_ACORN = "So shiny. . . It's very precious, this little Golden Acorn.\n" +
                                         "\n" +
                                         "Feed it or sell  it. It's up to you. Feeding it will increase weight by 4.\n" +
                                         "\n" +
@@ -292,7 +292,7 @@ public static class ShellmonDigiWikiNarratorText
 
     public static class PoopWiki
     {
-        public const string WikiText = "Digimon poop on a somewhat regular basis. Be sure to find a potty in time or things get stinky.\n" +
+        public const string WIKI_TEXT = "Digimon poop on a somewhat regular basis. Be sure to find a potty in time or things get stinky.\n" +
                                        "\n" +
                                        "The interval of the need to poop is based on the stage:\n" +
                                        "- Baby: 3h\n" +
@@ -305,7 +305,7 @@ public static class ShellmonDigiWikiNarratorText
                                        "\n" +
                                        "Fail to find a potty and your Digimon will poop in the overworld. This will decrease happiness by 10 and discipline by 5, increase care mistakes and virus bar by 1.\n";
 
-        public const string ShellFacts = "Shell Fact One\n" +
+        public const string SHELL_FACTS = "Shell Fact One\n" +
                                          "The virus bar has a total value of 16.\n" +
                                          "\n" +
                                          "Shell Fact Two\n" +
@@ -317,20 +317,20 @@ public static class ShellmonDigiWikiNarratorText
                                          "Shell Fact Four\n" +
                                          "If the size of a poop goes above a certain value the game renders it upside down. Use the cheat sheet for Cheat Engine to change the size of poops on the screen.";
 
-        public const string ToiletFileCity = "File city has a toilet where you can take your digimon to when it needs to poop.\n" +
+        public const string TOILET_FILE_CITY = "File city has a toilet where you can take your digimon to when it needs to poop.\n" +
                                              "\n" +
                                              "Theres a bunch of other places that have toilets too so keep an eye out for them so you know where to go when the time comes.\n" +
                                              "\n" +
                                              "If you visit a new place you might wanna buy some Port.potty's just in case.";
 
-        public const string PortpottyShop = "You can buy Port.potty's in the shop in File City. They sure come in handy when you go out exploring and need a toilet in a pinch.\n" +
+        public const string PORTPOTTY_SHOP = "You can buy Port.potty's in the shop in File City. They sure come in handy when you go out exploring and need a toilet in a pinch.\n" +
                                             "\n" +
                                             "My advice. . . Always have a couple on you just in case. *smiles*";
     }
 
     public static class AgeWiki
     {
-        public const string WikiText =
+        public const string WIKI_TEXT =
             "Every digimon starts out with 360 hours of lifespan. During its lifetime it will reduce each hours naturally but it may also be increased or decreased by certain events. When lifespan decreases to 0 it passes away and becomes an egg.\n" +
             "\n" +
             "The following events increase lifespan:\n" +
@@ -343,14 +343,14 @@ public static class ShellmonDigiWikiNarratorText
             "- Every 4th hour: 0-4h, based on happiness\n" +
             "- Feeding a DV chip: 24h";
 
-        public const string ShellFacts = "Whether you're a brother or whether you're a mother\n" +
+        public const string SHELL_FACTS = "Whether you're a brother or whether you're a mother\n" +
                                          "You're stayin' alive. . .  stayin' alive. . . \n" +
                                          "Feel the city breakin' and everybody shakin'\n" +
                                          "And we're stayin' alive. . .  stayin' alive. . . \n" +
                                          "Ah. . . ha. . .  ha. . .  ha. . .  stayin' alive. . .  stayin' alive. . . \n" +
                                          "Ah. . .  ha. . .  ha. . .  ha. . .  stayin' alive";
 
-        public const string AgeScreen = "You can view the age of your Digimon in the PROFILE section of the Status tab of the Digimon menu.\n" +
+        public const string AGE_SCREEN = "You can view the age of your Digimon in the PROFILE section of the Status tab of the Digimon menu.\n" +
                                         "\n" +
                                         "To get to this screen, open the main menu by pressing triangle. Then open the Digimon menu. It opens up at the Status tab, at the top you'll find the PROFILE section.\n" +
                                         "\n" +
@@ -358,7 +358,7 @@ public static class ShellmonDigiWikiNarratorText
                                         "\n" +
                                         "The remaining lifespan of your digimon is not visible in game. It is to remain a mystery as Jijimon would say.";
 
-        public const string HappinessThresholds = "This image show the happiness thresholds for the lifespan reduction.\n" +
+        public const string HAPPINESS_THRESHOLDS = "This image show the happiness thresholds for the lifespan reduction.\n" +
                                                   "\n" +
                                                   "From top to bottom the ranges are:\n" +
                                                   "- 97 to 100\n" +
@@ -373,7 +373,7 @@ public static class ShellmonDigiWikiNarratorText
 
     public static class TirednessWiki
     {
-        public const string WikiText = "Digimon, though being digital, get tired from activities. Once they get too tired they'll become tired.\n" +
+        public const string WIKI_TEXT = "Digimon, though being digital, get tired from activities. Once they get too tired they'll become tired.\n" +
                                        "\n" +
                                        "The tiredness value can be anywhere between 0 and 100. From 80 and up your digimon will get the tired condition.\n" +
                                        "While tired the following applies to your digimon:\n" +
@@ -385,7 +385,7 @@ public static class ShellmonDigiWikiNarratorText
                                        "- Increased chance of getting sick when staying up too long\n";
 
 
-        public const string ShellFacts = "Shell Fact One\n" +
+        public const string SHELL_FACTS = "Shell Fact One\n" +
                                          "A Happymushrm reduces tiredness, quite the funny mushroom I suppose.\n" +
                                          "\n" +
                                          "Shell Fact Two\n" +
@@ -397,13 +397,13 @@ public static class ShellmonDigiWikiNarratorText
                                          "Shell Fact Four\n" +
                                          "Resting at Punimons reduces tiredness by 10. When healing injure or sickness tiredness will be reduced to 50 if higher even!";
 
-        public const string DrimogemonCarryDirtQuest = "Drimogemon has you carrying dirt? Good for you! You'll get a nice work out but keep in mind that his does tires out your Digimon rather quickly.\n" +
+        public const string DRIMOGEMON_CARRY_DIRT_QUEST = "Drimogemon has you carrying dirt? Good for you! You'll get a nice work out but keep in mind that his does tires out your Digimon rather quickly.\n" +
                                                        "\n" +
                                                        "Each load you haul will increase tiredness by 10!\n" +
                                                        "\n" +
                                                        "Dont let that stop you though, just rest and eat in time and you'll be alright. *smiles reasuringly*";
 
-        public const string TrainingGym = "Training makes your Digimon stronger and allows it to evolve into other great Digimon.\n" +
+        public const string TRAINING_GYM = "Training makes your Digimon stronger and allows it to evolve into other great Digimon.\n" +
                                           "\n" +
                                           "This makes it an essential aspect of being a good tamer.\n" +
                                           "\n" +
@@ -416,7 +416,7 @@ public static class ShellmonDigiWikiNarratorText
 
     public static class SleepWiki
     {
-        public const string WikiText = "Each and every digimon requires a good sleep from time to time. Keeping them awake past their waking time will result in a care mistakes.\n" +
+        public const string WIKI_TEXT = "Each and every digimon requires a good sleep from time to time. Keeping them awake past their waking time will result in a care mistakes.\n" +
                                        "\n" +
                                        "Fresh and In Training digimon will sleep only 1 hour but need to sleep every 3 hours.\n" +
                                        "\n" +
@@ -428,13 +428,13 @@ public static class ShellmonDigiWikiNarratorText
                                        "- Sunset: 7:00 - 16:00\n" +
                                        "- Night: 10:00 - 19:00\n";
 
-        public const string ShellFacts = "Shell Fact One\n" +
+        public const string SHELL_FACTS = "Shell Fact One\n" +
                                          "Your digimon will get sleepy earlier based on tiredness. At 60 tiredness and up the effect is the strongest and your digimon will get sleeping 10 minutes earlier every 10 minutes.\n" +
                                          "\n" +
                                          "Shell Fact Two\n" +
                                          "The better your digimon sleeps, the more HP/MP will be regened and tiredness reduced.";
 
-        public const string SleepingSchedule = "Depending on the sleeping schedule of your Digimon it'll want to sleep during specific hours. You can find its sleeping schedule in the PROFILE section of the Digimon menu.\n" +
+        public const string SLEEPING_SCHEDULE = "Depending on the sleeping schedule of your Digimon it'll want to sleep during specific hours. You can find its sleeping schedule in the PROFILE section of the Digimon menu.\n" +
                                                "\n" +
                                                "To get to this screen, open the main menu by pressing triangle. Then open the Digimon menu. It opens up at the Status tab, in the top section you'll find the PROFILE section and under ACTIVE you'll see the sleeping schedule.\n" +
                                                "\n" +
@@ -443,7 +443,7 @@ public static class ShellmonDigiWikiNarratorText
 
     public static class AreaPreferenceWiki
     {
-        public const string WikiText = "Your Digimon might like or dislike a zone, or feel indiferent about it. The latter bis true for most zones.\n" +
+        public const string WIKI_TEXT = "Your Digimon might like or dislike a zone, or feel indiferent about it. The latter bis true for most zones.\n" +
                                        "\n" +
                                        "When a digimon likes or dislikes a zone you can tell by the animation of the face on of the happiness bar.\n" +
                                        "\n" +
@@ -457,9 +457,9 @@ public static class ShellmonDigiWikiNarratorText
                                        "- Tiredness is increased by 1 every 60 minutes\n" +
                                        "- Sleeping regenerates 20% less HP and MP and tiredness is reduced by 20% less ";
 
-        public const string ShellFacts = "";
+        public const string SHELL_FACTS = "";
         
-        public const string HappinessBar = "This shows the happiness bars and their animation when your digimon likes or dislike a zone.\n" +
+        public const string HAPPINESS_BAR = "This shows the happiness bars and their animation when your digimon likes or dislike a zone.\n" +
                                            "\n" +
                                            "From top to bottom:\n" +
                                            "- Disliked area, happiness range 0 to 100\n" +
@@ -470,19 +470,19 @@ public static class ShellmonDigiWikiNarratorText
 
     public static class HungryWiki
     {
-        public const string WikiText = "After a while your Digimon will get hungry. Feed it food to increase its energy level and once high enough it wont be hungry anymore.\n" +
+        public const string WIKI_TEXT = "After a while your Digimon will get hungry. Feed it food to increase its energy level and once high enough it wont be hungry anymore.\n" +
                                        "\n" +
                                        "If you dont feed it in time and the starvation timer runs out then the hunger will go away and the care mistake count goes up by one.\n" +
                                        "\n" +
                                        "Please feed your Digimon!";
 
-        public const string ShellFacts = "";
+        public const string SHELL_FACTS = "";
         
-        public const string HungerScreen = "When hungry, your Digimon will have a status modifier in the CONDITION section of the Status tab of the Digimon menu.\n" +
+        public const string HUNGER_SCREEN = "When hungry, your Digimon will have a status modifier in the CONDITION section of the Status tab of the Digimon menu.\n" +
                                            "\n" +
                                            "To get to this screen, open the main menu by pressing triangle. Then open the Digimon menu. It opens up at the Status tab, in the bottom left corner you'll find the CONDITION section.";
 
-        public const string HungerOverworld = "When hungry, your Digimon will have an emotion bubble with a meat icon above its head. As long as this emotion bubble is visible it is hungry.\n" +
+        public const string HUNGER_OVERWORLD = "When hungry, your Digimon will have an emotion bubble with a meat icon above its head. As long as this emotion bubble is visible it is hungry.\n" +
                                               "\n" +
                                               "It will make a uncomfortable movements and growl.\n" +
                                               "\n" +
@@ -491,7 +491,7 @@ public static class ShellmonDigiWikiNarratorText
 
     public static class PoopyWiki
     {
-        public const string WikiText = "Ah its time to find a toilet again!\n" +
+        public const string WIKI_TEXT = "Ah its time to find a toilet again!\n" +
                                        "\n" +
                                        "On a regular basis your digimon will feel the need to use the toilet.\n" +
                                        "\n" +
@@ -501,15 +501,15 @@ public static class ShellmonDigiWikiNarratorText
                                        "\n" +
                                        "The higher the discipline the longer your digimon will hold it in. But it can only hold for so long!";
 
-        public const string ShellFacts = "";
+        public const string SHELL_FACTS = "";
 
-        public const string PoopingScreen = "When your Digimon has to poop it will have a status modifier in the CONDITION section of the Status tab of the Digimon menu.\n" +
+        public const string POOPING_SCREEN = "When your Digimon has to poop it will have a status modifier in the CONDITION section of the Status tab of the Digimon menu.\n" +
                                             "\n" +
                                             "To get to this screen, open the main menu by pressing triangle. Then open the Digimon menu. It opens up at the Status tab, in the bottom left corner you'll find the CONDITION section.\n" +
                                             "\n" +
                                             "On this screen you'll also find the virus bar labelled as Vir.";
 
-        public const string PoopingOverworld = "When your Digimon has to poop it will have an emotion bubble with a turd icon above its head.\n" +
+        public const string POOPING_OVERWORLD = "When your Digimon has to poop it will have an emotion bubble with a turd icon above its head.\n" +
                                                "\n" +
                                                "It will stomp its feet and possible even grab its butt.\n" +
                                                "\n" +
@@ -518,7 +518,7 @@ public static class ShellmonDigiWikiNarratorText
 
     public static class TiredWiki
     {
-        public const string WikiText = "You might not expect this but your digimon can get tired after consuming too much energy. Once tiredness level reaches a critical value of 80 or higher it'll become tired.\n" +
+        public const string WIKI_TEXT = "You might not expect this but your digimon can get tired after consuming too much energy. Once tiredness level reaches a critical value of 80 or higher it'll become tired.\n" +
                                        "\n" +
                                        "When this happens you'll see the tired emotion appear above its head.\n" +
                                        "\n" +
@@ -527,20 +527,20 @@ public static class ShellmonDigiWikiNarratorText
                                        "Lets not overwork our dearest friend shall we?";
 
 
-        public const string ShellFacts = "";
+        public const string SHELL_FACTS = "";
 
-        public const string TiredScreen = "When your Digimon is tired it will have a status modifier in the CONDITION section of the Status tab of the Digimon menu.\n" +
+        public const string TIRED_SCREEN = "When your Digimon is tired it will have a status modifier in the CONDITION section of the Status tab of the Digimon menu.\n" +
                                               "\n" +
                                               "To get to this screen, open the main menu by pressing triangle. Then open the Digimon menu. It opens up at the Status tab, in the bottom left corner you'll find the CONDITION section.\n";
 
-        public const string TiredOverworld = "You'll notice a change in your Digimons behavior one it gets tired. An emotion bubble with a falling droplet will appear and his posture is slumped forward.\n" +
+        public const string TIRED_OVERWORLD = "You'll notice a change in your Digimons behavior one it gets tired. An emotion bubble with a falling droplet will appear and his posture is slumped forward.\n" +
                                                  "\n" +
                                                  "It's time to let it rest or feed it to reduce its tiredness.";
     }
 
     public static class SleepyWiki
     {
-        public const string WikiText = "Each and every digimon requires a good sleep from time to time. Keeping them awake past their waking time will result in a care mistakes.\n" +
+        public const string WIKI_TEXT = "Each and every digimon requires a good sleep from time to time. Keeping them awake past their waking time will result in a care mistakes.\n" +
                                        "\n" +
                                        "Fresh and In Training digimon will sleep only 1 hour but need to sleep every 3 hours.\n" +
                                        "\n" +
@@ -552,20 +552,20 @@ public static class ShellmonDigiWikiNarratorText
                                        "- Sunset: 7:00 - 16:00\n" +
                                        "- Night: 10:00 - 19:00\n";
 
-        public const string ShellFacts = "";
+        public const string SHELL_FACTS = "";
 
-        public const string SleepyScreen = "When your Digimon is sleepy it will have a status modifier in the CONDITION section of the Status tab of the Digimon menu.\n" +
+        public const string SLEEPY_SCREEN = "When your Digimon is sleepy it will have a status modifier in the CONDITION section of the Status tab of the Digimon menu.\n" +
                                           "\n" +
                                           "To get to this screen, open the main menu by pressing triangle. Then open the Digimon menu. It opens up at the Status tab, in the bottom left corner you'll find the CONDITION section.";
         
-        public const string SleepyOverworld = "Once sleepy your Digimon will appear drowzy and have a sleep icon in an emotion bubble above its head.\n" +
+        public const string SLEEPY_OVERWORLD = "Once sleepy your Digimon will appear drowzy and have a sleep icon in an emotion bubble above its head.\n" +
                                              "\n" +
                                              "Tell it good night and let it rest. Once it wakes up it'll be ready for another day!";
     }
     
     public static class FlowerWiki
     {
-        public const string WikiText = "This is a nasty condition, be sure to get rid of it quickly. Your digimon is feeling miserable and is losing stats quickly! It will start feeling better if you let it be though.\n" +
+        public const string WIKI_TEXT = "This is a nasty condition, be sure to get rid of it quickly. Your digimon is feeling miserable and is losing stats quickly! It will start feeling better if you let it be though.\n" +
                                        "\n" +
                                        "When happiness is negative and your Digimon has no other condition then the butterfly/flower condition may occur at any given moment. This is dependent on RNG and the chance to occur increases as happiness gets lower.\n" +
                                        "Every 10 minutes the game rolls RNG and if the check passes this condition will be applied.\n" +
@@ -576,14 +576,14 @@ public static class ShellmonDigiWikiNarratorText
                                        "- Every 0.75 minutes happiness is increased by 1\n" +
                                        "- Every 15 minutes stats are reduced by 2%";
         
-        public const string ShellFacts = "Shell Fact One\n" +
+        public const string SHELL_FACTS = "Shell Fact One\n" +
                                          "This condition is exclusive and will disappear when any other condition becomes active.";
 
-        public const string FlowerScreen = "When your Digimon has the butterfly / flower condition it will have a status modifier (flower) in the CONDITION section of the Status tab of the Digimon menu.\n" +
+        public const string FLOWER_SCREEN = "When your Digimon has the butterfly / flower condition it will have a status modifier (flower) in the CONDITION section of the Status tab of the Digimon menu.\n" +
                                            "\n" +
                                            "To get to this screen, open the main menu by pressing triangle. Then open the Digimon menu. It opens up at the Status tab, in the bottom left corner you'll find the CONDITION section.\n";
 
-        public const string ButterflyOverworld = "A digimon afflicted by the butterfly / flower condition will gawk at the sky aimlessly and have a butterfly flying around its head.\n" +
+        public const string BUTTERFLY_OVERWORLD = "A digimon afflicted by the butterfly / flower condition will gawk at the sky aimlessly and have a butterfly flying around its head.\n" +
                                                  "\n" +
                                                  "Cheer him up untill its happiness is positive and the condition will go away! Quick!\n" +
                                                  "\n" +
@@ -592,14 +592,14 @@ public static class ShellmonDigiWikiNarratorText
 
     public static class InjuredWiki
     {
-        public const string WikiText = "Battles are an integral part of the game but they injure your digimon. Once your digimon gets injured get it cured or it might fall all after time!" +
+        public const string WIKI_TEXT = "Battles are an integral part of the game but they injure your digimon. Once your digimon gets injured get it cured or it might fall all after time!" +
                                        "\n" +
                                        "Cure it by getting him to Centarumon or Punimon or feeding it a bandage or medicine.\n" +
                                        "\n" +
                                        "The chance of your Digimon getting injured after battle is as follows:\n" +
                                        "- Chance for injury = Tiredness - (CurrentHP / MaxHP)";
 
-        public const string ShellFacts = "Shell Fact One\n" +
+        public const string SHELL_FACTS = "Shell Fact One\n" +
                                          "Bandages and medicine can be bought from the store. Bandages can also be obtained as a drop from Psychemon. Medicine is dropped by PlatinumSukamon. Both have only a 10% chance of dropping though.\n" +
                                          "\n" +
                                          "Shell Fact Two\n" +
@@ -611,18 +611,18 @@ public static class ShellmonDigiWikiNarratorText
                                          "Shell Fact Four\n" +
                                          "The injury chance formula is: Tiredness - (CurrentHP / MaxHP). Keep your Digimon healthy and topped up to stay safe!";
 
-        public const string InjuredScreen = "When your Digimon has the injured condition it will have a status modifier in the CONDITION section of the Status tab of the Digimon menu.\n" +
+        public const string INJURED_SCREEN = "When your Digimon has the injured condition it will have a status modifier in the CONDITION section of the Status tab of the Digimon menu.\n" +
                                             "\n" +
                                             "To get to this screen, open the main menu by pressing triangle. Then open the Digimon menu. It opens up at the Status tab, in the bottom left corner you'll find the CONDITION section.\n";
 
-        public const string InjuredOverworld = "A digimon suffering from an injury will hunch forward and have a bandage in an emotion bubble by its head.\n" +
+        public const string INJURED_OVERWORLD = "A digimon suffering from an injury will hunch forward and have a bandage in an emotion bubble by its head.\n" +
                                                "\n" +
                                                "If not treated this will result in sickness eventually.";
     }
 
     public static class SickWiki
     {
-        public const string WikiText = "Oh deary me, has your Digimon fallen ill? This is not good, sickness should be cured quickly before your Digimon loses a life!\n" +
+        public const string WIKI_TEXT = "Oh deary me, has your Digimon fallen ill? This is not good, sickness should be cured quickly before your Digimon loses a life!\n" +
                                        "\n" +
                                        "Did it perhaps eat moldy meat or leave it injured for too long? How about staying in a screen of a disliked zone? All these can cause sickness.\n" +
                                        "\n" +
@@ -630,7 +630,7 @@ public static class ShellmonDigiWikiNarratorText
                                        "\n" +
                                        "If you happen to have a Sukamon or Numemon you might try your luck by letting it eat poop. The bigger the poop the higher the chance of curing the illness.";
 
-        public const string ShellFacts = "Shell Fact One\n" +
+        public const string SHELL_FACTS = "Shell Fact One\n" +
                                          "Medicine is available in the store, or obtained as a drop from PlatinumSukamon at a drop rate of 10%.\n" +
                                          "\n" +
                                          "Shell Fact Two\n" +
@@ -639,11 +639,11 @@ public static class ShellmonDigiWikiNarratorText
                                          "Shell Fact Three\n" +
                                          "Rather niche and. . . peculiar. . . but if you have a Numemon or Sukamon then they can heal by eating poop, the bigger the poop the higher the chance of healing!";
 
-        public const string SickScreen = "When your Digimon has the sick condition it will have a status modifier in the CONDITION section of the Status tab of the Digimon menu.\n" +
+        public const string SICK_SCREEN = "When your Digimon has the sick condition it will have a status modifier in the CONDITION section of the Status tab of the Digimon menu.\n" +
                                             "\n" +
                                             "To get to this screen, open the main menu by pressing triangle. Then open the Digimon menu. It opens up at the Status tab, in the bottom left corner you'll find the CONDITION section.\n";
 
-        public const string SickOverworld = "A digimon suffering from sickness will hunch forward and have a syringe in an emotion bubble by its head.\n" +
+        public const string SICK_OVERWORLD = "A digimon suffering from sickness will hunch forward and have a syringe in an emotion bubble by its head.\n" +
                                                "\n" +
                                                "If not treated this will result in the loss of a life eventually so be sure to cure it in time!";
     }

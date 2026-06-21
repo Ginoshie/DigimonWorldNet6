@@ -15,13 +15,13 @@ public class FinisherFormulaTopicViewModel : TopicViewModelBase
         base(
             instantDisplay,
             speakShellmonTextNoDelayAction,
-            ShellmonDigiWikiNarratorText.FinisherFormulaWiki.ShellFacts,
-            ShellmonDigiWikiNarratorText.FinisherFormulaWiki.WikiText)
+            ShellmonDigiWikiNarratorText.FinisherFormulaWiki.SHELL_FACTS,
+            ShellmonDigiWikiNarratorText.FinisherFormulaWiki.WIKI_TEXT)
     {
-        speakShellmonTextShortDelayAction(ShellmonDigiWikiNarratorText.FinisherFormulaWiki.WikiText, SpeakShellmonTextAction);
+        speakShellmonTextShortDelayAction(ShellmonDigiWikiNarratorText.FinisherFormulaWiki.WIKI_TEXT, SpeakShellmonTextAction);
 
-        SpeakFormulaImageCommand = new CommandHandler(() => speakShellmonTextNoDelayAction(ShellmonDigiWikiNarratorText.FinisherFormulaWiki.FormulaImage, SpeakShellmonTextAction));
-        OpenGuideFinisherFormulaChapterCommand = new CommandHandler(() => Process.Start(new ProcessStartInfo { FileName = Url.GuideFinisherFormulaChapter, UseShellExecute = true }));
+        SpeakFormulaImageCommand = new CommandHandler(() => speakShellmonTextNoDelayAction(ShellmonDigiWikiNarratorText.FinisherFormulaWiki.FORMULA_IMAGE, SpeakShellmonTextAction));
+        OpenGuideFinisherFormulaChapterCommand = new CommandHandler(() => Process.Start(new ProcessStartInfo { FileName = Url.GUIDE_FINISHER_FORMULA_CHAPTER, UseShellExecute = true }));
     }
 
     public ICommand SpeakFormulaImageCommand { get; }

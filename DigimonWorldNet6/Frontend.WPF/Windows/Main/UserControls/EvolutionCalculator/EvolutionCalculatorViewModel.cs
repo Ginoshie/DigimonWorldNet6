@@ -46,8 +46,8 @@ public sealed class EvolutionCalculatorViewModel : BaseViewModel, IDisposable
 
             // Parameter
             DigimonStatsEventHub.SyncAllEmulatorParameterStatsObservable.Subscribe(_ => SyncAllEmulatorCombatStats()),
-            DigimonStatsEventHub.SyncEmulatorHPObservable.Subscribe(_ => SyncEmulatorHp()),
-            DigimonStatsEventHub.SyncEmulatorMPObservable.Subscribe(_ => SyncEmulatorMp()),
+            DigimonStatsEventHub.SyncEmulatorHpObservable.Subscribe(_ => SyncEmulatorHp()),
+            DigimonStatsEventHub.SyncEmulatorMpObservable.Subscribe(_ => SyncEmulatorMp()),
             DigimonStatsEventHub.SyncEmulatorOffObservable.Subscribe(_ => SyncEmulatorOff()),
             DigimonStatsEventHub.SyncEmulatorDefObservable.Subscribe(_ => SyncEmulatorDef()),
             DigimonStatsEventHub.SyncEmulatorSpdObservable.Subscribe(_ => SyncEmulatorSpeed()),
@@ -83,7 +83,7 @@ public sealed class EvolutionCalculatorViewModel : BaseViewModel, IDisposable
         SyncAllFromCurrentMemoryState();
 
         _ = _speakingSimulator.SpeakAsync(
-            JijimonEvolutionCalculatorNarratorText.IntroText,
+            JijimonEvolutionCalculatorNarratorText.INTRO_TEXT,
             textOutput => JijimonText = textOutput,
             initialDelay);
     }
@@ -120,7 +120,7 @@ public sealed class EvolutionCalculatorViewModel : BaseViewModel, IDisposable
 
     public ICommand InstantDisplayCommand { get; }
 
-    public string CalculateButtonText => UiText.CalculateButtonText;
+    public string CalculateButtonText => UiText.CALCULATE_BUTTON_TEXT;
 
     public string JijimonText
     {

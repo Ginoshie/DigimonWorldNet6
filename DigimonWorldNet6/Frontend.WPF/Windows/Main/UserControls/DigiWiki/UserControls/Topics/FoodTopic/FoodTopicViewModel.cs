@@ -15,16 +15,16 @@ public class FoodTopicViewModel : TopicViewModelBase
         base(
             instantDisplay,
             speakShellmonTextNoDelayAction,
-            ShellmonDigiWikiNarratorText.FoodWiki.ShellFacts,
-            ShellmonDigiWikiNarratorText.FoodWiki.WikiText)
+            ShellmonDigiWikiNarratorText.FoodWiki.SHELL_FACTS,
+            ShellmonDigiWikiNarratorText.FoodWiki.WIKI_TEXT)
     {
-        speakShellmonTextShortDelayAction(ShellmonDigiWikiNarratorText.FoodWiki.WikiText, SpeakShellmonTextAction);
+        speakShellmonTextShortDelayAction(ShellmonDigiWikiNarratorText.FoodWiki.WIKI_TEXT, SpeakShellmonTextAction);
 
-        SpeakMushroomOverworldCommand = new CommandHandler(() => speakShellmonTextNoDelayAction(ShellmonDigiWikiNarratorText.FoodWiki.MushroomOverworld, SpeakShellmonTextAction));
-        SpeakMushroomFarmOverworldCommand = new CommandHandler(() => speakShellmonTextNoDelayAction(ShellmonDigiWikiNarratorText.FoodWiki.MeatFarmOverworld, SpeakShellmonTextAction));
-        OpenGuideFoodChapterCommand = new CommandHandler(() => Process.Start(new ProcessStartInfo { FileName = Url.GuideFoodChapter, UseShellExecute = true }));
-        OpenGuideHungryChapterCommand = new CommandHandler(() => Process.Start(new ProcessStartInfo { FileName = Url.GuideHungryChapter, UseShellExecute = true }));
-        OpenDataSheetCommand = new CommandHandler(() => Process.Start(new ProcessStartInfo { FileName = Url.DigimonRaiseDataSheet, UseShellExecute = true }));
+        SpeakMushroomOverworldCommand = new CommandHandler(() => speakShellmonTextNoDelayAction(ShellmonDigiWikiNarratorText.FoodWiki.MUSHROOM_OVERWORLD, SpeakShellmonTextAction));
+        SpeakMushroomFarmOverworldCommand = new CommandHandler(() => speakShellmonTextNoDelayAction(ShellmonDigiWikiNarratorText.FoodWiki.MEAT_FARM_OVERWORLD, SpeakShellmonTextAction));
+        OpenGuideFoodChapterCommand = new CommandHandler(() => Process.Start(new ProcessStartInfo { FileName = Url.GUIDE_FOOD_CHAPTER, UseShellExecute = true }));
+        OpenGuideHungryChapterCommand = new CommandHandler(() => Process.Start(new ProcessStartInfo { FileName = Url.GUIDE_HUNGRY_CHAPTER, UseShellExecute = true }));
+        OpenDataSheetCommand = new CommandHandler(() => Process.Start(new ProcessStartInfo { FileName = Url.DIGIMON_RAISE_DATA_SHEET, UseShellExecute = true }));
     }
 
     public ICommand SpeakMushroomOverworldCommand { get; }

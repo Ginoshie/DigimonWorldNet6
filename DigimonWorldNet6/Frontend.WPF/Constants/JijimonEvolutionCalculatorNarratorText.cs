@@ -6,13 +6,13 @@ namespace DigimonWorld.Frontend.WPF.Constants;
 
 public static class JijimonEvolutionCalculatorNarratorText
 {
-    public const string IntroText = "Well hello there! \n" +
+    public const string INTRO_TEXT = "Well hello there! \n" +
                                     "\n" +
                                     "If you wish to calculate an evolution result then choose the Digimon and fill out the stats in the section to the left of me.\n" +
                                     "\n" +
                                     "Once you've done that, open the 'Historic Evolutions' pane and select each evolution you've achieved in this save.\n" +
                                     "\n" +
-                                    $"When done, press the \"{UiText.CalculateButtonText}\" button to see the result.";
+                                    $"When done, press the \"{UiText.CALCULATE_BUTTON_TEXT}\" button to see the result.";
 
     public static string ShowEvolutionResultKeyWord => "ShowEvolutionResult";
 

@@ -75,7 +75,7 @@ public sealed class WeightCriteriaCalculatorTests
     {
         return new DigimonBuilder()
             .WithDigimonType(DigimonName.Agumon)
-            .WithHP(0).WithMP(0).WithOff(0).WithDef(0).WithSpeed(0).WithBrains(0)
+            .WithHp(0).WithMp(0).WithOff(0).WithDef(0).WithSpeed(0).WithBrains(0)
             .WithWeight(weight).WithCareMistakes(0).WithHappiness(0).WithDiscipline(0).WithBattles(0).WithTechniqueCount(0)
             .Build();
     }

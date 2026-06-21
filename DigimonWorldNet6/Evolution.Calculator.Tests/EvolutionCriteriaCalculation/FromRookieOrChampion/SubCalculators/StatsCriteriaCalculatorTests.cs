@@ -102,7 +102,7 @@ public sealed class StatsCriteriaCalculatorTests
     {
         return new DigimonBuilder()
             .WithDigimonType(DigimonName.Agumon)
-            .WithHP(hp).WithMP(mp).WithOff(off).WithDef(def).WithSpeed(speed).WithBrains(brains)
+            .WithHp(hp).WithMp(mp).WithOff(off).WithDef(def).WithSpeed(speed).WithBrains(brains)
             .WithWeight(20).WithCareMistakes(0).WithHappiness(0).WithDiscipline(0).WithBattles(0).WithTechniqueCount(0)
             .Build();
     }

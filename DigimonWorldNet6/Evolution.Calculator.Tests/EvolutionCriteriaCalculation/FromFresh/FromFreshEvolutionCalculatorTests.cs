@@ -22,8 +22,8 @@ public sealed class FromFreshEvolutionCalculatorTests
         FromFreshEvolutionCalculator sut = new();
         EvolutionCalculationInput input = new DigimonBuilder()
             .WithDigimonType(digimonName)
-            .WithHP(100)
-            .WithMP(100)
+            .WithHp(100)
+            .WithMp(100)
             .WithOff(10)
             .WithDef(10)
             .WithSpeed(10)
@@ -54,8 +54,8 @@ public sealed class FromFreshEvolutionCalculatorTests
         FromFreshEvolutionCalculator sut = new();
         EvolutionCalculationInput input = new DigimonBuilder()
             .WithDigimonType(digimonName)
-            .WithHP(100)
-            .WithMP(100)
+            .WithHp(100)
+            .WithMp(100)
             .WithOff(10)
             .WithDef(10)
             .WithSpeed(10)

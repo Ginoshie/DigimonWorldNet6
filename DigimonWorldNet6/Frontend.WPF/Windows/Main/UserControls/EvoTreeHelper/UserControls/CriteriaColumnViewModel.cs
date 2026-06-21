@@ -18,8 +18,8 @@ public class CriteriaColumnViewModel : BaseViewModel
         Criteria = criteria;
         Name = name;
         IconPath = iconPath;
-        HP = criteria.Stats.HP > 0 ? criteria.Stats.HP.ToString() : "";
-        MP = criteria.Stats.MP > 0 ? criteria.Stats.MP.ToString() : "";
+        Hp = criteria.Stats.Hp > 0 ? criteria.Stats.Hp.ToString() : "";
+        Mp = criteria.Stats.Mp > 0 ? criteria.Stats.Mp.ToString() : "";
         Off = criteria.Stats.Off > 0 ? criteria.Stats.Off.ToString() : "";
         Def = criteria.Stats.Def > 0 ? criteria.Stats.Def.ToString() : "";
         Speed = criteria.Stats.Speed > 0 ? criteria.Stats.Speed.ToString() : "";
@@ -46,8 +46,8 @@ public class CriteriaColumnViewModel : BaseViewModel
     public IEvolutionCriteria Criteria { get; }
     public string Name { get; }
     public string IconPath { get; }
-    public string HP { get; }
-    public string MP { get; }
+    public string Hp { get; }
+    public string Mp { get; }
     public string Off { get; }
     public string Def { get; }
     public string Speed { get; }
@@ -61,13 +61,13 @@ public class CriteriaColumnViewModel : BaseViewModel
     public string TechniqueCount { get; }
     public string? Precursor { get; }
 
-    public bool? IsHPMet
+    public bool? IsHpMet
     {
         get;
         private set => SetField(ref field, value);
     }
 
-    public bool? IsMPMet
+    public bool? IsMpMet
     {
         get;
         private set => SetField(ref field, value);
@@ -205,14 +205,14 @@ public class CriteriaColumnViewModel : BaseViewModel
 
         (string statName, int statValue) highestEvoStat = prioOrderedEvoCriteriaStats.MaxBy(s => s.statValue);
 
-        IsHPMet = Criteria.Stats.HP > 0 ? highestEvoStat.statName == hp : null;
-        IsMPMet = Criteria.Stats.MP > 0 ? highestEvoStat.statName == mp : null;
+        IsHpMet = Criteria.Stats.Hp > 0 ? highestEvoStat.statName == hp : null;
+        IsMpMet = Criteria.Stats.Mp > 0 ? highestEvoStat.statName == mp : null;
         IsOffMet = Criteria.Stats.Off > 0 ? highestEvoStat.statName == off : null;
         IsDefMet = Criteria.Stats.Def > 0 ? highestEvoStat.statName == def : null;
         IsSpeedMet = Criteria.Stats.Speed > 0 ? highestEvoStat.statName == speed : null;
         IsBrainsMet = Criteria.Stats.Brains > 0 ? highestEvoStat.statName == brains : null;
 
-        if (IsHPMet == true || IsMPMet == true)
+        if (IsHpMet == true || IsMpMet == true)
         {
             EvolutionScore = highestEvoStat.statValue / 10;
 
@@ -235,8 +235,8 @@ public class CriteriaColumnViewModel : BaseViewModel
     {
         BonusCriteria bonusCriteria = Criteria.BonusCriteria;
 
-        IsHPMet = Criteria.Stats.HP > 0 ? userHp >= Criteria.Stats.HP : null;
-        IsMPMet = Criteria.Stats.MP > 0 ? userMp >= Criteria.Stats.MP : null;
+        IsHpMet = Criteria.Stats.Hp > 0 ? userHp >= Criteria.Stats.Hp : null;
+        IsMpMet = Criteria.Stats.Mp > 0 ? userMp >= Criteria.Stats.Mp : null;
         IsOffMet = Criteria.Stats.Off > 0 ? userOff >= Criteria.Stats.Off : null;
         IsDefMet = Criteria.Stats.Def > 0 ? userDef >= Criteria.Stats.Def : null;
         IsSpeedMet = Criteria.Stats.Speed > 0 ? userSpeed >= Criteria.Stats.Speed : null;
@@ -276,8 +276,8 @@ public class CriteriaColumnViewModel : BaseViewModel
 
         IsPrecursorMet = bonusCriteria.PrecursorDigimon == UserDigimonDigimonName;
 
-        bool statsMet = userHp >= Criteria.Stats.HP
-                        && userMp >= Criteria.Stats.MP
+        bool statsMet = userHp >= Criteria.Stats.Hp
+                        && userMp >= Criteria.Stats.Mp
                         && userOff >= Criteria.Stats.Off
                         && userDef >= Criteria.Stats.Def
                         && userSpeed >= Criteria.Stats.Speed

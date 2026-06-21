@@ -41,13 +41,13 @@ public sealed class FromRookieOrChampionEvolutionScoreCalculator
         int evolutionStatsTotal = 0;
         int evolutionStatCountTotal = 0;
 
-        if (statsCriteria.HP > 0)
+        if (statsCriteria.Hp > 0)
         {
             evolutionStatsTotal += userHp / 10;
             evolutionStatCountTotal++;
         }
 
-        if (statsCriteria.MP > 0)
+        if (statsCriteria.Mp > 0)
         {
             evolutionStatsTotal += userMp / 10;
             evolutionStatCountTotal++;

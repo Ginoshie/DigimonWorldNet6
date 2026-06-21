@@ -26,8 +26,8 @@ public sealed class FromUltimateEvolutionCalculatorTests
             .Build();
         EvolutionCalculationInput userDigimon = new DigimonBuilder()
             .WithDigimonType(digimonName)
-            .WithHP(hp)
-            .WithMP(mp)
+            .WithHp(hp)
+            .WithMp(mp)
             .WithOff(off)
             .WithDef(def)
             .WithSpeed(speed)
@@ -64,8 +64,8 @@ public sealed class FromUltimateEvolutionCalculatorTests
             .Build();
         EvolutionCalculationInput userDigimon = new DigimonBuilder()
             .WithDigimonType(digimonName)
-            .WithHP(hp)
-            .WithMP(mp)
+            .WithHp(hp)
+            .WithMp(mp)
             .WithOff(off)
             .WithDef(def)
             .WithSpeed(speed)

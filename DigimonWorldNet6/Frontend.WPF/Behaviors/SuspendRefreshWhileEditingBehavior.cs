@@ -1,6 +1,5 @@
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
 using DigimonWorld.Frontend.WPF.ViewModelComponents;
 using Microsoft.Xaml.Behaviors;
 

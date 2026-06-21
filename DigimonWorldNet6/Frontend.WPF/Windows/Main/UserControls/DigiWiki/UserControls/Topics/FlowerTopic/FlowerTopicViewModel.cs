@@ -15,14 +15,14 @@ public class FlowerTopicViewModel : TopicViewModelBase
         base(
             instantDisplay,
             speakShellmonTextNoDelayAction,
-            ShellmonDigiWikiNarratorText.FlowerWiki.ShellFacts,
-            ShellmonDigiWikiNarratorText.FlowerWiki.WikiText)
+            ShellmonDigiWikiNarratorText.FlowerWiki.SHELL_FACTS,
+            ShellmonDigiWikiNarratorText.FlowerWiki.WIKI_TEXT)
     {
-        speakShellmonTextShortDelayAction(ShellmonDigiWikiNarratorText.FlowerWiki.WikiText, SpeakShellmonTextAction);
+        speakShellmonTextShortDelayAction(ShellmonDigiWikiNarratorText.FlowerWiki.WIKI_TEXT, SpeakShellmonTextAction);
 
-        SpeakButterflyConditionOverworldCommand = new CommandHandler(() => speakShellmonTextNoDelayAction(ShellmonDigiWikiNarratorText.FlowerWiki.ButterflyOverworld, SpeakShellmonTextAction));
-        SpeakFlowerConditionScreenCommand = new CommandHandler(() => speakShellmonTextNoDelayAction(ShellmonDigiWikiNarratorText.FlowerWiki.FlowerScreen, SpeakShellmonTextAction));
-        OpenGuideButterflyFlowerChapterCommand = new CommandHandler(() => Process.Start(new ProcessStartInfo { FileName = Url.GuideButterflyFlowerChapter, UseShellExecute = true }));
+        SpeakButterflyConditionOverworldCommand = new CommandHandler(() => speakShellmonTextNoDelayAction(ShellmonDigiWikiNarratorText.FlowerWiki.BUTTERFLY_OVERWORLD, SpeakShellmonTextAction));
+        SpeakFlowerConditionScreenCommand = new CommandHandler(() => speakShellmonTextNoDelayAction(ShellmonDigiWikiNarratorText.FlowerWiki.FLOWER_SCREEN, SpeakShellmonTextAction));
+        OpenGuideButterflyFlowerChapterCommand = new CommandHandler(() => Process.Start(new ProcessStartInfo { FileName = Url.GUIDE_BUTTERFLY_FLOWER_CHAPTER, UseShellExecute = true }));
     }
 
     public ICommand SpeakFlowerConditionScreenCommand { get; }

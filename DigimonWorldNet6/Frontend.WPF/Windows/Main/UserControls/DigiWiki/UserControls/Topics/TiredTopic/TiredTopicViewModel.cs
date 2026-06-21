@@ -15,16 +15,16 @@ public class TiredTopicViewModel : TopicViewModelBase
         base(
             instantDisplay,
             speakShellmonTextNoDelayAction,
-            ShellmonDigiWikiNarratorText.TiredWiki.ShellFacts,
-            ShellmonDigiWikiNarratorText.TiredWiki.WikiText)
+            ShellmonDigiWikiNarratorText.TiredWiki.SHELL_FACTS,
+            ShellmonDigiWikiNarratorText.TiredWiki.WIKI_TEXT)
     {
-        speakShellmonTextShortDelayAction(ShellmonDigiWikiNarratorText.TirednessWiki.WikiText, SpeakShellmonTextAction);
+        speakShellmonTextShortDelayAction(ShellmonDigiWikiNarratorText.TirednessWiki.WIKI_TEXT, SpeakShellmonTextAction);
 
-        OpenGuideTirednessChapterCommand = new CommandHandler(() => Process.Start(new ProcessStartInfo { FileName = Url.GuideTirednessChapter, UseShellExecute = true }));
-        OpenGuideTiredChapterCommand = new CommandHandler(() => Process.Start(new ProcessStartInfo { FileName = Url.GuideTiredChapter, UseShellExecute = true }));
+        OpenGuideTirednessChapterCommand = new CommandHandler(() => Process.Start(new ProcessStartInfo { FileName = Url.GUIDE_TIREDNESS_CHAPTER, UseShellExecute = true }));
+        OpenGuideTiredChapterCommand = new CommandHandler(() => Process.Start(new ProcessStartInfo { FileName = Url.GUIDE_TIRED_CHAPTER, UseShellExecute = true }));
         
-        SpeakTiredScreenCommand = new CommandHandler(() => speakShellmonTextNoDelayAction(ShellmonDigiWikiNarratorText.TiredWiki.TiredScreen, SpeakShellmonTextAction));
-        SpeakTiredOverworldCommand = new CommandHandler(() => speakShellmonTextNoDelayAction(ShellmonDigiWikiNarratorText.TiredWiki.TiredOverworld, SpeakShellmonTextAction));
+        SpeakTiredScreenCommand = new CommandHandler(() => speakShellmonTextNoDelayAction(ShellmonDigiWikiNarratorText.TiredWiki.TIRED_SCREEN, SpeakShellmonTextAction));
+        SpeakTiredOverworldCommand = new CommandHandler(() => speakShellmonTextNoDelayAction(ShellmonDigiWikiNarratorText.TiredWiki.TIRED_OVERWORLD, SpeakShellmonTextAction));
     }
 
     public ICommand OpenGuideTirednessChapterCommand { get; }

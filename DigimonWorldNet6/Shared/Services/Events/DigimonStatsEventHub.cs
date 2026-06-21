@@ -10,8 +10,8 @@ public static class DigimonStatsEventHub
     private static readonly Subject<Unit> _syncEmulatorDigimonTypeSubject = new();
     private static readonly Subject<Unit> _syncEmulatorWeightSubject = new();
     private static readonly Subject<Unit> _syncAllEmulatorParameterStatsSubject = new();
-    private static readonly Subject<Unit> _syncEmulatorHPSubject = new();
-    private static readonly Subject<Unit> _syncEmulatorMPSubject = new();
+    private static readonly Subject<Unit> _syncEmulatorHpSubject = new();
+    private static readonly Subject<Unit> _syncEmulatorMpSubject = new();
     private static readonly Subject<Unit> _syncEmulatorOffSubject = new();
     private static readonly Subject<Unit> _syncEmulatorDefSubject = new();
     private static readonly Subject<Unit> _syncEmulatorSpdSubject = new();
@@ -27,8 +27,8 @@ public static class DigimonStatsEventHub
     public static IObservable<Unit> SyncEmulatorDigimonTypeObservable => _syncEmulatorDigimonTypeSubject.AsObservable();
     public static IObservable<Unit> SyncEmulatorWeightObservable => _syncEmulatorWeightSubject.AsObservable();
     public static IObservable<Unit> SyncAllEmulatorParameterStatsObservable => _syncAllEmulatorParameterStatsSubject.AsObservable();
-    public static IObservable<Unit> SyncEmulatorHPObservable => _syncEmulatorHPSubject.AsObservable();
-    public static IObservable<Unit> SyncEmulatorMPObservable => _syncEmulatorMPSubject.AsObservable();
+    public static IObservable<Unit> SyncEmulatorHpObservable => _syncEmulatorHpSubject.AsObservable();
+    public static IObservable<Unit> SyncEmulatorMpObservable => _syncEmulatorMpSubject.AsObservable();
     public static IObservable<Unit> SyncEmulatorOffObservable => _syncEmulatorOffSubject.AsObservable();
     public static IObservable<Unit> SyncEmulatorDefObservable => _syncEmulatorDefSubject.AsObservable();
     public static IObservable<Unit> SyncEmulatorSpdObservable => _syncEmulatorSpdSubject.AsObservable();
@@ -44,8 +44,8 @@ public static class DigimonStatsEventHub
     public static void SignalSyncEmulatorDigimonType() => _syncEmulatorDigimonTypeSubject.OnNext(Unit.Default);
     public static void SignalSyncEmulatorWeight() => _syncEmulatorWeightSubject.OnNext(Unit.Default);
     public static void SignalSyncAllEmulatorParameterStats() => _syncAllEmulatorParameterStatsSubject.OnNext(Unit.Default);
-    public static void SignalSyncEmulatorHP() => _syncEmulatorHPSubject.OnNext(Unit.Default);
-    public static void SignalSyncEmulatorMP() => _syncEmulatorMPSubject.OnNext(Unit.Default);
+    public static void SignalSyncEmulatorHp() => _syncEmulatorHpSubject.OnNext(Unit.Default);
+    public static void SignalSyncEmulatorMp() => _syncEmulatorMpSubject.OnNext(Unit.Default);
     public static void SignalSyncEmulatorOff() => _syncEmulatorOffSubject.OnNext(Unit.Default);
     public static void SignalSyncEmulatorDef() => _syncEmulatorDefSubject.OnNext(Unit.Default);
     public static void SignalSyncEmulatorSpd() => _syncEmulatorSpdSubject.OnNext(Unit.Default);

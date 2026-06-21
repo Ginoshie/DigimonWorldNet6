@@ -19,25 +19,25 @@ public static class ActiveTimeMapper
 
         switch (standardAwakeTime)
         {
-            case ActiveTimeHour.Baby1AwakePeriodHours:
+            case ActiveTimeHour.BABY1_AWAKE_PERIOD_HOURS:
                 return ActiveTime.Baby1;
-            case ActiveTimeHour.Baby2AwakePeriodHours:
+            case ActiveTimeHour.BABY2_AWAKE_PERIOD_HOURS:
                 return ActiveTime.Baby2;
         }
 
         switch (startTime)
         {
-            case ActiveTimeHour.DayStartHour when endTime == ActiveTimeHour.DayEndHour:
+            case ActiveTimeHour.DAY_START_HOUR when endTime == ActiveTimeHour.DAY_END_HOUR:
                 return ActiveTime.Day;
-            case ActiveTimeHour.GroggyStartHour when endTime == ActiveTimeHour.GroggyEndHour:
+            case ActiveTimeHour.GROGGY_START_HOUR when endTime == ActiveTimeHour.GROGGY_END_HOUR:
                 return ActiveTime.Groggy;
-            case ActiveTimeHour.NightStartHour when endTime == ActiveTimeHour.NightEndHour:
+            case ActiveTimeHour.NIGHT_START_HOUR when endTime == ActiveTimeHour.NIGHT_END_HOUR:
                 return ActiveTime.Night;
-            case ActiveTimeHour.SleepyStartHour when endTime == ActiveTimeHour.SleepyEndHour:
+            case ActiveTimeHour.SLEEPY_START_HOUR when endTime == ActiveTimeHour.SLEEPY_END_HOUR:
                 return ActiveTime.Sleepy;
-            case ActiveTimeHour.SunRiseStartHour when endTime == ActiveTimeHour.SunRiseEndHour:
+            case ActiveTimeHour.SUN_RISE_START_HOUR when endTime == ActiveTimeHour.SUN_RISE_END_HOUR:
                 return ActiveTime.Sunrise;
-            case ActiveTimeHour.SunsetStartHour when endTime == ActiveTimeHour.SunsetEndHour:
+            case ActiveTimeHour.SUNSET_START_HOUR when endTime == ActiveTimeHour.SUNSET_END_HOUR:
                 return ActiveTime.Sunset;
         }
 

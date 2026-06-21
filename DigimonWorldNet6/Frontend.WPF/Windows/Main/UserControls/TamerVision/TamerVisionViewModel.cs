@@ -71,7 +71,7 @@ public class TamerVisionViewModel : BaseViewModel, IDisposable
         SpeechDelay initialDelay = UserConfigurationManager.SpeakingSimulatorConfig.NarratorMode == NarratorMode.Instant ? SpeechDelay.None : SpeechDelay.Long;
 
         _ = _speakingSimulator.SpeakAsync(
-            AnalogmanTamerVisionNarratorText.IntroText,
+            AnalogmanTamerVisionNarratorText.INTRO_TEXT,
             textOutput => AnalogmanText = textOutput,
             initialDelay);
 

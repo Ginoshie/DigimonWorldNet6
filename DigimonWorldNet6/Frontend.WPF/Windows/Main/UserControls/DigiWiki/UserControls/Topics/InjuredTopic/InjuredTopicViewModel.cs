@@ -15,14 +15,14 @@ public class InjuredTopicViewModel : TopicViewModelBase
         base(
             instantDisplay,
             speakShellmonTextNoDelayAction,
-            ShellmonDigiWikiNarratorText.InjuredWiki.ShellFacts,
-            ShellmonDigiWikiNarratorText.InjuredWiki.WikiText)
+            ShellmonDigiWikiNarratorText.InjuredWiki.SHELL_FACTS,
+            ShellmonDigiWikiNarratorText.InjuredWiki.WIKI_TEXT)
     {
-        speakShellmonTextShortDelayAction(ShellmonDigiWikiNarratorText.InjuredWiki.WikiText, SpeakShellmonTextAction);
+        speakShellmonTextShortDelayAction(ShellmonDigiWikiNarratorText.InjuredWiki.WIKI_TEXT, SpeakShellmonTextAction);
 
-        SpeakInjuredConditionOverworldCommand = new CommandHandler(() => speakShellmonTextNoDelayAction(ShellmonDigiWikiNarratorText.InjuredWiki.InjuredOverworld, SpeakShellmonTextAction));
-        SpeakInjuredConditionScreenCommand = new CommandHandler(() => speakShellmonTextNoDelayAction(ShellmonDigiWikiNarratorText.InjuredWiki.InjuredScreen, SpeakShellmonTextAction));
-        OpenGuideInjuredChapterCommand = new CommandHandler(() => Process.Start(new ProcessStartInfo { FileName = Url.GuideInjuredChapter, UseShellExecute = true }));
+        SpeakInjuredConditionOverworldCommand = new CommandHandler(() => speakShellmonTextNoDelayAction(ShellmonDigiWikiNarratorText.InjuredWiki.INJURED_OVERWORLD, SpeakShellmonTextAction));
+        SpeakInjuredConditionScreenCommand = new CommandHandler(() => speakShellmonTextNoDelayAction(ShellmonDigiWikiNarratorText.InjuredWiki.INJURED_SCREEN, SpeakShellmonTextAction));
+        OpenGuideInjuredChapterCommand = new CommandHandler(() => Process.Start(new ProcessStartInfo { FileName = Url.GUIDE_INJURED_CHAPTER, UseShellExecute = true }));
     }
 
     public ICommand SpeakInjuredConditionScreenCommand { get; }

@@ -2,8 +2,8 @@ namespace Shared.Enums;
 
 public enum DigimonStatName
 {
-    HP,
-    MP,
+    Hp,
+    Mp,
     Off,
     Def,
     Speed,

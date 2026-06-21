@@ -15,16 +15,16 @@ public class SleepyTopicViewModel : TopicViewModelBase
         base(
             instantDisplay,
             speakShellmonTextNoDelayAction,
-            ShellmonDigiWikiNarratorText.SleepyWiki.ShellFacts,
-            ShellmonDigiWikiNarratorText.SleepyWiki.WikiText)
+            ShellmonDigiWikiNarratorText.SleepyWiki.SHELL_FACTS,
+            ShellmonDigiWikiNarratorText.SleepyWiki.WIKI_TEXT)
     {
-        speakShellmonTextShortDelayAction(ShellmonDigiWikiNarratorText.SleepyWiki.WikiText, SpeakShellmonTextAction);
+        speakShellmonTextShortDelayAction(ShellmonDigiWikiNarratorText.SleepyWiki.WIKI_TEXT, SpeakShellmonTextAction);
 
-        OpenGuideSleepingChapterCommand = new CommandHandler(() => Process.Start(new ProcessStartInfo { FileName = Url.GuideSleepingChapter, UseShellExecute = true }));
-        OpenGuideSleepyChapterCommand = new CommandHandler(() => Process.Start(new ProcessStartInfo { FileName = Url.GuideSleepyChapter, UseShellExecute = true }));
+        OpenGuideSleepingChapterCommand = new CommandHandler(() => Process.Start(new ProcessStartInfo { FileName = Url.GUIDE_SLEEPING_CHAPTER, UseShellExecute = true }));
+        OpenGuideSleepyChapterCommand = new CommandHandler(() => Process.Start(new ProcessStartInfo { FileName = Url.GUIDE_SLEEPY_CHAPTER, UseShellExecute = true }));
         
-        SpeakSleepyScreenCommand = new CommandHandler(() => speakShellmonTextNoDelayAction(ShellmonDigiWikiNarratorText.SleepyWiki.SleepyScreen, SpeakShellmonTextAction));
-        SpeakSleepyOverworldCommand = new CommandHandler(() => speakShellmonTextNoDelayAction(ShellmonDigiWikiNarratorText.SleepyWiki.SleepyOverworld, SpeakShellmonTextAction));
+        SpeakSleepyScreenCommand = new CommandHandler(() => speakShellmonTextNoDelayAction(ShellmonDigiWikiNarratorText.SleepyWiki.SLEEPY_SCREEN, SpeakShellmonTextAction));
+        SpeakSleepyOverworldCommand = new CommandHandler(() => speakShellmonTextNoDelayAction(ShellmonDigiWikiNarratorText.SleepyWiki.SLEEPY_OVERWORLD, SpeakShellmonTextAction));
     }
 
     public ICommand OpenGuideSleepingChapterCommand { get; }

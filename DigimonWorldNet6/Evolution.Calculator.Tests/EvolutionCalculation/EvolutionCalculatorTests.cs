@@ -20,8 +20,8 @@ public sealed class EvolutionCalculatorTests
         // Arrange
         EvolutionCalculationInput input = new DigimonBuilder()
             .WithDigimonType(digimonName)
-            .WithHP(100)
-            .WithMP(100)
+            .WithHp(100)
+            .WithMp(100)
             .WithOff(10)
             .WithDef(10)
             .WithSpeed(10)
@@ -49,8 +49,8 @@ public sealed class EvolutionCalculatorTests
         // Arrange
         EvolutionCalculationInput input = new DigimonBuilder()
             .WithDigimonType(digimonName)
-            .WithHP(hp)
-            .WithMP(mp)
+            .WithHp(hp)
+            .WithMp(mp)
             .WithOff(off)
             .WithDef(def)
             .WithSpeed(speed)
@@ -78,8 +78,8 @@ public sealed class EvolutionCalculatorTests
         // Arrange
         EvolutionCalculationInput input = new DigimonBuilder()
             .WithDigimonType(digimonName)
-            .WithHP(9999)
-            .WithMP(9999)
+            .WithHp(9999)
+            .WithMp(9999)
             .WithOff(999)
             .WithDef(999)
             .WithSpeed(999)
@@ -105,8 +105,8 @@ public sealed class EvolutionCalculatorTests
         // Arrange - Agumon with stats that should produce a valid evolution
         EvolutionCalculationInput input = new DigimonBuilder()
             .WithDigimonType(DigimonName.Agumon)
-            .WithHP(1000)
-            .WithMP(1000)
+            .WithHp(1000)
+            .WithMp(1000)
             .WithOff(100)
             .WithDef(100)
             .WithSpeed(100)

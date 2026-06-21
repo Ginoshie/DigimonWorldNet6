@@ -15,15 +15,15 @@ public class PoopTopicViewModel : TopicViewModelBase
         base(
             instantDisplay,
             speakShellmonTextNoDelayAction,
-            ShellmonDigiWikiNarratorText.PoopWiki.ShellFacts,
-            ShellmonDigiWikiNarratorText.PoopWiki.WikiText)
+            ShellmonDigiWikiNarratorText.PoopWiki.SHELL_FACTS,
+            ShellmonDigiWikiNarratorText.PoopWiki.WIKI_TEXT)
     {
-        speakShellmonTextShortDelayAction(ShellmonDigiWikiNarratorText.PoopWiki.WikiText, SpeakShellmonTextAction);
+        speakShellmonTextShortDelayAction(ShellmonDigiWikiNarratorText.PoopWiki.WIKI_TEXT, SpeakShellmonTextAction);
 
-        SpeakToiletFileCityCommand = new CommandHandler(() => speakShellmonTextNoDelayAction(ShellmonDigiWikiNarratorText.PoopWiki.ToiletFileCity, SpeakShellmonTextAction));
-        SpeakPortpottyShopCommand = new CommandHandler(() => speakShellmonTextNoDelayAction(ShellmonDigiWikiNarratorText.PoopWiki.PortpottyShop, SpeakShellmonTextAction));
-        OpenGuidePoopingChapterCommand = new CommandHandler(() => Process.Start(new ProcessStartInfo { FileName = Url.GuidePoopingChapter, UseShellExecute = true }));
-        OpenYoutubeDiscAndPoopingClipCommand = new CommandHandler(() => Process.Start(new ProcessStartInfo { FileName = Url.YoutubeDiscAndPoopingClip, UseShellExecute = true }));
+        SpeakToiletFileCityCommand = new CommandHandler(() => speakShellmonTextNoDelayAction(ShellmonDigiWikiNarratorText.PoopWiki.TOILET_FILE_CITY, SpeakShellmonTextAction));
+        SpeakPortpottyShopCommand = new CommandHandler(() => speakShellmonTextNoDelayAction(ShellmonDigiWikiNarratorText.PoopWiki.PORTPOTTY_SHOP, SpeakShellmonTextAction));
+        OpenGuidePoopingChapterCommand = new CommandHandler(() => Process.Start(new ProcessStartInfo { FileName = Url.GUIDE_POOPING_CHAPTER, UseShellExecute = true }));
+        OpenYoutubeDiscAndPoopingClipCommand = new CommandHandler(() => Process.Start(new ProcessStartInfo { FileName = Url.YOUTUBE_DISC_AND_POOPING_CLIP, UseShellExecute = true }));
     }
 
     public ICommand SpeakToiletFileCityCommand { get; }

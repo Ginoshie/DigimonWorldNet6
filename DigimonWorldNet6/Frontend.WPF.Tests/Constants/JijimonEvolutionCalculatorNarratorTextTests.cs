@@ -297,13 +297,13 @@ public sealed class JijimonEvolutionCalculatorNarratorTextTests
     [Test]
     public void IntroText_ShouldNotBeNullOrEmpty()
     {
-        JijimonEvolutionCalculatorNarratorText.IntroText.ShouldNotBeNullOrEmpty();
+        JijimonEvolutionCalculatorNarratorText.INTRO_TEXT.ShouldNotBeNullOrEmpty();
     }
 
     [Test]
     public void IntroText_ShouldContainCalculateButtonText()
     {
-        JijimonEvolutionCalculatorNarratorText.IntroText.ShouldContain(UiText.CalculateButtonText);
+        JijimonEvolutionCalculatorNarratorText.INTRO_TEXT.ShouldContain(UiText.CALCULATE_BUTTON_TEXT);
     }
 
     // --- Edge case: undefined EvolutionResult enum value ---

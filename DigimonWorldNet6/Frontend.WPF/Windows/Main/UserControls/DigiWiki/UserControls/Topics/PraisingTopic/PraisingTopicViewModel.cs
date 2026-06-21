@@ -15,13 +15,13 @@ public class PraisingTopicViewModel : TopicViewModelBase
         base(
             instantDisplay,
             speakShellmonTextNoDelayAction,
-            ShellmonDigiWikiNarratorText.PraisingWiki.ShellFacts,
-            ShellmonDigiWikiNarratorText.PraisingWiki.WikiText)
+            ShellmonDigiWikiNarratorText.PraisingWiki.SHELL_FACTS,
+            ShellmonDigiWikiNarratorText.PraisingWiki.WIKI_TEXT)
     {
-        speakShellmonTextShortDelayAction(ShellmonDigiWikiNarratorText.PraisingWiki.WikiText, SpeakShellmonTextAction);
+        speakShellmonTextShortDelayAction(ShellmonDigiWikiNarratorText.PraisingWiki.WIKI_TEXT, SpeakShellmonTextAction);
 
-        SpeakPraiseMenuActionCommand = new CommandHandler(() => speakShellmonTextNoDelayAction(ShellmonDigiWikiNarratorText.PraisingWiki.PraisingMenuAction, SpeakShellmonTextAction));
-        OpenGuidePraisingChapterCommand = new CommandHandler(() => Process.Start(new ProcessStartInfo { FileName = Url.GuidePraisingChapter, UseShellExecute = true }));
+        SpeakPraiseMenuActionCommand = new CommandHandler(() => speakShellmonTextNoDelayAction(ShellmonDigiWikiNarratorText.PraisingWiki.PRAISING_MENU_ACTION, SpeakShellmonTextAction));
+        OpenGuidePraisingChapterCommand = new CommandHandler(() => Process.Start(new ProcessStartInfo { FileName = Url.GUIDE_PRAISING_CHAPTER, UseShellExecute = true }));
     }
 
     public ICommand SpeakPraiseMenuActionCommand { get; }

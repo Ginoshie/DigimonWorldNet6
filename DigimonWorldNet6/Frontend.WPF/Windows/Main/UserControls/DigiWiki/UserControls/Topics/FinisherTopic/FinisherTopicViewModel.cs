@@ -15,14 +15,14 @@ public class FinisherTopicViewModel : TopicViewModelBase
         base(
             instantDisplay,
             speakShellmonTextNoDelayAction,
-            ShellmonDigiWikiNarratorText.FinisherWiki.ShellFacts,
-            ShellmonDigiWikiNarratorText.FinisherWiki.WikiText)
+            ShellmonDigiWikiNarratorText.FinisherWiki.SHELL_FACTS,
+            ShellmonDigiWikiNarratorText.FinisherWiki.WIKI_TEXT)
     {
-        speakShellmonTextShortDelayAction(ShellmonDigiWikiNarratorText.FinisherWiki.WikiText, SpeakShellmonTextAction);
+        speakShellmonTextShortDelayAction(ShellmonDigiWikiNarratorText.FinisherWiki.WIKI_TEXT, SpeakShellmonTextAction);
 
-        SpeakFinisherProgressImageCommand = new CommandHandler(() => speakShellmonTextNoDelayAction(ShellmonDigiWikiNarratorText.FinisherWiki.FinisherProgressImage, SpeakShellmonTextAction));
-        SpeakFinisherBarImageCommand = new CommandHandler(() => speakShellmonTextNoDelayAction(ShellmonDigiWikiNarratorText.FinisherWiki.FinisherBarImage, SpeakShellmonTextAction));
-        OpenGuideFinisherChapterCommand = new CommandHandler(() => Process.Start(new ProcessStartInfo { FileName = Url.GuideFinisherChapter, UseShellExecute = true }));
+        SpeakFinisherProgressImageCommand = new CommandHandler(() => speakShellmonTextNoDelayAction(ShellmonDigiWikiNarratorText.FinisherWiki.FINISHER_PROGRESS_IMAGE, SpeakShellmonTextAction));
+        SpeakFinisherBarImageCommand = new CommandHandler(() => speakShellmonTextNoDelayAction(ShellmonDigiWikiNarratorText.FinisherWiki.FINISHER_BAR_IMAGE, SpeakShellmonTextAction));
+        OpenGuideFinisherChapterCommand = new CommandHandler(() => Process.Start(new ProcessStartInfo { FileName = Url.GUIDE_FINISHER_CHAPTER, UseShellExecute = true }));
     }
 
     public ICommand SpeakFinisherProgressImageCommand { get; }

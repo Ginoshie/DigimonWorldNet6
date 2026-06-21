@@ -202,7 +202,7 @@ public sealed class BonusCriteriaCalculatorTests
     {
         return new DigimonBuilder()
             .WithDigimonType(digimonName)
-            .WithHP(0).WithMP(0).WithOff(0).WithDef(0).WithSpeed(0).WithBrains(0)
+            .WithHp(0).WithMp(0).WithOff(0).WithDef(0).WithSpeed(0).WithBrains(0)
             .WithWeight(20).WithCareMistakes(0)
             .WithHappiness(happiness).WithDiscipline(discipline).WithBattles(battles).WithTechniqueCount(techniqueCount)
             .Build();

@@ -15,16 +15,16 @@ public class TirednessTopicViewModel : TopicViewModelBase
         base(
             instantDisplay,
             speakShellmonTextNoDelayAction,
-            ShellmonDigiWikiNarratorText.TirednessWiki.ShellFacts,
-            ShellmonDigiWikiNarratorText.TirednessWiki.WikiText)
+            ShellmonDigiWikiNarratorText.TirednessWiki.SHELL_FACTS,
+            ShellmonDigiWikiNarratorText.TirednessWiki.WIKI_TEXT)
     {
-        speakShellmonTextShortDelayAction(ShellmonDigiWikiNarratorText.TirednessWiki.WikiText, SpeakShellmonTextAction);
+        speakShellmonTextShortDelayAction(ShellmonDigiWikiNarratorText.TirednessWiki.WIKI_TEXT, SpeakShellmonTextAction);
 
-        OpenGuideTirednessChapterCommand = new CommandHandler(() => Process.Start(new ProcessStartInfo { FileName = Url.GuideTirednessChapter, UseShellExecute = true }));
-        OpenGuideTiredChapterCommand = new CommandHandler(() => Process.Start(new ProcessStartInfo { FileName = Url.GuideTiredChapter, UseShellExecute = true }));
+        OpenGuideTirednessChapterCommand = new CommandHandler(() => Process.Start(new ProcessStartInfo { FileName = Url.GUIDE_TIREDNESS_CHAPTER, UseShellExecute = true }));
+        OpenGuideTiredChapterCommand = new CommandHandler(() => Process.Start(new ProcessStartInfo { FileName = Url.GUIDE_TIRED_CHAPTER, UseShellExecute = true }));
         
-        SpeakDrimogemonCarryDirtQuestCommand = new CommandHandler(() => speakShellmonTextNoDelayAction(ShellmonDigiWikiNarratorText.TirednessWiki.DrimogemonCarryDirtQuest, SpeakShellmonTextAction));
-        SpeakTrainingGymCommand = new CommandHandler(() => speakShellmonTextNoDelayAction(ShellmonDigiWikiNarratorText.TirednessWiki.TrainingGym, SpeakShellmonTextAction));
+        SpeakDrimogemonCarryDirtQuestCommand = new CommandHandler(() => speakShellmonTextNoDelayAction(ShellmonDigiWikiNarratorText.TirednessWiki.DRIMOGEMON_CARRY_DIRT_QUEST, SpeakShellmonTextAction));
+        SpeakTrainingGymCommand = new CommandHandler(() => speakShellmonTextNoDelayAction(ShellmonDigiWikiNarratorText.TirednessWiki.TRAINING_GYM, SpeakShellmonTextAction));
     }
 
     public ICommand OpenGuideTirednessChapterCommand { get; }

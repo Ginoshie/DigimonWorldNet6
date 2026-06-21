@@ -15,16 +15,16 @@ public class PoopyTopicViewModel : TopicViewModelBase
         base(
             instantDisplay,
             speakShellmonTextNoDelayAction,
-            ShellmonDigiWikiNarratorText.PoopyWiki.ShellFacts,
-            ShellmonDigiWikiNarratorText.PoopyWiki.WikiText)
+            ShellmonDigiWikiNarratorText.PoopyWiki.SHELL_FACTS,
+            ShellmonDigiWikiNarratorText.PoopyWiki.WIKI_TEXT)
     {
-        speakShellmonTextShortDelayAction(ShellmonDigiWikiNarratorText.PoopyWiki.WikiText, SpeakShellmonTextAction);
+        speakShellmonTextShortDelayAction(ShellmonDigiWikiNarratorText.PoopyWiki.WIKI_TEXT, SpeakShellmonTextAction);
 
-        SpeakPoopingConditionOverworldCommand = new CommandHandler(() => speakShellmonTextNoDelayAction(ShellmonDigiWikiNarratorText.PoopyWiki.PoopingOverworld, SpeakShellmonTextAction));
-        SpeakPoopingConditionScreenCommand = new CommandHandler(() => speakShellmonTextNoDelayAction(ShellmonDigiWikiNarratorText.PoopyWiki.PoopingScreen, SpeakShellmonTextAction));
-        OpenGuidePoopingChapterCommand = new CommandHandler(() => Process.Start(new ProcessStartInfo { FileName = Url.GuidePoopingChapter, UseShellExecute = true }));
-        OpenGuidePoopyChapterCommand = new CommandHandler(() => Process.Start(new ProcessStartInfo { FileName = Url.GuidePoopyChapter, UseShellExecute = true }));
-        OpenYoutubeDiscAndPoopingClipCommand = new CommandHandler(() => Process.Start(new ProcessStartInfo { FileName = Url.YoutubeDiscAndPoopingClip, UseShellExecute = true }));
+        SpeakPoopingConditionOverworldCommand = new CommandHandler(() => speakShellmonTextNoDelayAction(ShellmonDigiWikiNarratorText.PoopyWiki.POOPING_OVERWORLD, SpeakShellmonTextAction));
+        SpeakPoopingConditionScreenCommand = new CommandHandler(() => speakShellmonTextNoDelayAction(ShellmonDigiWikiNarratorText.PoopyWiki.POOPING_SCREEN, SpeakShellmonTextAction));
+        OpenGuidePoopingChapterCommand = new CommandHandler(() => Process.Start(new ProcessStartInfo { FileName = Url.GUIDE_POOPING_CHAPTER, UseShellExecute = true }));
+        OpenGuidePoopyChapterCommand = new CommandHandler(() => Process.Start(new ProcessStartInfo { FileName = Url.GUIDE_POOPY_CHAPTER, UseShellExecute = true }));
+        OpenYoutubeDiscAndPoopingClipCommand = new CommandHandler(() => Process.Start(new ProcessStartInfo { FileName = Url.YOUTUBE_DISC_AND_POOPING_CLIP, UseShellExecute = true }));
     }
 
     public ICommand SpeakPoopingConditionScreenCommand { get; }

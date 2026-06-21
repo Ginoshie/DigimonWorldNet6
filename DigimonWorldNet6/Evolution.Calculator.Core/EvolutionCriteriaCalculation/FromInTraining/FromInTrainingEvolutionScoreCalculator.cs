@@ -25,12 +25,12 @@ public sealed class FromInTrainingEvolutionScoreCalculator
 
         // The stats requirement only counts if the current overall highest stat is one this evolution requires.
         // If so, the score is that stat's value (for priority ordering among enabled evolutions).
-        if (statsCriteria.HP > 0 && hpScore == overallHighestStat)
+        if (statsCriteria.Hp > 0 && hpScore == overallHighestStat)
         {
             return hpScore;
         }
 
-        if (statsCriteria.MP > 0 && mpScore == overallHighestStat)
+        if (statsCriteria.Mp > 0 && mpScore == overallHighestStat)
         {
             return mpScore;
         }

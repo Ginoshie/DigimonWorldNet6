@@ -16,7 +16,7 @@ public sealed class ActiveTimeMapperTests
     public void GetActiveTime_ShouldReturnBaby1_WhenStandardAwakeTimeIsBaby1(int startTime, int endTime)
     {
         // Act
-        ActiveTime result = ActiveTimeMapper.GetActiveTime(startTime, endTime, ActiveTimeHour.Baby1AwakePeriodHours);
+        ActiveTime result = ActiveTimeMapper.GetActiveTime(startTime, endTime, ActiveTimeHour.BABY1_AWAKE_PERIOD_HOURS);
 
         // Assert
         result.ShouldBe(ActiveTime.Baby1);
@@ -29,7 +29,7 @@ public sealed class ActiveTimeMapperTests
     public void GetActiveTime_ShouldReturnBaby2_WhenStandardAwakeTimeIsBaby2(int startTime, int endTime)
     {
         // Act
-        ActiveTime result = ActiveTimeMapper.GetActiveTime(startTime, endTime, ActiveTimeHour.Baby2AwakePeriodHours);
+        ActiveTime result = ActiveTimeMapper.GetActiveTime(startTime, endTime, ActiveTimeHour.BABY2_AWAKE_PERIOD_HOURS);
 
         // Assert
         result.ShouldBe(ActiveTime.Baby2);
@@ -39,42 +39,42 @@ public sealed class ActiveTimeMapperTests
     [Test]
     public void GetActiveTime_ShouldReturnDay_WhenStartAndEndMatchDayHours()
     {
-        ActiveTimeMapper.GetActiveTime(ActiveTimeHour.DayStartHour, ActiveTimeHour.DayEndHour, 0)
+        ActiveTimeMapper.GetActiveTime(ActiveTimeHour.DAY_START_HOUR, ActiveTimeHour.DAY_END_HOUR, 0)
             .ShouldBe(ActiveTime.Day);
     }
 
     [Test]
     public void GetActiveTime_ShouldReturnGroggy_WhenStartAndEndMatchGroggyHours()
     {
-        ActiveTimeMapper.GetActiveTime(ActiveTimeHour.GroggyStartHour, ActiveTimeHour.GroggyEndHour, 0)
+        ActiveTimeMapper.GetActiveTime(ActiveTimeHour.GROGGY_START_HOUR, ActiveTimeHour.GROGGY_END_HOUR, 0)
             .ShouldBe(ActiveTime.Groggy);
     }
 
     [Test]
     public void GetActiveTime_ShouldReturnNight_WhenStartAndEndMatchNightHours()
     {
-        ActiveTimeMapper.GetActiveTime(ActiveTimeHour.NightStartHour, ActiveTimeHour.NightEndHour, 0)
+        ActiveTimeMapper.GetActiveTime(ActiveTimeHour.NIGHT_START_HOUR, ActiveTimeHour.NIGHT_END_HOUR, 0)
             .ShouldBe(ActiveTime.Night);
     }
 
     [Test]
     public void GetActiveTime_ShouldReturnSleepy_WhenStartAndEndMatchSleepyHours()
     {
-        ActiveTimeMapper.GetActiveTime(ActiveTimeHour.SleepyStartHour, ActiveTimeHour.SleepyEndHour, 0)
+        ActiveTimeMapper.GetActiveTime(ActiveTimeHour.SLEEPY_START_HOUR, ActiveTimeHour.SLEEPY_END_HOUR, 0)
             .ShouldBe(ActiveTime.Sleepy);
     }
 
     [Test]
     public void GetActiveTime_ShouldReturnSunrise_WhenStartAndEndMatchSunriseHours()
     {
-        ActiveTimeMapper.GetActiveTime(ActiveTimeHour.SunRiseStartHour, ActiveTimeHour.SunRiseEndHour, 0)
+        ActiveTimeMapper.GetActiveTime(ActiveTimeHour.SUN_RISE_START_HOUR, ActiveTimeHour.SUN_RISE_END_HOUR, 0)
             .ShouldBe(ActiveTime.Sunrise);
     }
 
     [Test]
     public void GetActiveTime_ShouldReturnSunset_WhenStartAndEndMatchSunsetHours()
     {
-        ActiveTimeMapper.GetActiveTime(ActiveTimeHour.SunsetStartHour, ActiveTimeHour.SunsetEndHour, 0)
+        ActiveTimeMapper.GetActiveTime(ActiveTimeHour.SUNSET_START_HOUR, ActiveTimeHour.SUNSET_END_HOUR, 0)
             .ShouldBe(ActiveTime.Sunset);
     }
 
@@ -82,7 +82,7 @@ public sealed class ActiveTimeMapperTests
     [Test]
     public void GetActiveTime_ShouldReturnBaby1_EvenWhenStartEndMatchDayHours()
     {
-        ActiveTimeMapper.GetActiveTime(ActiveTimeHour.DayStartHour, ActiveTimeHour.DayEndHour, ActiveTimeHour.Baby1AwakePeriodHours)
+        ActiveTimeMapper.GetActiveTime(ActiveTimeHour.DAY_START_HOUR, ActiveTimeHour.DAY_END_HOUR, ActiveTimeHour.BABY1_AWAKE_PERIOD_HOURS)
             .ShouldBe(ActiveTime.Baby1);
     }
 

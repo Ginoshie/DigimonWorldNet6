@@ -15,13 +15,13 @@ public class SpecialtyFactorTopicViewModel : TopicViewModelBase
         base(
             instantDisplay,
             speakShellmonTextNoDelayAction,
-            ShellmonDigiWikiNarratorText.SpecialtyFactorWiki.ShellFacts,
-            ShellmonDigiWikiNarratorText.SpecialtyFactorWiki.WikiText)
+            ShellmonDigiWikiNarratorText.SpecialtyFactorWiki.SHELL_FACTS,
+            ShellmonDigiWikiNarratorText.SpecialtyFactorWiki.WIKI_TEXT)
     {
-        speakShellmonTextShortDelayAction(ShellmonDigiWikiNarratorText.SpecialtyFactorWiki.WikiText, SpeakShellmonTextAction);
+        speakShellmonTextShortDelayAction(ShellmonDigiWikiNarratorText.SpecialtyFactorWiki.WIKI_TEXT, SpeakShellmonTextAction);
 
-        SpeakSpecialtyChartImageCommand = new CommandHandler(() => speakShellmonTextNoDelayAction(ShellmonDigiWikiNarratorText.SpecialtyFactorWiki.SpecialtyChartImage, SpeakShellmonTextAction));
-        OpenGuideSpecialtyFactorChapterCommand = new CommandHandler(() => Process.Start(new ProcessStartInfo { FileName = Url.GuideSpecialtyFactorChapter, UseShellExecute = true }));
+        SpeakSpecialtyChartImageCommand = new CommandHandler(() => speakShellmonTextNoDelayAction(ShellmonDigiWikiNarratorText.SpecialtyFactorWiki.SPECIALTY_CHART_IMAGE, SpeakShellmonTextAction));
+        OpenGuideSpecialtyFactorChapterCommand = new CommandHandler(() => Process.Start(new ProcessStartInfo { FileName = Url.GUIDE_SPECIALTY_FACTOR_CHAPTER, UseShellExecute = true }));
     }
 
     public ICommand SpeakSpecialtyChartImageCommand { get; }

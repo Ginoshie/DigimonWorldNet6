@@ -27,13 +27,13 @@ public sealed class DigimonBuilder
         return this;
     }
 
-    public DigimonBuilder WithHP(int hp)
+    public DigimonBuilder WithHp(int hp)
     {
         _hp = hp;
         return this;
     }
 
-    public DigimonBuilder WithMP(int mp)
+    public DigimonBuilder WithMp(int mp)
     {
         _mp = mp;
         return this;

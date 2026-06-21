@@ -139,7 +139,7 @@ public sealed class FromInTrainingEvolutionScoreCalculatorTests
     {
         return new DigimonBuilder()
             .WithDigimonType(DigimonName.Koromon)
-            .WithHP(hp).WithMP(mp).WithOff(off).WithDef(def).WithSpeed(speed).WithBrains(brains)
+            .WithHp(hp).WithMp(mp).WithOff(off).WithDef(def).WithSpeed(speed).WithBrains(brains)
             .WithWeight(10).WithCareMistakes(0).WithHappiness(0).WithDiscipline(0).WithBattles(0).WithTechniqueCount(0)
             .Build();
     }

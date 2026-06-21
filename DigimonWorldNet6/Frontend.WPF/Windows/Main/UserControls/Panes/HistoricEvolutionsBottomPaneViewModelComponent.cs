@@ -114,7 +114,7 @@ public class HistoricEvolutionsBottomPaneViewModelComponent : PaneBaseViewModel,
 
     private async Task NotifyEmulatorSyncButtonSectionDelayedAsync()
     {
-        await Task.Delay(AnimationDurationInMs);
+        await Task.Delay(ANIMATION_DURATION_IN_MS);
         OnPropertyChanged(nameof(EmulatorSyncButtonSectionIsOpen));
     }
 

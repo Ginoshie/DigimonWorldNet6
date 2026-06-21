@@ -33,13 +33,13 @@ public class AreaPreferenceTopicViewModel : TopicViewModelBase
         base(
             instantDisplay,
             speakShellmonTextNoDelayAction,
-            ShellmonDigiWikiNarratorText.AreaPreferenceWiki.ShellFacts,
-            ShellmonDigiWikiNarratorText.AreaPreferenceWiki.WikiText)
+            ShellmonDigiWikiNarratorText.AreaPreferenceWiki.SHELL_FACTS,
+            ShellmonDigiWikiNarratorText.AreaPreferenceWiki.WIKI_TEXT)
     {
-        speakShellmonTextShortDelayAction(ShellmonDigiWikiNarratorText.AreaPreferenceWiki.WikiText, SpeakShellmonTextAction);
+        speakShellmonTextShortDelayAction(ShellmonDigiWikiNarratorText.AreaPreferenceWiki.WIKI_TEXT, SpeakShellmonTextAction);
 
-        SpeakAreaPreferenceHappinessBarCommand = new CommandHandler(() => speakShellmonTextNoDelayAction(ShellmonDigiWikiNarratorText.AreaPreferenceWiki.HappinessBar, SpeakShellmonTextAction));
-        OpenGuideAreaPreferenceChapterCommand = new CommandHandler(() => Process.Start(new ProcessStartInfo { FileName = Url.GuideAreaPreferenceChapter, UseShellExecute = true }));
+        SpeakAreaPreferenceHappinessBarCommand = new CommandHandler(() => speakShellmonTextNoDelayAction(ShellmonDigiWikiNarratorText.AreaPreferenceWiki.HAPPINESS_BAR, SpeakShellmonTextAction));
+        OpenGuideAreaPreferenceChapterCommand = new CommandHandler(() => Process.Start(new ProcessStartInfo { FileName = Url.GUIDE_AREA_PREFERENCE_CHAPTER, UseShellExecute = true }));
 
         ToggleAnimationCommand = new CommandHandler(ToggleAnimation);
     }

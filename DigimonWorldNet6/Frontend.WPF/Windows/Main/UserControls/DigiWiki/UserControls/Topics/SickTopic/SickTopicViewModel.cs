@@ -15,14 +15,14 @@ public class SickTopicViewModel : TopicViewModelBase
         base(
             instantDisplay,
             speakShellmonTextNoDelayAction,
-            ShellmonDigiWikiNarratorText.SickWiki.ShellFacts,
-            ShellmonDigiWikiNarratorText.SickWiki.WikiText)
+            ShellmonDigiWikiNarratorText.SickWiki.SHELL_FACTS,
+            ShellmonDigiWikiNarratorText.SickWiki.WIKI_TEXT)
     {
-        speakShellmonTextShortDelayAction(ShellmonDigiWikiNarratorText.SickWiki.WikiText, SpeakShellmonTextAction);
+        speakShellmonTextShortDelayAction(ShellmonDigiWikiNarratorText.SickWiki.WIKI_TEXT, SpeakShellmonTextAction);
 
-        SpeakSicknessConditionOverworldCommand = new CommandHandler(() => speakShellmonTextNoDelayAction(ShellmonDigiWikiNarratorText.SickWiki.SickOverworld, SpeakShellmonTextAction));
-        SpeakSicknessConditionScreenCommand = new CommandHandler(() => speakShellmonTextNoDelayAction(ShellmonDigiWikiNarratorText.SickWiki.SickScreen, SpeakShellmonTextAction));
-        OpenGuideSickChapterCommand = new CommandHandler(() => Process.Start(new ProcessStartInfo { FileName = Url.GuideSickChapter, UseShellExecute = true }));
+        SpeakSicknessConditionOverworldCommand = new CommandHandler(() => speakShellmonTextNoDelayAction(ShellmonDigiWikiNarratorText.SickWiki.SICK_OVERWORLD, SpeakShellmonTextAction));
+        SpeakSicknessConditionScreenCommand = new CommandHandler(() => speakShellmonTextNoDelayAction(ShellmonDigiWikiNarratorText.SickWiki.SICK_SCREEN, SpeakShellmonTextAction));
+        OpenGuideSickChapterCommand = new CommandHandler(() => Process.Start(new ProcessStartInfo { FileName = Url.GUIDE_SICK_CHAPTER, UseShellExecute = true }));
     }
 
     public ICommand SpeakSicknessConditionScreenCommand { get; }

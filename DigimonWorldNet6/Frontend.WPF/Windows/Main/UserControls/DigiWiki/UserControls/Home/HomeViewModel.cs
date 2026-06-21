@@ -13,7 +13,7 @@ public class HomeViewModel : BaseViewModel
     {
         _instantDisplay = instantDisplay;
         
-        speakShellmonTextAction(ShellmonDigiWikiNarratorText.HomeScreen.IntroText, SpeakShellmonTextAction);
+        speakShellmonTextAction(ShellmonDigiWikiNarratorText.HomeScreen.INTRO_TEXT, SpeakShellmonTextAction);
         
         InstantDisplayCommand = new CommandHandler(InstantDisplay);
     }

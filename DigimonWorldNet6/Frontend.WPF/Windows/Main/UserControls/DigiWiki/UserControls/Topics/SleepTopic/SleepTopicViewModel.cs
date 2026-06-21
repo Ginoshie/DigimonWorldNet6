@@ -15,14 +15,14 @@ public class SleepTopicViewModel : TopicViewModelBase
         base(
             instantDisplay,
             speakShellmonTextNoDelayAction,
-            ShellmonDigiWikiNarratorText.SleepWiki.ShellFacts,
-            ShellmonDigiWikiNarratorText.SleepWiki.WikiText)
+            ShellmonDigiWikiNarratorText.SleepWiki.SHELL_FACTS,
+            ShellmonDigiWikiNarratorText.SleepWiki.WIKI_TEXT)
     {
-        speakShellmonTextShortDelayAction(ShellmonDigiWikiNarratorText.SleepWiki.WikiText, SpeakShellmonTextAction);
+        speakShellmonTextShortDelayAction(ShellmonDigiWikiNarratorText.SleepWiki.WIKI_TEXT, SpeakShellmonTextAction);
 
-        OpenGuideSleepingChapterCommand = new CommandHandler(() => Process.Start(new ProcessStartInfo { FileName = Url.GuideSleepingChapter, UseShellExecute = true }));
+        OpenGuideSleepingChapterCommand = new CommandHandler(() => Process.Start(new ProcessStartInfo { FileName = Url.GUIDE_SLEEPING_CHAPTER, UseShellExecute = true }));
         
-        SpeakProfileSectionSleepingScheduleCommand = new CommandHandler(() => speakShellmonTextNoDelayAction(ShellmonDigiWikiNarratorText.SleepWiki.SleepingSchedule, SpeakShellmonTextAction));
+        SpeakProfileSectionSleepingScheduleCommand = new CommandHandler(() => speakShellmonTextNoDelayAction(ShellmonDigiWikiNarratorText.SleepWiki.SLEEPING_SCHEDULE, SpeakShellmonTextAction));
     }
 
     public ICommand OpenGuideSleepingChapterCommand { get; }

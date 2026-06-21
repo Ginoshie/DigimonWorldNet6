@@ -86,7 +86,7 @@ public class EvoTreeHelperViewModel : BaseViewModel, IDisposable
 
         _speechDelay = UserConfigurationManager.SpeakingSimulatorConfig.NarratorMode == NarratorMode.Instant ? SpeechDelay.None : SpeechDelay.Short;
 
-        SpeakGabumonTextAsync(GabumonEvoTreeHelperNarratorText.EmulatorNotConnectedText, _speechDelay).ConfigureAwait(false);
+        SpeakGabumonTextAsync(GabumonEvoTreeHelperNarratorText.EMULATOR_NOT_CONNECTED_TEXT, _speechDelay).ConfigureAwait(false);
 
         CurrentDigimon = DigimonName.Gabumon;
 
@@ -337,11 +337,11 @@ public class EvoTreeHelperViewModel : BaseViewModel, IDisposable
     {
         if (isConnected)
         {
-            SpeakGabumonTextAsync(GabumonEvoTreeHelperNarratorText.EmulatorConnectedText, _speechDelay).ConfigureAwait(false);
+            SpeakGabumonTextAsync(GabumonEvoTreeHelperNarratorText.EMULATOR_CONNECTED_TEXT, _speechDelay).ConfigureAwait(false);
         }
         else
         {
-            SpeakGabumonTextAsync(GabumonEvoTreeHelperNarratorText.EmulatorNotConnectedText, _speechDelay).ConfigureAwait(false);
+            SpeakGabumonTextAsync(GabumonEvoTreeHelperNarratorText.EMULATOR_NOT_CONNECTED_TEXT, _speechDelay).ConfigureAwait(false);
 
             CurrentDigimon = DigimonName.Gabumon;
 
@@ -391,8 +391,8 @@ public class EvoTreeHelperViewModel : BaseViewModel, IDisposable
                 break;
             case EvolutionStage.InTraining:
                 winnerIndex = evolutionCriteriaDisplayViewModels.FindIndex(x =>
-                    x.IsHPMet == true ||
-                    x.IsMPMet == true ||
+                    x.IsHpMet == true ||
+                    x.IsMpMet == true ||
                     x.IsOffMet == true ||
                     x.IsDefMet == true ||
                     x.IsSpeedMet == true ||

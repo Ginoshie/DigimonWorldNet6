@@ -85,8 +85,8 @@
             <Image Source="{Binding IconPath, FallbackValue={x:Null}, TargetNullValue={x:Null}}" Stretch="Fill" />
         </Button>
         <TextBox Grid.Row="1" Style="{StaticResource CriteriaMetTextBoxStyle}" Tag="{Binding IsWinningEvolution, FallbackValue=False}" Text="{Binding EvolutionScore, Mode=OneWay, FallbackValue=''}" HorizontalContentAlignment="Center" Margin="2,1" />
-        <TextBox Grid.Row="2" Style="{StaticResource CriteriaMetTextBoxStyle}" Tag="{Binding IsHPMet, FallbackValue=False}" Text="{Binding HP, Mode=OneWay, FallbackValue='', TargetNullValue=''}" HorizontalContentAlignment="Center" Margin="2,1" />
-        <TextBox Grid.Row="3" Style="{StaticResource CriteriaMetTextBoxStyle}" Tag="{Binding IsMPMet, FallbackValue=False}" Text="{Binding MP, Mode=OneWay, FallbackValue='', TargetNullValue=''}" HorizontalContentAlignment="Center" Margin="2,1" />
+        <TextBox Grid.Row="2" Style="{StaticResource CriteriaMetTextBoxStyle}" Tag="{Binding IsHpMet, FallbackValue=False}" Text="{Binding Hp, Mode=OneWay, FallbackValue='', TargetNullValue=''}" HorizontalContentAlignment="Center" Margin="2,1" />
+        <TextBox Grid.Row="3" Style="{StaticResource CriteriaMetTextBoxStyle}" Tag="{Binding IsMpMet, FallbackValue=False}" Text="{Binding Mp, Mode=OneWay, FallbackValue='', TargetNullValue=''}" HorizontalContentAlignment="Center" Margin="2,1" />
         <TextBox Grid.Row="4" Style="{StaticResource CriteriaMetTextBoxStyle}" Tag="{Binding IsOffMet, FallbackValue=False}" Text="{Binding Off, Mode=OneWay, FallbackValue='', TargetNullValue=''}" HorizontalContentAlignment="Center" Margin="2,1" />
         <TextBox Grid.Row="5" Style="{StaticResource CriteriaMetTextBoxStyle}" Tag="{Binding IsDefMet, FallbackValue=False}" Text="{Binding Def, Mode=OneWay, FallbackValue='', TargetNullValue=''}" HorizontalContentAlignment="Center" Margin="2,1" />
         <TextBox Grid.Row="6" Style="{StaticResource CriteriaMetTextBoxStyle}" Tag="{Binding IsSpeedMet, FallbackValue=False}" Text="{Binding Speed, Mode=OneWay, FallbackValue='', TargetNullValue=''}" HorizontalContentAlignment="Center" Margin="2,1" />

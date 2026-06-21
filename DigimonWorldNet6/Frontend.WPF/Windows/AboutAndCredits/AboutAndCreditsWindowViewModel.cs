@@ -21,9 +21,9 @@ public class AboutAndCreditsWindowViewModel : BaseViewModel
         CloseWindowCommand = new CommandHandler(CloseWindow);
     }
 
-    public string ContactEmailAddress { get; set; } = UiText.ContactEmailAddress;
+    public string ContactEmailAddress { get; set; } = UiText.CONTACT_EMAIL_ADDRESS;
 
-    public string YoutubeAddress { get; set; } = Url.YoutubeAddress;
+    public string YoutubeAddress { get; set; } = Url.YOUTUBE_ADDRESS;
 
     public string VersionText { get; } = AppVersion.Current;
 
@@ -38,7 +38,7 @@ public class AboutAndCreditsWindowViewModel : BaseViewModel
     private void OpenYoutubeWebsite() =>
         Process.Start(new ProcessStartInfo
         {
-            FileName = Url.YoutubeAddress,
+            FileName = Url.YOUTUBE_ADDRESS,
             UseShellExecute = true
         });
 

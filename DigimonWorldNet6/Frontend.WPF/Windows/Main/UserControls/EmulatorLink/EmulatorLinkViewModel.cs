@@ -28,8 +28,8 @@ public class EmulatorLinkViewModel : BaseViewModel, IDisposable
 
         // Parameter stats
         SignalSetAllEmulatorParameterStatsCommand = new CommandHandler(DigimonStatsEventHub.SignalSyncAllEmulatorParameterStats);
-        SignalSetEmulatorHPCommand = new CommandHandler(DigimonStatsEventHub.SignalSyncEmulatorHP);
-        SignalSetEmulatorMPCommand = new CommandHandler(DigimonStatsEventHub.SignalSyncEmulatorMP);
+        SignalSetEmulatorHpCommand = new CommandHandler(DigimonStatsEventHub.SignalSyncEmulatorHp);
+        SignalSetEmulatorMpCommand = new CommandHandler(DigimonStatsEventHub.SignalSyncEmulatorMp);
         SignalSetEmulatorOffCommand = new CommandHandler(DigimonStatsEventHub.SignalSyncEmulatorOff);
         SignalSetEmulatorDefCommand = new CommandHandler(DigimonStatsEventHub.SignalSyncEmulatorDef);
         SignalSetEmulatorSpdCommand = new CommandHandler(DigimonStatsEventHub.SignalSyncEmulatorSpd);
@@ -65,8 +65,8 @@ public class EmulatorLinkViewModel : BaseViewModel, IDisposable
 
     // Parameter stats
     public ICommand SignalSetAllEmulatorParameterStatsCommand { get; }
-    public ICommand SignalSetEmulatorHPCommand { get; }
-    public ICommand SignalSetEmulatorMPCommand { get; }
+    public ICommand SignalSetEmulatorHpCommand { get; }
+    public ICommand SignalSetEmulatorMpCommand { get; }
     public ICommand SignalSetEmulatorOffCommand { get; }
     public ICommand SignalSetEmulatorDefCommand { get; }
     public ICommand SignalSetEmulatorSpdCommand { get; }

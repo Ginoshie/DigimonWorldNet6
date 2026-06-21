@@ -15,13 +15,13 @@ public class NormalAttackTopicViewModel : TopicViewModelBase
         base(
             instantDisplay,
             speakShellmonTextNoDelayAction,
-            ShellmonDigiWikiNarratorText.NormalAttackWiki.ShellFacts,
-            ShellmonDigiWikiNarratorText.NormalAttackWiki.WikiText)
+            ShellmonDigiWikiNarratorText.NormalAttackWiki.SHELL_FACTS,
+            ShellmonDigiWikiNarratorText.NormalAttackWiki.WIKI_TEXT)
     {
-        speakShellmonTextShortDelayAction(ShellmonDigiWikiNarratorText.NormalAttackWiki.WikiText, SpeakShellmonTextAction);
+        speakShellmonTextShortDelayAction(ShellmonDigiWikiNarratorText.NormalAttackWiki.WIKI_TEXT, SpeakShellmonTextAction);
 
-        SpeakFormulaImageCommand = new CommandHandler(() => speakShellmonTextNoDelayAction(ShellmonDigiWikiNarratorText.NormalAttackWiki.FormulaImage, SpeakShellmonTextAction));
-        OpenGuideNormalAttackChapterCommand = new CommandHandler(() => Process.Start(new ProcessStartInfo { FileName = Url.GuideNormalAttackChapter, UseShellExecute = true }));
+        SpeakFormulaImageCommand = new CommandHandler(() => speakShellmonTextNoDelayAction(ShellmonDigiWikiNarratorText.NormalAttackWiki.FORMULA_IMAGE, SpeakShellmonTextAction));
+        OpenGuideNormalAttackChapterCommand = new CommandHandler(() => Process.Start(new ProcessStartInfo { FileName = Url.GUIDE_NORMAL_ATTACK_CHAPTER, UseShellExecute = true }));
     }
 
     public ICommand SpeakFormulaImageCommand { get; }

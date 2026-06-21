@@ -15,13 +15,13 @@ public class ScoldingTopicViewModel : TopicViewModelBase
         base(
             instantDisplay,
             speakShellmonTextNoDelayAction,
-            ShellmonDigiWikiNarratorText.ScoldingWiki.ShellFacts,
-            ShellmonDigiWikiNarratorText.ScoldingWiki.WikiText)
+            ShellmonDigiWikiNarratorText.ScoldingWiki.SHELL_FACTS,
+            ShellmonDigiWikiNarratorText.ScoldingWiki.WIKI_TEXT)
     {
-        speakShellmonTextShortDelayAction(ShellmonDigiWikiNarratorText.ScoldingWiki.WikiText, SpeakShellmonTextAction);
+        speakShellmonTextShortDelayAction(ShellmonDigiWikiNarratorText.ScoldingWiki.WIKI_TEXT, SpeakShellmonTextAction);
 
-        SpeakScoldingMenuActionCommand = new CommandHandler(() => speakShellmonTextNoDelayAction(ShellmonDigiWikiNarratorText.ScoldingWiki.ScoldingMenuAction, SpeakShellmonTextAction));
-        OpenGuideScoldingChapterCommand = new CommandHandler(() => Process.Start(new ProcessStartInfo { FileName = Url.GuideScoldingChapter, UseShellExecute = true }));
+        SpeakScoldingMenuActionCommand = new CommandHandler(() => speakShellmonTextNoDelayAction(ShellmonDigiWikiNarratorText.ScoldingWiki.SCOLDING_MENU_ACTION, SpeakShellmonTextAction));
+        OpenGuideScoldingChapterCommand = new CommandHandler(() => Process.Start(new ProcessStartInfo { FileName = Url.GUIDE_SCOLDING_CHAPTER, UseShellExecute = true }));
     }
 
     public ICommand SpeakScoldingMenuActionCommand { get; }

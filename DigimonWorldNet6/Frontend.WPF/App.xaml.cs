@@ -13,6 +13,7 @@ using Domain;
 using MemoryAccess;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using ReactiveUI.Builder;
 using Velopack;
 
 namespace DigimonWorld.Frontend.WPF;
@@ -24,6 +25,11 @@ public partial class App
     public App()
     {
         VelopackApp.Build().Run();
+
+        RxAppBuilder.CreateReactiveUIBuilder()
+            .WithPlatformServices()
+            .WithCoreServices()
+            .BuildApp();
 
         AppHost = Host.CreateDefaultBuilder()
             .ConfigureServices((_, services) =>
