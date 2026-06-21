@@ -25,8 +25,7 @@
         </ResourceDictionary>
     </UserControl.Resources>
 
-    <Grid Grid.IsSharedSizeScope="True" 
-          Width="155"
+    <Grid Grid.IsSharedSizeScope="True"
           Margin="10,0">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
@@ -41,9 +40,9 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto" SharedSizeGroup="CombatStatsCareStatsLabelColumn" />
                 <ColumnDefinition Width="{StaticResource LabelTextboxSpacing}" />
-                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="58" />
                 <ColumnDefinition Width="Auto" />
-                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="58" />
             </Grid.ColumnDefinitions>
             <Label Grid.Column="0" Grid.Row="0" Style="{StaticResource DefaultLabelStyle}" Content="HP:">
                 <Label.ToolTip>
@@ -82,9 +81,9 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto" SharedSizeGroup="CombatStatsCareStatsLabelColumn" />
                 <ColumnDefinition Width="{StaticResource LabelTextboxSpacing}" />
-                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="58" />
                 <ColumnDefinition Width="Auto" />
-                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="58" />
             </Grid.ColumnDefinitions>
             <Label Grid.Column="0" Grid.Row="0" Style="{StaticResource DefaultLabelStyle}" Content="MP:">
                 <Label.ToolTip>
@@ -123,7 +122,7 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto" SharedSizeGroup="CombatStatsCareStatsLabelColumn" />
                 <ColumnDefinition Width="{StaticResource LabelTextboxSpacing}" />
-                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="58" />
             </Grid.ColumnDefinitions>
             <Label Grid.Column="0" Grid.Row="0" Style="{StaticResource DefaultLabelStyle}" Content="Off:">
                 <Label.ToolTip>
@@ -134,6 +133,7 @@
             </Label>
             <TextBox Grid.Column="2"
                      Name="Off"
+                     HorizontalContentAlignment="Center"
                      Style="{StaticResource DefaultReadonlyTextBoxStyle}"
                      Margin="{StaticResource RowMargin}"
                      Text="{Binding Offense}">
@@ -148,7 +148,7 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto" SharedSizeGroup="CombatStatsCareStatsLabelColumn" />
                 <ColumnDefinition Width="{StaticResource LabelTextboxSpacing}" />
-                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="58" />
             </Grid.ColumnDefinitions>
             <Label Grid.Column="0" Grid.Row="0" Style="{StaticResource DefaultLabelStyle}" Content="Def:">
                 <Label.ToolTip>
@@ -159,6 +159,7 @@
             </Label>
             <TextBox Grid.Column="2"
                      Name="Def"
+                     HorizontalContentAlignment="Center"
                      Style="{StaticResource DefaultReadonlyTextBoxStyle}"
                      Margin="{StaticResource RowMargin}"
                      Text="{Binding Defence}">
@@ -173,7 +174,7 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto" SharedSizeGroup="CombatStatsCombatStatsCareStatsLabelColumn" />
                 <ColumnDefinition Width="{StaticResource LabelTextboxSpacing}" />
-                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="58" />
             </Grid.ColumnDefinitions>
             <Label Grid.Column="0" Grid.Row="0" Style="{StaticResource DefaultLabelStyle}" Content="Speed:">
                 <Label.ToolTip>
@@ -184,6 +185,7 @@
             </Label>
             <TextBox Grid.Column="2"
                      Name="Speed"
+                     HorizontalContentAlignment="Center"
                      Style="{StaticResource DefaultReadonlyTextBoxStyle}"
                      Margin="{StaticResource RowMargin}"
                      Text="{Binding Speed}">
@@ -198,7 +200,7 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto" SharedSizeGroup="CombatStatsCareStatsLabelColumn" />
                 <ColumnDefinition Width="{StaticResource LabelTextboxSpacing}" />
-                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="58" />
             </Grid.ColumnDefinitions>
             <Label Grid.Column="0" Grid.Row="0" Style="{StaticResource DefaultLabelStyle}" Content="Brains:">
                 <Label.ToolTip>
@@ -209,6 +211,7 @@
             </Label>
             <TextBox Grid.Column="2"
                      Name="Brains"
+                     HorizontalContentAlignment="Center"
                      Style="{StaticResource DefaultReadonlyTextBoxStyle}"
                      Margin="{StaticResource RowMargin}"
                      Text="{Binding Brains}">

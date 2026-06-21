@@ -34,14 +34,13 @@
                         Width="{StaticResource SpecialImageDimension}"
                         Height="{StaticResource SpecialImageDimension}"
                         Margin="{StaticResource Margin}"
-                        IsEnabled="False"
-                        Padding="1">
+                        IsEnabled="False">
                     <Button.ToolTip>
                         <ToolTip Style="{StaticResource DefaultToolTipRightStyle}">
                             <TextBlock Text="{Binding (models:SpecialIcon.Special)}" />
                         </ToolTip>
                     </Button.ToolTip>
-                    <Image Source="{Binding (models:SpecialIcon.IconPath)}" Stretch="Fill">
+                    <Image Source="{Binding (models:SpecialIcon.IconPath)}" Stretch="Fill" Margin="2">
                     </Image>
                 </Button>
             </DataTemplate>
