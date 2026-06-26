@@ -62,7 +62,7 @@ public sealed class LongMemoryValueViewModel : BaseViewModel, IRefreshable, IEdi
 
     public void PushLockedValueToMemory()
     {
-        if (!IsLocked || IsEditing)
+        if (!IsLocked)
         {
             return;
         }

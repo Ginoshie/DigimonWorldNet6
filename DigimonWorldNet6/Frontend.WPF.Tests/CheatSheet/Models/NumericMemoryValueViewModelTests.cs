@@ -39,7 +39,7 @@ public sealed class NumericMemoryValueViewModelTests
     }
 
     [Test]
-    public void ReassertLock_ShouldNotWrite_WhenEditing()
+    public void ReassertLock_ShouldWriteHeldValue_WhenEditing()
     {
         // Arrange
         int ram = 5;
@@ -50,7 +50,7 @@ public sealed class NumericMemoryValueViewModelTests
         sut.PushLockedValueToMemory();
 
         // Assert
-        ram.ShouldBe(99);
+        ram.ShouldBe(10);
     }
 
     [Test]

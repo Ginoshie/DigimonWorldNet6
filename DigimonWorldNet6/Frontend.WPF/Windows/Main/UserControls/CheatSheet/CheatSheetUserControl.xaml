@@ -27,6 +27,7 @@
         <b:Interaction.Behaviors>
             <behaviors:SuspendRefreshWhileEditingBehavior />
             <behaviors:LockOnRightClickBehavior />
+            <behaviors:CommitOnBackgroundClickBehavior />
         </b:Interaction.Behaviors>
         <Border CornerRadius="5" BorderBrush="Black" BorderThickness="3" Background="#2E3841" Padding="10">
             <Grid>

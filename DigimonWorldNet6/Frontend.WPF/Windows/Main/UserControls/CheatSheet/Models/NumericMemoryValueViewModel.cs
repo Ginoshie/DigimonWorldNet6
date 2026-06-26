@@ -62,7 +62,7 @@ public sealed class NumericMemoryValueViewModel : BaseViewModel, IRefreshable, I
 
     public void PushLockedValueToMemory()
     {
-        if (!IsLocked || IsEditing)
+        if (!IsLocked)
         {
             return;
         }
