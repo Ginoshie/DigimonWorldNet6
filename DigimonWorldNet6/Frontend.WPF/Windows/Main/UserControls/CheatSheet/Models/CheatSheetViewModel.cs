@@ -257,6 +257,7 @@ public class CheatSheetViewModel : BaseViewModel, IDisposable
         TechnicalUpgradeCounterOffense = new MemoryValueViewModel("Upgrade Offense", () => technical().UpgradeCounterOffense >= UPGRADE_TRAINED_THRESHOLD, v => technical().UpgradeCounterOffense = v ? UPGRADE_TRAINED_THRESHOLD : 0);
         TechnicalUpgradeCounterDefense = new MemoryValueViewModel("Upgrade Defense", () => technical().UpgradeCounterDefense >= UPGRADE_TRAINED_THRESHOLD, v => technical().UpgradeCounterDefense = v ? UPGRADE_TRAINED_THRESHOLD : 0);
         TechnicalUpgradeCounterSpeed = new MemoryValueViewModel("Upgrade Speed", () => technical().UpgradeCounterSpeed >= UPGRADE_TRAINED_THRESHOLD, v => technical().UpgradeCounterSpeed = v ? UPGRADE_TRAINED_THRESHOLD : 0);
+        TechnicalGoldenPoopEnabled = new MemoryValueViewModel("Golden Poop Enabled", () => technical().GoldenPoopEnabled, v => technical().GoldenPoopEnabled = v);
 
         Func<WorldTime> worldTime = () => LiveMemoryReader.Instance.WorldTime;
 
@@ -448,7 +449,7 @@ public class CheatSheetViewModel : BaseViewModel, IDisposable
         _refreshables.AddRange(
         [
             TamerLevel, TamerBits, TamerMeritPoints, TechnicalRng, TechnicalAgeInDays, TechnicalEvolutionAgeInHours,
-            TechnicalUpgradeCounterHp, TechnicalUpgradeCounterMp, TechnicalUpgradeCounterOffense, TechnicalUpgradeCounterDefense, TechnicalUpgradeCounterSpeed,
+            TechnicalUpgradeCounterHp, TechnicalUpgradeCounterMp, TechnicalUpgradeCounterOffense, TechnicalUpgradeCounterDefense, TechnicalUpgradeCounterSpeed, TechnicalGoldenPoopEnabled,
             ProfileWeight, ProfileLives,
             WorldYear, WorldDay, WorldHour, WorldMinute,
             CarePoopLevel, CareVirusBar, CarePoopingTimer, CareEnergyLevel, CareHungryTimer, CareStarvationTimer, CareLifespan,
@@ -524,6 +525,8 @@ public class CheatSheetViewModel : BaseViewModel, IDisposable
     public MemoryValueViewModel TechnicalUpgradeCounterDefense { get; }
 
     public MemoryValueViewModel TechnicalUpgradeCounterSpeed { get; }
+
+    public MemoryValueViewModel TechnicalGoldenPoopEnabled { get; }
 
     public NumericMemoryValueViewModel ProfileWeight { get; }
 

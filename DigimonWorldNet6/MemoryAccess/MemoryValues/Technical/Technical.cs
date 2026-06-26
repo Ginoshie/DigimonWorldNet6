@@ -14,6 +14,8 @@ public class Technical(ProcessMemory mem, PsxRam ram) : MemoryValueSyncBase
     private const int UPGRADE_COUNTER_OFFENSE_OFFSET = 0x001384CA;
     private const int UPGRADE_COUNTER_DEFENSE_OFFSET = 0x001384CE;
     private const int UPGRADE_COUNTER_SPEED_OFFSET = 0x001384D0;
+    private const int SLOT_FLAGS_OFFSET = 0x0008F3CA;
+    private const int GOLDEN_POOP_ENABLED_BIT = 1;
 
     private uint _currentRng;
     private int _evolveTrigger;
@@ -24,6 +26,7 @@ public class Technical(ProcessMemory mem, PsxRam ram) : MemoryValueSyncBase
     private int _upgradeCounterOffense;
     private int _upgradeCounterDefense;
     private int _upgradeCounterSpeed;
+    private byte _slotFlags;
 
     private Technical() : this(ProcessMemory.Empty, PsxRam.Empty)
     {
@@ -121,6 +124,12 @@ public class Technical(ProcessMemory mem, PsxRam ram) : MemoryValueSyncBase
         }
     }
 
+    public bool GoldenPoopEnabled
+    {
+        get => HasBit(GOLDEN_POOP_ENABLED_BIT);
+        set => SetFlag(GOLDEN_POOP_ENABLED_BIT, value);
+    }
+
     protected override void OnUpdateData()
     {
         _currentRng = (uint)mem.ReadInt32(ram.A(CURRENT_RNG_OFFSET));
@@ -132,7 +141,17 @@ public class Technical(ProcessMemory mem, PsxRam ram) : MemoryValueSyncBase
         _upgradeCounterOffense = mem.ReadInt16(ram.A(UPGRADE_COUNTER_OFFENSE_OFFSET));
         _upgradeCounterDefense = mem.ReadInt16(ram.A(UPGRADE_COUNTER_DEFENSE_OFFSET));
         _upgradeCounterSpeed = mem.ReadInt16(ram.A(UPGRADE_COUNTER_SPEED_OFFSET));
+        _slotFlags = mem.ReadByte(ram.A(SLOT_FLAGS_OFFSET));
 
         EmulatorLinkEventHub.SignalDigimonCareStatsSynchronized();
+    }
+
+    private bool HasBit(int bit)
+        => (_slotFlags & (1 << bit)) != 0;
+
+    private void SetFlag(int bit, bool value)
+    {
+        _slotFlags = (byte)(value ? _slotFlags | (1 << bit) : _slotFlags & ~(1 << bit));
+        mem.WriteByte(ram.A(SLOT_FLAGS_OFFSET), _slotFlags);
     }
 }

@@ -136,6 +136,8 @@ public static class CheatSheetInputInfo
     public static readonly string UpgradeCounterDefenseTooltip = $"Whether the Defense training station is upgraded.\n\n{UPGRADE_COUNTER_EXPLANATION}";
     public static readonly string UpgradeCounterSpeedTooltip = $"Whether the Speed training station is upgraded.\n\n{UPGRADE_COUNTER_EXPLANATION}";
 
+    public static readonly string GoldenPoopEnabledTooltip = "Whether the Golden Poop can be won in the Bonus Try slot-machine minigame.\n\nNormally the game rigs each training so the Golden Poop is rarely achievable; enabling this makes it winnable for a 10x training multiplier.\n\nNote: This value is recalculated at the start of training.";
+
     public static readonly string FinisherGoalTooltip = $"Charge required before the finisher fires.\n\nAllowed range {COMBAT_TIMER_MIN}–{COMBAT_TIMER_MAX}.";
     public static readonly string FinisherProgressTooltip = $"Current charge towards the finisher.\n\nAllowed range {COMBAT_TIMER_MIN}–{COMBAT_TIMER_MAX}.";
     public static readonly string PoisonTimerTooltip = $"Time remaining poisoned.\n\nAllowed range {COMBAT_TIMER_MIN}–{COMBAT_TIMER_MAX}.";
