@@ -26,3 +26,5 @@
 
 # Velopack pack output if accidentally run from the repo directory
 /DigimonWorldNet6/Releases/
+
+.claude/settings.local.json
