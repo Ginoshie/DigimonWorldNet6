@@ -26,6 +26,7 @@
     <Border CornerRadius="8" BorderBrush="#90D9FA" BorderThickness="3" Background="#2E3841">
         <b:Interaction.Behaviors>
             <behaviors:SuspendRefreshWhileEditingBehavior />
+            <behaviors:LockOnRightClickBehavior />
         </b:Interaction.Behaviors>
         <Border CornerRadius="5" BorderBrush="Black" BorderThickness="3" Background="#2E3841" Padding="10">
             <Grid>

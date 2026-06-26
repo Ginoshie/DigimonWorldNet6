@@ -31,7 +31,7 @@
                                    HorizontalAlignment="Stretch"
                                    VerticalAlignment="Top"
                                    Margin="0,5"
-                                   Height="135"
+                                   Height="145"
                                    TextWrapping="Wrap" />
                     </StackPanel>
                 </Border>

@@ -3,7 +3,7 @@ using DigimonWorld.Frontend.WPF.ViewModelComponents;
 
 namespace DigimonWorld.Frontend.WPF.Windows.Main.UserControls.CheatSheet.Models;
 
-public sealed class NumericMemoryValueViewModel : BaseViewModel, IRefreshable, IEditableValue
+public sealed class NumericMemoryValueViewModel : BaseViewModel, IRefreshable, IEditableValue, ILockableValue
 {
     private readonly Func<int> _getter;
     private readonly Action<int> _setter;
@@ -20,6 +20,12 @@ public sealed class NumericMemoryValueViewModel : BaseViewModel, IRefreshable, I
     public string Label { get; }
 
     public bool IsEditing { get; set; }
+
+    public bool IsLocked
+    {
+        get;
+        set => SetField(ref field, value);
+    }
 
     public int Value
     {
@@ -39,6 +45,11 @@ public sealed class NumericMemoryValueViewModel : BaseViewModel, IRefreshable, I
             return;
         }
 
+        if (IsLocked)
+        {
+            return;
+        }
+
         int current = _getter();
         if (current == _lastNotifiedValue)
         {
@@ -47,5 +58,15 @@ public sealed class NumericMemoryValueViewModel : BaseViewModel, IRefreshable, I
 
         _lastNotifiedValue = current;
         OnPropertyChanged(nameof(Value));
+    }
+
+    public void PushLockedValueToMemory()
+    {
+        if (!IsLocked || IsEditing)
+        {
+            return;
+        }
+
+        _setter(_lastNotifiedValue);
     }
 }

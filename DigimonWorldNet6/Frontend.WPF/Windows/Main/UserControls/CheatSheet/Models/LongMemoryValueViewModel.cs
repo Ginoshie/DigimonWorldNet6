@@ -3,7 +3,7 @@ using DigimonWorld.Frontend.WPF.ViewModelComponents;
 
 namespace DigimonWorld.Frontend.WPF.Windows.Main.UserControls.CheatSheet.Models;
 
-public sealed class LongMemoryValueViewModel : BaseViewModel, IRefreshable, IEditableValue
+public sealed class LongMemoryValueViewModel : BaseViewModel, IRefreshable, IEditableValue, ILockableValue
 {
     private readonly Func<long> _getter;
     private readonly Action<long> _setter;
@@ -20,6 +20,12 @@ public sealed class LongMemoryValueViewModel : BaseViewModel, IRefreshable, IEdi
     public string Label { get; }
 
     public bool IsEditing { get; set; }
+
+    public bool IsLocked
+    {
+        get;
+        set => SetField(ref field, value);
+    }
 
     public long Value
     {
@@ -39,6 +45,11 @@ public sealed class LongMemoryValueViewModel : BaseViewModel, IRefreshable, IEdi
             return;
         }
 
+        if (IsLocked)
+        {
+            return;
+        }
+
         long current = _getter();
         if (current == _lastNotifiedValue)
         {
@@ -47,5 +58,15 @@ public sealed class LongMemoryValueViewModel : BaseViewModel, IRefreshable, IEdi
 
         _lastNotifiedValue = current;
         OnPropertyChanged(nameof(Value));
+    }
+
+    public void PushLockedValueToMemory()
+    {
+        if (!IsLocked || IsEditing)
+        {
+            return;
+        }
+
+        _setter(_lastNotifiedValue);
     }
 }

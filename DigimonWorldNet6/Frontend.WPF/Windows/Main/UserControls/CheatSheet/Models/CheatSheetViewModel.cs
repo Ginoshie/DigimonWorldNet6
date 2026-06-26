@@ -25,9 +25,11 @@ public class CheatSheetViewModel : BaseViewModel, IDisposable
 {
     private const int NO_EVOLUTION_VALUE = 65535;
     private const int UPGRADE_TRAINED_THRESHOLD = 10;
+    private const int FREEZE_INTERVAL_MS = 100;
 
     private readonly SpeakingSimulator _speakingSimulator;
     private readonly List<IRefreshable> _refreshables = [];
+    private readonly List<ILockableValue> _lockables;
     private readonly CompositeDisposable _subscriptions;
     private int _visibleInventorySlotCount = -1;
 
@@ -457,6 +459,8 @@ public class CheatSheetViewModel : BaseViewModel, IDisposable
             StatOffense, StatDefense, StatSpeed, StatBrains, StatHp, StatMp, StatCurrentHp, StatCurrentMp
         ]);
 
+        _lockables = _refreshables.OfType<ILockableValue>().ToList();
+
         _subscriptions = new CompositeDisposable(
             Observable.Merge(
                     EmulatorLinkEventHub.RecruitmentSynchronizedObservable,
@@ -468,7 +472,10 @@ public class CheatSheetViewModel : BaseViewModel, IDisposable
                     EmulatorLinkEventHub.DigimonCombatStatsSynchronizedObservable,
                     EmulatorLinkEventHub.InventorySynchronizedObservable)
                 .ObserveOn(SynchronizationContext.Current!)
-                .Subscribe(_ => RefreshValues()));
+                .Subscribe(_ => RefreshValues()),
+            Observable.Interval(TimeSpan.FromMilliseconds(FREEZE_INTERVAL_MS))
+                .ObserveOn(SynchronizationContext.Current!)
+                .Subscribe(_ => PushLockedValuesToMemory()));
 
         UpdateVisibleInventorySlots();
     }
@@ -658,6 +665,14 @@ public class CheatSheetViewModel : BaseViewModel, IDisposable
         }
 
         UpdateVisibleInventorySlots();
+    }
+
+    private void PushLockedValuesToMemory()
+    {
+        foreach (ILockableValue lockable in _lockables)
+        {
+            lockable.PushLockedValueToMemory();
+        }
     }
 
     private void UpdateVisibleInventorySlots()

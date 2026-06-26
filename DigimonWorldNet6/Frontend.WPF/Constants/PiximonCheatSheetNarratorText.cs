@@ -6,5 +6,7 @@ public static class PiximonCheatSheetNarratorText
                                     "\n" +
                                     "Tick the boxes and adjust the values to your liking. Like magic things will change, sure beats my training manual huh!?\n" +
                                     "\n" +
+                                    "Right-click any value to lock it, so the game can't change it back. Right-click again to unlock it.\n" +
+                                    "\n" +
                                     "Click the buttons below to check out the various categories.\n";
 }
