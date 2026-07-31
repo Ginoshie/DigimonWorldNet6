@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using DigimonWorld.Evolution.Calculator.Core.EvolutionCriteria.Myotismon.Ultimate;
@@ -11,7 +10,6 @@ using Shared.Constants;
 using Shared.Enums;
 using Shared.Extensions;
 using Shared.Services;
-using GameVariant = Shared.Enums.GameVariant;
 
 namespace DigimonWorld.Evolution.Calculator.Core.EvolutionCriteriaCalculation.FromRookieOrChampion;
 
@@ -19,12 +17,8 @@ public sealed class FromRookieOrChampionEvolutionMapper
 {
     private readonly Dictionary<Digimon, IEnumerable<IEvolutionCriteria>> _fromRookieOrChampionEvolutionMappings = new();
 
-    private GameVariant _gameVariant = GameVariant.Original;
-
     public FromRookieOrChampionEvolutionMapper()
     {
-        UserConfigurationManager.CurrentEvolutionCalculatorConfig.Subscribe(evolutionCalculatorConfig => _gameVariant = evolutionCalculatorConfig.GameVariant);
-
         _fromRookieOrChampionEvolutionMappings[DigimonTypes.Agumon] = AgumonEvolutions;
         _fromRookieOrChampionEvolutionMappings[DigimonTypes.Airdramon] = AirdramonEvolutions;
         _fromRookieOrChampionEvolutionMappings[DigimonTypes.Angemon] = AngemonEvolutions;
@@ -86,8 +80,10 @@ public sealed class FromRookieOrChampionEvolutionMapper
 
     public List<IEvolutionCriteria> GetEvolutionCriteria(DigimonName digimonName)
     {
+        GameVariant gameVariant = UserConfigurationManager.EvolutionCalculatorConfig.GameVariant;
+        
         List<KeyValuePair<Digimon, IEnumerable<IEvolutionCriteria>>> candidates = _fromRookieOrChampionEvolutionMappings
-            .Where(e => e.Key.IncludeGameVariantFlags.IsAvailableIn(e.Key.ExcludeGameVariantFlags, _gameVariant) && e.Key.DigimonName == digimonName)
+            .Where(e => e.Key.IncludeGameVariantFlags.IsAvailableIn(e.Key.ExcludeGameVariantFlags, gameVariant) && e.Key.DigimonName == digimonName)
             .ToList();
 
         return candidates.Single().Value.ToList();

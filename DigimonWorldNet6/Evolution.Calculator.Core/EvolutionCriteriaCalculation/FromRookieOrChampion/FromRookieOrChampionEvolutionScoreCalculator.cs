@@ -1,7 +1,5 @@
-using System;
 using System.Collections.Generic;
 using DigimonWorld.Evolution.Calculator.Core.DataObjects.EvolutionCriteria;
-using Shared.Configuration;
 using Shared.Enums;
 using Shared.Services;
 
@@ -9,21 +7,11 @@ namespace DigimonWorld.Evolution.Calculator.Core.EvolutionCriteriaCalculation.Fr
 
 public sealed class FromRookieOrChampionEvolutionScoreCalculator
 {
-    private bool _dontUseCarriedOverStats;
-
-    public FromRookieOrChampionEvolutionScoreCalculator()
-    {
-        UserConfigurationManager.CurrentEvolutionCalculatorConfig.Subscribe(OnEvolutionCalculatorConfigChanged);
-    }
-
-    private void OnEvolutionCalculatorConfigChanged(EvolutionCalculatorConfig evolutionCalculatorConfig) => _dontUseCarriedOverStats = evolutionCalculatorConfig.GameVariant != GameVariant.Original;
-
-    public EvolutionScoreCalculationResult CalculateEvolutionScore(EvolutionCalculationInput evolutionCalculationInput, MainCriteriaStats statsCriteria, int carriedOverStatTotal, int carriedOverStatCount)
-    {
-        return CalculateEvolutionScore(
+    public EvolutionScoreCalculationResult CalculateEvolutionScore(EvolutionCalculationInput evolutionCalculationInput, MainCriteriaStats statsCriteria, int carriedOverStatTotal, int carriedOverStatCount) =>
+        CalculateEvolutionScore(
             evolutionCalculationInput.Hp, evolutionCalculationInput.Mp, evolutionCalculationInput.Off, evolutionCalculationInput.Def, evolutionCalculationInput.Speed, evolutionCalculationInput.Brains,
-            statsCriteria, carriedOverStatTotal, carriedOverStatCount, !_dontUseCarriedOverStats);
-    }
+            statsCriteria, carriedOverStatTotal, carriedOverStatCount,
+            useCarriedOverStats: UserConfigurationManager.EvolutionCalculatorConfig.GameVariant == GameVariant.Original);
 
     /// <summary>
     /// Calculates the evolution score for a single evolution given raw user stats and criteria.

@@ -11,7 +11,9 @@ namespace DigimonWorld.Frontend.WPF.Windows.Main.UserControls.EvoTreeHelper.User
 
 public class CriteriaColumnViewModel : BaseViewModel
 {
-    public CriteriaColumnViewModel(DigimonName userDigimonDigimonName, string name, string iconPath, IEvolutionCriteria criteria, int userHp, int userMp, int userOff, int userDef, int userSpeed, int userBrains, int userWeight, int userCareMistakes,
+    public CriteriaColumnViewModel(DigimonName userDigimonDigimonName, string name, string iconPath,
+        IEvolutionCriteria criteria, int userHp, int userMp, int userOff, int userDef, int userSpeed, int userBrains,
+        int userWeight, int userCareMistakes,
         int userHappiness, int userDiscipline, int userBattles, int userTechniqueCount)
     {
         UserDigimonDigimonName = userDigimonDigimonName;
@@ -24,7 +26,9 @@ public class CriteriaColumnViewModel : BaseViewModel
         Def = criteria.Stats.Def > 0 ? criteria.Stats.Def.ToString() : "";
         Speed = criteria.Stats.Speed > 0 ? criteria.Stats.Speed.ToString() : "";
         Brains = criteria.Stats.Brains > 0 ? criteria.Stats.Brains.ToString() : "";
-        Weight = criteria.Weight.WeightTarget > 0 ? $"{criteria.Weight.LowerWeightLimit} - {criteria.Weight.UpperWeightLimit}" : "";
+        Weight = criteria.Weight.WeightTarget > 0
+            ? $"{criteria.Weight.LowerWeightLimit} - {criteria.Weight.UpperWeightLimit}"
+            : "";
 
         string careMistakeOperator = criteria.CareMistakes.IsCareMistakesCriteriaAMaximum ? "≤ " : "≥ ";
         CareMistakes = criteria.CareMistakes.CareMistakes >= 0
@@ -39,7 +43,8 @@ public class CriteriaColumnViewModel : BaseViewModel
         TechniqueCount = b.TechniqueCount > 0 ? b.TechniqueCount.ToString() : "";
         Precursor = criteria.BonusCriteria.PrecursorDigimon.ToString();
 
-        UpdateUserStats(userHp, userMp, userOff, userDef, userSpeed, userBrains, userWeight, userCareMistakes, userHappiness, userDiscipline, userBattles, userTechniqueCount);
+        UpdateUserStats(userHp, userMp, userOff, userDef, userSpeed, userBrains, userWeight, userCareMistakes,
+            userHappiness, userDiscipline, userBattles, userTechniqueCount);
     }
 
     public DigimonName UserDigimonDigimonName { get; }
@@ -170,7 +175,9 @@ public class CriteriaColumnViewModel : BaseViewModel
         set => SetField(ref field, value);
     }
 
-    public void UpdateUserStats(int userHp, int userMp, int userOff, int userDef, int userSpeed, int userBrains, int userWeight, int userCareMistakes, int userHappiness, int userDiscipline, int userBattles, int userTechniqueCount)
+    public void UpdateUserStats(int userHp, int userMp, int userOff, int userDef, int userSpeed, int userBrains,
+        int userWeight, int userCareMistakes, int userHappiness, int userDiscipline, int userBattles,
+        int userTechniqueCount)
     {
         switch (Criteria.EvolutionStage)
         {
@@ -182,14 +189,16 @@ public class CriteriaColumnViewModel : BaseViewModel
                 break;
             case EvolutionStage.Champion:
             case EvolutionStage.Ultimate:
-                SetChampionAndUltimateEvolutionStats(userHp, userMp, userOff, userDef, userSpeed, userBrains, userWeight, userCareMistakes, userHappiness, userDiscipline, userBattles, userTechniqueCount);
+                SetChampionAndUltimateEvolutionStats(userHp, userMp, userOff, userDef, userSpeed, userBrains,
+                    userWeight, userCareMistakes, userHappiness, userDiscipline, userBattles, userTechniqueCount);
                 break;
             default:
                 throw new ArgumentOutOfRangeException();
         }
     }
 
-    private void SetRookieEvolutionStats(int userHp, int userMp, int userOff, int userDef, int userSpeed, int userBrains)
+    private void SetRookieEvolutionStats(int userHp, int userMp, int userOff, int userDef, int userSpeed,
+        int userBrains)
     {
         const string hp = "hp", mp = "mp", off = "off", def = "def", speed = "speed", brains = "brains";
 
@@ -230,7 +239,8 @@ public class CriteriaColumnViewModel : BaseViewModel
         }
     }
 
-    private void SetChampionAndUltimateEvolutionStats(int userHp, int userMp, int userOff, int userDef, int userSpeed, int userBrains, int userWeight, int userCareMistakes, int userHappiness, int userDiscipline, int userBattles,
+    private void SetChampionAndUltimateEvolutionStats(int userHp, int userMp, int userOff, int userDef, int userSpeed,
+        int userBrains, int userWeight, int userCareMistakes, int userHappiness, int userDiscipline, int userBattles,
         int userTechniqueCount)
     {
         BonusCriteria bonusCriteria = Criteria.BonusCriteria;
@@ -272,7 +282,8 @@ public class CriteriaColumnViewModel : BaseViewModel
             IsBattlesMet = userBattles >= bonusCriteria.Battles;
         }
 
-        IsTechniqueCountMet = bonusCriteria.TechniqueCount > 0 ? userTechniqueCount >= bonusCriteria.TechniqueCount : null;
+        IsTechniqueCountMet =
+            bonusCriteria.TechniqueCount > 0 ? userTechniqueCount >= bonusCriteria.TechniqueCount : null;
 
         IsPrecursorMet = bonusCriteria.PrecursorDigimon == UserDigimonDigimonName;
 
@@ -295,7 +306,8 @@ public class CriteriaColumnViewModel : BaseViewModel
                             ? userBattles <= bonusCriteria.Battles
                             : userBattles >= bonusCriteria.Battles))
                         || userTechniqueCount >= bonusCriteria.TechniqueCount
-                        || !string.IsNullOrWhiteSpace(bonusCriteria.PrecursorDigimon.ToString()) && bonusCriteria.PrecursorDigimon.ToString() == Precursor;
+                        || !string.IsNullOrWhiteSpace(bonusCriteria.PrecursorDigimon.ToString()) &&
+                        bonusCriteria.PrecursorDigimon.ToString() == Precursor;
 
         int criteriaMetCount = (statsMet ? 1 : 0) + (careMistakesMet ? 1 : 0)
                                                   + (weightMet ? 1 : 0) + (bonusMet ? 1 : 0);
@@ -306,7 +318,9 @@ public class CriteriaColumnViewModel : BaseViewModel
             return;
         }
 
-        EvolutionScoreCalculationResult scoreResult = FromRookieOrChampionEvolutionScoreCalculator.CalculateEvolutionScore(userHp, userMp, userOff, userDef, userSpeed, userBrains, Criteria.Stats, 0, 0, false);
+        EvolutionScoreCalculationResult scoreResult =
+            FromRookieOrChampionEvolutionScoreCalculator.CalculateEvolutionScore(userHp, userMp, userOff, userDef,
+                userSpeed, userBrains, Criteria.Stats, 0, 0, false);
 
         ScoreTotal = scoreResult.StatTotal;
         StatCount = scoreResult.StatCount;
