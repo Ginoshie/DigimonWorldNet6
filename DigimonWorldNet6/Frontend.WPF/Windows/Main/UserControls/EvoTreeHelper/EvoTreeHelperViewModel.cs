@@ -153,7 +153,7 @@ public class EvoTreeHelperViewModel : BaseViewModel, IDisposable
                 BuildGraph();
             }
         }
-    } = DigimonName.None;
+    }
 
     public CriteriaColumnViewModel? Evolution1
     {
@@ -207,73 +207,73 @@ public class EvoTreeHelperViewModel : BaseViewModel, IDisposable
     {
         get;
         private set => SetField(ref field, value);
-    } = "0";
+    }
 
     public string CurrentMp
     {
         get;
         private set => SetField(ref field, value);
-    } = "0";
+    }
 
     public string CurrentOff
     {
         get;
         private set => SetField(ref field, value);
-    } = "0";
+    }
 
     public string CurrentDef
     {
         get;
         private set => SetField(ref field, value);
-    } = "0";
+    }
 
     public string CurrentSpeed
     {
         get;
         private set => SetField(ref field, value);
-    } = "0";
+    }
 
     public string CurrentBrains
     {
         get;
         private set => SetField(ref field, value);
-    } = "0";
+    }
 
     public string CurrentWeight
     {
         get;
         private set => SetField(ref field, value);
-    } = "0";
+    }
 
     public string CurrentCareMistakes
     {
         get;
         private set => SetField(ref field, value);
-    } = "0";
+    }
 
     public string CurrentHappiness
     {
         get;
         private set => SetField(ref field, value);
-    } = "0";
+    }
 
     public string CurrentDiscipline
     {
         get;
         private set => SetField(ref field, value);
-    } = "0";
+    }
 
     public string CurrentBattles
     {
         get;
         private set => SetField(ref field, value);
-    } = "0";
+    }
 
     public string CurrentTechniqueCount
     {
         get;
         private set => SetField(ref field, value);
-    } = "0";
+    }
 
     private void InstantDisplay() => _speakingSimulator.RequestInstantDisplay();
 
